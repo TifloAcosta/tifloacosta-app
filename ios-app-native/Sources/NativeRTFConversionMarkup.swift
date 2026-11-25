@@ -51,10 +51,7 @@ enum NativeRTFConversionMarkup {
             }
             result += html[cursor...]
             for (index, body) in bodies.enumerated() {
-                let paragraphs = body.components(separatedBy: .newlines).map {
-                    "<p>\(NativeDocumentConversion.xml($0))</p>"
-                }.joined()
-                result += "<aside id=\"rtf-note-\(index)\" role=\"doc-footnote\">\(paragraphs)</aside>"
+                result += "<aside id=\"rtf-note-\(index)\" role=\"doc-footnote\">\(body)</aside>"
             }
             return result
         }
@@ -134,7 +131,7 @@ enum NativeRTFConversionMarkup {
             original.append(contentsOf: bytes[end..<entry.whole.lowerBound])
             original.append(contentsOf: "{\(prefix)\(bodies.count)X}".utf8)
             end = entry.whole.upperBound
-            bodies.append(text.string.trimmingCharacters(in: .whitespacesAndNewlines))
+            bodies.append(try render(text))
         }
         guard !bodies.isEmpty else { return nil }
         original.append(contentsOf: bytes[end...])
@@ -148,6 +145,12 @@ enum NativeRTFConversionMarkup {
         let notes = try footnotes(in: data)
         let original = try NSAttributedString(data: notes?.document ?? data, options: [.documentType: NSAttributedString.DocumentType.rtf],
                                               documentAttributes: nil)
+        let body = try render(original)
+        let escape = NativeDocumentConversion.xml
+        return Data("<html><head><title>\(escape(title))</title></head><body>\(notes?.insertLinks(in: body) ?? body)</body></html>".utf8)
+    }
+
+    private static func render(_ original: NSAttributedString) throws -> String {
         let escape = NativeDocumentConversion.xml
         let text = original.string as NSString
         var body = ""
@@ -254,6 +257,6 @@ enum NativeRTFConversionMarkup {
         closeLists()
         closeTables(from: 0)
         try Task.checkCancellation()
-        return Data("<html><head><title>\(escape(title))</title></head><body>\(notes?.insertLinks(in: body) ?? body)</body></html>".utf8)
+        return body
     }
 }

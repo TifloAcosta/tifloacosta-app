@@ -58,7 +58,7 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
             try Task.checkCancellation()
             throw NativeDocumentConversion.Failure.invalidOutput
         }
-        noteBodies = collector.notes
+        noteBodies = collector.richNotes
         for key in collector.references where noteBodies[key] != nil && noteIDs[key] == nil {
             noteIDs[key] = noteIDs.count + 1
         }
@@ -69,12 +69,14 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
             try Task.checkCancellation()
             throw NativeDocumentConversion.Failure.invalidOutput
         }
-        let notes = noteIDs.sorted { $0.value < $1.value }.map { key, id in
-            let paragraphs = (noteBodies[key] ?? "").components(separatedBy: "\n")
-            let content = paragraphs.enumerated().map { index, text in
-                let marker = index == 0 ? "<w:r><w:rPr><w:vertAlign w:val=\"superscript\"/></w:rPr><w:footnoteRef/></w:r>" : ""
-                return "<w:p>\(marker)<w:r><w:t xml:space=\"preserve\">\(escape(text))</w:t></w:r></w:p>"
-            }.joined()
+        let notes = try noteIDs.sorted { $0.value < $1.value }.map { key, id in
+            let note = NativeConversionMarkup.Document(body: collector.richNotes[key] ?? "", title: "",
+                language: nil, metadata: [:], assets: [], headings: [])
+            let rendered = try NativeDOCXConversionWriter().write(note).body
+            let marker = "<w:r><w:footnoteRef/></w:r>"
+            let content = rendered.hasPrefix("<w:p>") ?
+                "<w:p>" + marker + String(rendered.dropFirst(5)) :
+                "<w:p>\(marker)</w:p>\(rendered)"
             return "<w:footnote w:id=\"\(id)\">\(content)</w:footnote>"
         }.joined()
         let footnotes = notes.isEmpty ? nil : "<w:footnotes xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:footnote w:type=\"separator\" w:id=\"-1\"><w:p><w:r><w:separator/></w:r></w:p></w:footnote><w:footnote w:type=\"continuationSeparator\" w:id=\"0\"><w:p><w:r><w:continuationSeparator/></w:r></w:p></w:footnote>\(notes)</w:footnotes>"
@@ -313,31 +315,42 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
 }
 
 final class NativeConversionNoteCollector: NSObject, XMLParserDelegate {
-    var notes: [String: String] = [:]
+    var richNotes: [String: String] = [:]
     var references: [String] = []
     private var key: String?
     private var depth = 0
-    private var text = ""
+    private var rich = ""
+    private let tags: Set<String> = ["p", "strong", "b", "em", "i", "u", "sub", "sup", "span", "br"]
     func parser(_ parser: XMLParser, didStartElement tag: String, namespaceURI: String?,
                 qualifiedName: String?, attributes: [String: String]) {
         if Task.isCancelled { parser.abortParsing(); return }
-        if depth > 0 { depth += 1; if tag == "br" { text += "\n" }; return }
+        if depth > 0 {
+            depth += 1
+            if tag == "br" { rich += "<br/>" }
+            else if tags.contains(tag) {
+                let language = (attributes["xml:lang"] ?? attributes["lang"]).map {
+                    " xml:lang=\"\(NativeDocumentConversion.xml($0))\""
+                } ?? ""
+                rich += "<\(tag)\(language)>"
+            }
+            return
+        }
         if tag == "a", attributes["role"] == "doc-noteref", let href = attributes["href"], href.hasPrefix("#") {
             references.append(String(href.dropFirst()))
         }
         if attributes["role"] == "doc-footnote", let id = attributes["id"] {
-            key = id; depth = 1; text = ""
+            key = id; depth = 1; rich = ""
         }
     }
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-        if depth > 0 { text += string }
+        if depth > 0 { rich += NativeDocumentConversion.xml(string) }
     }
     func parser(_ parser: XMLParser, didEndElement tag: String, namespaceURI: String?, qualifiedName: String?) {
         guard depth > 0 else { return }
-        if tag == "p" { text += "\n" }
+        if depth > 1, tag != "br", tags.contains(tag) { rich += "</\(tag)>" }
         depth -= 1
         if depth == 0, let key {
-            notes[key] = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            richNotes[key] = rich
             self.key = nil
         }
     }

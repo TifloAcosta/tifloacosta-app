@@ -31,10 +31,11 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
         self.assets = Dictionary(uniqueKeysWithValues: assets.map { ($0.path, $0) })
     }
 
-    func write(_ markup: NativeConversionMarkup.Document) throws -> String {
+    func write(_ markup: NativeConversionMarkup.Document, fragment: Bool = false) throws -> String {
         output = "{\\rtf1\\ansi\\uc1{\\fonttbl{\\f0 Arial;}}{\\info{\\title \(Self.escape(markup.title))}"
         if let author = markup.metadata["author"] { output += "{\\author \(Self.escape(author))}" }
         output += "}\\f0\\fs24 "
+        if fragment { output = "" }
         let headerEnd = output.utf8.count
         let data = Data("<body>\(markup.body)</body>".utf8)
         let collector = NativeConversionNoteCollector()
@@ -45,7 +46,12 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
             try Task.checkCancellation()
             throw NativeDocumentConversion.Failure.invalidOutput
         }
-        for id in collector.references { notes[id] = collector.notes[id] }
+        for id in collector.references where notes[id] == nil {
+            guard let body = collector.richNotes[id] else { continue }
+            let note = NativeConversionMarkup.Document(body: body, title: "", language: nil,
+                metadata: [:], assets: [], headings: [])
+            notes[id] = try NativeRTFConversionWriter(assets: []).write(note, fragment: true)
+        }
         let parser = XMLParser(data: data)
         parser.shouldResolveExternalEntities = false
         parser.delegate = self
@@ -59,7 +65,7 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
             output.insert(contentsOf: tables, at: index)
         }
         try Task.checkCancellation()
-        return output + "}"
+        return fragment ? output : output + "}"
     }
 
     static func escape(_ text: String) -> String {
@@ -88,7 +94,7 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
             let id = String(href.dropFirst())
             if let note = notes[id], emittedNotes.insert(id).inserted {
                 let name = Self.bookmark(id)
-                let content = note.components(separatedBy: "\n").map(Self.escape).joined(separator: "\\par ")
+                let content = note
                 output += "{\\super\\chftn}{\\footnote\\pard\\plain\\fs20{\\*\\bkmkstart \(name)}{\\*\\bkmkend \(name)}{\\super\\chftn} \(content)}"
                 suppressedDepth = 1
                 return

@@ -233,7 +233,7 @@ struct DocumentConversionSmoke {
         <figure><img src="data:image/png;base64,\(png)" alt="Imagen de prueba" onload="bad()"/><figcaption>Figura original</figcaption></figure>
         <script>bad()</script><a href="#tabla">Volver</a>
         <p xml:lang="fr"><strong><em>Déjà vu</em></strong> <a href="#nota" role="doc-noteref">1</a></p>
-        <aside id="nota" role="doc-footnote"><p>Hinweis – opinião.</p></aside></body></html>
+        <aside id="nota" role="doc-footnote"><p>Hinweis – opinião.</p><p><strong>Énfasis en nota</strong></p></aside></body></html>
         """.write(to: xhtml, atomically: true, encoding: .utf8)
         let rich = NativeConversionSource(filename: "Original.xhtml", title: "Original", format: "xhtml",
             text: "Tabla\nDatos", links: [], original: xhtml)
@@ -268,6 +268,7 @@ struct DocumentConversionSmoke {
         let wordAgain = try NativeDocumentConversion.convert(readWord, to: .epub,
             in: richOutput.appendingPathComponent("docx-roundtrip"))
         let wordRoundtrip = try members(wordAgain, mime: "application/epub+zip")["EPUB/book.xhtml"]!
+        precondition(wordRoundtrip.contains("<strong>Énfasis en nota</strong>"))
         precondition(wordRoundtrip.contains("<ol start=\"3\" type=\"I\">") &&
             wordRoundtrip.contains("<ol start=\"7\" type=\"I\">"))
         precondition(wordRoundtrip.contains("<table>") && wordRoundtrip.contains("alt=\"Imagen de prueba\""))
@@ -281,7 +282,7 @@ struct DocumentConversionSmoke {
         let rtfRoundtrip = try NativeRTFConversionMarkup.xhtml(Data(rtfMarkup.utf8), title: "Prueba")
             .flatMap { String(data: $0, encoding: .utf8) } ?? ""
         precondition(rtfRoundtrip.contains("role=\"doc-footnote\"") && rtfRoundtrip.contains("role=\"doc-noteref\"") &&
-            rtfRoundtrip.contains("Hinweis – opinião."))
+            rtfRoundtrip.contains("Hinweis – opinião.") && rtfRoundtrip.contains("<strong>Énfasis en nota</strong>"))
         let richRTFReader = try NSAttributedString(url: richRTF,
             options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
         precondition(richRTFReader.string.contains("Imagen de prueba") && richRTFReader.string.contains("Déjà vu"))
@@ -353,6 +354,7 @@ struct DocumentConversionSmoke {
         precondition(recoveredBook.contains("<table>") && recoveredBook.contains("<ul>") &&
             recoveredBook.contains("alt=\"Imagen de prueba\"") && recoveredBook.contains("Hinweis – opinião."))
         precondition(recoveredBook.contains("lang=\"fr\""))
+        precondition(recoveredBook.contains("<strong>Énfasis en nota</strong>"))
         precondition(recoveredBook.contains("role=\"doc-footnote\"") && recoveredBook.contains("role=\"doc-noteref\""))
         precondition(recoveredBook.contains("<ol type=\"I\">") &&
             recoveredBook.contains("<li value=\"3\">") && recoveredBook.contains("<li value=\"7\">") &&

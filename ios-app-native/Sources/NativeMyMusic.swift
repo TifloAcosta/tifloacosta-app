@@ -1074,8 +1074,24 @@ struct NativeMyMusicScreen: View {
         }
     }
 
+    private var possibleDuplicateSongs: Set<UUID> {
+        let locale = Locale(identifier: "en_US_POSIX")
+        let indexed = library.files.compactMap { file -> (key: [String], id: UUID)? in
+            guard let artist = file.artist else { return nil }
+            let key = [file.name, artist].map {
+                $0.split(whereSeparator: \.isWhitespace).joined(separator: " ")
+                    .folding(options: [.caseInsensitive, .diacriticInsensitive], locale: locale)
+            }
+            guard key.allSatisfy({ !$0.isEmpty }) else { return nil }
+            return (key, file.id)
+        }
+        let groups = Dictionary(grouping: indexed, by: { $0.key })
+        return Set(groups.values.filter { $0.count > 1 }.flatMap { group in group.map { $0.id } })
+    }
+
     private var musicLibrarySection: some View {
         Section("Mi biblioteca") {
+            let duplicates = possibleDuplicateSongs
             if library.files.isEmpty {
                 Text("Todavía no hay canciones. Usa Organizar mi música para importarlas.")
             } else {
@@ -1092,6 +1108,7 @@ struct NativeMyMusicScreen: View {
                         .accessibilityLabel(detailedVoiceOver ?
                             MusicLocalized.format("%@, artista %@, álbum %@, disponible sin conexión", file.name, file.artist ?? MusicLocalized.format("No indicado"), file.album ?? MusicLocalized.format("No indicado")) :
                             file.name)
+                        .accessibilityHint(duplicates.contains(file.id) ? MusicLocalized.message("Posible canción duplicada") : "")
                         .accessibilityActions {
                             Button("Reproducir") {
                                 player.play(name: file.name, url: library.audioURL(for: file),
@@ -1108,6 +1125,9 @@ struct NativeMyMusicScreen: View {
                             }
                             Button("Editar información de la canción") { editTrackInformation(file) }
                             Button("Eliminar de la biblioteca") { pendingRemoval = file }
+                        }
+                        if duplicates.contains(file.id) {
+                            Text("Posible canción duplicada").font(.caption).accessibilityHidden(true)
                         }
                         Spacer()
                         Menu("Acciones de \(file.name)") {

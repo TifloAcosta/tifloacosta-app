@@ -363,11 +363,16 @@ final class NativeReaderLibrary: ObservableObject {
         }
     }
 
-    func rename(_ document: NativeReadingDocument, to proposedTitle: String) {
+    func rename(_ document: NativeReadingDocument, to proposedTitle: String) throws {
         let title = proposedTitle.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !title.isEmpty, let index = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        let previousTitle = documents[index].title
         documents[index].title = title
-        try? save()
+        do { try save() }
+        catch {
+            documents[index].title = previousTitle
+            throw error
+        }
     }
 
     @discardableResult
@@ -2401,7 +2406,10 @@ struct NativeReaderLibraryScreen: View {
         )) {
             TextField("Título", text: $proposedTitle)
             Button("Guardar") {
-                if let doc = documentToRename { library.rename(doc, to: proposedTitle) }
+                if let doc = documentToRename {
+                    do { try library.rename(doc, to: proposedTitle) }
+                    catch { importError = error.localizedDescription }
+                }
                 documentToRename = nil
             }
             Button("Cancelar", role: .cancel) { documentToRename = nil }

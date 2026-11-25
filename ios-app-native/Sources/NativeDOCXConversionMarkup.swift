@@ -372,6 +372,12 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
         private var body = ""
         private var textDepth = 0
         private var ignored = 0
+        private var run = ""
+        private var bold = false
+        private var italic = false
+        private var underline = false
+        private var language: String?
+        private var vertical: String?
         func parser(_ parser: XMLParser, didStartElement name: String, namespaceURI: String?,
                     qualifiedName: String?, attributes: [String: String]) {
             if Task.isCancelled { parser.abortParsing(); return }
@@ -385,9 +391,15 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
             guard id != nil else { return }
             switch name {
             case "p": body += "<p>"
+            case "r": run = ""; bold = false; italic = false; underline = false; language = nil; vertical = nil
+            case "b": bold = !["0", "false", "off"].contains(attributes["w:val"] ?? "")
+            case "i": italic = !["0", "false", "off"].contains(attributes["w:val"] ?? "")
+            case "u": underline = !["0", "false", "off", "none"].contains(attributes["w:val"] ?? "")
+            case "lang": language = attributes["w:val"]
+            case "vertAlign": vertical = attributes["w:val"]
             case "t": textDepth += 1
-            case "br": body += "<br/>"
-            case "tab": body += "&#9;"
+            case "br": run += "<br/>"
+            case "tab": run += "&#9;"
             default: break
             }
         }
@@ -396,6 +408,14 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
             if ignored > 0 { ignored -= 1; return }
             guard let id else { return }
             switch name {
+            case "r" where !run.isEmpty:
+                if bold { run = "<strong>\(run)</strong>" }
+                if italic { run = "<em>\(run)</em>" }
+                if underline { run = "<u>\(run)</u>" }
+                if vertical == "subscript" { run = "<sub>\(run)</sub>" }
+                if vertical == "superscript" { run = "<sup>\(run)</sup>" }
+                if let language { run = "<span xml:lang=\"\(NativeDocumentConversion.xml(language))\">\(run)</span>" }
+                body += run
             case "p": body += "</p>"
             case "t": textDepth -= 1
             case "footnote": notes[id] = body; self.id = nil
@@ -403,7 +423,7 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
             }
         }
         func parser(_ parser: XMLParser, foundCharacters text: String) {
-            if id != nil && textDepth > 0 && ignored == 0 { body += NativeDocumentConversion.xml(text) }
+            if id != nil && textDepth > 0 && ignored == 0 { run += NativeDocumentConversion.xml(text) }
         }
     }
 

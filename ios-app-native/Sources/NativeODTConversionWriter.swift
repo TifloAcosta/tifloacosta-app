@@ -80,7 +80,14 @@ final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
             try Task.checkCancellation()
             throw NativeDocumentConversion.Failure.invalidOutput
         }
-        for id in collector.references { notes[id] = collector.notes[id] }
+        for id in collector.references where notes[id] == nil {
+            if let content = collector.richNotes[id] {
+                let writer = NativeODTConversionWriter(assets: [])
+                writer.passageStyles = passageStyles
+                notes[id] = try writer.write(content)
+                passageStyles = writer.passageStyles
+            }
+        }
         parser.delegate = self
         guard parser.parse() else {
             try Task.checkCancellation()
@@ -119,7 +126,7 @@ final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
                 if closeCitationParagraph { output += "<text:p>" }
                 if emittedNotes.insert(id).inserted {
                     output += "<text:note text:id=\"\(escape(id))\" text:note-class=\"footnote\"><text:note-citation>"
-                    let paragraphs = note.components(separatedBy: "\n").map { "<text:p>\(escape($0))</text:p>" }.joined()
+                    let paragraphs = note.isEmpty ? "<text:p/>" : note
                     citationEnding = "</text:note-citation><text:note-body>\(paragraphs)</text:note-body></text:note>"
                 } else {
                     output += "<text:note-ref text:ref-name=\"\(escape(id))\" text:note-class=\"footnote\" text:reference-format=\"text\">"

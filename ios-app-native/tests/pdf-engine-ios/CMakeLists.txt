@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.21)
+project(TifloPDFEngineProbe LANGUAGES C CXX)
+find_package(PkgConfig REQUIRED)
+set(PKG_CONFIG_ARGN --static)
+pkg_check_modules(CAIRO REQUIRED IMPORTED_TARGET cairo)
+find_package(qpdf CONFIG REQUIRED)
+add_executable(pdf-engine-probe main.c)
+set_property(TARGET pdf-engine-probe PROPERTY LINKER_LANGUAGE CXX)
+target_link_libraries(pdf-engine-probe PRIVATE PkgConfig::CAIRO qpdf::libqpdf
+    "-framework CoreGraphics" "-framework CoreText" "-framework CoreFoundation")

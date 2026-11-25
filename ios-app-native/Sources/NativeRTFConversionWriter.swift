@@ -1,0 +1,113 @@
+import Foundation
+
+/// Serializes the shared XHTML representation without executing markup or loading resources.
+final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
+    private var output = ""
+    private var endings: [String] = []
+    private var listCounters: [Int?] = []
+    private let assets: [String: NativeConversionMarkup.Asset]
+
+    init(assets: [NativeConversionMarkup.Asset]) {
+        self.assets = Dictionary(uniqueKeysWithValues: assets.map { ($0.path, $0) })
+    }
+
+    func write(_ markup: NativeConversionMarkup.Document) throws -> String {
+        output = "{\\rtf1\\ansi\\uc1{\\fonttbl{\\f0 Arial;}}{\\info{\\title \(Self.escape(markup.title))}"
+        if let author = markup.metadata["author"] { output += "{\\author \(Self.escape(author))}" }
+        output += "}\\f0\\fs24 "
+        let parser = XMLParser(data: Data("<body>\(markup.body)</body>".utf8))
+        parser.shouldResolveExternalEntities = false
+        parser.delegate = self
+        guard parser.parse() else {
+            try Task.checkCancellation()
+            throw NativeDocumentConversion.Failure.invalidOutput
+        }
+        return output + "}"
+    }
+
+    static func escape(_ text: String) -> String {
+        var result = ""
+        for code in text.utf16 {
+            switch code {
+            case 9: result += "\\tab "
+            case 92, 123, 125: result += "\\" + String(UnicodeScalar(code)!)
+            case 32...126: result += String(UnicodeScalar(code)!)
+            case 0...31: continue
+            default: result += "\\u\(Int16(bitPattern: code))?"
+            }
+        }
+        return result
+    }
+
+    func parser(_ parser: XMLParser, didStartElement tag: String, namespaceURI: String?,
+                qualifiedName: String?, attributes: [String: String]) {
+        if Task.isCancelled { parser.abortParsing(); return }
+        var close = ""
+        if let id = attributes["id"] {
+            let safe = Self.bookmark(id)
+            output += "{\\*\\bkmkstart \(safe)}{\\*\\bkmkend \(safe)}"
+        }
+        switch tag {
+        case "p", "blockquote", "pre", "figcaption", "caption": close = "\\par\n"
+        case "h1", "h2", "h3", "h4", "h5", "h6":
+            let level = (tag.last?.wholeNumberValue ?? 1) - 1
+            output += "{\\pard\\outlinelevel\(level)\\b "
+            close = "\\par}\n"
+        case "strong", "b": output += "{\\b "; close = "}"
+        case "em", "i": output += "{\\i "; close = "}"
+        case "u": output += "{\\ul "; close = "}"
+        case "sub": output += "{\\sub "; close = "}"
+        case "sup": output += "{\\super "; close = "}"
+        case "br": output += "\\line "
+        case "ol": listCounters.append(attributes["start"].flatMap(Int.init) ?? 1)
+        case "ul": listCounters.append(nil)
+        case "li":
+            output += "{\\pard\\li\(min(listCounters.count, 12) * 360) "
+            if let counter = listCounters.last ?? nil {
+                let value = min(attributes["value"].flatMap(Int.init) ?? counter, Int.max - 1)
+                output += "\(value).\\tab "
+                listCounters[listCounters.count - 1] = value + 1
+            } else { output += "\\bullet\\tab " }
+            close = "\\par}\n"
+        case "tr": close = "\\par\n"
+        case "td", "th": close = "\\tab "
+        case "a":
+            if let href = attributes["href"] {
+                let field: String
+                if href.hasPrefix("#") { field = "\\\\l \"\(Self.bookmark(String(href.dropFirst())))\"" }
+                else { field = "\"\(Self.escape(href.replacingOccurrences(of: "\"", with: "%22")))\"" }
+                output += "{\\field{\\*\\fldinst HYPERLINK \(field)}{\\fldrslt "
+                close = "}}"
+            }
+        case "img":
+            if let path = attributes["src"], let image = assets[path],
+               ["image/png", "image/jpeg"].contains(image.mediaType) {
+                let kind = image.mediaType == "image/png" ? "pngblip" : "jpegblip"
+                let digits = Array("0123456789abcdef".utf8)
+                var bytes: [UInt8] = []
+                bytes.reserveCapacity(image.data.count * 2)
+                for byte in image.data {
+                    bytes.append(digits[Int(byte >> 4)])
+                    bytes.append(digits[Int(byte & 15)])
+                }
+                output += "{\\pict\\\(kind) " + String(decoding: bytes, as: UTF8.self) + "}"
+            }
+            if let alt = attributes["alt"], !alt.isEmpty { output += Self.escape(alt) }
+        default: break
+        }
+        endings.append(close)
+    }
+
+    private static func bookmark(_ id: String) -> String {
+        "t" + id.utf8.map { String(format: "%02x", $0) }.joined()
+    }
+
+    func parser(_ parser: XMLParser, didEndElement tag: String, namespaceURI: String?, qualifiedName: String?) {
+        output += endings.popLast() ?? ""
+        if tag == "ol" || tag == "ul" { _ = listCounters.popLast() }
+    }
+
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        output += Self.escape(string)
+    }
+}

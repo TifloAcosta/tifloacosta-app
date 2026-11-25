@@ -80,14 +80,14 @@ enum NativeDocumentConversion {
             } catch {
                 markup = nil
             }
-            let usesOnlyMarkup = markup != nil && [.html, .epub, .odt].contains(format)
+            let usesOnlyMarkup = markup != nil && [.html, .epub, .odt, .rtf].contains(format)
             let paragraphs = usesOnlyMarkup ? [] : try parse(input) { onProgress($0 * 0.6) }
             onProgress(0.6)
             let title = xml(input.title)
             switch format {
             case .txt: break
             case .md: try write(try markdown(paragraphs), to: output)
-            case .rtf: try write(try rtf(paragraphs, title: input.title), to: output)
+            case .rtf: try write(try markup.map { try NativeRTFConversionWriter(assets: $0.assets).write($0) } ?? rtf(paragraphs, title: input.title), to: output)
             case .html:
                 let contents = try markup?.xhtml() ?? xhtml(paragraphs, title: title)
                 try write("<!DOCTYPE html>\n" + contents, to: output)
@@ -368,26 +368,13 @@ enum NativeDocumentConversion {
     }
 
     private static func rtf(_ paragraphs: [Paragraph], title: String) throws -> String {
-        func escaped(_ text: String) -> String {
-            var result = ""
-            for unit in text.utf16 {
-                switch unit {
-                case 9: result += "\\tab "
-                case 92, 123, 125: result += "\\" + String(UnicodeScalar(unit)!)
-                case 32...126: result += String(UnicodeScalar(unit)!)
-                case 0...31: continue
-                default: result += "\\u\(Int16(bitPattern: unit))?"
-                }
-            }
-            return result
-        }
-        var result = "{\\rtf1\\ansi\\uc1{\\fonttbl{\\f0 Arial;}}{\\info{\\title \(escaped(title))}}\\f0\\fs24 "
+        var result = "{\\rtf1\\ansi\\uc1{\\fonttbl{\\f0 Arial;}}{\\info{\\title \(NativeRTFConversionWriter.escape(title))}}\\f0\\fs24 "
         for paragraph in paragraphs {
             try Task.checkCancellation()
             let text = paragraph.runs.map { run in
-                let label = escaped(run.text)
+                let label = NativeRTFConversionWriter.escape(run.text)
                 guard let url = run.url else { return label }
-                return "{\\field{\\*\\fldinst HYPERLINK \"\(escaped(url.absoluteString))\"}{\\fldrslt \(label)}}"
+                return "{\\field{\\*\\fldinst HYPERLINK \"\(NativeRTFConversionWriter.escape(url.absoluteString))\"}{\\fldrslt \(label)}}"
             }.joined()
             if paragraph.level > 0 {
                 result += "\\pard\\outlinelevel\(paragraph.level - 1)\\b \(text)\\b0\\par\n"

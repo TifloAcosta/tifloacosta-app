@@ -197,6 +197,14 @@ struct DocumentConversionSmoke {
         precondition(table.contains("<table>") && table.contains(png) && table.contains("href=\"#c0-") &&
             table.contains("xml:lang=\"fr\"") && table.contains("role=\"doc-footnote\"") &&
             table.contains("Hinweis – opinião."))
+        let richRTF = try NativeDocumentConversion.convert(reopened, to: .rtf, in: richOutput)
+        let rtfMarkup = try String(contentsOf: richRTF, encoding: .utf8)
+        precondition(rtfMarkup.contains("\\outlinelevel1") && rtfMarkup.contains("\\pict") &&
+            rtfMarkup.contains("Imagen de prueba") && rtfMarkup.contains("HYPERLINK"))
+        let richRTFReader = try NSAttributedString(url: richRTF,
+            options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
+        precondition(richRTFReader.string.contains("Imagen de prueba") && richRTFReader.string.contains("Hinweis – opinião."))
+
         let richODT = try NativeDocumentConversion.convert(reopened, to: .odt, in: richOutput)
         let odtPackage = try members(richODT, mime: "application/vnd.oasis.opendocument.text")
         let contentXML = odtPackage["content.xml"]!

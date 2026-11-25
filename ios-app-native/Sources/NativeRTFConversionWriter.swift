@@ -16,6 +16,7 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
     private struct ListState {
         var id: Int
         let format: Int
+        let level: Int
         var next: Int?
     }
     private var listStates: [ListState] = []
@@ -113,19 +114,21 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
         case "ol", "ul":
             let start = tag == "ol" ? max(1, min(32767, attributes["start"].flatMap(Int.init) ?? 1)) : nil
             let format = tag == "ul" ? 23 : (["I": 1, "i": 2, "A": 3, "a": 4][attributes["type"] ?? ""] ?? 0)
-            listStates.append(ListState(id: registerList(format: format, start: start ?? 1), format: format, next: start))
+            let level = min(8, listStates.count)
+            let id = registerList(format: format, start: start ?? 1, level: level)
+            listStates.append(ListState(id: id, format: format, level: level, next: start))
         case "li":
             let indentation = min(listStates.count, 12) * 360
             output += "{\\pard" + (rowStart == nil ? "" : "\\intbl") + "\\li\(indentation) "
             if var list = listStates.last {
                 if let counter = list.next {
                     let value = max(1, min(32767, attributes["value"].flatMap(Int.init) ?? counter))
-                    if value != counter { list.id = registerList(format: list.format, start: value) }
-                    output += "\\ls\(list.id)\\ilvl0 {\\listtext \(Self.listMarker(value, format: list.format)).\\tab}"
+                    if value != counter { list.id = registerList(format: list.format, start: value, level: list.level) }
+                    output += "\\ls\(list.id)\\ilvl\(list.level) {\\listtext \(Self.listMarker(value, format: list.format)).\\tab}"
                     list.next = min(32767, value + 1)
                     listStates[listStates.count - 1] = list
                 } else {
-                    output += "\\ls\(list.id)\\ilvl0 {\\listtext\\bullet\\tab}"
+                    output += "\\ls\(list.id)\\ilvl\(list.level) {\\listtext\\bullet\\tab}"
                 }
             }
             close = "\\par}\n"
@@ -192,10 +195,16 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
         }
     }
 
-    private func registerList(format: Int, start: Int) -> Int {
+    private func registerList(format: Int, start: Int, level: Int) -> Int {
         let id = lists.count + 1
-        let levelText = format == 23 ? "{\\leveltext\\'01\\u8226?;}{\\levelnumbers;}" : "{\\leveltext\\'02\\'00.;}{\\levelnumbers\\'01;}"
-        lists.append("{\\list\\listtemplateid\(id)\\listsimple1{\\listlevel\\levelnfc\(format)\\leveljc0\\levelfollow0\\levelstartat\(start)\(levelText)}\\listid\(id)}")
+        let levels = (0...level).map { index in
+            let marker = format == 23 ? "{\\leveltext\\'01\\u8226?;}{\\levelnumbers;}" :
+                "{\\leveltext\\'02\\'0\(index).;}{\\levelnumbers\\'01;}"
+            let first = index == level ? start : 1
+            return "{\\listlevel\\levelnfc\(format)\\leveljc0\\levelfollow0\\levelstartat\(first)\(marker)}"
+        }.joined()
+        let kind = level == 0 ? "\\listsimple1" : "\\listhybrid"
+        lists.append("{\\list\\listtemplateid\(id)\(kind)\(levels)\\listid\(id)}")
         overrides.append("{\\listoverride\\listid\(id)\\listoverridecount0\\ls\(id)}")
         return id
     }

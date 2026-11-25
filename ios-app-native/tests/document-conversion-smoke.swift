@@ -314,6 +314,11 @@ struct DocumentConversionSmoke {
         precondition(numberedRTF.contains("\\ls1\\ilvl0 {\\listtext 3.\\tab}"))
         precondition(numberedRTF.contains("\\ls2\\ilvl0 {\\listtext 8.\\tab}"))
         precondition(numberedRTF.contains("\\ls2\\ilvl0 {\\listtext 9.\\tab}"))
+        let nestedLists = NativeConversionMarkup.Document(
+            body: "<ol><li>Exterior<ul><li>Interior</li></ul></li></ol>",
+            title: "Jerarquía", language: "es", metadata: [:], assets: [], headings: [])
+        let nestedRTF = try NativeRTFConversionWriter(assets: []).write(nestedLists)
+        precondition(nestedRTF.contains("\\listhybrid") && nestedRTF.contains("\\ilvl1"))
         let numberedReader = try NSAttributedString(data: Data(numberedRTF.utf8),
             options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
         precondition(numberedReader.string.contains("A") && numberedReader.string.contains("B") &&

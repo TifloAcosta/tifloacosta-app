@@ -93,7 +93,11 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
             } else { tag = "p" }
         case "text:list":
             tag = attributes["text:style-name"].map { orderedListStyles.contains($0) } == true ? "ol" : "ul"
-        case "text:list-item": tag = "li"
+        case "text:list-item":
+            tag = "li"
+            if let start = attributes["text:start-value"].flatMap(Int.init), start > 0 {
+                htmlAttributes += " value=\"\(start)\""
+            }
         case "table:table": tag = "table"
         case "table:table-header-rows": tag = "thead"
         case "table:table-row": tag = "tr"

@@ -21,24 +21,7 @@ actor NativeMusicRecognition {
     }()
 
 
-    struct Match: Sendable {
-        let title: String
-        let artist: String
-    }
-
-    private struct Response: Decodable {
-        struct Result: Decodable {
-            struct Recording: Decodable {
-                struct Artist: Decodable { let name: String }
-                let title: String?
-                let artists: [Artist]?
-            }
-            let score: Double
-            let recordings: [Recording]?
-        }
-        let status: String
-        let results: [Result]?
-    }
+    typealias Match = NativeAcoustIDLookup.Match
 
     private let clock = ContinuousClock()
     private var lastRequest: ContinuousClock.Instant?
@@ -58,15 +41,7 @@ actor NativeMusicRecognition {
         let user: User?
     }
 
-    enum KeyState: String, Decodable {
-        case pending, approved, declined, expired, revoked, unknown
-    }
-
-    private struct KeyResponse: Decodable {
-        struct Key: Decodable { let state: KeyState }
-        let status: String
-        let key: Key?
-    }
+    typealias KeyState = NativeAcoustIDLookup.KeyState
 
     func requestLink(client: String) async throws -> LinkResponse.User {
         let data = try await request("user/request_link", client: client, fields: [
@@ -81,9 +56,7 @@ actor NativeMusicRecognition {
 
     func linkStatus(client: String, user: String) async throws -> KeyState {
         let data = try await request("user/link_status", client: client, user: user)
-        let result = try JSONDecoder().decode(KeyResponse.self, from: data)
-        guard result.status == "ok", let key = result.key else { throw URLError(.badServerResponse) }
-        return key.state
+        return try NativeAcoustIDLookup.keyState(in: data)
     }
 
     static var clientKey: String? {
@@ -105,21 +78,7 @@ actor NativeMusicRecognition {
             URLQueryItem(name: "fingerprint", value: sample.value),
             URLQueryItem(name: "meta", value: "recordings")
         ])
-        let payload = try JSONDecoder().decode(Response.self, from: data)
-        guard payload.status == "ok" else { throw URLError(.badServerResponse) }
-
-        var candidates: [String: Match] = [:]
-        for result in payload.results ?? [] where result.score >= 0.90 {
-            for recording in result.recordings ?? [] {
-                guard let title = recording.title?.trimmingCharacters(in: .whitespacesAndNewlines), !title.isEmpty,
-                      let artists = recording.artists, !artists.isEmpty else { continue }
-                let artist = artists.map(\.name).joined(separator: ", ").trimmingCharacters(in: .whitespacesAndNewlines)
-                guard !artist.isEmpty else { continue }
-                candidates[(title + "\u{001F}" + artist).lowercased()] = Match(title: title, artist: artist)
-            }
-        }
-        // Keep the user's existing metadata when multiple credits disagree.
-        return candidates.count == 1 ? candidates.values.first : nil
+        return try NativeAcoustIDLookup.match(in: data)
     }
 
     private func request(_ path: String, client: String, user: String? = nil,
@@ -140,7 +99,7 @@ actor NativeMusicRecognition {
         request.setValue(client, forHTTPHeaderField: "Acoustid-App-Key")
         if let user { request.setValue(user, forHTTPHeaderField: "Acoustid-User-Key") }
         request.httpBody = form.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B").data(using: .utf8)
-        let (data, response) = try await session.data(for: request)
+        let (data, response) = try await NativeAcoustIDLookup.send { try await session.data(for: request) }
         guard let http = response as? HTTPURLResponse else { throw URLError(.badServerResponse) }
         if http.statusCode == 429 {
             let seconds = http.value(forHTTPHeaderField: "Retry-After").flatMap(Int.init) ?? 30

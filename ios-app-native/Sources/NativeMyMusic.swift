@@ -873,21 +873,16 @@ struct NativeMyMusicScreen: View {
             return
         }
         recognitionTask = Task {
-            var matched = 0
-            var failed = 0
-            for id in ids {
-                if Task.isCancelled { break }
-                do { if try await library.recognizeTrack(id) { matched += 1 } }
-                catch is CancellationError { break }
-                catch let error as URLError where error.code == .userAuthenticationRequired {
-                    showRecognitionAccount = true
-                    recognitionTask = nil
-                    return
+            do {
+                let counts = try await NativeAcoustIDLookup.identifyBatch(ids) {
+                    try await library.recognizeTrack($0)
                 }
-                catch { failed += 1 }
-            }
-            if !Task.isCancelled {
-                recognitionResult = MusicLocalized.format("Identificadas: %d de %d. Errores: %d.", matched, ids.count, failed)
+                recognitionResult = MusicLocalized.format("Identificadas: %d de %d. Errores: %d.",
+                    counts.matched, ids.count, counts.failed)
+            } catch let error as URLError where error.code == .userAuthenticationRequired {
+                showRecognitionAccount = true
+            } catch {
+                // A cancelled batch keeps the results already committed.
             }
             recognitionTask = nil
         }

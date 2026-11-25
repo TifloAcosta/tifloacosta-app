@@ -78,6 +78,13 @@ jobs:
             ios-app-native/tests/reader-speech-queue-background-smoke.swift \
             -o "$RUNNER_TEMP/reader-tts-background-queue"
           "$RUNNER_TEMP/reader-tts-background-queue"
+      - name: Probar respuestas controladas de AcoustID
+        run: |
+          set -euo pipefail
+          swiftc ios-app-native/Sources/NativeAcoustIDLookup.swift \
+            ios-app-native/tests/acoustid-controlled-smoke.swift \
+            -o "$RUNNER_TEMP/acoustid-controlled-check"
+          "$RUNNER_TEMP/acoustid-controlled-check"
       - name: Abrir y verificar los once formatos de conversión local
         env:
           CONVERSION_SAMPLES_DIR: ${{ runner.temp }}/conversion-samples

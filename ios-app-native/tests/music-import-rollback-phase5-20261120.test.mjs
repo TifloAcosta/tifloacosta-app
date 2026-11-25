@@ -34,7 +34,7 @@ test('AcoustID solo recibe una huella local, con activación voluntaria y coinci
   assert.match(recognition, /AVAudioFile\(forReading: url\)/);
   assert.match(recognition, /chromaprint_feed/);
   assert.match(recognition, /URLQueryItem\(name: "fingerprint", value: sample.value\)/);
-  assert.match(recognition, /candidates\.count == 1/);
+  assert.match(readFileSync(new URL('../Sources/NativeAcoustIDLookup.swift', import.meta.url), 'utf8'), /candidates\.count == 1/);
   assert.doesNotMatch(recognition, /uploadTask|Data\(contentsOf: audioURL/);
   assert.match(build, /-DFFT_LIB=vdsp -DUSE_INTERNAL_AVRESAMPLE=OFF/);
   const account = readFileSync(new URL('../Sources/NativeAcoustIDAccount.swift', import.meta.url), 'utf8');

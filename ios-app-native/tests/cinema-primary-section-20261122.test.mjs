@@ -64,8 +64,8 @@ test('the main cinema directory excludes general TV landing pages and routes to 
   const ids = [...directory.matchAll(/\.init\(id: "([^"]+)", name:/g)].map(match => match[1]);
   assert.deepEqual(ids, ['audesc-es', 'audesc-latino', 'audiocinemateca',
     'mercosur-pt', 'tape-territory', 'movies-for-the-blind', 'cinema-accessibile',
-    'rai-play-sound', 'cineaudioteca', 'tela-brasil', 'rtp-play', 'tubi', 'pluto', 'plex-ad', 'play-suisse-de', 'ami', 'ami-fr', 'ard', 'arte', 'arte-de']);
-  for (const excluded of ['foal', 'rtve', 'nfb', 'pbs', 'itvx', 'channel4', 'five', 'abc']) {
+    'rai-play-sound', 'cineaudioteca', 'tela-brasil', 'rtp-play', 'nfb', 'pbs', 'abc', 'nhb', 'spcine', 'tubi', 'pluto', 'plex-ad', 'play-suisse-de', 'ami', 'ami-fr', 'ard', 'arte', 'arte-de']);
+  for (const excluded of ['foal', 'rtve', 'itvx', 'channel4', 'five']) {
     assert.ok(!ids.includes(excluded), 'Generalist homepage leaked into directory: ' + excluded);
   }
   assert.match(directory, /https:\/\/tubitv\.com\/category\/audio_description/);
@@ -95,4 +95,8 @@ test('Italian and Portuguese partners have official user-facing access routes', 
   assert.ok(cinema.includes('https://www.cineaudioteca.it/login_catalogo.php'));
   assert.ok(cinema.includes('https://www.cineaudioteca.it/come_iscriversi.php'));
   assert.ok(cinema.includes('https://www.rtp.pt/play/'));
+});
+
+test('additional international sources use official access routes', () => {
+  for (const url of ['https://www.nfb.ca/explore-all-films/?accessibility=DV&language=en', 'https://www.pbs.org/show/american-masters/collections/accessible-episodes/', 'https://iview.abc.net.au/shows/ad', 'https://norddeutsche-hoerbuecherei.de/hoerfilme.html', 'https://www.spcineplay.com.br/']) assert.ok(cinema.includes(url));
 });

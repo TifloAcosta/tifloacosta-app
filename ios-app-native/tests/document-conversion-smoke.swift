@@ -115,11 +115,11 @@ struct DocumentConversionSmoke {
         precondition(CGPDFDictionaryGetStream(catalog, "Metadata", &pdfMetadata), "PDF lacks XMP metadata")
 
         precondition(pdf.page(at: 0)?.annotations.first { $0.url?.host == "example.com" }?.contents == "Leer guía")
-        let pdfDictionary = CGPDFDocument(results[.pdf]! as CFURL)!.catalog!
-        var structureRoot: CGPDFDictionaryRef?
-        var reverseTree: CGPDFDictionaryRef?
-        precondition(CGPDFDictionaryGetDictionary(pdfDictionary, "StructTreeRoot", &structureRoot))
-        precondition(CGPDFDictionaryGetDictionary(structureRoot!, "ParentTree", &reverseTree))
+        withExtendedLifetime(raw) {
+            var reverseTree: CGPDFDictionaryRef?
+            precondition(CGPDFDictionaryGetDictionary(structure!, "ParentTree", &reverseTree),
+                         "PDF lacks the reverse structural index")
+        }
         let reopenedDOCX = NativeConversionSource(filename: "Obra.versión.docx", title: "DOCX",
             format: "docx", text: "Text fallback", links: [], original: results[.docx]!)
         let docxHTML = try NativeDocumentConversion.convert(reopenedDOCX, to: .html,

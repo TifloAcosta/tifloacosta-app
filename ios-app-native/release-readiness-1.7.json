@@ -330,9 +330,11 @@
         "ios-app-native/Sources/NativeMoviesForTheBlind.swift",
         "ios-app-native/Sources/NativeRaiPlaySoundScreen.swift",
         "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45455489911",
-        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45406133567"
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45406133567",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/eadee411227dcae73c617eb8a4b184488b34551d",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/365c00b82defcae4ddb03c9bb0bdd5f67f46b58c"
       ],
-      "validation": "24-11-2026: pantalla nativa, biblioteca personal audio/vídeo, filtros de idioma y tipo; integraciones españolas completadas a nivel de desarrollo conforme al registro de trabajo, Audiocinemateca con prueba autenticada y Range HTTP 206 (ejecución 45406133567). Directorio internacional ampliado, Movies for the Blind con agrupación completa de partes, RaiPlay Sound con colecciones oficiales, buscadores de títulos en inglés y francés separados de la reproducción. Dieciséis solicitudes de colaboración enviadas; dos acuses automáticos. Ejecución 477: contratos y compilación de simulador correctos. Parcial: comprobar enlaces, catálogo real y reproducción de fuentes internacionales, integración nativa autorizada donde proceda y pruebas físicas. No distribución."
+      "validation": "24-11-2026: pantalla nativa, biblioteca personal audio/vídeo, filtros de idioma y tipo; integraciones españolas completadas a nivel de desarrollo conforme al registro de trabajo, Audiocinemateca con prueba autenticada y Range HTTP 206 (ejecución 45406133567). Directorio internacional ampliado, Movies for the Blind con agrupación completa de partes, RaiPlay Sound con colecciones oficiales, buscadores de títulos en inglés y francés separados de la reproducción. Dieciséis solicitudes de colaboración enviadas; dos acuses automáticos. Ejecución 477: contratos y compilación de simulador correctos. Parcial: comprobar enlaces, catálogo real y reproducción de fuentes internacionales, integración nativa autorizada donde proceda y pruebas físicas. No distribución. 25-11-2026: decisión editorial de incorporar recursos utilizables ahora sin esperar mejoras futuras. FOAL excluido expresamente. Añadidas colecciones AD oficiales Tubi, Pluto TV US, Plex y Play Suisse con filtro alemán; buscadores separados hörfilm.info y CiecandoScherzando. Enlaces externos sin extracción ni reproducción no autorizada; disponibilidad territorial y pista real dependen del proveedor. Contratos actualizados, CI pendiente."
     },
     {
       "id": 23,

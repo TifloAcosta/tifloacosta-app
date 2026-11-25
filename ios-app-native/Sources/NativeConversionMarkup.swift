@@ -33,7 +33,7 @@ enum NativeConversionMarkup {
                                      "jpeg": "image/jpeg", "gif": "image/gif"]
 
     static func read(_ input: NativeConversionSource, for format: NativeDocumentFormat) throws -> Document? {
-        guard [.html, .epub, .odt, .rtf, .docx, .daisy, .daisy3, .pdf].contains(format), let source = input.original else { return nil }
+        guard [.html, .epub, .odt, .rtf, .docx, .daisy, .daisy3, .pdf, .md, .fb2].contains(format), let source = input.original else { return nil }
         if input.format == "rtf" {
             guard let size = try? source.resourceValues(forKeys: [.fileSizeKey]).fileSize,
                   size <= maximumTextBytes,

@@ -89,7 +89,15 @@ enum NativeDocumentConversion {
                 markup = nil
             }
             let usesOnlyMarkup = markup != nil && [.html, .epub, .odt, .rtf, .docx].contains(format)
-            let paragraphs = usesOnlyMarkup ? [] : try parse(input) { onProgress($0 * 0.6) }
+            let paragraphs: [Paragraph]
+            if usesOnlyMarkup {
+                paragraphs = []
+            } else if [.pdf, .md, .fb2, .daisy, .daisy3].contains(format),
+                      let structured = try sourceParagraphs(markup, includeImages: format == .pdf) {
+                paragraphs = structured
+            } else {
+                paragraphs = try parse(input) { onProgress($0 * 0.6) }
+            }
             onProgress(0.6)
             let title = xml(input.title)
             switch format {
@@ -107,24 +115,7 @@ enum NativeDocumentConversion {
             case .daisy3: try daisy3(paragraphs, title: title, markup: markup, output: output)
             case .pdf:
                 let intermediate = staging.appendingPathComponent("rendered-" + UUID().uuidString + ".pdf")
-                let structured = try markup.flatMap { try NativePDFMarkup.read($0) }
-                let pdfParagraphs = structured.map { document in
-                    document.parts.map { part -> Paragraph in
-                        let runs = part.text.map { text, href -> Run in
-                            let destination = href.flatMap { link -> Int? in
-                                guard link.hasPrefix("#") else { return nil }
-                                return document.anchors[String(link.dropFirst())]
-                            }
-                            let url = href.flatMap { URL(string: $0) }.flatMap { candidate in
-                                ["https", "http", "mailto"].contains(candidate.scheme?.lowercased() ?? "") ? candidate : nil
-                            }
-                            return Run(text: text, url: url, target: destination)
-                        }
-                        return Paragraph(offset: part.offset, level: part.heading, runs: runs,
-                                         semanticPath: part.path, language: part.language, image: part.image, alternative: part.alternative)
-                    }
-                } ?? paragraphs
-                let metadata = try pdf(pdfParagraphs, title: input.title, markup: markup, output: intermediate) {
+                let metadata = try pdf(paragraphs, title: input.title, markup: markup, output: intermediate) {
                     onProgress(0.6 + $0 * 0.35)
                 }
                 try Task.checkCancellation()
@@ -139,6 +130,26 @@ enum NativeDocumentConversion {
         try files.moveItem(at: output, to: finalURL)
         onProgress(1)
         return finalURL
+    }
+
+    private static func sourceParagraphs(_ markup: NativeConversionMarkup.Document?, includeImages: Bool) throws -> [Paragraph]? {
+        guard let structured = try markup.flatMap({ try NativePDFMarkup.read($0) }) else { return nil }
+        return structured.parts.map { part in
+            let runs = part.text.map { text, href -> Run in
+                let destination = href.flatMap { link -> Int? in
+                    guard link.hasPrefix("#") else { return nil }
+                    return structured.anchors[String(link.dropFirst())]
+                }
+                let url = href.flatMap { URL(string: $0) }.flatMap { candidate in
+                    ["https", "http", "mailto"].contains(candidate.scheme?.lowercased() ?? "") ? candidate : nil
+                }
+                return Run(text: !includeImages && part.image != nil ? (part.alternative ?? "") : text,
+                           url: url, target: destination)
+            }
+            return Paragraph(offset: part.offset, level: part.heading, runs: runs,
+                semanticPath: part.path, language: part.language,
+                image: includeImages ? part.image : nil, alternative: part.alternative)
+        }
     }
 
     private static func parse(_ input: NativeConversionSource, onProgress: (Double) -> Void) throws -> [Paragraph] {
@@ -388,15 +399,21 @@ enum NativeDocumentConversion {
             }
             return result
         }
+        let targets = Set(paragraphs.flatMap { paragraph in
+            paragraph.runs.compactMap { anchor(for: $0.target, in: paragraphs) }
+        })
         return try paragraphs.map { paragraph in
             try Task.checkCancellation()
             let heading = paragraph.level > 0 ? String(repeating: "#", count: paragraph.level) + " " : ""
             let content = paragraph.runs.map { run in
                 let label = escaped(run.text)
-                return run.url.map { "[\(label)](<\($0.absoluteString)>)" } ?? label
+                let href = anchor(for: run.target, in: paragraphs).map { "#" + $0 } ?? run.url?.absoluteString
+                return href.map { "[\(label)](<\($0)>)" } ?? label
             }.joined()
-            return heading + content
-        }.joined(separator: "\n")
+            let id = "p\(paragraph.offset)"
+            let destination = targets.contains(id) ? "<a id=\"\(id)\"></a>\n\n" : ""
+            return destination + heading + content
+        }.joined(separator: "\n\n")
     }
 
     private static func rtf(_ paragraphs: [Paragraph], title: String) throws -> String {

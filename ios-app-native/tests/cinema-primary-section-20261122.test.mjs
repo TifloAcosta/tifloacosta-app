@@ -64,10 +64,14 @@ test('the main cinema directory excludes general TV landing pages and routes to 
   const ids = [...directory.matchAll(/\.init\(id: "([^"]+)", name:/g)].map(match => match[1]);
   assert.deepEqual(ids, ['audesc-es', 'audesc-latino', 'audiocinemateca',
     'mercosur-pt', 'tape-territory', 'movies-for-the-blind', 'cinema-accessibile',
-    'rai-play-sound', 'ami', 'ami-fr', 'ard', 'arte', 'arte-de']);
-  for (const excluded of ['foal', 'rtve', 'nfb', 'pbs', 'itvx', 'channel4', 'five', 'abc', 'tubi', 'pluto']) {
+    'rai-play-sound', 'tubi', 'pluto', 'plex-ad', 'play-suisse-de', 'ami', 'ami-fr', 'ard', 'arte', 'arte-de']);
+  for (const excluded of ['foal', 'rtve', 'nfb', 'pbs', 'itvx', 'channel4', 'five', 'abc']) {
     assert.ok(!ids.includes(excluded), 'Generalist homepage leaked into directory: ' + excluded);
   }
+  assert.match(directory, /https:\/\/tubitv\.com\/category\/audio_description/);
+  assert.match(directory, /https:\/\/pluto\.tv\/us\/category\/1a9072ea-901f-415c-aca0-c4ce3264389f\//);
+  assert.match(directory, /https:\/\/watch\.plex\.tv\/on-demand\/category\/descriptive-audio/);
+  assert.match(directory, /audioDescriptionLanguageFilter=de/);
   assert.doesNotMatch(directory, /https:\/\/(www\.)?rtve\.es\/play\//);
   assert.doesNotMatch(directory, /https:\/\/www\.arte\.tv\/"\)/);
   assert.match(directory, /id: "ard"[\s\S]*?https:\/\/www\.ardmediathek\.de\/audiodeskription/);

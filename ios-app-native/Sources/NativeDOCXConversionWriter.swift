@@ -17,6 +17,17 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
     private var relationships = ""
     private var relationshipCount = 0
     private var bookmarkCount = 0
+    private struct VerticalMerge {
+        let span: Int
+        var remaining: Int
+    }
+    private struct TableGrid {
+        var active: [Int: VerticalMerge] = [:]
+        var next: [Int: VerticalMerge] = [:]
+        var column = 0
+        var rowOpen = false
+    }
+    private var grids: [TableGrid] = []
     private var imageCount = 0
     private var images: [String: NativeConversionMarkup.Asset] = [:]
 
@@ -30,6 +41,20 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
             throw NativeDocumentConversion.Failure.invalidOutput
         }
         return Result(body: body, relationships: relationships, assets: images.values.sorted { $0.path < $1.path })
+    }
+
+    private func appendMergeContinuations() {
+        guard !grids.isEmpty else { return }
+        let index = grids.count - 1
+        while let merge = grids[index].active[grids[index].column] {
+            let column = grids[index].column
+            let span = merge.span > 1 ? "<w:gridSpan w:val=\"\(merge.span)\"/>" : ""
+            body += "<w:tc><w:tcPr>\(span)<w:vMerge/></w:tcPr><w:p/></w:tc>"
+            if merge.remaining > 1 {
+                grids[index].next[column] = VerticalMerge(span: merge.span, remaining: merge.remaining - 1)
+            }
+            grids[index].column += merge.span
+        }
     }
 
     private func openParagraph(_ properties: String = "") {
@@ -61,16 +86,32 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
         case "table":
             closeParagraph()
             body += "<w:tbl><w:tblPr><w:tblW w:w=\"0\" w:type=\"auto\"/></w:tblPr><w:tblGrid/>"
-            end = "</w:tbl>"
+            grids.append(TableGrid())
+            end = "table"
         case "tr":
             closeParagraph()
             body += "<w:tr>"
-            end = "</w:tr>"
+            if !grids.isEmpty {
+                let index = grids.count - 1
+                grids[index].column = 0
+                grids[index].next = [:]
+                grids[index].rowOpen = true
+            }
+            end = "row"
         case "td", "th":
             closeParagraph()
+            appendMergeContinuations()
             body += "<w:tc>"
-            if let count = attributes["colspan"].flatMap(Int.init), (2...100).contains(count) {
-                body += "<w:tcPr><w:gridSpan w:val=\"\(count)\"/></w:tcPr>"
+            let span = attributes["colspan"].flatMap(Int.init).flatMap { (2...100).contains($0) ? $0 : nil } ?? 1
+            let rows = attributes["rowspan"].flatMap(Int.init).flatMap { (2...1000).contains($0) ? $0 : nil } ?? 1
+            var properties = span > 1 ? "<w:gridSpan w:val=\"\(span)\"/>" : ""
+            if rows > 1 { properties += "<w:vMerge w:val=\"restart\"/>" }
+            if !properties.isEmpty { body += "<w:tcPr>\(properties)</w:tcPr>" }
+            if !grids.isEmpty {
+                let index = grids.count - 1
+                let column = grids[index].column
+                if rows > 1 { grids[index].next[column] = VerticalMerge(span: span, remaining: rows - 1) }
+                grids[index].column += span
             }
             end = "cell"
         case "b", "strong", "i", "em", "u", "sub", "sup":
@@ -139,6 +180,18 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
             if paragraph { closeParagraph() }
             else if !body.hasSuffix("</w:p>") { body += "<w:p/>" }
             body += "</w:tc>"
+        case "row":
+            closeParagraph()
+            appendMergeContinuations()
+            if !grids.isEmpty {
+                let index = grids.count - 1
+                grids[index].active = grids[index].next
+                grids[index].rowOpen = false
+            }
+            body += "</w:tr>"
+        case "table":
+            _ = grids.popLast()
+            body += "</w:tbl>"
         case "style": _ = runProperties.popLast()
         default: body += end
         }

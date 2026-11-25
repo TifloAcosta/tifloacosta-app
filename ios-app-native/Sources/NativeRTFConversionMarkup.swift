@@ -144,7 +144,10 @@ enum NativeRTFConversionMarkup {
         guard data.starts(with: Data("{\\rtf".utf8)) else { return nil }
         let notes = try footnotes(in: data)
         let source = notes?.document ?? data
-        let tables = try extractTables(source)
+        let tables: (document: Data, prefix: String, html: [String])?
+        do { tables = try extractTables(source) }
+        catch is CancellationError { throw CancellationError() }
+        catch { tables = nil }
         let original = try NSAttributedString(data: tables?.document ?? source, options: [.documentType: NSAttributedString.DocumentType.rtf],
                                               documentAttributes: nil)
         var body = try render(original)
@@ -199,8 +202,9 @@ enum NativeRTFConversionMarkup {
             i += 1
             if byte == 123 { groups.append(start); continue }
             if byte == 125 {
-                if let fontStart, fontStart.depth == groups.count {
-                    fontTable = fontStart.start..<i
+                if let pendingFont = fontStart, pendingFont.depth == groups.count {
+                    fontTable = pendingFont.start..<i
+                    fontStart = nil
                 }
                 if ignoredDepth == groups.count { ignoredDepth = nil }
                 _ = groups.popLast()
@@ -268,6 +272,7 @@ enum NativeRTFConversionMarkup {
                     var end = i
                     while end < bytes.count && [9, 10, 13, 32].contains(bytes[end]) { end += 1 }
                     if grouped && (end >= bytes.count || bytes[end] != 125) { row = nil; continue }
+                    if let previous = rows.last, previous.range.upperBound > current.start { return nil }
                     rows.append((current.start..<(grouped ? end + 1 : i), current))
                 }
                 row = nil

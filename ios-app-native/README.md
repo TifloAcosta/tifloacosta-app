@@ -35,3 +35,19 @@ Las compilaciones que sustituyen a la beta híbrida previa pueden necesitar migr
 3. No usar `npx cap add ios`, `npx cap sync ios` ni el paquete móvil híbrido para preparar versiones Apple.
 4. No afectar al código Android, web ni al catálogo de contenidos salvo encargo separado.
 5. Comprobar los controles con VoiceOver real tras la instalación; una compilación de simulador no valida por sí sola gestos.
+
+### Identificación musical con AcoustID
+
+Registra el cliente de TifloAcosta en https://acoustid.org/new-application si
+cumple las condiciones del servicio gratuito para uso no comercial. Configura
+el identificador público como ajuste de compilación `TIFLO_ACOUSTID_CLIENT`.
+La app deja desactivada la consulta si se construye sin ese valor. El usuario
+elige la opción durante la importación o confirma las consultas manuales.
+
+La compilación fija Chromaprint 1.6.2, usa vDSP y prescinde de FFmpeg y de su
+remuestreador incluido. AVFoundation decodifica y convierte un máximo de 120
+segundos localmente a PCM mono de 11025 Hz. La petición HTTPS de AcoustID
+envía la huella comprimida y la duración, sin enviar el archivo de audio.
+Solo se conservan título e intérprete de los registros básicos de MusicBrainz
+(CC0) ante una coincidencia inequívoca. Se incluye el aviso de licencia de
+Chromaprint en la aplicación compilada.

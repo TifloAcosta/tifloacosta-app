@@ -120,6 +120,27 @@ struct DocumentConversionSmoke {
             precondition(CGPDFDictionaryGetDictionary(structure!, "ParentTree", &reverseTree),
                          "PDF lacks the reverse structural index")
         }
+        withExtendedLifetime(raw) {
+            var document: CGPDFDictionaryRef?
+            var children: CGPDFArrayRef?
+            precondition(CGPDFDictionaryGetDictionary(structure!, "K", &document))
+            precondition(CGPDFDictionaryGetArray(document!, "K", &children))
+            var inlineLinks = 0
+            for index in 0..<CGPDFArrayGetCount(children!) {
+                var block: CGPDFDictionaryRef?
+                var contents: CGPDFArrayRef?
+                guard CGPDFArrayGetDictionary(children!, index, &block),
+                      CGPDFDictionaryGetArray(block!, "K", &contents) else { continue }
+                for childIndex in 0..<CGPDFArrayGetCount(contents!) {
+                    var child: CGPDFDictionaryRef?
+                    var role: UnsafePointer<CChar>?
+                    if CGPDFArrayGetDictionary(contents!, childIndex, &child),
+                       CGPDFDictionaryGetName(child!, "S", &role),
+                       let role, String(cString: role) == "Link" { inlineLinks += 1 }
+                }
+            }
+            precondition(inlineLinks == 2, "Both links must be associated with their original paragraphs")
+        }
         let reopenedDOCX = NativeConversionSource(filename: "Obra.versión.docx", title: "DOCX",
             format: "docx", text: "Text fallback", links: [], original: results[.docx]!)
         let docxHTML = try NativeDocumentConversion.convert(reopenedDOCX, to: .html,

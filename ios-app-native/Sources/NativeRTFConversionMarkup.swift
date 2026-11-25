@@ -6,6 +6,20 @@ import AppKit
 #endif
 
 enum NativeRTFConversionMarkup {
+    private struct ListLevel {
+        let list: NSTextList
+        let tag: String
+        var next: Int
+    }
+
+    private static func listTag(_ list: NSTextList) -> String? {
+        let first = list.marker(forItemNumber: 1)
+        let second = list.marker(forItemNumber: 2)
+        if first == second, !first.isEmpty { return "ul" }
+        if ["1", "1.", "1)"].contains(first), ["2", "2.", "2)"].contains(second) { return "ol" }
+        return nil
+    }
+
     static func xhtml(_ data: Data, title: String) throws -> Data? {
         try Task.checkCancellation()
         // RTFD has external attachments. This reader accepts only the plain RTF stream.
@@ -16,11 +30,42 @@ enum NativeRTFConversionMarkup {
         let text = original.string as NSString
         var body = ""
         var offset = 0
+        var levels: [ListLevel] = []
         while offset < text.length {
             try Task.checkCancellation()
             let paragraph = text.paragraphRange(for: NSRange(location: offset, length: 0))
+            let style = original.attribute(.paragraphStyle, at: paragraph.location, effectiveRange: nil) as? NSParagraphStyle
+            let nativeLists = style?.textLists ?? []
+            let tags = nativeLists.compactMap(listTag)
+            let supportedLists = tags.count == nativeLists.count ? nativeLists : []
+            let shared = zip(levels, supportedLists).prefix { $0.0.list === $0.1 }.count
+            while levels.count > shared {
+                body += "</li></\(levels.removeLast().tag)>"
+            }
+            if shared > 0 && shared == supportedLists.count {
+                body += "</li><li>"
+            }
+            for index in shared..<supportedLists.count {
+                let list = supportedLists[index]
+                let tag = tags[index]
+                let start = max(1, list.startingItemNumber)
+                let attribute = tag == "ol" && start != 1 ? " start=\"\(start)\"" : ""
+                body += "<\(tag)\(attribute)><li>"
+                levels.append(ListLevel(list: list, tag: tag, next: start))
+            }
+            var content = paragraph
+            if let list = levels.last {
+                let marker = list.list.marker(forItemNumber: list.next)
+                let source = text.substring(with: paragraph)
+                for prefix in ["\t" + marker + "\t", marker + "\t"] where source.hasPrefix(prefix) && !marker.isEmpty {
+                    let length = prefix.utf16.count
+                    content = NSRange(location: paragraph.location + length, length: paragraph.length - length)
+                    break
+                }
+                levels[levels.count - 1].next = min(list.next, Int.max - 1) + 1
+            }
             body += "<p>"
-            original.enumerateAttributes(in: paragraph) { attributes, range, stop in
+            original.enumerateAttributes(in: content) { attributes, range, stop in
                 if Task.isCancelled { stop.pointee = true; return }
                 let value = text.substring(with: range).trimmingCharacters(in: .newlines)
                 var rendered = escape(value)
@@ -47,6 +92,7 @@ enum NativeRTFConversionMarkup {
             body += "</p>"
             offset = NSMaxRange(paragraph)
         }
+        while let level = levels.popLast() { body += "</li></\(level.tag)>" }
         try Task.checkCancellation()
         return Data("<html><head><title>\(escape(title))</title></head><body>\(body)</body></html>".utf8)
     }

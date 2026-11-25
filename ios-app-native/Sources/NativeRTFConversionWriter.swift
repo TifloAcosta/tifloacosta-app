@@ -21,6 +21,9 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
     private var listStates: [ListState] = []
     private var lists: [String] = []
     private var overrides: [String] = []
+    private var notes: [String: String] = [:]
+    private var emittedNotes: Set<String> = []
+    private var suppressedDepth = 0
     private let assets: [String: NativeConversionMarkup.Asset]
 
     init(assets: [NativeConversionMarkup.Asset]) {
@@ -32,7 +35,17 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
         if let author = markup.metadata["author"] { output += "{\\author \(Self.escape(author))}" }
         output += "}\\f0\\fs24 "
         let headerEnd = output.utf8.count
-        let parser = XMLParser(data: Data("<body>\(markup.body)</body>".utf8))
+        let data = Data("<body>\(markup.body)</body>".utf8)
+        let collector = NativeConversionNoteCollector()
+        let scan = XMLParser(data: data)
+        scan.shouldResolveExternalEntities = false
+        scan.delegate = collector
+        guard scan.parse() else {
+            try Task.checkCancellation()
+            throw NativeDocumentConversion.Failure.invalidOutput
+        }
+        for id in collector.references { notes[id] = collector.notes[id] }
+        let parser = XMLParser(data: data)
         parser.shouldResolveExternalEntities = false
         parser.delegate = self
         guard parser.parse() else {
@@ -65,6 +78,21 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
     func parser(_ parser: XMLParser, didStartElement tag: String, namespaceURI: String?,
                 qualifiedName: String?, attributes: [String: String]) {
         if Task.isCancelled { parser.abortParsing(); return }
+        if suppressedDepth > 0 { suppressedDepth += 1; return }
+        if attributes["role"] == "doc-footnote", let id = attributes["id"], notes[id] != nil {
+            suppressedDepth = 1
+            return
+        }
+        if tag == "a", attributes["role"] == "doc-noteref", let href = attributes["href"], href.hasPrefix("#") {
+            let id = String(href.dropFirst())
+            if let note = notes[id], emittedNotes.insert(id).inserted {
+                let name = Self.bookmark(id)
+                let content = note.components(separatedBy: "\n").map(Self.escape).joined(separator: "\\par ")
+                output += "{\\super\\chftn}{\\footnote\\pard\\plain\\fs20{\\*\\bkmkstart \(name)}{\\*\\bkmkend \(name)}{\\super\\chftn} \(content)}"
+                suppressedDepth = 1
+                return
+            }
+        }
         var close = ""
         if let id = attributes["id"] {
             let safe = Self.bookmark(id)
@@ -196,6 +224,7 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
     }
 
     func parser(_ parser: XMLParser, didEndElement tag: String, namespaceURI: String?, qualifiedName: String?) {
+        if suppressedDepth > 0 { suppressedDepth -= 1; return }
         output += endings.popLast() ?? ""
         if tag == "ol" || tag == "ul" { _ = listStates.popLast() }
         if tag == "tr", tableDepth == 1, let start = rowStart {
@@ -218,6 +247,6 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
     }
 
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-        output += Self.escape(string)
+        if suppressedDepth == 0 { output += Self.escape(string) }
     }
 }

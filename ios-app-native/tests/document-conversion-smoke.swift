@@ -273,13 +273,14 @@ struct DocumentConversionSmoke {
         precondition(wordRoundtrip.contains("<table>") && wordRoundtrip.contains("alt=\"Imagen de prueba\""))
         let richRTF = try NativeDocumentConversion.convert(reopened, to: .rtf, in: richOutput)
         let rtfMarkup = try String(contentsOf: richRTF, encoding: .utf8)
+        precondition(rtfMarkup.contains("{\\footnote") && rtfMarkup.contains("Hinweis"))
         precondition(rtfMarkup.contains("\\outlinelevel1") && rtfMarkup.contains("\\pict") &&
             rtfMarkup.contains("Imagen de prueba") && rtfMarkup.contains("HYPERLINK") &&
             rtfMarkup.contains("\\trowd") && rtfMarkup.contains("\\cellx") && rtfMarkup.contains("\\listtable") && rtfMarkup.contains("\\levelnfc1") &&
             rtfMarkup.contains("\\levelstartat7") && rtfMarkup.contains("VII.\\tab"))
         let richRTFReader = try NSAttributedString(url: richRTF,
             options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
-        precondition(richRTFReader.string.contains("Imagen de prueba") && richRTFReader.string.contains("Hinweis – opinião."))
+        precondition(richRTFReader.string.contains("Imagen de prueba") && richRTFReader.string.contains("Déjà vu"))
 
         let merged = NativeConversionMarkup.Document(
             body: "<table><tr><td colspan=\"2\" rowspan=\"2\"><p>Combinada</p></td><td><p>A</p></td></tr><tr><td><p>B</p></td></tr></table><p><u>Subrayado</u> H<sub>2</sub>O x<sup>2</sup></p>",

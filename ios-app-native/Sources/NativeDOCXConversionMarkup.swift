@@ -69,16 +69,19 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
     }
     private let escape = NativeDocumentConversion.xml
 
+    private var footnotes: [Int: String] = [:]
+    private var referencedNotes: [Int] = []
     private var links: [String: String] = [:]
     private var images: [String: String] = [:]
     private var drawing = false
     private var embeddedSource: String?
     private var imageDescription = ""
 
-    static func xhtml(content: Data, relationships: Data?, title: String) -> Data? {
+    static func xhtml(content: Data, relationships: Data?, title: String, footnotes: Data? = nil) -> Data? {
         guard let source = String(data: content, encoding: .utf8),
               !source.localizedCaseInsensitiveContains("<!DOCTYPE") else { return nil }
         let delegate = NativeDOCXConversionMarkup()
+        if let footnotes { delegate.footnotes = readFootnotes(footnotes) }
         if let relationships, let xml = String(data: relationships, encoding: .utf8),
            !xml.localizedCaseInsensitiveContains("<!DOCTYPE") {
             let relationParser = XMLParser(data: relationships)
@@ -94,6 +97,11 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
         parser.shouldResolveExternalEntities = false
         parser.delegate = delegate
         guard parser.parse(), !delegate.body.isEmpty else { return nil }
+        for id in delegate.referencedNotes {
+            if let note = delegate.footnotes[id] {
+                delegate.body += "<aside id=\"word-note-\(id)\" role=\"doc-footnote\">\(note)</aside>"
+            }
+        }
         return Data("<html><head><title>\(delegate.escape(title))</title></head><body>\(delegate.body)</body></html>".utf8)
     }
 
@@ -136,6 +144,13 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
             drawing = true
             embeddedSource = nil
             imageDescription = ""
+        case "footnoteReference":
+            if let id = attributes["w:id"].flatMap(Int.init), footnotes[id] != nil {
+                if !referencedNotes.contains(id) { referencedNotes.append(id) }
+                if let index = referencedNotes.firstIndex(of: id) {
+                    run += "<a href=\"#word-note-\(id)\" role=\"doc-noteref\">\(index + 1)</a>"
+                }
+            }
         case "t": textDepth += 1
         case "tab": run += "&#9;"
         case "br": run += "<br/>"
@@ -228,6 +243,59 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
 
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         if textDepth > 0 && ignoredDepth == 0 { run += escape(string) }
+    }
+
+    private static func readFootnotes(_ data: Data) -> [Int: String] {
+        guard let xml = String(data: data, encoding: .utf8),
+              !xml.localizedCaseInsensitiveContains("<!DOCTYPE"),
+              !xml.localizedCaseInsensitiveContains("<!ENTITY") else { return [:] }
+        let parser = XMLParser(data: data)
+        let delegate = Footnotes()
+        parser.shouldProcessNamespaces = true
+        parser.shouldResolveExternalEntities = false
+        parser.delegate = delegate
+        return parser.parse() ? delegate.notes : [:]
+    }
+
+    private final class Footnotes: NSObject, XMLParserDelegate {
+        var notes: [Int: String] = [:]
+        private var id: Int?
+        private var body = ""
+        private var textDepth = 0
+        private var ignored = 0
+        func parser(_ parser: XMLParser, didStartElement name: String, namespaceURI: String?,
+                    qualifiedName: String?, attributes: [String: String]) {
+            if Task.isCancelled { parser.abortParsing(); return }
+            guard namespaceURI == NativeDOCXConversionMarkup.word else { return }
+            if ignored > 0 || ["del", "moveFrom"].contains(name) { ignored += 1; return }
+            if name == "footnote" {
+                id = attributes["w:id"].flatMap(Int.init).flatMap { $0 >= 0 ? $0 : nil }
+                if attributes["w:type"] != nil && attributes["w:type"] != "normal" { id = nil }
+                body = ""
+            }
+            guard id != nil else { return }
+            switch name {
+            case "p": body += "<p>"
+            case "t": textDepth += 1
+            case "br": body += "<br/>"
+            case "tab": body += "&#9;"
+            default: break
+            }
+        }
+        func parser(_ parser: XMLParser, didEndElement name: String, namespaceURI: String?, qualifiedName: String?) {
+            guard namespaceURI == NativeDOCXConversionMarkup.word else { return }
+            if ignored > 0 { ignored -= 1; return }
+            guard let id else { return }
+            switch name {
+            case "p": body += "</p>"
+            case "t": textDepth -= 1
+            case "footnote": notes[id] = body; self.id = nil
+            default: break
+            }
+        }
+        func parser(_ parser: XMLParser, foundCharacters text: String) {
+            if id != nil && textDepth > 0 && ignored == 0 { body += NativeDocumentConversion.xml(text) }
+        }
     }
 
     private final class Relationships: NSObject, XMLParserDelegate {

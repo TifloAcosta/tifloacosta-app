@@ -81,7 +81,8 @@ final class NativePDFMarkup: NSObject, XMLParserDelegate {
             let scope = role == "TH" ? scopes[attributes["scope"] ?? ""] ?? 0 : 0
             return "\(key):\(rowSpan):\(colSpan):\(scope)"
         }
-        if !roles.isEmpty { semantic = true }
+        if !roles.isEmpty || ["h1", "h2", "h3", "h4", "h5", "h6"].contains(name) ||
+            (name == "a" && attributes["href"]?.isEmpty == false) { semantic = true }
         stack.append(Frame(element: name, roles: unique, language: attributes["xml:lang"] ?? attributes["lang"]))
         if name == "a" { link = attributes["href"] }
         if name == "br" { flush() }

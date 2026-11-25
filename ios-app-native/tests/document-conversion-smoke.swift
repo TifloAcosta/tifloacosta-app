@@ -381,6 +381,28 @@ struct DocumentConversionSmoke {
         precondition(NativeDocumentConversion.pdfHeadingLevels([0, 1, 2, 3, 2, 1, 0]) == [0, 1, 2, 3, 2, 1, 0])
         precondition(NativeDocumentConversion.pdfHeadingLevels([0, 0]) == [0, 0])
 
+        // A document with only headings and links also has useful source structure.
+        let simpleMarkup = root.appendingPathComponent("Encabezados.xhtml")
+        try """
+        <html lang="es"><head><title>Encabezados y enlaces</title></head><body>
+        <h3 id="inicio">Título original</h3><p>Un <a href="https://example.org/guia">enlace original</a>.</p>
+        <h5>Subtítulo original</h5><p><a href="#inicio">Volver al título</a></p>
+        </body></html>
+        """.write(to: simpleMarkup, atomically: true, encoding: .utf8)
+        let simpleSource = NativeConversionSource(filename: "Encabezados.xhtml", title: "Encabezados y enlaces",
+            format: "xhtml", text: "Título original\nUn enlace original.\nSubtítulo original\nVolver al título",
+            links: [], original: simpleMarkup)
+        let simplePDF = try NativeDocumentConversion.convert(simpleSource, to: .pdf,
+            in: root.appendingPathComponent("pdf-heading-links"))
+        let simpleReopened = PDFDocument(url: simplePDF)!
+        precondition(simpleReopened.string!.contains("Subtítulo original"))
+        precondition(simpleReopened.page(at: 0)!.annotations.contains { $0.url?.host == "example.org" })
+        precondition(simpleReopened.page(at: 0)!.annotations.contains { $0.destination?.page != nil || $0.action is PDFActionGoTo })
+        if CommandLine.arguments.count > 2 {
+            let samples = URL(fileURLWithPath: CommandLine.arguments[2], isDirectory: true)
+            try FileManager.default.copyItem(at: simplePDF, to: samples.appendingPathComponent("conversion-heading-links.pdf"))
+        }
+
         let structuralPDF = try NativeDocumentConversion.convert(reopened, to: .pdf,
             in: root.appendingPathComponent("pdf-structured"))
         let structuredCG = CGPDFDocument(structuralPDF as CFURL)!

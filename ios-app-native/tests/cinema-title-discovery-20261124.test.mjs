@@ -10,6 +10,10 @@ test('title discovery is separate from playback and links to official directorie
  assert.match(section,/is_free=1/);
  assert.match(section,/selectedLanguage == \.english/);
  assert.match(section,/selectedLanguage == \.french/);
+ assert.match(section,/https:\/\/hoerfilm\.info\/mediatheken\.html/);
+ assert.match(section,/https:\/\/ciecandoscherzando\.it\/audiodescrizioni\//);
+ assert.match(section,/selectedLanguage == \.german/);
+ assert.match(section,/selectedLanguage == \.italian/);
  assert.doesNotMatch(section,/AVPlayer|URLSession/);
  for(const lang of ['en','fr','it','de','pt']) for(const key of ['Dónde ver una película','Películas gratuitas']) assert.ok(read(lang+'.lproj/Localizable.strings').includes('"'+key+'" = '));
 });

@@ -9,6 +9,8 @@ final class NativePDFMarkup: NSObject, XMLParserDelegate {
         let text: [(String, String?)]
         let path: String
         let language: String?
+        var image: Data?
+        var alternative: String?
     }
 
     private struct Frame {
@@ -25,6 +27,7 @@ final class NativePDFMarkup: NSObject, XMLParserDelegate {
     private var offset = 0
     private var anchors: [String: Int] = [:]
     private var semantic = false
+    private var images: [String: Data] = [:]
     private let blocks: Set<String> = ["body", "p", "div", "section", "article", "main", "blockquote", "pre",
                                        "ul", "ol", "li", "table", "thead", "tbody", "tfoot", "tr", "th", "td",
                                        "figure", "figcaption", "caption", "aside", "footer",
@@ -32,6 +35,7 @@ final class NativePDFMarkup: NSObject, XMLParserDelegate {
 
     static func read(_ document: NativeConversionMarkup.Document) throws -> (parts: [Part], anchors: [String: Int])? {
         let reader = NativePDFMarkup()
+        reader.images = Dictionary(uniqueKeysWithValues: document.assets.map { ($0.path, $0.data) })
         let parser = XMLParser(data: Data("<body xmlns:epub=\"http://www.idpf.org/2007/ops\">\(document.body)</body>".utf8))
         parser.shouldResolveExternalEntities = false
         parser.delegate = reader
@@ -62,7 +66,7 @@ final class NativePDFMarkup: NSObject, XMLParserDelegate {
         let layoutRoles: [String: [String]] = [
             "ul": ["L"], "ol": ["L"], "li": ["LI", "LBody"], "table": ["Table"],
             "thead": ["THead"], "tbody": ["TBody"], "tfoot": ["TFoot"],
-            "tr": ["TR"], "th": ["TH"], "td": ["TD"], "figure": ["Figure"],
+            "tr": ["TR"], "th": ["TH"], "td": ["TD"], "figure": ["Div"],
             "figcaption": ["Caption"], "caption": ["Caption"]
         ]
         let isNote = ["doc-footnote", "doc-endnote"].contains(attributes["role"] ?? "")
@@ -75,10 +79,19 @@ final class NativePDFMarkup: NSObject, XMLParserDelegate {
         stack.append(Frame(element: name, roles: unique, language: attributes["xml:lang"] ?? attributes["lang"]))
         if name == "a" { link = attributes["href"] }
         if name == "br" { flush() }
-        if name == "img", let alt = attributes["alt"], !alt.isEmpty {
-            // The description remains readable even though this renderer
-            // does not yet embed the original graphic in the page.
-            append(alt)
+        if name == "img" {
+            let alternative = attributes["alt"]
+            if let source = attributes["src"], let image = images[source] {
+                flush()
+                semantic = true
+                parts.append(Part(offset: offset, heading: 0, text: [("\u{FFFC}", link)],
+                    path: stack.flatMap(\.roles).joined(separator: "/"),
+                    language: stack.reversed().compactMap(\.language).first,
+                    image: image, alternative: alternative))
+                offset += 2
+            } else if let alternative, !alternative.isEmpty {
+                append(alternative)
+            }
         }
     }
 

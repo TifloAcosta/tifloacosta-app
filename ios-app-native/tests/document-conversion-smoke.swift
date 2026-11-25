@@ -335,10 +335,19 @@ struct DocumentConversionSmoke {
         withExtendedLifetime(structuredCG) {
             var rootTag: CGPDFDictionaryRef?
             precondition(CGPDFDictionaryGetDictionary(structuredCG.catalog!, "StructTreeRoot", &rootTag))
+            var imageAlternative = false
             func roles(_ node: CGPDFDictionaryRef) -> Set<String> {
                 var result: Set<String> = []
                 var entry: UnsafePointer<CChar>?
-                if CGPDFDictionaryGetName(node, "S", &entry), let entry { result.insert(String(cString: entry)) }
+                if CGPDFDictionaryGetName(node, "S", &entry), let entry {
+                    let role = String(cString: entry)
+                    result.insert(role)
+                    var alternative: CGPDFStringRef?
+                    if role == "Figure", CGPDFDictionaryGetString(node, "Alt", &alternative), let alternative,
+                       let value = CGPDFStringCopyTextString(alternative), value as String == "Imagen de prueba" {
+                        imageAlternative = true
+                    }
+                }
                 var child: CGPDFDictionaryRef?
                 if CGPDFDictionaryGetDictionary(node, "K", &child), let child {
                     result.formUnion(roles(child))
@@ -355,9 +364,15 @@ struct DocumentConversionSmoke {
                 return result
             }
             precondition(Set(["Table", "TR", "TH", "TD", "L", "LI", "LBody", "Figure", "Caption", "Note"]).isSubset(of: roles(rootTag!)))
+            precondition(imageAlternative)
+            var resources: CGPDFDictionaryRef?
+            var xobjects: CGPDFDictionaryRef?
+            let page = structuredCG.page(at: 1)!
+            precondition(CGPDFDictionaryGetDictionary(page.dictionary!, "Resources", &resources) &&
+                CGPDFDictionaryGetDictionary(resources!, "XObject", &xobjects), "The PDF must contain the image resource")
         }
         let structuredText = PDFDocument(url: structuralPDF)?.string ?? ""
-        precondition(structuredText.contains("Hinweis – opinião.") && structuredText.contains("Imagen de prueba"))
+        precondition(structuredText.contains("Hinweis – opinião.") && structuredText.contains("Figura original"))
         if CommandLine.arguments.count > 2 {
             let samples = URL(fileURLWithPath: CommandLine.arguments[2], isDirectory: true)
             try FileManager.default.copyItem(at: structuralPDF, to: samples.appendingPathComponent("conversion-complex.pdf"))

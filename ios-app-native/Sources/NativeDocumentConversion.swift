@@ -2,6 +2,7 @@ import Foundation
 import CoreGraphics
 import CoreText
 import NaturalLanguage
+import ImageIO
 #if canImport(TifloPDFPostprocess)
 import TifloPDFPostprocess
 #endif
@@ -56,6 +57,8 @@ enum NativeDocumentConversion {
         let runs: [Run]
         var semanticPath = ""
         var language: String?
+        var image: Data?
+        var alternative: String?
         var text: String { runs.map(\.text).joined() }
     }
 
@@ -118,7 +121,7 @@ enum NativeDocumentConversion {
                             return Run(text: text, url: url, target: destination)
                         }
                         return Paragraph(offset: part.offset, level: part.heading, runs: runs,
-                                         semanticPath: part.path, language: part.language)
+                                         semanticPath: part.path, language: part.language, image: part.image, alternative: part.alternative)
                     }
                 } ?? paragraphs
                 let metadata = try pdf(pdfParagraphs, title: input.title, markup: markup, output: intermediate) {
@@ -604,6 +607,28 @@ enum NativeDocumentConversion {
         guard result == 0 else { throw Failure.invalidOutput }
     }
 
+    private final class PDFImageMetrics {
+        let width: CGFloat
+        let height: CGFloat
+        init(_ width: CGFloat, _ height: CGFloat) { self.width = width; self.height = height }
+    }
+
+    private static func imageRunDelegate(_ size: PDFImageMetrics) -> CTRunDelegate? {
+        var callbacks = CTRunDelegateCallbacks(
+            version: kCTRunDelegateCurrentVersion,
+            dealloc: { Unmanaged<PDFImageMetrics>.fromOpaque($0).release() },
+            getAscent: { Unmanaged<PDFImageMetrics>.fromOpaque($0).takeUnretainedValue().height },
+            getDescent: { _ in 0 },
+            getWidth: { Unmanaged<PDFImageMetrics>.fromOpaque($0).takeUnretainedValue().width }
+        )
+        let retained = Unmanaged.passRetained(size)
+        guard let delegate = CTRunDelegateCreate(&callbacks, retained.toOpaque()) else {
+            retained.release()
+            return nil
+        }
+        return delegate
+    }
+
     private static func pdf(_ paragraphs: [Paragraph], title: String, markup: NativeConversionMarkup.Document?, output: URL,
                             onProgress: (Double) -> Void) throws -> (language: String?, labels: [String], owners: [Int32], ownerCount: Int, semanticPaths: [String]) {
         var annotationLabels: [String] = []
@@ -616,6 +641,7 @@ enum NativeDocumentConversion {
         let heading = CTFontCreateWithName("Helvetica-Bold" as CFString, 15, nil)
         let headerTags: [CGPDFTagType] = [.paragraph, .header1, .header2, .header3, .header4, .header5, .header6]
         var paragraphStarts: [Int] = []
+        var pdfImages: [Int: (CGImage, PDFImageMetrics)] = [:]
         var linkRanges: [(range: NSRange, url: URL?, anchor: String?, label: String)] = []
         var destinationNames: Set<String> = []
         let declaredLanguage = markup?.language?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -631,7 +657,7 @@ enum NativeDocumentConversion {
         }
         let language = declaredLanguage.flatMap { $0.isEmpty || $0 == "und" ? nil : $0 }
             ?? detectedLanguage(paragraphs.prefix(12).map { String($0.text.prefix(256)) }.joined(separator: " "))
-        for paragraph in paragraphs {
+        for (index, paragraph) in paragraphs.enumerated() {
             try Task.checkCancellation()
             paragraphStarts.append(text.length)
             var lineOffset = text.length
@@ -641,12 +667,31 @@ enum NativeDocumentConversion {
                     let target = anchor(for: run.target, in: paragraphs)
                     if let target { destinationNames.insert(target) }
                     if run.url != nil || target != nil {
-                        linkRanges.append((NSRange(location: lineOffset, length: length), run.url, target, run.text))
+                        linkRanges.append((NSRange(location: lineOffset, length: length), run.url, target, paragraph.alternative ?? run.text))
                     }
                 }
                 lineOffset += length
             }
-            text.append(NSAttributedString(string: paragraph.text + "\n",
+            if let data = paragraph.image,
+               let source = CGImageSourceCreateWithData(data as CFData, nil),
+               let image = CGImageSourceCreateThumbnailAtIndex(source, 0, [
+                    kCGImageSourceCreateThumbnailFromImageAlways: true,
+                    kCGImageSourceCreateThumbnailWithTransform: true,
+                    kCGImageSourceThumbnailMaxPixelSize: 400
+               ] as CFDictionary) {
+                let scale = min(1, 180 / CGFloat(max(image.width, image.height)))
+                let metrics = PDFImageMetrics(CGFloat(image.width) * scale, CGFloat(image.height) * scale)
+                if let delegate = imageRunDelegate(metrics) {
+                    pdfImages[index] = (image, metrics)
+                    text.append(NSAttributedString(string: "\u{FFFC}", attributes: [
+                        key: normal, NSAttributedString.Key(kCTRunDelegateAttributeName as String): delegate
+                    ]))
+                    text.append(NSAttributedString(string: "\n", attributes: [key: normal]))
+                    continue
+                }
+            }
+            let display = paragraph.image == nil ? paragraph.text : (paragraph.alternative ?? " ")
+            text.append(NSAttributedString(string: display + "\n",
                 attributes: [key: paragraph.level > 0 ? heading : normal]))
         }
         let framesetter = CTFramesetterCreateWithAttributedString(text)
@@ -699,8 +744,12 @@ enum NativeDocumentConversion {
                     if openParagraph != nil { CGPDFContextEndTag(context) }
                     let paragraph = paragraphs[paragraphIndex]
                     let tagLanguage = paragraph.language ?? detectedLanguage(paragraph.text) ?? language
-                    let properties = tagLanguage.map { [languageKey: $0] } ?? [:]
-                    CGPDFContextBeginTag(context, headerTags[paragraph.level], properties as CFDictionary)
+                    var properties = tagLanguage.map { [languageKey: $0] } ?? [:]
+                    let hasImage = pdfImages[paragraphIndex] != nil
+                    if hasImage, let alternative = paragraph.alternative, !alternative.isEmpty {
+                        properties[CGPDFTagProperty.alternativeText.rawValue as String] = alternative
+                    }
+                    CGPDFContextBeginTag(context, hasImage ? .figure : headerTags[paragraph.level], properties as CFDictionary)
                     openParagraph = paragraphIndex
                     tagCount += 1
                     semanticPaths.append(paragraph.semanticPath)
@@ -713,7 +762,12 @@ enum NativeDocumentConversion {
                     }
                 }
                 context.textPosition = point
-                CTLineDraw(line, context)
+                if let (image, size) = pdfImages[paragraphIndex],
+                   range.location == paragraphStarts[paragraphIndex] {
+                    context.draw(image, in: CGRect(x: point.x, y: point.y, width: size.width, height: size.height))
+                } else {
+                    CTLineDraw(line, context)
+                }
                 let lineEnd = range.location + range.length
                 while linkIndex < linkRanges.count,
                       NSMaxRange(linkRanges[linkIndex].0) <= range.location { linkIndex += 1 }

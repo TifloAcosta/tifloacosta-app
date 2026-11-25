@@ -40,14 +40,14 @@ enum NativeConversionMarkup {
                   let data = try? Data(contentsOf: source, options: .mappedIfSafe),
                   let xhtml = try NativeRTFConversionMarkup.xhtml(data, title: input.title) else { return nil }
             return try parse([(path: "book.xhtml", data: xhtml)], fallbackTitle: input.title,
-                             packageImages: [.epub, .odt, .rtf, .docx].contains(format)) { _, _ in nil }
+                             packageImages: [.epub, .odt, .rtf, .docx, .pdf].contains(format)) { _, _ in nil }
         }
         if ["html", "htm", "xhtml"].contains(input.format) {
             guard let size = try? source.resourceValues(forKeys: [.fileSizeKey]).fileSize,
                   size <= maximumTextBytes,
                   let data = try? Data(contentsOf: source, options: .mappedIfSafe) else { return nil }
             return try parse([(path: "book.xhtml", data: data)], fallbackTitle: input.title,
-                             packageImages: [.epub, .odt, .rtf, .docx].contains(format)) { _, _ in nil }
+                             packageImages: [.epub, .odt, .rtf, .docx, .pdf].contains(format)) { _, _ in nil }
         }
         guard ["epub", "odt", "docx"].contains(input.format),
               let archive = Archive(url: source, accessMode: .read) else { return nil }
@@ -65,7 +65,7 @@ enum NativeConversionMarkup {
                   let xhtml = NativeDOCXConversionMarkup.xhtml(content: content, relationships: relationships,
                     title: input.title, footnotes: footnotes) else { return nil }
             return try parse([(path: "word/book.xhtml", data: xhtml)], fallbackTitle: input.title,
-                             packageImages: [.epub, .odt, .rtf, .docx].contains(format)) { href, chapter in
+                             packageImages: [.epub, .odt, .rtf, .docx, .pdf].contains(format)) { href, chapter in
                 guard let path = member(href, relativeTo: chapter), path.hasPrefix("word/media/"),
                       let type = imageTypes[URL(fileURLWithPath: path).pathExtension.lowercased()],
                       let entry = archive[path], entry.type == .file,
@@ -83,7 +83,7 @@ enum NativeConversionMarkup {
                     styles: xmlMember("styles.xml"), metadata: xmlMember("meta.xml"), title: input.title)
             else { return nil }
             return try parse([(path: "book.xhtml", data: xhtml)], fallbackTitle: input.title,
-                             packageImages: [.epub, .odt, .rtf, .docx].contains(format)) { href, chapter in
+                             packageImages: [.epub, .odt, .rtf, .docx, .pdf].contains(format)) { href, chapter in
                 guard let path = member(href, relativeTo: chapter), path.hasPrefix("Pictures/"),
                       let type = imageTypes[URL(fileURLWithPath: path).pathExtension.lowercased()],
                       let entry = archive[path], entry.type == .file,
@@ -116,7 +116,7 @@ enum NativeConversionMarkup {
         guard let order = try? NativeEpubSpine.readingOrder(in: temporary, availableFiles: files),
               Set(order).count == order.count else { return nil }
         let chapters = try order.map { ($0, try Data(contentsOf: temporary.appendingPathComponent($0))) }
-        return try parse(chapters, fallbackTitle: input.title, packageImages: [.epub, .odt, .rtf, .docx].contains(format)) { href, chapter in
+        return try parse(chapters, fallbackTitle: input.title, packageImages: [.epub, .odt, .rtf, .docx, .pdf].contains(format)) { href, chapter in
             guard let path = member(href, relativeTo: chapter),
                   let type = imageTypes[URL(fileURLWithPath: path).pathExtension.lowercased()],
                   let entry = entries[path], let data = try entryData(entry, in: archive, limit: maximumImageBytes)

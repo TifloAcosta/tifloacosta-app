@@ -639,6 +639,9 @@ enum NativeDocumentConversion {
         let normal = CTFontCreateWithName("Helvetica" as CFString, 11, nil)
         let heading = CTFontCreateWithName("Helvetica-Bold" as CFString, 15, nil)
         let headerTags: [CGPDFTagType] = [.paragraph, .header1, .header2, .header3, .header4, .header5, .header6]
+        let linkAttribute = NSAttributedString.Key("TifloAcostaPDFLink")
+        let blockRoles = ["P", "H1", "H2", "H3", "H4", "H5", "H6"]
+        var linkedParagraphs: Set<Int> = []
         var paragraphStarts: [Int] = []
         var pdfImages: [Int: (CGImage, PDFImageMetrics)] = [:]
         var linkRanges: [(range: NSRange, url: URL?, anchor: String?, label: String)] = []
@@ -659,6 +662,7 @@ enum NativeDocumentConversion {
         for (index, paragraph) in paragraphs.enumerated() {
             try Task.checkCancellation()
             paragraphStarts.append(text.length)
+            let firstLink = linkRanges.count
             var lineOffset = text.length
             for run in paragraph.runs {
                 let length = run.text.utf16.count
@@ -671,6 +675,7 @@ enum NativeDocumentConversion {
                 }
                 lineOffset += length
             }
+            if paragraph.image == nil && firstLink < linkRanges.count { linkedParagraphs.insert(index) }
             if let data = paragraph.image,
                let source = CGImageSourceCreateWithData(data as CFData, nil),
                let image = CGImageSourceCreateThumbnailAtIndex(source, 0, [
@@ -692,6 +697,9 @@ enum NativeDocumentConversion {
             let display = paragraph.image == nil ? paragraph.text : (paragraph.alternative ?? " ")
             text.append(NSAttributedString(string: display + "\n",
                 attributes: [key: paragraph.level > 0 ? heading : normal]))
+            for link in firstLink..<linkRanges.count where paragraph.image == nil {
+                text.addAttribute(linkAttribute, value: NSNumber(value: link), range: linkRanges[link].range)
+            }
         }
         let framesetter = CTFramesetterCreateWithAttributedString(text)
         var page = CGRect(x: 0, y: 0, width: 595, height: 842)
@@ -739,8 +747,11 @@ enum NativeDocumentConversion {
                 let range = CTLineGetStringRange(line)
                 while paragraphIndex + 1 < paragraphStarts.count,
                       paragraphStarts[paragraphIndex + 1] <= range.location { paragraphIndex += 1 }
+                let inline = linkedParagraphs.contains(paragraphIndex)
                 if openParagraph != paragraphIndex {
-                    if openParagraph != nil { CGPDFContextEndTag(context) }
+                    if openParagraph != nil { CGPDFContextEndTag(context); openParagraph = nil }
+                }
+                if !inline && openParagraph == nil {
                     let paragraph = paragraphs[paragraphIndex]
                     let tagLanguage = paragraph.language ?? detectedLanguage(paragraph.text) ?? language
                     var properties = tagLanguage.map { [languageKey: $0] } ?? [:]
@@ -760,8 +771,36 @@ enum NativeDocumentConversion {
                         context.addDestination(destination as CFString, at: point)
                     }
                 }
+                var linkOwners: [Int: Int32] = [:]
                 context.textPosition = point
-                if let (image, size) = pdfImages[paragraphIndex],
+                if inline {
+                    let paragraph = paragraphs[paragraphIndex]
+                    let tagLanguage = paragraph.language ?? detectedLanguage(paragraph.text) ?? language
+                    let properties = tagLanguage.map { [languageKey: $0] } ?? [:]
+                    let block = "\(blockRoles[paragraph.level]):\(paragraphIndex)"
+                    let groups = [paragraph.semanticPath, block].filter { !$0.isEmpty }.joined(separator: "/")
+                    let runs = (CTLineGetGlyphRuns(line) as! [CTRun]).sorted {
+                        CTRunGetStringRange($0).location < CTRunGetStringRange($1).location
+                    }
+                    var open = false
+                    var active: Int?
+                    for run in runs where CTRunGetGlyphCount(run) > 0 {
+                        let attributes = CTRunGetAttributes(run) as NSDictionary
+                        let link = (attributes[linkAttribute.rawValue] as? NSNumber)?.intValue
+                        if !open || active != link {
+                            if open { CGPDFContextEndTag(context) }
+                            CGPDFContextBeginTag(context, .span, properties as CFDictionary)
+                            semanticPaths.append(groups)
+                            if let link { linkOwners[link] = Int32(exactly: tagCount) }
+                            tagCount += 1
+                            open = true
+                            active = link
+                        }
+                        context.textPosition = point
+                        CTRunDraw(run, context, CFRange(location: 0, length: 0))
+                    }
+                    if open { CGPDFContextEndTag(context) }
+                } else if let (image, size) = pdfImages[paragraphIndex],
                    range.location == paragraphStarts[paragraphIndex] {
                     context.draw(image, in: CGRect(x: point.x, y: point.y, width: size.width, height: size.height))
                 } else {
@@ -785,7 +824,7 @@ enum NativeDocumentConversion {
                         if let anchor { context.setDestination(anchor as CFString, for: rect) }
                         else if let url { context.setURL(url as CFURL, for: rect) }
                         annotationLabels.append(label)
-                        annotationOwners.append(Int32(exactly: tagCount - 1) ?? -1)
+                        annotationOwners.append(inline ? linkOwners[index] ?? -1 : Int32(exactly: tagCount - 1) ?? -1)
                     }
                     index += 1
                 }

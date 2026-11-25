@@ -12,7 +12,7 @@ struct DocumentConversionSmoke {
         let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: root) }
-        let body = "# Capítulo & prólogo\n\nLeer guía: café y pingüino.\n\n## 第二章 – Ελληνικά\n\nVolver. Última línea."
+        let body = "# Capítulo & prólogo\n\nAntes, Leer guía: café y pingüino.\n\n## 第二章 – Ελληνικά\n\nVolver. Última línea."
         let linkOffset = body.distance(from: body.startIndex, to: body.range(of: "Leer guía")!.lowerBound)
         let source = NativeConversionSource(filename: "Obra.versión.md", title: "Obra & título",
             format: "md", text: body,
@@ -104,6 +104,7 @@ struct DocumentConversionSmoke {
         let plain = pdf.string!
         precondition(pdf.pageCount == 1 && plain.range(of: "Capítulo & prólogo")!.lowerBound <
             plain.range(of: "Última línea.")!.lowerBound && plain.contains("café y pingüino"))
+        precondition(plain.contains("Antes, Leer guía: café"), "Inline glyph runs must retain text order and layout")
         let raw = CGPDFDocument(results[.pdf]! as CFURL)!
         guard let catalog = raw.catalog else { fatalError("Missing PDF catalog") }
         var structure: CGPDFDictionaryRef?
@@ -126,6 +127,7 @@ struct DocumentConversionSmoke {
             precondition(CGPDFDictionaryGetDictionary(structure!, "K", &document))
             precondition(CGPDFDictionaryGetArray(document!, "K", &children))
             var inlineLinks = 0
+            var linkBetweenSpans = false
             for index in 0..<CGPDFArrayGetCount(children!) {
                 var block: CGPDFDictionaryRef?
                 var contents: CGPDFArrayRef?
@@ -136,10 +138,24 @@ struct DocumentConversionSmoke {
                     var role: UnsafePointer<CChar>?
                     if CGPDFArrayGetDictionary(contents!, childIndex, &child),
                        CGPDFDictionaryGetName(child!, "S", &role),
-                       let role, String(cString: role) == "Link" { inlineLinks += 1 }
+                       let role, String(cString: role) == "Link" {
+                        inlineLinks += 1
+                        var linkChildren: CGPDFArrayRef?
+                        var markedContent: CGPDFInteger = -1
+                        var reference: CGPDFDictionaryRef?
+                        precondition(CGPDFDictionaryGetArray(child!, "K", &linkChildren) &&
+                            CGPDFArrayGetInteger(linkChildren!, 0, &markedContent) && markedContent >= 0 &&
+                            CGPDFArrayGetDictionary(linkChildren!, 1, &reference))
+                        var type: UnsafePointer<CChar>?
+                        precondition(CGPDFDictionaryGetName(reference!, "Type", &type) &&
+                            type.map { String(cString: $0) } == "OBJR")
+                        if childIndex > 0 && childIndex + 1 < CGPDFArrayGetCount(contents!) {
+                            linkBetweenSpans = true
+                        }
+                    }
                 }
             }
-            precondition(inlineLinks == 2, "Both links must be associated with their original paragraphs")
+            precondition(inlineLinks == 2 && linkBetweenSpans, "Links must own their text in its original position")
         }
         let reopenedDOCX = NativeConversionSource(filename: "Obra.versión.docx", title: "DOCX",
             format: "docx", text: "Text fallback", links: [], original: results[.docx]!)

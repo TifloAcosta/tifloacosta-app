@@ -19,18 +19,26 @@ static int attach_link(qpdf_data pdf, qpdf_oh tree, qpdf_oh numbers,
     qpdf_oh_replace_key(pdf, reference, "/Type", qpdf_oh_new_name(pdf, "/OBJR"));
     qpdf_oh_replace_key(pdf, reference, "/Obj", annotation);
     qpdf_oh_replace_key(pdf, reference, "/Pg", page);
-    qpdf_oh node = qpdf_make_indirect_object(pdf, qpdf_oh_new_dictionary(pdf));
-    qpdf_oh_replace_key(pdf, node, "/Type", qpdf_oh_new_name(pdf, "/StructElem"));
+    qpdf_oh role = qpdf_oh_get_key(pdf, tree, "/S");
+    qpdf_oh node;
+    if (qpdf_oh_is_name_and_equals(pdf, role, "/Span")) {
+        // The span already owns the glyphs and is indexed by their MCID.
+        node = tree;
+        qpdf_oh_append_item(pdf, kids, reference);
+    } else {
+        node = qpdf_make_indirect_object(pdf, qpdf_oh_new_dictionary(pdf));
+        qpdf_oh_replace_key(pdf, node, "/Type", qpdf_oh_new_name(pdf, "/StructElem"));
+        qpdf_oh_replace_key(pdf, node, "/P", tree);
+        qpdf_oh_replace_key(pdf, node, "/Pg", page);
+        qpdf_oh_replace_key(pdf, node, "/K", reference);
+        qpdf_oh_append_item(pdf, kids, node);
+    }
     qpdf_oh_replace_key(pdf, node, "/S", qpdf_oh_new_name(pdf, "/Link"));
-    qpdf_oh_replace_key(pdf, node, "/P", tree);
-    qpdf_oh_replace_key(pdf, node, "/Pg", page);
-    qpdf_oh_replace_key(pdf, node, "/K", reference);
     qpdf_oh description = qpdf_oh_get_key(pdf, annotation, "/Contents");
     if (qpdf_oh_is_string(pdf, description)) qpdf_oh_replace_key(pdf, node, "/Alt", description);
     qpdf_oh_replace_key(pdf, annotation, "/StructParent", qpdf_oh_new_integer(pdf, key));
     qpdf_oh_append_item(pdf, numbers, qpdf_oh_new_integer(pdf, key));
     qpdf_oh_append_item(pdf, numbers, node);
-    qpdf_oh_append_item(pdf, kids, node);
     return 1;
 }
 

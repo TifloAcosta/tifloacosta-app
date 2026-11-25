@@ -37,7 +37,17 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
             let tables = "{\\*\\listtable" + lists.joined() + "}{\\*\\listoverridetable" + overrides.joined() + "}"
             output.insert(contentsOf: tables, at: index)
         }
+        try Task.checkCancellation()
         return output + "}"
+    }
+
+    private func makeList(start: Int?) -> ListState {
+        let id = lists.count + 1
+        let numberFormat = start == nil ? 23 : 0
+        let levelText = start == nil ? "{\\leveltext\\'01\\u8226?;}{\\levelnumbers;}" : "{\\leveltext\\'02\\'00.;}{\\levelnumbers\\'01;}"
+        lists.append("{\\list\\listtemplateid\(id)\\listsimple1{\\listlevel\\levelnfc\(numberFormat)\\leveljc0\\levelfollow0\\levelstartat\(start ?? 1)\(levelText)}\\listid\(id)}")
+        overrides.append("{\\listoverride\\listid\(id)\\listoverridecount0\\ls\(id)}")
+        return ListState(id: id, next: start)
     }
 
     static func escape(_ text: String) -> String {
@@ -76,22 +86,26 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
         case "br": output += "\\line "
         case "ol", "ul":
             let start = tag == "ol" ? max(1, min(32767, attributes["start"].flatMap(Int.init) ?? 1)) : nil
-            let id = lists.count + 1
-            let numberFormat = start == nil ? 23 : 0
-            let levelText = start == nil ? "{\\leveltext\\'01\\u8226?;}{\\levelnumbers;}" : "{\\leveltext\\'02\\'00.;}{\\levelnumbers\\'01;}"
-            lists.append("{\\list\\listtemplateid\(id)\\listsimple1{\\listlevel\\levelnfc\(numberFormat)\\leveljc0\\levelfollow0\\levelstartat\(start ?? 1)\(levelText)}\\listid\(id)}")
-            overrides.append("{\\listoverride\\listid\(id)\\listoverridecount0\\ls\(id)}")
-            listStates.append(ListState(id: id, next: start))
+            listStates.append(makeList(start: start))
         case "li":
             let indentation = min(listStates.count, 12) * 360
             output += "{\\pard" + (rowStart == nil ? "" : "\\intbl") + "\\li\(indentation) "
-            if let list = listStates.last {
-                output += "\\ls\(list.id)\\ilvl0 "
+            if var list = listStates.last {
                 if let counter = list.next {
-                    let value = min(attributes["value"].flatMap(Int.init) ?? counter, Int.max - 1)
+                    // A new native list definition makes an explicit restart semantic,
+                    // rather than merely changing the visible listtext fallback.
+                    let requested = attributes["value"].flatMap(Int.init)
+                    if let requested, requested != counter, (1...32767).contains(requested) {
+                        list = makeList(start: requested)
+                        listStates[listStates.count - 1] = list
+                    }
+                    let value = list.next ?? counter
+                    output += "\\ls\(list.id)\\ilvl0 "
                     output += "{\\listtext \(value).\\tab}"
-                    listStates[listStates.count - 1].next = value + 1
-                } else { output += "{\\listtext\\bullet\\tab}" }
+                    listStates[listStates.count - 1].next = min(value, Int.max - 1) + 1
+                } else {
+                    output += "\\ls\(list.id)\\ilvl0 {\\listtext\\bullet\\tab}"
+                }
             }
             close = "\\par}\n"
         case "table":
@@ -122,7 +136,8 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
                 let digits = Array("0123456789abcdef".utf8)
                 var bytes: [UInt8] = []
                 bytes.reserveCapacity(image.data.count * 2)
-                for byte in image.data {
+                for (index, byte) in image.data.enumerated() {
+                    if index % 16384 == 0, Task.isCancelled { parser.abortParsing(); return }
                     bytes.append(digits[Int(byte >> 4)])
                     bytes.append(digits[Int(byte & 15)])
                 }

@@ -285,10 +285,15 @@ enum NativeRTFConversionMarkup {
         var html: [String] = []
         var end = 0
         var first = 0
+        func isRowSeparator(_ bytes: ArraySlice<UInt8>) -> Bool {
+            let controls = String(decoding: bytes, as: UTF8.self)
+            return controls.replacingOccurrences(of: "\\pard", with: "")
+                .trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        }
         while first < rows.count {
             var last = first + 1
             while last < rows.count, rows[last - 1].range.upperBound <= rows[last].range.lowerBound,
-                  bytes[rows[last - 1].range.upperBound..<rows[last].range.lowerBound].allSatisfy({ [9, 10, 13, 32].contains($0) }) {
+                  isRowSeparator(bytes[rows[last - 1].range.upperBound..<rows[last].range.lowerBound]) {
                 last += 1
             }
             document.append(contentsOf: bytes[end..<rows[first].range.lowerBound])

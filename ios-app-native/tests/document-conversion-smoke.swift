@@ -305,7 +305,7 @@ struct DocumentConversionSmoke {
         let importedRTF = try NativeRTFConversionMarkup.xhtml(Data(mergedRTF.utf8), title: "Combinaciones")
             .flatMap { String(data: $0, encoding: .utf8) } ?? ""
         precondition(importedRTF.contains("<table>") && importedRTF.contains("Combinada") &&
-            importedRTF.contains("colspan=\"2\" rowspan=\"2\""))
+            importedRTF.contains("colspan=\"2\" rowspan=\"2\""), importedRTF)
         let mergedODT = try NativeODTConversionWriter(assets: []).write(merged.body)
         precondition(mergedODT.contains("table:number-columns-spanned=\"2\"") &&
             mergedODT.contains("table:number-rows-spanned=\"2\"") &&

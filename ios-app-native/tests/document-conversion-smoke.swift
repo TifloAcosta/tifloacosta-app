@@ -245,6 +245,20 @@ struct DocumentConversionSmoke {
             options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
         precondition(richRTFReader.string.contains("Imagen de prueba") && richRTFReader.string.contains("Hinweis – opinião."))
 
+        // Numbering restarts must change the native list identity, not only the visible marker.
+        let numbered = NativeConversionMarkup.Document(
+            body: "<ol start=\"3\"><li>A</li><li value=\"8\">B</li><li>C</li></ol>",
+            title: "Numeración", language: "es", metadata: [:], assets: [], headings: [])
+        let numberedRTF = try NativeRTFConversionWriter(assets: []).write(numbered)
+        precondition(numberedRTF.contains("\\levelstartat3") && numberedRTF.contains("\\levelstartat8"))
+        precondition(numberedRTF.contains("\\ls1\\ilvl0 {\\listtext 3.\\tab}"))
+        precondition(numberedRTF.contains("\\ls2\\ilvl0 {\\listtext 8.\\tab}"))
+        precondition(numberedRTF.contains("\\ls2\\ilvl0 {\\listtext 9.\\tab}"))
+        let numberedReader = try NSAttributedString(data: Data(numberedRTF.utf8),
+            options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
+        precondition(numberedReader.string.contains("A") && numberedReader.string.contains("B") &&
+            numberedReader.string.contains("C"))
+
         let rtfSourceURL = root.appendingPathComponent("Estilo.rtf")
         try #"{\rtf1\ansi{\fonttbl{\f0 Helvetica;}}\f0 Texto {\b importante} {\i cursiva}.}"#
             .write(to: rtfSourceURL, atomically: true, encoding: .utf8)

@@ -143,11 +143,189 @@ enum NativeRTFConversionMarkup {
         // RTFD has external attachments. This reader accepts only the plain RTF stream.
         guard data.starts(with: Data("{\\rtf".utf8)) else { return nil }
         let notes = try footnotes(in: data)
-        let original = try NSAttributedString(data: notes?.document ?? data, options: [.documentType: NSAttributedString.DocumentType.rtf],
+        let source = notes?.document ?? data
+        let tables = try extractTables(source)
+        let original = try NSAttributedString(data: tables?.document ?? source, options: [.documentType: NSAttributedString.DocumentType.rtf],
                                               documentAttributes: nil)
-        let body = try render(original)
+        var body = try render(original)
+        if let tables {
+            for (index, table) in tables.html.enumerated() {
+                let marker = "<p>\(tables.prefix)\(index)X</p>"
+                guard body.contains(marker) else {
+                    let fallback = try NSAttributedString(data: source,
+                        options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
+                    body = try render(fallback)
+                    break
+                }
+                body = body.replacingOccurrences(of: marker, with: table)
+            }
+        }
         let escape = NativeDocumentConversion.xml
         return Data("<html><head><title>\(escape(title))</title></head><body>\(notes?.insertLinks(in: body) ?? body)</body></html>".utf8)
+    }
+
+    private struct TableCell {
+        var text: Range<Int> = 0..<0
+        var horizontal = 0
+        var vertical = 0
+    }
+
+    private struct TableRow {
+        var cells: [TableCell] = []
+        var start: Int
+        var contentStart: Int?
+        var finished = 0
+        var header = false
+    }
+
+    /// Read explicitly defined RTF cells. Native text decoding is used only
+    /// for their contents, so the same table structure is available on iOS and macOS.
+    private static func extractTables(_ data: Data) throws -> (document: Data, prefix: String, html: [String])? {
+        let bytes = Array(data)
+        var i = 0
+        var groups: [Int] = []
+        var ignoredDepth: Int?
+        var row: TableRow?
+        var definition = TableCell()
+        var rows: [(range: Range<Int>, row: TableRow)] = []
+        var fontTable: Range<Int>?
+        var fontStart: (start: Int, depth: Int)?
+        var codePage = ""
+        func isLetter(_ b: UInt8) -> Bool { (65...90).contains(b) || (97...122).contains(b) }
+        while i < bytes.count {
+            if i % 2048 == 0 { try Task.checkCancellation() }
+            let start = i
+            let byte = bytes[i]
+            i += 1
+            if byte == 123 { groups.append(start); continue }
+            if byte == 125 {
+                if let fontStart, fontStart.depth == groups.count {
+                    fontTable = fontStart.start..<i
+                }
+                if ignoredDepth == groups.count { ignoredDepth = nil }
+                _ = groups.popLast()
+                continue
+            }
+            guard byte == 92, i < bytes.count else { continue }
+            if bytes[i] == 39 { i = min(i + 3, bytes.count); continue }
+            if bytes[i] == 42 {
+                if ignoredDepth == nil { ignoredDepth = groups.count }
+                i += 1
+                continue
+            }
+            guard isLetter(bytes[i]) else { i += 1; continue }
+            let wordStart = i
+            while i < bytes.count && isLetter(bytes[i]) { i += 1 }
+            let word = String(decoding: bytes[wordStart..<i], as: UTF8.self)
+            let paramStart = i
+            if i < bytes.count && bytes[i] == 45 { i += 1 }
+            while i < bytes.count && (48...57).contains(bytes[i]) { i += 1 }
+            let paramEnd = i
+            if i < bytes.count && bytes[i] == 32 { i += 1 }
+            if word == "bin" {
+                guard let count = Int(String(decoding: bytes[paramStart..<paramEnd], as: UTF8.self)),
+                      count >= 0, count <= bytes.count - i else { return nil }
+                i += count
+                continue
+            }
+            if ignoredDepth != nil { continue }
+            switch word {
+            case "fonttbl", "pict", "object", "footnote", "stylesheet", "colortbl":
+                if word == "fonttbl", let boundary = groups.last {
+                    fontStart = (boundary, groups.count)
+                }
+                ignoredDepth = groups.count
+            case "ansicpg":
+                if groups.count == 1, Int(String(decoding: bytes[paramStart..<paramEnd], as: UTF8.self)) != nil {
+                    codePage = "\\ansicpg" + String(decoding: bytes[paramStart..<paramEnd], as: UTF8.self)
+                }
+            case "trowd":
+                let boundary = groups.last.map { $0 == start - 1 && groups.count > 1 ? $0 : start } ?? start
+                row = TableRow(start: boundary)
+                definition = TableCell()
+            case "trhdr": row?.header = true
+            case "clmgf": definition.horizontal = 1
+            case "clmrg": definition.horizontal = 2
+            case "clvmgf": definition.vertical = 1
+            case "clvmrg": definition.vertical = 2
+            case "cellx":
+                if var current = row, current.finished == 0, current.cells.count < 512 {
+                    current.cells.append(definition)
+                    current.contentStart = i
+                    row = current
+                }
+                definition = TableCell()
+            case "cell":
+                if var current = row, let contentStart = current.contentStart, current.finished < current.cells.count {
+                    current.cells[current.finished].text = contentStart..<start
+                    current.contentStart = i
+                    current.finished += 1
+                    row = current
+                }
+            case "row":
+                if let current = row, !current.cells.isEmpty, current.finished == current.cells.count {
+                    let grouped = groups.last == current.start
+                    var end = i
+                    while end < bytes.count && [9, 10, 13, 32].contains(bytes[end]) { end += 1 }
+                    if grouped && (end >= bytes.count || bytes[end] != 125) { row = nil; continue }
+                    rows.append((current.start..<(grouped ? end + 1 : i), current))
+                }
+                row = nil
+            default: break
+            }
+        }
+        guard !rows.isEmpty else { return nil }
+        let prefix = "TifloTable" + UUID().uuidString.replacingOccurrences(of: "-", with: "") + "X"
+        var document = Data()
+        var html: [String] = []
+        var end = 0
+        var first = 0
+        while first < rows.count {
+            var last = first + 1
+            while last < rows.count, rows[last - 1].range.upperBound <= rows[last].range.lowerBound,
+                  bytes[rows[last - 1].range.upperBound..<rows[last].range.lowerBound].allSatisfy({ [9, 10, 13, 32].contains($0) }) {
+                last += 1
+            }
+            document.append(contentsOf: bytes[end..<rows[first].range.lowerBound])
+            document.append(contentsOf: "\\par {\\pard\\plain \(prefix)\(html.count)X\\par} ".utf8)
+            var table = "<table>"
+            for pos in first..<last {
+                try Task.checkCancellation()
+                table += "<tr>"
+                let row = rows[pos].row
+                var column = 0
+                while column < row.cells.count {
+                    let cell = row.cells[column]
+                    var width = 1
+                    if cell.horizontal == 1 {
+                        while column + width < row.cells.count && row.cells[column + width].horizontal == 2 { width += 1 }
+                    }
+                    defer { column += width }
+                    if cell.vertical == 2 || cell.horizontal == 2 { continue }
+                    var height = 1
+                    if cell.vertical == 1 {
+                        while pos + height < last, column < rows[pos + height].row.cells.count,
+                              rows[pos + height].row.cells[column].vertical == 2 { height += 1 }
+                    }
+                    var content = Data("{\\rtf1\\ansi\(codePage) ".utf8)
+                    if let fontTable { content.append(contentsOf: bytes[fontTable]) }
+                    content.append(contentsOf: bytes[cell.text])
+                    content.append(125)
+                    let styled = try NSAttributedString(data: content,
+                        options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
+                    let tag = row.header ? "th" : "td"
+                    table += "<\(tag)\(width > 1 ? " colspan=\"\(width)\"" : "")\(height > 1 ? " rowspan=\"\(height)\"" : "")>"
+                    table += try render(styled)
+                    table += "</\(tag)>"
+                }
+                table += "</tr>"
+            }
+            html.append(table + "</table>")
+            end = rows[last - 1].range.upperBound
+            first = last
+        }
+        document.append(contentsOf: bytes[end...])
+        return (document, prefix, html)
     }
 
     private static func render(_ original: NSAttributedString) throws -> String {
@@ -156,45 +334,13 @@ enum NativeRTFConversionMarkup {
         var body = ""
         var offset = 0
         var levels: [ListLevel] = []
-        var tables: [NSTextTableBlock] = []
         func closeLists() {
             while let level = levels.popLast() { body += "</li></\(level.tag)>" }
-        }
-        func closeTables(from index: Int) {
-            while tables.count > index {
-                _ = tables.popLast()
-                body += "</td></tr></table>"
-            }
         }
         while offset < text.length {
             try Task.checkCancellation()
             let paragraph = text.paragraphRange(for: NSRange(location: offset, length: 0))
             let style = original.attribute(.paragraphStyle, at: paragraph.location, effectiveRange: nil) as? NSParagraphStyle
-            let blocks = (style?.textBlocks ?? []).compactMap { $0 as? NSTextTableBlock }
-            let sharedCells = zip(tables, blocks).prefix {
-                $0.0.table === $0.1.table && $0.0.startingRow == $0.1.startingRow &&
-                $0.0.startingColumn == $0.1.startingColumn
-            }.count
-            if sharedCells != tables.count || sharedCells != blocks.count {
-                closeLists()
-                let sharedTable = sharedCells < tables.count && sharedCells < blocks.count &&
-                    tables[sharedCells].table === blocks[sharedCells].table
-                closeTables(from: sharedCells + (sharedTable ? 1 : 0))
-                for index in sharedCells..<blocks.count {
-                    let block = blocks[index]
-                    if sharedTable && index == sharedCells {
-                        if tables[index].startingRow == block.startingRow { body += "</td>" }
-                        else { body += "</td></tr><tr>" }
-                        tables[index] = block
-                    } else {
-                        body += "<table><tr>"
-                        tables.append(block)
-                    }
-                    let width = block.columnSpan > 1 ? " colspan=\"\(block.columnSpan)\"" : ""
-                    let height = block.rowSpan > 1 ? " rowspan=\"\(block.rowSpan)\"" : ""
-                    body += "<td\(width)\(height)>"
-                }
-            }
             let nativeLists = style?.textLists ?? []
             let kinds = nativeLists.compactMap(listKind)
             let supportedLists = kinds.count == nativeLists.count ? nativeLists : []
@@ -255,7 +401,6 @@ enum NativeRTFConversionMarkup {
             offset = NSMaxRange(paragraph)
         }
         closeLists()
-        closeTables(from: 0)
         try Task.checkCancellation()
         return body
     }

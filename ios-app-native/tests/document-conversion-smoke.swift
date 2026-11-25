@@ -114,6 +114,7 @@ struct DocumentConversionSmoke {
         var pdfMetadata: CGPDFStreamRef?
         precondition(CGPDFDictionaryGetStream(catalog, "Metadata", &pdfMetadata), "PDF lacks XMP metadata")
 
+        precondition(pdf.page(at: 0)?.annotations.first { $0.url?.host == "example.com" }?.contents == "Leer guía")
         let reopenedDOCX = NativeConversionSource(filename: "Obra.versión.docx", title: "DOCX",
             format: "docx", text: "Text fallback", links: [], original: results[.docx]!)
         let docxHTML = try NativeDocumentConversion.convert(reopenedDOCX, to: .html,

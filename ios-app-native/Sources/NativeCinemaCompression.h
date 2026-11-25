@@ -5,4 +5,5 @@
 // Return 0 for a complete stream, 1 for output limit, -1 for invalid data.
 int tiflo_cinema_bz2(const uint8_t *input, size_t length, uint8_t *output, size_t *capacity);
 int tiflo_cinema_gzip(const uint8_t *input, size_t length, uint8_t *output, size_t *capacity);
+#include "../PDFEngine/TifloPDFPostprocess.h"
 #endif

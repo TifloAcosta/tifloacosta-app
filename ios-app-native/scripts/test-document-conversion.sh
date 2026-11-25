@@ -5,19 +5,29 @@ root="$(cd "$(dirname "$0")/.." && pwd)"
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
 
-mkdir -p "$work/Sources/ConversionSmoke"
+mkdir -p "$work/Sources/ConversionSmoke" "$work/Sources/TifloPDFPostprocess/include"
+engine="${TIFLO_MAC_PDF_ENGINE:-$work/pdf-engine}"
+bash "$root/scripts/prepare-pdf-engine.sh" macosx "$engine"
+cp "$root/PDFEngine/TifloPDFPostprocess.c" "$work/Sources/TifloPDFPostprocess/"
+cp "$root/PDFEngine/TifloPDFPostprocess.h" "$work/Sources/TifloPDFPostprocess/include/"
 cp "$root/Sources/NativeDocumentConversion.swift"   "$root/Sources/NativeConversionMarkup.swift"   "$root/Sources/NativeODTConversionMarkup.swift" "$root/Sources/NativeODTConversionWriter.swift" "$root/Sources/NativeRTFConversionWriter.swift" "$root/Sources/NativeDOCXConversionMarkup.swift" "$root/Sources/NativeDOCXConversionWriter.swift"   "$root/Sources/NativeEpubSpine.swift"   "$root/tests/document-conversion-smoke.swift" "$work/Sources/ConversionSmoke/"
 cat > "$work/Package.swift" <<'SWIFT'
 // swift-tools-version: 5.9
 import PackageDescription
+import Foundation
 
 let package = Package(
     name: "ConversionSmoke",
     platforms: [.macOS(.v14)],
     dependencies: [.package(url: "https://github.com/weichsel/ZIPFoundation.git", from: "0.9.0")],
-    targets: [.executableTarget(
+    targets: [
+        .target(name: "TifloPDFPostprocess",
+                cSettings: [.unsafeFlags(["-I", ProcessInfo.processInfo.environment["TIFLO_PROBE_PDF_ENGINE"]! + "/include"])],
+                linkerSettings: [.unsafeFlags(["-L", ProcessInfo.processInfo.environment["TIFLO_PROBE_PDF_ENGINE"]! + "/lib"]),
+                                 .linkedLibrary("qpdf"), .linkedLibrary("jpeg"), .linkedLibrary("z"), .linkedLibrary("c++")]),
+        .executableTarget(
         name: "ConversionSmoke",
-        dependencies: [.product(name: "ZIPFoundation", package: "ZIPFoundation")]
+        dependencies: ["TifloPDFPostprocess", .product(name: "ZIPFoundation", package: "ZIPFoundation")]
     )]
 )
 SWIFT
@@ -29,6 +39,7 @@ for file in FictionBook.xsd FictionBookLinks.xsd FictionBookGenres.xsd FictionBo
 done
 samples="${CONVERSION_SAMPLES_DIR:-$work/samples}"
 mkdir -p "$samples"
+export TIFLO_PROBE_PDF_ENGINE="$engine"
 swift build --package-path "$work" --product ConversionSmoke
 bin="$(swift build --package-path "$work" --show-bin-path)/ConversionSmoke"
 /usr/bin/time -l "$bin" "$schema/FictionBook.xsd" "$samples"

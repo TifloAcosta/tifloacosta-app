@@ -2,6 +2,9 @@ import Foundation
 import CoreGraphics
 import CoreText
 import NaturalLanguage
+#if canImport(TifloPDFPostprocess)
+import TifloPDFPostprocess
+#endif
 import ZIPFoundation
 
 enum NativeDocumentFormat: String, CaseIterable, Identifiable, Sendable {
@@ -97,7 +100,13 @@ enum NativeDocumentConversion {
             case .fb2: try fb2(paragraphs, title: title, output: output)
             case .daisy: try daisy(paragraphs, title: title, markup: markup, output: output)
             case .daisy3: try daisy3(paragraphs, title: title, markup: markup, output: output)
-            case .pdf: try pdf(paragraphs, title: input.title, markup: markup, output: output) { onProgress(0.6 + $0 * 0.39) }
+            case .pdf:
+                let intermediate = staging.appendingPathComponent("rendered-" + UUID().uuidString + ".pdf")
+                let metadata = try pdf(paragraphs, title: input.title, markup: markup, output: intermediate) {
+                    onProgress(0.6 + $0 * 0.35)
+                }
+                try Task.checkCancellation()
+                try finishPDF(intermediate, output: output, language: metadata.language, labels: metadata.labels)
             }
         }
         try Task.checkCancellation()
@@ -547,15 +556,28 @@ enum NativeDocumentConversion {
         try write(contents, to: output)
     }
 
+    private static func finishPDF(_ input: URL, output: URL, language: String?, labels: [String]) throws {
+        let buffers = labels.map { strdup($0) }
+        defer { buffers.forEach { free($0) } }
+        guard buffers.allSatisfy({ $0 != nil }) else { throw Failure.invalidOutput }
+        let pointers: [UnsafePointer<CChar>?] = buffers.map { $0.map { UnsafePointer($0) } }
+        let result = pointers.withUnsafeBufferPointer { labels in
+            tiflo_pdf_postprocess(input.path, output.path, language ?? "", labels.baseAddress, labels.count)
+        }
+        guard result == 0 else { throw Failure.invalidOutput }
+        try Task.checkCancellation()
+    }
+
     private static func pdf(_ paragraphs: [Paragraph], title: String, markup: NativeConversionMarkup.Document?, output: URL,
-                            onProgress: (Double) -> Void) throws {
+                            onProgress: (Double) -> Void) throws -> (language: String?, labels: [String]) {
+        var annotationLabels: [String] = []
         let text = NSMutableAttributedString(string: "")
         let key = NSAttributedString.Key(kCTFontAttributeName as String)
         let normal = CTFontCreateWithName("Helvetica" as CFString, 11, nil)
         let heading = CTFontCreateWithName("Helvetica-Bold" as CFString, 15, nil)
         let headerTags: [CGPDFTagType] = [.paragraph, .header1, .header2, .header3, .header4, .header5, .header6]
         var paragraphStarts: [Int] = []
-        var linkRanges: [(range: NSRange, url: URL?, anchor: String?)] = []
+        var linkRanges: [(range: NSRange, url: URL?, anchor: String?, label: String)] = []
         var destinationNames: Set<String> = []
         let declaredLanguage = markup?.language?.trimmingCharacters(in: .whitespacesAndNewlines)
         let languageKey = CGPDFTagProperty.languageText.rawValue as String
@@ -580,7 +602,7 @@ enum NativeDocumentConversion {
                     let target = anchor(for: run.target, in: paragraphs)
                     if let target { destinationNames.insert(target) }
                     if run.url != nil || target != nil {
-                        linkRanges.append((NSRange(location: lineOffset, length: length), run.url, target))
+                        linkRanges.append((NSRange(location: lineOffset, length: length), run.url, target, run.text))
                     }
                 }
                 lineOffset += length
@@ -656,7 +678,7 @@ enum NativeDocumentConversion {
                       NSMaxRange(linkRanges[linkIndex].0) <= range.location { linkIndex += 1 }
                 var index = linkIndex
                 while index < linkRanges.count, linkRanges[index].0.location < lineEnd {
-                    let (link, url, anchor) = linkRanges[index]
+                    let (link, url, anchor, label) = linkRanges[index]
                     let bounds = NSIntersectionRange(link, NSRange(location: range.location, length: range.length))
                     let startX = CTLineGetOffsetForStringIndex(line, bounds.location, nil)
                     let endX = CTLineGetOffsetForStringIndex(line, NSMaxRange(bounds), nil)
@@ -668,6 +690,7 @@ enum NativeDocumentConversion {
                             width: abs(endX - startX), height: ascent + descent)
                         if let anchor { context.setDestination(anchor as CFString, for: rect) }
                         else if let url { context.setURL(url as CFURL, for: rect) }
+                        annotationLabels.append(label)
                     }
                     index += 1
                 }
@@ -678,5 +701,6 @@ enum NativeDocumentConversion {
             offset += visible.length
             onProgress(Double(offset) / Double(text.length))
         }
+        return (language, annotationLabels)
     }
 }

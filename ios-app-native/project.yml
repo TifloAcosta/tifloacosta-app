@@ -20,11 +20,24 @@ targets:
     deploymentTarget: "17.0"
     sources:
       - Sources
+      - PDFEngine
+    preBuildScripts:
+      - name: Preparar qpdf local
+        script: |
+          bash "$SRCROOT/scripts/prepare-pdf-engine.sh" "$PLATFORM_NAME" "$DERIVED_FILE_DIR/TifloPDF"
+    postBuildScripts:
+      - name: Incluir avisos de qpdf
+        script: |
+          destination="$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/PDFEngineLicenses"
+          mkdir -p "$destination"
+          cp "$DERIVED_FILE_DIR/TifloPDF/licenses/"*.txt "$destination/"
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.app
         SWIFT_OBJC_BRIDGING_HEADER: Sources/NativeCinemaCompression.h
-        OTHER_LDFLAGS: "$(inherited) -lbz2 -lz"
+        HEADER_SEARCH_PATHS: "$(inherited) \"$(DERIVED_FILE_DIR)/TifloPDF/include\""
+        LIBRARY_SEARCH_PATHS: "$(inherited) \"$(DERIVED_FILE_DIR)/TifloPDF/lib\""
+        OTHER_LDFLAGS: "$(inherited) -lbz2 -lqpdf -ljpeg -lz -lc++"
         GENERATE_INFOPLIST_FILE: NO
         INFOPLIST_FILE: Sources/Info.plist
         INFOPLIST_KEY_CFBundleDisplayName: "TifloAcosta"

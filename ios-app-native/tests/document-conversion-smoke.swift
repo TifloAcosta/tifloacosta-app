@@ -245,6 +245,24 @@ struct DocumentConversionSmoke {
             options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
         precondition(richRTFReader.string.contains("Imagen de prueba") && richRTFReader.string.contains("Hinweis – opinião."))
 
+        let merged = NativeConversionMarkup.Document(
+            body: "<table><tr><td colspan=\"2\" rowspan=\"2\"><p>Combinada</p></td><td><p>A</p></td></tr><tr><td><p>B</p></td></tr></table><p><u>Subrayado</u> H<sub>2</sub>O x<sup>2</sup></p>",
+            title: "Combinaciones", language: "es", metadata: [:], assets: [], headings: [])
+        let mergedWord = try NativeDOCXConversionWriter().write(merged)
+        precondition(mergedWord.body.contains("<w:vMerge w:val=\"restart\"/>") &&
+            mergedWord.body.contains("<w:vMerge/>") && mergedWord.body.contains("<w:gridSpan w:val=\"2\"/>"))
+        let mergedXML = "<w:document xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:body>\(mergedWord.body)</w:body></w:document>"
+        let mergedRead = NativeDOCXConversionMarkup.xhtml(content: Data(mergedXML.utf8),
+            relationships: nil, title: "Combinaciones").flatMap { String(data: $0, encoding: .utf8) } ?? ""
+        precondition(mergedRead.contains("colspan=\"2\" rowspan=\"2\"") &&
+            mergedRead.contains("<u>Subrayado</u>") && mergedRead.contains("<sub>2</sub>") &&
+            mergedRead.contains("<sup>2</sup>"))
+        precondition(mergedRead.components(separatedBy: "Combinada").count == 2)
+        let mergedODT = try NativeODTConversionWriter(assets: []).write(merged.body)
+        precondition(mergedODT.contains("table:number-columns-spanned=\"2\"") &&
+            mergedODT.contains("table:number-rows-spanned=\"2\"") &&
+            mergedODT.components(separatedBy: "<table:covered-table-cell/>").count == 4)
+
         // Numbering restarts must change the native list identity, not only the visible marker.
         let numbered = NativeConversionMarkup.Document(
             body: "<ol start=\"3\"><li>A</li><li value=\"8\">B</li><li>C</li></ol>",

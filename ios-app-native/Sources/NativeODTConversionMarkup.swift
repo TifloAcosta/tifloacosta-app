@@ -8,6 +8,7 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
     private var suppressDepth = 0
     private var stack: [String] = []
     private var textStyle: String?
+    private var textStyleParents: [String: String] = [:]
     private var textStyleProperties: [String: [String: String]] = [:]
     private var metadataField: String?
     private var metadataValue = ""
@@ -56,6 +57,17 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
         return Data("<html\(language)><head><title>\(documentTitle)</title>\(meta)</head><body>\(delegate.body)\(delegate.notes.joined())</body></html>".utf8)
     }
 
+    private func resolvedTextStyle(_ name: String) -> [String: String] {
+        var resolved: [String: String] = [:]
+        var current: String? = name
+        var visited: Set<String> = []
+        while let style = current, visited.count < 64, visited.insert(style).inserted {
+            resolved.merge(textStyleProperties[style] ?? [:], uniquingKeysWith: { local, _ in local })
+            current = textStyleParents[style]
+        }
+        return resolved
+    }
+
     func parser(_ parser: XMLParser, didStartElement element: String,
                 namespaceURI: String?, qualifiedName: String?, attributes: [String: String]) {
         if Task.isCancelled { parser.abortParsing(); return }
@@ -71,6 +83,7 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
                 metadataValue = ""
             } else if name == "style:style", attributes["style:family"] == "text" {
                 textStyle = attributes["style:name"]
+                if let textStyle { textStyleParents[textStyle] = attributes["style:parent-style-name"] }
             } else if name == "style:text-properties", let textStyle {
                 textStyleProperties[textStyle] = attributes
             } else if name == "text:list-style" {
@@ -148,7 +161,8 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
             if let href = attributes["xlink:href"] { htmlAttributes += " href=\"\(escape(href))\"" }
         case "text:span":
             tag = "span"
-            if let name = attributes["text:style-name"], let style = textStyleProperties[name] {
+            if let name = attributes["text:style-name"] {
+                let style = resolvedTextStyle(name)
                 if style["fo:font-weight"] == "bold" { inlineEmphasis.append("strong") }
                 if style["fo:font-style"] == "italic" { inlineEmphasis.append("em") }
                 if let underline = style["style:text-underline-style"], underline != "none" {

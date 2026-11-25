@@ -857,6 +857,15 @@ struct NativeMyMusicScreen: View {
     @State private var recognitionTask: Task<Void, Never>?
     @State private var recognitionResult: String?
 
+    private func requestIdentification(_ ids: [UUID]) {
+        guard !ids.isEmpty, recognitionTask == nil else { return }
+        if NativeMusicRecognition.hasActiveAccount {
+            recognitionSelection = ids
+        } else {
+            showRecognitionAccount = true
+        }
+    }
+
     private func identify(_ ids: [UUID]) {
         guard !ids.isEmpty, recognitionTask == nil else { return }
         guard NativeMusicRecognition.hasActiveAccount else {
@@ -1178,7 +1187,7 @@ struct NativeMyMusicScreen: View {
                                 Button("Añadir a \(folder.name)") { library.assign(file.id, to: folder.id) }
                             }
                             if NativeMusicRecognition.clientKey != nil {
-                                Button("Identificar canción") { recognitionSelection = [file.id] }
+                                Button("Identificar canción") { requestIdentification([file.id]) }
                                     .disabled(recognitionTask != nil)
                             }
                             Button("Editar información de la canción") { editTrackInformation(file) }
@@ -1190,7 +1199,7 @@ struct NativeMyMusicScreen: View {
                         Spacer()
                         Menu("Acciones de \(file.name)") {
                             if NativeMusicRecognition.clientKey != nil {
-                                Button("Identificar canción") { recognitionSelection = [file.id] }
+                                Button("Identificar canción") { requestIdentification([file.id]) }
                                     .disabled(recognitionTask != nil)
                             }
                             Button("Editar información de la canción") { editTrackInformation(file) }
@@ -1377,7 +1386,7 @@ struct NativeMyMusicScreen: View {
                 Button("Importar canciones") { isImporting = true }
                 Button("Importar carpeta desde Archivos o nube") { isImportingFolder = true }
                 if NativeMusicRecognition.clientKey != nil {
-                    Button("Identificar canciones visibles") { recognitionSelection = visibleFiles.map(\.id) }
+                    Button("Identificar canciones visibles") { requestIdentification(visibleFiles.map(\.id)) }
                         .disabled(recognitionTask != nil || visibleFiles.isEmpty)
                 }
                 Button("Crear carpeta") { showingFolderEditor = true }

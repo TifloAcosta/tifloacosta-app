@@ -454,12 +454,22 @@ struct DocumentConversionSmoke {
           xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
           xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0"
           xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0"
-          xmlns:xlink="http://www.w3.org/1999/xlink">
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"
+          xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0">
+          <office:automatic-styles>
+            <style:style style:name="base" style:family="text">
+              <style:text-properties fo:font-weight="bold" fo:language="fr"/>
+            </style:style>
+            <style:style style:name="child" style:family="text" style:parent-style-name="base">
+              <style:text-properties fo:font-style="italic"/>
+            </style:style>
+          </office:automatic-styles>
           <office:body><office:text>
             <text:h text:outline-level="2">Reunión – 会議</text:h>
             <text:list><text:list-item><text:p>Café</text:p></text:list-item></text:list>
             <table:table><table:table-header-rows><table:table-row><table:table-cell>
-              <text:p>Résumé</text:p>
+              <text:p><text:span text:style-name="child">Résumé</text:span></text:p>
             </table:table-cell></table:table-row></table:table-header-rows></table:table>
             <text:p><draw:frame><draw:image xlink:href="Pictures/frame.png"/>
               <svg:desc>Descripción de la imagen</svg:desc></draw:frame></text:p>
@@ -481,6 +491,7 @@ struct DocumentConversionSmoke {
         xml(complexBook)
         precondition(complexBook.contains("<thead><tr><th>") && complexBook.contains("<ul><li>") &&
             complexBook.contains("alt=\"Descripción de la imagen\"") && complexBook.contains("会議"))
+        precondition(complexBook.contains("<span lang=\"fr\"><strong><em>Résumé</em></strong></span>"))
         precondition(complexFiles["EPUB/book.opf"]!.contains("assets/image-1.png"))
         let complexDOCX = root.appendingPathComponent("Complejo.docx")
         let wordArchive = try Archive(url: complexDOCX, accessMode: .create)

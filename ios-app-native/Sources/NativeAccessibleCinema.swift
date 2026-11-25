@@ -709,16 +709,21 @@ struct NativeAccessibleCinemaScreen: View {
         .task(id: submittedSearch) {
             if let request = submittedSearch { await performRemoteSearch(request) }
         }
-        .task {
+        .onAppear {
+            // A return from the account screen must not expose another account's cache.
             audiocinematecaResults = []
-            if let account = NativeAudiocinematecaCredentials.load(),
-               let entries = try? await NativeAudiocinematecaCache.shared.cachedEntries(account: account),
-               let current = NativeAudiocinematecaCredentials.load(),
-               current.username == account.username, current.password == account.password {
-                audiocinematecaResults = entries
+            if submittedSearch == nil {
+                Task { @MainActor in
+                    if let account = NativeAudiocinematecaCredentials.load(),
+                       let entries = try? await NativeAudiocinematecaCache.shared.cachedEntries(account: account),
+                       submittedSearch == nil,
+                       let current = NativeAudiocinematecaCredentials.load(),
+                       current.username == account.username, current.password == account.password {
+                        audiocinematecaResults = entries
+                    }
+                }
             }
         }
-        .onAppear { if NativeAudiocinematecaCredentials.load() == nil { audiocinematecaResults = [] } }
         .fileImporter(
             isPresented: $selectingPersonalFiles,
             allowedContentTypes: [.audio, .movie],

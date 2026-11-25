@@ -33,6 +33,12 @@ final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
     private var horizontalSpans: [Int] = []
     private var listStarts: [Int?] = []
     private var paragraphDepth = 0
+    private var notes: [String: String] = [:]
+    private var emittedNotes: Set<String> = []
+    private var ignoredNoteDepth = 0
+    private var citationDepth = 0
+    private var citationEnding = ""
+    private var closeCitationParagraph = false
     private let escape = NativeDocumentConversion.xml
 
     init(assets: [NativeConversionMarkup.Asset]) {
@@ -42,6 +48,15 @@ final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
     func write(_ body: String) throws -> String {
         let parser = XMLParser(data: Data("<body>\(body)</body>".utf8))
         parser.shouldResolveExternalEntities = false
+        let notesParser = XMLParser(data: Data("<body>\(body)</body>".utf8))
+        let collector = NativeConversionNoteCollector()
+        notesParser.shouldResolveExternalEntities = false
+        notesParser.delegate = collector
+        guard notesParser.parse() else {
+            try Task.checkCancellation()
+            throw NativeDocumentConversion.Failure.invalidOutput
+        }
+        for id in collector.references { notes[id] = collector.notes[id] }
         parser.delegate = self
         guard parser.parse() else {
             try Task.checkCancellation()
@@ -66,6 +81,30 @@ final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
     func parser(_ parser: XMLParser, didStartElement tag: String,
                 namespaceURI: String?, qualifiedName: String?, attributes: [String: String]) {
         if Task.isCancelled { parser.abortParsing(); return }
+        if ignoredNoteDepth > 0 { ignoredNoteDepth += 1; return }
+        if citationDepth > 0 { citationDepth += 1; return }
+        if attributes["role"] == "doc-footnote", let id = attributes["id"], notes[id] != nil {
+            ignoredNoteDepth = 1
+            return
+        }
+        if tag == "a", attributes["role"] == "doc-noteref",
+           let href = attributes["href"], href.hasPrefix("#") {
+            let id = String(href.dropFirst())
+            if let note = notes[id] {
+                closeCitationParagraph = paragraphDepth == 0
+                if closeCitationParagraph { output += "<text:p>" }
+                if emittedNotes.insert(id).inserted {
+                    output += "<text:note text:id=\"\(escape(id))\" text:note-class=\"footnote\"><text:note-citation>"
+                    let paragraphs = note.components(separatedBy: "\n").map { "<text:p>\(escape($0))</text:p>" }.joined()
+                    citationEnding = "</text:note-citation><text:note-body>\(paragraphs)</text:note-body></text:note>"
+                } else {
+                    output += "<text:note-ref text:ref-name=\"\(escape(id))\" text:note-class=\"footnote\" text:reference-format=\"text\">"
+                    citationEnding = "</text:note-ref>"
+                }
+                citationDepth = 1
+                return
+            }
+        }
         let mapping: (String, String)
         switch tag {
         case "p", "div", "blockquote", "pre", "figcaption", "caption":
@@ -135,6 +174,15 @@ final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
 
     func parser(_ parser: XMLParser, didEndElement tag: String,
                 namespaceURI: String?, qualifiedName: String?) {
+        if ignoredNoteDepth > 0 { ignoredNoteDepth -= 1; return }
+        if citationDepth > 0 {
+            citationDepth -= 1
+            if citationDepth == 0 {
+                output += citationEnding
+                if closeCitationParagraph { output += "</text:p>" }
+            }
+            return
+        }
         guard let frame = frames.popLast() else { return }
         if tag == "tr" { coveredCells() }
         if !frame.element.isEmpty { output += "</\(frame.element)>" }
@@ -153,7 +201,8 @@ final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
     }
 
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-        if paragraphDepth > 0 {
+        if ignoredNoteDepth > 0 { return }
+        if paragraphDepth > 0 || citationDepth > 0 {
             output += escape(string)
         } else if !string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             appendInline(escape(string))

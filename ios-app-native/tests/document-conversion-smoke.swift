@@ -320,6 +320,7 @@ struct DocumentConversionSmoke {
         let odtPackage = try members(richODT, mime: "application/vnd.oasis.opendocument.text")
         let contentXML = odtPackage["content.xml"]!
         xml(contentXML)
+        precondition(contentXML.contains("<text:note ") && contentXML.contains("<text:note-body>"))
         precondition(contentXML.contains("<table:table>") && contentXML.contains("<text:list ") &&
             contentXML.contains("Imagen de prueba") && contentXML.contains("text:outline-level=\"2\""))
         precondition(odtPackage["META-INF/manifest.xml"]!.contains("Pictures/assets/image-1.png"))
@@ -330,6 +331,7 @@ struct DocumentConversionSmoke {
         let recoveredBook = try members(recoveredEPUB, mime: "application/epub+zip")["EPUB/book.xhtml"]!
         precondition(recoveredBook.contains("<table>") && recoveredBook.contains("<ul>") &&
             recoveredBook.contains("alt=\"Imagen de prueba\"") && recoveredBook.contains("Hinweis – opinião."))
+        precondition(recoveredBook.contains("role=\"doc-footnote\"") && recoveredBook.contains("role=\"doc-noteref\""))
         precondition(recoveredBook.contains("<ol type=\"I\">") &&
             recoveredBook.contains("<li value=\"3\">") && recoveredBook.contains("<li value=\"7\">") &&
             recoveredBook.contains("<span><strong><span><em>Déjà vu</em></span></strong></span>"))

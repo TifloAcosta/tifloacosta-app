@@ -39,7 +39,7 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
     func write(_ markup: NativeConversionMarkup.Document) throws -> Result {
         images = Dictionary(uniqueKeysWithValues: markup.assets.map { ($0.path, $0) })
         let data = Data("<body>\(markup.body)</body>".utf8)
-        let collector = NoteCollector()
+        let collector = NativeConversionNoteCollector()
         let scan = XMLParser(data: data)
         scan.shouldResolveExternalEntities = false
         scan.delegate = collector
@@ -259,34 +259,35 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
         if noteDepth == 0 && referenceDepth == 0 { append(string) }
     }
 
-    private final class NoteCollector: NSObject, XMLParserDelegate {
-        var notes: [String: String] = [:]
-        var references: [String] = []
-        private var key: String?
-        private var depth = 0
-        private var text = ""
-        func parser(_ parser: XMLParser, didStartElement tag: String, namespaceURI: String?,
-                    qualifiedName: String?, attributes: [String: String]) {
-            if Task.isCancelled { parser.abortParsing(); return }
-            if depth > 0 { depth += 1; if tag == "br" { text += "\n" }; return }
-            if tag == "a", attributes["role"] == "doc-noteref", let href = attributes["href"], href.hasPrefix("#") {
-                references.append(String(href.dropFirst()))
-            }
-            if attributes["role"] == "doc-footnote", let id = attributes["id"] {
-                key = id; depth = 1; text = ""
-            }
+}
+
+final class NativeConversionNoteCollector: NSObject, XMLParserDelegate {
+    var notes: [String: String] = [:]
+    var references: [String] = []
+    private var key: String?
+    private var depth = 0
+    private var text = ""
+    func parser(_ parser: XMLParser, didStartElement tag: String, namespaceURI: String?,
+                qualifiedName: String?, attributes: [String: String]) {
+        if Task.isCancelled { parser.abortParsing(); return }
+        if depth > 0 { depth += 1; if tag == "br" { text += "\n" }; return }
+        if tag == "a", attributes["role"] == "doc-noteref", let href = attributes["href"], href.hasPrefix("#") {
+            references.append(String(href.dropFirst()))
         }
-        func parser(_ parser: XMLParser, foundCharacters string: String) {
-            if depth > 0 { text += string }
+        if attributes["role"] == "doc-footnote", let id = attributes["id"] {
+            key = id; depth = 1; text = ""
         }
-        func parser(_ parser: XMLParser, didEndElement tag: String, namespaceURI: String?, qualifiedName: String?) {
-            guard depth > 0 else { return }
-            if tag == "p" { text += "\n" }
-            depth -= 1
-            if depth == 0, let key {
-                notes[key] = text.trimmingCharacters(in: .whitespacesAndNewlines)
-                self.key = nil
-            }
+    }
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        if depth > 0 { text += string }
+    }
+    func parser(_ parser: XMLParser, didEndElement tag: String, namespaceURI: String?, qualifiedName: String?) {
+        guard depth > 0 else { return }
+        if tag == "p" { text += "\n" }
+        depth -= 1
+        if depth == 0, let key {
+            notes[key] = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            self.key = nil
         }
     }
 }

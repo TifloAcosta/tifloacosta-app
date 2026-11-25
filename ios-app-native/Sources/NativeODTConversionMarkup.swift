@@ -24,6 +24,13 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
     private var frame: ImageFrame?
     private var expandedSpaces = 0
     private var foundText = false
+    private struct Note {
+        let id: String
+        let role: String
+        var outerBody: String?
+    }
+    private var note: Note?
+    private var notes: [String] = []
     private var body = ""
     private var metadata: [String: String] = [:]
 
@@ -46,7 +53,7 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
         let meta = ["author", "description"].compactMap { name in
             delegate.metadata[name].map { "<meta name=\"\(name)\" content=\"\(escape($0))\"/>" }
         }.joined()
-        return Data("<html\(language)><head><title>\(documentTitle)</title>\(meta)</head><body>\(delegate.body)</body></html>".utf8)
+        return Data("<html\(language)><head><title>\(documentTitle)</title>\(meta)</head><body>\(delegate.body)\(delegate.notes.joined())</body></html>".utf8)
     }
 
     func parser(_ parser: XMLParser, didStartElement element: String,
@@ -78,6 +85,18 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
             return
         }
 
+        if name == "text:note" {
+            guard note == nil else { suppressDepth = 1; return }
+            let id = attributes["text:id"] ?? "odt-generated-note-\(notes.count + 1)"
+            let role = attributes["text:note-class"] == "endnote" ? "doc-endnote" : "doc-footnote"
+            note = Note(id: id, role: role)
+            return
+        }
+        if name == "text:note-body", note != nil {
+            note?.outerBody = body
+            body = ""
+            return
+        }
         if name == "draw:frame", frame == nil { frame = ImageFrame() }
         if frame != nil {
             frame?.depth += 1
@@ -118,6 +137,11 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
                 if let count = attributes[source].flatMap(Int.init), (2...10_000).contains(count) {
                     htmlAttributes += " \(target)=\"\(count)\""
                 }
+            }
+        case "text:note-citation", "text:note-ref":
+            if let id = name == "text:note-citation" ? note?.id : attributes["text:ref-name"] {
+                tag = "a"
+                htmlAttributes = " href=\"#\(escape(id))\" role=\"doc-noteref\""
             }
         case "text:a":
             tag = "a"
@@ -182,6 +206,14 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
             }
             return
         }
+        if qualifiedName == "text:note-body", let note, let outside = note.outerBody {
+            let escape = NativeDocumentConversion.xml
+            notes.append("<aside id=\"\(escape(note.id))\" role=\"\(note.role)\">\(body)</aside>")
+            body = outside
+            self.note?.outerBody = nil
+            return
+        }
+        if qualifiedName == "text:note" { note = nil; return }
         if element == "text", namespaceURI == Self.office { inText = false; return }
         body += stack.popLast() ?? ""
     }

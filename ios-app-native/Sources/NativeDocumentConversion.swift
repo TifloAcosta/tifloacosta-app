@@ -536,8 +536,7 @@ enum NativeDocumentConversion {
         <office:automatic-styles>
         <style:style style:name="Bold" style:family="text"><style:text-properties fo:font-weight="bold"/></style:style>
         <style:style style:name="Italic" style:family="text"><style:text-properties fo:font-style="italic"/></style:style>
-        <text:list-style style:name="Bullets"><text:list-level-style-bullet text:level="1" text:bullet-char="•"/></text:list-style>
-        <text:list-style style:name="Numbered"><text:list-level-style-number text:level="1" style:num-format="1"/></text:list-style>
+        \(NativeODTConversionWriter.listStyles)
         </office:automatic-styles>
         """
         try package([

@@ -84,6 +84,8 @@ struct DocumentConversionSmoke {
         precondition(daisy["book.xhtml"]!.contains("href=\"#p0\">Volver") &&
             daisy["book.xhtml"]!.contains("Ελληνικά"))
         precondition(!daisy["book.smil"]!.contains("<audio"))
+        precondition(recoveredBook.contains("<ol type=\"I\">") &&
+            recoveredBook.contains("<li value=\"3\">") && recoveredBook.contains("<li value=\"7\">"))
         if CommandLine.arguments.count > 2 {
             let samples = URL(fileURLWithPath: CommandLine.arguments[2], isDirectory: true)
             for (name, contents) in daisy {

@@ -2,6 +2,20 @@ import Foundation
 
 /// Writes the supported subset of the shared, sanitized XHTML document as ODF.
 final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
+    private static let numberStyles = ["1": "Numbered", "I": "RomanUpper", "i": "RomanLower",
+                                       "A": "AlphabeticUpper", "a": "AlphabeticLower"]
+    static let listStyles: String = {
+        let levels = 1...10
+        let bullets = levels.map { "<text:list-level-style-bullet text:level=\"\($0)\" text:bullet-char=\"•\"/>" }
+        let styles = numberStyles.sorted(by: { $0.key < $1.key }).map { format, name in
+            let numbering = levels.map {
+                "<text:list-level-style-number text:level=\"\($0)\" style:num-format=\"\(format)\" style:num-suffix=\".\"/>"
+            }
+            return "<text:list-style style:name=\"\(name)\">\(numbering.joined())</text:list-style>"
+        }
+        return "<text:list-style style:name=\"Bullets\">\(bullets.joined())</text:list-style>" + styles.joined()
+    }()
+
     private let assets: [String: NativeConversionMarkup.Asset]
     private var output = ""
     private var frames: [(element: String, wrapsInline: Bool)] = []
@@ -60,7 +74,8 @@ final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
             mapping = ("text:h", " text:outline-level=\"\(tag.suffix(1))\"")
         case "ol", "ul":
             listStarts.append(tag == "ol" ? attributes["start"].flatMap(Int.init).flatMap { $0 > 0 ? $0 : nil } : nil)
-            mapping = ("text:list", " text:style-name=\"\(tag == "ol" ? "Numbered" : "Bullets")\"")
+            let type = Self.numberStyles[attributes["type"] ?? "1"] ?? "Numbered"
+            mapping = ("text:list", " text:style-name=\"\(tag == "ol" ? type : "Bullets")\"")
         case "li":
             let start = attributes["value"].flatMap(Int.init).flatMap { $0 > 0 ? $0 : nil } ?? (listStarts.last ?? nil)
             if !listStarts.isEmpty { listStarts[listStarts.count - 1] = nil }

@@ -10,7 +10,7 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
     private var metadataField: String?
     private var metadataValue = ""
     private var listStyle: String?
-    private var orderedListStyles: Set<String> = []
+    private var orderedListStyles: [String: String] = [:]
     private struct ImageFrame {
         var depth = 0
         var source: String?
@@ -63,7 +63,7 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
             } else if name == "text:list-style" {
                 listStyle = attributes["style:name"]
             } else if name == "text:list-level-style-number", attributes["text:level"] == "1", let listStyle {
-                orderedListStyles.insert(listStyle)
+                orderedListStyles[listStyle] = attributes["style:num-format"] ?? "1"
             }
             return
         }
@@ -92,7 +92,10 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
                 tag = "h\(level)"
             } else { tag = "p" }
         case "text:list":
-            tag = attributes["text:style-name"].map { orderedListStyles.contains($0) } == true ? "ol" : "ul"
+            if let style = attributes["text:style-name"], let format = orderedListStyles[style] {
+                tag = "ol"
+                if ["I", "i", "A", "a"].contains(format) { htmlAttributes = " type=\"\(format)\"" }
+            } else { tag = "ul" }
         case "text:list-item":
             tag = "li"
             if let start = attributes["text:start-value"].flatMap(Int.init), start > 0 {

@@ -80,6 +80,8 @@ jobs:
         env:
           CONVERSION_SAMPLES_DIR: ${{ runner.temp }}/conversion-samples
         run: bash ios-app-native/scripts/test-document-conversion.sh
+      - name: Auditar la muestra PDF con veraPDF (PDF/UA-1)
+        run: bash ios-app-native/scripts/audit-conversion-pdf-ua.sh "$RUNNER_TEMP/conversion-samples/"conversion*.pdf
       - name: Preparar credencial de catálogo público Google Drive si está configurada
         env:
           TIFLO_CINEMA_PUBLIC_DRIVE_API_KEY: ${{ secrets.TIFLO_CINEMA_PUBLIC_DRIVE_API_KEY }}
@@ -94,9 +96,7 @@ jobs:
             -scheme TifloAcostaNative -configuration Debug \
             -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath "$RUNNER_TEMP/TifloAcosta-17-build" \
-            CODE_SIGNING_ALLOWED=NO build
-      - name: Auditar la muestra PDF con veraPDF (PDF/UA-1)
-        run: bash ios-app-native/scripts/audit-conversion-pdf-ua.sh "$RUNNER_TEMP/conversion-samples/"conversion*.pdf
+            ARCHS=arm64 CODE_SIGNING_ALLOWED=NO build
       - name: Medir el ejecutable y la aplicación del simulador
         run: |
           app="$(find "$RUNNER_TEMP/TifloAcosta-17-build/Build/Products" -type d -name TifloAcostaNative.app -print -quit)"

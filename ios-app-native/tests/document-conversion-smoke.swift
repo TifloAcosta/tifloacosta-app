@@ -209,7 +209,7 @@ struct DocumentConversionSmoke {
         precondition(original == "Original intacto" && remaining == ["Largo.txt"])
 
         let xhtml = root.appendingPathComponent("Original.xhtml")
-        let png = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9Zr9kAAAAASUVORK5CYII="
+        let png = "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAAFElEQVR4nGN0C0hhgAEmBiSAmwMAMboBAgT+U/YAAAAASUVORK5CYII="
         try """
         <html lang="es"><head><title>Tabla original</title><meta name="author" content="Autora"/></head><body>
         <h2 id="tabla">Tabla</h2><ul><li>Primero</li></ul><ol type="I" start="3"><li>Romano</li><li value="7">Reinicio</li></ol>
@@ -336,12 +336,19 @@ struct DocumentConversionSmoke {
             var rootTag: CGPDFDictionaryRef?
             precondition(CGPDFDictionaryGetDictionary(structuredCG.catalog!, "StructTreeRoot", &rootTag))
             var imageAlternative = false
+            var columnScope = false
             func roles(_ node: CGPDFDictionaryRef) -> Set<String> {
                 var result: Set<String> = []
                 var entry: UnsafePointer<CChar>?
                 if CGPDFDictionaryGetName(node, "S", &entry), let entry {
                     let role = String(cString: entry)
                     result.insert(role)
+                    var attributes: CGPDFDictionaryRef?
+                    var scope: UnsafePointer<CChar>?
+                    if role == "TH", CGPDFDictionaryGetDictionary(node, "A", &attributes), let attributes,
+                       CGPDFDictionaryGetName(attributes, "Scope", &scope), let scope, String(cString: scope) == "Column" {
+                        columnScope = true
+                    }
                     var alternative: CGPDFStringRef?
                     if role == "Figure", CGPDFDictionaryGetString(node, "Alt", &alternative), let alternative,
                        let value = CGPDFStringCopyTextString(alternative), value as String == "Imagen de prueba" {
@@ -364,7 +371,7 @@ struct DocumentConversionSmoke {
                 return result
             }
             precondition(Set(["Table", "TR", "TH", "TD", "L", "LI", "LBody", "Figure", "Caption", "Note"]).isSubset(of: roles(rootTag!)))
-            precondition(imageAlternative)
+            precondition(imageAlternative && columnScope)
             var resources: CGPDFDictionaryRef?
             var xobjects: CGPDFDictionaryRef?
             let page = structuredCG.page(at: 1)!

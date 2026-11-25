@@ -95,7 +95,7 @@ static void complete_quartz_parent_tree(qpdf_data pdf, qpdf_oh tree, int pages, 
 // without replacing the leaf objects already referenced in the ParentTree.
 static void group_marked_leaves(qpdf_data pdf, qpdf_oh document, qpdf_oh leaves,
                                 const char *const *paths, size_t count, int (*cancelled)(void)) {
-    enum { max_depth = 32, max_token = 24 };
+    enum { max_depth = 32, max_token = 40 };
     char previous[max_depth][max_token] = {{0}};
     qpdf_oh parents[max_depth + 1];
     qpdf_oh children[max_depth + 1];
@@ -128,6 +128,21 @@ static void group_marked_leaves(qpdf_data pdf, qpdf_oh document, qpdf_oh leaves,
                 qpdf_oh_replace_key(pdf, item, "/Type", qpdf_oh_new_name(pdf, "/StructElem"));
                 qpdf_oh_replace_key(pdf, item, "/S", qpdf_oh_new_name(pdf, role));
                 qpdf_oh_replace_key(pdf, item, "/P", parents[depth]);
+                if (!strcmp(role, "/TH") || !strcmp(role, "/TD")) {
+                    int row_span, col_span, scope;
+                    if (sscanf(separator + 1, "%*d:%d:%d:%d", &row_span, &col_span, &scope) == 3 &&
+                            (row_span > 1 || col_span > 1 || scope)) {
+                        qpdf_oh attributes = qpdf_oh_new_dictionary(pdf);
+                        qpdf_oh_replace_key(pdf, attributes, "/O", qpdf_oh_new_name(pdf, "/Table"));
+                        if (row_span > 1)
+                            qpdf_oh_replace_key(pdf, attributes, "/RowSpan", qpdf_oh_new_integer(pdf, row_span));
+                        if (col_span > 1)
+                            qpdf_oh_replace_key(pdf, attributes, "/ColSpan", qpdf_oh_new_integer(pdf, col_span));
+                        if (scope == 1 || scope == 2)
+                            qpdf_oh_replace_key(pdf, attributes, "/Scope", qpdf_oh_new_name(pdf, scope == 1 ? "/Row" : "/Column"));
+                        qpdf_oh_replace_key(pdf, item, "/A", attributes);
+                    }
+                }
                 parents[depth + 1] = item;
                 children[depth + 1] = qpdf_oh_new_array(pdf);
                 qpdf_oh_replace_key(pdf, item, "/K", children[depth + 1]);

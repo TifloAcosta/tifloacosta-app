@@ -73,7 +73,13 @@ final class NativePDFMarkup: NSObject, XMLParserDelegate {
         let roles = isNote ? ["Note"] : layoutRoles[name] ?? []
         let unique = roles.map { role in
             identifier += 1
-            return role + ":" + String(identifier)
+            let key = role + ":" + String(identifier)
+            guard role == "TH" || role == "TD" else { return key }
+            let rowSpan = min(65534, max(1, Int(attributes["rowspan"] ?? "") ?? 1))
+            let colSpan = min(1000, max(1, Int(attributes["colspan"] ?? "") ?? 1))
+            let scopes = ["row": 1, "col": 2]
+            let scope = role == "TH" ? scopes[attributes["scope"] ?? ""] ?? 0 : 0
+            return "\(key):\(rowSpan):\(colSpan):\(scope)"
         }
         if !roles.isEmpty { semantic = true }
         stack.append(Frame(element: name, roles: unique, language: attributes["xml:lang"] ?? attributes["lang"]))

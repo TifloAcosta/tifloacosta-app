@@ -6,6 +6,25 @@ struct NativeMoviesForTheBlindWork: Identifiable {
     let id: String
     let title: String
     let parts: [NativePodcastEpisode]
+    static func fetchWorks() async throws -> [Self] {
+        var request = URLRequest(url: URL(string: "https://media.rss.com/movies-for-the-blind/feed.xml")!)
+        request.timeoutInterval = 30
+        let (bytes, response) = try await URLSession.shared.bytes(for: request)
+        guard let http = response as? HTTPURLResponse, http.statusCode == 200 else { throw URLError(.badServerResponse) }
+        var data = Data()
+        for try await byte in bytes {
+            guard data.count < 4_000_000 else { throw URLError(.dataLengthExceedsMaximum) }
+            data.append(byte)
+        }
+        let delegate = NativeRSSParser()
+        let parser = XMLParser(data: data)
+        parser.shouldResolveExternalEntities = false
+        parser.delegate = delegate
+        guard parser.parse() else { throw URLError(.cannotParseResponse) }
+        let results = NativeMoviesForTheBlindWork.group(delegate.episodes)
+        guard !results.isEmpty else { throw URLError(.cannotParseResponse) }
+        return results
+    }
     static func group(_ episodes: [NativePodcastEpisode]) -> [Self] {
         var groups: [String: [(Int, Int, NativePodcastEpisode)]] = [:]
         var titles: [String: String] = [:]
@@ -45,7 +64,10 @@ struct NativeMoviesForTheBlindScreen: View {
     @State private var search = ""
     @State private var loading = false
     @State private var failed = false
-    private let feed = URL(string: "https://media.rss.com/movies-for-the-blind/feed.xml")!
+    init(query: String = "", initialWorks: [NativeMoviesForTheBlindWork] = []) {
+        _search = State(initialValue: query)
+        _works = State(initialValue: initialWorks)
+    }
     private var filtered: [NativeMoviesForTheBlindWork] {
         works.filter { search.isEmpty || $0.title.localizedStandardContains(search) }
     }
@@ -100,23 +122,7 @@ struct NativeMoviesForTheBlindScreen: View {
         failed = false
         defer { loading = false }
         do {
-            var request = URLRequest(url: feed)
-            request.timeoutInterval = 30
-            let (bytes, response) = try await URLSession.shared.bytes(for: request)
-            guard let http = response as? HTTPURLResponse, http.statusCode == 200 else { throw URLError(.badServerResponse) }
-            var data = Data()
-            for try await byte in bytes {
-                guard data.count < 4_000_000 else { throw URLError(.dataLengthExceedsMaximum) }
-                data.append(byte)
-            }
-            let delegate = NativeRSSParser()
-            let parser = XMLParser(data: data)
-            parser.shouldResolveExternalEntities = false
-            parser.delegate = delegate
-            guard parser.parse() else { throw URLError(.cannotParseResponse) }
-            let results = NativeMoviesForTheBlindWork.group(delegate.episodes)
-            guard !results.isEmpty else { throw URLError(.cannotParseResponse) }
-            works = results
+            works = try await NativeMoviesForTheBlindWork.fetchWorks()
         } catch is CancellationError {
             return
         } catch { failed = true }

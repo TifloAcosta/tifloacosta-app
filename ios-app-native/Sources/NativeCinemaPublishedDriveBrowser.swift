@@ -9,6 +9,12 @@ import UIKit
 struct NativeCinemaPublishedDriveBrowser: View {
     let sourceID: String
     let sourceName: String
+    private let initialHit: NativeCinemaDriveSearchHit?
+    init(sourceID: String, sourceName: String, initialHit: NativeCinemaDriveSearchHit? = nil) {
+        self.sourceID = sourceID
+        self.sourceName = sourceName
+        self.initialHit = initialHit
+    }
 
     @ObservedObject private var player = NativeCinemaAudioPlayer.shared
     @ObservedObject private var network = NativeMusicConnectionPolicy.shared
@@ -188,15 +194,22 @@ struct NativeCinemaPublishedDriveBrowser: View {
             guard let root = NativeCinemaPublicDrive.publisherRoot(for: sourceID) else {
                 throw NativeCinemaPublicDriveError.invalidFolder
             }
-            path = [root]
-            loading = false
-            await loadPage(reset: true)
+            if let hit = initialHit, hit.sourceID == sourceID, hit.path.first?.id == root.id {
+                path = hit.path
+                query = hit.entry.name
+                loading = false
+                await loadPage(reset: true, initialCursor: hit.pageCursor)
+            } else {
+                path = [root]
+                loading = false
+                await loadPage(reset: true)
+            }
         } catch {
             alertMessage = error.localizedDescription
         }
     }
 
-    private func loadPage(reset: Bool) async {
+    private func loadPage(reset: Bool, initialCursor: String? = nil) async {
         guard !loading, let folder = currentFolder else { return }
         loading = true
         defer { loading = false }
@@ -204,7 +217,7 @@ struct NativeCinemaPublishedDriveBrowser: View {
             let service = try NativeCinemaPublicDrive()
             let page = try await service.listFolder(
                 folder, ancestors: Array(path.dropLast()),
-                cursor: reset ? nil : cursor
+                cursor: reset ? initialCursor : cursor
             )
             if reset {
                 entries = page.entries

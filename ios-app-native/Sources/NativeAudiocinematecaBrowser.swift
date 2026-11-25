@@ -12,6 +12,16 @@ struct NativeAudiocinematecaBrowser: View {
     @State private var limit = 100
     @State private var hasAccount = false
     @State private var accountScreen = false
+    @State private var genre = ""
+    init(query: String = "", kind: AccessibleCinemaKind = .all, language: AccessibleCinemaLanguage = .all) {
+        _query = State(initialValue: query)
+        _kind = State(initialValue: kind)
+        _language = State(initialValue: [.spain, .latino].contains(language) ? language : .all)
+    }
+    private var genres: [String] {
+        Array(Set(entries.map(\.genre).filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }))
+            .sorted { $0.localizedStandardCompare($1) == .orderedAscending }
+    }
 
     private var filtered: [NativeAudiocinematecaCatalogueIndex.Entry] {
         let categories: [AccessibleCinemaKind: String] = [
@@ -19,6 +29,7 @@ struct NativeAudiocinematecaBrowser: View {
         ]
         let needle = query.trimmingCharacters(in: .whitespacesAndNewlines)
         return entries.filter { entry in
+            (genre.isEmpty || entry.genre == genre) &&
             (kind == .all || entry.category == categories[kind]) &&
             (language == .all || (language == .spain && entry.languageCode == "1") ||
                 (language == .latino && entry.languageCode == "2")) &&
@@ -48,6 +59,12 @@ struct NativeAudiocinematecaBrowser: View {
                         Picker("Idioma", selection: $language) {
                             ForEach([AccessibleCinemaLanguage.all, .spain, .latino], id: \.self) { value in
                                 Text(MusicLocalized.message(value.rawValue)).tag(value)
+                            }
+                        }
+                        if !genres.isEmpty {
+                            Picker("Género", selection: $genre) {
+                                Text("Todos los contenidos").tag("")
+                                ForEach(genres, id: \.self) { Text($0).tag($0) }
                             }
                         }
                         let results = filtered
@@ -85,6 +102,7 @@ struct NativeAudiocinematecaBrowser: View {
         .searchable(text: $query, prompt: Text("Buscar obras"))
         .onChange(of: query) { _, _ in limit = 100 }
         .onChange(of: kind) { _, _ in limit = 100 }
+        .onChange(of: genre) { _, _ in limit = 100 }
         .onChange(of: language) { _, _ in limit = 100 }
         .task {
             hasAccount = NativeAudiocinematecaCredentials.load() != nil
@@ -110,6 +128,7 @@ struct NativeAudiocinematecaBrowser: View {
                 return
             }
             entries = result.sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
+            if !genres.contains(genre) { genre = "" }
             loaded = true
         } catch is CancellationError {
             return

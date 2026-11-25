@@ -267,3 +267,69 @@ final class NativeCinemaPublicDrive {
     }
 
 }
+
+
+// Live, bounded traversal of the publisher's configured folder, never the
+// user's entire Drive. No title or resource key is persisted.
+struct NativeCinemaDriveSearchHit: Identifiable {
+    let sourceID: String
+    let entry: NativeCinemaPublicDriveEntry
+    let path: [NativeCinemaPublicDriveEntry]
+    let pageCursor: String?
+    var id: String { sourceID + ":" + entry.id }
+}
+struct NativeCinemaDriveSearchResult {
+    var hits: [NativeCinemaDriveSearchHit] = []
+    var incomplete = false
+}
+extension NativeCinemaPublicDrive {
+    func searchPublished(sourceID: String, query: String, kind: AccessibleCinemaKind) async throws -> NativeCinemaDriveSearchResult {
+        guard let root = Self.publisherRoot(for: sourceID) else { throw NativeCinemaPublicDriveError.invalidFolder }
+        let term = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !term.isEmpty else { return NativeCinemaDriveSearchResult() }
+        var result = NativeCinemaDriveSearchResult()
+        var queue: [([NativeCinemaPublicDriveEntry], String?)] = [([root], nil)]
+        var seenFolders: Set<String> = [root.id]
+        var seenFiles = Set<String>()
+        let started = Date()
+        var pages = 0
+        while !queue.isEmpty && pages < 40 && Date().timeIntervalSince(started) < 20 && result.hits.count < 100 {
+            try Task.checkCancellation()
+            let (path, cursor) = queue.removeFirst()
+            guard let folder = path.last else { continue }
+            pages += 1
+            let page: NativeCinemaPublicDrivePage
+            do {
+                page = try await listFolder(folder, ancestors: Array(path.dropLast()), cursor: cursor)
+            } catch is CancellationError { throw CancellationError() }
+            catch {
+                if pages == 1 { throw error }
+                result.incomplete = true
+                continue
+            }
+            let category = Self.searchCategory(path: path)
+            for entry in page.entries {
+                if entry.isFolder {
+                    if seenFolders.insert(entry.id).inserted { queue.append((path + [entry], nil)) }
+                } else if entry.isSupportedMedia && (kind == .all || kind == category)
+                    && entry.name.localizedStandardContains(term) && seenFiles.insert(entry.id).inserted {
+                    result.hits.append(.init(sourceID: sourceID, entry: entry, path: path, pageCursor: cursor))
+                }
+            }
+            if let next = page.nextCursor, next != cursor { queue.insert((path, next), at: 0) }
+        }
+        result.incomplete = result.incomplete || !queue.isEmpty
+        result.hits.sort { $0.entry.name.localizedStandardCompare($1.entry.name) == .orderedAscending }
+        return result
+    }
+    private static func searchCategory(path: [NativeCinemaPublicDriveEntry]) -> AccessibleCinemaKind? {
+        for folder in path.dropFirst().reversed() {
+            let name = folder.name.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "es"))
+            if name.contains("documental") { return .documentary }
+            if name.contains("cortometraje") || name.contains("cortos") { return .short }
+            if name.contains("series") { return .series }
+            if name.contains("pelicula") || name.contains("cine por orden") { return .film }
+        }
+        return nil
+    }
+}

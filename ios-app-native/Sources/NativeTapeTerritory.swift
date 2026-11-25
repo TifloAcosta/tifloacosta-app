@@ -26,6 +26,22 @@ struct NativeTapeTerritoryCatalogue: Decodable {
     }
 
     let films: [Film]
+    static func fetchFilms() async throws -> [Film] {
+        let endpoint = URL(string: "https://tapeterritory.com/api/apple/catalog")!
+        let (data, response) = try await URLSession.shared.data(from: endpoint)
+        guard (response as? HTTPURLResponse)?.statusCode == 200,
+              response.url?.host == endpoint.host, data.count < 1_000_000 else {
+            throw URLError(.badServerResponse)
+        }
+        let catalogue = try JSONDecoder().decode(NativeTapeTerritoryCatalogue.self, from: data)
+        try Task.checkCancellation()
+        var seen: Set<String> = []
+        let described = catalogue.films.filter {
+            $0.describedStream != nil && !$0.title.isEmpty && seen.insert($0.id).inserted
+        }
+        guard !described.isEmpty else { throw URLError(.cannotParseResponse) }
+        return described
+    }
 }
 
 @MainActor
@@ -36,6 +52,10 @@ struct NativeTapeTerritoryScreen: View {
     @State private var query = ""
     @State private var failed = false
     @State private var loading = false
+    init(query: String = "", initialFilms: [NativeTapeTerritoryCatalogue.Film] = []) {
+        _query = State(initialValue: query)
+        _films = State(initialValue: initialFilms)
+    }
 
     private var matches: [NativeTapeTerritoryCatalogue.Film] {
         let term = query.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -79,7 +99,7 @@ struct NativeTapeTerritoryScreen: View {
         }
         .navigationTitle(Text(verbatim: "Tape Territory"))
         .searchable(text: $query, prompt: "Buscar plataformas y contenidos audiodescritos")
-        .task { await load() }
+        .task { if films.isEmpty { await load() } }
         .refreshable { await load() }
     }
 
@@ -88,20 +108,7 @@ struct NativeTapeTerritoryScreen: View {
         loading = true
         defer { loading = false }
         do {
-            let endpoint = URL(string: "https://tapeterritory.com/api/apple/catalog")!
-            let (data, response) = try await URLSession.shared.data(from: endpoint)
-            guard (response as? HTTPURLResponse)?.statusCode == 200,
-                  response.url?.host == endpoint.host, data.count < 1_000_000 else {
-                throw URLError(.badServerResponse)
-            }
-            let catalogue = try JSONDecoder().decode(NativeTapeTerritoryCatalogue.self, from: data)
-            try Task.checkCancellation()
-            var seen: Set<String> = []
-            let described = catalogue.films.filter {
-                $0.describedStream != nil && !$0.title.isEmpty && seen.insert($0.id).inserted
-            }
-            guard !described.isEmpty else { throw URLError(.cannotParseResponse) }
-            films = described
+            films = try await NativeTapeTerritoryCatalogue.fetchFilms()
             failed = false
         } catch {
             if !Task.isCancelled { failed = true }

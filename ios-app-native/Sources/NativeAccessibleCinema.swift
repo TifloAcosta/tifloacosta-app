@@ -70,7 +70,12 @@ private struct AccessibleCinemaSource: Identifiable {
 
     var detail: String {
         let format = isAudioOnly ? "Solo audio con audiodescripción." : "Vídeo con audiodescripción según el título."
-        let parts = [description, format, access, geographicNotice].filter { !$0.isEmpty }
+        let effectiveAccess: String
+        if id == "audesc-es" || id == "audesc-latino" {
+            effectiveAccess = NativeCinemaPublicDrive.configuredKey != nil && NativeCinemaPublicDrive.publisherRoot(for: id) != nil
+                ? "Catálogo público de Google Drive." : "Explorar carpeta de Google Drive"
+        } else { effectiveAccess = access }
+        let parts = [description, format, effectiveAccess, geographicNotice].filter { !$0.isEmpty }
         return parts.map { MusicLocalized.message($0) }.joined(separator: " ")
     }
 }
@@ -239,6 +244,14 @@ struct NativeAccessibleCinemaScreen: View {
     @State private var searchText = ""
     @State private var audiocinematecaResults: [NativeAudiocinematecaCatalogueIndex.Entry] = []
     @State private var cinemaSearchLimit = 50
+    @State private var submittedSearch: UUID?
+    @State private var remoteSearching = false
+    @State private var remoteSearched = false
+    @State private var tapeResults: [NativeTapeTerritoryCatalogue.Film] = []
+    @State private var movieResults: [NativeMoviesForTheBlindWork] = []
+    @State private var driveResults: [NativeCinemaDriveSearchHit] = []
+    @State private var unavailableSources: [String] = []
+    @State private var partialSources: [String] = []
     @AppStorage("native-cinema-language-index-v1") private var languageIndex = 0
     @AppStorage("native-cinema-content-index-v1") private var contentIndex = 0
     @AppStorage("native-cinema-import-language-index-v1") private var importLanguageIndex = 1
@@ -267,6 +280,103 @@ struct NativeAccessibleCinemaScreen: View {
             let queryMatches = query.isEmpty || [MusicLocalized.message(source.name), source.description, source.detail]
                 .contains(where: { $0.localizedStandardContains(query) })
             return languageMatches && typeMatches && queryMatches
+        }
+    }
+
+    private var spanishFilter: Bool {
+        selectedLanguage == .all || selectedLanguage == .spain || selectedLanguage == .latino
+    }
+    private var englishFilmsFilter: Bool {
+        (selectedLanguage == .all || selectedLanguage == .english) &&
+        (selectedKind == .all || selectedKind == .film)
+    }
+    private func resetRemoteSearch() {
+        submittedSearch = nil
+        remoteSearching = false
+        remoteSearched = false
+        tapeResults = []
+        movieResults = []
+        driveResults = []
+        unavailableSources = []
+        partialSources = []
+        cinemaSearchLimit = 50
+    }
+    @MainActor private func performRemoteSearch(_ request: UUID) async {
+        let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !term.isEmpty else { return }
+        remoteSearching = true
+        defer { if submittedSearch == request { remoteSearching = false; remoteSearched = !Task.isCancelled } }
+        if spanishFilter, let account = NativeAudiocinematecaCredentials.load() {
+            audiocinematecaResults = []
+            do {
+                let entries = try await NativeAudiocinematecaCache.shared.refresh(account: account)
+                guard !Task.isCancelled, submittedSearch == request else { return }
+                if let current = NativeAudiocinematecaCredentials.load(),
+                   current.username == account.username, current.password == account.password {
+                    audiocinematecaResults = entries
+                }
+            } catch { if !Task.isCancelled, submittedSearch == request { unavailableSources.append("Audiocinemateca") } }
+        }
+        guard !Task.isCancelled, submittedSearch == request else { return }
+        if englishFilmsFilter {
+            do {
+                let films = try await NativeTapeTerritoryCatalogue.fetchFilms()
+                guard !Task.isCancelled, submittedSearch == request else { return }
+                tapeResults = films.filter { $0.title.localizedStandardContains(term) || String($0.year).contains(term) }
+            } catch { if !Task.isCancelled, submittedSearch == request { unavailableSources.append("Tape Territory") } }
+            guard !Task.isCancelled, submittedSearch == request else { return }
+            do {
+                let works = try await NativeMoviesForTheBlindWork.fetchWorks()
+                guard !Task.isCancelled, submittedSearch == request else { return }
+                movieResults = works.filter { $0.title.localizedStandardContains(term) }
+            } catch { if !Task.isCancelled, submittedSearch == request { unavailableSources.append("Movies for the Blind") } }
+        }
+        for (sourceID, language, name) in [
+            ("audesc-es", AccessibleCinemaLanguage.spain, "Universo Audesc España"),
+            ("audesc-latino", AccessibleCinemaLanguage.latino, "Universo Audesc Latina")
+        ] where selectedLanguage == .all || selectedLanguage == language {
+            guard !Task.isCancelled, submittedSearch == request else { return }
+            do {
+                let result = try await NativeCinemaPublicDrive().searchPublished(sourceID: sourceID, query: term, kind: selectedKind)
+                guard !Task.isCancelled, submittedSearch == request else { return }
+                driveResults.append(contentsOf: result.hits)
+                if result.incomplete { partialSources.append(name) }
+            } catch { if !Task.isCancelled, submittedSearch == request { unavailableSources.append(name) } }
+        }
+    }
+
+    @ViewBuilder private var remoteResults: some View {
+        Section("Resultados de catálogos") {
+            ForEach(tapeResults.prefix(cinemaSearchLimit)) { film in
+                NavigationLink {
+                    NativeTapeTerritoryScreen(query: film.title, initialFilms: [film])
+                } label: { Text(film.title + " — Tape Territory (" + String(film.year) + ")") }
+            }
+            ForEach(movieResults.prefix(cinemaSearchLimit)) { work in
+                NavigationLink {
+                    NativeMoviesForTheBlindScreen(query: work.title, initialWorks: [work])
+                } label: { Text(work.title + " — Movies for the Blind") }
+            }
+            ForEach(driveResults.prefix(cinemaSearchLimit)) { hit in
+                let name = hit.sourceID == "audesc-es" ? "Universo Audesc España" : "Universo Audesc Latina"
+                NavigationLink {
+                    NativeCinemaPublishedDriveBrowser(sourceID: hit.sourceID, sourceName: name, initialHit: hit)
+                } label: { Text(hit.entry.name + " — " + name) }
+            }
+            if ([tapeResults.count, movieResults.count, driveResults.count].max() ?? 0) > cinemaSearchLimit {
+                Button("Cargar más resultados") { cinemaSearchLimit += 50 }
+            }
+            if !unavailableSources.isEmpty {
+                Text(MusicLocalized.message("Catálogos no disponibles: ") + unavailableSources.joined(separator: ", "))
+            }
+            if !partialSources.isEmpty {
+                Text(MusicLocalized.message("Búsqueda parcial: ") + partialSources.joined(separator: ", "))
+            }
+            if remoteSearched && tapeResults.isEmpty && movieResults.isEmpty && driveResults.isEmpty && matchingAudiocinemateca.isEmpty {
+                Text("No se encontraron obras en los catálogos consultados.")
+            }
+            Text("Los servicios externos se consultan en su plataforma original. La búsqueda de Google Drive es limitada y puede no abarcar todas las carpetas.")
+                .font(.footnote)
         }
     }
 
@@ -340,6 +450,7 @@ struct NativeAccessibleCinemaScreen: View {
                 TextField("Buscar plataformas y contenidos audiodescritos", text: $searchText)
                     .textInputAutocapitalization(.sentences)
                     .submitLabel(.search)
+                    .onSubmit { resetRemoteSearch(); submittedSearch = UUID() }
                     .accessibilityHint("Busca títulos y fuentes.")
                 NativeAdjustableChoice(
                     title: "Idioma de audiodescripción",
@@ -351,10 +462,19 @@ struct NativeAccessibleCinemaScreen: View {
                     choices: AccessibleCinemaKind.allCases.map(\.rawValue),
                     selectedIndex: $contentIndex
                 )
+                if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    Button("Buscar obras") { resetRemoteSearch(); submittedSearch = UUID() }
+                    if remoteSearching {
+                        ProgressView("Consultando catálogos…")
+                        Button("Cancelar") { resetRemoteSearch() }
+                    }
+                }
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
-            if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            if remoteSearched || remoteSearching { remoteResults }
+
+            if spanishFilter && !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 Section("Audiocinemateca") {
                     if NativeAudiocinematecaCredentials.load() != nil {
                         ForEach(matchingAudiocinemateca.prefix(cinemaSearchLimit)) { item in
@@ -369,7 +489,7 @@ struct NativeAccessibleCinemaScreen: View {
                         }
                     }
                     NavigationLink("Explorar catálogo audiodescrito") {
-                        NativeAudiocinematecaBrowser()
+                        NativeAudiocinematecaBrowser(query: searchText, kind: selectedKind, language: selectedLanguage)
                     }
                 }
             }
@@ -508,7 +628,7 @@ struct NativeAccessibleCinemaScreen: View {
                             .foregroundStyle(TifloVisual.secondaryText)
                             .fixedSize(horizontal: false, vertical: true)
                         if ["audesc-es", "audesc-latino"].contains(source.id) {
-                            if NativeCinemaPublicDrive.configuredKey != nil {
+                            if NativeCinemaPublicDrive.configuredKey != nil && NativeCinemaPublicDrive.publisherRoot(for: source.id) != nil {
                                     NavigationLink("Explorar catálogo audiodescrito") {
                                         NativeCinemaPublishedDriveBrowser(
                                             sourceID: source.id,
@@ -555,7 +675,7 @@ struct NativeAccessibleCinemaScreen: View {
                         }
                         if source.id == "audiocinemateca" {
                             NavigationLink("Explorar catálogo audiodescrito") {
-                                NativeAudiocinematecaBrowser()
+                                NativeAudiocinematecaBrowser(query: searchText, kind: selectedKind, language: selectedLanguage)
                             }
                             .frame(minHeight: 44, alignment: .leading)
                         }
@@ -583,7 +703,12 @@ struct NativeAccessibleCinemaScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("Multicines Accesibles")
-        .onChange(of: searchText) { _, _ in cinemaSearchLimit = 50 }
+        .onChange(of: searchText) { _, _ in resetRemoteSearch() }
+        .onChange(of: languageIndex) { _, _ in resetRemoteSearch() }
+        .onChange(of: contentIndex) { _, _ in resetRemoteSearch() }
+        .task(id: submittedSearch) {
+            if let request = submittedSearch { await performRemoteSearch(request) }
+        }
         .task {
             audiocinematecaResults = []
             if let account = NativeAudiocinematecaCredentials.load(),
@@ -593,6 +718,7 @@ struct NativeAccessibleCinemaScreen: View {
                 audiocinematecaResults = entries
             }
         }
+        .onAppear { if NativeAudiocinematecaCredentials.load() == nil { audiocinematecaResults = [] } }
         .fileImporter(
             isPresented: $selectingPersonalFiles,
             allowedContentTypes: [.audio, .movie],

@@ -1476,3 +1476,12 @@
 "No se pudo abrir Tape Territory." = "Could not open Tape Territory.";
 "Escuchar en línea" = "Listen online";
 "Cómo inscribirse" = "How to sign up";
+
+"Género" = "Genre";
+"Consultando catálogos…" = "Searching catalogues…";
+"Resultados de catálogos" = "Catalogue results";
+"Catálogos no disponibles: " = "Unavailable catalogues: ";
+"Búsqueda parcial: " = "Partial search: ";
+"No se encontraron obras en los catálogos consultados." = "No works were found in the catalogues searched.";
+"Los servicios externos se consultan en su plataforma original. La búsqueda de Google Drive es limitada y puede no abarcar todas las carpetas." = "External services are searched on their original platform. Google Drive search is limited and may not cover all folders.";
+"Catálogo público de Google Drive." = "Public Google Drive catalogue.";

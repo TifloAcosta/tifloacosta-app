@@ -12,12 +12,26 @@ enum NativeRTFConversionMarkup {
         var next: Int
     }
 
-    private static func listTag(_ list: NSTextList) -> String? {
+    private struct ListKind {
+        let tag: String
+        let type: String?
+    }
+
+    private static func listKind(_ list: NSTextList) -> ListKind? {
         let first = list.marker(forItemNumber: 1)
         let second = list.marker(forItemNumber: 2)
-        if first == second, !first.isEmpty { return "ul" }
-        if ["1", "1.", "1)"].contains(first), ["2", "2.", "2)"].contains(second) { return "ol" }
-        return nil
+        if first == second, !first.isEmpty { return ListKind(tag: "ul", type: nil) }
+        func token(_ marker: String) -> String {
+            marker.trimmingCharacters(in: CharacterSet(charactersIn: " .()\t"))
+        }
+        switch (token(first), token(second)) {
+        case ("1", "2"): return ListKind(tag: "ol", type: nil)
+        case ("I", "II"): return ListKind(tag: "ol", type: "I")
+        case ("i", "ii"): return ListKind(tag: "ol", type: "i")
+        case ("A", "B"): return ListKind(tag: "ol", type: "A")
+        case ("a", "b"): return ListKind(tag: "ol", type: "a")
+        default: return nil
+        }
     }
 
     static func xhtml(_ data: Data, title: String) throws -> Data? {
@@ -36,8 +50,8 @@ enum NativeRTFConversionMarkup {
             let paragraph = text.paragraphRange(for: NSRange(location: offset, length: 0))
             let style = original.attribute(.paragraphStyle, at: paragraph.location, effectiveRange: nil) as? NSParagraphStyle
             let nativeLists = style?.textLists ?? []
-            let tags = nativeLists.compactMap(listTag)
-            let supportedLists = tags.count == nativeLists.count ? nativeLists : []
+            let kinds = nativeLists.compactMap(listKind)
+            let supportedLists = kinds.count == nativeLists.count ? nativeLists : []
             let shared = zip(levels, supportedLists).prefix { $0.0.list === $0.1 }.count
             while levels.count > shared {
                 body += "</li></\(levels.removeLast().tag)>"
@@ -47,10 +61,12 @@ enum NativeRTFConversionMarkup {
             }
             for index in shared..<supportedLists.count {
                 let list = supportedLists[index]
-                let tag = tags[index]
+                let kind = kinds[index]
+                let tag = kind.tag
                 let start = max(1, list.startingItemNumber)
                 let attribute = tag == "ol" && start != 1 ? " start=\"\(start)\"" : ""
-                body += "<\(tag)\(attribute)><li>"
+                let type = kind.type.map { " type=\"\($0)\"" } ?? ""
+                body += "<\(tag)\(attribute)\(type)><li>"
                 levels.append(ListLevel(list: list, tag: tag, next: start))
             }
             var content = paragraph

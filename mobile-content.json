@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T14:59:58.682Z",
+  "generatedAt": "2026-11-25T15:38:56.431Z",
   "resources": [
     {
       "kind": "resource",
@@ -5646,51 +5646,202 @@
   "news": [
     {
       "kind": "news",
-      "id": "9to5mac-90c2599b6327770c:en",
-      "sourceId": "9to5mac-90c2599b6327770c",
+      "id": "9to5mac-fe949681be5d862a:en",
+      "sourceId": "9to5mac-fe949681be5d862a",
       "lang": "en",
-      "title": "PrismML’s Bonsai 2.5 brings better coding and tool use to on-device AI",
-      "summary": "Back in July, PrismML claimed its roughly 4 GB, 1-bit Bonsai 27B was the first AI model of its size to run on an iPhone. Now PrismML has released Ternary Bonsai 2.5 27B, an update to the model it introduced in September. more…",
-      "body": "Back in July, PrismML claimed its roughly 4 GB, 1-bit Bonsai 27B was the first AI model of its size to run on an iPhone. Now PrismML has released Ternary Bonsai 2.5 27B, an update to the model it introduced in September.\n\nThe startup also drew attention when CEO Babak Hassibi told CNBC that Apple was evaluating its technology, as we reported at the time .\n\nThe new model is based on Qwen3.8 27B and keeps the same 5.9 GB footprint in its most compact format. This time, PrismML focused on helping the model handle longer tasks, including figuring out what to do when a tool returns an unexpected result or a step fails.\n\nBonsai 2.5 improved on six of the seven benchmarks PrismML highlights . Its SWE-bench Verified coding score rose from 60.8 to 75.6, while its AppWorld tool-use score jumped from 51.2 to 90.5. LiveCodeBench v6 dipped from 83.8 to 83.0.\n\nWhat could that look like on a Mac? A coding assistant could inspect a private project, make a change, run the tests, and use the results to revise its fix. A document app could summarize a folder of sensitive files while keeping the processing on the device.\n\nPrismML says Bonsai 2.5 runs on Mac, iPhone, and iPad through MLX. Its Apple silicon package is about 8.9 GB, and the model card walks through setup on a Mac . The weights are available for free under Apache 2.0.\n\nFor a closer look at how the model was compressed and tested, read PrismML’s technical white paper .\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable",
+      "title": "iOS 27.3 introduces design changes for these Apple apps",
+      "summary": "iOS 27.3 includes many new features for Apple’s built-in apps, but it also introduces design changes on the iPhone across Calendar, Safari, Music, and more. Here’s what’s new. more…",
+      "body": "iOS 27.3 includes many new features for Apple’s built-in apps, but it also introduces design changes on the iPhone across Calendar, Safari, Music, and more. Here’s what’s new.\n\nApple is always iterating on the design of its software. While major overhauls like iOS 26’s Liquid Glass don’t come along often, the company makes smaller design changes all the time via software updates. In iOS 27.3, which will launch to all users next month , Apple has design changes coming to four popular apps: Health, Calendar, Safari, and Music.\n\nThe Health app gets the biggest design changes .\n\nAs seen above, Health introduces brand new Insights, Longevity, and Browse tabs that replace the previous options and include a variety of fresh UI elements like a top navigation row, personalized prompts and coaching, educational videos, and a lot more.\n\nApple Calendar’s design updates focus on making key buttons more reachable one-handed.\n\nAs the side-by-side above shows, the buttons for search and creating a new event have moved out of the top-right corner and into the bottom of the screen.\n\nCalendar also now shows the year at the top of the screen next to the current month, and has updated the ‘Today’ button to show the current date instead.\n\nSafari introduces an optional new design for tabs: Vertical Tabs. You can enable these inside Settings ⇾ Apps ⇾ Safari for a different approach to tabs across iPhone, iPad, and Mac. Here’s an example of vertical tabs on iPhone Duo.\n\nVertical Tabs won’t be for everyone, but they’ve proven popular in other browsers, so it’s great to see Safari add the option.\n\nApple Music has a subtle but beautiful design update in iOS 27.3 when viewing lyrics in landscape mode.\n\nSong artwork is now able to break the constraints of a square and blend seamlessly into the scrolling lyrics view. Here are examples from Beta Profiles on X :\n\nThis lyrics view was previously available on iPhone Duo, but now it’s coming to all iPhones.\n\nWhat do you think of iOS 27.3’s design updates in apps? Let us know in the comments.",
       "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/24/prismmls-bonsai-2-5-brings-better-coding-and-tool-use-to-on-device-ai/",
-      "publishedAt": "2026-11-25T01:08:37.000Z",
+      "originalUrl": "https://9to5mac.com/2026/11/25/ios-27-3-introduces-design-changes-for-these-apple-apps/",
+      "publishedAt": "2026-11-25T15:32:08.000Z",
       "categories": [
         "apple",
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-8580c524f0d6da9c:en",
+      "sourceId": "the-verge-8580c524f0d6da9c",
+      "lang": "en",
+      "title": "Amazon is reportedly in talks to end Muse AI shopping block",
+      "summary": "Amazon has held talks about letting Meta's Muse AI agent shop on its online marketplace, according to a report from Fortune. The discussions, which could end Amazon's block on Muse, reportedly center on the kinds of products the AI agent recommends and the potential impact on the ecommerce giant's advertising revenue. As reported by Fortune, […]",
+      "body": "Amazon has held talks about letting Meta's Muse AI agent shop on its online marketplace, according to a report from Fortune . The discussions, which could end Amazon's block on Muse , reportedly center on the kinds of products the AI agent recommends and the potential impact on the ecommerce giant's advertising revenue.\n\nAs reported by Fortune , Amazon is concerned that it could lose advertising revenue by allowing Muse on its site, since it depends on actual humans seeing ads across its online marketplace. It's also reportedly worried about the quality of the product search results that Muse will present to users, as well as whether the AI age …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1042071/meta-amazon-muse-ai-shopping-discussions",
+      "publishedAt": "2026-11-25T14:12:33.000Z",
+      "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
       ]
     },
     {
       "kind": "news",
-      "id": "the-verge-1ae969345ae72a70:en",
-      "sourceId": "the-verge-1ae969345ae72a70",
+      "id": "9to5mac-ffb050d7f27c2536:en",
+      "sourceId": "9to5mac-ffb050d7f27c2536",
       "lang": "en",
-      "title": "US financial crimes bureau discloses ‘cybersecurity incident’",
-      "summary": "The Financial Crimes Enforcement Network (FinCEN) disclosed on Tuesday that it's investigating a \"cybersecurity incident.\" The bureau, which is part of the Treasury Department, said it's looking into an \"incident that resulted in unauthorized access to a limited subset of its systems.\" It hasn't offered any information about the full scope or source of the […]",
-      "body": "The Financial Crimes Enforcement Network (FinCEN) disclosed on Tuesday that it's investigating a \"cybersecurity incident.\" The bureau, which is part of the Treasury Department, said it's looking into an \"incident that resulted in unauthorized access to a limited subset of its systems.\" It hasn't offered any information about the full scope or source of the breach, but FinCEN has taken some systems offline as a precaution.\n\nThe news comes hours after The New York Times reported that the Central Intelligence Agency and Office of the Director of National Security discovered a breach of an open source intelligence system, exposing unclassified i …\n\nRead the full story at The Verge.",
+      "title": "Apple has iPads running macOS already, but don’t get too excited",
+      "summary": "With iPads running the same chips as Macs , many have wished Apple would give us the option of running macOS on them instead of the somewhat clunky iPadOS windowing system. Apple’s previous arguments against converging devices have been somewhat weakened by the launch of the touchscreen MacBook Pro . A new report says that Apple already has iPads running macOS internally, and that work on a giant iPad continues, but don’t hold your breath for a public launch of either … more…",
+      "body": "With iPads running the same chips as Macs , many have wished Apple would give us the option of running macOS on them instead of the somewhat clunky iPadOS windowing system. Apple’s previous arguments against converging devices have been somewhat weakened by the launch of the touchscreen MacBook Pro .\n\nA new report says that Apple already has iPads running macOS internally, and that work on a giant iPad continues, but don’t hold your breath for a public launch of either …\n\nAs iPad hardware has grown more powerful over the years, the software has struggled to keep up. We saw split-screen capabilities first, with full windowing finally coming to the devices in iPadOS 26 last year.\n\nThe UI is still rather clunky compared to macOS, however, leading a significant number of people to wish that Apple simply offered the option of using the more powerful operating system on its tablet devices.\n\nIn a podcast Q&A, Bloomberg’s Mark Gurman says that Apple is already doing this internally, but there’s no sign of any plans to make it available outside the company.\n\nApple has iPads internally running macOS, and they’ve had that for some time. The fact that they have the underlying architecture of Apple Silicon that’s the same on the iPad and the Mac gives them the flexibility in order to test these types of things.\n\nIn terms if they’re actually going to do it – would they bring macOS to the iPad itself – at this point I don’t think that’s going to happen anytime soon. I’ve checked into this and there’s no ongoing operating system project right now in terms of a brand new operating system for the iPad – there is no work being done to consumerize macOs on the iPad.\n\nGurman says Apple seems set to continue to make piecemeal changes over time to bring iPad capabilities closer to those of the Mac but is showing no signs of full convergence.\n\nHe reiterated that work on a long-rumored giant-sized folding iPad continues.\n\nThe other thing I want to say is that I’m really excited for this potential of Project J312. That is, this giant 19-inch, 20-inch foldable iPad. And it’s basically like a gigantic iPhone Duo with no display on the outside.\n\nHowever, he says there’s no guarantee it will ever launch, saying the timings have already slipped from 2027 through 2028 to 2029, but both cost and yield issues may still kill the project. If it does launch, it’s expected to cost anywhere from $3,000 to $5,000.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/25/apple-has-ipads-running-macos-already-but-dont-get-too-excited/",
+      "publishedAt": "2026-11-25T13:40:50.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-55ea52e4c8db6be1:en",
+      "sourceId": "the-verge-55ea52e4c8db6be1",
+      "lang": "en",
+      "title": "Tapo’s new indoor security camera includes a touchscreen for video calls",
+      "summary": "TP-Link's Tapo smart home brand announced a new indoor security camera that can help keep an eye on your house while you're away or connect you to family and friends while you're at home. The C825 upgrades a 2K pan-and-tilt camera with a 4-inch touchscreen, so when it's not watching for intruders or misbehaving pets, […]",
+      "body": "TP-Link's Tapo smart home brand announced a new indoor security camera that can help keep an eye on your house while you're away or connect you to family and friends while you're at home. The C825 upgrades a 2K pan-and-tilt camera with a 4-inch touchscreen, so when it's not watching for intruders or misbehaving pets, it can be used to make hands-free video calls.\n\nThe Tapo C825 is available starting today for $149.99. That's a little expensive for a 2K camera, but its tracking capabilities could make up for it not being 4K. Using a rotating base, the C825 can pan 360 degrees while its camera module on top can tilt up and down up to 156 degre …\n\nRead the full story at The Verge.",
       "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/policy/1041957/fincen-treasury-cybersecurity-incident",
-      "publishedAt": "2026-11-25T01:00:00.000Z",
+      "originalUrl": "https://www.theverge.com/tech/1041221/tapo-c825-security-indoor-2k-camera-video-calls-tracking-pan-tilt",
+      "publishedAt": "2026-11-25T13:30:00.000Z",
       "categories": [
         "tecnologia-general"
       ]
     },
     {
       "kind": "news",
-      "id": "9to5mac-92b55f5cd8dcb56b:en",
-      "sourceId": "9to5mac-92b55f5cd8dcb56b",
+      "id": "engadget-b5cc5fd186f8dd5f:en",
+      "sourceId": "engadget-b5cc5fd186f8dd5f",
       "lang": "en",
-      "title": "Apple Mail added four convenient new features in iOS 27",
-      "summary": "iOS 27 brought new features to Apple Wallet , Maps , Notes , Messages , and more —and it includes key upgrades for the Mail app too. Here’s everything new for Apple Mail in iOS 27. more…",
-      "body": "iOS 27 brought new features to Apple Wallet , Maps , Notes , Messages , and more —and it includes key upgrades for the Mail app too. Here’s everything new for Apple Mail in iOS 27.\n\nIf you have much history using Apple Mail, you’ll know that its search feature hasn’t always been the best. But in iOS 27, search has gotten a big upgrade .\n\nFrom Apple’s website :\n\nMore relevant search in Mail. A new ranking system brings the most relevant results to the top to help you find what you need right away — even if it’s buried deep in your inbox.\n\nI can’t count the number of times search has previously failed to find messages that I knew existed. So far in my usage, iOS 27 has fixed that.\n\nSuggestions at the top of messages have been in Apple Mail for years. But in iOS 27, they have a new, more flexible design and expand to support third-party apps.\n\nWhen Mail detects that you might want to take action on the contents of an email, a suggestion might appear at the top of the message. These include: directions in Maps, creating events in Calendar, tracking a shipment with Apple Wallet, and more.\n\nIn iOS 27, third-party apps can offer suggestions too. And when multiple apps are available with suggested actions, there’s a drop-down menu to show you all available options.\n\nSmart Reply is a keyboard feature that automatically surfaces reply options you can utilize with a single tap.\n\nIn iOS 27, the next generation of Apple Intelligence comes with improvements to Smart Reply.\n\nApple says that Smart Reply “can now draw on a user’s personalized writing style.” Essentially, rather than offering fairly generic reply options, now Smart Reply suggestions will actually sound a lot more like you.\n\nApple has added ‘Ask Siri’ buttons throughout Apple Mail, just like the rest of its system apps. And Siri AI brings a bunch of new powers for Mail users.\n\nOne example I’ve seen several times on social media is that you can ask Siri to delete all messages from a specific sender that’s spamming you.\n\nBeyond new features, Apple also says that iOS 27 makes the Mail app run better than ever thanks to bug fixes and performance improvements. Here are some specific examples given :\n\nWhich new Apple Mail features in iOS 27 are most exciting to you? Let us know in the comments.",
+      "title": "Acer Predator Atlas 8 review: Potent performance at a slightly better price",
+      "summary": "Thanks to its Intel Arc G3 Extreme chip, the Acer Predator Atlas 8 delivers 95 percent of the performance you get from MSI's Claw 8 EX AI+ for $350 less.",
+      "body": "Thanks to its Intel Arc G3 Extreme chip, you get top-notch graphics for $350 less than its closest rival.\n\nModern handheld PCs started out as complimentary devices, compact systems designed to help you game on the go when you didn't have access to your beefy setup at home. But as the category has matured, we've seen manufacturers pursue higher tiers of performance. This culminated most recently in systems like MSI's Claw 8 EX AI+ , which delivers serious graphics power along with an equally serious price of $1,800. But now, Acer is trying to undercut the current framerate champ with the Predator Atlas 8, equipping it with the exact same chip used in MSI's machine, but for $350 less. The result is a compelling package that delivers on many of the same highs while easing the burden on your wallet.\n\nWith the Predator Atlas 8, Acer hasn't strayed too far from the basic template we've seen on so many other portable PCs. The middle of the system is dominated by a large 8-inch LCD TFT display with a 120Hz refresh and respectable 500-nit brightness. On the outside you get TMR analog sticks along with an Xbox-style button layout. I must admit I'm not a huge fan of Acer's circular D-Pad as it's a bit mushy and doesn't feel super precise. But if you're not playing fighting games or similar titles, it's more than serviceable for navigating menus. And if I'm really nitpicking, colors from the Predator's TFT screen aren't quite as rich as what you get from MSI's machine, but it's the kind of difference that you only really notice when you look at the two systems side by side.\n\nAround back, Acer included a pair of rear paddles, two shoulder buttons and analog Hall-effect triggers with plenty of travel — the latter of which are great for racing games. Along the top edge of the system you get all of the Predator Atlas 8's ports, which includes dual USB-C jacks with support for Thunderbolt 4, a microSD card reader for expandable storage, a 3.5mm audio jack and a power button with a built-in fingerprint reader.\n\nAll told, it's a pretty standard setup, though the Predator does lack a USB-A port like you get on the MSI Claw 8 EX AI+. I also noticed that while Acer's dual two-watt speakers can get surprisingly loud, audio becomes distorted at higher volumes (above 50 TK) that results in a crackly or crunchy sound. That said, the speakers are so punchy, I found that I never really needed to turn them up that high. Unless you're trying to DJ a house party with this thing, you might not even notice.\n\nThe real star of the Atlas 8 is its Intel Arc G3 Extreme processor, which is the exact same chip used in the MSI Claw 8 EX AI+. The main difference is that Acer's handheld comes with 512GB of storage instead of 1TB and tops out with 24GB of shared memory (compared to 32GB on the MSI). This discrepancy almost entirely accounts for the price gap between the two systems. But for people striving for top-notch performance while trying to save a few bucks, the framerate delta in games isn't as pronounced as you might think.\n\nWhen I tested this out in Cyberpunk 2077 at 35 watts on FHD, medium graphics and XeSS set to performance, the Predator Atlas 8 hit 88 fps, which is barely more than five percent lower than the 95 fps I got from the Claw 8 EX AI+. But it's important to note that this was using Acer's highest performance mode. When I set the system to 15 watts (which you might do when playing on battery only), the Predator and the Claw were essentially dead even in Returnal at FHD and medium graphics (60 fps for the Acer vs 59 fps for the MSI). This means that if you're trying to decide between the two, you really need to consider how you plan on using your handheld and what types of games you'll be playing.\n\nSimilar to other high-end Windows handhelds, the Atlas 8 comes with Microsoft's Xbox experience. This software allows you to boot into a dedicated UI for gaming instead of needing to deal with the traditional desktop OS. This also makes it super easy to download all of the most popular launchers and storefronts like Epic, Steam, Battle.net and more, and because it's Windows underneath, you get better compatibility than what you get from SteamOS-powered portables. That said, if you're the type to travel with a portable monitor, keyboard and mouse, you can still switch over to the classic Windows interface to get some work done too.\n\nThe Atlas 8 is powered by an 80WHr battery that provides ample longevity, though it can vary quite a bit depending on what you're playing. However, without even doing anything to boost its longevity, I was able to play World of Warcraft: Forever at FHD on medium settings for an hour and 45 minutes on a single charge while still keeping frame rates consistently above 90. On the flipside, when I played a less demanding title like Warhammer Survivors, Acer's machine had more battery life than I knew what to do with: It lasted for more than three hours before needing to be plugged in. Notably, both of those games were played using the handheld's 30-watt Balanced performance mode, so if you're not afraid to mess around with its settings, there's a lot of room to tweak this thing to get even longer untethered gaming sessions.\n\nI'm still not sure how I feel about PC handhelds that cost well above $1,000. For me, that's just a ton of money to drop on a system that can't multitask as well as a similarly priced gaming laptop. However, for mobile gaming enthusiasts trying to find the sweet spot between price, performance and portability, Acer has carved out an interesting niche with the Predator Atlas 8.\n\nAt $1,450, it costs $350 less than the MSI Claw 8 EX AI+, while sporting the exact same processor and delivering essentially 95 percent of the performance. That said, Acer's more approachable pricing leaves the Predator with a bit less RAM and storage, though having a microSD card slot provides a workaround for the latter. There are also some minor differences, like the lack of a USB-A port, a slightly less colorful TFT display and speakers that sound a bit wonky at high volumes. But these shortcomings could very well be a worthwhile trade-off for anyone looking for peak handheld gaming performance without completely fragging their budget.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2326961/acer-predator-atlas-8-review/",
+      "publishedAt": "2026-11-25T13:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-9e5cf74590f55758:en",
+      "sourceId": "techcrunch-9e5cf74590f55758",
+      "lang": "en",
+      "title": "The questions Jensen Huang and Nvidia will still have to answer about Megaspeed",
+      "summary": "Huang still faces questions from Congress and his own board about his romantic relationship with an alleged chip smuggler.",
+      "body": "Jensen Huang’s return as CEO to Nvidia hasn’t eased the scrutiny the company confronts. The chipmaker still faces multiple inquiries into allegations that its advanced GPUs were smuggled into China by a customer, the Singapore-based data center operator Megaspeed, in violation of US export rules designed to slow China’s development of frontier AI models.\n\nThe central question for investigators is what Nvidia knew about where those chips ended up, and whether Huang’s affair with a Megaspeed executive gave the company reason to doubt Megaspeed’s assurances. Huang’s return doesn’t settle that. US Attorney General Todd Blanche has suggested Nvidia isn’t a target of an investigation, but California’s attorney general and Congress are pressing ahead, and the Securities & Exchange Commission is reportedly investigating, too.\n\nThe US government opened an investigation into Megaspeed in 2024 and requested information from Nvidia about its billions of dollars in sales to the company, concerned that some of the chips Megaspeed bought for data center projects in Malaysia were in fact being diverted to China. Singapore also began investigating similar allegations in 2025. Megaspeed has denied any wrongdoing.\n\nDiversion of this kind would be a fairly routine issue for a company like Nvidia, whose in-demand chips are the targets of smugglers and re-sellers. When it comes to compliance and liability for export control violations, Nvidia and other chip sellers need assurances that the end users of their chips are obeying the rules. However, they also cannot ignore other information that might call the reliability of those assurances into question, export control attorneys told TechCrunch.\n\nAnd that’s why Jensen Huang’s affair with Megaspeed executive Alice Huang was such a problem for Nvidia, likely even more so than her alleged role as a source for Chinese intelligence agencies. If Nvidia personnel, from lower-level employees up to the CEO, had reason to believe that statements from Megaspeed weren’t reliable, the attorneys said, that would increase the company’s legal risk.\n\n“Government investigators likely would want to know, notwithstanding whatever formal assurances were exchanged between the parties, what anyone at Nvidia actually knew about the end use and end users of the chips,” Dan Fisher-Owens, an attorney at the firm Berliner Corcoran & Rowe, told TechCrunch last week.\n\nThe concern Nvidia’s board faced when it decided to oust Huang is that he knew more about what Megaspeed was doing with Nvidia’s products than was reflected in any of the compliance statements. The Wall Street Journal reported that Alice Huang and her husband, Kang Wei, were part of a network of businesses that funneled chips to a company in Shanghai. Kang also reportedly introduced his wife to Jensen Huang, whom he had known for a decade.\n\nOn Monday, the US government added Megaspeed and its affiliates to a list of companies restricted from US trade due to national security concerns. The US also issued new rules last week barring large data centers that purchase US chips from serving customers in China and other nations seen as problematic by the US government. Nvidia, meanwhile, said it would stop selling licensed chips to China, and laid out plans to hire its first compliance officer and create a new board committee focused on export controls.\n\nNvidia’s board said it reinstated Huang on Monday after receiving “input from senior levels of the United States government” that left it confident his return posed no national security risk. President Donald Trump later said he called into the meeting to give them that assurance.\n\nIn a news conference Tuesday, Blanche said that Nvidia was “a good corporate citizen” and suggested it is not the target of an investigation, but Blanche declined to answer questions about the government’s investigation into Megaspeed, which the Justice Department said was ongoing as recently as last week.\n\n“When you say the export investigation is still ongoing, I don’t know what you’re talking about,” Blanche said.\n\nOther authorities may be more demanding. Nvidia faces investigations by California Attorney General Rob Bonta and, reportedly , the SEC, both tied to its corporate disclosures. While many details of the investigation still aren’t known, short sellers complained about the company’s decision to stop breaking out its exports to Singapore in financial filings after journalists raised concerns about chip diversion.\n\nMembers of Congress from both parties say they want answers from Nvidia, with many citing alarm about China and some questioning the White House’s role in Huang’s return. Three committees in the House of Representatives will privately interview Huang and Nvidia’s top lawyer, Tim Teter, next week. Teter reportedly intervened in the Department of Commerce’s investigation of Megaspeed last year.\n\n“We remain committed to getting answers on the mass smuggling of Nvidia products, their diversion for Chinese military purposes, and their key role in advancing our foremost adversary’s AI capabilities,” the Republican chairs of House committees focused on foreign affairs, intelligence, and China said in a joint statement.\n\nRep. Brian Mast, the chair of the House Foreign Affairs Committee, has also demanded that the Department of Commerce share extensive data regarding its investigation into chip smuggling, including by Megaspeed and its affiliates.\n\nThe Senate Banking Committee will also question Huang in a public hearing on Dec. 3.\n\n“Mr. Huang, Nvidia executives, and the company’s board still owe Congress answers about the company’s compliance with U.S. export controls,” Senator Elizabeth Warren, the ranking Democratic member on the committee, said in a statement. “The Trump Administration also needs to explain to Congress what ‘input’ was given and by which senior officials in the United States government to support his reinstatement.”",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/25/the-questions-jensen-huang-and-nvidia-will-still-have-to-answer-about-megaspeed/",
+      "publishedAt": "2026-11-25T13:00:00.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-5c91bd78a4b25969:en",
+      "sourceId": "9to5mac-5c91bd78a4b25969",
+      "lang": "en",
+      "title": "An annoying ‘mistake’ in macOS was actually prep for the latest MacBook Pro",
+      "summary": "You may remember that Apple made a seeming mistake in the user interface for macOS 26 , meaning that attempts to resize windows would often fail . The reason for this has now become clear, and Apple has done something both fun and clever in macOS 27 to resolve it … more…",
+      "body": "You may remember that Apple made a seeming mistake in the user interface for macOS 26 , meaning that attempts to resize windows would often fail . The reason for this has now become clear, and Apple has done something both fun and clever in macOS 27 to resolve it …\n\nI was one of a number of people to note that trying to grab the corner of a window in macOS Tahoe in order to resize it would oft e n fail . Developer Norbert Heger pointed out this is because Apple changed the radius of the corners without changing the grabbable area.\n\nIt turns out that my initial click in the window corner instinctively happens in an area where the window doesn’t respond to it. The window expects this click to happen in an area of 19 × 19 pixels, located near the window corner. If the window had no rounded corners at all, 62% of that area would lie inside the window. But due to the huge corner radius in Tahoe, most of it – about 75% – now lies outside the window.\n\nAt the time, the radius change itself looked like an inexplicable mistake on Apple’s part, and the company did revert it. However, Macworld’s Michael Simon appears to have discovered the reason for the original change.\n\nThe new rounder corners on the MacBook Pro with PROLED XDR are basically a perfect match for the macOS 26 radii.\n\nSo if you move a window to the corner of the new machine, it would fit perfectly. However, since Apple reverted the corner radius, it would no longer do so. The company solved this by a clever UI transition.\n\nWhat’s happening there is Golden Gate’s 20-point corner radius is subtly and gradually expanding when It approaches the bottom corner of the screen to match the exact corner of the display, which is much larger. I can’t be certain it’s exactly 26-point, but it sure looks like it to me. The effect is incredible. I’ve watched it like 20 times and I can barely see it changing, yet when it reaches the corner it’s perfectly expanded to match.\n\nYou can see this illustrated by a GIF in the Macworld piece . While the original change annoyed me, Apple’s solution is the perfect example of the company sweating the details.",
       "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/24/heres-everything-new-for-apple-mail-in-ios-27/",
-      "publishedAt": "2026-11-24T23:56:12.000Z",
+      "originalUrl": "https://9to5mac.com/2026/11/25/an-annoying-mistake-in-macos-was-actually-prep-for-the-latest-macbook-pro/",
+      "publishedAt": "2026-11-25T12:00:57.000Z",
       "categories": [
         "apple",
         "tecnologia-general",
-        "apps-accesibles"
+        "windows"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-e8d1c0d791fbbdaa:en",
+      "sourceId": "ars-technica-e8d1c0d791fbbdaa",
+      "lang": "en",
+      "title": "AI may soon change what it means to be a theoretical physicist",
+      "summary": "Frontier AI is already solving problems that once took top physicists a full day.",
+      "body": "About six months ago, Suvrat Raju, a professor of theoretical physics at the International Centre for Theoretical Sciences in Bengaluru, India, asked a frontier AI model to solve a physics problem. He didn’t ask because he needed to know the answer. He had actually solved this particular problem already. But he had never published the solution—which made it a perfect question to test how good AI was at physics.\n\nLLMs have been trained on the whole Internet, so if a physics problem has been discussed online, it’s likely the model already knows about it and may have memorized the answer. So a fair test of AI capabilities needs to focus on problems that have never appeared online.\n\nThe model didn’t answer Raju’s problem correctly, but it did better than he expected—well, enough to get him thinking that the experiment should be repeated and formalized. With the help of a colleague, he set out to create a theoretical physics benchmark for AI.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/ai/2026/11/ai-can-do-the-calculations-physicists-are-figuring-out-what-comes-next/",
+      "publishedAt": "2026-11-25T12:00:28.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "cti-once-b476db0be5046c9b:es",
+      "sourceId": "cti-once-b476db0be5046c9b",
+      "lang": "es",
+      "title": "Actualización de software y APP Disponible GOLD 6.1 para iOS y Android: nuevas funciones y mejoras",
+      "summary": "El Centro de Tiflotecnología e Innovación (CTI) presenta la versión 6.1 del Gestor ONCE de Libros Digitales (GOLD) para dispositivos iOS y Android . Esta actualización incorpora nuevas funciones y mejoras para facilitar el uso de la aplicación y la lectura de las obras.",
+      "body": "El Centro de Tiflotecnología e Innovación (CTI) presenta la versión 6.1 del Gestor ONCE de Libros Digitales (GOLD) para dispositivos iOS y Android . Esta actualización incorpora nuevas funciones y mejoras para facilitar el uso de la aplicación y la lectura de las obras.\n\nLa versión de iOS ha renovado su apariencia incluyendo nuevas opciones y organizando de una manera más accesible las funcionalidades existentes.\n\nLas principales novedades son las siguientes:\n\nLa versión para Android renueva su interfaz e incorpora mejoras en el modo oscuro, la organización de la biblioteca, los controles de reproducción y la accesibilidad.\n\nLas principales novedades, en este caso, son las siguientes:\n\nSe puede acceder a la descarga de esta aplicación mediante los siguientes enlaces:\n\nGOLD para iOS\n\nGOLD para Android",
+      "sourceName": "CTI de la ONCE",
+      "originalUrl": "https://cti.once.es/noticias/disponible-gold-6-1-para-ios-y-android-nuevas-funciones-y-mejoras",
+      "publishedAt": "2026-11-25T12:00:00.000Z",
+      "categories": [
+        "tecnologia-accesibilidad",
+        "apple",
+        "android",
+        "apps-accesibles",
+        "programas-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-4425d73f37f4ddb1:en",
+      "sourceId": "the-verge-4425d73f37f4ddb1",
+      "lang": "en",
+      "title": "Microsoft declares ‘Code Red’ after huge Outlook outage",
+      "summary": "This month's Exchange Online and Microsoft Outlook outage has prompted the software giant to declare an unusual \"Code Red\" internally, Reuters reports. The nearly 24-hour outage took down email for millions of customers, and was triggered by a bug that had been sitting on Microsoft 365 networking gateway servers since July without any impact to […]",
+      "body": "This month's Exchange Online and Microsoft Outlook outage has prompted the software giant to declare an unusual \"Code Red\" internally, Reuters reports . The nearly 24-hour outage took down email for millions of customers, and was triggered by a bug that had been sitting on Microsoft 365 networking gateway servers since July without any impact to servers.\n\nIn a memo to the teams responsible for Exchange Online, Microsoft 365 Core president Jason Henderson revealed the outage was the most significant in history for Microsoft's customers. \"Unfortunately, all the work we have done over the years was not sufficient to protect us on Thursday,\" said …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/news/1042025/microsoft-code-red-outlook-outage",
+      "publishedAt": "2026-11-25T11:12:42.000Z",
+      "categories": [
+        "tecnologia-general",
+        "windows",
+        "programas-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "accessible-android-cfc599fbebd4e68d:en",
+      "sourceId": "accessible-android-cfc599fbebd4e68d",
+      "lang": "en",
+      "title": "Ariadne GPS",
+      "summary": "Ariadne GPS is an orientation app designed for blind and visually impaired people, available on iPhone since 2011 and now on Android. It tells you…",
+      "body": "Published 25 November 2026 by lciaffoni\n\nAriadne GPS is an orientation app designed for blind and visually impaired people, available on iPhone since 2011 and now on Android. It tells you where you are and what is around you, and lets you explore the map with your finger.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nDesigned from the start for TalkBack: all buttons are labeled, and the main functions also have TalkBack actions (TalkBack menu > Actions), e.g. Repeat, Places list, Sort by direction/distance, Quick save. On the map you explore directly with one finger (no passthrough); double tap opens the map commands (zoom, move, say the address, add favorite, report); two fingers drag the map; shake or the Close button closes it. On Android 11 and earlier, choosing an action by swiping and double tapping may not run it (a TalkBack limitation); TalkBack menu > Actions always works. Also usable without TalkBack, with its own gestures and visual help; follows system font size and dark theme.\n\nLast Tested App version and Android version:\n\n5.0.1, Android 17. Requires Android 8.0 or later\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
+      "sourceName": "Accessible Android",
+      "originalUrl": "https://accessibleandroid.com/app/ariadne-gps/",
+      "publishedAt": "2026-11-25T08:26:15.000Z",
+      "categories": [
+        "android",
+        "apps-accesibles",
+        "tecnologia-accesibilidad",
+        "apple",
+        "movilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "freedom-scientific-blog-b9aef871527a63d2:en",
+      "sourceId": "freedom-scientific-blog-b9aef871527a63d2",
+      "lang": "en",
+      "title": "Vispero Connect: November 2026 – JAWS Power Tips, Exploring ZoomText, And a Quick Trip To Argentina",
+      "summary": "This month, we share a few JAWS power tips from our listeners and take a quick trip to Argentina. Jost Eckhardt gives us an inside look at ZoomText and Fusion, and Elizabeth Whitaker previews upcoming training opportunities. Activate to listen, right-click to download. Read the November 2026 Vispero Connect transcript",
+      "body": "This month, we share a few JAWS power tips from our listeners and take a quick trip to Argentina. Jost Eckhardt gives us an inside look at ZoomText and Fusion, and Elizabeth Whitaker previews upcoming training opportunities. Activate to listen, right-click to download.\n\nRead the November 2026 Vispero Connect transcript",
+      "sourceName": "Freedom Scientific",
+      "originalUrl": "https://training.vispero.com/vispero-connect-november-2026-jaws-power-tips-exploring-zoomtext-and-a-quick-trip-to-argentina/",
+      "publishedAt": "2026-11-25T04:57:41.000Z",
+      "categories": [
+        "windows",
+        "tecnologia-accesibilidad",
+        "jaws"
       ]
     },
     {
@@ -5759,40 +5910,6 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-a5dd65d9d129fac6:en",
-      "sourceId": "9to5mac-a5dd65d9d129fac6",
-      "lang": "en",
-      "title": "New Gemini setting lets you keep chat history, but turn off AI training [U]",
-      "summary": "Google is rolling out new privacy settings for the Gemini app that will let you “keep your history while independently controlling generative AI model training.” more…",
-      "body": "Google is rolling out new privacy settings for the Gemini app that will let you “keep your history while independently controlling generative AI model training.”\n\nUpdate 11/24 : This new setting is now widely rolling out. On gemini.google.com, tap the settings gear icon to find a new “Gemini History” item at the very bottom. This opens myactivity.google.com/product/gemini with an On/Off dropdown.\n\nUnder “Help train generative AI models with,” you’ll find the new “Chat content including text & attachments” setting. It’s enabled by default.\n\nYour future chats won’t be used to train generative AI models, unless you provide feedback.\n\nTraining on “Audio and Gemini Live videos & screenshares” remains an opt-in preference.\n\nOriginal 11/16 : Gemini’s existing Keep Activity setting “controls how long your chats are saved and whether they are used to train generative AI models.”\n\nGoogle is now separating that preference into two new options.\n\nThe first setting is called “History” and lets you “control how long your history is saved.” If disabled:\n\n“…future chats will be saved for around 2 months and used to respond to you, process your feedback, and protect Google, its users, and the public, with help from human reviewers.”\n\nThe duration is currently 24 hours for chat context, and 72 hours to help protect Google, users, and the public.\n\nThe second setting allows you to “separately control whether your chat content, including text and attachments, is used to train generative AI models.”\n\nWith this change, you will be able to keep your history while independently controlling generative AI model training.\n\nIf Keep Activity is currently off, the two “new settings will both be off.” These changes are rolling out over the “coming weeks,” and Google is notifying users via email.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5google.com/2026/11/24/gemini-history-ai-training/",
-      "publishedAt": "2026-11-24T21:11:31.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-890e90e88bb8a085:en",
-      "sourceId": "engadget-890e90e88bb8a085",
-      "lang": "en",
-      "title": "This underrated Pixel feature is more versatile than you realize",
-      "summary": "Google's Pixel phones have a very cool feature that will make your phone easier to use one-handed. Here's what it does.",
-      "body": "If you're not using this feature, you're missing out on a lot of convenience.\n\nIf you own a Pixel phone , you probably look forward to the new features that pop up after an Android OS update and Pixel Drop. The latest Android 17 QPR2 and the November 2026 Pixel Drop, for example, upgraded Pixel Search and added cool customizable icon designs, Transit Mode for train commuters, Pixel VIPs real-time location sharing and a new Status bar settings menu for all Pixel 6a and newer phones, plus expanded Gemini Intelligence , Extreme Charging Mode and other features for the Pixel 10 and 11.\n\nBut there's one old, reliable and underrated feature that you may have missed, and it's actually quite versatile and convenient. It's called Quick Tap, and it transforms the back of your Pixel phone into a customizable shortcut when you tap it twice. Quick Tap allows you to accomplish common tasks with just one hand and without scrolling through any menus.\n\nThe Quick Tap feature is available on all Pixel 4a (5G) and newer phones. To access it and to customize the settings, open the Settings app on your Pixel phone, then tap System > Gestures > Quick Tap to start actions.\n\nFrom there, you can then choose a built-in action for Quick Tap to perform when you double-tap the back of your phone. All of these actions are pretty convenient, but since Quick Tap only supports one action at a time, you should choose the one you're likely to use most.\n\nYou can assign Quick Tap to turn the flashlight on and off even when your phone is locked. Or set the feature to take a screenshot without having to hold the power and volume-down buttons at the same time. Quick Tap can also play or pause music, videos or podcasts using just about any of your favorite streaming apps with just a couple of taps. This is super convenient when you want to watch or listen to content while you're driving, cooking or working out, because you don't need to unlock the phone, navigate the apps and resume your media. Just double-tap the back of your Pixel.\n\nUse Quick Tap to wake up Gemini without having to talk to the phone. Or assign Quick Tap to easily show notifications without having to pull the notification shade down from the top of the screen; Quick Tap pulls it down for you. You can also use the feature to open the multiple app overview screen and switch between recently used apps without navigating. Quick Tap can also launch any app installed on your Pixel phone — you just need to assign which app you use most.\n\nOne thing to consider: Quick Tap works perfectly on a naked Pixel phone. However, if you have a protective case on your phone, you might need to try a few things to get it working as it should. If your Pixel phone case is super thick, finger tapping may not be enough to get it going. Lighter-weight cases, though, should allow you to activate Quick Tap without much effort.\n\nIf you're having trouble, there is an option within the Quick Tap settings called Require stronger taps, designed to prevent accidental triggering of an app when you put the phone down or slide it into your pocket. Make sure that's turned off and then test it out. Messing around with where you tap your phone can also help. If you have a magnetic accessory on the back of the phone, keep tapping around until you find the sweet spot. For the foldable Pixel 9 Pro Fold and Pixel 11 Pro Fold phones, you can tap the rear glass panel whether the phone is unfolded or closed to activate Quick Tap.\n\nQuick Tap can be paired with other apps and automation tools to get even more out of the feature. The Tap, Tap app can be used to supplement Quick Tap by providing support for both double-taps and triple-taps, so you can assign more than one action and choose from a wider range of over 50 available actions to assign. You could also connect Quick Tap to a free pop-up menu or folder app so the double-tap triggers a menu of your most-used apps or tools.\n\nYour Pixel phone is also loaded with built-in Gestures, which give you another way to access certain tools and features without having to unlock or swipe — or install another app like Tap, Tap. To find these, go to Settings > System > Gestures.\n\nLet's say you want to use your Quick Tap action to toggle the flashlight when you double-tap the phone, but you also want fast access to your camera or Google Wallet. You can do this by customizing your Gestures to open either the camera or Google Wallet by double-pressing the power button. You can also press and hold the power button to summon Gemini. Then there's the Flip to Shhh feature that automatically enables Do Not Disturb when you place your Pixel phone facedown, as well as a shortcut that lets you tap or lift your phone to check the time, notifications and other info.\n\nBetween Quick Tap and Gestures, your Pixel phone is versatile enough to let you simply tap or press your way through a bunch of actions to maximize convenience and one-handed operation. That makes day-to-day phone use much more convenient. Assign it to your smart home device app for quick controllability, or have it open Google Wallet to quickly pay when you're at the store, for example. Anyone who uses a phone knows it's a whole lot easier to tap the phone than to unlock it or swipe through apps... especially if you only have one hand available.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2321246/underrated-pixel-feature-more-versatile-realize-quick-tap/",
-      "publishedAt": "2026-11-24T21:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "android"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-c24be4c125e085b2:en",
       "sourceId": "ars-technica-c24be4c125e085b2",
       "lang": "en",
@@ -5802,38 +5919,6 @@
       "sourceName": "Ars Technica",
       "originalUrl": "https://arstechnica.com/ai/2026/11/whats-going-on-with-the-riemann-hypothesis/",
       "publishedAt": "2026-11-24T20:34:53.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-7b953176cc7863d3:en",
-      "sourceId": "the-verge-7b953176cc7863d3",
-      "lang": "en",
-      "title": "TikTok was down",
-      "summary": "Earlier on Tuesday, TikTok experienced some issues, with videos, search results, favorites, and other features not loading as they usually do, following a slew of other outages over the past couple of weeks. Videos sometimes wouldn't load in the For You feed on my iPhone, and search results occasionally didn't show up as expected in […]",
-      "body": "Earlier on Tuesday, TikTok experienced some issues, with videos, search results, favorites, and other features not loading as they usually do, following a slew of other outages over the past couple of weeks . Videos sometimes wouldn't load in the For You feed on my iPhone, and search results occasionally didn't show up as expected in the app on iOS or Android, or on the web.\n\nEven trying to pull up a profile would show a blank page, while links to videos are dead in the water too. However, as of 3:45PM ET or so, things appear to be working normally again. Downdetector showed around 25,000 reports of issues at around 2:56PM ET, and many peopl …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1041618/tiktok-down-outage",
-      "publishedAt": "2026-11-24T20:27:27.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-2d72c38569a51157:en",
-      "sourceId": "techcrunch-2d72c38569a51157",
-      "lang": "en",
-      "title": "UK warns AI-driven cyberattacks are exposing years of weak security",
-      "summary": "The British cyber agency says that \"building strong foundations has never mattered more\" as AI hacking tools rely on exploiting simple security flaws.",
-      "body": "The U.K. government’s cybersecurity unit says it has seen a “marked rise” in AI-driven cyberattacks in recent months, as hackers increasingly rely on autonomous hacking tools to identify and exploit simple weaknesses to break into systems and networks.\n\nThe U.K. National Cybersecurity Center (NCSC) said it has seen several cyber incidents since September involving autonomous hacking tools, such as penetration testing tools used by defenders to stress-test their cybersecurity defenses. These incidents have caused intrusions at organizations and resulted in downtime, the unit said in a blog post .\n\nThe NCSC says that while none of the vulnerabilities being exploited are new, the speed at which these AI tools are able to carry out simple hacks has changed.\n\nThe rise in AI-related cyberattacks coincides with the broader release earlier this year of open source autonomous penetration testing tools like Artex and Cairn, among others, which anyone can download and use at no cost. The U.S. Federal Bureau of Investigation recently warned that malicious hackers are using AI penetration testing tools to carry out cyberattacks at unprecedented speeds.\n\nWhile cyberattacks and intrusions are on the rise, the message from London is that many of these attacks are preventable with basic cybersecurity defenses and best practices.\n\n“Notably, the issues being exploited currently are not novel memory corruption vulnerabilities (or even known but unpatched vulnerabilities), but unmitigated weaknesses that are often the result of years of technical debt that organisations have accumulated,” the NCSC wrote.\n\nThe unit said that agentic hacking tools often look for exposed or internet-facing systems, then quickly run through lists of weak or easy-to-guess passwords or abuse API endpoints often used by developers to access data.\n\nThe NCSC said that AI “does not make established cyber security controls obsolete,” but rather that “building strong foundations has never mattered more.”\n\nThe unit added that AI has made it easier to find vulnerabilities and faster to exploit them, warning that weaknesses that have gone unnoticed for years can now be found in minutes.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/24/uk-warns-ai-driven-cyberattacks-are-exposing-years-of-weak-security/",
-      "publishedAt": "2026-11-24T18:02:59.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
@@ -5870,22 +5955,6 @@
         "apple",
         "apps-accesibles",
         "android"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-9dc5af9d3e0c1f4d:en",
-      "sourceId": "ars-technica-9dc5af9d3e0c1f4d",
-      "lang": "en",
-      "title": "Amazon says hackers' AI agents found and exploited 0-day with little human input",
-      "summary": "The Cairn AI framework is proving to be a boon for defenders and attackers.",
-      "body": "Amazon said AI agents recently found and exploited a zero-day vulnerability with no human oversight beyond a simple instruction to get root access on an East Asian university server.\n\nThe agents were running on Cairn, an open source AI penetration-testing framework. The hackers, who provided prompts in simplified Chinese and configured the model to the Chinese Standard Time zone, gave the agents a list of IP addresses and the goal: “obtain shell access.” In short order, the agents discovered a zero-day in an open source medical imaging AI application running on one of the target servers. The agents then exploited the vulnerability and gained full control of the system.\n\n“These findings show that agentic offensive operations are already happening, and defenders should prepare for the speed and persistence these tools enable,” Amazon said .\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/security/2026/11/amazon-says-hackers-ai-agents-found-and-exploited-0-day-with-little-human-input/",
-      "publishedAt": "2026-11-24T12:30:05.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {

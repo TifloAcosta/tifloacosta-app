@@ -377,6 +377,10 @@ struct DocumentConversionSmoke {
             try FileManager.default.copyItem(at: richPDF, to: samples.appendingPathComponent("conversion-multipage.pdf"))
         }
 
+        precondition(NativeDocumentConversion.pdfHeadingLevels([3, 5, 4, 0, 2, 4, 4, 1, 6]) == [1, 2, 2, 0, 1, 2, 2, 1, 2])
+        precondition(NativeDocumentConversion.pdfHeadingLevels([0, 1, 2, 3, 2, 1, 0]) == [0, 1, 2, 3, 2, 1, 0])
+        precondition(NativeDocumentConversion.pdfHeadingLevels([0, 0]) == [0, 0])
+
         let structuralPDF = try NativeDocumentConversion.convert(reopened, to: .pdf,
             in: root.appendingPathComponent("pdf-structured"))
         let structuredCG = CGPDFDocument(structuralPDF as CFURL)!
@@ -424,7 +428,9 @@ struct DocumentConversionSmoke {
                 }
                 return result
             }
-            precondition(Set(["Table", "TR", "TH", "TD", "L", "LI", "LBody", "Figure", "Caption", "Note"]).isSubset(of: roles(rootTag!)))
+            let actualRoles = roles(rootTag!)
+            precondition(Set(["Table", "TR", "TH", "TD", "L", "LI", "LBody", "Figure", "Caption", "Note", "H1"]).isSubset(of: actualRoles))
+            precondition(!actualRoles.contains("H2"), "The sole source H2 must start the PDF hierarchy at H1")
             precondition(imageAlternative && columnScope)
             var idTree: CGPDFDictionaryRef?
             var names: CGPDFArrayRef?

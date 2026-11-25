@@ -21,7 +21,7 @@ static int attach_link(qpdf_data pdf, qpdf_oh tree, qpdf_oh numbers,
     qpdf_oh_replace_key(pdf, reference, "/Pg", page);
     qpdf_oh role = qpdf_oh_get_key(pdf, tree, "/S");
     qpdf_oh node;
-    if (qpdf_oh_is_name_and_equals(pdf, role, "/Span")) {
+    if (qpdf_oh_is_name_and_equals(pdf, role, "/Span") || qpdf_oh_is_name_and_equals(pdf, role, "/Link")) {
         // The span already owns the glyphs and is indexed by their MCID.
         node = tree;
         qpdf_oh_append_item(pdf, kids, reference);

@@ -640,6 +640,19 @@ enum NativeDocumentConversion {
         return delegate
     }
 
+    // PDF/UA headings start at H1 and cannot descend through missing levels.
+    // Compress only the source's actual ancestor levels; never insert a title
+    // or change the source text, bookmarks, offsets or other export formats.
+    static func pdfHeadingLevels(_ source: [Int]) -> [Int] {
+        var ancestors: [Int] = []
+        return source.map { level in
+            guard (1...6).contains(level) else { return 0 }
+            while let last = ancestors.last, last >= level { ancestors.removeLast() }
+            ancestors.append(level)
+            return ancestors.count
+        }
+    }
+
     private static func pdf(_ paragraphs: [Paragraph], title: String, markup: NativeConversionMarkup.Document?, output: URL,
                             onProgress: (Double) -> Void) throws -> (language: String?, labels: [String], owners: [Int32], ownerCount: Int, semanticPaths: [String]) {
         var annotationLabels: [String] = []
@@ -653,6 +666,7 @@ enum NativeDocumentConversion {
         let headerTags: [CGPDFTagType] = [.paragraph, .header1, .header2, .header3, .header4, .header5, .header6]
         let linkAttribute = NSAttributedString.Key("TifloAcostaPDFLink")
         let blockRoles = ["P", "H1", "H2", "H3", "H4", "H5", "H6"]
+        let headingLevels = pdfHeadingLevels(paragraphs.map { $0.text.allSatisfy(\.isWhitespace) ? 0 : $0.level })
         var linkedParagraphs: Set<Int> = []
         var paragraphStarts: [Int] = []
         var pdfImages: [Int: (CGImage, PDFImageMetrics)] = [:]
@@ -771,7 +785,7 @@ enum NativeDocumentConversion {
                     if hasImage, let alternative = paragraph.alternative, !alternative.isEmpty {
                         properties[CGPDFTagProperty.alternativeText.rawValue as String] = alternative
                     }
-                    CGPDFContextBeginTag(context, hasImage ? .figure : headerTags[paragraph.level], properties as CFDictionary)
+                    CGPDFContextBeginTag(context, hasImage ? .figure : headerTags[headingLevels[paragraphIndex]], properties as CFDictionary)
                     openParagraph = paragraphIndex
                     tagCount += 1
                     semanticPaths.append(paragraph.semanticPath)
@@ -789,7 +803,7 @@ enum NativeDocumentConversion {
                     let paragraph = paragraphs[paragraphIndex]
                     let tagLanguage = paragraph.language ?? detectedLanguage(paragraph.text) ?? language
                     let properties = tagLanguage.map { [languageKey: $0] } ?? [:]
-                    let block = "\(blockRoles[paragraph.level]):\(paragraphIndex)"
+                    let block = "\(blockRoles[headingLevels[paragraphIndex]]):\(paragraphIndex)"
                     let groups = [paragraph.semanticPath, block].filter { !$0.isEmpty }.joined(separator: "/")
                     let runs = (CTLineGetGlyphRuns(line) as! [CTRun]).sorted {
                         CTRunGetStringRange($0).location < CTRunGetStringRange($1).location

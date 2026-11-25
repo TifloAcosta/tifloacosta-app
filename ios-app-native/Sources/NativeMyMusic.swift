@@ -852,11 +852,17 @@ struct NativeMyMusicScreen: View {
     @State private var newSmartFolderName = ""
     @State private var newSmartFolderKeyword = ""
     @State private var selectedSmartRule = MusicSmartRuleKind.title
+    @State private var showRecognitionAccount = false
     @State private var recognitionSelection: [UUID]?
     @State private var recognitionTask: Task<Void, Never>?
     @State private var recognitionResult: String?
 
     private func identify(_ ids: [UUID]) {
+        guard !ids.isEmpty, recognitionTask == nil else { return }
+        guard NativeMusicRecognition.hasActiveAccount else {
+            showRecognitionAccount = true
+            return
+        }
         recognitionTask = Task {
             var matched = 0
             var failed = 0
@@ -864,6 +870,11 @@ struct NativeMyMusicScreen: View {
                 if Task.isCancelled { break }
                 do { if try await library.recognizeTrack(id) { matched += 1 } }
                 catch is CancellationError { break }
+                catch let error as URLError where error.code == .userAuthenticationRequired {
+                    showRecognitionAccount = true
+                    recognitionTask = nil
+                    return
+                }
                 catch { failed += 1 }
             }
             if !Task.isCancelled {
@@ -1452,6 +1463,14 @@ struct NativeMyMusicScreen: View {
             }
 
         let libraryActions = smartFolderSheet
+            .sheet(isPresented: $showRecognitionAccount) {
+                NavigationStack {
+                    NativeAcoustIDAccount()
+                        .toolbar { ToolbarItem(placement: .cancellationAction) {
+                            Button("Cerrar") { showRecognitionAccount = false }
+                        } }
+                }
+            }
             .confirmationDialog("Identificar con AcoustID", isPresented: Binding(
                 get: { recognitionSelection != nil }, set: { if !$0 { recognitionSelection = nil } }
             ), titleVisibility: .visible) {

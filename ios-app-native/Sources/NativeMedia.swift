@@ -88,6 +88,7 @@ final class NativeMediaStore: ObservableObject {
     }
 
     func refresh() async {
+        guard !loading else { return }
         loading = true
         defer { loading = false }
         var request = URLRequest(url: endpoint)
@@ -98,10 +99,12 @@ final class NativeMediaStore: ObservableObject {
                 throw URLError(.badServerResponse)
             }
             let snapshot = try JSONDecoder().decode([NativeMediaItem].self, from: data)
+            try Task.checkCancellation()
             items = snapshot.filter { $0.type == "audio" || $0.type == "video" }
             try? data.write(to: cacheURL, options: .atomic)
             error = nil
         } catch {
+            guard !Task.isCancelled else { return }
             self.error = items.isEmpty
                 ? "No se pudieron cargar los podcasts y canales de YouTube."
                 : "Sin conexión. Se muestran los contenidos multimedia guardados."

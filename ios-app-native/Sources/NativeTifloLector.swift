@@ -676,10 +676,9 @@ final class NativeReaderLibrary: ObservableObject {
             forKey: Self.lastOpenedPrefix + document.id.uuidString)
     }
 
-    func toggleFavorite(_ document: NativeReadingDocument) {
-        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
-        documents[i].isFavorite = !(documents[i].isFavorite ?? false)
-        try? save()
+    func toggleFavorite(_ document: NativeReadingDocument) throws {
+        guard let entry = documents.first(where: { $0.id == document.id }) else { return }
+        try markFavorites(withIDs: [entry.id], favorite: entry.isFavorite != true)
     }
 
     func updatePreferences(_ document: NativeReadingDocument,
@@ -1996,8 +1995,9 @@ struct NativeReaderLibraryScreen: View {
                     .accessibilityAction(named: Text("Mover a carpeta")) {
                         folderForDocument = document
                     }
-                    .accessibilityAction(named: Text("Añadir a favoritos")) {
-                        library.toggleFavorite(document)
+                    .accessibilityAction(named: Text(document.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                        do { try library.toggleFavorite(document) }
+                        catch { importError = error.localizedDescription }
                     }
                     .accessibilityAction(named: Text("Cambiar título")) {
                         documentToRename = document
@@ -4403,7 +4403,11 @@ struct NativeReadingScreen: View {
             Button("Índice y navegación estructurada") { showStructure = true }
         }
         Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
-            library.toggleFavorite(document)
+            do { try library.toggleFavorite(document) }
+            catch {
+                actionMessage = error.localizedDescription
+                UIAccessibility.post(notification: .announcement, argument: actionMessage)
+            }
         }
         if library.originalURL(for: document) != nil {
             if latest.fileExtension?.lowercased() == "daisy" {

@@ -545,6 +545,9 @@ enum NativeDocumentConversion {
         <office:automatic-styles>
         <style:style style:name="Bold" style:family="text"><style:text-properties fo:font-weight="bold"/></style:style>
         <style:style style:name="Italic" style:family="text"><style:text-properties fo:font-style="italic"/></style:style>
+        <style:style style:name="Underline" style:family="text"><style:text-properties style:text-underline-style="solid"/></style:style>
+        <style:style style:name="Subscript" style:family="text"><style:text-properties style:text-position="sub 58%"/></style:style>
+        <style:style style:name="Superscript" style:family="text"><style:text-properties style:text-position="super 58%"/></style:style>
         \(NativeODTConversionWriter.listStyles)\(writer?.languageStyles ?? "")
         </office:automatic-styles>
         """

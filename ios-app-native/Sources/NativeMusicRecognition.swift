@@ -4,6 +4,23 @@ import Foundation
 actor NativeMusicRecognition {
     static let shared = NativeMusicRecognition()
 
+    private final class RejectRedirects: NSObject, URLSessionTaskDelegate {
+        func urlSession(_ session: URLSession, task: URLSessionTask,
+                        willPerformHTTPRedirection response: HTTPURLResponse,
+                        newRequest request: URLRequest,
+                        completionHandler: @escaping (URLRequest?) -> Void) {
+            completionHandler(nil)
+        }
+    }
+
+    private let session: URLSession = {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.urlCache = nil
+        configuration.httpShouldSetCookies = false
+        return URLSession(configuration: configuration, delegate: RejectRedirects(), delegateQueue: nil)
+    }()
+
+
     struct Match: Sendable {
         let title: String
         let artist: String
@@ -75,6 +92,10 @@ actor NativeMusicRecognition {
         return key
     }
 
+    static var hasActiveAccount: Bool {
+        (try? NativeAcoustIDKeychain.read(.active)) != nil
+    }
+
     func identify(_ audioURL: URL, client: String) async throws -> Match? {
         let user = try NativeAcoustIDKeychain.read(.active)
         guard let user else { throw URLError(.userAuthenticationRequired) }
@@ -119,13 +140,14 @@ actor NativeMusicRecognition {
         request.setValue(client, forHTTPHeaderField: "Acoustid-App-Key")
         if let user { request.setValue(user, forHTTPHeaderField: "Acoustid-User-Key") }
         request.httpBody = form.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B").data(using: .utf8)
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await session.data(for: request)
         guard let http = response as? HTTPURLResponse else { throw URLError(.badServerResponse) }
         if http.statusCode == 429 {
             let seconds = http.value(forHTTPHeaderField: "Retry-After").flatMap(Int.init) ?? 30
             let deadline = clock.now.advanced(by: .seconds(max(1, seconds)))
             blockedUntil = max(blockedUntil ?? deadline, deadline)
         }
+        if http.statusCode == 401 || http.statusCode == 403 { throw URLError(.userAuthenticationRequired) }
         guard http.statusCode == 200 else { throw URLError(.badServerResponse) }
         return data
     }

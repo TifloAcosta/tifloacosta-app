@@ -151,6 +151,13 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
             if let name = attributes["text:style-name"], let style = textStyleProperties[name] {
                 if style["fo:font-weight"] == "bold" { inlineEmphasis.append("strong") }
                 if style["fo:font-style"] == "italic" { inlineEmphasis.append("em") }
+                if let underline = style["style:text-underline-style"], underline != "none" {
+                    inlineEmphasis.append("u")
+                }
+                if let position = style["style:text-position"]?.split(separator: " ").first {
+                    if position == "sub" { inlineEmphasis.append("sub") }
+                    if position == "super" { inlineEmphasis.append("sup") }
+                }
                 if let language = style["fo:language"], !language.isEmpty, language != "none" {
                     let country = style["fo:country"].flatMap { $0 == "none" || $0.isEmpty ? nil : "-" + $0 } ?? ""
                     htmlAttributes += " lang=\"\(escape(language + country))\""

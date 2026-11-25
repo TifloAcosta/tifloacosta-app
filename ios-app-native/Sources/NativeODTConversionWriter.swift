@@ -179,6 +179,9 @@ final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
             mapping = attributes["href"].map { ("text:a", " xlink:type=\"simple\" xlink:href=\"\(escape($0))\"") } ?? ("", "")
         case "strong", "b": mapping = ("text:span", " text:style-name=\"Bold\"")
         case "em", "i": mapping = ("text:span", " text:style-name=\"Italic\"")
+        case "u": mapping = ("text:span", " text:style-name=\"Underline\"")
+        case "sub": mapping = ("text:span", " text:style-name=\"Subscript\"")
+        case "sup": mapping = ("text:span", " text:style-name=\"Superscript\"")
         case "br":
             appendInline("<text:line-break/>")
             mapping = ("", "")

@@ -465,6 +465,8 @@ final class NativeCinemaAudioPlayer: ObservableObject {
                     self.buffering = false
                     player.pause()
                     self.playbackError = MusicLocalized.message("No se pudo recuperar la posición de reproducción.")
+                    self.unregisterRemoteCommands()
+                    NativeRemotePlaybackOwner.release(.cinema)
                 }
                 self.updateNowPlaying()
             }

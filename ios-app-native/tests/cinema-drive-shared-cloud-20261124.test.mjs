@@ -48,9 +48,11 @@ test('cinema reuses AVPlayer and system background controls for transient cloud 
   assert.match(library, /beginProgressTracking\(library: library\)/);
   assert.match(library, /cleanUpTemporaryPlayback\(\)/);
   assert.match(library, /NativeRemotePlaybackOwner\.claim\(\.cinema\)/);
-  assert.match(browser, /player\.toggle\(library: personalLibrary\)/);
-  assert.match(browser, /player\.seek\(by: -30, library: personalLibrary\)/);
-  assert.match(browser, /player\.pauseAndSave\(library: personalLibrary\)/);
+  assert.match(browser, /NativeCinemaTransportControls\(player: player, library: personalLibrary\)/);
+  const transport = read("NativeCinemaHistory.swift");
+  assert.match(transport, /player\.toggle\(library: library\)/);
+  assert.match(transport, /player\.seek\(by: -30, library: library\)/);
+  assert.match(transport, /player\.pauseAndSave\(library: library\)/);
   assert.match(browser, /NativeCinemaVideoSurface\(player: video\)/);
 });
 

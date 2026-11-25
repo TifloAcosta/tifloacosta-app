@@ -447,7 +447,7 @@ struct NativeAccessibleCinemaScreen: View {
 
     var body: some View {
         List {
-            if personalPlayer.currentCloudReference != nil {
+            if personalPlayer.currentCloudReference != nil || (personalPlayer.currentID != nil && !personalItems.contains { $0.id == personalPlayer.currentID }) {
                 Section("Reproductor") {
                     Text(personalPlayer.currentTitle).accessibilityAddTraits(.isHeader)
                     if personalPlayer.currentCloudIsVideo, let video = personalPlayer.videoPlayer {

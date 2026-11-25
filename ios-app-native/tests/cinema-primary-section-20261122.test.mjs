@@ -64,7 +64,7 @@ test('the main cinema directory excludes general TV landing pages and routes to 
   const ids = [...directory.matchAll(/\.init\(id: "([^"]+)", name:/g)].map(match => match[1]);
   assert.deepEqual(ids, ['audesc-es', 'audesc-latino', 'audiocinemateca',
     'mercosur-pt', 'tape-territory', 'movies-for-the-blind', 'cinema-accessibile',
-    'rai-play-sound', 'cineaudioteca', 'tela-brasil', 'rtp-play', 'nfb', 'pbs', 'abc', 'nhb', 'spcine', 'tubi', 'pluto', 'plex-ad', 'play-suisse-de', 'ami', 'ami-fr', 'ard', 'arte', 'arte-de']);
+    'rai-play-sound', 'cineaudioteca', 'tela-brasil', 'rtp-play', 'nfb', 'pbs', 'abc', 'nhb', 'spcine', 'tubi', 'bbc-iplayer', 'rtve-campeones', 'pluto', 'plex-ad', 'play-suisse-de', 'ami', 'ami-fr', 'ard', 'arte', 'arte-de']);
   for (const excluded of ['foal', 'rtve', 'itvx', 'channel4', 'five']) {
     assert.ok(!ids.includes(excluded), 'Generalist homepage leaked into directory: ' + excluded);
   }
@@ -72,7 +72,7 @@ test('the main cinema directory excludes general TV landing pages and routes to 
   assert.match(directory, /https:\/\/pluto\.tv\/us\/category\/1a9072ea-901f-415c-aca0-c4ce3264389f\//);
   assert.match(directory, /https:\/\/watch\.plex\.tv\/on-demand\/category\/descriptive-audio/);
   assert.match(directory, /audioDescriptionLanguageFilter=de/);
-  assert.doesNotMatch(directory, /https:\/\/(www\.)?rtve\.es\/play\//);
+  assert.match(directory, /https:\/\/www\.rtve\.es\/play\/videos\/somos-cine\/campeones\/5751723\//);
   assert.doesNotMatch(directory, /https:\/\/www\.arte\.tv\/"\)/);
   assert.match(directory, /id: "ard"[\s\S]*?https:\/\/www\.ardmediathek\.de\/audiodeskription/);
   assert.match(directory, /id: "arte"[\s\S]*?languages: \[\.french\][\s\S]*?https:\/\/www\.arte\.tv\/fr\/videos\/programmes-en-audiodescription\//);
@@ -99,4 +99,13 @@ test('Italian and Portuguese partners have official user-facing access routes', 
 
 test('additional international sources use official access routes', () => {
   for (const url of ['https://www.nfb.ca/explore-all-films/?accessibility=DV&language=en', 'https://www.pbs.org/show/american-masters/collections/accessible-episodes/', 'https://iview.abc.net.au/shows/ad', 'https://norddeutsche-hoerbuecherei.de/hoerfilme.html', 'https://www.spcineplay.com.br/']) assert.ok(cinema.includes(url));
+});
+
+test('Tape Territory uses the authorized player and selects only described HLS variants', () => {
+  const tape = readFileSync(new URL('../Sources/NativeTapeTerritory.swift', import.meta.url), 'utf8');
+  assert.match(cinema, /NativeTapeTerritoryScreen\(\)/);
+  assert.match(tape, /https:\/\/tapeterritory\.com\/api\/apple\/catalog/);
+  assert.match(tape, /\.id == "described"/);
+  assert.match(tape, /openTapeTerritory/);
+  assert.match(tape, /Audiodescripción de Tape Territory/);
 });

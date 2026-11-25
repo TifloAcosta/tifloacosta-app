@@ -1469,3 +1469,10 @@
 "No se pudo vincular la cuenta de AcoustID." = "The AcoustID account could not be linked.";
 "La clave personal de AcoustID no es válida." = "The personal AcoustID key is invalid.";
 "No se pudo desvincular la cuenta de AcoustID." = "The AcoustID account could not be unlinked.";
+
+"Registro e inicio de sesión en el servicio original." = "Sign up and sign in on the original service.";
+"Audiodescripción de Tape Territory" = "Audio description by Tape Territory";
+"Cargando catálogo de Tape Territory" = "Loading Tape Territory catalogue";
+"No se pudo abrir Tape Territory." = "Could not open Tape Territory.";
+"Escuchar en línea" = "Listen online";
+"Cómo inscribirse" = "How to sign up";

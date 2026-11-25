@@ -170,6 +170,16 @@ private enum AccessibleCinemaDirectory {
               address: URL(string: "https://tubitv.com/category/audio_description"),
               access: "Colección oficial de audiodescripción.",
               description: "", geographicNotice: "Acceso sujeto a derechos territoriales.", isAudioOnly: false),
+        .init(id: "bbc-iplayer", name: "BBC iPlayer",
+              languages: [.english], kinds: [.film, .series, .documentary],
+              address: URL(string: "https://www.bbc.co.uk/iplayer/categories/audio-described/featured"),
+              access: "Colección oficial de audiodescripción.",
+              description: "", geographicNotice: "Acceso sujeto a derechos territoriales.", isAudioOnly: false),
+        .init(id: "rtve-campeones", name: "RTVE Play: Campeones",
+              languages: [.spain], kinds: [.film],
+              address: URL(string: "https://www.rtve.es/play/videos/somos-cine/campeones/5751723/"),
+              access: "Vídeo con audiodescripción según el título.",
+              description: "", geographicNotice: "Acceso sujeto a derechos territoriales.", isAudioOnly: false),
         .init(id: "pluto", name: "Pluto TV (EE. UU.)",
               languages: [.english], kinds: [.film, .series],
               address: URL(string: "https://pluto.tv/us/category/1a9072ea-901f-415c-aca0-c4ce3264389f/"),
@@ -519,9 +529,9 @@ struct NativeAccessibleCinemaScreen: View {
                             }
                         }
                         if source.id == "cineaudioteca" {
-                            Link("Ascolto online", destination: URL(string: "https://www.cineaudioteca.it/login_catalogo.php")!)
+                            Link("Escuchar en línea", destination: URL(string: "https://www.cineaudioteca.it/login_catalogo.php")!)
                                 .frame(minHeight: 44, alignment: .leading)
-                            Link("Come iscriversi", destination: URL(string: "https://www.cineaudioteca.it/come_iscriversi.php")!)
+                            Link("Cómo inscribirse", destination: URL(string: "https://www.cineaudioteca.it/come_iscriversi.php")!)
                                 .frame(minHeight: 44, alignment: .leading)
                         }
                         if source.id == "rtp-play" {
@@ -531,6 +541,11 @@ struct NativeAccessibleCinemaScreen: View {
                         if source.id == "rai-play-sound" {
                             NavigationLink("Explorar catálogo audiodescrito") {
                                 NativeRaiPlaySoundScreen(kind: selectedKind)
+                            }
+                        }
+                        if source.id == "tape-territory" {
+                            NavigationLink("Explorar catálogo audiodescrito") {
+                                NativeTapeTerritoryScreen()
                             }
                         }
                         if source.id == "movies-for-the-blind" {

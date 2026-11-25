@@ -305,6 +305,18 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         guard reference.hasPrefix("audiocinemateca:") else {
             throw NativeAudiocinematecaCatalogueError.denied
         }
+        try openAuthorizedCinemaStream(asset: asset, loader: loader, title: title, reference: reference,
+                                       isVideo: isVideo, library: library)
+    }
+
+    func openTapeTerritory(_ url: URL, title: String, slug: String, library: NativeCinemaLocalLibrary) throws {
+        try openAuthorizedCinemaStream(asset: AVURLAsset(url: url), loader: nil, title: title,
+                                       reference: "tape-territory:" + slug, isVideo: true, library: library)
+    }
+
+    private func openAuthorizedCinemaStream(asset: AVURLAsset, loader: NativeAudiocinematecaResourceLoader?,
+                                            title: String, reference: String, isVideo: Bool,
+                                            library: NativeCinemaLocalLibrary) throws {
         pauseAndSave(library: library)
         try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
         try AVAudioSession.sharedInstance().setActive(true)

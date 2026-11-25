@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T04:19:06.664Z",
+  "generatedAt": "2026-11-25T14:59:58.682Z",
   "resources": [
     {
       "kind": "resource",
@@ -6216,24 +6216,6 @@
         "apps-accesibles",
         "ia-accesibilidad",
         "movilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-23ce40460fdffbbe:en",
-      "sourceId": "accessible-android-23ce40460fdffbbe",
-      "lang": "en",
-      "title": "PLOT: AI Interactive Fiction",
-      "summary": "PLOT is interactive fiction written by AI. Pick a genre, or write one line about the story you want, and the AI writes a scene.…",
-      "body": "Published 15 November 2026 by KihaKwon\n\nPLOT is interactive fiction written by AI. Pick a genre, or write one line about the story you want, and the AI writes a scene. At the end of each scene you choose one of two options or type what happens next, and the story keeps going for as long as you like.\n\nYou can keep several stories going at once. Sign-in options include Google, Apple, Kakao, or a 6-digit email code. The app and stories are available in 40 languages.\n\nPLOT is free with optional in-app purchases. You receive 30 pages at sign-up, can earn up to 49 additional one-time pages from first-step activities in the app, and can earn up to 17 pages per day through daily check-ins and small tasks. Optional short video ads can provide 3 pages each, up to 10 times per day. One page equals one scene.\n\nOne-time page packs are also available for purchase. There is no subscription and no banner advertising.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nDisclosure: I’m the developer (Mirror Lab). I’ve used PLOT with TalkBack and my eyes closed on my Galaxy S25, for a long time last summer and again after 2.0. Just before 2.0.0, the main flow was also tested on a Galaxy S23 running Android 16, from sign-in to Get pages. No step got stuck.\n\nPLOT follows system font size up to 200%, bold font, high contrast text, and remove animations. PLOT does not read aloud by itself.\n\nVersion 2.0.1 fixes these three issues and was in Google Play review in November 2026. The keyboard fix requires Android 15 or later. Video ads have not yet been checked with TalkBack.\n\nFeedback is welcome, including workarounds you may have found. Contact contact@plotai.app , or use Profile > Settings > Feedback & support in the app.\n\nLast Tested App version and Android version:\n\nPLOT 2.0.0, Android 16 (Samsung Galaxy S23)\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/plot-ai-interactive-fiction/",
-      "publishedAt": "2026-11-15T13:22:57.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad",
-        "ia-accesibilidad"
       ]
     }
   ]

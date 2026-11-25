@@ -34,6 +34,14 @@ enum NativeConversionMarkup {
 
     static func read(_ input: NativeConversionSource, for format: NativeDocumentFormat) throws -> Document? {
         guard [.html, .epub, .odt, .rtf, .docx, .daisy, .daisy3, .pdf].contains(format), let source = input.original else { return nil }
+        if input.format == "rtf" {
+            guard let size = try? source.resourceValues(forKeys: [.fileSizeKey]).fileSize,
+                  size <= maximumTextBytes,
+                  let data = try? Data(contentsOf: source, options: .mappedIfSafe),
+                  let xhtml = try NativeRTFConversionMarkup.xhtml(data, title: input.title) else { return nil }
+            return try parse([(path: "book.xhtml", data: xhtml)], fallbackTitle: input.title,
+                             packageImages: [.epub, .odt, .rtf, .docx].contains(format)) { _, _ in nil }
+        }
         if ["html", "htm", "xhtml"].contains(input.format) {
             guard let size = try? source.resourceValues(forKeys: [.fileSizeKey]).fileSize,
                   size <= maximumTextBytes,

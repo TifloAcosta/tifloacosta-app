@@ -103,3 +103,17 @@ jobs:
           test -n "$app"
           wc -c "$app/TifloAcostaNative"
           du -sk "$app"
+      - name: Compilar para iPhone arm64 sin firma ni distribución
+        run: |
+          xcodebuild -project ios-app-native/TifloAcostaNative.xcodeproj \
+            -scheme TifloAcostaNative -configuration Debug \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath "$RUNNER_TEMP/TifloAcosta-device-build" \
+            ARCHS=arm64 CODE_SIGNING_ALLOWED=NO build
+      - name: Conservar las muestras PDF generadas para auditar la estructura
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: conversion-pdf-samples
+          path: ${{ runner.temp }}/conversion-samples/conversion*.pdf
+          if-no-files-found: ignore

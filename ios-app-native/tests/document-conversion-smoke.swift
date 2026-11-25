@@ -218,6 +218,15 @@ struct DocumentConversionSmoke {
             options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
         precondition(richRTFReader.string.contains("Imagen de prueba") && richRTFReader.string.contains("Hinweis – opinião."))
 
+        let rtfSourceURL = root.appendingPathComponent("Estilo.rtf")
+        try #"{\rtf1\ansi{\fonttbl{\f0 Helvetica;}}\f0 Texto {\b importante} {\i cursiva}.}"#
+            .write(to: rtfSourceURL, atomically: true, encoding: .utf8)
+        let rtfSource = NativeConversionSource(filename: "Estilo.rtf", title: "Estilo", format: "rtf",
+            text: "Texto importante cursiva.", links: [], original: rtfSourceURL)
+        let rtfHTML = try NativeDocumentConversion.convert(rtfSource, to: .html, in: richOutput)
+        let rtfReopened = try String(contentsOf: rtfHTML, encoding: .utf8)
+        precondition(rtfReopened.contains("<strong>importante</strong>") && rtfReopened.contains("<em>cursiva</em>"))
+
         let richODT = try NativeDocumentConversion.convert(reopened, to: .odt, in: richOutput)
         let odtPackage = try members(richODT, mime: "application/vnd.oasis.opendocument.text")
         let contentXML = odtPackage["content.xml"]!

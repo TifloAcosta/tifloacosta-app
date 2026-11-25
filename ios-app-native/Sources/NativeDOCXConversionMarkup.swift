@@ -13,8 +13,58 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
     private var textDepth = 0
     private var ignoredDepth = 0
     private var inBody = false
-    private var rows: [Bool] = []
-    private var cells: [(tag: String, attributePosition: Int)] = []
+    private struct Cell {
+        var tag: String
+        var content: String
+        var span: Int = 1
+        var rows: Int = 1
+        var merge: String? = nil
+    }
+    private struct Table {
+        var rows: [[Cell]] = []
+        var current: [Cell] = []
+        var header = false
+        var cellStart: Int? = nil
+        var cellSpan = 1
+        var cellMerge: String? = nil
+    }
+    private var tables: [Table] = []
+
+    private static func renderTable(_ table: Table) -> String {
+        var resolved: [[Cell]] = []
+        // Active entries are indexed by grid column, not physical cell number.
+        var active: [Int: (row: Int, cell: Int, span: Int)] = [:]
+        for row in table.rows {
+            var next: [Int: (row: Int, cell: Int, span: Int)] = [:]
+            var result: [Cell] = []
+            var column = 0
+            for cell in row {
+                if cell.merge == "continue", let owner = active[column], owner.span == cell.span {
+                    resolved[owner.row][owner.cell].rows += 1
+                    // Preserve nonempty continuation content instead of silently discarding it.
+                    if !cell.content.isEmpty && cell.content != "<p></p>" {
+                        resolved[owner.row][owner.cell].content += cell.content
+                    }
+                    next[column] = owner
+                } else {
+                    if cell.merge == "restart" {
+                        next[column] = (resolved.count, result.count, cell.span)
+                    }
+                    result.append(cell)
+                }
+                column += cell.span
+            }
+            resolved.append(result)
+            active = next
+        }
+        return "<table>" + resolved.map { row in
+            "<tr>" + row.map { cell in
+                let columns = cell.span > 1 ? " colspan=\"\(cell.span)\"" : ""
+                let rows = cell.rows > 1 ? " rowspan=\"\(cell.rows)\"" : ""
+                return "<\(cell.tag)\(columns)\(rows)>\(cell.content)</\(cell.tag)>"
+            }.joined() + "</tr>"
+        }.joined() + "</table>"
+    }
     private let escape = NativeDocumentConversion.xml
 
     private var links: [String: String] = [:]
@@ -82,20 +132,25 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
         case "t": textDepth += 1
         case "tab": run += "&#9;"
         case "br": run += "<br/>"
-        case "tbl": body += "<table>"
-        case "tr": rows.append(false); body += "<tr>"
+        case "tbl": tables.append(Table())
+        case "tr":
+            if !tables.isEmpty { tables[tables.count - 1].current = []; tables[tables.count - 1].header = false }
         case "tblHeader":
-            if !rows.isEmpty { rows[rows.count - 1] = !["0", "false", "off"].contains(attributes["w:val"] ?? "") }
+            if !tables.isEmpty { tables[tables.count - 1].header = !["0", "false", "off"].contains(attributes["w:val"] ?? "") }
         case "tc":
-            let cellTag = rows.last == true ? "th" : "td"
-            body += "<\(cellTag)"
-            cells.append((cellTag, body.utf8.count))
-            body += ">"
+            if !tables.isEmpty {
+                tables[tables.count - 1].cellStart = body.utf8.count
+                tables[tables.count - 1].cellSpan = 1
+                tables[tables.count - 1].cellMerge = nil
+            }
         case "gridSpan":
-            if let cell = cells.last, let count = attributes["w:val"].flatMap(Int.init),
-               (2...100).contains(count), body.utf8.count == cell.attributePosition + 1 {
-                let position = body.utf8.index(body.utf8.startIndex, offsetBy: cell.attributePosition)
-                body.insert(contentsOf: " colspan=\"\(count)\"", at: position)
+            if !tables.isEmpty, let count = attributes["w:val"].flatMap(Int.init), (2...100).contains(count) {
+                tables[tables.count - 1].cellSpan = count
+            }
+        case "vMerge":
+            if !tables.isEmpty {
+                let value = attributes["w:val"] ?? "continue"
+                if ["restart", "continue"].contains(value) { tables[tables.count - 1].cellMerge = value }
             }
         case "bookmarkStart":
             if let id = attributes["w:name"] { paragraph? += "<span id=\"\(escape(id))\"></span>" }
@@ -137,9 +192,24 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
                 body += "<\(tag)>\(paragraph)</\(tag)>"
             }
             paragraph = nil
-        case "tc": if let cell = cells.popLast() { body += "</\(cell.tag)>" }
-        case "tr": _ = rows.popLast(); body += "</tr>"
-        case "tbl": body += "</table>"
+        case "tc":
+            if !tables.isEmpty, let start = tables[tables.count - 1].cellStart {
+                let position = body.utf8.index(body.utf8.startIndex, offsetBy: start)
+                let content = String(body[position...])
+                body.removeSubrange(position...)
+                let index = tables.count - 1
+                tables[index].current.append(Cell(tag: tables[index].header ? "th" : "td", content: content,
+                                                  span: tables[index].cellSpan, merge: tables[index].cellMerge))
+                tables[index].cellStart = nil
+            }
+        case "tr":
+            if !tables.isEmpty {
+                let index = tables.count - 1
+                tables[index].rows.append(tables[index].current)
+                tables[index].current = []
+            }
+        case "tbl":
+            if let table = tables.popLast() { body += Self.renderTable(table) }
         default: break
         }
     }

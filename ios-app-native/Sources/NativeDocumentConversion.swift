@@ -483,6 +483,11 @@ enum NativeDocumentConversion {
         if footnotes != nil {
             references += "<Relationship Id=\"footnotes\" Type=\"\(office)/footnotes\" Target=\"footnotes.xml\"/>"
         }
+        let numbering = rich?.numbering
+        if numbering != nil {
+            references += "<Relationship Id=\"numbering\" Type=\"\(office)/numbering\" Target=\"numbering.xml\"/>"
+        }
+        let numberingType = numbering == nil ? "" : "<Override PartName=\"/word/numbering.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml\"/>"
         let footnoteType = footnotes == nil ? "" : "<Override PartName=\"/word/footnotes.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.wordprocessingml.footnotes+xml\"/>"
         let imageParts = (rich?.assets ?? []).map {
             NativeConversionMarkup.Asset(path: "word/media/" + $0.path, mediaType: $0.mediaType, data: $0.data)
@@ -495,7 +500,7 @@ enum NativeDocumentConversion {
             "<w:style w:type=\"paragraph\" w:styleId=\"Heading\($0)\"><w:name w:val=\"heading \($0)\"/><w:pPr><w:outlineLvl w:val=\"\($0 - 1)\"/></w:pPr><w:rPr><w:b/><w:sz w:val=\"\(38 - $0 * 2)\"/></w:rPr></w:style>"
         }.joined()
         let types = """
-        <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>\(imageTypes)\(footnoteType)</Types>
+        <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>\(imageTypes)\(footnoteType)\(numberingType)</Types>
         """
         try package([
             ("[Content_Types].xml", types),
@@ -504,7 +509,8 @@ enum NativeDocumentConversion {
             ("word/styles.xml", "<w:styles xmlns:w=\"\(styleNS)\">\(styles)</w:styles>"),
             ("word/_rels/document.xml.rels", "<Relationships xmlns=\"\(relationship)\">\(references)</Relationships>"),
             ("docProps/core.xml", "<cp:coreProperties xmlns:cp=\"http://schemas.openxmlformats.org/package/2006/metadata/core-properties\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\"><dc:title>\(title)</dc:title></cp:coreProperties>")
-        ] + (footnotes.map { [("word/footnotes.xml", $0)] } ?? []), assets: imageParts, output: output)
+        ] + (footnotes.map { [("word/footnotes.xml", $0)] } ?? [])
+          + (numbering.map { [("word/numbering.xml", $0)] } ?? []), assets: imageParts, output: output)
     }
 
     private static func odt(_ paragraphs: [Paragraph], title: String, markup: NativeConversionMarkup.Document?, output: URL) throws {

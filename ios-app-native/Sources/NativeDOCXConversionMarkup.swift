@@ -69,6 +69,42 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
     }
     private let escape = NativeDocumentConversion.xml
 
+    private struct ListLevel {
+        let id: Int
+        let level: Int
+        let tag: String
+    }
+    private var listLevels: [ListLevel] = []
+    private var listID: Int?
+    private var listDepth = 0
+    private var numbering: Numbering?
+
+    private func closeLists(from index: Int = 0) {
+        while listLevels.count > index {
+            body += "</li></\(listLevels.removeLast().tag)>"
+        }
+    }
+
+    private func appendParagraph(_ content: String) {
+        guard let id = listID, let level = numbering?.resolve(id: id, level: listDepth) else {
+            closeLists()
+            body += content
+            return
+        }
+        while let last = listLevels.last, last.level > listDepth { closeLists(from: listLevels.count - 1) }
+        if let last = listLevels.last, last.level == listDepth, last.id == id {
+            body += "</li><li>\(content)"
+            return
+        }
+        if listLevels.last?.level == listDepth { closeLists(from: listLevels.count - 1) }
+        let tag = level.format == "bullet" ? "ul" : "ol"
+        let formats = ["upperRoman": "I", "lowerRoman": "i", "upperLetter": "A", "lowerLetter": "a"]
+        let type = formats[level.format].map { " type=\"\($0)\"" } ?? ""
+        let start = tag == "ol" && level.start != 1 ? " start=\"\(level.start)\"" : ""
+        body += "<\(tag)\(type)\(start)><li>\(content)"
+        listLevels.append(ListLevel(id: id, level: listDepth, tag: tag))
+    }
+
     private var footnotes: [Int: String] = [:]
     private var referencedNotes: [Int] = []
     private var links: [String: String] = [:]
@@ -77,11 +113,12 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
     private var embeddedSource: String?
     private var imageDescription = ""
 
-    static func xhtml(content: Data, relationships: Data?, title: String, footnotes: Data? = nil) -> Data? {
+    static func xhtml(content: Data, relationships: Data?, title: String, footnotes: Data? = nil, numbering: Data? = nil) -> Data? {
         guard let source = String(data: content, encoding: .utf8),
               !source.localizedCaseInsensitiveContains("<!DOCTYPE") else { return nil }
         let delegate = NativeDOCXConversionMarkup()
         if let footnotes { delegate.footnotes = readFootnotes(footnotes) }
+        if let numbering { delegate.numbering = Numbering.read(numbering) }
         if let relationships, let xml = String(data: relationships, encoding: .utf8),
            !xml.localizedCaseInsensitiveContains("<!DOCTYPE") {
             let relationParser = XMLParser(data: relationships)
@@ -97,6 +134,7 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
         parser.shouldResolveExternalEntities = false
         parser.delegate = delegate
         guard parser.parse(), !delegate.body.isEmpty else { return nil }
+        delegate.closeLists()
         for id in delegate.referencedNotes {
             if let note = delegate.footnotes[id] {
                 delegate.body += "<aside id=\"word-note-\(id)\" role=\"doc-footnote\">\(note)</aside>"
@@ -125,7 +163,9 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
         if name == "body" { inBody = true }
         guard inBody else { return }
         switch name {
-        case "p": paragraph = ""; heading = nil
+        case "p": paragraph = ""; heading = nil; listID = nil; listDepth = 0
+        case "numId": listID = attributes["w:val"].flatMap(Int.init)
+        case "ilvl": listDepth = min(8, max(0, attributes["w:val"].flatMap(Int.init) ?? 0))
         case "pStyle":
             if let value = attributes["w:val"], value.lowercased().hasPrefix("heading"),
                let depth = Int(value.dropFirst("heading".count)), (1...6).contains(depth) { heading = depth }
@@ -154,7 +194,7 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
         case "t": textDepth += 1
         case "tab": run += "&#9;"
         case "br": run += "<br/>"
-        case "tbl": tables.append(Table())
+        case "tbl": closeLists(); tables.append(Table())
         case "tr":
             if !tables.isEmpty { tables[tables.count - 1].current = []; tables[tables.count - 1].header = false }
         case "tblHeader":
@@ -216,10 +256,11 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
         case "p":
             if let paragraph {
                 let tag = heading.map { "h\($0)" } ?? "p"
-                body += "<\(tag)>\(paragraph)</\(tag)>"
+                appendParagraph("<\(tag)>\(paragraph)</\(tag)>")
             }
             paragraph = nil
         case "tc":
+            closeLists()
             if !tables.isEmpty, let start = tables[tables.count - 1].cellStart {
                 let position = body.utf8.index(body.utf8.startIndex, offsetBy: start)
                 let content = String(body[position...])
@@ -243,6 +284,74 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
 
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         if textDepth > 0 && ignoredDepth == 0 { run += escape(string) }
+    }
+
+    private final class Numbering: NSObject, XMLParserDelegate {
+        struct Level {
+            var start = 1
+            var format = "decimal"
+        }
+        private var definitions: [Int: [Int: Level]] = [:]
+        private var instances: [Int: Int] = [:]
+        private var restarts: [Int: [Int: Int]] = [:]
+        private var overrides: [Int: [Int: Level]] = [:]
+        private var abstractID: Int?
+        private var numID: Int?
+        private var depth: Int?
+        private var overrideDepth: Int?
+        private var level = Level()
+
+        static func read(_ data: Data) -> Numbering? {
+            guard let text = String(data: data, encoding: .utf8),
+                  !text.localizedCaseInsensitiveContains("<!DOCTYPE") else { return nil }
+            let parser = XMLParser(data: data)
+            let reader = Numbering()
+            parser.shouldProcessNamespaces = true
+            parser.shouldResolveExternalEntities = false
+            parser.delegate = reader
+            return parser.parse() ? reader : nil
+        }
+
+        func resolve(id: Int, level: Int) -> Level? {
+            guard let abstract = instances[id],
+                  var definition = overrides[id]?[level] ?? definitions[abstract]?[level],
+                  definition.format != "none" else { return nil }
+            if let start = restarts[id]?[level] { definition.start = start }
+            return definition
+        }
+
+        func parser(_ parser: XMLParser, didStartElement name: String, namespaceURI: String?,
+                    qualifiedName: String?, attributes: [String: String]) {
+            if Task.isCancelled { parser.abortParsing(); return }
+            guard namespaceURI == NativeDOCXConversionMarkup.word else { return }
+            let value = attributes["w:val"]
+            switch name {
+            case "abstractNum": abstractID = attributes["w:abstractNumId"].flatMap(Int.init)
+            case "num": numID = attributes["w:numId"].flatMap(Int.init)
+            case "abstractNumId": if let numID { instances[numID] = value.flatMap(Int.init) }
+            case "lvlOverride": overrideDepth = attributes["w:ilvl"].flatMap(Int.init)
+            case "startOverride":
+                if let numID, let overrideDepth { restarts[numID, default: [:]][overrideDepth] = value.flatMap(Int.init) }
+            case "lvl": depth = attributes["w:ilvl"].flatMap(Int.init); level = Level()
+            case "start": if depth != nil { level.start = value.flatMap(Int.init) ?? 1 }
+            case "numFmt": if depth != nil { level.format = value ?? "decimal" }
+            default: break
+            }
+        }
+
+        func parser(_ parser: XMLParser, didEndElement name: String, namespaceURI: String?, qualifiedName: String?) {
+            guard namespaceURI == NativeDOCXConversionMarkup.word else { return }
+            switch name {
+            case "abstractNum": abstractID = nil
+            case "num": numID = nil
+            case "lvlOverride": overrideDepth = nil
+            case "lvl":
+                if let abstractID, let depth { definitions[abstractID, default: [:]][depth] = level }
+                if let numID, let overrideDepth { overrides[numID, default: [:]][overrideDepth] = level }
+                depth = nil
+            default: break
+            }
+        }
     }
 
     private static func readFootnotes(_ data: Data) -> [Int: String] {

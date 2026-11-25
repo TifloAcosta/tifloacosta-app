@@ -256,6 +256,10 @@ struct DocumentConversionSmoke {
         let richDOCX = try NativeDocumentConversion.convert(reopened, to: .docx, in: richOutput)
         let richWord = try members(richDOCX)
         let wordXML = richWord["word/document.xml"]!
+        let wordNumbering = richWord["word/numbering.xml"]!
+        xml(wordNumbering)
+        precondition(wordXML.contains("<w:numPr>") && wordNumbering.contains("upperRoman") &&
+            wordNumbering.contains("<w:start w:val=\"7\"/>"))
         xml(wordXML)
         precondition(wordXML.contains("<w:tbl>") && wordXML.contains("descr=\"Imagen de prueba\"") &&
             wordXML.contains("<w:lang w:val=\"fr\""))
@@ -264,6 +268,8 @@ struct DocumentConversionSmoke {
         let wordAgain = try NativeDocumentConversion.convert(readWord, to: .epub,
             in: richOutput.appendingPathComponent("docx-roundtrip"))
         let wordRoundtrip = try members(wordAgain, mime: "application/epub+zip")["EPUB/book.xhtml"]!
+        precondition(wordRoundtrip.contains("<ol start=\"3\" type=\"I\">") &&
+            wordRoundtrip.contains("<ol start=\"7\" type=\"I\">"))
         precondition(wordRoundtrip.contains("<table>") && wordRoundtrip.contains("alt=\"Imagen de prueba\""))
         let richRTF = try NativeDocumentConversion.convert(reopened, to: .rtf, in: richOutput)
         let rtfMarkup = try String(contentsOf: richRTF, encoding: .utf8)

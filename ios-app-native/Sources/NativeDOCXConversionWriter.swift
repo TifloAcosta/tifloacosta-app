@@ -7,7 +7,18 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
         let relationships: String
         let assets: [NativeConversionMarkup.Asset]
         let footnotes: String?
+        let numbering: String?
     }
+
+    private struct List {
+        var id: Int
+        let level: Int
+        let format: String
+        var next: Int
+    }
+    private var lists: [List] = []
+    private var numbering: [(level: Int, format: String, start: Int)] = []
+    private var pendingList: String?
 
     private let escape = NativeDocumentConversion.xml
     private var body = ""
@@ -67,7 +78,13 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
             return "<w:footnote w:id=\"\(id)\">\(content)</w:footnote>"
         }.joined()
         let footnotes = notes.isEmpty ? nil : "<w:footnotes xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:footnote w:type=\"separator\" w:id=\"-1\"><w:p><w:r><w:separator/></w:r></w:p></w:footnote><w:footnote w:type=\"continuationSeparator\" w:id=\"0\"><w:p><w:r><w:continuationSeparator/></w:r></w:p></w:footnote>\(notes)</w:footnotes>"
-        return Result(body: body, relationships: relationships, assets: images.values.sorted { $0.path < $1.path }, footnotes: footnotes)
+        let abstracts = numbering.enumerated().map { index, list in
+            let marker = list.format == "bullet" ? "•" : "%\(list.level + 1)."
+            return "<w:abstractNum w:abstractNumId=\"\(index)\"><w:multiLevelType w:val=\"multilevel\"/><w:lvl w:ilvl=\"\(list.level)\"><w:start w:val=\"\(list.start)\"/><w:numFmt w:val=\"\(list.format)\"/><w:lvlText w:val=\"\(marker)\"/><w:pPr><w:ind w:left=\"\((list.level + 1) * 360)\" w:hanging=\"240\"/></w:pPr></w:lvl></w:abstractNum>"
+        }.joined()
+        let instances = numbering.indices.map { "<w:num w:numId=\"\($0 + 1)\"><w:abstractNumId w:val=\"\($0)\"/></w:num>" }.joined()
+        let numberingXML = numbering.isEmpty ? nil : "<w:numbering xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\">\(abstracts)\(instances)</w:numbering>"
+        return Result(body: body, relationships: relationships, assets: images.values.sorted { $0.path < $1.path }, footnotes: footnotes, numbering: numberingXML)
     }
 
     private func appendMergeContinuations() {
@@ -86,7 +103,14 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
 
     private func openParagraph(_ properties: String = "") {
         guard !paragraph else { return }
-        body += "<w:p>\(properties)"
+        body += "<w:p>"
+        if let pendingList {
+            let style = properties.replacingOccurrences(of: "<w:pPr>", with: "").replacingOccurrences(of: "</w:pPr>", with: "")
+            body += "<w:pPr>\(style)\(pendingList)</w:pPr>"
+            self.pendingList = nil
+        } else {
+            body += properties
+        }
         paragraph = true
     }
 
@@ -129,6 +153,29 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
             closeParagraph()
             openParagraph("<w:pPr><w:pStyle w:val=\"Heading\(tag.suffix(1))\"/></w:pPr>")
             end = "paragraph"
+        case "ol", "ul":
+            if pendingList != nil { openParagraph() }
+            closeParagraph()
+            let level = min(lists.count, 8)
+            let formats = ["I": "upperRoman", "i": "lowerRoman", "A": "upperLetter", "a": "lowerLetter"]
+            let format = tag == "ul" ? "bullet" : formats[attributes["type"] ?? ""] ?? "decimal"
+            let start = max(1, attributes["start"].flatMap(Int.init) ?? 1)
+            numbering.append((level, format, start))
+            lists.append(List(id: numbering.count, level: level, format: format, next: start))
+            end = "list"
+        case "li":
+            closeParagraph()
+            if var list = lists.last {
+                let value = max(1, attributes["value"].flatMap(Int.init) ?? list.next)
+                if list.format != "bullet", value != list.next {
+                    numbering.append((list.level, list.format, value))
+                    list.id = numbering.count
+                }
+                list.next = min(value, Int.max - 1) + 1
+                lists[lists.count - 1] = list
+                pendingList = "<w:numPr><w:ilvl w:val=\"\(list.level)\"/><w:numId w:val=\"\(list.id)\"/></w:numPr>"
+            }
+            end = "item"
         case "table":
             closeParagraph()
             body += "<w:tbl><w:tblPr><w:tblW w:w=\"0\" w:type=\"auto\"/></w:tblPr><w:tblGrid/>"
@@ -224,6 +271,10 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
         guard let end = closing.popLast() else { return }
         switch end {
         case "paragraph": closeParagraph()
+        case "item":
+            if pendingList != nil { openParagraph() }
+            closeParagraph()
+        case "list": _ = lists.popLast()
         case "cell":
             if paragraph { closeParagraph() }
             else if !body.hasSuffix("</w:p>") { body += "<w:p/>" }

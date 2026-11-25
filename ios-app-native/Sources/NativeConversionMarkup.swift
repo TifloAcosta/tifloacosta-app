@@ -60,10 +60,14 @@ enum NativeConversionMarkup {
             if let entry = archive["word/footnotes.xml"], entry.type == .file {
                 footnotes = try entryData(entry, in: archive, limit: maximumTextBytes / 4)
             } else { footnotes = nil }
+            let numbering: Data?
+            if let entry = archive["word/numbering.xml"], entry.type == .file {
+                numbering = try entryData(entry, in: archive, limit: maximumTextBytes / 4)
+            } else { numbering = nil }
             guard let entry = archive["word/document.xml"], entry.type == .file,
                   let content = try entryData(entry, in: archive, limit: maximumTextBytes),
                   let xhtml = NativeDOCXConversionMarkup.xhtml(content: content, relationships: relationships,
-                    title: input.title, footnotes: footnotes) else { return nil }
+                    title: input.title, footnotes: footnotes, numbering: numbering) else { return nil }
             return try parse([(path: "word/book.xhtml", data: xhtml)], fallbackTitle: input.title,
                              packageImages: [.epub, .odt, .rtf, .docx, .pdf].contains(format)) { href, chapter in
                 guard let path = member(href, relativeTo: chapter), path.hasPrefix("word/media/"),

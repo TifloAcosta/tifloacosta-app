@@ -125,6 +125,21 @@ private enum AccessibleCinemaDirectory {
               address: URL(string: "https://www.raiplaysound.it/generi/audiodescrizioni-film-fiction-programmi-c31adf5d-25c7-459a-9081-66a669298a39.html"),
               access: "Colección oficial de audiodescripción.",
               description: "", geographicNotice: "Acceso sujeto a derechos territoriales.", isAudioOnly: true),
+        .init(id: "cineaudioteca", name: "Cineaudioteca Senza Barriere",
+              languages: [.italian], kinds: [.film, .series, .documentary],
+              address: URL(string: "https://www.cineaudioteca.it/catalogo_lista.php"),
+              access: "Registro e inicio de sesión en el servicio original.",
+              description: "", geographicNotice: "", isAudioOnly: true),
+        .init(id: "tela-brasil", name: "Tela Brasil",
+              languages: [.portuguese], kinds: [.film, .documentary, .short],
+              address: URL(string: "https://telabrasil.cultura.gov.br/"),
+              access: "Registro e inicio de sesión en el servicio original.",
+              description: "", geographicNotice: "Acceso sujeto a derechos territoriales.", isAudioOnly: false),
+        .init(id: "rtp-play", name: "RTP Play",
+              languages: [.portuguese], kinds: [.film, .series, .documentary],
+              address: URL(string: "https://acessibilidades.rtp.pt/audiodescricao/"),
+              access: "Colección oficial de audiodescripción.",
+              description: "", geographicNotice: "Acceso sujeto a derechos territoriales.", isAudioOnly: false),
         .init(id: "tubi", name: "Tubi (EE. UU.)",
               languages: [.english], kinds: [.film, .series],
               address: URL(string: "https://tubitv.com/category/audio_description"),
@@ -477,6 +492,16 @@ struct NativeAccessibleCinemaScreen: View {
                                      destination: originalFolder)
                                     .frame(minHeight: 44, alignment: .leading)
                             }
+                        }
+                        if source.id == "cineaudioteca" {
+                            Link("Ascolto online", destination: URL(string: "https://www.cineaudioteca.it/login_catalogo.php")!)
+                                .frame(minHeight: 44, alignment: .leading)
+                            Link("Come iscriversi", destination: URL(string: "https://www.cineaudioteca.it/come_iscriversi.php")!)
+                                .frame(minHeight: 44, alignment: .leading)
+                        }
+                        if source.id == "rtp-play" {
+                            Link("RTP Play", destination: URL(string: "https://www.rtp.pt/play/")!)
+                                .frame(minHeight: 44, alignment: .leading)
                         }
                         if source.id == "rai-play-sound" {
                             NavigationLink("Explorar catálogo audiodescrito") {

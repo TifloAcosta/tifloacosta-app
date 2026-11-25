@@ -6,6 +6,9 @@ static int attach_link(qpdf_data pdf, qpdf_oh tree, qpdf_oh numbers,
                        qpdf_oh page, qpdf_oh annotation, long long key) {
     if (!qpdf_oh_is_indirect(pdf, tree) || !qpdf_oh_is_indirect(pdf, page) ||
         !qpdf_oh_is_indirect(pdf, annotation)) return 0;
+    qpdf_oh document = qpdf_oh_get_key(pdf, tree, "/K");
+    if (qpdf_oh_is_indirect(pdf, document) && qpdf_oh_is_dictionary(pdf, document) &&
+        qpdf_oh_is_name_and_equals(pdf, qpdf_oh_get_key(pdf, document, "/S"), "/Document")) tree = document;
     qpdf_oh kids = qpdf_oh_get_key(pdf, tree, "/K");
     if (!qpdf_oh_is_array(pdf, kids)) {
         qpdf_oh earlier = kids;
@@ -30,6 +33,61 @@ static int attach_link(qpdf_data pdf, qpdf_oh tree, qpdf_oh numbers,
     qpdf_oh_append_item(pdf, numbers, node);
     qpdf_oh_append_item(pdf, kids, node);
     return 1;
+}
+
+// Quartz writes page-local MCIDs and their structure elements but may omit
+// the reverse lookup required by readers and validators.
+static void complete_quartz_parent_tree(qpdf_data pdf, qpdf_oh tree, int pages) {
+    if (!qpdf_oh_is_null(pdf, qpdf_oh_get_key(pdf, tree, "/ParentTree"))) return;
+    qpdf_oh document = qpdf_oh_get_key(pdf, tree, "/K");
+    if (!qpdf_oh_is_dictionary(pdf, document)) return;
+    qpdf_oh children = qpdf_oh_get_key(pdf, document, "/K");
+    if (!qpdf_oh_is_array(pdf, children) || pages < 1 || pages > 100000) return;
+
+    int count = qpdf_oh_get_array_n_items(pdf, children);
+    qpdf_oh page_refs = qpdf_oh_new_array(pdf);
+    qpdf_oh numbers = qpdf_oh_new_array(pdf);
+    for (int i = 0; i < pages; ++i) {
+        qpdf_oh refs = qpdf_oh_new_array(pdf);
+        qpdf_oh_append_item(pdf, page_refs, refs);
+    }
+    int page_index = 0;
+    long long allocated_slots = 0;
+    qpdf_oh page = qpdf_get_page_n(pdf, page_index);
+    for (int i = 0; i < count; ++i) {
+        qpdf_oh child = qpdf_oh_get_array_item(pdf, children, i);
+        if (!qpdf_oh_is_indirect(pdf, child) || !qpdf_oh_is_dictionary(pdf, child)) return;
+        qpdf_oh content = qpdf_oh_get_key(pdf, child, "/K");
+        qpdf_oh child_page = qpdf_oh_get_key(pdf, child, "/Pg");
+        if (!qpdf_oh_is_integer(pdf, content) || !qpdf_oh_is_indirect(pdf, child_page)) return;
+        while (qpdf_oh_get_object_id(pdf, page) != qpdf_oh_get_object_id(pdf, child_page)) {
+            if (++page_index >= pages) return;
+            page = qpdf_get_page_n(pdf, page_index);
+        }
+        long long mcid = qpdf_oh_get_int_value(pdf, content);
+        if (mcid < 0 || mcid >= 100000) return;
+        qpdf_oh refs = qpdf_oh_get_array_item(pdf, page_refs, page_index);
+        int existing = qpdf_oh_get_array_n_items(pdf, refs);
+        if (existing <= mcid) {
+            allocated_slots += mcid + 1 - existing;
+            if (allocated_slots > 1000000) return;
+            for (long long j = existing; j <= mcid; ++j)
+                qpdf_oh_append_item(pdf, refs, qpdf_oh_new_null(pdf));
+        }
+        if (!qpdf_oh_is_null(pdf, qpdf_oh_get_array_item(pdf, refs, (int)mcid))) return;
+        qpdf_oh_set_array_item(pdf, refs, (int)mcid, child);
+    }
+    if (!count) return;
+    for (int i = 0; i < pages; ++i) {
+        qpdf_oh refs = qpdf_oh_get_array_item(pdf, page_refs, i);
+        if (qpdf_oh_get_array_n_items(pdf, refs) == 0) continue;
+        qpdf_oh_replace_key(pdf, qpdf_get_page_n(pdf, i), "/StructParents", qpdf_oh_new_integer(pdf, i));
+        qpdf_oh_append_item(pdf, numbers, qpdf_oh_new_integer(pdf, i));
+        qpdf_oh_append_item(pdf, numbers, refs);
+    }
+    qpdf_oh parent_tree = qpdf_make_indirect_object(pdf, qpdf_oh_new_dictionary(pdf));
+    qpdf_oh_replace_key(pdf, parent_tree, "/Nums", numbers);
+    qpdf_oh_replace_key(pdf, tree, "/ParentTree", parent_tree);
 }
 
 int tiflo_pdf_postprocess(const char *input, const char *output, const char *language,
@@ -71,6 +129,7 @@ int tiflo_pdf_postprocess(const char *input, const char *output, const char *lan
     qpdf_oh numbers = 0;
     long long next_key = 0;
     if (qpdf_oh_is_dictionary(pdf, tree)) {
+        complete_quartz_parent_tree(pdf, tree, pages);
         qpdf_oh parent_tree = qpdf_oh_get_key(pdf, tree, "/ParentTree");
         if (qpdf_oh_is_dictionary(pdf, parent_tree) &&
             qpdf_oh_is_null(pdf, qpdf_oh_get_key(pdf, parent_tree, "/Kids")) &&

@@ -45,10 +45,45 @@ enum NativeRTFConversionMarkup {
         var body = ""
         var offset = 0
         var levels: [ListLevel] = []
+        var tables: [NSTextTableBlock] = []
+        func closeLists() {
+            while let level = levels.popLast() { body += "</li></\(level.tag)>" }
+        }
+        func closeTables(from index: Int) {
+            while tables.count > index {
+                _ = tables.popLast()
+                body += "</td></tr></table>"
+            }
+        }
         while offset < text.length {
             try Task.checkCancellation()
             let paragraph = text.paragraphRange(for: NSRange(location: offset, length: 0))
             let style = original.attribute(.paragraphStyle, at: paragraph.location, effectiveRange: nil) as? NSParagraphStyle
+            let blocks = (style?.textBlocks ?? []).compactMap { $0 as? NSTextTableBlock }
+            let sharedCells = zip(tables, blocks).prefix {
+                $0.0.table === $0.1.table && $0.0.startingRow == $0.1.startingRow &&
+                $0.0.startingColumn == $0.1.startingColumn
+            }.count
+            if sharedCells != tables.count || sharedCells != blocks.count {
+                closeLists()
+                let sharedTable = sharedCells < tables.count && sharedCells < blocks.count &&
+                    tables[sharedCells].table === blocks[sharedCells].table
+                closeTables(from: sharedCells + (sharedTable ? 1 : 0))
+                for index in sharedCells..<blocks.count {
+                    let block = blocks[index]
+                    if sharedTable && index == sharedCells {
+                        if tables[index].startingRow == block.startingRow { body += "</td>" }
+                        else { body += "</td></tr><tr>" }
+                        tables[index] = block
+                    } else {
+                        body += "<table><tr>"
+                        tables.append(block)
+                    }
+                    let width = block.columnSpan > 1 ? " colspan=\"\(block.columnSpan)\"" : ""
+                    let height = block.rowSpan > 1 ? " rowspan=\"\(block.rowSpan)\"" : ""
+                    body += "<td\(width)\(height)>"
+                }
+            }
             let nativeLists = style?.textLists ?? []
             let kinds = nativeLists.compactMap(listKind)
             let supportedLists = kinds.count == nativeLists.count ? nativeLists : []
@@ -108,7 +143,8 @@ enum NativeRTFConversionMarkup {
             body += "</p>"
             offset = NSMaxRange(paragraph)
         }
-        while let level = levels.popLast() { body += "</li></\(level.tag)>" }
+        closeLists()
+        closeTables(from: 0)
         try Task.checkCancellation()
         return Data("<html><head><title>\(escape(title))</title></head><body>\(body)</body></html>".utf8)
     }

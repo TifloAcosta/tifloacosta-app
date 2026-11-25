@@ -340,6 +340,7 @@ struct DocumentConversionSmoke {
             precondition(CGPDFDictionaryGetDictionary(structuredCG.catalog!, "StructTreeRoot", &rootTag))
             var imageAlternative = false
             var columnScope = false
+            var noteID: String?
             func roles(_ node: CGPDFDictionaryRef) -> Set<String> {
                 var result: Set<String> = []
                 var entry: UnsafePointer<CChar>?
@@ -351,6 +352,11 @@ struct DocumentConversionSmoke {
                     if role == "TH", CGPDFDictionaryGetDictionary(node, "A", &attributes), let attributes,
                        CGPDFDictionaryGetName(attributes, "Scope", &scope), let scope, String(cString: scope) == "Column" {
                         columnScope = true
+                    }
+                    var identifier: CGPDFStringRef?
+                    if role == "Note", CGPDFDictionaryGetString(node, "ID", &identifier), let identifier,
+                       let value = CGPDFStringCopyTextString(identifier) {
+                        noteID = value as String
                     }
                     var alternative: CGPDFStringRef?
                     if role == "Figure", CGPDFDictionaryGetString(node, "Alt", &alternative), let alternative,
@@ -375,6 +381,13 @@ struct DocumentConversionSmoke {
             }
             precondition(Set(["Table", "TR", "TH", "TD", "L", "LI", "LBody", "Figure", "Caption", "Note"]).isSubset(of: roles(rootTag!)))
             precondition(imageAlternative && columnScope)
+            var idTree: CGPDFDictionaryRef?
+            var names: CGPDFArrayRef?
+            var firstName: CGPDFStringRef?
+            precondition(noteID != nil && CGPDFDictionaryGetDictionary(rootTag!, "IDTree", &idTree) &&
+                CGPDFDictionaryGetArray(idTree!, "Names", &names) &&
+                CGPDFArrayGetString(names!, 0, &firstName))
+            precondition(CGPDFStringCopyTextString(firstName!).map { $0 as String } == noteID)
             var resources: CGPDFDictionaryRef?
             var xobjects: CGPDFDictionaryRef?
             let page = structuredCG.page(at: 1)!

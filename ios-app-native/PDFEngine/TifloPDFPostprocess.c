@@ -93,7 +93,7 @@ static void complete_quartz_parent_tree(qpdf_data pdf, qpdf_oh tree, int pages, 
 
 // Quartz supplies the marked leaves. Group them in logical source order
 // without replacing the leaf objects already referenced in the ParentTree.
-static void group_marked_leaves(qpdf_data pdf, qpdf_oh document, qpdf_oh leaves,
+static void group_marked_leaves(qpdf_data pdf, qpdf_oh tree, qpdf_oh document, qpdf_oh leaves,
                                 const char *const *paths, size_t count, int (*cancelled)(void)) {
     enum { max_depth = 32, max_token = 40 };
     char previous[max_depth][max_token] = {{0}};
@@ -106,6 +106,8 @@ static void group_marked_leaves(qpdf_data pdf, qpdf_oh document, qpdf_oh leaves,
         qpdf_oh leaf = qpdf_oh_get_array_item(pdf, leaves, (int)i);
         if (!qpdf_oh_is_indirect(pdf, leaf) || !qpdf_oh_is_dictionary(pdf, leaf)) return;
     }
+    qpdf_oh note_names = 0;
+    size_t note_count = 0;
     int prior_depth = 0;
     for (size_t i = 0; i < count; ++i) {
         if (cancelled && cancelled()) return;
@@ -143,6 +145,16 @@ static void group_marked_leaves(qpdf_data pdf, qpdf_oh document, qpdf_oh leaves,
                         qpdf_oh_replace_key(pdf, item, "/A", attributes);
                     }
                 }
+                if (!strcmp(role, "/Note")) {
+                    // Fixed-width numbers keep the name tree in bytewise order.
+                    char note_id[32];
+                    snprintf(note_id, sizeof(note_id), "tiflo-note-%020zu", ++note_count);
+                    qpdf_oh name = qpdf_oh_new_unicode_string(pdf, note_id);
+                    qpdf_oh_replace_key(pdf, item, "/ID", name);
+                    if (!note_names) note_names = qpdf_oh_new_array(pdf);
+                    qpdf_oh_append_item(pdf, note_names, name);
+                    qpdf_oh_append_item(pdf, note_names, item);
+                }
                 parents[depth + 1] = item;
                 children[depth + 1] = qpdf_oh_new_array(pdf);
                 qpdf_oh_replace_key(pdf, item, "/K", children[depth + 1]);
@@ -158,6 +170,11 @@ static void group_marked_leaves(qpdf_data pdf, qpdf_oh document, qpdf_oh leaves,
         prior_depth = depth;
     }
     qpdf_oh_replace_key(pdf, document, "/K", children[0]);
+    if (note_names) {
+        qpdf_oh id_tree = qpdf_make_indirect_object(pdf, qpdf_oh_new_dictionary(pdf));
+        qpdf_oh_replace_key(pdf, id_tree, "/Names", note_names);
+        qpdf_oh_replace_key(pdf, tree, "/IDTree", id_tree);
+    }
 }
 
 int tiflo_pdf_postprocess(const char *input, const char *output, const char *language,
@@ -266,7 +283,7 @@ int tiflo_pdf_postprocess(const char *input, const char *output, const char *lan
         (size_t)qpdf_oh_get_array_n_items(pdf, elements) == owner_count) {
         for (size_t i = 0; i < path_count; ++i) {
             if (paths[i] && paths[i][0]) {
-                group_marked_leaves(pdf, document, elements, paths, path_count, cancelled);
+                group_marked_leaves(pdf, tree, document, elements, paths, path_count, cancelled);
                 break;
             }
         }

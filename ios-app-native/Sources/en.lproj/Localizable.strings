@@ -1495,3 +1495,6 @@
 "Desconocida" = "Unknown";
 "No se pudo recuperar la posición de reproducción." = "Could not restore the playback position.";
 "No se ha podido recuperar esta obra del catálogo actual." = "This work could not be retrieved from the current catalogue.";
+
+"No hay obras en el historial." = "There are no works in the history.";
+"No hay resultados confirmados. Consulta también las plataformas originales." = "No confirmed results. Also check the original platforms.";

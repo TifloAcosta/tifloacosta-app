@@ -1493,3 +1493,6 @@
 "Desconocida" = "Desconhecida";
 "No se pudo recuperar la posición de reproducción." = "Não foi possível recuperar a posição de reprodução.";
 "No se ha podido recuperar esta obra del catálogo actual." = "Não foi possível recuperar esta obra do catálogo atual.";
+
+"No hay obras en el historial." = "Não há obras no histórico.";
+"No hay resultados confirmados. Consulta también las plataformas originales." = "Não há resultados confirmados. Consulta também as plataformas originais.";

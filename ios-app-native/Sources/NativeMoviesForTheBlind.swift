@@ -50,9 +50,8 @@ struct NativeMoviesForTheBlindWork: Identifiable {
             groups[key, default: []].append((number, total, episode))
         }
         return groups.compactMap { key, values -> Self? in
-            guard let total = values.first?.1, values.allSatisfy({ $0.1 == total }),
-                  values.count == total, Set(values.map { $0.0 }) == Set(1...total) else { return nil }
-            return Self(id: key, title: titles[key] ?? key, parts: values.sorted { $0.0 < $1.0 }.map { $0.2 })
+            guard let parts = NativeCinemaRules.orderedParts(values) else { return nil }
+            return Self(id: key, title: titles[key] ?? key, parts: parts)
         }.sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
     }
 }
@@ -71,7 +70,7 @@ struct NativeMoviesForTheBlindScreen: View {
         _works = State(initialValue: initialWorks)
     }
     private var filtered: [NativeMoviesForTheBlindWork] {
-        works.filter { search.isEmpty || $0.title.localizedStandardContains(search) }
+        works.filter { NativeCinemaRules.matches(search, fields: [$0.title]) }
     }
     var body: some View {
         List {
@@ -84,7 +83,8 @@ struct NativeMoviesForTheBlindScreen: View {
             }
             if playbackFailed { Text("No se pudo reproducir este archivo. Comprueba que el formato es compatible.") }
             if loading { ProgressView("Actualizando catálogo") }
-            if failed { Text("No se ha podido actualizar el catálogo.") }
+            if failed { Text("No se ha podido actualizar el catálogo.").accessibilityAddTraits(.updatesFrequently) }
+            if !loading && !failed && filtered.isEmpty && !works.isEmpty { Text("No se encontraron obras en los catálogos consultados.") }
             Button("Actualizar catálogo") { Task { await refresh() } }.disabled(loading)
             ForEach(filtered) { work in
                 Section {
@@ -98,7 +98,7 @@ struct NativeMoviesForTheBlindScreen: View {
                             } catch { playbackFailed = true }
                         }
                     }
-                } header: { Text(work.title) }
+                } header: { Text(work.title).accessibilityAddTraits(.isHeader) }
             }
         }
         .navigationTitle(Text(verbatim: "Movies for the Blind"))

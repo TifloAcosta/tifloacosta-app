@@ -85,6 +85,13 @@ jobs:
             ios-app-native/tests/acoustid-controlled-smoke.swift \
             -o "$RUNNER_TEMP/acoustid-controlled-check"
           "$RUNNER_TEMP/acoustid-controlled-check"
+      - name: Probar reglas funcionales de Multicines con Swift real
+        run: |
+          set -euo pipefail
+          swiftc ios-app-native/Sources/NativeCinemaRules.swift \
+            ios-app-native/tests/cinema-functional-smoke.swift \
+            -o "$RUNNER_TEMP/cinema-functional-check"
+          "$RUNNER_TEMP/cinema-functional-check"
       - name: Abrir y verificar los once formatos de conversión local
         env:
           CONVERSION_SAMPLES_DIR: ${{ runner.temp }}/conversion-samples

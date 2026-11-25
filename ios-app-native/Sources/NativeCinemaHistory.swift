@@ -39,6 +39,7 @@ struct NativeCinemaRecent: Codable, Identifiable {
 final class NativeCinemaRecentStore: ObservableObject {
     static let shared = NativeCinemaRecentStore()
     @Published private(set) var entries: [NativeCinemaRecent] = []
+    private var suppressedKeys = Set<String>()
     private let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         .appendingPathComponent("cinema-recent-v1.json")
     init() {
@@ -54,10 +55,10 @@ final class NativeCinemaRecentStore: ObservableObject {
         }
     }
     func remember(key: String, source: String, title: String, seconds: Double, duration: Double) {
-        guard !key.isEmpty, !source.isEmpty, seconds.isFinite, duration.isFinite else { return }
-        entries.removeAll { $0.id == key }
-        entries.insert(.init(id: key, source: source, title: title, seconds: seconds, duration: duration, finished: false), at: 0)
-        entries = Array(entries.prefix(100))
+        guard !key.isEmpty, !source.isEmpty, !suppressedKeys.contains(key),
+              seconds.isFinite, duration.isFinite, seconds >= 0, duration >= 0 else { return }
+        entries = NativeCinemaRules.upsert(NativeCinemaRecent(id: key, source: source, title: title,
+            seconds: seconds, duration: duration, finished: false), in: entries)
         persist()
     }
     func markFinished(key: String) {
@@ -66,9 +67,14 @@ final class NativeCinemaRecentStore: ObservableObject {
         entries[index].seconds = 0
         persist()
     }
-    func remove(_ key: String) { entries.removeAll { $0.id == key }; persist() }
-    func clear() { entries = []; persist() }
-    func removeSource(_ source: String) { entries.removeAll { $0.source == source }; persist() }
+    func allow(key: String) { suppressedKeys.remove(key) }
+    func remove(_ key: String) { suppressedKeys.insert(key); entries.removeAll { $0.id == key }; persist() }
+    func clear() { suppressedKeys.formUnion(entries.map(\.id)); entries = []; persist() }
+    func removeSource(_ source: String) {
+        suppressedKeys.formUnion(entries.filter { $0.source == source }.map(\.id))
+        entries.removeAll { $0.source == source }
+        persist()
+    }
 }
 
 @MainActor
@@ -102,14 +108,24 @@ struct NativeCinemaHistoryScreen: View {
     var body: some View {
         List {
             ForEach(store.entries) { recent in
-                NavigationLink(recent.title + " — " + MusicLocalized.message(recent.providerName)) {
+                NavigationLink {
                     NativeCinemaResumeScreen(recent: recent)
+                } label: {
+                    VStack(alignment: .leading) {
+                        Text(recent.title)
+                        Text(MusicLocalized.message(recent.providerName))
+                        if recent.finished { Text("Finalizado") }
+                        else { Text(MusicLocalized.format("Posición: %@. Duración: %@.", NativeCinemaTransportControls.clock(recent.seconds),
+                            recent.duration > 0 ? NativeCinemaTransportControls.clock(recent.duration) : MusicLocalized.message("Desconocida"))) }
+                    }.accessibilityElement(children: .combine)
                 }
                 .swipeActions { Button("Eliminar", role: .destructive) { store.remove(recent.id) } }
                 .accessibilityAction(named: Text("Eliminar del historial")) { store.remove(recent.id) }
             }
+            if store.entries.isEmpty { Text("No hay obras en el historial.") }
             if !store.entries.isEmpty { Button("Borrar historial", role: .destructive) { confirm = true } }
         }
+        .tifloScreenSurface()
         .navigationTitle("Historial de Multicines")
         .confirmationDialog("¿Borrar el historial de Multicines?", isPresented: $confirm, titleVisibility: .visible) {
             Button("Borrar historial", role: .destructive) { store.clear() }
@@ -172,6 +188,7 @@ struct NativeCinemaResumeScreen: View {
                 Button("Reintentar") { Task { await resolve() } }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle(recent.title)
         .task { await resolve() }
     }

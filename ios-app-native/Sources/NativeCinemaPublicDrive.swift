@@ -309,10 +309,13 @@ extension NativeCinemaPublicDrive {
             }
             let category = Self.searchCategory(path: path)
             for entry in page.entries {
+                if result.hits.count >= 100 { result.incomplete = true; break }
                 if entry.isFolder {
                     if seenFolders.insert(entry.id).inserted { queue.append((path + [entry], nil)) }
+                } else if entry.isSupportedMedia && kind != .all && category == nil {
+                    if NativeCinemaRules.matches(term, fields: [entry.name]) { result.incomplete = true }
                 } else if entry.isSupportedMedia && (kind == .all || kind == category)
-                    && entry.name.localizedStandardContains(term) && seenFiles.insert(entry.id).inserted {
+                    && NativeCinemaRules.matches(term, fields: [entry.name]) && seenFiles.insert(entry.id).inserted {
                     result.hits.append(.init(sourceID: sourceID, entry: entry, path: path, pageCursor: cursor))
                 }
             }

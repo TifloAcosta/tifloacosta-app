@@ -212,6 +212,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         buffering = true
         if pendingRestore == nil { player?.play() }
         beginProgressTracking(library: library)
+        NativeCinemaRecentStore.shared.allow(key: historyKey)
         save(library: library, force: true)
         updateNowPlaying()
     }
@@ -259,6 +260,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         buffering = true
         if pendingRestore == nil { player?.play() }
         beginProgressTracking(library: library)
+        NativeCinemaRecentStore.shared.allow(key: historyKey)
         save(library: library, force: true)
         updateNowPlaying()
     }
@@ -304,6 +306,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         buffering = true
         if pendingRestore == nil { player?.play() }
         beginProgressTracking(library: library)
+        NativeCinemaRecentStore.shared.allow(key: historyKey)
         save(library: library, force: true)
         updateNowPlaying()
     }
@@ -358,6 +361,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         buffering = true
         if pendingRestore == nil { player?.play() }
         beginProgressTracking(library: library)
+        NativeCinemaRecentStore.shared.allow(key: historyKey)
         save(library: library, force: true)
         updateNowPlaying()
     }
@@ -402,7 +406,8 @@ final class NativeCinemaAudioPlayer: ObservableObject {
             endObserver = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
                 object: item, queue: .main) { [weak self, weak library] _ in
                 Task { @MainActor [weak self, weak library] in
-                    guard let self, let library, self.player?.currentItem === item else { return }
+                    guard let self, let library, self.player?.currentItem === item,
+                          self.playing, NativeRemotePlaybackOwner.current == .cinema else { return }
                     self.finished(library: library)
                 }
             }
@@ -440,8 +445,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
     func seek(by delta: Double, library: NativeCinemaLocalLibrary) {
         guard let player, playbackError == nil, player.currentItem?.status == .readyToPlay,
               pendingRestore == nil, seekToken == nil else { return }
-        let next = max(0, min(duration > 0 ? duration : Double.greatestFiniteMagnitude, seconds + delta))
-        guard next.isFinite else { return }
+        guard let next = NativeCinemaRules.seekTarget(position: seconds, delta: delta, duration: duration) else { return }
         completed = false
         performSeek(next, library: library)
     }
@@ -457,7 +461,8 @@ final class NativeCinemaAudioPlayer: ObservableObject {
                 self.seekToken = nil
                 if success {
                     let actual = player.currentTime().seconds
-                    if actual.isFinite && actual >= 0 { self.seconds = actual }
+                    if self.completed { self.seconds = 0 }
+                    else if actual.isFinite && actual >= 0 { self.seconds = actual }
                     self.save(library: library, force: true)
                     if self.playing && NativeRemotePlaybackOwner.current == .cinema { player.play() }
                 } else {

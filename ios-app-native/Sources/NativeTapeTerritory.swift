@@ -19,7 +19,7 @@ struct NativeTapeTerritoryCatalogue: Decodable {
             guard slug.range(of: #"^[a-z0-9-]+$"#, options: .regularExpression) != nil else { return nil }
             return versions.first {
                 $0.id == "described" && $0.url.scheme == "https" &&
-                $0.url.host == "tapeterritory.com" && $0.url.port == nil && $0.url.user == nil &&
+                $0.url.host == "tapeterritory.com" && $0.url.port == nil && $0.url.user == nil && $0.url.password == nil && $0.url.fragment == nil &&
                 $0.url.path == "/apple/\(slug)/described.m3u8"
             }?.url
         }
@@ -61,7 +61,7 @@ struct NativeTapeTerritoryScreen: View {
     private var matches: [NativeTapeTerritoryCatalogue.Film] {
         let term = query.trimmingCharacters(in: .whitespacesAndNewlines)
         return films.filter {
-            term.isEmpty || $0.title.localizedStandardContains(term) || String($0.year).contains(term)
+            NativeCinemaRules.matches(term, fields: [$0.title, String($0.year)])
         }
     }
 
@@ -74,6 +74,7 @@ struct NativeTapeTerritoryScreen: View {
                 Text("No se pudo abrir Tape Territory.").accessibilityAddTraits(.updatesFrequently)
                 Button("Reintentar") { Task { await load() } }
             }
+            if !loading && !failed && !films.isEmpty && matches.isEmpty { Text("No se encontraron obras en los catálogos consultados.") }
             ForEach(matches) { film in
                 Section {
                     if let synopsis = film.synopsis, !synopsis.isEmpty { Text(synopsis) }
@@ -91,7 +92,7 @@ struct NativeTapeTerritoryScreen: View {
                         NativeCinemaTransportControls(player: player, library: library)
                     }
                 } header: {
-                    Text("\(film.title) (\(String(film.year)))")
+                    Text("\(film.title) (\(String(film.year)))").accessibilityAddTraits(.isHeader)
                 }
             }
         }

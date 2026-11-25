@@ -243,6 +243,8 @@ private enum AccessibleCinemaDirectory {
 struct NativeAccessibleCinemaScreen: View {
     @State private var searchText = ""
     @State private var audiocinematecaResults: [NativeAudiocinematecaCatalogueIndex.Entry] = []
+    @State private var audioAccountStamp: String?
+    @State private var consultedCatalogues = 0
     @State private var cinemaSearchLimit = 50
     @State private var submittedSearch: UUID?
     @State private var remoteSearching = false
@@ -280,10 +282,13 @@ struct NativeAccessibleCinemaScreen: View {
             let typeMatches = selectedKind == .all || source.kinds.contains(selectedKind)
             let queryMatches = query.isEmpty || [MusicLocalized.message(source.name), source.description, source.detail]
                 .contains(where: { $0.localizedStandardContains(query) })
-            return languageMatches && typeMatches && queryMatches
+            return languageMatches && typeMatches && (queryMatches || remoteSearched || remoteSearching)
         }
     }
 
+    private var currentAudioStamp: String? {
+        NativeAudiocinematecaCredentials.load().map { NativeCinemaRecent.digest($0.username + "\u{0}" + $0.password) }
+    }
     private var spanishFilter: Bool {
         selectedLanguage == .all || selectedLanguage == .spain || selectedLanguage == .latino
     }
@@ -295,6 +300,7 @@ struct NativeAccessibleCinemaScreen: View {
         submittedSearch = nil
         remoteSearching = false
         remoteSearched = false
+        consultedCatalogues = 0
         tapeResults = []
         movieResults = []
         driveResults = []
@@ -304,7 +310,7 @@ struct NativeAccessibleCinemaScreen: View {
     }
     @MainActor private func performRemoteSearch(_ request: UUID) async {
         let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !term.isEmpty else { return }
+        guard !term.isEmpty, !remoteSearched else { return }
         remoteSearching = true
         defer { if submittedSearch == request { remoteSearching = false; remoteSearched = !Task.isCancelled } }
         if spanishFilter, let account = NativeAudiocinematecaCredentials.load() {
@@ -314,7 +320,9 @@ struct NativeAccessibleCinemaScreen: View {
                 guard !Task.isCancelled, submittedSearch == request else { return }
                 if let current = NativeAudiocinematecaCredentials.load(),
                    current.username == account.username, current.password == account.password {
+                    audioAccountStamp = currentAudioStamp
                     audiocinematecaResults = entries
+                    consultedCatalogues += 1
                 }
             } catch { if !Task.isCancelled, submittedSearch == request { unavailableSources.append("Audiocinemateca") } }
         }
@@ -323,13 +331,15 @@ struct NativeAccessibleCinemaScreen: View {
             do {
                 let films = try await NativeTapeTerritoryCatalogue.fetchFilms()
                 guard !Task.isCancelled, submittedSearch == request else { return }
-                tapeResults = films.filter { $0.title.localizedStandardContains(term) || String($0.year).contains(term) }
+                tapeResults = films.filter { NativeCinemaRules.matches(term, fields: [$0.title, String($0.year)]) }
+                consultedCatalogues += 1
             } catch { if !Task.isCancelled, submittedSearch == request { unavailableSources.append("Tape Territory") } }
             guard !Task.isCancelled, submittedSearch == request else { return }
             do {
                 let works = try await NativeMoviesForTheBlindWork.fetchWorks()
                 guard !Task.isCancelled, submittedSearch == request else { return }
-                movieResults = works.filter { $0.title.localizedStandardContains(term) }
+                movieResults = works.filter { NativeCinemaRules.matches(term, fields: [$0.title]) }
+                consultedCatalogues += 1
             } catch { if !Task.isCancelled, submittedSearch == request { unavailableSources.append("Movies for the Blind") } }
         }
         for (sourceID, language, name) in [
@@ -341,6 +351,7 @@ struct NativeAccessibleCinemaScreen: View {
                 let result = try await NativeCinemaPublicDrive().searchPublished(sourceID: sourceID, query: term, kind: selectedKind)
                 guard !Task.isCancelled, submittedSearch == request else { return }
                 driveResults.append(contentsOf: result.hits)
+                consultedCatalogues += 1
                 if result.incomplete { partialSources.append(name) }
             } catch { if !Task.isCancelled, submittedSearch == request { unavailableSources.append(name) } }
         }
@@ -373,8 +384,15 @@ struct NativeAccessibleCinemaScreen: View {
             if !partialSources.isEmpty {
                 Text(MusicLocalized.message("Búsqueda parcial: ") + partialSources.joined(separator: ", "))
             }
-            if remoteSearched && tapeResults.isEmpty && movieResults.isEmpty && driveResults.isEmpty && matchingAudiocinemateca.isEmpty {
-                Text("No se encontraron obras en los catálogos consultados.")
+            let resultCount = tapeResults.count + movieResults.count + driveResults.count + matchingAudiocinemateca.count
+            if remoteSearched {
+                Text(MusicLocalized.format("Resultados: %d", resultCount)).accessibilityAddTraits(.updatesFrequently)
+                if NativeCinemaRules.canDeclareEmpty(completed: remoteSearched, count: resultCount,
+                    unavailable: unavailableSources.count, partial: partialSources.count, attempted: consultedCatalogues) {
+                    Text("No se encontraron obras en los catálogos consultados.")
+                } else if resultCount == 0 {
+                    Text("No hay resultados confirmados. Consulta también las plataformas originales.")
+                }
             }
             Text("Los servicios externos se consultan en su plataforma original. La búsqueda de Google Drive es limitada y puede no abarcar todas las carpetas.")
                 .font(.footnote)
@@ -383,7 +401,7 @@ struct NativeAccessibleCinemaScreen: View {
 
     private var matchingAudiocinemateca: [NativeAudiocinematecaCatalogueIndex.Entry] {
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !query.isEmpty, NativeAudiocinematecaCredentials.load() != nil else { return [] }
+        guard !query.isEmpty, let stamp = currentAudioStamp, stamp == audioAccountStamp else { return [] }
         let categories: [AccessibleCinemaKind: String] = [
             .film: "peliculas", .series: "series", .documentary: "documentales", .short: "cortometrajes"
         ]
@@ -391,16 +409,16 @@ struct NativeAccessibleCinemaScreen: View {
             (selectedKind == .all || item.category == categories[selectedKind]) &&
             (selectedLanguage == .all || (selectedLanguage == .spain && item.languageCode == "1") ||
              (selectedLanguage == .latino && item.languageCode == "2")) &&
-            [item.title, item.year, item.genre, item.synopsis].contains { $0.localizedStandardContains(query) }
+            NativeCinemaRules.matches(query, fields: [item.title, item.year, item.genre, item.synopsis])
         }.sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
     }
 
     private var personalItems: [NativeCinemaLocalItem] {
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         return personalLibrary.items.filter { item in
-            (selectedLanguage == .all || selectedLanguage == item.language)
-                && (selectedKind == .all || selectedKind == item.kind)
-                && (query.isEmpty || item.title.localizedStandardContains(query))
+            NativeCinemaRules.permits(selectedLanguage, all: .all, actual: item.language)
+                && NativeCinemaRules.permits(selectedKind, all: .all, actual: item.kind)
+                && NativeCinemaRules.matches(query, fields: [item.title])
         }
         .sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
     }
@@ -573,7 +591,7 @@ struct NativeAccessibleCinemaScreen: View {
                         Text(item.title)
                             .font(.headline)
                             .accessibilityAddTraits(.isHeader)
-                        Text(item.language.rawValue + ", " + item.kind.rawValue)
+                        Text(MusicLocalized.message(item.language.rawValue) + ", " + MusicLocalized.message(item.kind.rawValue))
                             .font(.subheadline)
                         Button("Reproducir: \(item.title)") {
                             do { try personalPlayer.open(item, library: personalLibrary) }
@@ -738,8 +756,15 @@ struct NativeAccessibleCinemaScreen: View {
             if let request = submittedSearch { await performRemoteSearch(request) }
         }
         .onAppear {
-            // A return from the account screen must not expose another account's cache.
-            audiocinematecaResults = []
+            let stamp = currentAudioStamp
+            if stamp != audioAccountStamp {
+                audiocinematecaResults = []
+                audioAccountStamp = stamp
+                if submittedSearch != nil {
+                    resetRemoteSearch()
+                    if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty { submittedSearch = UUID() }
+                }
+            }
             if submittedSearch == nil {
                 Task { @MainActor in
                     if let account = NativeAudiocinematecaCredentials.load(),
@@ -747,6 +772,7 @@ struct NativeAccessibleCinemaScreen: View {
                        submittedSearch == nil,
                        let current = NativeAudiocinematecaCredentials.load(),
                        current.username == account.username, current.password == account.password {
+                        audioAccountStamp = currentAudioStamp
                         audiocinematecaResults = entries
                     }
                 }

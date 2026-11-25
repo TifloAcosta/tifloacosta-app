@@ -1493,3 +1493,6 @@
 "Desconocida" = "Unbekannt";
 "No se pudo recuperar la posición de reproducción." = "Die Wiedergabeposition konnte nicht wiederhergestellt werden.";
 "No se ha podido recuperar esta obra del catálogo actual." = "Dieses Werk konnte im aktuellen Katalog nicht gefunden werden.";
+
+"No hay obras en el historial." = "Der Verlauf enthält keine Werke.";
+"No hay resultados confirmados. Consulta también las plataformas originales." = "Keine bestätigten Ergebnisse. Prüfe auch die Originalplattformen.";

@@ -7,7 +7,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: ios-17-validate-${{ github.ref }}
+  group: ios-17-validate-${{ github.ref }}-${{ github.sha }}
   cancel-in-progress: true
 jobs:
   contracts:
@@ -103,6 +103,12 @@ jobs:
           test -n "$app"
           wc -c "$app/TifloAcostaNative"
           du -sk "$app"
+          python3 - "$app" <<'PYTHON'
+          import pathlib, sys
+          app = pathlib.Path(sys.argv[1])
+          total = sum(item.stat().st_size for item in app.rglob("*") if item.is_file() and not item.is_symlink())
+          print(f"APP_BYTES={total}")
+          PYTHON
       - name: Compilar para iPhone arm64 sin firma ni distribución
         run: |
           xcodebuild -project ios-app-native/TifloAcostaNative.xcodeproj \
@@ -117,3 +123,32 @@ jobs:
           name: conversion-pdf-samples
           path: ${{ runner.temp }}/conversion-samples/conversion*.pdf
           if-no-files-found: ignore
+  size-baseline-506:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 41d66483346ced8e92bf8bbf1307f259ead0770f
+      - name: Compilar la referencia 506 arm64 en Debug
+        run: |
+          set -euo pipefail
+          xcode="$(find /Applications -maxdepth 1 -type d -name 'Xcode_26*.app' -print | sort | tail -n 1)"
+          test -n "$xcode"
+          export DEVELOPER_DIR="$xcode/Contents/Developer"
+          xcodebuild -version
+          brew install xcodegen
+          (cd ios-app-native && xcodegen generate --spec project.yml)
+          xcodebuild -project ios-app-native/TifloAcostaNative.xcodeproj \
+            -scheme TifloAcostaNative -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$RUNNER_TEMP/TifloAcosta-baseline" \
+            ARCHS=arm64 CODE_SIGNING_ALLOWED=NO build
+          app="$(find "$RUNNER_TEMP/TifloAcosta-baseline/Build/Products" -type d -name TifloAcostaNative.app -print -quit)"
+          test -n "$app"
+          python3 - "$app" <<'PYTHON'
+          import pathlib, sys
+          app = pathlib.Path(sys.argv[1])
+          total = sum(item.stat().st_size for item in app.rglob("*") if item.is_file() and not item.is_symlink())
+          print(f"APP_BYTES={total}")
+          PYTHON

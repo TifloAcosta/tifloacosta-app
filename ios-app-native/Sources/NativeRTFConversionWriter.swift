@@ -4,6 +4,9 @@ import Foundation
 final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
     private var output = ""
     private var endings: [String] = []
+    private var tableDepth = 0
+    private var rowStart: Int?
+    private var cells = 0
     private var listCounters: [Int?] = []
     private let assets: [String: NativeConversionMarkup.Asset]
 
@@ -51,7 +54,7 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
         case "p", "blockquote", "pre", "figcaption", "caption": close = "\\par\n"
         case "h1", "h2", "h3", "h4", "h5", "h6":
             let level = (tag.last?.wholeNumberValue ?? 1) - 1
-            output += "{\\pard\\outlinelevel\(level)\\b "
+            output += "{\\pard" + (rowStart == nil ? "" : "\\intbl") + "\\outlinelevel\(level)\\b "
             close = "\\par}\n"
         case "strong", "b": output += "{\\b "; close = "}"
         case "em", "i": output += "{\\i "; close = "}"
@@ -62,15 +65,26 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
         case "ol": listCounters.append(attributes["start"].flatMap(Int.init) ?? 1)
         case "ul": listCounters.append(nil)
         case "li":
-            output += "{\\pard\\li\(min(listCounters.count, 12) * 360) "
+            output += "{\\pard" + (rowStart == nil ? "" : "\\intbl") + "\\li\(min(listCounters.count, 12) * 360) "
             if let counter = listCounters.last ?? nil {
                 let value = min(attributes["value"].flatMap(Int.init) ?? counter, Int.max - 1)
                 output += "\(value).\\tab "
                 listCounters[listCounters.count - 1] = value + 1
             } else { output += "\\bullet\\tab " }
             close = "\\par}\n"
-        case "tr": close = "\\par\n"
-        case "td", "th": close = "\\tab "
+        case "table":
+            tableDepth += 1
+        case "tr":
+            if tableDepth == 1 {
+                rowStart = output.utf8.count
+                cells = 0
+            } else { close = "\\line " }
+        case "td", "th":
+            if tableDepth == 1, rowStart != nil {
+                cells += 1
+                output += "\\pard\\intbl "
+                close = "\\cell "
+            } else { close = "\\tab " }
         case "a":
             if let href = attributes["href"] {
                 let field: String
@@ -105,6 +119,17 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
     func parser(_ parser: XMLParser, didEndElement tag: String, namespaceURI: String?, qualifiedName: String?) {
         output += endings.popLast() ?? ""
         if tag == "ol" || tag == "ul" { _ = listCounters.popLast() }
+        if tag == "tr", tableDepth == 1, let start = rowStart {
+            if cells > 0 {
+                let width = max(1, 9000 / cells)
+                let positions = (1...cells).map { "\\cellx\($0 * width)" }.joined()
+                let insertion = output.utf8.index(output.utf8.startIndex, offsetBy: start)
+                output.insert(contentsOf: "{\\trowd\\trgaph108" + positions + " ", at: insertion)
+                output += "\\row}\\pard\n"
+            }
+            rowStart = nil
+        }
+        if tag == "table" { tableDepth -= 1 }
     }
 
     func parser(_ parser: XMLParser, foundCharacters string: String) {

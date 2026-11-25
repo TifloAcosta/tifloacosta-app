@@ -14,7 +14,7 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
     private var ignoredDepth = 0
     private var inBody = false
     private var rows: [Bool] = []
-    private var cells: [String] = []
+    private var cells: [(tag: String, attributePosition: Int)] = []
     private let escape = NativeDocumentConversion.xml
 
     private var links: [String: String] = [:]
@@ -88,8 +88,15 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
             if !rows.isEmpty { rows[rows.count - 1] = !["0", "false", "off"].contains(attributes["w:val"] ?? "") }
         case "tc":
             let cellTag = rows.last == true ? "th" : "td"
-            cells.append(cellTag)
-            body += "<\(cellTag)>"
+            body += "<\(cellTag)"
+            cells.append((cellTag, body.utf8.count))
+            body += ">"
+        case "gridSpan":
+            if let cell = cells.last, let count = attributes["w:val"].flatMap(Int.init),
+               (2...100).contains(count), body.utf8.count == cell.attributePosition + 1 {
+                let position = body.utf8.index(body.utf8.startIndex, offsetBy: cell.attributePosition)
+                body.insert(contentsOf: " colspan=\"\(count)\"", at: position)
+            }
         case "bookmarkStart":
             if let id = attributes["w:name"] { paragraph? += "<span id=\"\(escape(id))\"></span>" }
         case "hyperlink":
@@ -130,7 +137,7 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
                 body += "<\(tag)>\(paragraph)</\(tag)>"
             }
             paragraph = nil
-        case "tc": if let tag = cells.popLast() { body += "</\(tag)>" }
+        case "tc": if let cell = cells.popLast() { body += "</\(cell.tag)>" }
         case "tr": _ = rows.popLast(); body += "</tr>"
         case "tbl": body += "</table>"
         default: break

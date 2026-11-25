@@ -288,6 +288,8 @@ struct DocumentConversionSmoke {
             mergedRead.contains("<u>Subrayado</u>") && mergedRead.contains("<sub>2</sub>") &&
             mergedRead.contains("<sup>2</sup>"))
         precondition(mergedRead.components(separatedBy: "Combinada").count == 2)
+        let mergedRTF = try NativeRTFConversionWriter(assets: []).write(merged)
+        precondition(mergedRTF.contains("\\clvmgf\\clmgf") && mergedRTF.contains("\\clvmrg\\clmrg"))
         let mergedODT = try NativeODTConversionWriter(assets: []).write(merged.body)
         precondition(mergedODT.contains("table:number-columns-spanned=\"2\"") &&
             mergedODT.contains("table:number-rows-spanned=\"2\"") &&

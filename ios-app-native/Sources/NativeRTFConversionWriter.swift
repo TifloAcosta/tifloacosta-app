@@ -6,7 +6,13 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
     private var endings: [String] = []
     private var tableDepth = 0
     private var rowStart: Int?
-    private var cells = 0
+    private struct Merge {
+        let width: Int
+        let remaining: Int
+    }
+    private var cellProperties: [String] = []
+    private var activeMerges: [Int: Merge] = [:]
+    private var followingMerges: [Int: Merge] = [:]
     private struct ListState {
         var id: Int
         let format: Int
@@ -100,13 +106,18 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
         case "tr":
             if tableDepth == 1 {
                 rowStart = output.utf8.count
-                cells = 0
+                cellProperties.removeAll(keepingCapacity: true)
+                followingMerges.removeAll(keepingCapacity: true)
             } else { close = "\\line " }
         case "td", "th":
             if tableDepth == 1, rowStart != nil {
-                cells += 1
+                appendCoveredCells()
+                let width = min(100, max(1, attributes["colspan"].flatMap(Int.init) ?? 1))
+                let rows = min(1000, max(1, attributes["rowspan"].flatMap(Int.init) ?? 1))
+                if rows > 1 { followingMerges[cellProperties.count] = Merge(width: width, remaining: rows - 1) }
+                appendCellProperties(width: width, vertical: rows > 1 ? "\\clvmgf" : "")
                 output += "\\pard\\intbl "
-                close = "\\cell "
+                close = String(repeating: "\\cell ", count: width)
             } else { close = "\\tab " }
         case "a":
             if let href = attributes["href"] {
@@ -134,6 +145,23 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
         default: break
         }
         endings.append(close)
+    }
+
+    private func appendCellProperties(width: Int, vertical: String) {
+        for index in 0..<width {
+            let horizontal = width == 1 ? "" : index == 0 ? "\\clmgf" : "\\clmrg"
+            cellProperties.append(vertical + horizontal)
+        }
+    }
+
+    private func appendCoveredCells() {
+        while let merge = activeMerges[cellProperties.count] {
+            if merge.remaining > 1 {
+                followingMerges[cellProperties.count] = Merge(width: merge.width, remaining: merge.remaining - 1)
+            }
+            appendCellProperties(width: merge.width, vertical: "\\clvmrg")
+            output += "\\pard\\intbl " + String(repeating: "\\cell ", count: merge.width)
+        }
     }
 
     private func registerList(format: Int, start: Int) -> Int {
@@ -171,16 +199,22 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
         output += endings.popLast() ?? ""
         if tag == "ol" || tag == "ul" { _ = listStates.popLast() }
         if tag == "tr", tableDepth == 1, let start = rowStart {
-            if cells > 0 {
-                let width = max(1, 9000 / cells)
-                let positions = (1...cells).map { "\\cellx\($0 * width)" }.joined()
+            appendCoveredCells()
+            if !cellProperties.isEmpty {
+                let positions = cellProperties.enumerated().map { index, properties in
+                    properties + "\\cellx\((index + 1) * 1200)"
+                }.joined()
                 let insertion = output.utf8.index(output.utf8.startIndex, offsetBy: start)
                 output.insert(contentsOf: "{\\trowd\\trgaph108" + positions + " ", at: insertion)
                 output += "\\row}\\pard\n"
             }
+            activeMerges = followingMerges
             rowStart = nil
         }
-        if tag == "table" { tableDepth -= 1 }
+        if tag == "table" {
+            tableDepth -= 1
+            if tableDepth == 0 { activeMerges.removeAll(keepingCapacity: true) }
+        }
     }
 
     func parser(_ parser: XMLParser, foundCharacters string: String) {

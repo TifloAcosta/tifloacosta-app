@@ -35,3 +35,11 @@ test('Mover varios libros permite crear carpeta y los mueve tras confirmar', () 
   assert.match(reader, /library\.moveDocuments\(withIDs: documentIDs, to: name\)/);
   assert.match(reader, /finishSelection\(/);
 });
+
+test('La biblioteca guarda el índice antes de eliminar los archivos y revierte si el guardado falla', () => {
+  const deletion = reader.slice(reader.indexOf('func deleteDocuments(withIDs'), reader.indexOf('func originalURL'));
+  assert.match(deletion, /try save\(\)[\s\S]*?documents = previous\s+throw error[\s\S]*?deleteStoredFiles/);
+  assert.match(reader, /let removed = try library\.deleteDocuments\(withIDs: visibleSelection\)/);
+  const folder = reader.slice(reader.indexOf('func deleteFolder'), reader.indexOf('func resetPreferences'));
+  assert.match(folder, /try save\(\)[\s\S]*?documents = previous\s+throw error[\s\S]*?folders\.removeAll/);
+});

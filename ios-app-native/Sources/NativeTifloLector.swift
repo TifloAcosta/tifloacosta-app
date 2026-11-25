@@ -370,11 +370,23 @@ final class NativeReaderLibrary: ObservableObject {
         try? save()
     }
 
-    func delete(_ document: NativeReadingDocument) {
-        documents.removeAll { $0.id == document.id }
-        NativeReaderFormats.deleteStoredFiles(for: document.id)
-        NativeReaderFormats.deleteOriginal(for: document.id)
-        try? save()
+    @discardableResult
+    func deleteDocuments(withIDs ids: Set<UUID>) throws -> Int {
+        let removed = documents.filter { ids.contains($0.id) }
+        guard !removed.isEmpty else { return 0 }
+        let previous = documents
+        documents.removeAll { ids.contains($0.id) }
+        do {
+            try save()
+        } catch {
+            documents = previous
+            throw error
+        }
+        for document in removed {
+            NativeReaderFormats.deleteStoredFiles(for: document.id)
+            NativeReaderFormats.deleteOriginal(for: document.id)
+        }
+        return removed.count
     }
 
     func originalURL(for document: NativeReadingDocument) -> URL? {
@@ -721,13 +733,19 @@ final class NativeReaderLibrary: ObservableObject {
         return changed
     }
 
-    func deleteFolder(_ folder: String) {
+    func deleteFolder(_ folder: String) throws {
         guard folders.contains(folder) else { return }
         // Removing a folder never deletes the books inside it.
+        let previous = documents
         for index in documents.indices where documents[index].folderName == folder {
             documents[index].folderName = nil
         }
-        try? save()
+        do {
+            try save()
+        } catch {
+            documents = previous
+            throw error
+        }
         folders.removeAll { $0 == folder }
         UserDefaults.standard.set(folders, forKey: folderStorageKey)
     }
@@ -2350,8 +2368,12 @@ struct NativeReaderLibraryScreen: View {
             titleVisibility: .visible) {
             Button("Eliminar carpeta", role: .destructive) {
                 if let folder = folderToDelete {
-                    library.deleteFolder(folder)
-                    if selectedFolder == folder { selectedFolder = "" }
+                    do {
+                        try library.deleteFolder(folder)
+                        if selectedFolder == folder { selectedFolder = "" }
+                    } catch {
+                        importError = error.localizedDescription
+                    }
                 }
                 folderToDelete = nil
             }
@@ -2389,11 +2411,12 @@ struct NativeReaderLibraryScreen: View {
         .confirmationDialog("Eliminar documentos seleccionados", isPresented: $showBulkDelete,
                             titleVisibility: .visible) {
             Button("Eliminar definitivamente \(visibleSelection.count) documentos", role: .destructive) {
-                let ids = visibleSelection
-                for doc in library.documents where ids.contains(doc.id) {
-                    library.delete(doc)
+                do {
+                    let removed = try library.deleteDocuments(withIDs: visibleSelection)
+                    finishSelection("\(removed) documentos eliminados.")
+                } catch {
+                    importError = error.localizedDescription
                 }
-                finishSelection("\(ids.count) documentos eliminados.")
             }
             Button("Cancelar", role: .cancel) { showBulkDelete = false }
         } message: {
@@ -2403,7 +2426,10 @@ struct NativeReaderLibraryScreen: View {
         .confirmationDialog("Eliminar documento", isPresented: $confirmDeletion,
                             titleVisibility: .visible) {
             Button("Eliminar definitivamente \(documentToDelete?.title ?? "el documento")", role: .destructive) {
-                if let doc = documentToDelete { library.delete(doc) }
+                if let doc = documentToDelete {
+                    do { try library.deleteDocuments(withIDs: [doc.id]) }
+                    catch { importError = error.localizedDescription }
+                }
                 documentToDelete = nil
             }
             Button("Cancelar", role: .cancel) { documentToDelete = nil }

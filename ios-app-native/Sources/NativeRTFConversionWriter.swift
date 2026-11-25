@@ -7,7 +7,13 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
     private var tableDepth = 0
     private var rowStart: Int?
     private var cells = 0
-    private var listCounters: [Int?] = []
+    private struct ListState {
+        let id: Int
+        var next: Int?
+    }
+    private var listStates: [ListState] = []
+    private var lists: [String] = []
+    private var overrides: [String] = []
     private let assets: [String: NativeConversionMarkup.Asset]
 
     init(assets: [NativeConversionMarkup.Asset]) {
@@ -18,12 +24,18 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
         output = "{\\rtf1\\ansi\\uc1{\\fonttbl{\\f0 Arial;}}{\\info{\\title \(Self.escape(markup.title))}"
         if let author = markup.metadata["author"] { output += "{\\author \(Self.escape(author))}" }
         output += "}\\f0\\fs24 "
+        let headerEnd = output.utf8.count
         let parser = XMLParser(data: Data("<body>\(markup.body)</body>".utf8))
         parser.shouldResolveExternalEntities = false
         parser.delegate = self
         guard parser.parse() else {
             try Task.checkCancellation()
             throw NativeDocumentConversion.Failure.invalidOutput
+        }
+        if !lists.isEmpty {
+            let index = output.utf8.index(output.utf8.startIndex, offsetBy: headerEnd)
+            let tables = "{\\*\\listtable" + lists.joined() + "}{\\*\\listoverridetable" + overrides.joined() + "}"
+            output.insert(contentsOf: tables, at: index)
         }
         return output + "}"
     }
@@ -62,15 +74,25 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
         case "sub": output += "{\\sub "; close = "}"
         case "sup": output += "{\\super "; close = "}"
         case "br": output += "\\line "
-        case "ol": listCounters.append(attributes["start"].flatMap(Int.init) ?? 1)
-        case "ul": listCounters.append(nil)
+        case "ol", "ul":
+            let start = tag == "ol" ? max(1, min(32767, attributes["start"].flatMap(Int.init) ?? 1)) : nil
+            let id = lists.count + 1
+            let numberFormat = start == nil ? 23 : 0
+            let levelText = start == nil ? "{\\leveltext\\'01\\u8226?;}{\\levelnumbers;}" : "{\\leveltext\\'02\\'00.;}{\\levelnumbers\\'01;}"
+            lists.append("{\\list\\listtemplateid\(id)\\listsimple1{\\listlevel\\levelnfc\(numberFormat)\\leveljc0\\levelfollow0\\levelstartat\(start ?? 1)\(levelText)}\\listid\(id)}")
+            overrides.append("{\\listoverride\\listid\(id)\\listoverridecount0\\ls\(id)}")
+            listStates.append(ListState(id: id, next: start))
         case "li":
-            output += "{\\pard" + (rowStart == nil ? "" : "\\intbl") + "\\li\(min(listCounters.count, 12) * 360) "
-            if let counter = listCounters.last ?? nil {
-                let value = min(attributes["value"].flatMap(Int.init) ?? counter, Int.max - 1)
-                output += "\(value).\\tab "
-                listCounters[listCounters.count - 1] = value + 1
-            } else { output += "\\bullet\\tab " }
+            let indentation = min(listStates.count, 12) * 360
+            output += "{\\pard" + (rowStart == nil ? "" : "\\intbl") + "\\li\(indentation) "
+            if let list = listStates.last {
+                output += "\\ls\(list.id)\\ilvl0 "
+                if let counter = list.next {
+                    let value = min(attributes["value"].flatMap(Int.init) ?? counter, Int.max - 1)
+                    output += "{\\listtext \(value).\\tab}"
+                    listStates[listStates.count - 1].next = value + 1
+                } else { output += "{\\listtext\\bullet\\tab}" }
+            }
             close = "\\par}\n"
         case "table":
             tableDepth += 1
@@ -118,7 +140,7 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
 
     func parser(_ parser: XMLParser, didEndElement tag: String, namespaceURI: String?, qualifiedName: String?) {
         output += endings.popLast() ?? ""
-        if tag == "ol" || tag == "ul" { _ = listCounters.popLast() }
+        if tag == "ol" || tag == "ul" { _ = listStates.popLast() }
         if tag == "tr", tableDepth == 1, let start = rowStart {
             if cells > 0 {
                 let width = max(1, 9000 / cells)

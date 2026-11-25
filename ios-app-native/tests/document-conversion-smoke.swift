@@ -219,7 +219,7 @@ struct DocumentConversionSmoke {
         let rtfMarkup = try String(contentsOf: richRTF, encoding: .utf8)
         precondition(rtfMarkup.contains("\\outlinelevel1") && rtfMarkup.contains("\\pict") &&
             rtfMarkup.contains("Imagen de prueba") && rtfMarkup.contains("HYPERLINK") &&
-            rtfMarkup.contains("\\trowd") && rtfMarkup.contains("\\cellx"))
+            rtfMarkup.contains("\\trowd") && rtfMarkup.contains("\\cellx") && rtfMarkup.contains("\\listtable"))
         let richRTFReader = try NSAttributedString(url: richRTF,
             options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
         precondition(richRTFReader.string.contains("Imagen de prueba") && richRTFReader.string.contains("Hinweis – opinião."))

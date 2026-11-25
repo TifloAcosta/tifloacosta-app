@@ -106,7 +106,7 @@ enum NativeDocumentConversion {
                     onProgress(0.6 + $0 * 0.35)
                 }
                 try Task.checkCancellation()
-                try finishPDF(intermediate, output: output, language: metadata.language, labels: metadata.labels)
+                try finishPDF(intermediate, output: output, language: metadata.language, labels: metadata.labels, owners: metadata.owners, ownerCount: metadata.ownerCount)
             }
         }
         try Task.checkCancellation()
@@ -556,21 +556,26 @@ enum NativeDocumentConversion {
         try write(contents, to: output)
     }
 
-    private static func finishPDF(_ input: URL, output: URL, language: String?, labels: [String]) throws {
+    private static func finishPDF(_ input: URL, output: URL, language: String?, labels: [String], owners: [Int32], ownerCount: Int) throws {
         let buffers = labels.map { strdup($0) }
         defer { buffers.forEach { free($0) } }
         guard buffers.allSatisfy({ $0 != nil }) else { throw Failure.invalidOutput }
         let pointers: [UnsafePointer<CChar>?] = buffers.map { $0.map { UnsafePointer($0) } }
         let result = pointers.withUnsafeBufferPointer { labels in
-            tiflo_pdf_postprocess(input.path, output.path, language ?? "", labels.baseAddress, labels.count)
+            owners.withUnsafeBufferPointer { owners in
+                tiflo_pdf_postprocess(input.path, output.path, language ?? "", labels.baseAddress,
+                                      owners.baseAddress, labels.count, ownerCount)
+            }
         }
         guard result == 0 else { throw Failure.invalidOutput }
         try Task.checkCancellation()
     }
 
     private static func pdf(_ paragraphs: [Paragraph], title: String, markup: NativeConversionMarkup.Document?, output: URL,
-                            onProgress: (Double) -> Void) throws -> (language: String?, labels: [String]) {
+                            onProgress: (Double) -> Void) throws -> (language: String?, labels: [String], owners: [Int32], ownerCount: Int) {
         var annotationLabels: [String] = []
+        var annotationOwners: [Int32] = []
+        var tagCount = 0
         let text = NSMutableAttributedString(string: "")
         let key = NSAttributedString.Key(kCTFontAttributeName as String)
         let normal = CTFontCreateWithName("Helvetica" as CFString, 11, nil)
@@ -663,6 +668,7 @@ enum NativeDocumentConversion {
                     let properties = tagLanguage.map { [languageKey: $0] } ?? [:]
                     CGPDFContextBeginTag(context, headerTags[paragraph.level], properties as CFDictionary)
                     openParagraph = paragraphIndex
+                    tagCount += 1
                 }
                 let point = CGPoint(x: origin.x + path.boundingBox.minX, y: origin.y + path.boundingBox.minY)
                 if range.location == paragraphStarts[paragraphIndex] {
@@ -691,6 +697,7 @@ enum NativeDocumentConversion {
                         if let anchor { context.setDestination(anchor as CFString, for: rect) }
                         else if let url { context.setURL(url as CFURL, for: rect) }
                         annotationLabels.append(label)
+                        annotationOwners.append(Int32(exactly: tagCount - 1) ?? -1)
                     }
                     index += 1
                 }
@@ -701,6 +708,6 @@ enum NativeDocumentConversion {
             offset += visible.length
             onProgress(Double(offset) / Double(text.length))
         }
-        return (language, annotationLabels)
+        return (language, annotationLabels, annotationOwners, tagCount)
     }
 }

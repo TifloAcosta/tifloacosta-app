@@ -6,9 +6,6 @@ static int attach_link(qpdf_data pdf, qpdf_oh tree, qpdf_oh numbers,
                        qpdf_oh page, qpdf_oh annotation, long long key) {
     if (!qpdf_oh_is_indirect(pdf, tree) || !qpdf_oh_is_indirect(pdf, page) ||
         !qpdf_oh_is_indirect(pdf, annotation)) return 0;
-    qpdf_oh document = qpdf_oh_get_key(pdf, tree, "/K");
-    if (qpdf_oh_is_indirect(pdf, document) && qpdf_oh_is_dictionary(pdf, document) &&
-        qpdf_oh_is_name_and_equals(pdf, qpdf_oh_get_key(pdf, document, "/S"), "/Document")) tree = document;
     qpdf_oh kids = qpdf_oh_get_key(pdf, tree, "/K");
     if (!qpdf_oh_is_array(pdf, kids)) {
         qpdf_oh earlier = kids;
@@ -91,7 +88,7 @@ static void complete_quartz_parent_tree(qpdf_data pdf, qpdf_oh tree, int pages) 
 }
 
 int tiflo_pdf_postprocess(const char *input, const char *output, const char *language,
-                          const char *const *labels, size_t label_count) {
+                          const char *const *labels, const int *owners, size_t label_count, size_t owner_count) {
     qpdf_data pdf = qpdf_init();
     if (!pdf) return QPDF_ERRORS;
     qpdf_silence_errors(pdf);
@@ -148,6 +145,11 @@ int tiflo_pdf_postprocess(const char *input, const char *output, const char *lan
             }
         }
     }
+    qpdf_oh document = qpdf_oh_get_key(pdf, tree, "/K");
+    int valid_document = qpdf_oh_is_dictionary(pdf, document) && qpdf_oh_is_indirect(pdf, document);
+    qpdf_oh elements = valid_document ? qpdf_oh_get_key(pdf, document, "/K") : 0;
+    int mapped = elements && qpdf_oh_is_array(pdf, elements) &&
+        (size_t)qpdf_oh_get_array_n_items(pdf, elements) == owner_count;
     size_t label = 0;
     for (int i = 0; i < pages; ++i) {
         qpdf_oh page = qpdf_get_page_n(pdf, i);
@@ -163,8 +165,19 @@ int tiflo_pdf_postprocess(const char *input, const char *output, const char *lan
             if (labels[label] && labels[label][0]) {
                 qpdf_oh_replace_key(pdf, annotation, "/Contents", qpdf_oh_new_unicode_string(pdf, labels[label]));
             }
-            if (numbers && qpdf_oh_is_null(pdf, qpdf_oh_get_key(pdf, annotation, "/StructParent")) &&
-                attach_link(pdf, tree, numbers, page, annotation, next_key)) ++next_key;
+            if (numbers && qpdf_oh_is_null(pdf, qpdf_oh_get_key(pdf, annotation, "/StructParent"))) {
+                qpdf_oh parent = valid_document ? document : tree;
+                if (mapped && owners && owners[label] >= 0 && (size_t)owners[label] < owner_count) {
+                    qpdf_oh element = qpdf_oh_get_array_item(pdf, elements, owners[label]);
+                    if (qpdf_oh_is_dictionary(pdf, element) && qpdf_oh_is_indirect(pdf, element)) {
+                        qpdf_oh location = qpdf_oh_get_key(pdf, element, "/Pg");
+                        if (qpdf_oh_is_indirect(pdf, location) &&
+                            qpdf_oh_get_object_id(pdf, location) == qpdf_oh_get_object_id(pdf, page))
+                            parent = element;
+                    }
+                }
+                if (attach_link(pdf, parent, numbers, page, annotation, next_key)) ++next_key;
+            }
             ++label;
         }
     }

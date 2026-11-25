@@ -10,7 +10,7 @@ engine="${TIFLO_MAC_PDF_ENGINE:-$work/pdf-engine}"
 bash "$root/scripts/prepare-pdf-engine.sh" macosx "$engine"
 cp "$root/PDFEngine/TifloPDFPostprocess.c" "$work/Sources/TifloPDFPostprocess/"
 cp "$root/PDFEngine/TifloPDFPostprocess.h" "$work/Sources/TifloPDFPostprocess/include/"
-cp "$root/Sources/NativeDocumentConversion.swift"   "$root/Sources/NativeConversionMarkup.swift"   "$root/Sources/NativeODTConversionMarkup.swift" "$root/Sources/NativeODTConversionWriter.swift" "$root/Sources/NativeRTFConversionWriter.swift" "$root/Sources/NativeRTFConversionMarkup.swift" "$root/Sources/NativeDOCXConversionMarkup.swift" "$root/Sources/NativeDOCXConversionWriter.swift"   "$root/Sources/NativeEpubSpine.swift"   "$root/tests/document-conversion-smoke.swift" "$work/Sources/ConversionSmoke/"
+cp "$root/Sources/NativeDocumentConversion.swift" "$root/Sources/NativePDFMarkup.swift"   "$root/Sources/NativeConversionMarkup.swift"   "$root/Sources/NativeODTConversionMarkup.swift" "$root/Sources/NativeODTConversionWriter.swift" "$root/Sources/NativeRTFConversionWriter.swift" "$root/Sources/NativeRTFConversionMarkup.swift" "$root/Sources/NativeDOCXConversionMarkup.swift" "$root/Sources/NativeDOCXConversionWriter.swift"   "$root/Sources/NativeEpubSpine.swift"   "$root/tests/document-conversion-smoke.swift" "$work/Sources/ConversionSmoke/"
 cat > "$work/Package.swift" <<'SWIFT'
 // swift-tools-version: 5.9
 import PackageDescription

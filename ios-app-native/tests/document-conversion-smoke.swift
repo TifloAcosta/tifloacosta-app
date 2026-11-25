@@ -214,7 +214,7 @@ struct DocumentConversionSmoke {
         <html lang="es"><head><title>Tabla original</title><meta name="author" content="Autora"/></head><body>
         <h2 id="tabla">Tabla</h2><ul><li>Primero</li></ul><ol type="I" start="3"><li>Romano</li><li value="7">Reinicio</li></ol>
         <table><caption>Datos</caption><tr><th scope="col">Valor</th><td>Ñ</td></tr></table>
-        <img src="data:image/png;base64,\(png)" alt="Imagen de prueba" onload="bad()"/>
+        <figure><img src="data:image/png;base64,\(png)" alt="Imagen de prueba" onload="bad()"/><figcaption>Figura original</figcaption></figure>
         <script>bad()</script><a href="#tabla">Volver</a>
         <p xml:lang="fr">Déjà vu <a href="#nota" role="doc-noteref">1</a></p>
         <aside id="nota" role="doc-footnote"><p>Hinweis – opinião.</p></aside></body></html>
@@ -317,13 +317,50 @@ struct DocumentConversionSmoke {
         if CommandLine.arguments.count > 2 {
             let samples = URL(fileURLWithPath: CommandLine.arguments[2], isDirectory: true)
             let pdfText = "# Tabla\n\n## Primera sección\n\n" + longBody
+            let languageSource = root.appendingPathComponent("Idioma.xhtml")
+            try #"<html lang="es"><head><title>Documento multilingüe</title></head><body><p>Texto original.</p></body></html>"#
+                .write(to: languageSource, atomically: true, encoding: .utf8)
             let pdfSource = NativeConversionSource(filename: "Multilingue.xhtml", title: "Documento multilingüe",
-                format: "xhtml", text: pdfText + "\nRésumé — Ελληνικά — 会議", links: [], original: xhtml)
+                format: "xhtml", text: pdfText + "\nRésumé — Ελληνικά — 会議", links: [], original: languageSource)
             let richPDF = try NativeDocumentConversion.convert(pdfSource, to: .pdf,
                 in: root.appendingPathComponent("pdf-multipage"))
             let reopenedPDF = PDFDocument(url: richPDF)!
             precondition(reopenedPDF.pageCount > 1 && reopenedPDF.string!.contains("Primera sección"))
             try FileManager.default.copyItem(at: richPDF, to: samples.appendingPathComponent("conversion-multipage.pdf"))
+        }
+
+        let structuralPDF = try NativeDocumentConversion.convert(reopened, to: .pdf,
+            in: root.appendingPathComponent("pdf-structured"))
+        let structuredCG = CGPDFDocument(structuralPDF as CFURL)!
+        withExtendedLifetime(structuredCG) {
+            var rootTag: CGPDFDictionaryRef?
+            precondition(CGPDFDictionaryGetDictionary(structuredCG.catalog!, "StructTreeRoot", &rootTag))
+            func roles(_ node: CGPDFDictionaryRef) -> Set<String> {
+                var result: Set<String> = []
+                var entry: UnsafePointer<CChar>?
+                if CGPDFDictionaryGetName(node, "S", &entry), let entry { result.insert(String(cString: entry)) }
+                var child: CGPDFDictionaryRef?
+                if CGPDFDictionaryGetDictionary(node, "K", &child), let child {
+                    result.formUnion(roles(child))
+                }
+                var kids: CGPDFArrayRef?
+                if CGPDFDictionaryGetArray(node, "K", &kids), let kids {
+                    for index in 0..<CGPDFArrayGetCount(kids) {
+                        var item: CGPDFDictionaryRef?
+                        if CGPDFArrayGetDictionary(kids, index, &item), let item {
+                            result.formUnion(roles(item))
+                        }
+                    }
+                }
+                return result
+            }
+            precondition(Set(["Table", "TR", "TH", "TD", "L", "LI", "LBody", "Figure", "Caption", "Note"]).isSubset(of: roles(rootTag!)))
+        }
+        let structuredText = PDFDocument(url: structuralPDF)?.string ?? ""
+        precondition(structuredText.contains("Hinweis – opinião.") && structuredText.contains("Imagen de prueba"))
+        if CommandLine.arguments.count > 2 {
+            let samples = URL(fileURLWithPath: CommandLine.arguments[2], isDirectory: true)
+            try FileManager.default.copyItem(at: structuralPDF, to: samples.appendingPathComponent("conversion-complex.pdf"))
         }
 
         let complexODT = root.appendingPathComponent("Complejo.odt")

@@ -1,6 +1,7 @@
 #include "TifloPDFPostprocess.h"
 #include <qpdf/qpdf-c.h>
 #include <stdio.h>
+#include <string.h>
 
 // Quartz emits a flat number tree for its page marked-content references.
 static int attach_link(qpdf_data pdf, qpdf_oh tree, qpdf_oh numbers,
@@ -90,8 +91,62 @@ static void complete_quartz_parent_tree(qpdf_data pdf, qpdf_oh tree, int pages, 
     qpdf_oh_replace_key(pdf, tree, "/ParentTree", parent_tree);
 }
 
+// Quartz supplies the marked leaves. Group them in logical source order
+// without replacing the leaf objects already referenced in the ParentTree.
+static void group_marked_leaves(qpdf_data pdf, qpdf_oh document, qpdf_oh leaves,
+                                const char *const *paths, size_t count, int (*cancelled)(void)) {
+    enum { max_depth = 32, max_token = 24 };
+    char previous[max_depth][max_token] = {{0}};
+    qpdf_oh parents[max_depth + 1];
+    qpdf_oh children[max_depth + 1];
+    parents[0] = document;
+    children[0] = qpdf_oh_new_array(pdf);
+    for (size_t i = 0; i < count; ++i) {
+        if (cancelled && cancelled()) return;
+        qpdf_oh leaf = qpdf_oh_get_array_item(pdf, leaves, (int)i);
+        if (!qpdf_oh_is_indirect(pdf, leaf) || !qpdf_oh_is_dictionary(pdf, leaf)) return;
+    }
+    int prior_depth = 0;
+    for (size_t i = 0; i < count; ++i) {
+        if (cancelled && cancelled()) return;
+        const char *cursor = paths[i];
+        int depth = 0;
+        while (cursor && *cursor && depth < max_depth) {
+            const char *slash = strchr(cursor, '/');
+            size_t size = slash ? (size_t)(slash - cursor) : strlen(cursor);
+            if (size >= max_token) break;
+            char token[max_token] = {0};
+            memcpy(token, cursor, size);
+            char *separator = strchr(token, ':');
+            if (!separator) break;
+            if (depth >= prior_depth || strcmp(token, previous[depth])) {
+                strcpy(previous[depth], token);
+                *separator = 0;
+                char role[max_token + 1];
+                snprintf(role, sizeof(role), "/%s", token);
+                qpdf_oh item = qpdf_make_indirect_object(pdf, qpdf_oh_new_dictionary(pdf));
+                qpdf_oh_replace_key(pdf, item, "/Type", qpdf_oh_new_name(pdf, "/StructElem"));
+                qpdf_oh_replace_key(pdf, item, "/S", qpdf_oh_new_name(pdf, role));
+                qpdf_oh_replace_key(pdf, item, "/P", parents[depth]);
+                parents[depth + 1] = item;
+                children[depth + 1] = qpdf_oh_new_array(pdf);
+                qpdf_oh_replace_key(pdf, item, "/K", children[depth + 1]);
+                qpdf_oh_append_item(pdf, children[depth], item);
+                prior_depth = depth + 1;
+            }
+            ++depth;
+            cursor = slash ? slash + 1 : NULL;
+        }
+        qpdf_oh leaf = qpdf_oh_get_array_item(pdf, leaves, (int)i);
+        qpdf_oh_replace_key(pdf, leaf, "/P", parents[depth]);
+        qpdf_oh_append_item(pdf, children[depth], leaf);
+        prior_depth = depth;
+    }
+    qpdf_oh_replace_key(pdf, document, "/K", children[0]);
+}
+
 int tiflo_pdf_postprocess(const char *input, const char *output, const char *language,
-                          const char *const *labels, const int *owners, size_t label_count, size_t owner_count, int (*cancelled)(void)) {
+                          const char *const *labels, const int *owners, size_t label_count, size_t owner_count, const char *const *paths, size_t path_count, int (*cancelled)(void)) {
     if (cancelled && cancelled()) return -1;
     qpdf_data pdf = qpdf_init();
     if (!pdf) return QPDF_ERRORS;
@@ -192,6 +247,15 @@ int tiflo_pdf_postprocess(const char *input, const char *output, const char *lan
         }
     }
 
+    if (mapped && paths && path_count == owner_count &&
+        (size_t)qpdf_oh_get_array_n_items(pdf, elements) == owner_count) {
+        for (size_t i = 0; i < path_count; ++i) {
+            if (paths[i] && paths[i][0]) {
+                group_marked_leaves(pdf, document, elements, paths, path_count, cancelled);
+                break;
+            }
+        }
+    }
     if (numbers && next_key > 0)
         qpdf_oh_replace_key(pdf, tree, "/ParentTreeNextKey", qpdf_oh_new_integer(pdf, next_key));
     if (qpdf_has_error(pdf)) goto failed;

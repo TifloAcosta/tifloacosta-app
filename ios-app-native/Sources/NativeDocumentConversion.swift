@@ -54,6 +54,8 @@ enum NativeDocumentConversion {
         let offset: Int
         let level: Int
         let runs: [Run]
+        var semanticPath = ""
+        var language: String?
         var text: String { runs.map(\.text).joined() }
     }
 
@@ -102,12 +104,29 @@ enum NativeDocumentConversion {
             case .daisy3: try daisy3(paragraphs, title: title, markup: markup, output: output)
             case .pdf:
                 let intermediate = staging.appendingPathComponent("rendered-" + UUID().uuidString + ".pdf")
-                let metadata = try pdf(paragraphs, title: input.title, markup: markup, output: intermediate) {
+                let structured = try markup.flatMap { try NativePDFMarkup.read($0) }
+                let pdfParagraphs = structured.map { document in
+                    document.parts.map { part -> Paragraph in
+                        let runs = part.text.map { text, href -> Run in
+                            let destination = href.flatMap { link -> Int? in
+                                guard link.hasPrefix("#") else { return nil }
+                                return document.anchors[String(link.dropFirst())]
+                            }
+                            let url = href.flatMap { URL(string: $0) }.flatMap { candidate in
+                                ["https", "http", "mailto"].contains(candidate.scheme?.lowercased() ?? "") ? candidate : nil
+                            }
+                            return Run(text: text, url: url, target: destination)
+                        }
+                        return Paragraph(offset: part.offset, level: part.heading, runs: runs,
+                                         semanticPath: part.path, language: part.language)
+                    }
+                } ?? paragraphs
+                let metadata = try pdf(pdfParagraphs, title: input.title, markup: markup, output: intermediate) {
                     onProgress(0.6 + $0 * 0.35)
                 }
                 try Task.checkCancellation()
                 onProgress(0.96)
-                try finishPDF(intermediate, output: output, language: metadata.language, labels: metadata.labels, owners: metadata.owners, ownerCount: metadata.ownerCount)
+                try finishPDF(intermediate, output: output, language: metadata.language, labels: metadata.labels, owners: metadata.owners, ownerCount: metadata.ownerCount, semanticPaths: metadata.semanticPaths)
             }
         }
         try Task.checkCancellation()
@@ -562,16 +581,22 @@ enum NativeDocumentConversion {
         try write(contents, to: output)
     }
 
-    private static func finishPDF(_ input: URL, output: URL, language: String?, labels: [String], owners: [Int32], ownerCount: Int) throws {
+    private static func finishPDF(_ input: URL, output: URL, language: String?, labels: [String], owners: [Int32], ownerCount: Int, semanticPaths: [String]) throws {
         let buffers = labels.map { strdup($0) }
         defer { buffers.forEach { free($0) } }
         guard buffers.allSatisfy({ $0 != nil }) else { throw Failure.invalidOutput }
         let pointers: [UnsafePointer<CChar>?] = buffers.map { $0.map { UnsafePointer($0) } }
+        let pathBuffers = semanticPaths.map { strdup($0) }
+        defer { pathBuffers.forEach { free($0) } }
+        guard pathBuffers.allSatisfy({ $0 != nil }) else { throw Failure.invalidOutput }
+        let paths: [UnsafePointer<CChar>?] = pathBuffers.map { $0.map { UnsafePointer($0) } }
         let result = pointers.withUnsafeBufferPointer { labels in
             owners.withUnsafeBufferPointer { owners in
-                tiflo_pdf_postprocess(input.path, output.path, language ?? "", labels.baseAddress,
-                                      owners.baseAddress, labels.count, ownerCount) {
-                    Task.isCancelled ? 1 : 0
+                paths.withUnsafeBufferPointer { paths in
+                    tiflo_pdf_postprocess(input.path, output.path, language ?? "", labels.baseAddress,
+                                          owners.baseAddress, labels.count, ownerCount, paths.baseAddress, paths.count) {
+                        Task.isCancelled ? 1 : 0
+                    }
                 }
             }
         }
@@ -580,10 +605,11 @@ enum NativeDocumentConversion {
     }
 
     private static func pdf(_ paragraphs: [Paragraph], title: String, markup: NativeConversionMarkup.Document?, output: URL,
-                            onProgress: (Double) -> Void) throws -> (language: String?, labels: [String], owners: [Int32], ownerCount: Int) {
+                            onProgress: (Double) -> Void) throws -> (language: String?, labels: [String], owners: [Int32], ownerCount: Int, semanticPaths: [String]) {
         var annotationLabels: [String] = []
         var annotationOwners: [Int32] = []
         var tagCount = 0
+        var semanticPaths: [String] = []
         let text = NSMutableAttributedString(string: "")
         let key = NSAttributedString.Key(kCTFontAttributeName as String)
         let normal = CTFontCreateWithName("Helvetica" as CFString, 11, nil)
@@ -672,11 +698,12 @@ enum NativeDocumentConversion {
                 if openParagraph != paragraphIndex {
                     if openParagraph != nil { CGPDFContextEndTag(context) }
                     let paragraph = paragraphs[paragraphIndex]
-                    let tagLanguage = detectedLanguage(paragraph.text) ?? language
+                    let tagLanguage = paragraph.language ?? detectedLanguage(paragraph.text) ?? language
                     let properties = tagLanguage.map { [languageKey: $0] } ?? [:]
                     CGPDFContextBeginTag(context, headerTags[paragraph.level], properties as CFDictionary)
                     openParagraph = paragraphIndex
                     tagCount += 1
+                    semanticPaths.append(paragraph.semanticPath)
                 }
                 let point = CGPoint(x: origin.x + path.boundingBox.minX, y: origin.y + path.boundingBox.minY)
                 if range.location == paragraphStarts[paragraphIndex] {
@@ -716,6 +743,6 @@ enum NativeDocumentConversion {
             offset += visible.length
             onProgress(Double(offset) / Double(text.length))
         }
-        return (language, annotationLabels, annotationOwners, tagCount)
+        return (language, annotationLabels, annotationOwners, tagCount, semanticPaths)
     }
 }

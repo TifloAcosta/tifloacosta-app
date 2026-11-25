@@ -197,6 +197,18 @@ struct DocumentConversionSmoke {
         precondition(table.contains("<table>") && table.contains(png) && table.contains("href=\"#c0-") &&
             table.contains("xml:lang=\"fr\"") && table.contains("role=\"doc-footnote\"") &&
             table.contains("Hinweis – opinião."))
+        let richDOCX = try NativeDocumentConversion.convert(reopened, to: .docx, in: richOutput)
+        let richWord = try members(richDOCX)
+        let wordXML = richWord["word/document.xml"]!
+        xml(wordXML)
+        precondition(wordXML.contains("<w:tbl>") && wordXML.contains("descr=\"Imagen de prueba\"") &&
+            wordXML.contains("<w:lang w:val=\"fr\""))
+        let readWord = NativeConversionSource(filename: richDOCX.lastPathComponent, title: "Original",
+            format: "docx", text: "Fallback", links: [], original: richDOCX)
+        let wordAgain = try NativeDocumentConversion.convert(readWord, to: .epub,
+            in: richOutput.appendingPathComponent("docx-roundtrip"))
+        let wordRoundtrip = try members(wordAgain, mime: "application/epub+zip")["EPUB/book.xhtml"]!
+        precondition(wordRoundtrip.contains("<table>") && wordRoundtrip.contains("alt=\"Imagen de prueba\""))
         let richRTF = try NativeDocumentConversion.convert(reopened, to: .rtf, in: richOutput)
         let rtfMarkup = try String(contentsOf: richRTF, encoding: .utf8)
         precondition(rtfMarkup.contains("\\outlinelevel1") && rtfMarkup.contains("\\pict") &&
@@ -304,6 +316,18 @@ struct DocumentConversionSmoke {
         precondition(wordBook.contains("<th>") && wordBook.contains("<strong>Résumé</strong>") &&
             wordBook.contains("xml:lang=\"fr\"") && wordBook.contains("alt=\"Descripción en DOCX\""))
         precondition(wordFiles["EPUB/book.opf"]!.contains("assets/image-1.png"))
+        let batchText = (0..<1200).map { "Línea \($0): Contenido para comprobar el lote." }.joined(separator: "\n")
+        for index in 0..<12 {
+            try autoreleasepool {
+                let batchSource = NativeConversionSource(filename: "Lote-\(index).txt", title: "Lote",
+                    format: "txt", text: batchText, links: [])
+                let output = try NativeDocumentConversion.convert(batchSource, to: .rtf,
+                    in: root.appendingPathComponent("batch-\(index)"))
+                let size = try output.resourceValues(forKeys: [.fileSizeKey]).fileSize ?? 0
+                precondition(size > 10_000)
+            }
+        }
+        print("Completed 12 sequential conversions of 1,200 paragraphs.")
         print("Eleven local formats opened and validated; EPUB/HTML structure and assets, PDF text and tags verified.")
     }
 

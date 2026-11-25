@@ -80,7 +80,7 @@ enum NativeDocumentConversion {
             } catch {
                 markup = nil
             }
-            let usesOnlyMarkup = markup != nil && [.html, .epub, .odt, .rtf].contains(format)
+            let usesOnlyMarkup = markup != nil && [.html, .epub, .odt, .rtf, .docx].contains(format)
             let paragraphs = usesOnlyMarkup ? [] : try parse(input) { onProgress($0 * 0.6) }
             onProgress(0.6)
             let title = xml(input.title)
@@ -92,7 +92,7 @@ enum NativeDocumentConversion {
                 let contents = try markup?.xhtml() ?? xhtml(paragraphs, title: title)
                 try write("<!DOCTYPE html>\n" + contents, to: output)
             case .epub: try epub(paragraphs, title: title, markup: markup, output: output)
-            case .docx: try docx(paragraphs, title: title, output: output)
+            case .docx: try docx(paragraphs, title: title, markup: markup, output: output)
             case .odt: try odt(paragraphs, title: title, markup: markup, output: output)
             case .fb2: try fb2(paragraphs, title: title, output: output)
             case .daisy: try daisy(paragraphs, title: title, markup: markup, output: output)
@@ -424,12 +424,12 @@ enum NativeDocumentConversion {
         }, output: output)
     }
 
-    private static func docx(_ paragraphs: [Paragraph], title: String, output: URL) throws {
+    private static func docx(_ paragraphs: [Paragraph], title: String, markup: NativeConversionMarkup.Document?, output: URL) throws {
         let office = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
         let relationship = "http://schemas.openxmlformats.org/package/2006/relationships"
         var references = "<Relationship Id=\"styles\" Type=\"\(office)/styles\" Target=\"styles.xml\"/>"
         var number = 0
-        let body = try paragraphs.map { paragraph in
+        let plainBody = try paragraphs.map { paragraph in
             try Task.checkCancellation()
             let style = paragraph.level > 0 ? "<w:pPr><w:pStyle w:val=\"Heading\(paragraph.level)\"/></w:pPr>" : ""
             let text = paragraph.runs.map { run in
@@ -444,21 +444,30 @@ enum NativeDocumentConversion {
             }.joined()
             return "<w:p>\(style)<w:bookmarkStart w:id=\"\(paragraph.offset)\" w:name=\"p\(paragraph.offset)\"/>\(text)<w:bookmarkEnd w:id=\"\(paragraph.offset)\"/></w:p>"
         }.joined()
+        let rich = try markup.map { try NativeDOCXConversionWriter().write($0) }
+        let body = rich?.body ?? plainBody
+        references += rich?.relationships ?? ""
+        let imageParts = (rich?.assets ?? []).map {
+            NativeConversionMarkup.Asset(path: "word/media/" + $0.path, mediaType: $0.mediaType, data: $0.data)
+        }
+        let imageTypes = imageParts.map {
+            "<Override PartName=\"/\(xml($0.path))\" ContentType=\"\(xml($0.mediaType))\"/>"
+        }.joined()
         let styleNS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
         let styles = (1...6).map {
             "<w:style w:type=\"paragraph\" w:styleId=\"Heading\($0)\"><w:name w:val=\"heading \($0)\"/><w:pPr><w:outlineLvl w:val=\"\($0 - 1)\"/></w:pPr><w:rPr><w:b/><w:sz w:val=\"\(38 - $0 * 2)\"/></w:rPr></w:style>"
         }.joined()
         let types = """
-        <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/></Types>
+        <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>\(imageTypes)</Types>
         """
         try package([
             ("[Content_Types].xml", types),
             ("_rels/.rels", "<Relationships xmlns=\"\(relationship)\"><Relationship Id=\"doc\" Type=\"\(office)/officeDocument\" Target=\"word/document.xml\"/><Relationship Id=\"meta\" Type=\"\(relationship)/metadata/core-properties\" Target=\"docProps/core.xml\"/></Relationships>"),
-            ("word/document.xml", "<w:document xmlns:w=\"\(styleNS)\" xmlns:r=\"\(office)\"><w:body>\(body)</w:body></w:document>"),
+            ("word/document.xml", "<w:document xmlns:w=\"\(styleNS)\" xmlns:r=\"\(office)\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:pic=\"http://schemas.openxmlformats.org/drawingml/2006/picture\"><w:body>\(body)</w:body></w:document>"),
             ("word/styles.xml", "<w:styles xmlns:w=\"\(styleNS)\">\(styles)</w:styles>"),
             ("word/_rels/document.xml.rels", "<Relationships xmlns=\"\(relationship)\">\(references)</Relationships>"),
             ("docProps/core.xml", "<cp:coreProperties xmlns:cp=\"http://schemas.openxmlformats.org/package/2006/metadata/core-properties\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\"><dc:title>\(title)</dc:title></cp:coreProperties>")
-        ], output: output)
+        ], assets: imageParts, output: output)
     }
 
     private static func odt(_ paragraphs: [Paragraph], title: String, markup: NativeConversionMarkup.Document?, output: URL) throws {

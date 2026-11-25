@@ -4,7 +4,16 @@ find_package(PkgConfig REQUIRED)
 set(PKG_CONFIG_ARGN --static)
 pkg_check_modules(CAIRO REQUIRED IMPORTED_TARGET cairo)
 find_package(qpdf CONFIG REQUIRED)
+find_package(JPEG REQUIRED)
+find_package(ZLIB REQUIRED)
 add_executable(pdf-engine-probe main.c)
-set_property(TARGET pdf-engine-probe PROPERTY LINKER_LANGUAGE CXX)
-target_link_libraries(pdf-engine-probe PRIVATE PkgConfig::CAIRO qpdf::libqpdf
+set_target_properties(pdf-engine-probe PROPERTIES LINKER_LANGUAGE CXX MACOSX_BUNDLE FALSE)
+# qpdf exports bare -ljpeg/-lz flags for a static build. Resolve them inside the target SDK triplet.
+get_target_property(jpeg_path JPEG::JPEG IMPORTED_LOCATION_RELEASE)
+if(NOT jpeg_path)
+    get_target_property(jpeg_path JPEG::JPEG IMPORTED_LOCATION)
+endif()
+get_filename_component(jpeg_dir "${jpeg_path}" DIRECTORY)
+target_link_directories(pdf-engine-probe PRIVATE "${jpeg_dir}")
+target_link_libraries(pdf-engine-probe PRIVATE PkgConfig::CAIRO qpdf::libqpdf JPEG::JPEG ZLIB::ZLIB
     "-framework CoreGraphics" "-framework CoreText" "-framework CoreFoundation")

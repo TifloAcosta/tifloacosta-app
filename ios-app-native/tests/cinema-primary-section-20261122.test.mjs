@@ -64,7 +64,7 @@ test('the main cinema directory excludes general TV landing pages and routes to 
   const ids = [...directory.matchAll(/\.init\(id: "([^"]+)", name:/g)].map(match => match[1]);
   assert.deepEqual(ids, ['audesc-es', 'audesc-latino', 'audiocinemateca',
     'mercosur-pt', 'tape-territory', 'movies-for-the-blind', 'cinema-accessibile',
-    'rai-play-sound', 'tubi', 'pluto', 'plex-ad', 'play-suisse-de', 'ami', 'ami-fr', 'ard', 'arte', 'arte-de']);
+    'rai-play-sound', 'cineaudioteca', 'tela-brasil', 'rtp-play', 'tubi', 'pluto', 'plex-ad', 'play-suisse-de', 'ami', 'ami-fr', 'ard', 'arte', 'arte-de']);
   for (const excluded of ['foal', 'rtve', 'nfb', 'pbs', 'itvx', 'channel4', 'five', 'abc']) {
     assert.ok(!ids.includes(excluded), 'Generalist homepage leaked into directory: ' + excluded);
   }
@@ -80,4 +80,19 @@ test('the main cinema directory excludes general TV landing pages and routes to 
   assert.match(directory, /id: "ami"[\s\S]*?languages: \[\.english\]/);
   assert.match(directory, /id: "ami-fr"[\s\S]*?languages: \[\.french\]/);
   assert.match(cinema, /MusicLocalized\.message\(source\.name\)/);
+});
+
+test('Italian and Portuguese partners have official user-facing access routes', () => {
+  for (const [id, language, url] of [
+    ['cineaudioteca', 'italian', 'https://www.cineaudioteca.it/catalogo_lista.php'],
+    ['tela-brasil', 'portuguese', 'https://telabrasil.cultura.gov.br/'],
+    ['rtp-play', 'portuguese', 'https://acessibilidades.rtp.pt/audiodescricao/']
+  ]) {
+    const entry = cinema.split('.init(id: "' + id + '"')[1].split('.init(id:')[0];
+    assert.ok(entry.includes('languages: [.' + language + ']'));
+    assert.ok(entry.includes(url));
+  }
+  assert.ok(cinema.includes('https://www.cineaudioteca.it/login_catalogo.php'));
+  assert.ok(cinema.includes('https://www.cineaudioteca.it/come_iscriversi.php'));
+  assert.ok(cinema.includes('https://www.rtp.pt/play/'));
 });

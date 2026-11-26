@@ -484,3 +484,38 @@ private struct NativeRadioScreen: View {
         .navigationTitle("Radio musical gratuita")
     }
 }
+
+/// Favorites are portable by station ID. URLs with possible credentials are
+/// omitted; restoration must resolve those IDs again through the directory.
+struct NativeRadioBackupEntry: Codable {
+    let stationID: String
+    let name: String
+    let streamURL: String?
+    let country: String?
+    let tags: String?
+}
+
+struct NativeRadioBackupSnapshot: Codable {
+    let schemaVersion: Int
+    let favorites: [NativeRadioBackupEntry]
+    let requiresDirectoryLookup: Int
+}
+
+@MainActor
+enum NativeRadioBackupAdapter {
+    static func capture(defaults: UserDefaults = .standard) throws -> NativeRadioBackupSnapshot {
+        let saved = defaults.string(forKey: "mi-musica-radio-favorites-v2") ?? ""
+        let stations = saved.isEmpty ? [] : try JSONDecoder().decode([NativeRadioStation].self, from: Data(saved.utf8))
+        guard stations.allSatisfy({ UUID(uuidString: $0.stationuuid) != nil }),
+              Set(stations.map(\.stationuuid)).count == stations.count else {
+            throw CocoaError(.fileReadCorruptFile)
+        }
+        let entries = stations.map { station in
+            NativeRadioBackupEntry(stationID: station.stationuuid, name: station.name,
+                streamURL: NativeBackupReferencePolicy.eligible(station.url_resolved) ? station.url_resolved : nil,
+                country: station.country, tags: station.tags)
+        }
+        return NativeRadioBackupSnapshot(schemaVersion: 1, favorites: entries,
+            requiresDirectoryLookup: entries.filter { $0.streamURL == nil }.count)
+    }
+}

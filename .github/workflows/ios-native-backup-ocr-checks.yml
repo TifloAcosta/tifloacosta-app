@@ -1,0 +1,41 @@
+name: Backup, OCR and resources checks (no distribution)
+on:
+  push:
+    branches:
+      - development/next-public-1.6-500200-20261121
+    paths:
+      - '.github/workflows/ios-native-backup-ocr-checks.yml'
+      - 'ios-app-native/Sources/NativeBackup*.swift'
+      - 'ios-app-native/Sources/NativeReaderFormats.swift'
+      - 'ios-app-native/Sources/NativeTifloLector.swift'
+      - 'ios-app-native/Sources/*.lproj/Localizable.strings'
+      - 'ios-app-native/tests/backup-manifest-smoke.swift'
+      - 'ios-app-native/tests/ocr-notice-contract.test.mjs'
+      - 'ios-app-native/tests/resource-folder-navigation-contract.test.mjs'
+      - 'ios-app-native/scripts/test-backup-manifest.sh'
+      - 'shared/resource-inventory.mjs'
+      - 'shared/content-parity.mjs'
+      - 'scripts/build-mobile-content.mjs'
+      - 'resource-browser-core.js'
+      - 'app.js'
+      - 'test/resource-inventory.test.mjs'
+      - 'test/resource-browser-web.test.mjs'
+permissions:
+  contents: read
+concurrency:
+  group: backup-ocr-resource-checks
+  cancel-in-progress: true
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test ios-app-native/tests/ocr-notice-contract.test.mjs ios-app-native/tests/resource-folder-navigation-contract.test.mjs test/resource-inventory.test.mjs test/resource-browser-web.test.mjs test/mobile-content.test.mjs
+  backup-smoke:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash ios-app-native/scripts/test-backup-manifest.sh

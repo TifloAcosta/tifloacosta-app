@@ -589,6 +589,47 @@ final class NativeReaderLibrary: ObservableObject {
         return destination
     }
 
+    /// Independent, explicitly selected backup for the global backup service.
+    /// Capture the library on the main actor, then encode and compress off it.
+    func createGlobalBackupArchive() async throws -> URL {
+        let snapshot = documentsForPersistence()
+        let folderSnapshot = folders
+        let support = Self.storageURL.deletingLastPathComponent()
+        let worker = Task.detached(priority: .utility) {
+            var files: [NativeBackupSectionArchive.File] = []
+            var paths = Set<String>()
+            for document in snapshot {
+                let references = (document.trackPaths ?? [])
+                    + [document.originalRelativePath].compactMap { $0 }
+                for path in references {
+                    try NativeBackupSectionArchive.validatePath(path)
+                    let pieces = path.split(separator: "/")
+                    guard pieces.count >= 3,
+                          ["ReaderMedia", "ReaderOriginals"].contains(String(pieces[0])),
+                          String(pieces[1]) == document.id.uuidString else {
+                        throw NativeBackupSectionArchive.Failure.invalidPath
+                    }
+                    guard paths.insert(path).inserted else { continue }
+                    files.append(.init(path: path,
+                        source: support.appendingPathComponent(path), trustedRoot: support))
+                }
+            }
+            let encoder = JSONEncoder()
+            return try NativeBackupSectionArchive.create(
+                metadata: ["documentos.json": encoder.encode(snapshot),
+                           "carpetas.json": encoder.encode(folderSnapshot)],
+                files: files, maxBytes: 1_500_000_000, maxEntries: 10_000)
+        }
+        let archive = try await withTaskCancellationHandler {
+            try await worker.value
+        } onCancel: { worker.cancel() }
+        if Task.isCancelled {
+            try? FileManager.default.removeItem(at: archive.deletingLastPathComponent())
+            throw CancellationError()
+        }
+        return archive
+    }
+
     /// Restaura únicamente libros que aún no existen, sin modificar los actuales.
     /// Valida primero toda la copia. Ante un error, revierte los archivos nuevos.
     func restoreBackup(from source: URL) throws -> Int {

@@ -1514,3 +1514,11 @@
 "¿Eliminar esta marca?" = "Eliminar este marcador?";
 
 "No se pudo eliminar la marca. Inténtalo de nuevo." = "Não foi possível eliminar o marcador. Tente novamente.";
+
+"Identificación cancelada." = "Identificação cancelada.";
+
+"La cuenta de AcoustID debe volver a vincularse." = "É necessário voltar a associar a conta AcoustID.";
+
+"No se pudo completar la identificación." = "Não foi possível concluir a identificação.";
+
+"Procesadas: %d de %d." = "Processadas: %d de %d.";

@@ -1514,3 +1514,11 @@
 "¿Eliminar esta marca?" = "Dieses Lesezeichen löschen?";
 
 "No se pudo eliminar la marca. Inténtalo de nuevo." = "Das Lesezeichen konnte nicht gelöscht werden. Versuche es erneut.";
+
+"Identificación cancelada." = "Identifizierung abgebrochen.";
+
+"La cuenta de AcoustID debe volver a vincularse." = "Das AcoustID-Konto muss erneut verknüpft werden.";
+
+"No se pudo completar la identificación." = "Die Identifizierung konnte nicht abgeschlossen werden.";
+
+"Procesadas: %d de %d." = "Verarbeitet: %d von %d.";

@@ -1516,3 +1516,11 @@
 "¿Eliminar esta marca?" = "Delete this bookmark?";
 
 "No se pudo eliminar la marca. Inténtalo de nuevo." = "Could not delete the bookmark. Try again.";
+
+"Identificación cancelada." = "Identification cancelled.";
+
+"La cuenta de AcoustID debe volver a vincularse." = "The AcoustID account needs to be linked again.";
+
+"No se pudo completar la identificación." = "Identification could not be completed.";
+
+"Procesadas: %d de %d." = "Processed: %d of %d.";

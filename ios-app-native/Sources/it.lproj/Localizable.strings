@@ -1514,3 +1514,11 @@
 "¿Eliminar esta marca?" = "Eliminare questo segnalibro?";
 
 "No se pudo eliminar la marca. Inténtalo de nuevo." = "Impossibile eliminare il segnalibro. Riprova.";
+
+"Identificación cancelada." = "Identificazione annullata.";
+
+"La cuenta de AcoustID debe volver a vincularse." = "L’account AcoustID deve essere collegato di nuovo.";
+
+"No se pudo completar la identificación." = "Impossibile completare l’identificazione.";
+
+"Procesadas: %d de %d." = "Elaborate: %d di %d.";

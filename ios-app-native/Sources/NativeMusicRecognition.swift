@@ -78,6 +78,11 @@ actor NativeMusicRecognition {
             URLQueryItem(name: "fingerprint", value: sample.value),
             URLQueryItem(name: "meta", value: "recordings")
         ])
+        try Task.checkCancellation()
+        // A request may finish after the user unlinks or replaces the account.
+        guard try NativeAcoustIDKeychain.read(.active) == user else {
+            throw URLError(.userAuthenticationRequired)
+        }
         return try NativeAcoustIDLookup.match(in: data)
     }
 

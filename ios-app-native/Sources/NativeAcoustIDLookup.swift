@@ -70,9 +70,11 @@ enum NativeAcoustIDLookup {
     }
 
     @MainActor
-    static func identifyBatch<ID>(_ ids: [ID], identify: (ID) async throws -> Bool) async throws -> (matched: Int, failed: Int) {
+    static func identifyBatch<ID>(_ ids: [ID],
+                                  onProgress: (Int, Int, Int) -> Void = { _, _, _ in },
+                                  identify: (ID) async throws -> Bool) async throws -> (matched: Int, failed: Int) {
         var counts = (matched: 0, failed: 0)
-        for id in ids {
+        for (index, id) in ids.enumerated() {
             try Task.checkCancellation()
             do {
                 if try await identify(id) { counts.matched += 1 }
@@ -83,6 +85,7 @@ enum NativeAcoustIDLookup {
             } catch {
                 counts.failed += 1
             }
+            onProgress(index + 1, counts.matched, counts.failed)
         }
         try Task.checkCancellation()
         return counts

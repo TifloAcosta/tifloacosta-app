@@ -43,6 +43,27 @@ struct AcoustIDControlledSmoke {
         } catch let error as URLError {
             precondition(error.code == .userAuthenticationRequired && requested == [1])
         }
-        print("AcoustID controlled responses and batch cancellation passed.")
+        var progress: [[Int]] = []
+        let counts = try await NativeAcoustIDLookup.identifyBatch([1, 2, 3], onProgress: {
+            progress.append([$0, $1, $2])
+        }) { id in
+            if id == 2 { throw URLError(.notConnectedToInternet) }
+            return id == 1
+        }
+        precondition(counts.matched == 1 && counts.failed == 1)
+        precondition(progress == [[1, 1, 0], [2, 1, 1], [3, 1, 1]])
+        progress = []
+        do {
+            _ = try await NativeAcoustIDLookup.identifyBatch([1, 2, 3], onProgress: {
+                progress.append([$0, $1, $2])
+            }) { id in
+                if id == 2 { throw CancellationError() }
+                return true
+            }
+            fatalError("Expected cancellation")
+        } catch is CancellationError {
+            precondition(progress == [[1, 1, 0]])
+        }
+        print("AcoustID controlled responses, partial results and batch cancellation passed.")
     }
 }

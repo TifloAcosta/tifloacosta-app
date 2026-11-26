@@ -243,16 +243,23 @@ private final class NativeMusicLibrary: ObservableObject {
         }
     }
 
+    private var recognizingTrackIDs: Set<UUID> = []
+
     func recognizeTrack(_ id: UUID, protectEdits: Bool = false) async throws -> Bool {
         guard let key = NativeMusicRecognition.clientKey,
               let current = files.first(where: { $0.id == id }),
               !protectEdits || current.hasEditedTrackInformation != true else { return false }
+        guard recognizingTrackIDs.insert(id).inserted else { return false }
+        defer { recognizingTrackIDs.remove(id) }
         let url = audioURL(for: current)
         guard let match = try await NativeMusicRecognition.shared.identify(url, client: key) else { return false }
         try Task.checkCancellation()
         guard let index = files.firstIndex(where: { $0.id == id }),
               files[index].fileName == current.fileName, files[index].name == current.name,
-              files[index].artist == current.artist else { return false }
+              files[index].artist == current.artist,
+              files[index].hasEditedTrackInformation == current.hasEditedTrackInformation,
+              !protectEdits || (files[index].hasEditedTrackInformation != true &&
+                UserDefaults.standard.bool(forKey: "mi-musica-acoustid-auto")) else { return false }
         var updated = files[index]
         updated.name = match.title
         updated.artist = match.artist
@@ -856,6 +863,10 @@ struct NativeMyMusicScreen: View {
     @State private var recognitionSelection: [UUID]?
     @State private var recognitionTask: Task<Void, Never>?
     @State private var recognitionResult: String?
+    @State private var recognitionCompleted = 0
+    @State private var recognitionMatched = 0
+    @State private var recognitionFailed = 0
+    @State private var recognitionTotal = 0
 
     private func requestIdentification(_ ids: [UUID]) {
         guard !ids.isEmpty, recognitionTask == nil else { return }
@@ -872,19 +883,33 @@ struct NativeMyMusicScreen: View {
             showRecognitionAccount = true
             return
         }
+        recognitionCompleted = 0
+        recognitionMatched = 0
+        recognitionFailed = 0
+        recognitionTotal = ids.count
+        recognitionResult = nil
         recognitionTask = Task {
+            defer { recognitionTask = nil }
+            var prefix = ""
             do {
-                let counts = try await NativeAcoustIDLookup.identifyBatch(ids) {
+                _ = try await NativeAcoustIDLookup.identifyBatch(ids, onProgress: { completed, matched, failed in
+                    recognitionCompleted = completed
+                    recognitionMatched = matched
+                    recognitionFailed = failed
+                }) {
                     try await library.recognizeTrack($0)
                 }
-                recognitionResult = MusicLocalized.format("Identificadas: %d de %d. Errores: %d.",
-                    counts.matched, ids.count, counts.failed)
+            } catch is CancellationError {
+                prefix = MusicLocalized.message("Identificación cancelada.") + " "
             } catch let error as URLError where error.code == .userAuthenticationRequired {
-                showRecognitionAccount = true
+                prefix = MusicLocalized.message("La cuenta de AcoustID debe volver a vincularse.") + " "
             } catch {
-                // A cancelled batch keeps the results already committed.
+                prefix = MusicLocalized.message("No se pudo completar la identificación.") + " "
             }
-            recognitionTask = nil
+            recognitionResult = prefix + MusicLocalized.format(
+                "Identificadas: %d de %d. Errores: %d.",
+                recognitionMatched, recognitionTotal, recognitionFailed)
+                + " " + MusicLocalized.format("Procesadas: %d de %d.", recognitionCompleted, recognitionTotal)
         }
     }
 
@@ -1389,6 +1414,9 @@ struct NativeMyMusicScreen: View {
                 Button("Crear carpeta inteligente") { showingSmartFolderEditor = true }
             }
             if recognitionTask != nil {
+                ProgressView(value: Double(recognitionCompleted), total: Double(max(1, recognitionTotal))) {
+                    Text(MusicLocalized.format("Procesadas: %d de %d.", recognitionCompleted, recognitionTotal))
+                }
                 Button("Cancelar identificación") { recognitionTask?.cancel() }
             }
             NavigationLink("Nubes") { musicClouds }

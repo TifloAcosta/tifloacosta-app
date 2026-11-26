@@ -1514,3 +1514,11 @@
 "¿Eliminar esta marca?" = "Supprimer ce signet ?";
 
 "No se pudo eliminar la marca. Inténtalo de nuevo." = "Impossible de supprimer le signet. Réessayez.";
+
+"Identificación cancelada." = "Identification annulée.";
+
+"La cuenta de AcoustID debe volver a vincularse." = "Le compte AcoustID doit être associé de nouveau.";
+
+"No se pudo completar la identificación." = "Impossible de terminer l’identification.";
+
+"Procesadas: %d de %d." = "Traitées : %d sur %d.";

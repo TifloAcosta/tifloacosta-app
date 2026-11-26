@@ -38,9 +38,19 @@ if report is None:
 if report.attrib.get("isCompliant") == "true":
     print("veraPDF PDF/UA-1 automated checks passed. Manual checks are still required.")
 else:
-    print("::warning::The conversion sample failed the veraPDF PDF/UA-1 checks.")
-    for rule in report.findall(".//rule"):
-        if rule.attrib.get("status") == "failed":
-            print(rule.attrib, rule.findtext("description", ""))
+    failed = [rule for rule in report.findall(".//rule")
+              if rule.attrib.get("status") == "failed"]
+    for rule in failed:
+        print(rule.attrib, rule.findtext("description", ""))
+    # The conversion fixtures deliberately omit the PDF/UA identification
+    # extension until manual accessibility and interoperability checks finish.
+    # Allow only that known diagnostic finding, never a new structural failure.
+    known = ("ISO 14289-1:2014", "5", "1")
+    unexpected = [rule for rule in failed if (
+        rule.attrib.get("specification"), rule.attrib.get("clause"),
+        rule.attrib.get("testNumber")) != known]
+    if not failed or unexpected:
+        raise SystemExit("PDF/UA fixture regression: unexpected or missing failed-rule details")
+    print("::warning::Only the deliberately omitted PDF/UA identification remains. No conformance claim.")
 PYTHON
 done

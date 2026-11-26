@@ -160,6 +160,7 @@ final class NativeReaderLibrary: ObservableObject {
     @discardableResult
     func importFile(from url: URL, sharingID: UUID? = nil,
                     originalName: String? = nil, preferredTitle: String? = nil,
+                    onOCRStatus: ((String) -> Void)? = nil,
                     onProgress: @escaping (String) -> Void = { _ in }) async throws -> NativeReadingDocument {
         let identifier = sharingID ?? UUID()
         if let existing = documents.first(where: { $0.id == identifier }) { return existing }
@@ -182,7 +183,7 @@ final class NativeReaderLibrary: ObservableObject {
         let ocrTask = Task { @MainActor in
             for await _ in ocr.stream {
                 let message = MusicLocalized.message("Este documento contiene texto en forma de imagen. TifloLector lo reconocerá automáticamente para que puedas leerlo de forma accesible.")
-                onProgress(message)
+                (onOCRStatus ?? onProgress)(message)
                 UIAccessibility.post(notification: .announcement, argument: message)
                 return true
             }
@@ -234,7 +235,7 @@ final class NativeReaderLibrary: ObservableObject {
                 let message = payload.ocrUnreadablePages > 0
                     ? MusicLocalized.format("Reconocimiento parcial. No se encontró texto en %d páginas procesadas. El texto disponible se ha guardado.", payload.ocrUnreadablePages)
                     : MusicLocalized.message("Reconocimiento completado. El documento está listo para su lectura.")
-                onProgress(message)
+                (onOCRStatus ?? onProgress)(message)
                 UIAccessibility.post(notification: .announcement, argument: message)
             }
             return document
@@ -245,7 +246,7 @@ final class NativeReaderLibrary: ObservableObject {
                 let message = error is CancellationError
                     ? MusicLocalized.message("Reconocimiento de texto cancelado.")
                     : MusicLocalized.message("No se pudo completar el reconocimiento o guardar el documento.")
-                onProgress(message)
+                (onOCRStatus ?? onProgress)(message)
                 UIAccessibility.post(notification: .announcement, argument: message)
             }
             await Task.detached {
@@ -287,6 +288,7 @@ final class NativeReaderLibrary: ObservableObject {
     /// security-scoped folder stays available while each child is copied to
     /// private app storage. Do not follow symlinks outside the selected folder.
     func importFolder(from folder: URL,
+                      onOCRStatus: ((String) -> Void)? = nil,
                       onProgress: @escaping (String) -> Void) async throws
                       -> NativeReaderFolderImportSummary {
         let scope = folder.startAccessingSecurityScopedResource()
@@ -299,7 +301,7 @@ final class NativeReaderLibrary: ObservableObject {
         } onCancel: {
             scan.cancel()
         }
-        let summary = try await importSelectedFiles(from: files, onProgress: onProgress)
+        let summary = try await importSelectedFiles(from: files, onOCRStatus: onOCRStatus, onProgress: onProgress)
         return NativeReaderFolderImportSummary(imported: summary.imported,
                                                skipped: skipped, failed: scanFailures + summary.failed)
     }
@@ -355,6 +357,7 @@ final class NativeReaderLibrary: ObservableObject {
     /// discard the other documents in the selection. Report counts, not
     /// guessed percentages; keep security-scoped access inside each import.
     func importSelectedFiles(from urls: [URL],
+                             onOCRStatus: ((String) -> Void)? = nil,
                              onProgress: @escaping (String) -> Void) async throws
                              -> NativeReaderFolderImportSummary {
         guard urls.count <= 750 else {
@@ -367,7 +370,7 @@ final class NativeReaderLibrary: ObservableObject {
             onProgress(MusicLocalized.format("Importando %d de %d: %@",
                                             index + 1, urls.count, url.lastPathComponent))
             do {
-                try await importFile(from: url, onProgress: onProgress)
+                try await importFile(from: url, onOCRStatus: onOCRStatus, onProgress: onProgress)
                 imported += 1
             } catch is CancellationError {
                 throw CancellationError()
@@ -2263,7 +2266,10 @@ struct NativeReaderLibraryScreen: View {
                         // Announce progress sparingly in large batches. Status text
                         // always reflects the current item for VoiceOver review.
                         var lastAnnouncement = Date()
-                        let summary = try await library.importSelectedFiles(from: urls) { message in
+                        let summary = try await library.importSelectedFiles(from: urls, onOCRStatus: { message in
+                            importFilesStatus = message
+                            lastAnnouncement = Date()
+                        }) { message in
                             importFilesStatus = message
                             if Date().timeIntervalSince(lastAnnouncement) >= 5 {
                                 UIAccessibility.post(notification: .announcement, argument: message)
@@ -2310,7 +2316,10 @@ struct NativeReaderLibraryScreen: View {
                         // seconds; VoiceOver can inspect the live status
                         // without an announcement on each imported file.
                         var lastAnnouncement = Date()
-                        let summary = try await library.importFolder(from: folder) { message in
+                        let summary = try await library.importFolder(from: folder, onOCRStatus: { message in
+                            importFolderStatus = message
+                            lastAnnouncement = Date()
+                        }) { message in
                             importFolderStatus = message
                             if Date().timeIntervalSince(lastAnnouncement) >= 5 {
                                 UIAccessibility.post(notification: .announcement, argument: message)

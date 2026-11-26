@@ -6,6 +6,10 @@ const archive = read('NativeBackupSectionArchive.swift');
 const reader = read('NativeTifloLector.swift');
 const music = read('NativeMyMusic.swift');
 const coordinator = read('NativeBackupCoordinator.swift');
+const cinema = read('NativeAccessibleCinemaLibrary.swift');
+const personal = read('NativeBackupPersonalData.swift');
+const radio = read('NativeRadioBrowser.swift');
+const voiceProfiles = read('NativeReaderSettings.swift');
 const section = (source, begin, end) => source.slice(source.indexOf(begin), source.indexOf(end, source.indexOf(begin)));
 
 test('reader global backup snapshots complete persisted reading records and only referenced files', () => {
@@ -48,11 +52,49 @@ test('section archive rejects duplicate paths, unsafe roots and oversized restor
 });
 
 test('coordinator never publishes a subset of a requested selection', () => {
-    assert.match(coordinator, /supportedSections: Set<NativeBackupManifest.Section> = \[.reader, .music\]/);
+    assert.match(coordinator, /supportedSections: Set<NativeBackupManifest.Section> = \[.reader, .music, .cinema, .podcasts, .radio, .preferences\]/);
     assert.match(coordinator, /sections.isSubset\(of: Self.supportedSections\)/);
     assert.match(coordinator, /guard !isCreating/);
     assert.match(coordinator, /archives\[.reader\] = try await reader.createGlobalBackupArchive\(\)/);
     assert.match(coordinator, /archives\[.music\] = try await NativeMusicBackupAdapter.createArchive\(\)/);
     assert.match(coordinator, /let prepared = archives[\s\S]*?destination.publish\(archives: prepared\)/);
     assert.match(coordinator, /for archive in archives.values/);
+});
+
+test('cinema backs up only selected personal files and stable history, not provider media', () => {
+    const source = section(cinema, 'func createGlobalBackupArchive()', 'private func persist(');
+    assert.match(source, /let snapshot = items/);
+    assert.match(source, /let recent = NativeCinemaRecentStore.shared.entries/);
+    assert.match(source, /item.storedName == item.id.uuidString \+ "\." \+ ext/);
+    assert.match(source, /"catalogo-personal.json": encoder.encode\(snapshot\)/);
+    assert.match(source, /"historial.json": encoder.encode\(recent\)/);
+    assert.doesNotMatch(source, /Credentials|URLSession|Cache.shared|currentCloudReference/);
+});
+test('podcast backup captures personal records and reports excluded URL references', () => {
+    assert.match(personal, /url.user == nil, url.password == nil/);
+    assert.match(personal, /url.percentEncodedQuery == nil, url.percentEncodedFragment == nil/);
+    assert.match(personal, /let followed = library.followed.filter/);
+    assert.match(personal, /let progress = library.playbackProgress.filter/);
+    assert.match(personal, /let previous = downloads.entries.filter/);
+    assert.match(personal, /excludedReferences: excluded/);
+    assert.match(personal, /files: \[\], maxBytes: 32_000_000/);
+});
+test('radio and preferences preserve explicit personal data without copying account records', () => {
+    assert.match(radio, /struct NativeRadioBackupEntry: Codable/);
+    assert.match(radio, /stationID: station.stationuuid/);
+    assert.match(radio, /NativeBackupReferencePolicy.eligible\(station.url_resolved\) \? station.url_resolved : nil/);
+    assert.match(radio, /requiresDirectoryLookup: entries.filter/);
+    assert.match(personal, /favorites: favorites.keys, savedForLater: activity.savedForLater/);
+    assert.match(personal, /recentlyRead: activity.recentlyRead, youtubeVideos: youtube.videos/);
+    assert.match(personal, /voiceProfiles: try NativeReaderVoiceProfileStore.backupProfiles/);
+    assert.match(voiceProfiles, /where key.hasPrefix\(prefix\)/);
+    assert.match(voiceProfiles, /JSONDecoder\(\).decode\(NativeReaderVoiceProfile.self, from: data\)/);
+    assert.doesNotMatch(personal, /"native-reader-gemini-validated"|"mi-musica-auto-backup-destination-bookmark"/);
+});
+test('all six selected archives must exist before publication, and missing stores abort', () => {
+    for (const name of ['reader','music','cinema','podcasts','radio','preferences']) {
+        assert.ok(coordinator.includes('archives[.' + name + '] = try await'), name);
+    }
+    assert.match(coordinator, /guard Set\(archives.keys\) == sections/);
+    assert.match(coordinator, /throw Failure.missingLiveStore/);
 });

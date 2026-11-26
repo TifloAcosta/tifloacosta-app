@@ -27,22 +27,26 @@ struct NativeBackupRestoreJournal {
     private static let maximumBytes = 512 * 1024 * 1024
 
     func pending() throws -> Record? {
-        // resourceValues detects symlinks, including dangling links.
-        let attributes: URLResourceValues
+        // FileManager attributes are read afresh; URL.resourceValues may
+        // cache the old file identity after a successful removal/rename.
+        // Unlike fileExists, attributes distinguish absent from unreadable.
+        let attributes: [FileAttributeKey: Any]
         do {
-            attributes = try url.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey, .fileSizeKey])
+            attributes = try fm.attributesOfItem(atPath: url.path)
         } catch {
-            if (error as NSError).domain == NSCocoaErrorDomain &&
-                (error as NSError).code == NSFileNoSuchFileError { return nil }
-            if (error as NSError).domain == NSCocoaErrorDomain &&
-                (error as NSError).code == NSFileReadNoSuchFileError { return nil }
+            let error = error as NSError
+            if error.domain == NSCocoaErrorDomain &&
+                [NSFileNoSuchFileError, NSFileReadNoSuchFileError].contains(error.code) { return nil }
+            if error.domain == NSPOSIXErrorDomain && error.code == 2 { return nil }
             throw error
         }
-        guard attributes.isRegularFile == true, attributes.isSymbolicLink == false,
-              let count = attributes.fileSize, count > 0, count <= Self.maximumBytes else {
+        guard attributes[.type] as? FileAttributeType == .typeRegular,
+              let count = (attributes[.size] as? NSNumber)?.int64Value,
+              count > 0, count <= Int64(Self.maximumBytes) else {
             throw Failure.invalidRecord
         }
-        let record = try PropertyListDecoder().decode(Record.self, from: Data(contentsOf: url))
+        let fresh = URL(fileURLWithPath: url.path)
+        let record = try PropertyListDecoder().decode(Record.self, from: Data(contentsOf: fresh))
         guard record.version == 1, !record.recoveryPayload.isEmpty else { throw Failure.invalidRecord }
         return record
     }

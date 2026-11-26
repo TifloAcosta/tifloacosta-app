@@ -1037,7 +1037,8 @@ final class NativeReadingSpeech: ObservableObject {
         liveSystemSettings = settings
         let voice = (voiceIdentifier.isEmpty ? nil : AVSpeechSynthesisVoice(identifier: voiceIdentifier))
             ?? AVSpeechSynthesisVoice(language: language)
-        let first = systemSpeechNeedsRestart ? speechQueueIndex : speechQueueIndex + 1
+        let first = NativeReaderSpeechQueueWindow.editableStart(current: speechQueueIndex,
+            alreadyQueued: speechEnqueuedThroughIndex, total: speechQueue.count)
         guard first < speechQueue.count else { return }
         for index in first..<speechQueue.count {
             let utterance = speechQueue[index].utterance
@@ -1125,8 +1126,8 @@ final class NativeReadingSpeech: ObservableObject {
                     self.geminiCursorUTF16 += segment.utf16.count
                     self.generatedCharacters += segment.count
                     self.textCharacterOffset = self.generatedBaseCharacters + self.generatedCharacters
-                    self.textPercent = min(100, Int(Double(self.geminiCursorUTF16) * 100 /
-                        Double(max(1, self.totalUTF16))))
+                    self.textPercent = NativeReaderProgress.textPercent(
+                        length: self.generatedTotalCharacters, offset: self.textCharacterOffset)
                     self.geminiSegmentIndex += 1
                     self.player = nil
                     if self.geminiSegmentIndex < self.geminiSegments.count {
@@ -1171,6 +1172,7 @@ final class NativeReadingSpeech: ObservableObject {
     private var geminiOnError: ((String) -> Void)?
     private var generatedBaseCharacters = 0
     private var generatedCharacters = 0
+    private var generatedTotalCharacters = 0
     private(set) var isGemini = false
     private(set) var isPhonon = false
     var isGeneratedSpeech: Bool { isGemini || isPhonon }
@@ -1293,9 +1295,10 @@ final class NativeReadingSpeech: ObservableObject {
         geminiCursorUTF16 = baseUTF16
         generatedBaseCharacters = baseCharacters
         generatedCharacters = 0
+        generatedTotalCharacters = baseCharacters + text.count
         self.totalUTF16 = max(1, totalUTF16)
         self.textCharacterOffset = baseCharacters
-        self.textPercent = Int(Double(baseUTF16) * 100 / Double(self.totalUTF16))
+        self.textPercent = NativeReaderProgress.textPercent(length: generatedTotalCharacters, offset: baseCharacters)
         self.geminiOnError = onError
         isGemini = engine == 1
         isPhonon = engine == 2
@@ -3182,6 +3185,7 @@ struct NativeReadingScreen: View {
     }
 
     private func play() {
+        interruptedWhilePlaying = false
         NativeRadioPlayer.shared.pauseForOtherAudio()
         NativeAppleMusicPlayer.shared.pauseForOtherAudio()
         NativeAudiusPlayer.shared.pauseForOtherAudio()
@@ -3362,12 +3366,14 @@ struct NativeReadingScreen: View {
         case .began:
             // A real system interruption is not a user-requested pause.
             // Preserve the exact word/track position once.
-            interruptedWhilePlaying = speech.isPlaying
-            if interruptedWhilePlaying { pausePlayback() }
+            guard NativeRemotePlaybackOwner.current == .reader, speech.isPlaying else { return }
+            pausePlayback()
+            interruptedWhilePlaying = true
         case .ended:
             let rawOptions = notification.userInfo?[AVAudioSessionInterruptionOptionKey] as? UInt ?? 0
             let options = AVAudioSession.InterruptionOptions(rawValue: rawOptions)
-            if interruptedWhilePlaying && options.contains(.shouldResume) && speech.isPaused {
+            if interruptedWhilePlaying && options.contains(.shouldResume) && speech.isPaused &&
+                readerIsVisible && NativeRemotePlaybackOwner.current == .reader {
                 play()
             }
             interruptedWhilePlaying = false
@@ -3377,6 +3383,7 @@ struct NativeReadingScreen: View {
     }
 
     private func pausePlayback() {
+        interruptedWhilePlaying = false
         checkpointLiveTextPosition()
         speech.pause()
         if NativeRemotePlaybackOwner.current == .reader {
@@ -3406,6 +3413,7 @@ struct NativeReadingScreen: View {
         let pauseToken = remoteCommandCenter.pauseCommand.addTarget { _ in
             DispatchQueue.main.async {
                 guard NativeRemotePlaybackOwner.current == .reader else { return }
+                interruptedWhilePlaying = false
                 if speech.isPlaying { pausePlayback() }
             }
             return .success
@@ -3432,6 +3440,7 @@ struct NativeReadingScreen: View {
     private func stopPlayback() {
         // Capture a live text cursor, or the exact audio time, before the
         // active synthesizer/player is discarded by stop().
+        interruptedWhilePlaying = false
         checkpointLiveTextPosition()
         persistPosition()
         speech.stop()
@@ -4087,6 +4096,7 @@ struct NativeReadingScreen: View {
 
     /// One activation returns to the start without auto-playing any voice.
     private func returnToBeginning() {
+        interruptedWhilePlaying = false
         speech.stop()
         sleepDeadline = nil
         readingOffset = 0

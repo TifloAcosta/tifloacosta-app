@@ -33,7 +33,8 @@ struct NativeReaderContinuousBrailleText: UIViewRepresentable {
         // UITextView layout and move the braille viewport unexpectedly.
         let requestedFont = UIFont.systemFont(ofSize: CGFloat(textSize),
             weight: strongText ? .bold : .regular)
-        if view.font != requestedFont { view.font = requestedFont }
+        let fontChanged = view.font != requestedFont
+        let previousSelection = view.selectedRange
         let textChanged = context.coordinator.originalText != text
         if textChanged {
             context.coordinator.originalText = text
@@ -41,7 +42,7 @@ struct NativeReaderContinuousBrailleText: UIViewRepresentable {
             context.coordinator.offsets = NativeReaderTextOffsets(context.coordinator.visibleText)
         }
         let explicitPositionChange = context.coordinator.requestedOffset != initialOffset
-        guard textChanged || explicitPositionChange else { return }
+        guard textChanged || explicitPositionChange || fontChanged else { return }
 
         // UITextView selection callbacks are also triggered by replacing text.
         // Suppress programmatic callbacks across the complete update, rather than
@@ -49,6 +50,13 @@ struct NativeReaderContinuousBrailleText: UIViewRepresentable {
         context.coordinator.restoring = true
         defer { context.coordinator.restoring = false }
         if textChanged { view.text = context.coordinator.visibleText }
+        if view.font != requestedFont { view.font = requestedFont }
+        // A typography-only update must preserve the user's actual selection.
+        if !textChanged && !explicitPositionChange {
+            if view.selectedRange != previousSelection { view.selectedRange = previousSelection }
+            view.scrollRangeToVisible(previousSelection)
+            return
+        }
         let offset = max(0, min(context.coordinator.offsets.length, initialOffset))
         let utf16Offset = context.coordinator.offsets.utf16Offset(for: offset)
         let restoredRange = NSRange(location: utf16Offset, length: 0)

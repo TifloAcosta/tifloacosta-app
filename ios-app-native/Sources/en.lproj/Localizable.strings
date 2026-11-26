@@ -1718,3 +1718,16 @@
 "La duración de audio se mostrará al iniciar la pista." = "Audio duration will appear when the track starts.";
 "Tiempo realizado %@. Tiempo restante %@." = "Elapsed time %@. Remaining time %@.";
 "Voz reproducida %@. Tiempo restante estimado %@." = "Speech played %@. Estimated remaining time %@.";
+
+// Release 1.7: music backup and playback state
+"No se pudo preparar el respaldo: %@" = "Could not prepare the backup: %@";
+"No se pudo guardar el destino elegido: %@" = "Could not save the selected destination: %@";
+"No se pudo restablecer el destino interno: %@" = "Could not restore the internal destination: %@";
+"No se pudo guardar la copia automática: %@" = "Could not save the automatic backup: %@";
+"No se pudo restaurar el índice: %@" = "Could not restore the library index: %@";
+"No se pudo crear la copia con audio: %@" = "Could not create the backup with audio: %@";
+"No se pudo restaurar la copia con audio: %@" = "Could not restore the backup with audio: %@";
+"Organización restaurada. Canciones sin audio local: %d. Tendrás que importarlas para reproducirlas." = "Library organization restored. Songs without local audio: %d. Import them to play them.";
+"desactivada" = "off";
+"toda la lista" = "entire playlist";
+"una canción" = "one song";

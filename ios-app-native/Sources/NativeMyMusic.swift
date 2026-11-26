@@ -592,7 +592,7 @@ private final class NativeMusicLibrary: ObservableObject {
                     titleContains: $0.titleContains, rule: $0.rule) }, audioProfiles: NativeMusicPlayer.shared.exportProfiles())
             let bytes = try JSONEncoder().encode(backup)
             return MusicBackupDocument(text: String(decoding: bytes, as: UTF8.self))
-        } catch { self.error = "No se pudo preparar el respaldo: \(error.localizedDescription)"; return nil }
+        } catch { self.error = MusicLocalized.format("No se pudo preparar el respaldo: %@", error.localizedDescription); return nil }
     }
 
     func setAutomaticBackup(days: Int) {
@@ -622,7 +622,7 @@ private final class NativeMusicLibrary: ObservableObject {
             UserDefaults.standard.set(lastAutomaticBackup, forKey: "mi-musica-last-auto-backup")
             error = nil
         } catch {
-            self.error = "No se pudo guardar el destino elegido: \(error.localizedDescription)"
+            self.error = MusicLocalized.format("No se pudo guardar el destino elegido: %@", error.localizedDescription)
         }
     }
 
@@ -636,7 +636,7 @@ private final class NativeMusicLibrary: ObservableObject {
             lastAutomaticBackup = Date()
             UserDefaults.standard.set(lastAutomaticBackup, forKey: "mi-musica-last-auto-backup")
             error = nil
-        } catch { self.error = "No se pudo restablecer el destino interno: \(error.localizedDescription)" }
+        } catch { self.error = MusicLocalized.format("No se pudo restablecer el destino interno: %@", error.localizedDescription) }
     }
 
     private func automaticBackupDirectory() throws -> URL {
@@ -671,7 +671,7 @@ private final class NativeMusicLibrary: ObservableObject {
             try writeAutomaticBackup(document, to: folder, custom: custom)
             lastAutomaticBackup = Date()
             UserDefaults.standard.set(lastAutomaticBackup, forKey: "mi-musica-last-auto-backup")
-        } catch { self.error = "No se pudo guardar la copia automática: \(error.localizedDescription)" }
+        } catch { self.error = MusicLocalized.format("No se pudo guardar la copia automática: %@", error.localizedDescription) }
     }
 
     func restoreIndex(_ url: URL) {
@@ -713,8 +713,8 @@ private final class NativeMusicLibrary: ObservableObject {
             do { try save() } catch { files = originalFiles; folders = originalFolders; playlists = originalPlaylists; smartFolders = originalSmart; throw error }
             NativeMusicPlayer.shared.restoreProfiles(imported.audioProfiles)
             let unavailable = imported.catalog.tracks.count - importable.count
-            if unavailable > 0 { self.error = "Organización restaurada. Hay \(unavailable) canciones sin audio local; tendrás que importarlas para reproducirlas." }
-        } catch { self.error = "No se pudo restaurar el índice: \(error.localizedDescription)" }
+            if unavailable > 0 { self.error = MusicLocalized.format("Organización restaurada. Canciones sin audio local: %d. Tendrás que importarlas para reproducirlas.", unavailable) }
+        } catch { self.error = MusicLocalized.format("No se pudo restaurar el índice: %@", error.localizedDescription) }
     }
 
     func createCompleteArchive() -> URL? {
@@ -758,7 +758,7 @@ private final class NativeMusicLibrary: ObservableObject {
         } catch {
             try? FileManager.default.removeItem(at: staging)
             try? FileManager.default.removeItem(at: output)
-            self.error = "No se pudo crear la copia con audio: \(error.localizedDescription)"
+            self.error = MusicLocalized.format("No se pudo crear la copia con audio: %@", error.localizedDescription)
             return nil
         }
     }
@@ -834,7 +834,7 @@ private final class NativeMusicLibrary: ObservableObject {
             NativeMusicPlayer.shared.restoreProfiles(backup.audioProfiles)
         } catch {
             createdFiles.forEach { try? FileManager.default.removeItem(at: $0) }
-            self.error = "No se pudo restaurar la copia con audio: \(error.localizedDescription)"
+            self.error = MusicLocalized.format("No se pudo restaurar la copia con audio: %@", error.localizedDescription)
         }
         try? FileManager.default.removeItem(at: staging)
     }
@@ -1156,9 +1156,9 @@ struct NativeMyMusicScreen: View {
 
     private var musicRepeatDescription: String {
         switch player.repeatMode {
-        case "off": return "desactivada"
-        case "all": return "toda la lista"
-        default: return "una canción"
+        case "off": return MusicLocalized.message("desactivada")
+        case "all": return MusicLocalized.message("toda la lista")
+        default: return MusicLocalized.message("una canción")
         }
     }
 
@@ -1361,7 +1361,7 @@ struct NativeMyMusicScreen: View {
         Section("Carpetas inteligentes") {
             ForEach(library.smartFolders) { folder in
                 let matches = library.matchingTracks(for: folder)
-                Text("\(folder.name), criterio: \(folder.ruleKind.label) \(folder.titleContains), \(matches.count) canciones")
+                Text("\(folder.name), criterio: \(MusicLocalized.message(folder.ruleKind.label)) \(folder.titleContains), \(matches.count) canciones")
                 Button("Reproducir carpeta inteligente \(folder.name)") {
                     let items = matches.map { (name: $0.name, url: library.audioURL(for: $0)) }
                     if let first = items.first { player.play(name: first.name, url: first.url, queue: items,

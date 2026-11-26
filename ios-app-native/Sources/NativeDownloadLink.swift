@@ -14,23 +14,23 @@ enum NativeDownloadLinkError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalid:
-            return "Pega un enlace HTTPS válido y pulsa Analizar enlace."
+            return MusicLocalized.message("Pega un enlace HTTPS válido y pulsa Analizar enlace.")
         case .unsupportedFolder:
-            return "Este enlace señala una carpeta. Abre la carpeta en Google Drive y comparte el enlace de un archivo concreto."
+            return MusicLocalized.message("Este enlace señala una carpeta. Abre la carpeta en Google Drive y comparte el enlace de un archivo concreto.")
         case .unsupportedGoogleLink:
-            return "No se ha podido reconocer el archivo de Google Drive. Comprueba el enlace compartido."
+            return MusicLocalized.message("No se ha podido reconocer el archivo de Google Drive. Comprueba el enlace compartido.")
         case .accessDenied:
-            return "Google Drive no permite descargar este archivo sin autorización. Si es tuyo, revisa Compartir y permite el acceso a quien tenga el enlace. Si no, solicita permiso a la persona propietaria."
+            return MusicLocalized.message("Google Drive no permite descargar este archivo sin autorización. Si es tuyo, revisa Compartir y permite el acceso a quien tenga el enlace. Si no, solicita permiso a la persona propietaria.")
         case .notFound:
-            return "El archivo no se ha encontrado. Puede que el enlace haya caducado o que el archivo se haya eliminado."
+            return MusicLocalized.message("El archivo no se ha encontrado. Puede que el enlace haya caducado o que el archivo se haya eliminado.")
         case .httpStatus(let code):
-            return "El servidor ha rechazado la descarga (HTTP \(code)). Comprueba el enlace o inténtalo más tarde."
+            return MusicLocalized.format("El servidor ha rechazado la descarga (HTTP %d). Comprueba el enlace o inténtalo más tarde.", code)
         case .webPageInsteadOfFile:
-            return "Google Drive ha devuelto una página de visualización o de inicio de sesión, no el archivo. Abre el enlace original y comprueba los permisos de descarga."
+            return MusicLocalized.message("Google Drive ha devuelto una página de visualización o de inicio de sesión, no el archivo. Abre el enlace original y comprueba los permisos de descarga.")
         case .tooLarge:
-            return "El archivo supera el límite de 100 MB."
+            return MusicLocalized.message("El archivo supera el límite de 100 MB.")
         case .emptyFile:
-            return "El archivo está vacío y no se ha guardado."
+            return MusicLocalized.message("El archivo está vacío y no se ha guardado.")
         }
     }
 }

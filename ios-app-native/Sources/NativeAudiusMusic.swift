@@ -106,7 +106,7 @@ final class NativeAudiusPlayer: ObservableObject {
             error = nil
             return true
         } catch {
-            self.error = "No se pudo iniciar la canción: \(error.localizedDescription)"
+            self.error = MusicLocalized.format("No se pudo iniciar la canción: %@", error.localizedDescription)
             return false
         }
     }
@@ -238,7 +238,7 @@ struct NativeAudiusScreen: View {
                         title: track.title, artist: track.user?.name ?? "Audius", addToPlaylist: addToPlaylist)
                 }
             }
-            if let message = directory.error ?? player.error { Text(message) }
+            if let message = directory.error ?? player.error { Text(MusicLocalized.message(message)) }
         }
         .tifloScreenSurface()
         .navigationTitle("Audius: música gratuita")

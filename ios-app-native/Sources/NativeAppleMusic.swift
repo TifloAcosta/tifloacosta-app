@@ -206,7 +206,7 @@ struct NativeAppleMusicScreen: View {
                     }
                 }
             }
-            if let error = music.error { Text(error) }
+            if let error = music.error { Text(MusicLocalized.message(error)) }
         }
         .tifloScreenSurface()
         .navigationTitle("Apple Music")

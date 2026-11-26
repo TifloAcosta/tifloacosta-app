@@ -1731,3 +1731,32 @@
 "desactivada" = "off";
 "toda la lista" = "entire playlist";
 "una canción" = "one song";
+
+// Release 1.7: shortcuts, provider and download errors
+"Abre la sección Actualidad de TifloAcosta." = "Opens the TifloAcosta News section.";
+"Abre la biblioteca de TifloLector en TifloAcosta." = "Opens the TifloLector library in TifloAcosta.";
+"Reanuda el último libro abierto, desde la posición guardada." = "Resumes the last opened book from its saved position.";
+"Abre los vídeos accesibles de TifloAcosta." = "Opens TifloAcosta’s accessible videos.";
+"Continuar el último libro en TifloLector" = "Resume the last book in TifloLector";
+"Continuar libro" = "Resume book";
+"Pegar clave" = "Paste key";
+"Apple Music no tiene permiso para acceder a tu biblioteca. Puedes autorizarlo en Ajustes del iPhone." = "Apple Music does not have permission to access your library. You can grant it in iPhone Settings.";
+"No se pudo comprobar el acceso a Apple Music." = "Could not check access to Apple Music.";
+"Para buscar en el catálogo necesitas autorizar Apple Music y disponer de acceso al catálogo." = "To search the catalog, authorize Apple Music and make sure you have catalog access.";
+"No se pudo buscar música en el catálogo de Apple." = "Could not search for music in the Apple catalog.";
+"No se pudo reproducir esta canción con Apple Music." = "Could not play this song with Apple Music.";
+"No se pudo reanudar Apple Music." = "Could not resume Apple Music.";
+"No se pudo preparar la búsqueda." = "Could not prepare the search.";
+"No se pudo consultar Audius. Comprueba la conexión e inténtalo de nuevo." = "Could not reach Audius. Check your connection and try again.";
+"Esta pista no tiene un identificador compatible." = "This track has no compatible identifier.";
+"No se pudo iniciar la canción: %@" = "Could not start the song: %@";
+"Pega un enlace HTTPS válido y pulsa Analizar enlace." = "Paste a valid HTTPS link and select Analyze link.";
+"Este enlace señala una carpeta. Abre la carpeta en Google Drive y comparte el enlace de un archivo concreto." = "This link points to a folder. Open it in Google Drive and share a link to a specific file.";
+"No se ha podido reconocer el archivo de Google Drive. Comprueba el enlace compartido." = "The Google Drive file could not be identified. Check the shared link.";
+"Google Drive no permite descargar este archivo sin autorización. Si es tuyo, revisa Compartir y permite el acceso a quien tenga el enlace. Si no, solicita permiso a la persona propietaria." = "Google Drive does not allow this file to be downloaded without authorization. If it is yours, check Sharing and grant access to anyone with the link. Otherwise, ask its owner for permission.";
+"El archivo no se ha encontrado. Puede que el enlace haya caducado o que el archivo se haya eliminado." = "File not found. The link may have expired or the file may have been deleted.";
+"El servidor ha rechazado la descarga (HTTP %d). Comprueba el enlace o inténtalo más tarde." = "The server rejected the download (HTTP %d). Check the link or try again later.";
+"Google Drive ha devuelto una página de visualización o de inicio de sesión, no el archivo. Abre el enlace original y comprueba los permisos de descarga." = "Google Drive returned a preview or sign-in page rather than the file. Open the original link and check download permissions.";
+"El archivo supera el límite de 100 MB." = "The file exceeds the 100 MB limit.";
+"El archivo está vacío y no se ha guardado." = "The file is empty and was not saved.";
+"No se pudo leer este documento: %@" = "Could not read this document: %@";

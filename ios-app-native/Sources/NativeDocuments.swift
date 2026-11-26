@@ -148,7 +148,7 @@ struct NativeRemoteResourceScreen: View {
             paragraphs = text.components(separatedBy: "\n\n").filter { !$0.isEmpty }
             if paragraphs.isEmpty { throw NativeResourceError.emptyDocument }
         } catch {
-            self.error = "No se pudo leer este documento: \(error.localizedDescription)"
+            self.error = MusicLocalized.format("No se pudo leer este documento: %@", error.localizedDescription)
         }
     }
 

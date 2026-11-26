@@ -1729,3 +1729,32 @@
 "desactivada" = "disattivata";
 "toda la lista" = "intera lista";
 "una canción" = "un brano";
+
+// Release 1.7: shortcuts, provider and download errors
+"Abre la sección Actualidad de TifloAcosta." = "Apre la sezione Attualità di TifloAcosta.";
+"Abre la biblioteca de TifloLector en TifloAcosta." = "Apre la biblioteca di TifloLector in TifloAcosta.";
+"Reanuda el último libro abierto, desde la posición guardada." = "Riprende l’ultimo libro aperto dalla posizione salvata.";
+"Abre los vídeos accesibles de TifloAcosta." = "Apre i video accessibili di TifloAcosta.";
+"Continuar el último libro en TifloLector" = "Riprendi l’ultimo libro in TifloLector";
+"Continuar libro" = "Riprendi libro";
+"Pegar clave" = "Incolla chiave";
+"Apple Music no tiene permiso para acceder a tu biblioteca. Puedes autorizarlo en Ajustes del iPhone." = "Apple Music non ha il permesso di accedere alla libreria. Puoi concederlo nelle impostazioni dell’iPhone.";
+"No se pudo comprobar el acceso a Apple Music." = "Impossibile verificare l’accesso ad Apple Music.";
+"Para buscar en el catálogo necesitas autorizar Apple Music y disponer de acceso al catálogo." = "Per cercare nel catalogo, autorizza Apple Music e assicurati di avere accesso al catalogo.";
+"No se pudo buscar música en el catálogo de Apple." = "Impossibile cercare musica nel catalogo Apple.";
+"No se pudo reproducir esta canción con Apple Music." = "Impossibile riprodurre questo brano con Apple Music.";
+"No se pudo reanudar Apple Music." = "Impossibile riprendere la riproduzione di Apple Music.";
+"No se pudo preparar la búsqueda." = "Impossibile preparare la ricerca.";
+"No se pudo consultar Audius. Comprueba la conexión e inténtalo de nuevo." = "Impossibile consultare Audius. Controlla la connessione e riprova.";
+"Esta pista no tiene un identificador compatible." = "Questa traccia non ha un identificatore compatibile.";
+"No se pudo iniciar la canción: %@" = "Impossibile avviare il brano: %@";
+"Pega un enlace HTTPS válido y pulsa Analizar enlace." = "Incolla un link HTTPS valido e seleziona Analizza link.";
+"Este enlace señala una carpeta. Abre la carpeta en Google Drive y comparte el enlace de un archivo concreto." = "Questo link rimanda a una cartella. Aprila in Google Drive e condividi il link di un file specifico.";
+"No se ha podido reconocer el archivo de Google Drive. Comprueba el enlace compartido." = "Impossibile identificare il file Google Drive. Controlla il link condiviso.";
+"Google Drive no permite descargar este archivo sin autorización. Si es tuyo, revisa Compartir y permite el acceso a quien tenga el enlace. Si no, solicita permiso a la persona propietaria." = "Google Drive non consente di scaricare questo file senza autorizzazione. Se è tuo, controlla la condivisione e consenti l’accesso a chi ha il link. Altrimenti, chiedi il permesso al proprietario.";
+"El archivo no se ha encontrado. Puede que el enlace haya caducado o que el archivo se haya eliminado." = "File non trovato. Il link potrebbe essere scaduto o il file eliminato.";
+"El servidor ha rechazado la descarga (HTTP %d). Comprueba el enlace o inténtalo más tarde." = "Il server ha rifiutato il download (HTTP %d). Controlla il link o riprova più tardi.";
+"Google Drive ha devuelto una página de visualización o de inicio de sesión, no el archivo. Abre el enlace original y comprueba los permisos de descarga." = "Google Drive ha restituito una pagina di anteprima o accesso, non il file. Apri il link originale e controlla i permessi di download.";
+"El archivo supera el límite de 100 MB." = "Il file supera il limite di 100 MB.";
+"El archivo está vacío y no se ha guardado." = "Il file è vuoto e non è stato salvato.";
+"No se pudo leer este documento: %@" = "Impossibile leggere questo documento: %@";

@@ -304,6 +304,7 @@ private enum NativeCinemaContentMode {
 private struct NativeCinemaContentScreen: View {
     let mode: NativeCinemaContentMode
     @State private var searchText = ""
+    @State private var discoveryLanguageIndex = 0
     @State private var audiocinematecaResults: [NativeAudiocinematecaCatalogueIndex.Entry] = []
     @State private var audioAccountStamp: String?
     @State private var consultedCatalogues = 0
@@ -330,7 +331,8 @@ private struct NativeCinemaContentScreen: View {
     @StateObject private var cinemaRecents = NativeCinemaRecentStore.shared
 
     private var selectedLanguage: AccessibleCinemaLanguage {
-        AccessibleCinemaLanguage.allCases[min(max(0, languageIndex), AccessibleCinemaLanguage.allCases.count - 1)]
+        let index = mode == .discovery ? discoveryLanguageIndex : languageIndex
+        return AccessibleCinemaLanguage.allCases[min(max(0, index), AccessibleCinemaLanguage.allCases.count - 1)]
     }
 
     private var selectedKind: AccessibleCinemaKind {
@@ -344,7 +346,7 @@ private struct NativeCinemaContentScreen: View {
             let typeMatches = selectedKind == .all || source.kinds.contains(selectedKind)
             let queryMatches = query.isEmpty || [MusicLocalized.message(source.name), source.description, source.detail]
                 .contains(where: { $0.localizedStandardContains(query) })
-            return languageMatches && typeMatches && (queryMatches || remoteSearched || remoteSearching)
+            return languageMatches && typeMatches && queryMatches
         }
     }
 
@@ -646,9 +648,23 @@ private struct NativeCinemaContentScreen: View {
             }
 
 
-                if !personalItems.isEmpty && !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    Section("Mi colección personal") {
-                        personalRows
+                if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    if !personalItems.isEmpty {
+                        Section {
+                            personalRows
+                        } header: { Text("Mi colección personal") }
+                    }
+                    if !filtered.isEmpty {
+                        Section("Plataformas") {
+                            ForEach(filtered) { source in
+                                NavigationLink {
+                                    NativeCinemaProviderScreen(source: source)
+                                } label: {
+                                    Text(MusicLocalized.message(source.name))
+                                }
+                            }
+                        }
+                        .listRowBackground(TifloVisual.surfaceRaised)
                     }
                 }
             }
@@ -656,7 +672,7 @@ private struct NativeCinemaContentScreen: View {
                 NativeAdjustableChoice(
                     title: "Idioma de audiodescripción",
                     choices: AccessibleCinemaLanguage.allCases.map(\.rawValue),
-                    selectedIndex: $languageIndex
+                    selectedIndex: $discoveryLanguageIndex
                 )
             if selectedLanguage == .all || selectedLanguage == .english || selectedLanguage == .french || selectedLanguage == .german || selectedLanguage == .italian {
                 Section("Dónde ver una película") {
@@ -677,6 +693,10 @@ private struct NativeCinemaContentScreen: View {
             }
 
 
+                if selectedLanguage == .spain || selectedLanguage == .latino || selectedLanguage == .portuguese {
+                    Text("No hay fuentes para estos filtros")
+                        .foregroundStyle(TifloVisual.secondaryText)
+                }
             }
             if mode == .collection {
                 Section("Mi colección personal") {
@@ -948,28 +968,33 @@ private struct NativeCinemaProviderScreen: View {
                             Link("Crear cuenta gratuita", destination: URL(string: "https://audiocinemateca.com/usuario/register")!)
                             .frame(minHeight: 44, alignment: .leading)
                         }
-                        if let address = source.address {
+                        if let address = source.address, source.id != "audiocinemateca" {
                             Link("Abrir plataforma original: \(MusicLocalized.message(source.name))", destination: address)
                                 .font(.body.weight(.semibold))
                                 .frame(minHeight: 44, alignment: .leading)
-                        } else if !["audesc-es", "audesc-latino"].contains(source.id) {
+                        } else if source.address == nil && !["audesc-es", "audesc-latino"].contains(source.id) {
                             Text("Fuente pendiente de conexión segura")
                                 .font(.subheadline)
                                 .foregroundStyle(TifloVisual.secondaryText)
                         }
 
-            NavigationLink("Información y agradecimientos") {
+            NavigationLink {
                 List {
                     Section("Sobre el acceso") {
                         Text(source.detail)
                         Text("Las plataformas muestran obras audiodescritas según su catálogo, país y permisos. Abrir la web oficial no significa que todas sus películas tengan audiodescripción.")
+                        if source.id == "audiocinemateca", let address = source.address {
+                            Link("Abrir plataforma original: \(MusicLocalized.message(source.name))", destination: address)
+                        }
                         if let collaborator {
                             Text(MusicLocalized.format("Agradecemos a %@ su predisposición y colaboración con Multicines Accesibles.", collaborator))
                         }
                     }
                 }
                 .tifloScreenSurface()
-                .navigationTitle("Información y agradecimientos")
+                .navigationTitle(MusicLocalized.message(collaborator == nil ? "Información" : "Información y agradecimientos"))
+            } label: {
+                Text(MusicLocalized.message(collaborator == nil ? "Información" : "Información y agradecimientos"))
             }
         }
         .tifloScreenSurface()

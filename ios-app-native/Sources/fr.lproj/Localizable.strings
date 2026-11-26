@@ -1610,3 +1610,6 @@
 "No se pudo guardar «%@»: %@" = "Impossible d'enregistrer « %@ » : %@";
 "Selecciona una carpeta en Archivos para descargar «%@»." = "Choisissez un dossier dans Fichiers pour télécharger « %@ ».";
 "No se pudo descargar «%@»: %@" = "Impossible de télécharger « %@ » : %@";
+"¿Borrar el historial de consulta de Actualidad y Recursos?" = "Effacer l’historique de consultation d’Actualités et de Ressources ?";
+"Lecturas de Actualidad" = "Lectures d’Actualités";
+"Lecturas de Recursos" = "Lectures de Ressources";

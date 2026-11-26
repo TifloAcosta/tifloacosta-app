@@ -22,7 +22,7 @@ test('La biblioteca presenta Importar y documentos antes de opciones secundarias
 
 test('Pausas Normal Mayor Expresiva y Personalizadas ofrecen ajustes reales por signo', () => {
   assert.match(settings, /choices: \["Normal", "Mayor", "Expresiva", "Personalizadas"\]/);
-  assert.match(settings, /private let choices = \(0\.\.\.30\)\.map/);
+  assert.match(settings, /private var choices: \[String\] \{ \(0\.\.\.30\)\.map/);
   for (const name of ['comma', 'semicolon', 'colon', 'sentence', 'paragraph']) {
     assert.match(settings, new RegExp('native-reading-pause-' + name));
   }

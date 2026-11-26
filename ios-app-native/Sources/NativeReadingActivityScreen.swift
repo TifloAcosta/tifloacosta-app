@@ -6,6 +6,7 @@ struct NativeReadingActivityScreen: View {
     let kind: NativeFavoriteKind
     @EnvironmentObject private var catalog: NativeCatalogStore
     @EnvironmentObject private var activity: NativeReadingActivity
+    @State private var confirmClear = false
 
     private var catalogItems: [NativeCatalogItem] {
         kind == .news ? catalog.news : catalog.resources
@@ -61,11 +62,15 @@ struct NativeReadingActivityScreen: View {
                     NavigationLink(item.title) { detail(item) }
                 }
                 if !activity.recentlyRead.isEmpty {
-                    Button("Borrar historial de consulta") { activity.clearHistory() }
+                    Button("Borrar historial de consulta", role: .destructive) { confirmClear = true }
                 }
             }
         }
         .tifloScreenSurface()
-        .navigationTitle(kind == .news ? "Lecturas de Actualidad" : "Lecturas de Recursos")
+        .navigationTitle(MusicLocalized.message(kind == .news ? "Lecturas de Actualidad" : "Lecturas de Recursos"))
+        .confirmationDialog("¿Borrar el historial de consulta de Actualidad y Recursos?", isPresented: $confirmClear, titleVisibility: .visible) {
+            Button("Borrar historial de consulta", role: .destructive) { activity.clearHistory() }
+            Button("Cancelar", role: .cancel) {}
+        }
     }
 }

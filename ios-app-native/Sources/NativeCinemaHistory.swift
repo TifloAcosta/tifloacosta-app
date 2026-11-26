@@ -105,6 +105,7 @@ struct NativeCinemaTransportControls: View {
 struct NativeCinemaHistoryScreen: View {
     @ObservedObject private var store = NativeCinemaRecentStore.shared
     @State private var confirm = false
+    @State private var pendingRemoval: NativeCinemaRecent?
     var body: some View {
         List {
             ForEach(store.entries) { recent in
@@ -119,17 +120,21 @@ struct NativeCinemaHistoryScreen: View {
                             recent.duration > 0 ? NativeCinemaTransportControls.clock(recent.duration) : MusicLocalized.message("Desconocida"))) }
                     }.accessibilityElement(children: .combine)
                 }
-                .swipeActions { Button("Eliminar", role: .destructive) { store.remove(recent.id) } }
-                .accessibilityAction(named: Text("Eliminar del historial")) { store.remove(recent.id) }
+                .swipeActions(allowsFullSwipe: false) { Button("Eliminar", role: .destructive) { pendingRemoval = recent; confirm = true } }
+                .accessibilityAction(named: Text("Eliminar del historial")) { pendingRemoval = recent; confirm = true }
             }
             if store.entries.isEmpty { Text("No hay obras en el historial.") }
-            if !store.entries.isEmpty { Button("Borrar historial", role: .destructive) { confirm = true } }
+            if !store.entries.isEmpty { Button("Borrar historial", role: .destructive) { pendingRemoval = nil; confirm = true } }
         }
         .tifloScreenSurface()
         .navigationTitle("Historial de Multicines")
-        .confirmationDialog("¿Borrar el historial de Multicines?", isPresented: $confirm, titleVisibility: .visible) {
-            Button("Borrar historial", role: .destructive) { store.clear() }
-            Button("Cancelar", role: .cancel) {}
+        .confirmationDialog(pendingRemoval.map { MusicLocalized.format("¿Eliminar «%@»?", $0.title) } ?? MusicLocalized.message("¿Borrar el historial de Multicines?"), isPresented: $confirm, titleVisibility: .visible) {
+            if let recent = pendingRemoval {
+                Button("Eliminar del historial", role: .destructive) { store.remove(recent.id); pendingRemoval = nil }
+            } else {
+                Button("Borrar historial", role: .destructive) { store.clear() }
+            }
+            Button("Cancelar", role: .cancel) { pendingRemoval = nil }
         }
     }
 }

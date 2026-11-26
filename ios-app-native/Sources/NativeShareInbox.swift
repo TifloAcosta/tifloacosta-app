@@ -322,6 +322,7 @@ struct NativeInboxScreen: View {
     @Environment(\.openURL) private var openURL
     @State private var importError: String?
     @State private var pendingAudioChoice: NativeShareMessage?
+    @State private var pendingDeletion: NativeShareMessage?
 
     private func perform(_ item: NativeShareMessage, destination: String? = nil) async {
         if destination == nil && item.needsAudioDestination {
@@ -411,7 +412,7 @@ struct NativeInboxScreen: View {
                     }
                 }
                 .accessibilityAction(named: Text("Eliminar de Recibidos")) {
-                    if inbox.activeReaderImportID != item.id { inbox.complete(item) }
+                    if inbox.activeReaderImportID != item.id { pendingDeletion = item }
                 }
             }
         }
@@ -431,6 +432,16 @@ struct NativeInboxScreen: View {
             Button("Cancelar", role: .cancel) { pendingAudioChoice = nil }
         } message: {
             Text("Selecciona dónde importar el archivo de audio.")
+        }
+        .confirmationDialog(MusicLocalized.format("¿Eliminar «%@»?", pendingDeletion?.name ?? ""), isPresented: Binding(
+            get: { pendingDeletion != nil },
+            set: { if !$0 { pendingDeletion = nil } }
+        ), titleVisibility: .visible) {
+            Button("Eliminar de Recibidos", role: .destructive) {
+                if let item = pendingDeletion, inbox.activeReaderImportID != item.id { inbox.complete(item) }
+                pendingDeletion = nil
+            }
+            Button("Cancelar", role: .cancel) { pendingDeletion = nil }
         }
         .navigationTitle("Recibidos")
         .toolbar { Button("Actualizar") { inbox.refresh() } }

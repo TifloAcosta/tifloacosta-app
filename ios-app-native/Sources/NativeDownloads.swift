@@ -250,7 +250,7 @@ struct NativeDownloadsScreen: View {
             Text(alertText ?? "")
         }
         .confirmationDialog(
-            "Eliminar descarga",
+            MusicLocalized.format("¿Eliminar «%@»?", pendingDeletion?.title ?? ""),
             isPresented: Binding(
                 get: { pendingDeletion != nil },
                 set: { if !$0 { pendingDeletion = nil } }

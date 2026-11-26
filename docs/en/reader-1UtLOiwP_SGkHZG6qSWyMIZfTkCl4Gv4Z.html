@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="NVDA 2026.3 is here: key improvements and add-on compatibility advice">
+<title>NVDA 2026.3 is here: key improvements and add-on compatibility advice | TifloAcosta</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif; line-height: 1.65; margin: 0 auto; padding: 1.25rem; max-width: 76ch; font-size: 1.05rem; }
+header, main, footer { display: block; }
+h1, h2 { line-height: 1.25; }
+h1 { font-size: 1.75rem; margin: 0.35em 0 0.6em; }
+h2 { font-size: 1.25rem; margin: 2rem 0 0.75rem; }
+p, li { margin-bottom: 0.85em; }
+li { padding-left: 0.2rem; }
+a { text-decoration: underline; text-underline-offset: .12em; }
+a:focus-visible, .skip-link:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+.skip-link { position: absolute; left: -10000px; top: auto; }
+.skip-link:focus { position: static; display: inline-block; margin-bottom: 1rem; }
+.meta { font-size: .95rem; }
+footer { border-top: 1px solid currentColor; margin-top: 2.5rem; padding-top: 1rem; }
+@media print { body { max-width: none; padding: 0; font-size: 11pt; } .skip-link { display: none; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Skip to main content</a>
+<header>
+<h1>NVDA 2026.3 is here: key improvements and add-on compatibility advice</h1>
+<p class="meta"><time datetime="2026-10-26">26 October 2026</time> · TifloAcosta</p>
+</header>
+<main id="contenido">
+<article aria-label="NVDA 2026.3 is here: key improvements and add-on compatibility advice">
+<p>Hello, hello, everyone!</p>
+<p>NV Access has released the stable version of <strong>NVDA 2026.3</strong>, its free, open-source screen reader for Windows. This release brings changes you may notice in everyday use: greater responsiveness, better document reading, more braille features and expanded touchscreen gestures. There is, however, one thing worth checking before you update: your add-ons.</p>
+<h2>What is new in NVDA 2026.3?</h2>
+<p><strong>Better performance and stability.</strong> NVDA now retrieves and caches more control information in the background to reduce lag, particularly in File Explorer and combo boxes. It is also better at recovering when an application stops responding and avoids certain crashes when the screen reader exits or restarts.</p>
+<p><strong>Say all by sentence, paragraph or line.</strong> A new speech setting lets you choose how Say All moves through a document. Where supported, Say All now reads by sentence by default. Sentence navigation with <kbd>Alt</kbd> + <kbd>Up Arrow</kbd> and <kbd>Alt</kbd> + <kbd>Down Arrow</kbd> is available in more documents and edit controls.</p>
+<p><strong>Copy the last spoken information.</strong> Press <kbd>NVDA</kbd> + <kbd>Control</kbd> + <kbd>X</kbd> to copy NVDA's last spoken information to the clipboard. Handy when the screen reader says something you want to keep.</p>
+<p><strong>Easier-to-use dialogs.</strong> The Configuration Profiles, Input Gestures and Speech Dictionaries dialogs have gained context menus and keyboard shortcuts. You can now change an existing gesture directly in Input Gestures. Browseable message windows are also easier to resize.</p>
+<p><strong>Web navigation.</strong> An optional native selection mode has been added for supported Firefox and Chromium-based browser documents; it is off by default. Browse mode's Find dialog can also remember previous search terms if you enable that setting.</p>
+<p><strong>Add-on Store fixes.</strong> Problems that could make the Add-on Store unresponsive when moving quickly through lists or searching for a single character have been addressed. Restarting NVDA after installing an add-on from File Explorer is also more reliable.</p>
+<h2>Braille, touchscreen input and text recognition</h2>
+<p>Braille users get more control over how words wrap across display lines, with continuation indicators; supported displays can also use combinations of multiple routing keys. Support for the Help Tech myBraille range and additional Liblouis tables has been added.</p>
+<p>Touchscreen users can assign gestures made from two consecutive flicks and gestures that begin at the screen edges. Edge gestures are disabled by default and can be enabled in Touch Interaction settings.</p>
+<p>Windows OCR can now work while Screen Curtain or NVDA's built-in Magnifier is active on supported systems. eSpeak NG has also been updated.</p>
+<h2>Will updating break my add-ons?</h2>
+<p><strong>NVDA 2026.3 is not a general add-on compatibility-breaking release.</strong> The major change happened with <strong>NVDA 2026.1</strong>, which broke compatibility with add-ons built for NVDA 2025.3.3 and earlier. As a general rule, add-ons made compatible with NVDA 2026.1 should continue to work with NVDA 2026.2 and 2026.3. Individual problems are still possible.</p>
+<p>This distinction matters: upgrading from NVDA 2026.2 with up-to-date add-ons is not the same as jumping straight from NVDA 2025 while relying on old extensions.</p>
+<h2>Older add-on versions worth checking</h2>
+<p>The following are <strong>specific older versions</strong> whose last-tested NVDA version in the international directory predates the 2026 series. This is not a claim that every version or similarly named alternative is incompatible.</p>
+<ul>
+<li><strong>Remote Support / NVDA Remote 2.6.4:</strong> last tested with NVDA 2024.1. Consider NVDA's current built-in Remote Access features or a maintained alternative such as TeleNVDA.</li>
+<li><strong>WhatsAppPlus 2.1.0:</strong> last tested with NVDA 2024.1.</li>
+<li><strong>NoBeepsSpeechMode 5.5:</strong> last tested with NVDA 2024.1.</li>
+<li><strong>zPortapapeles 0.5.1 and zRadio 0.6:</strong> old versions listed up to NVDA 2023.1. zPortapapeles is also marked as a legacy add-on.</li>
+<li><strong>Vocalizer Expressive 1.1 Driver 3.1.11:</strong> last tested with NVDA 2024.1 in the directory. If you rely on these voices, check with your voice provider for an updated driver before installing NVDA 2026.3.</li>
+</ul>
+<p>A package's <strong>last-tested version is not proof of a specific failure</strong> in NVDA 2026.3. It is a warning sign that the particular package needs checking before you upgrade.</p>
+<h2>What about popular, more recent add-ons?</h2>
+<p>The directory lists <strong>Braille Extender</strong> and <strong>WordNav</strong> releases tested with NVDA 2026.1, while versions of <strong>Windows App Essentials</strong> and <strong>Resource Monitor</strong> are listed up to NVDA 2026.3. A recent <strong>TeleNVDA</strong> release is listed as tested up to NVDA 2026.2. A last-tested value of 2026.1 or 2026.2 does not automatically mean an add-on fails in 2026.3, but it does not guarantee trouble-free operation either.</p>
+<p>What matters most is the <strong>exact version installed</strong>, how recently it was maintained and any guidance from its developer.</p>
+<h2>What to do before updating</h2>
+<ol>
+<li>Open the NVDA menu with <kbd>NVDA</kbd> + <kbd>N</kbd>, go to <strong>Tools</strong> and open the <strong>Add-on Store</strong>.</li>
+<li>Review your installed, updatable and incompatible add-ons. Install available updates and restart NVDA when prompted.</li>
+<li>Check add-ons installed manually, particularly third-party speech synthesizer drivers, as they may not be updated through the built-in store.</li>
+<li>Back up your configuration if you have a heavily customized setup. Read any incompatibility warning carefully before proceeding.</li>
+<li>Do not override an incompatibility warning without understanding the risk: an unsupported add-on can cause errors or crashes.</li>
+</ol>
+<p>After installing NVDA, <strong>restart Windows</strong>. If something goes wrong, try restarting NVDA temporarily with add-ons disabled. If the problem disappears, investigate your extensions one by one.</p>
+<h2>Downloads and further information</h2>
+<p>You can update through <strong>NVDA menu, Help, Check for update</strong>, or download the installer from the <a href="https://www.nvaccess.org/download/">official NV Access download page</a>.</p>
+<p>Read the <a href="https://download.nvaccess.org/releases/2026.3/documentation/changes.html">full NVDA 2026.3 release notes</a> and check the <a href="https://nvda-addons.org/">international NVDA Add-ons Directory</a> for individual add-on versions.</p>
+<p>The NVDA 2026 family requires a 64-bit version of Windows 10 or Windows 11. Support for 32-bit Windows ended with NVDA 2026.1.</p>
+<h2>In short</h2>
+<p>NVDA 2026.3 includes genuinely useful improvements without imposing a fresh, blanket add-on compatibility break. If you already use NVDA 2026.2 successfully, check for add-on updates and then proceed. If your setup relies on an older add-on or a specific third-party voice, confirm its support first.</p>
+<p>Updates are great. Finding out afterwards that your favorite add-on has taken an unexpected holiday? Not quite so great.</p>
+<p>All the best.</p>
+</article>
+</main>
+<footer>
+<p>Tony Acosta · TifloAcosta</p>
+</footer>
+</body>
+</html>

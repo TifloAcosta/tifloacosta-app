@@ -36,6 +36,8 @@ private struct NativeOPDSPage {
 private enum NativeCatalogError: LocalizedError {
     case invalidURL, invalidCatalog, invalidResponse, tooLarge, unavailableFormat
     case gutenbergDenied, gutenbergRateLimited
+    case gutenbergUnavailable
+    case gutenbergRetryAfter(Date)
 
     var errorDescription: String? {
         switch self {
@@ -46,6 +48,9 @@ private enum NativeCatalogError: LocalizedError {
         case .unavailableFormat: return "Esta obra no ofrece una descarga directa en un formato que TifloLector pueda leer."
         case .gutenbergDenied: return MusicLocalized.message("Proyecto Gutenberg ha rechazado la conexión. Puedes consultar su web oficial.")
         case .gutenbergRateLimited: return MusicLocalized.message("Proyecto Gutenberg ha limitado temporalmente las consultas. Inténtalo más tarde.")
+        case .gutenbergUnavailable: return MusicLocalized.message("Proyecto Gutenberg no está disponible temporalmente. Inténtalo más tarde.")
+        case .gutenbergRetryAfter(let date):
+            return MusicLocalized.format("Proyecto Gutenberg solicita esperar hasta %@ antes de volver a conectar.", DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .short))
         }
     }
 }
@@ -201,20 +206,48 @@ private enum NativeOPDSService {
         return request
     }
 
+    private static let gutenbergRetryKey = "native-reader-gutenberg-retry-after-v1"
+
+    static func retryAfter(_ header: String?, now: Date = Date()) -> Date? {
+        guard let value = header?.trimmingCharacters(in: .whitespacesAndNewlines) else { return nil }
+        if let seconds = Double(value), seconds.isFinite, seconds > 0 {
+            return now.addingTimeInterval(seconds)
+        }
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss zzz"
+        guard let date = formatter.date(from: value), date > now else { return nil }
+        return date
+    }
+
+    static func respectGutenbergRetryAfter(_ url: URL) throws {
+        guard isGutenbergURL(url), let date = UserDefaults.standard.object(forKey: gutenbergRetryKey) as? Date else { return }
+        if date > Date() { throw NativeCatalogError.gutenbergRetryAfter(date) }
+        UserDefaults.standard.removeObject(forKey: gutenbergRetryKey)
+    }
+
     static func validateResponse(_ response: URLResponse, requestedURL: URL) throws -> HTTPURLResponse {
         guard let http = response as? HTTPURLResponse,
               secureURL(http.url?.absoluteString ?? "") != nil else {
             throw NativeCatalogError.invalidResponse
         }
         if isGutenbergURL(requestedURL) {
+            if http.statusCode == 503 || http.statusCode == 429,
+               let date = retryAfter(http.value(forHTTPHeaderField: "Retry-After")) {
+                UserDefaults.standard.set(date, forKey: gutenbergRetryKey)
+                throw NativeCatalogError.gutenbergRetryAfter(date)
+            }
             if http.statusCode == 403 { throw NativeCatalogError.gutenbergDenied }
             if http.statusCode == 429 { throw NativeCatalogError.gutenbergRateLimited }
+            if http.statusCode == 503 { throw NativeCatalogError.gutenbergUnavailable }
         }
         guard (200...299).contains(http.statusCode) else { throw NativeCatalogError.invalidResponse }
         return http
     }
 
     static func fetch(_ url: URL) async throws -> NativeOPDSPage {
+        try respectGutenbergRetryAfter(url)
         var request = catalogRequest(url)
         request.timeoutInterval = 25
         request.setValue("application/atom+xml, application/opds+json, application/json",
@@ -302,6 +335,7 @@ private enum NativeOPDSService {
               let format = supportedExtension(url: link.url, mime: link.mime) else {
             throw NativeCatalogError.unavailableFormat
         }
+        try respectGutenbergRetryAfter(link.url)
         var request = catalogRequest(link.url)
         request.timeoutInterval = 90
         let (temporary, response) = try await URLSession.shared.download(for: request)

@@ -1695,3 +1695,5 @@
 "Proyecto Gutenberg ha rechazado la conexión. Puedes consultar su web oficial." = "Project Gutenberg has rejected the connection. You can visit its official website.";
 "Proyecto Gutenberg ha limitado temporalmente las consultas. Inténtalo más tarde." = "Project Gutenberg has temporarily limited requests. Try again later.";
 "Abrir Proyecto Gutenberg en la web" = "Open Project Gutenberg on the web";
+"Proyecto Gutenberg no está disponible temporalmente. Inténtalo más tarde." = "Project Gutenberg is temporarily unavailable. Try again later.";
+"Proyecto Gutenberg solicita esperar hasta %@ antes de volver a conectar." = "Project Gutenberg asks you to wait until %@ before reconnecting.";

@@ -14,7 +14,8 @@ final class NativeBackupCoordinator: ObservableObject {
     private let store: NativeBackupGenerationStore
 
     enum Failure: Error {
-        case busy, unsupportedSelection, missingLiveStore, incompleteRestore, liveStoresNotQuiescent
+        case busy, unsupportedSelection, missingLiveStore, liveStoresNotQuiescent
+        case incompleteRestore(RestoreReport)
     }
 
     init(root: URL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
@@ -120,15 +121,37 @@ final class NativeBackupCoordinator: ObservableObject {
         let unresolvedRadioStations: [NativeRadioBackupEntry]
         let omittedSettings: [String]
         let omittedMusicProfilesAndRules: [String]
+        let excludedPodcastReferences: Int
         let omittedPodcastPositions: Int
         let omittedReadingHistory: Int
         let omittedCinemaHistory: Int
 
+        var omissionSummary: RestoreOmissionSummary {
+            RestoreOmissionSummary(podcastIDs: pendingPodcastDownloads.map(\.id).sorted(),
+                radioIDs: unresolvedRadioStations.map(\.stationID).sorted(),
+                settings: omittedSettings.sorted(), music: omittedMusicProfilesAndRules.sorted(),
+                excludedPodcastReferences: excludedPodcastReferences, podcastPositions: omittedPodcastPositions,
+                readingHistory: omittedReadingHistory, cinemaHistory: omittedCinemaHistory)
+        }
+
         var hasOmissions: Bool {
             !pendingPodcastDownloads.isEmpty || !unresolvedRadioStations.isEmpty ||
             !omittedSettings.isEmpty || !omittedMusicProfilesAndRules.isEmpty ||
-            omittedPodcastPositions > 0 || omittedReadingHistory > 0 || omittedCinemaHistory > 0
+            excludedPodcastReferences > 0 || omittedPodcastPositions > 0 || omittedReadingHistory > 0 || omittedCinemaHistory > 0
         }
+    }
+
+    /// Approval is scoped to the precise omissions presented to the user.
+    /// A retry must not silently accept new omissions after staging again.
+    struct RestoreOmissionSummary: Equatable {
+        let podcastIDs: [String]
+        let radioIDs: [String]
+        let settings: [String]
+        let music: [String]
+        let excludedPodcastReferences: Int
+        let podcastPositions: Int
+        let readingHistory: Int
+        let cinemaHistory: Int
     }
 
     /// Internal integration only. Do not expose this entry point in the UI
@@ -140,7 +163,7 @@ final class NativeBackupCoordinator: ObservableObject {
                                 podcastDownloads: NativePodcastDownloads? = nil,
                                 favorites: NativeFavoritesStore? = nil,
                                 activity: NativeReadingActivity? = nil,
-                                allowReportedOmissions: Bool = false,
+                                approvedOmissions: RestoreOmissionSummary? = nil,
                                 liveStoresAreQuiescent: () -> Bool) async throws -> RestoreReport {
         guard !isCreating, !isRestoring else { throw Failure.busy }
         isRestoring = true
@@ -182,7 +205,7 @@ final class NativeBackupCoordinator: ObservableObject {
         var downloads: [NativeDownloadedPodcastEpisode] = []
         var stations: [NativeRadioBackupEntry] = []
         var settings: [String] = [], music: [String] = []
-        var podcastPositions = 0, readingHistory = 0, cinemaHistory = 0
+        var podcastPositions = 0, readingHistory = 0, cinemaHistory = 0, excludedPodcastReferences = 0
         let decoder = JSONDecoder()
         // No await or live mutation between snapshot preparation and commit.
         for section in NativeBackupManifest.Section.allCases {
@@ -207,6 +230,7 @@ final class NativeBackupCoordinator: ObservableObject {
                 }.map(\.id))
                 let (step, plan) = try podcastLibrary.prepareBackupRestore(snapshot, downloadedIDs: ids, recovery: recovery)
                 steps.append(step); downloads = plan.downloadReferences; podcastPositions = plan.progressNotImported
+                excludedPodcastReferences = snapshot.excludedReferences
             case .radio:
                 let snapshot = try decoder.decode(NativeRadioBackupSnapshot.self,
                     from: Data(contentsOf: url.appendingPathComponent("snapshot.json")))
@@ -222,9 +246,11 @@ final class NativeBackupCoordinator: ObservableObject {
         }
         let report = RestoreReport(manifest: manifest, pendingPodcastDownloads: downloads,
             unresolvedRadioStations: stations, omittedSettings: settings, omittedMusicProfilesAndRules: music,
+            excludedPodcastReferences: excludedPodcastReferences,
             omittedPodcastPositions: podcastPositions, omittedReadingHistory: readingHistory,
             omittedCinemaHistory: cinemaHistory)
-        guard !report.hasOmissions || allowReportedOmissions else { throw Failure.incompleteRestore }
+        let omissions = report.omissionSummary
+        guard !report.hasOmissions || approvedOmissions == omissions else { throw Failure.incompleteRestore(report) }
         guard liveStoresAreQuiescent(), NativeRemotePlaybackOwner.current == nil,
               reader.readyForGlobalRestore, NativeMusicBackupAdapter.readyForRestore,
               podcastLibrary?.readyForGlobalRestore ?? true,

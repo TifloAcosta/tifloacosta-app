@@ -278,7 +278,11 @@ enum NativeBackupPersonalDataMerge {
         let currentIDs = Set(progress.map(\.id))
         let missing = backup.playbackProgress.filter { !currentIDs.contains($0.id) }
             .sorted { $0.updatedAt == $1.updatedAt ? $0.id < $1.id : $0.updatedAt > $1.updatedAt }
-        let accepted = Array(missing.prefix(max(0, 200 - progress.count)))
+        let playable = missing.filter {
+            URL(string: $0.audioURL)?.scheme?.lowercased() == "https" &&
+                $0.seconds <= $0.duration
+        }
+        let accepted = Array(playable.prefix(max(0, 200 - progress.count)))
         let combinedProgress = appendMissing(progress, accepted, id: { $0.id })
         return PodcastPlan(followed: combinedFollowed, favorites: combinedFavorites,
             savedEpisodes: combinedSaved, playbackProgress: combinedProgress,

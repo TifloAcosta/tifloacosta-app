@@ -289,7 +289,7 @@ test('local restore stages every archive before preparing six section steps and 
     for (const name of ['reader','music','cinema','podcasts','radio','preferences']) {
         assert.ok(source.includes('case .' + name + ':'), name);
     }
-    assert.match(source, /guard !report\.hasOmissions \|\| allowReportedOmissions/);
+    assert.match(source, /guard !report\.hasOmissions \|\| approvedOmissions == omissions/);
     assert.match(source, /NativeBackupRestoreTransaction\.execute\(expected: selected, steps: steps\)/);
     assert.match(source, /guard liveStoresAreQuiescent\(\)/);
 });
@@ -326,4 +326,14 @@ test('global music backup maps EQ to track identity and validates recovered prof
     assert.match(coordinator, /NativeRemotePlaybackOwner\.current == nil/);
     assert.match(coordinator, /NativeMusicBackupAdapter\.readyForRestore/);
     assert.match(archive, /expectedBytes > available/);
+});
+
+test('partial restore approval is specific to the reviewed omissions and includes excluded podcast references', () => {
+    assert.match(coordinator, /case incompleteRestore\(RestoreReport\)/);
+    assert.match(coordinator, /approvedOmissions: RestoreOmissionSummary\? = nil/);
+    assert.match(coordinator, /let omissions = report\.omissionSummary/);
+    assert.match(coordinator, /excludedPodcastReferences = snapshot\.excludedReferences/);
+    assert.match(coordinator, /throw Failure\.incompleteRestore\(report\)/);
+    assert.match(personal, /let playable = missing\.filter/);
+    assert.match(personal, /\$0\.seconds <= \$0\.duration/);
 });

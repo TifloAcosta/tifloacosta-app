@@ -44,3 +44,21 @@ test('Recursos dispone de controles nativos y Novedades puede mostrar más de tr
   assert.match(sw,/'\.\/resource-browser-core\.js\?v=1\.0'/);
   assert.match(sw,/'\.\/app\.js\?v=2\.9'/);
 });
+
+test('recursive resource folders preserve direct documents and searchable paths', () => {
+  const items = [
+    { id:'direct', title:'Comandos', category:'Lectores de pantalla' },
+    { id:'course', title:'Curso práctico', category:'Lectores de pantalla', folderPath:['NVDA','Cursos'], searchText:'configuración avanzada' },
+    { id:'guide', title:'Guía de Windows', category:'Lectores de pantalla', folderPath:['JAWS'] }
+  ];
+  assert.deepEqual(core.folderGroups(items).direct.map(x=>x.id), ['direct']);
+  assert.deepEqual(core.folderGroups(items).folders.map(x=>x.name), ['JAWS','NVDA']);
+  assert.deepEqual(core.folderGroups(items,['NVDA']).folders.map(x=>x.name), ['Cursos']);
+  assert.deepEqual(core.folderGroups(items,['NVDA','Cursos']).direct.map(x=>x.id), ['course']);
+  assert.deepEqual(core.filterAndSort(items,'nvda configuracion avanzada').map(x=>x.id), ['course']);
+  assert.deepEqual(core.filterAndSort(items,'lectores jaws').map(x=>x.id), ['guide']);
+  const source = read('app.js');
+  assert.match(source, /document\.createElement\('details'\)/);
+  assert.match(source, /document\.createElement\('summary'\)/);
+  assert.match(source, /appendResourceTree\(details,folder\.items,\[\.\.\.path,folder\.name\]\)/);
+});

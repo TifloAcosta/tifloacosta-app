@@ -100,7 +100,7 @@ test('all six selected archives must exist before publication, and missing store
 });
 
 test('restore preflight checks the entire generation and each archive without applying data', () => {
-    const preflight = coordinator.slice(coordinator.indexOf('func preflightRestore('));
+    const preflight = section(coordinator, 'func preflightRestore(', 'struct RestoreReport');
     assert.match(preflight, /destination\.verifiedGeneration\(generation\)/);
     assert.match(preflight, /for artifact in manifest\.artifacts/);
     assert.match(preflight, /NativeBackupSectionArchive\.verifyContentsForRestore/);
@@ -273,4 +273,21 @@ test('media restore steps preserve original IDs and reverse index and media chan
     assert.match(disk, /!fm\.fileExists\(atPath: item\.target\.path\)/);
     assert.match(disk, /attemptedIndexes\.reversed\(\)/);
     assert.match(disk, /if let firstError \{ throw firstError \}[\s\S]*?for target in moved\.reversed\(\)/);
+});
+
+test('local restore stages every archive before preparing six section steps and executing one transaction', () => {
+    const source = coordinator.slice(coordinator.indexOf('func restoreLocalGeneration('));
+    assert.match(source, /guard !isCreating, !isRestoring/);
+    assert.match(source, /defer \{ isRestoring = false \}/);
+    assert.match(source, /destination\.verifiedGeneration\(generation\)/);
+    assert.match(source, /NativeBackupSectionArchive\.stageForRestore/);
+    assert.match(source, /worker\.cancel\(\)/);
+    assert.match(source, /for url in staged\.values/);
+    assert.match(source, /Set\(staged\.keys\) == selected/);
+    for (const name of ['reader','music','cinema','podcasts','radio','preferences']) {
+        assert.ok(source.includes('case .' + name + ':'), name);
+    }
+    assert.match(source, /guard !report\.hasOmissions \|\| allowReportedOmissions/);
+    assert.match(source, /NativeBackupRestoreTransaction\.execute\(expected: selected, steps: steps\)/);
+    assert.match(source, /guard liveStoresAreQuiescent\(\)/);
 });

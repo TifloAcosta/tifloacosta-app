@@ -1938,3 +1938,7 @@
 "Reconocimiento completado. El documento está listo para su lectura." = "Erkennung abgeschlossen. Das Dokument kann nun gelesen werden.";
 "Reconocimiento de texto cancelado." = "Texterkennung abgebrochen.";
 "No se pudo completar el reconocimiento o guardar el documento." = "Die Erkennung konnte nicht abgeschlossen oder das Dokument nicht gespeichert werden.";
+
+"No se pudo completar la recuperación de la copia de seguridad." = "Die Wiederherstellung der Sicherung konnte nicht abgeschlossen werden.";
+
+"Cierra y vuelve a abrir TifloAcosta. No borres la aplicación ni sus datos." = "Schließe TifloAcosta und öffne die App erneut. Lösche weder die App noch ihre Daten.";

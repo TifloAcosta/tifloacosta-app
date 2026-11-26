@@ -20,7 +20,22 @@ struct TifloAcostaNativeApp: App {
     @AppStorage("native-ios-color-scheme") private var schemeIndex = 0
     @AppStorage("native-ios-language") private var languageIndex = 0
 
+    private let recoveryFailed: Bool
+
     init() {
+        // StateObject factories are lazy. Recover before the home hierarchy
+        // can instantiate libraries or start background tasks.
+        do {
+            try NativeBackupRestoreJournal.application.recover { record in
+                let payload = try PropertyListDecoder().decode(NativeBackupRecoveryPayload.self,
+                    from: record.recoveryPayload)
+                try payload.replay()
+            }
+            recoveryFailed = false
+        } catch {
+            recoveryFailed = true
+            return
+        }
         NativeAppLanguage.initializeIfMissing()
         UserDefaults(suiteName: "group.com.tifloacosta.app")?.set(
             NativeAppLanguage.code(for: UserDefaults.standard.integer(forKey: NativeAppLanguage.storageKey)),
@@ -30,6 +45,17 @@ struct TifloAcostaNativeApp: App {
 
     var body: some Scene {
         WindowGroup {
+            if recoveryFailed {
+                VStack(spacing: 16) {
+                    Text("No se pudo completar la recuperación de la copia de seguridad.")
+                        .font(.headline)
+                        .accessibilityAddTraits(.isHeader)
+                    Text("Cierra y vuelve a abrir TifloAcosta. No borres la aplicación ni sus datos.")
+                }
+                .padding()
+                .environment(\.locale, Locale(identifier: NativeAppLanguage.code(for: languageIndex)))
+                .tifloVisualPreferences()
+            } else {
             NativeHomeScreen()
                 .environmentObject(catalog)
                 .environmentObject(library)
@@ -54,6 +80,7 @@ struct TifloAcostaNativeApp: App {
                 .environment(\.locale, Locale(identifier: NativeAppLanguage.code(for: languageIndex)))
                 .tifloVisualPreferences()
                 .preferredColorScheme(schemeIndex == 1 ? .light : schemeIndex == 2 ? .dark : nil)
+            }
         }
     }
 }

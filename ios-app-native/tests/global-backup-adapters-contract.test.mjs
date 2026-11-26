@@ -220,7 +220,7 @@ test('live personal restore adapters encode before applying and restore both per
     assert.match(youtube, /videoIDs\.insert\(\$0\.id\)\.inserted/);
     assert.match(youtube, /self\.videos = oldVideos/);
     assert.match(personal, /else \{ defaults\.removeObject\(forKey: key\) \}/);
-    assert.match(personal, /NativeYouTubePersonalLibrary\.shared\.prepareBackupLibrary\(backup\)/);
+    assert.match(personal, /NativeYouTubePersonalLibrary\.shared\.prepareBackupLibrary\(backup, recovery: recovery\)/);
 });
 
 test('restore validates scalar choices and voice profiles without overwriting existing settings', () => {
@@ -290,4 +290,23 @@ test('local restore stages every archive before preparing six section steps and 
     assert.match(source, /guard !report\.hasOmissions \|\| allowReportedOmissions/);
     assert.match(source, /NativeBackupRestoreTransaction\.execute\(expected: selected, steps: steps\)/);
     assert.match(source, /guard liveStoresAreQuiescent\(\)/);
+});
+
+test('journal records before-state before applying live changes and is replayed before stores load', () => {
+    const source = coordinator.slice(coordinator.indexOf('func restoreLocalGeneration('));
+    const journal = read('NativeBackupRestoreJournal.swift');
+    const payload = read('NativeBackupRecoveryPayload.swift');
+    const app = read('TifloAcostaNativeApp.swift');
+    assert.ok(source.indexOf('try journal.begin(') < source.indexOf('try NativeBackupRestoreTransaction.execute('));
+    assert.match(source, /prepareGlobalBackupRestore\(staging: url, recovery: recovery\)/);
+    assert.match(source, /prepareRestore\(staging: url, recovery: recovery\)/);
+    assert.match(source, /downloadedIDs: ids, recovery: recovery/);
+    assert.match(source, /NativeRadioBackupAdapter\.prepareBackupRestore\(snapshot, recovery: recovery\)/);
+    assert.match(source, /NativeBackupPreferencesRestore\.prepare\(snapshot, favorites: favorites, activity: activity, recovery: recovery\)/);
+    assert.match(payload, /allowedPath\(path, media: media\)/);
+    assert.match(payload, /values\.isSymbolicLink == false/);
+    assert.match(payload, /allowedKey\(item\.key\)/);
+    assert.match(journal, /try handle\.synchronize\(\)/);
+    assert.ok(app.indexOf('NativeBackupRestoreJournal.application.recover') < app.indexOf('NativeAppLanguage.initializeIfMissing()'));
+    assert.match(app, /if recoveryFailed \{/);
 });

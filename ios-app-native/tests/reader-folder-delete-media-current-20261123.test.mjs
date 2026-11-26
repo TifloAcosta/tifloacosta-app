@@ -47,7 +47,8 @@ test('deletions require a named confirmation in reader, music, podcasts and cine
   assert.match(podcasts, /pendingDownloadedRemoval = item/);
   assert.match(podcasts, /MusicLocalized\.format\("¿Eliminar «%@»\?", pendingDownloadedRemoval\?\.title \?\? ""\)/);
   assert.match(podcasts, /Button\("Eliminar descarga", role: \.destructive\)/);
-  assert.match(cinema, /MusicLocalized\.format\("¿Eliminar «%@»\?", pendingDeletion\?\.title \?\? ""\)/);
+  assert.match(cinema, /MusicLocalized\.format\("¿Eliminar «%@»\?", item\?\.title \?\? ""\)/);
+  assert.match(cinema, /guard let item else \{ return \}/);
   assert.match(cinema, /Button\("Eliminar archivo personal", role: \.destructive\)/);
 });
 

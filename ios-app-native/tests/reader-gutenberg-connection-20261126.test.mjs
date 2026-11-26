@@ -13,6 +13,10 @@ test('Gutenberg requests use the official endpoint and an identifiable applicati
  assert.ok(src.includes('var request = catalogRequest(link.url)'));
 });
 test('Gutenberg rejection is distinct from an empty catalogue and provides a manual official link',()=>{
- for(const token of ['http.statusCode == 403','http.statusCode == 429','!loading && !feedFailed && filtered.isEmpty','feedFailed && isGutenberg && !loading','https://www.gutenberg.org/','Task.isCancelled, currentURL == url']) assert.ok(src.includes(token),token);
+ for(const token of ['http.statusCode == 403','http.statusCode == 429','!loading && !feedFailed && filtered.isEmpty','feedFailed && !loading','https://www.gutenberg.org/','Task.isCancelled, currentURL == url']) assert.ok(src.includes(token),token);
  for(const lang of ['en','pt','fr','it','de']) for(const key of ["Proyecto Gutenberg ha rechazado la conexión. Puedes consultar su web oficial.","Proyecto Gutenberg ha limitado temporalmente las consultas. Inténtalo más tarde.","Abrir Proyecto Gutenberg en la web"]) assert.ok(read(lang+'.lproj/Localizable.strings').includes('"'+key+'" = '),lang+' '+key);
+});
+
+test('native feed supports retries, valid OPDS roots, and server-side Gutenberg search without double filtering',()=>{
+ for(const token of ['Button("Reintentar") { loadRevision += 1 }','if isGutenberg { return entries }','guard parser.parse(), hasFeedRoot','root["groups"]','term.isEmpty ? nil','loadRevision == revision','parser.shouldResolveExternalEntities = false']) assert.ok(src.includes(token),token);
 });

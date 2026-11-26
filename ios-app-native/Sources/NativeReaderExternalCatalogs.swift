@@ -55,6 +55,8 @@ private enum NativeCatalogError: LocalizedError {
 private final class NativeAtomOPDSParser: NSObject, XMLParserDelegate {
     private let base: URL
     private var inEntry = false
+    private var hasFeedRoot = false
+    private var sawRoot = false
     private var inAuthor = false
     private var activeField = ""
     private var buffer = ""
@@ -75,6 +77,10 @@ private final class NativeAtomOPDSParser: NSObject, XMLParserDelegate {
                 namespaceURI: String?, qualifiedName qName: String?,
                 attributes attributeDict: [String: String] = [:]) {
         let element = key(elementName)
+        if !sawRoot {
+            sawRoot = true
+            hasFeedRoot = element == "feed"
+        }
         if element == "entry" {
             inEntry = true
             title = ""
@@ -133,7 +139,8 @@ private final class NativeAtomOPDSParser: NSObject, XMLParserDelegate {
     func read(_ data: Data) throws -> NativeOPDSPage {
         let parser = XMLParser(data: data)
         parser.delegate = self
-        guard parser.parse() else { throw NativeCatalogError.invalidCatalog }
+        parser.shouldResolveExternalEntities = false
+        guard parser.parse(), hasFeedRoot else { throw NativeCatalogError.invalidCatalog }
         return NativeOPDSPage(entries: entries, nextURL: nextURL)
     }
 }
@@ -216,14 +223,23 @@ private enum NativeOPDSService {
         let http = try validateResponse(response, requestedURL: url)
         if http.mimeType?.lowercased() == "text/html" { throw NativeCatalogError.invalidCatalog }
         guard data.count <= feedLimit else { throw NativeCatalogError.tooLarge }
-        if data.first == 123 || data.first == 91 {
-            return try parseJSON(data, base: http.url ?? url)
+        return try decodeFeed(data, base: http.url ?? url, mime: http.mimeType)
+    }
+
+    static func decodeFeed(_ data: Data, base: URL, mime: String? = nil) throws -> NativeOPDSPage {
+        let prefix = data.starts(with: [0xEF, 0xBB, 0xBF]) ? data.dropFirst(3) : data[...]
+        let first = prefix.first { ![9, 10, 13, 32].contains($0) }
+        if mime?.lowercased().contains("json") == true || first == 123 || first == 91 {
+            return try parseJSON(Data(prefix), base: base)
         }
-        return try NativeAtomOPDSParser(base: http.url ?? url).read(data)
+        return try NativeAtomOPDSParser(base: base).read(data)
     }
 
     static func parseJSON(_ data: Data, base: URL) throws -> NativeOPDSPage {
         guard let root = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw NativeCatalogError.invalidCatalog
+        }
+        guard root["navigation"] is [[String: Any]] || root["publications"] is [[String: Any]] || root["groups"] is [[String: Any]] else {
             throw NativeCatalogError.invalidCatalog
         }
         var entries: [NativeOPDSEntry] = []
@@ -235,8 +251,12 @@ private enum NativeOPDSService {
                 }
             }
         }
-        let sections = (root["navigation"] as? [[String: Any]] ?? []) +
+        var sections = (root["navigation"] as? [[String: Any]] ?? []) +
                        (root["publications"] as? [[String: Any]] ?? [])
+        for group in root["groups"] as? [[String: Any]] ?? [] {
+            sections += group["navigation"] as? [[String: Any]] ?? []
+            sections += group["publications"] as? [[String: Any]] ?? []
+        }
         for record in sections {
             let metadata = record["metadata"] as? [String: Any] ?? [:]
             let title = (metadata["title"] as? String ?? record["title"] as? String ?? "")
@@ -407,6 +427,8 @@ private struct NativeReaderOPDSFeedScreen: View {
     @State private var page: NativeOPDSPage?
     @State private var loading = false
     @State private var feedFailed = false
+    @State private var feedError: String?
+    @State private var loadRevision = 0
     @State private var importing: UUID?
     @State private var searchText = ""
     @State private var message: String?
@@ -421,6 +443,7 @@ private struct NativeReaderOPDSFeedScreen: View {
 
     private var filtered: [NativeOPDSEntry] {
         guard let entries = page?.entries else { return [] }
+        if isGutenberg { return entries }
         let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !term.isEmpty else { return entries }
         return entries.filter { $0.title.localizedStandardContains(term) ||
@@ -430,27 +453,33 @@ private struct NativeReaderOPDSFeedScreen: View {
     private func loadFeed() async {
         let url = currentURL
         loading = true
+        let revision = loadRevision
         feedFailed = false
-        page = nil
-        defer { if currentURL == url { loading = false } }
+        feedError = nil
+        defer { if currentURL == url && loadRevision == revision { loading = false } }
         do {
             let result = try await NativeOPDSService.fetch(url)
-            guard !Task.isCancelled, currentURL == url else { return }
+            guard !Task.isCancelled, currentURL == url, loadRevision == revision else { return }
             page = result
         } catch {
-            guard !Task.isCancelled, currentURL == url else { return }
+            guard !Task.isCancelled, currentURL == url, loadRevision == revision else { return }
             feedFailed = true
-            self.error = error.localizedDescription
+            feedError = error.localizedDescription
+            page = nil
         }
     }
 
     private func searchGutenberg() {
         let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !term.isEmpty,
-              var components = URLComponents(url: NativeExternalCatalog.gutenberg.url,
+        guard var components = URLComponents(url: NativeExternalCatalog.gutenberg.url,
                                              resolvingAgainstBaseURL: false) else { return }
-        components.queryItems = [URLQueryItem(name: "query", value: term)]
-        if let url = components.url { currentURL = url }
+        components.queryItems = term.isEmpty ? nil : [URLQueryItem(name: "query", value: term)]
+        if let url = components.url, url != currentURL {
+            page = nil
+            currentURL = url
+        } else if feedFailed && !loading {
+            loadRevision += 1
+        }
     }
 
     private var searchSection: some View {
@@ -529,13 +558,17 @@ private struct NativeReaderOPDSFeedScreen: View {
             if let message {
                 Text(message).accessibilityAddTraits(.updatesFrequently)
             }
-            if feedFailed && isGutenberg && !loading {
+            if feedFailed && !loading {
                 Section {
-                    Link("Abrir Proyecto Gutenberg en la web", destination: URL(string: "https://www.gutenberg.org/")!)
+                    if let feedError { Text(feedError).accessibilityAddTraits(.updatesFrequently) }
+                    Button("Reintentar") { loadRevision += 1 }
+                    if isGutenberg {
+                        Link("Abrir Proyecto Gutenberg en la web", destination: URL(string: "https://www.gutenberg.org/")!)
+                    }
                 }
             }
             resultsSection
-            if let next = page?.nextURL {
+            if let next = page?.nextURL, !loading {
                 Section {
                     Button("Mostrar más resultados") { currentURL = next }
                 }
@@ -544,7 +577,7 @@ private struct NativeReaderOPDSFeedScreen: View {
         .tifloScreenSurface()
         .navigationTitle(heading)
         .navigationBarTitleDisplayMode(.inline)
-        .task(id: currentURL) { await loadFeed() }
+        .task(id: currentURL.absoluteString + "#" + String(loadRevision)) { await loadFeed() }
         .alert("No se pudo completar la operación", isPresented: Binding(
             get: { error != nil }, set: { if !$0 { error = nil } }
         )) {

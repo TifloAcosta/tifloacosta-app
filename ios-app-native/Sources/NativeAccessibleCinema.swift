@@ -310,7 +310,14 @@ struct NativeAccessibleCinemaScreen: View {
     }
     @MainActor private func performRemoteSearch(_ request: UUID) async {
         let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !term.isEmpty, !remoteSearched else { return }
+        guard !term.isEmpty, !remoteSearched, submittedSearch == request else { return }
+        // A view can reappear after its task was cancelled. Restart the incomplete pass.
+        consultedCatalogues = 0
+        tapeResults = []
+        movieResults = []
+        driveResults = []
+        unavailableSources = []
+        partialSources = []
         remoteSearching = true
         defer { if submittedSearch == request { remoteSearching = false; remoteSearched = !Task.isCancelled } }
         if spanishFilter, let account = NativeAudiocinematecaCredentials.load() {

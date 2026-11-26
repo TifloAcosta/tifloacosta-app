@@ -642,7 +642,7 @@ struct NativeResourcesScreen: View {
     private func updateResources() {
         Task {
             await catalog.refresh()
-            announce(catalog.updateMessage ?? "La actualización está en curso.")
+            announce(catalog.updateMessage ?? MusicLocalized.message("La actualización está en curso."))
         }
     }
 
@@ -660,9 +660,9 @@ struct NativeResourcesScreen: View {
         Task {
             do {
                 try await resourceService.saveInReader(item, library: library)
-                announce("«\(item.title)» guardado en TifloLector.")
+                announce(MusicLocalized.format("«%@» guardado en TifloLector.", item.title))
             } catch {
-                announce("No se pudo guardar «\(item.title)»: \(error.localizedDescription)")
+                announce(MusicLocalized.format("No se pudo guardar «%@»: %@", item.title, error.localizedDescription))
             }
         }
     }
@@ -671,9 +671,9 @@ struct NativeResourcesScreen: View {
         Task {
             do {
                 try await resourceService.exportToFiles(item)
-                announce("Selecciona una carpeta en Archivos para descargar «\(item.title)».")
+                announce(MusicLocalized.format("Selecciona una carpeta en Archivos para descargar «%@».", item.title))
             } catch {
-                announce("No se pudo descargar «\(item.title)»: \(error.localizedDescription)")
+                announce(MusicLocalized.format("No se pudo descargar «%@»: %@", item.title, error.localizedDescription))
             }
         }
     }
@@ -698,8 +698,8 @@ struct NativeResourcesScreen: View {
         .accessibilityAction(named: Text(readingActivity.isSaved(.resource, item: item)
             ? "Quitar de Leer después" : "Guardar para leer después")) {
             let saved = readingActivity.toggleReadLater(.resource, item: item)
-            announce(saved ? "Recurso guardado para leer después." :
-                "Recurso retirado de Leer después.")
+            announce(MusicLocalized.message(saved ? "Recurso guardado para leer después." :
+                "Recurso retirado de Leer después."))
         }
         .accessibilityAction(named: Text("Compartir")) {
             if let url = item.resourceURL { NativeShare.present(url: url) }
@@ -930,7 +930,7 @@ private struct NativeYouTubeSearchScreen: View {
                             NativeShare.present(url: channel.url)
                         }
                         .accessibilityAction(named: Text(personalVideos.isFollowing(channel.id)
-                            ? "Dejar de seguir canal" : "Seguir canal sin cuenta Google")) {
+                            ? MusicLocalized.message("Dejar de seguir canal") : MusicLocalized.message("Seguir canal sin cuenta Google"))) {
                             personalVideos.toggleFollowed(channel)
                         }
                     }
@@ -1196,15 +1196,14 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
                 await store.search("", channelID: channel.id)
             }
             searches[channel.id] = store
-            if store.videos.isEmpty, let error = store.message,
-               !error.contains("resultados encontrados") {
+            if store.searchFailed {
                 failures.append(channel.title)
             }
         }
         gather()
         if loadMore { visibleCount += 10 }
         message = failures.isEmpty ? nil
-            : "No se pudieron consultar algunos canales: " + failures.joined(separator: ", ")
+            : MusicLocalized.format("No se pudieron consultar algunos canales: %@", failures.joined(separator: ", "))
     }
 
     var body: some View {
@@ -1215,9 +1214,9 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
                 if loading { ProgressView("Consultando canales seguidos") }
                 if let message { Text(message).accessibilityAddTraits(.updatesFrequently) }
                 if channels.isEmpty {
-                    Text(useYouTubeSubscriptions
+                    Text(MusicLocalized.message(useYouTubeSubscriptions
                         ? "No hay suscripciones disponibles. Comprueba tu sesión y actualiza las suscripciones."
-                        : "Sigue un canal desde los resultados de YouTube para ver aquí sus novedades.")
+                        : "Sigue un canal desde los resultados de YouTube para ver aquí sus novedades."))
                 }
                 ForEach(Array(collected.prefix(visibleCount))) { video in
                     NativeYouTubeVideoRow(video: video,
@@ -1236,8 +1235,8 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
             }
         }
         .tifloScreenSurface()
-        .navigationTitle(useYouTubeSubscriptions
-            ? "Novedades de suscripciones" : "Novedades de canales")
+        .navigationTitle(MusicLocalized.message(useYouTubeSubscriptions
+            ? "Novedades de suscripciones" : "Novedades de canales"))
         .sheet(item: $selectedVideo) { video in
             NavigationStack { NativeYouTubePlayerScreen(video: video) }
         }
@@ -1270,7 +1269,7 @@ private struct NativeYouTubeTitleActions: ViewModifier {
                 NativeShare.present(url: video.url)
             }
             .accessibilityAction(named: Text(personalVideos.isWatchLater(video.id)
-                ? "Quitar de Ver después" : "Guardar para ver después")) {
+                ? MusicLocalized.message("Quitar de Ver después") : MusicLocalized.message("Guardar para ver después"))) {
                 personalVideos.toggleWatchLater(video)
             }
         if account.authenticated {
@@ -1502,7 +1501,7 @@ private struct NativeYouTubeChannelVideosScreen: View {
         List {
             Section("Canal") {
                 Button(personalVideos.isFollowing(channel.id)
-                    ? "Dejar de seguir canal" : "Seguir canal sin cuenta Google") {
+                    ? MusicLocalized.message("Dejar de seguir canal") : MusicLocalized.message("Seguir canal sin cuenta Google")) {
                     personalVideos.toggleFollowed(channel)
                 }
             }

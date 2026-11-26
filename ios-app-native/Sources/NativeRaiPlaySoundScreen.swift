@@ -18,6 +18,7 @@ struct NativeRaiPlaySoundScreen: View {
             Link("Todos los contenidos", destination: URL(string: "https://www.raiplaysound.it/generi/Audiodescrizioni-Tutti-i-podcast-f93943af-3ab2-4bc8-b6bf-c288ccd4f755.html")!)
             Text("Acceso sujeto a derechos territoriales.")
         }
+        .tifloScreenSurface()
         .navigationTitle(Text(verbatim: "RaiPlay Sound"))
     }
 }

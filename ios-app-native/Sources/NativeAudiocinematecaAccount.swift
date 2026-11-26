@@ -102,6 +102,7 @@ struct NativeAudiocinematecaAccountScreen: View {
                 Text("Si utilizas autenticación en dos pasos, conserva esa protección y accede desde la web oficial.")
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Audiocinemateca")
         .onAppear { saved = NativeAudiocinematecaCredentials.load() != nil }
         .onDisappear { password = "" }

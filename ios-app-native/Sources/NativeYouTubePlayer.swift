@@ -244,7 +244,7 @@ final class NativeYouTubeSearchStore: ObservableObject {
             hasSearched = true
         }
         isLoading = true
-        message = "Buscando en YouTube."
+        message = MusicLocalized.message("Buscando en YouTube.")
         defer { isLoading = false }
         do {
             let target = currentChannelID == nil
@@ -311,8 +311,8 @@ final class NativeYouTubeSearchStore: ObservableObject {
                 consumedPageTokens.contains(page.nextPageToken) ? "" : page.nextPageToken
             searchFailed = false
             let count = videos.count + channels.count + playlists.count
-            message = count == 0 ? "No se encontraron resultados."
-                : "\(count) resultados encontrados hasta el momento."
+            message = count == 0 ? MusicLocalized.message("No se encontraron resultados.")
+                : MusicLocalized.format("%d resultados encontrados hasta el momento.", count)
         } catch {
             if error is CancellationError || (error as? URLError)?.code == .cancelled {
                 message = nil
@@ -730,7 +730,7 @@ struct NativeYouTubePlayerScreen: View {
                 }
 
                 Button(personalLibrary.isWatchLater(currentVideo.id)
-                    ? "Quitar de Ver después" : "Guardar para ver después") {
+                    ? MusicLocalized.message("Quitar de Ver después") : MusicLocalized.message("Guardar para ver después")) {
                     personalLibrary.toggleWatchLater(currentVideo)
                 }
                 .buttonStyle(TifloSecondaryActionStyle())
@@ -779,7 +779,7 @@ struct NativeYouTubePlayerScreen: View {
                 if !account.authenticated {
                     Text("Para indicar Me gusta, suscribirte o comentar, debes iniciar sesión en Google. Buscar y reproducir vídeos no requiere una cuenta.")
                         .foregroundStyle(TifloVisual.secondaryText)
-                    Button(account.busy ? "Conectando con Google" : "Iniciar sesión con Google") {
+                    Button(MusicLocalized.message(account.busy ? "Conectando con Google" : "Iniciar sesión con Google")) {
                         account.signIn(videoID: currentVideo.id)
                     }
                     .disabled(account.busy)

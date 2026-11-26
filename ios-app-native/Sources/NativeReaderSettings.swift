@@ -103,7 +103,7 @@ struct NativeReaderVoiceCustomizationControls: View {
     private let pauseNames = ["Pausa después de coma", "Pausa después de punto y coma",
         "Pausa después de dos puntos", "Pausa después de punto, interrogación o exclamación",
         "Pausa después de salto de párrafo"]
-    private let pauseChoices = (0...30).map { String(format: "%.2f segundos", Double($0) * 0.05) }
+    private var pauseChoices: [String] { (0...30).map { MusicLocalized.format("%.2f segundos", Double($0) * 0.05) } }
 
     private func load() {
         preview.stop()
@@ -265,10 +265,10 @@ enum NativeReaderPauseProfile {
 /// Los nuevos índices se guardan como 100 + posición para no reinterpretar libros existentes.
 enum NativeReaderSpeedOptions {
     static let rates: [Double] = (15...30).map { Double($0) / 20.0 }
-    static let choices: [String] = rates.map { rate in
-        abs(rate - 1.0) < 0.001 ? "Normal, 1,00 veces" :
-            String(format: "%.2f veces", rate).replacingOccurrences(of: ".", with: ",")
-    }
+    static var choices: [String] { rates.map { rate in
+        abs(rate - 1.0) < 0.001 ? MusicLocalized.message("Normal, 1,00 veces") :
+            MusicLocalized.format("%.2f veces", rate)
+    } }
     private static let legacyRates: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
     static func rate(for stored: Int) -> Double {
         if stored >= 100 {
@@ -296,7 +296,7 @@ struct NativeReaderPunctuationControls: View {
     @AppStorage("native-reading-pause-paragraph") private var paragraph = 0.6
 
     private let choices = (0...30).map {
-        String(format: "%.2f segundos", Double($0) * 0.05)
+        MusicLocalized.format("%.2f segundos", Double($0) * 0.05)
     }
 
     private func selection(_ value: Binding<Double>) -> Binding<Int> {
@@ -435,10 +435,10 @@ struct NativeReaderAudioControls: View {
 
     private var voiceChoices: [String] {
         ["Predeterminada del sistema"] + voices.map { voice in
-            let language = Locale(identifier: "es")
+            let language = Locale(identifier: NativeAppLanguage.code(for: UserDefaults.standard.integer(forKey: NativeAppLanguage.storageKey)))
                 .localizedString(forIdentifier: voice.language) ?? voice.language
-            let quality = voice.voiceTraits.contains(.isPersonalVoice) ? "Voz personal" :
-                (voice.quality == .enhanced ? "mejorada" : "estándar")
+            let quality = MusicLocalized.message(voice.voiceTraits.contains(.isPersonalVoice) ? "Voz personal" :
+                (voice.quality == .enhanced ? "mejorada" : "estándar"))
             return "\(voice.name), \(language), \(quality)"
         }
     }

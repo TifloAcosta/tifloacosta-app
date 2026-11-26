@@ -44,6 +44,7 @@ struct NativeAcoustIDAccount: View {
                 Text("Falta configurar el identificador público de TifloAcosta en AcoustID.")
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Cuenta AcoustID")
         .onAppear { linked = (try? NativeAcoustIDKeychain.read(.active)) != nil }
         .onDisappear { operation?.cancel(); key = "" }

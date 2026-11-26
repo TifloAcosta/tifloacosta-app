@@ -1118,7 +1118,7 @@ final class NativeReadingSpeech: ObservableObject {
                 guard let self, self.player === completed else { return }
                 if self.isGeneratedSpeech {
                     guard success, self.geminiSegments.indices.contains(self.geminiSegmentIndex) else {
-                        self.geminiOnError?("No se pudo completar el fragmento de voz.")
+                        self.geminiOnError?(MusicLocalized.message("No se pudo completar el fragmento de voz."))
                         self.stop()
                         return
                     }
@@ -1142,7 +1142,7 @@ final class NativeReadingSpeech: ObservableObject {
                 }
                 if !self.daisyClips.isEmpty {
                     if success { self.advanceDaisyClip() }
-                    else { self.onAudioError?("No se pudo completar el fragmento DAISY."); self.stop() }
+                    else { self.onAudioError?(MusicLocalized.message("No se pudo completar el fragmento DAISY.")); self.stop() }
                     return
                 }
                 self.isPlaying = false
@@ -2036,7 +2036,7 @@ struct NativeReaderLibraryScreen: View {
                     }
                     }
                 }
-                Button(selectionMode ? "Terminar selección" : "Selección") {
+                Button(MusicLocalized.message(selectionMode ? "Terminar selección" : "Selección")) {
                     if selectionMode {
                         finishSelection()
                     } else {
@@ -2327,7 +2327,7 @@ struct NativeReaderLibraryScreen: View {
             TextField("Nombre de la carpeta", text: $newFolderName)
             Button("Crear") {
                 if !library.createFolder(named: newFolderName) {
-                    importError = "El nombre de la carpeta está vacío, repetido o es demasiado largo."
+                    importError = MusicLocalized.message("El nombre de la carpeta está vacío, repetido o es demasiado largo.")
                 }
             }
             Button("Cancelar", role: .cancel) {}
@@ -2367,11 +2367,11 @@ struct NativeReaderLibraryScreen: View {
                 let name = newFolderName.trimmingCharacters(in: .whitespacesAndNewlines)
                 let documentIDs = visibleSelection
                 guard !documentIDs.isEmpty else {
-                    selectionFeedback = "No hay documentos seleccionados para mover."
+                    selectionFeedback = MusicLocalized.message("No hay documentos seleccionados para mover.")
                     return
                 }
                 guard library.createFolder(named: name) else {
-                    selectionFeedback = "No se pudo crear la carpeta. Comprueba que el nombre no esté vacío, repetido o sea demasiado largo."
+                    selectionFeedback = MusicLocalized.message("No se pudo crear la carpeta. Comprueba que el nombre no esté vacío, repetido o sea demasiado largo.")
                     return
                 }
                 do {
@@ -2744,7 +2744,7 @@ struct NativeReaderVideoScreen: View {
                 .buttonStyle(.bordered)
                 if let error { Text(error).foregroundStyle(.secondary) }
             } else {
-                Text(error ?? "Vídeo no disponible.")
+                Text(error ?? MusicLocalized.message("Vídeo no disponible."))
             }
         }
         .padding()
@@ -2759,7 +2759,7 @@ struct NativeReaderVideoScreen: View {
             guard let player else { return }
             isPlaying = player.rate > 0
             if player.currentItem?.status == .failed {
-                error = "No se pudo reproducir el vídeo con el reproductor de Apple."
+                error = MusicLocalized.message("No se pudo reproducir el vídeo con el reproductor de Apple.")
                 isPlaying = false
             }
             let current = player.currentTime().seconds
@@ -2774,7 +2774,7 @@ struct NativeReaderVideoScreen: View {
         guard player == nil else { return }
         guard let path = document.trackPaths?.first,
               let url = NativeReaderFormats.storedURL(for: path) else {
-            error = "Vídeo no disponible."
+            error = MusicLocalized.message("Vídeo no disponible.")
             return
         }
         let instance = AVPlayer(url: url)
@@ -3741,7 +3741,7 @@ struct NativeReadingScreen: View {
 
     private func bookmarkDescription(atOffset offset: Int) -> String {
         let text = latest.body
-        guard !text.isEmpty else { return "Comienzo del documento" }
+        guard !text.isEmpty else { return MusicLocalized.message("Comienzo del documento") }
         let characters = Array(text)
         let index = min(characters.count - 1, max(0, offset))
         let sentenceStart = (0..<index).reversed().first {
@@ -3881,7 +3881,7 @@ struct NativeReadingScreen: View {
             voice = audioExportPhononVoice
         }
         audioExportBusy = true
-        audioExportProgress = "Preparando exportación…"
+        audioExportProgress = MusicLocalized.message("Preparando exportación…")
         let body = latest.body
         let title = latest.title
         audioExportTask = Task {
@@ -3896,7 +3896,7 @@ struct NativeReadingScreen: View {
                     speed: NativeReaderSpeedOptions.rate(for: effectiveSpeedIndex),
                     pitch: pitch, language: audioExportLanguage,
                     progress: { finished, total in
-                        audioExportProgress = "Generados \(finished) de \(total) fragmentos"
+                        audioExportProgress = MusicLocalized.format("Generados %d de %d fragmentos", finished, total)
                     })
                 try Task.checkCancellation()
                 // The share sheet can fail or be dismissed. Persist the result
@@ -3922,12 +3922,12 @@ struct NativeReadingScreen: View {
                 }
                 savedExportURL = persistentURL
                 showAudioExport = false
-                audioExportProgress = "Conversión completada. Archivo guardado en la biblioteca."
+                audioExportProgress = MusicLocalized.message("Conversión completada. Archivo guardado en la biblioteca.")
                 showExportCompleted = true
             } catch is CancellationError {
-                audioExportProgress = "Exportación cancelada."
+                audioExportProgress = MusicLocalized.message("Exportación cancelada.")
             } catch {
-                audioExportProgress = "Error al exportar: \(error.localizedDescription)"
+                audioExportProgress = MusicLocalized.format("Error al exportar: %@", error.localizedDescription)
             }
         }
     }
@@ -4008,7 +4008,7 @@ struct NativeReadingScreen: View {
                     }
                 }
                 Section("Estado") {
-                    Text(audioExportProgress.isEmpty ? "Selecciona el formato y el motor." : audioExportProgress)
+                    Text(audioExportProgress.isEmpty ? MusicLocalized.message("Selecciona el formato y el motor.") : audioExportProgress)
                         .accessibilityAddTraits(.updatesFrequently)
                     Button(audioExportBusy ? "Generando…" : "Convertir y guardar") {
                         exportGeneratedAudio()
@@ -4601,7 +4601,7 @@ struct NativeReadingScreen: View {
                             Button(point.title) { jump(to: point.offset); showStructure = false }
                         }
                     }
-                    Section(textLayout.hasRealPages ? "Páginas, diapositivas y hojas" : "Bloques de lectura") {
+                    Section(LocalizedStringKey(textLayout.hasRealPages ? "Páginas, diapositivas y hojas" : "Bloques de lectura")) {
                         if textLayout.namedPages.isEmpty {
                             Text("No hay divisiones reconocibles en este documento.")
                         }

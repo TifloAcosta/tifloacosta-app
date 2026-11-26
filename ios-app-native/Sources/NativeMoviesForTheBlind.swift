@@ -101,6 +101,7 @@ struct NativeMoviesForTheBlindScreen: View {
                 } header: { Text(work.title).accessibilityAddTraits(.isHeader) }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle(Text(verbatim: "Movies for the Blind"))
         .searchable(text: $search, prompt: Text("Buscar obras"))
         .task { if works.isEmpty { await refresh() } }

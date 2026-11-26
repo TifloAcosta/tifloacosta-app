@@ -606,7 +606,7 @@ private final class NativeMusicLibrary: ObservableObject {
         let accessed = url.startAccessingSecurityScopedResource()
         defer { if accessed { url.stopAccessingSecurityScopedResource() } }
         guard accessed else {
-            error = "No se obtuvo permiso para guardar copias en la carpeta seleccionada."
+            error = MusicLocalized.message("No se obtuvo permiso para guardar copias en la carpeta seleccionada.")
             return
         }
         do {
@@ -1029,6 +1029,7 @@ struct NativeMyMusicScreen: View {
             NavigationLink("Copias de seguridad") { musicBackupSettings }
             NavigationLink("Ecualizador") { musicEqualizerSettings }
         }
+        .tifloScreenSurface()
         .navigationTitle("Ajustes de Mi Música")
     }
 
@@ -1041,6 +1042,7 @@ struct NativeMyMusicScreen: View {
                     choices: ["Solo Wi-Fi", "Wi-Fi y datos móviles"], selectedIndex: downloadConnection)
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Conexión")
     }
 
@@ -1051,6 +1053,7 @@ struct NativeMyMusicScreen: View {
                     choices: ["Normal", "Detallada"], selectedIndex: voiceOverInformation)
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Información de VoiceOver")
     }
 
@@ -1084,6 +1087,7 @@ struct NativeMyMusicScreen: View {
                 Text("Este respaldo conserva el índice y las carpetas, pero no incluye los archivos de audio. Para recuperar música en otro dispositivo tendrás que importar también las canciones.")
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Copias de seguridad")
     }
 
@@ -1110,6 +1114,7 @@ struct NativeMyMusicScreen: View {
                 }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Ecualizador")
     }
 
@@ -1121,7 +1126,7 @@ struct NativeMyMusicScreen: View {
     }
 
     @ViewBuilder private var musicTransportControls: some View {
-        Text(player.currentName.isEmpty ? "Ninguna canción en reproducción" : player.currentName)
+        Text(player.currentName.isEmpty ? MusicLocalized.message("Ninguna canción en reproducción") : player.currentName)
             .accessibilityAddTraits(.isHeader)
         Button(player.isPlaying ? "Pausar" : "Reproducir") { player.toggle() }
             .disabled(player.currentName.isEmpty)
@@ -1383,6 +1388,7 @@ struct NativeMyMusicScreen: View {
                 }, allowCellularDownloads: allowCellularDownloads)
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Nubes")
     }
 
@@ -1438,6 +1444,7 @@ struct NativeMyMusicScreen: View {
         }
 
         let searchableList = list
+            .tifloScreenSurface()
             .navigationTitle("Mi Música")
             .onReceive(network.$path) { _ in stopOnlineIfConnectionIsRestricted() }
             .onChange(of: allowCellularPlayback) { _, _ in stopOnlineIfConnectionIsRestricted() }
@@ -1474,6 +1481,7 @@ struct NativeMyMusicScreen: View {
                         Text("Para fecha, escribe AAAA-MM-DD. Para reproducciones, escribe el número mínimo.")
                         Text("Su contenido se actualiza automáticamente al añadir o retirar canciones.")
                     }
+                    .tifloScreenSurface()
                     .navigationTitle("Crear carpeta inteligente")
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {

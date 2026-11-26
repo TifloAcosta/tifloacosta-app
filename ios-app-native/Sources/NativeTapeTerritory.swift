@@ -96,6 +96,7 @@ struct NativeTapeTerritoryScreen: View {
                 }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle(Text(verbatim: "Tape Territory"))
         .searchable(text: $query, prompt: "Buscar plataformas y contenidos audiodescritos")
         .task { if films.isEmpty { await load() } }

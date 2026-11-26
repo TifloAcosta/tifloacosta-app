@@ -87,6 +87,7 @@ struct NativeAudiocinematecaBrowser: View {
                 }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Audiocinemateca")
         .sheet(isPresented: $accountScreen, onDismiss: {
             entries = []
@@ -167,6 +168,7 @@ struct NativeAudiocinematecaDetail: View {
                                 NativeAudiocinematecaPlaybackRow(entry: entry, part: part, label: MusicLocalized.format("Episodio %@: %@", part.number, part.title))
                             }
                         }
+                        .tifloScreenSurface()
                         .navigationTitle(MusicLocalized.format("Temporada %@", season))
                     }
                 }
@@ -179,6 +181,7 @@ struct NativeAudiocinematecaDetail: View {
             }
             Link("Abrir Audiocinemateca en la web", destination: URL(string: "https://audiocinemateca.com/catalogo")!)
         }
+        .tifloScreenSurface()
         .navigationTitle(entry.title)
     }
 }

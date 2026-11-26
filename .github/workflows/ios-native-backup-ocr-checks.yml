@@ -8,8 +8,10 @@ on:
       - 'ios-app-native/Sources/NativeBackup*.swift'
       - 'ios-app-native/Sources/NativeReaderFormats.swift'
       - 'ios-app-native/Sources/NativeTifloLector.swift'
+      - 'ios-app-native/Sources/NativeMyMusic.swift'
       - 'ios-app-native/Sources/*.lproj/Localizable.strings'
       - 'ios-app-native/tests/backup-manifest-smoke.swift'
+      - 'ios-app-native/tests/global-backup-adapters-contract.test.mjs'
       - 'ios-app-native/tests/ocr-notice-contract.test.mjs'
       - 'ios-app-native/tests/resource-folder-navigation-contract.test.mjs'
       - 'ios-app-native/scripts/test-backup-manifest.sh'
@@ -33,7 +35,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test ios-app-native/tests/ocr-notice-contract.test.mjs ios-app-native/tests/resource-folder-navigation-contract.test.mjs test/resource-inventory.test.mjs test/resource-browser-web.test.mjs test/mobile-content.test.mjs
+      - run: node --test ios-app-native/tests/global-backup-adapters-contract.test.mjs ios-app-native/tests/ocr-notice-contract.test.mjs ios-app-native/tests/resource-folder-navigation-contract.test.mjs test/resource-inventory.test.mjs test/resource-browser-web.test.mjs test/mobile-content.test.mjs
   backup-smoke:
     runs-on: macos-15
     steps:

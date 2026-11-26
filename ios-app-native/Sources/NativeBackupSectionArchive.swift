@@ -7,6 +7,7 @@ enum NativeBackupSectionArchive {
     struct File {
         let path: String
         let source: URL
+        let trustedRoot: URL
     }
 
     enum Failure: Error {
@@ -55,9 +56,21 @@ enum NativeBackupSectionArchive {
         for file in files {
             try Task.checkCancellation()
             let source = file.source
+            let root = file.trustedRoot.standardizedFileURL
+            let components = source.standardizedFileURL.pathComponents
+            let prefix = root.pathComponents
+            guard components.count > prefix.count,
+                  Array(components.prefix(prefix.count)) == prefix else { throw Failure.invalidPath }
+            var parent = root
+            for component in components.dropFirst(prefix.count).dropLast() {
+                parent.appendPathComponent(component, isDirectory: true)
+                let attributes = try parent.resourceValues(forKeys: [.isDirectoryKey, .isSymbolicLinkKey])
+                guard attributes.isDirectory == true, attributes.isSymbolicLink == false else {
+                    throw Failure.invalidFile
+                }
+            }
             let values = try source.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey, .fileSizeKey])
             guard values.isRegularFile == true, values.isSymbolicLink == false,
-                  source.standardizedFileURL.resolvingSymlinksInPath() == source.standardizedFileURL,
                   let bytes = values.fileSize, bytes > 0 else { throw Failure.invalidFile }
             let target = try reserve(file.path, bytes: Int64(bytes))
             try fm.copyItem(at: source, to: target)

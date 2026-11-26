@@ -1734,3 +1734,60 @@ enum NativeMusicSharedAudio {
         try NativeMusicLibrary.shared.importSharedFile(url, sharingID: sharingID)
     }
 }
+
+/// Uses the same private portable models as the music exporter. This is a
+/// read-only validation step; the legacy importer creates new UUIDs and must
+/// not be called by the global restore transaction.
+enum NativeMusicBackupValidation {
+    static func validate(data: Data, mediaPaths: Set<String>) throws {
+        let backup = try JSONDecoder().decode(MusicIndexBackup.self, from: data)
+        let tracks = backup.catalog.tracks
+        let trackIDs = Set(tracks.keys)
+        let allowed = Set(["mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf", "flac", "ogg"])
+        func validIDs(_ ids: [String]) -> Bool {
+            let parsed = ids.compactMap { UUID(uuidString: $0) }
+            return parsed.count == ids.count && Set(parsed).count == ids.count
+        }
+        guard backup.format == "tifloacosta-mi-musica", backup.version == 1,
+              backup.catalog.version == 1, backup.includesAudioFiles,
+              validIDs(Array(trackIDs)), validIDs(backup.folders.map(\.id)),
+              validIDs(backup.playlists.map(\.id)), validIDs(backup.smartFolders.map(\.id))
+        else { throw CocoaError(.fileReadCorruptFile) }
+        var expected = Set<String>()
+        for (id, track) in tracks {
+            try Task.checkCancellation()
+            guard id == track.id, track.locations.count == 1,
+                  let location = track.locations.first, location.provider == "archive",
+                  (track.playCount ?? 0) >= 0 else { throw CocoaError(.fileReadCorruptFile) }
+            let ext = (location.remoteId as NSString).pathExtension
+            guard allowed.contains(ext), location.remoteId == "audio/" + id + "." + ext,
+                  expected.insert(location.remoteId).inserted else {
+                throw CocoaError(.fileReadCorruptFile)
+            }
+        }
+        guard expected == mediaPaths else { throw CocoaError(.fileReadCorruptFile) }
+        for folder in backup.folders {
+            guard Set(folder.trackIds).isSubset(of: trackIDs) else { throw CocoaError(.fileReadCorruptFile) }
+        }
+        for playlist in backup.playlists {
+            guard Set(playlist.trackIds).isSubset(of: trackIDs) else { throw CocoaError(.fileReadCorruptFile) }
+            if let entries = playlist.orderedEntries {
+                guard Set(entries.map(\.id)).count == entries.count else { throw CocoaError(.fileReadCorruptFile) }
+                for entry in entries {
+                    if entry.provider == .local {
+                        guard let local = entry.localId, trackIDs.contains(local.uuidString) else {
+                            throw CocoaError(.fileReadCorruptFile)
+                        }
+                    } else {
+                        guard let remote = entry.appleMusicSongId,
+                              NativeBackupReferencePolicy.eligibleID(remote) else {
+                            throw CocoaError(.fileReadCorruptFile)
+                        }
+                    }
+                }
+            }
+        }
+        // Audio profile payloads and smart-folder rules are decoded and
+        // range-checked by their eventual apply adapters before persistence.
+    }
+}

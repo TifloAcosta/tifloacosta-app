@@ -226,6 +226,9 @@ struct NativeSettingsScreen: View {
     @AppStorage("native-ios-language") private var languageIndex = 0
     @Environment(\.openURL) private var openURL
     @State private var showVisualSettings = false
+    @State private var showBackups = false
+    @State private var backupUnavailable = false
+    @ObservedObject private var backups = NativeBackupCoordinator.shared
     @ObservedObject private var ownUpdatesNotifications = NativeOwnUpdatesNotifications.shared
 
     private var version: String {
@@ -277,6 +280,16 @@ struct NativeSettingsScreen: View {
                     }
                 }
                 .accessibilityHint("Abre este menú para modificar la presentación de TifloAcosta.")
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
+            Section("Copias de seguridad") {
+                Button("Gestionar copias de seguridad") {
+                    if backups.beginManagement() { showBackups = true }
+                    else { backupUnavailable = true }
+                }
+                .accessibilityIdentifier("tiflo.settings.backups")
+                .accessibilityHint("Crea, consulta y recupera copias locales o en iCloud.")
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
@@ -360,6 +373,14 @@ struct NativeSettingsScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("Configuración")
+        .fullScreenCover(isPresented: $showBackups, onDismiss: { backups.endManagement() }) {
+            NativeBackupManagementScreen()
+        }
+        .alert("Copias de seguridad", isPresented: $backupUnavailable) {
+            Button("Aceptar", role: .cancel) {}
+        } message: {
+            Text("Hay otra operación de copia en curso. Inténtalo cuando termine.")
+        }
     }
 }
 

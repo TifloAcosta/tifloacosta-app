@@ -146,6 +146,51 @@ enum NativeBackupMetadataArchive {
 /// not confer permission to access remote URLs or apply preferences.
 enum NativeBackupPersonalDataValidation {
     enum Failure: Error { case invalidSnapshot }
+
+    /// Validate stored values using the actual choices in the current app.
+    /// Unsupported or device-dependent identifiers remain explicit omissions.
+    static func validSpeed(_ value: Int) -> Bool {
+        (0...4).contains(value) || (100..<(100 + NativeReaderSpeedOptions.rates.count)).contains(value)
+    }
+
+    static func validVoiceProfile(_ value: NativeReaderVoiceProfile) -> Bool {
+        validSpeed(value.speedIndex) && (0...4).contains(value.pitchIndex) &&
+        (0...3).contains(value.pauseStyle) && value.pauseSeconds.count == 5 &&
+        value.pauseSeconds.allSatisfy { $0.isFinite && (0...1.5).contains($0) } &&
+        (value.volume.map { $0.isFinite && (0...1).contains($0) } ?? true)
+    }
+
+    static func validInteger(_ key: String, _ value: Int) -> Bool {
+        switch key {
+        case "native-ios-language": return NativeAppLanguage.codes.indices.contains(value)
+        case "native-ios-color-scheme", "native-ios-line-spacing",
+             "native-voiceover-library-detail-index", "native-reading-line-spacing-index",
+             "native-reader-presentation-mode": return (0...2).contains(value)
+        case "native-ios-text-size", "native-reading-pause-style": return (0...3).contains(value)
+        case "native-reading-folder-entry-mode", "native-reader-reading-mode",
+             "native-reader-ocr-accuracy-index": return (0...1).contains(value)
+        case "native-reading-filter": return (0...10).contains(value)
+        case "native-reading-sort": return (0...5).contains(value)
+        case "native-reading-speed-index": return validSpeed(value)
+        case "native-reading-pitch-index", "native-reader-navigation-unit": return (0...4).contains(value)
+        case "native-reader-ocr-language-index": return (0...7).contains(value)
+        case "native-cinema-collection-language-index-v1", "native-cinema-language-index-v1":
+            return AccessibleCinemaLanguage.allCases.indices.contains(value)
+        case "native-cinema-collection-content-index-v1", "native-cinema-content-index-v1":
+            return AccessibleCinemaKind.allCases.indices.contains(value)
+        case "native-cinema-import-language-index-v1":
+            return value > 0 && AccessibleCinemaLanguage.allCases.indices.contains(value)
+        case "native-cinema-import-kind-index-v1":
+            return value > 0 && AccessibleCinemaKind.allCases.indices.contains(value)
+        default: return false
+        }
+    }
+
+    static func validNumber(_ key: String, _ value: Double) -> Bool {
+        guard value.isFinite else { return false }
+        if key == "native-reading-text-size" { return (14...40).contains(value) }
+        return NativeBackupPreferencesSnapshot.numberKeys.contains(key) && (0...1.5).contains(value)
+    }
     static func validate(section: NativeBackupManifest.Section, data: Data) throws {
         let decoder = JSONDecoder()
         let eligible = NativeBackupReferencePolicy.eligible
@@ -408,5 +453,54 @@ enum NativeBackupPreferencesComponents {
             favorites: try favorites.prepareBackupFavorites(plan.favorites),
             activity: try activity.prepareBackupActivity(plan),
             youtube: try NativeYouTubePersonalLibrary.shared.prepareBackupLibrary(backup))
+    }
+}
+
+
+/// Restore only missing, validated settings. Device-dependent choices and
+/// live player settings are deferred and must be reported to the caller.
+@MainActor
+enum NativeBackupSettingsRestore {
+    struct Prepared {
+        let omittedKeys: [String]
+        let apply: () throws -> Void
+        let rollback: () throws -> Void
+    }
+
+    static func prepare(_ backup: NativeBackupPreferencesSnapshot,
+                        defaults: UserDefaults = .standard) throws -> Prepared {
+        var updates: [String: Any] = [:]
+        var omitted = [String]()
+        func offer(_ key: String, _ value: Any, allowed: Bool) {
+            guard allowed else { omitted.append(key); return }
+            if defaults.object(forKey: key) == nil { updates[key] = value }
+        }
+        for (key, value) in backup.integers {
+            offer(key, value, allowed: NativeBackupPersonalDataValidation.validInteger(key, value))
+        }
+        for (key, value) in backup.booleans {
+            offer(key, value, allowed: NativeBackupPreferencesSnapshot.booleanKeys.contains(key) &&
+                  key != "mi-musica-shuffle")
+        }
+        for (key, value) in backup.numbers {
+            offer(key, value, allowed: NativeBackupPersonalDataValidation.validNumber(key, value))
+        }
+        for (key, value) in backup.strings {
+            // Voice IDs, folder selections and repeat mode require device or
+            // live-store resolution. Never activate an unavailable engine.
+            offer(key, value, allowed: false)
+        }
+        let voices = try NativeReaderVoiceProfileStore.prepareBackupProfiles(
+            backup.voiceProfiles, defaults: defaults)
+        omitted.append(contentsOf: voices.omittedKeys)
+        let before = NativeBackupDefaultsBeforeState(defaults: defaults, keys: Array(updates.keys))
+        let staged = updates
+        return Prepared(omittedKeys: omitted.sorted(), apply: {
+            for (key, value) in staged { defaults.set(value, forKey: key) }
+            try voices.apply()
+        }, rollback: {
+            before.restore()
+            try voices.rollback()
+        })
     }
 }

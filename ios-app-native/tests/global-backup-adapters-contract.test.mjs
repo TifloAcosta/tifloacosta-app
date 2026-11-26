@@ -136,7 +136,7 @@ test('restore checks CRC and actual decoded bytes before reading metadata snapsh
     assert.doesNotMatch(source, /copyItem|removeItem|UserDefaults/);
 });
 test('personal data validation rejects unsupported versions duplicate identifiers and unapproved preferences', () => {
-    const source = personal.slice(personal.indexOf('enum NativeBackupPersonalDataValidation'));
+    const source = section(personal, 'enum NativeBackupPersonalDataValidation', 'enum NativeBackupPersonalDataMerge');
     for (const name of ['NativePodcastBackupSnapshot','NativeRadioBackupSnapshot','NativeBackupPreferencesSnapshot']) {
         assert.ok(source.includes('decoder.decode(' + name + '.self'), name);
     }
@@ -153,7 +153,7 @@ test('personal data validation rejects unsupported versions duplicate identifier
 });
 
 test('prepared metadata merges preserve current records and do not manufacture downloads or streams', () => {
-    const source = personal.slice(personal.indexOf('enum NativeBackupPersonalDataMerge'));
+    const source = section(personal, 'enum NativeBackupPersonalDataMerge', 'enum NativeBackupLibraryValidation');
     assert.match(source, /favorites\.union\(backup\.favorites\)/);
     assert.match(source, /appendMissing\(followed, backup\.followed/);
     assert.match(source, /!currentIDs\.contains\(\$0\.id\)/);
@@ -170,7 +170,7 @@ test('prepared metadata merges preserve current records and do not manufacture d
 });
 
 test('library restore decodes all three typed indexes and rejects missing or orphaned media', () => {
-    const source = personal.slice(personal.indexOf('enum NativeBackupLibraryValidation'));
+    const source = section(personal, 'enum NativeBackupLibraryValidation', 'struct NativeBackupDefaultsBeforeState');
     for (const name of ['NativeReadingDocument','NativeCinemaLocalItem','NativeCinemaRecent']) {
         assert.ok(source.includes('decoder.decode([' + name + '].self'), name);
     }
@@ -221,4 +221,17 @@ test('live personal restore adapters encode before applying and restore both per
     assert.match(youtube, /self\.videos = oldVideos/);
     assert.match(personal, /else \{ defaults\.removeObject\(forKey: key\) \}/);
     assert.match(personal, /NativeYouTubePersonalLibrary\.shared\.prepareBackupLibrary\(backup\)/);
+});
+
+test('restore validates scalar choices and voice profiles without overwriting existing settings', () => {
+    assert.match(personal, /100 \+ NativeReaderSpeedOptions\.rates\.count/);
+    assert.match(personal, /value\.pauseSeconds\.count == 5/);
+    assert.match(personal, /value\.volume\.map/);
+    assert.match(personal, /NativeAppLanguage\.codes\.indices\.contains\(value\)/);
+    assert.match(personal, /defaults\.object\(forKey: key\) == nil \{ updates\[key\] = value \}/);
+    assert.match(personal, /key != "mi-musica-shuffle"/);
+    assert.match(personal, /omittedKeys: omitted\.sorted\(\)/);
+    assert.match(voiceProfiles, /storage != migratedKey/);
+    assert.match(voiceProfiles, /defaults\.object\(forKey: storage\) == nil/);
+    assert.match(voiceProfiles, /try JSONEncoder\(\)\.encode\(profile\)/);
 });

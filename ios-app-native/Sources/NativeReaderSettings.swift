@@ -83,6 +83,38 @@ enum NativeReaderVoiceProfileStore {
         return result
     }
 
+
+    /// Preserve all existing profiles. Do not trigger legacy migration during
+    /// preparation, and never write any value outside the profile namespace.
+    static func prepareBackupProfiles(_ profiles: [String: NativeReaderVoiceProfile],
+                                      defaults: UserDefaults = .standard) throws
+        -> (omittedKeys: [String], apply: () throws -> Void, rollback: () throws -> Void) {
+        var updates: [String: Data] = [:]
+        var omitted = [String]()
+        for (identifier, profile) in profiles {
+            guard !identifier.isEmpty, identifier.utf8.count <= 512,
+                  !identifier.unicodeScalars.contains(where: { CharacterSet.controlCharacters.contains($0) }),
+                  NativeBackupPersonalDataValidation.validVoiceProfile(profile) else {
+                omitted.append("voice-profile:" + identifier)
+                continue
+            }
+            let storage = key(identifier)
+            // Exclude the reserved migration marker and preserve old profiles.
+            guard storage != migratedKey else {
+                omitted.append("voice-profile:" + identifier)
+                continue
+            }
+            if defaults.object(forKey: storage) == nil {
+                updates[storage] = try JSONEncoder().encode(profile)
+            }
+        }
+        let before = NativeBackupDefaultsBeforeState(defaults: defaults, keys: Array(updates.keys))
+        let staged = updates
+        return (omitted.sorted(), {
+            for (key, bytes) in staged { defaults.set(bytes, forKey: key) }
+        }, { before.restore() })
+    }
+
     static func remove(for voiceIdentifier: String) {
         migrateIfNeeded()
         UserDefaults.standard.removeObject(forKey: key(voiceIdentifier))

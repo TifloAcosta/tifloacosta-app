@@ -246,3 +246,31 @@ test('preferences transaction exposes omissions and reverses every prepared comp
     assert.match(source, /omittedKeys: settings\.omittedKeys/);
     assert.match(source, /historyNotImported: components\.readingPlan\.historyNotImported/);
 });
+
+test('verified archive staging writes only private paths and checks actual bytes and CRC', () => {
+    const source = section(archive, 'static func stageForRestore(', 'static func verifyContentsForRestore(');
+    assert.match(source, /try verifyContentsForRestore\(section: section, source: source\)/);
+    assert.match(source, /fm\.temporaryDirectory/);
+    assert.match(source, /try validatePath\(entry\.path\)/);
+    assert.match(source, /written == entry\.uncompressedSize, crc == entry\.checksum/);
+    assert.match(source, /if !finished \{ try\? fm\.removeItem\(at: staging\) \}/);
+});
+test('media restore steps preserve original IDs and reverse index and media changes', () => {
+    const reading = section(reader, 'func prepareGlobalBackupRestore(', 'func createGlobalBackupArchive()');
+    const audio = section(music, 'func prepareGlobalBackupRestore(', 'func createGlobalBackupArchive()');
+    const movies = section(cinema, 'func prepareGlobalBackupRestore(', 'func createGlobalBackupArchive()');
+    const disk = read('NativeBackupFileRestore.swift');
+    assert.match(reading, /pendingFileImports\.isEmpty/);
+    assert.match(reading, /!currentIDs\.contains\(\$0\.id\)/);
+    assert.match(reading, /self\.documents = oldDocuments/);
+    assert.match(audio, /trackIDs\.insert\(id\)\.inserted/);
+    assert.match(audio, /additions\.append\(\.init\(id: id/);
+    assert.match(audio, /orderedEntries: list\.orderedEntries/);
+    assert.match(audio, /omitted\.append\(contentsOf: backup\.audioProfiles\.keys\.sorted\(\)\)/);
+    assert.doesNotMatch(audio, /UUID\(\)/);
+    assert.match(movies, /!ids\.contains\(\$0\.id\)/);
+    assert.match(movies, /historyPlan\.rollback/);
+    assert.match(disk, /!fm\.fileExists\(atPath: item\.target\.path\)/);
+    assert.match(disk, /attemptedIndexes\.reversed\(\)/);
+    assert.match(disk, /if let firstError \{ throw firstError \}[\s\S]*?for target in moved\.reversed\(\)/);
+});

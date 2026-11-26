@@ -20,6 +20,7 @@ on:
       - 'ios-app-native/Sources/*.lproj/Localizable.strings'
       - 'ios-app-native/tests/backup-manifest-smoke.swift'
       - 'ios-app-native/tests/backup-restore-transaction-smoke.swift'
+      - 'ios-app-native/tests/backup-file-restore-smoke.swift'
       - 'ios-app-native/tests/global-backup-adapters-contract.test.mjs'
       - 'ios-app-native/tests/ocr-notice-contract.test.mjs'
       - 'ios-app-native/tests/resource-folder-navigation-contract.test.mjs'

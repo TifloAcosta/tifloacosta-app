@@ -51,7 +51,15 @@ test('search remains federated and can find personal titles and provider names; 
 test('minimal cinema labels and acknowledgements have all five translated catalogues', () => {
   for (const lang of ['en','pt','fr','it','de']) {
     const dict = read(lang + '.lproj/Localizable.strings');
-    for (const key of ['Plataformas','Latinoamérica','Información y agradecimientos','Entrar en Audiocinemateca','Agradecemos a %@ su predisposición y colaboración con Multicines Accesibles.'])
+    for (const key of ['Universo Audesc','Plataformas','Latinoamérica','Información y agradecimientos','Entrar en Audiocinemateca','Agradecemos a %@ su predisposición y colaboración con Multicines Accesibles.'])
       assert.ok(dict.includes('"' + key + '" = '), lang + ' ' + key);
   }
+});
+
+test('collection filters are independent and provider search carries its context', () => {
+  assert.ok(source.includes('selectedIndex: $collectionLanguageIndex'));
+  assert.ok(source.includes('selectedIndex: $collectionContentIndex'));
+  assert.ok(source.includes('NativeCinemaProviderScreen(source: source, selectedKind: selectedKind, selectedLanguage: selectedLanguage, query: searchText)'));
+  assert.ok(source.includes('NativeAudiocinematecaBrowser(query: query, kind: selectedKind, language: selectedLanguage)'));
+  assert.ok(source.includes('var selectedKind: AccessibleCinemaKind = .all'));
 });

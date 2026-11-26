@@ -305,6 +305,8 @@ private struct NativeCinemaContentScreen: View {
     let mode: NativeCinemaContentMode
     @State private var searchText = ""
     @State private var discoveryLanguageIndex = 0
+    @AppStorage("native-cinema-collection-language-index-v1") private var collectionLanguageIndex = 0
+    @AppStorage("native-cinema-collection-content-index-v1") private var collectionContentIndex = 0
     @State private var audiocinematecaResults: [NativeAudiocinematecaCatalogueIndex.Entry] = []
     @State private var audioAccountStamp: String?
     @State private var consultedCatalogues = 0
@@ -331,12 +333,13 @@ private struct NativeCinemaContentScreen: View {
     @StateObject private var cinemaRecents = NativeCinemaRecentStore.shared
 
     private var selectedLanguage: AccessibleCinemaLanguage {
-        let index = mode == .discovery ? discoveryLanguageIndex : languageIndex
+        let index = mode == .discovery ? discoveryLanguageIndex : (mode == .collection ? collectionLanguageIndex : languageIndex)
         return AccessibleCinemaLanguage.allCases[min(max(0, index), AccessibleCinemaLanguage.allCases.count - 1)]
     }
 
     private var selectedKind: AccessibleCinemaKind {
-        AccessibleCinemaKind.allCases[min(max(0, contentIndex), AccessibleCinemaKind.allCases.count - 1)]
+        let index = mode == .collection ? collectionContentIndex : contentIndex
+        return AccessibleCinemaKind.allCases[min(max(0, index), AccessibleCinemaKind.allCases.count - 1)]
     }
 
     private var filtered: [AccessibleCinemaSource] {
@@ -658,7 +661,7 @@ private struct NativeCinemaContentScreen: View {
                         Section("Plataformas") {
                             ForEach(filtered) { source in
                                 NavigationLink {
-                                    NativeCinemaProviderScreen(source: source)
+                                    NativeCinemaProviderScreen(source: source, selectedKind: selectedKind, selectedLanguage: selectedLanguage, query: searchText)
                                 } label: {
                                     Text(MusicLocalized.message(source.name))
                                 }
@@ -762,12 +765,12 @@ private struct NativeCinemaContentScreen: View {
                     NativeAdjustableChoice(
                         title: "Idioma de audiodescripción",
                         choices: AccessibleCinemaLanguage.allCases.map(\.rawValue),
-                        selectedIndex: $languageIndex
+                        selectedIndex: $collectionLanguageIndex
                     )
                     NativeAdjustableChoice(
                         title: "Tipo de contenido",
                         choices: AccessibleCinemaKind.allCases.map(\.rawValue),
-                        selectedIndex: $contentIndex
+                        selectedIndex: $collectionContentIndex
                     )
                     personalRows
                 }
@@ -903,6 +906,9 @@ private struct NativeCinemaAudescScreen: View {
 
 private struct NativeCinemaProviderScreen: View {
     let source: AccessibleCinemaSource
+    var selectedKind: AccessibleCinemaKind = .all
+    var selectedLanguage: AccessibleCinemaLanguage = .all
+    var query: String = ""
 
     private var collaborator: String? {
         switch source.id {
@@ -948,7 +954,7 @@ private struct NativeCinemaProviderScreen: View {
                         }
                         if source.id == "rai-play-sound" {
                             NavigationLink("Explorar catálogo audiodescrito") {
-                                NativeRaiPlaySoundScreen(kind: .all)
+                                NativeRaiPlaySoundScreen(kind: selectedKind)
                             }
                         }
                         if source.id == "tape-territory" {
@@ -963,7 +969,7 @@ private struct NativeCinemaProviderScreen: View {
                         }
                         if source.id == "audiocinemateca" {
                             NavigationLink("Entrar en Audiocinemateca") {
-                                NativeAudiocinematecaBrowser(query: "", kind: .all, language: .all)
+                                NativeAudiocinematecaBrowser(query: query, kind: selectedKind, language: selectedLanguage)
                             }
                             Link("Crear cuenta gratuita", destination: URL(string: "https://audiocinemateca.com/usuario/register")!)
                             .frame(minHeight: 44, alignment: .leading)

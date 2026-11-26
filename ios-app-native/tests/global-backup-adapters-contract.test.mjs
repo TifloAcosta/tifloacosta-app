@@ -31,7 +31,7 @@ test('music global backup captures ordered playlists, local audio, folders and e
     assert.match(source, /let sourceFiles = files/);
     assert.match(source, /locations: \[MusicPortableLocation\(provider: "archive"/);
     assert.match(source, /folders: snapshot.folders, playlists: snapshot.playlists/);
-    assert.match(source, /smartFolders: snapshot.smartFolders, audioProfiles: snapshot.audioProfiles/);
+    assert.match(source, /smartFolders: snapshot.smartFolders, audioProfiles: profiles/);
     assert.match(source, /hasEditedTrackInformation: file.hasEditedTrackInformation/);
     assert.match(source, /guard tracks.count == media.count/);
     assert.match(source, /manifest.count <= 8_388_608/);
@@ -89,7 +89,9 @@ test('radio and preferences preserve explicit personal data without copying acco
     assert.match(personal, /voiceProfiles: try NativeReaderVoiceProfileStore.backupProfiles/);
     assert.match(voiceProfiles, /where key.hasPrefix\(prefix\)/);
     assert.match(voiceProfiles, /JSONDecoder\(\).decode\(NativeReaderVoiceProfile.self, from: data\)/);
-    assert.doesNotMatch(personal, /"native-reader-gemini-validated"|"mi-musica-auto-backup-destination-bookmark"/);
+    const capture = section(personal, 'struct NativeBackupPreferencesSnapshot', 'enum NativeBackupMetadataArchive');
+    assert.doesNotMatch(capture, /"native-reader-gemini-validated"|"mi-musica-auto-backup-destination-bookmark"/);
+    assert.match(personal, /defaults.bool\(forKey: "native-reader-gemini-validated"\)/);
 });
 test('all six selected archives must exist before publication, and missing stores abort', () => {
     for (const name of ['reader','music','cinema','podcasts','radio','preferences']) {

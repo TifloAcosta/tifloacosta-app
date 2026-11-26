@@ -49,7 +49,7 @@ test('El rotor ofrece leer, guardar, compartir y fuente original', () => {
 
 test('La pantalla de lectura mantiene metadatos y párrafos separados', () => {
   const news = read('NativeNews.swift');
-  for (const text of ['Text("Medio:', 'Text("Publicado:', 'Text("Categorías:']) {
+  for (const text of ['Text(MusicLocalized.format("Medio: %@", NativeNewsMetadata.source(item))', 'Text(MusicLocalized.format("Publicado: %@", published)', 'Text(MusicLocalized.format("Categorías: %@", categories.map(NativeNewsMetadata.category)']) {
     assert.ok(news.includes(text));
   }
   assert.match(news, /LazyVStack\(alignment: \.leading/);

@@ -26,6 +26,6 @@ test('Reproducción continua y episodio individual prefieren audio descargado', 
   assert.match(podcasts, /downloads\.localURL\(for: episode\.id\)/);
   assert.match(podcasts, /player\.select\(episode, at: library\.progress\(for: episode\)/);
   assert.match(podcasts, /Section\("Episodios descargados"\)/);
-  assert.match(podcasts, /Button\("Eliminar descarga:/);
-  assert.match(podcasts, /Button\("Descargar:/);
+  assert.match(podcasts, /Button\(MusicLocalized\.format\("Eliminar descarga: %@", item\.title\)/);
+  assert.match(podcasts, /Button\(MusicLocalized\.format\("Descargar: %@", episode\.title\)/);
 });

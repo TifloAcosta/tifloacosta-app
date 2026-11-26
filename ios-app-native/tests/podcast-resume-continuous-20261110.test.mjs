@@ -30,7 +30,7 @@ test('Pantalla de Pódcast expone continuar escuchando y reproducción continua 
   assert.match(player, /Section\("Continuar escuchando"\)/);
   assert.match(player, /Toggle\("Reproducir el siguiente episodio automáticamente"/);
   assert.match(player, /native-podcast-continuous-playback/);
-  assert.ok(player.includes('Button("Continuar: '));
+  assert.ok(player.includes('Button(MusicLocalized.format("Continuar: %@, desde %@", saved.title, clock(saved.seconds))'));
   assert.match(player, /saveCurrentPosition\(\)/);
   assert.match(player, /playEpisode\(episode, collection: store\.episodes\)/);
   assert.match(player, /playEpisode\(episode, collection: followedEpisodes\)/);

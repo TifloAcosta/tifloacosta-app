@@ -1863,3 +1863,30 @@
 "Diagnóstico básico:" = "Diagnostica di base:";
 "El enlace del vídeo no está disponible." = "Il link del video non è disponibile.";
 "No hay un enlace disponible para compartir." = "Non è disponibile alcun link da condividere.";
+
+// Release 1.7: dynamic music and reader controls
+"Reproducción aleatoria: %@" = "Riproduzione casuale: %@";
+"Repetición: %@" = "Ripetizione: %@";
+"Temporizador: %d segundos restantes" = "Timer: %d secondi rimanenti";
+"Posición: %d de %d segundos" = "Posizione: %d di %d secondi";
+"Añadir a lista %@" = "Aggiungi alla playlist %@";
+"Eliminar carpeta %@" = "Elimina cartella %@";
+"Reproducir lista %@" = "Riproduci playlist %@";
+"%@, archivo no disponible" = "%@, file non disponibile";
+"Eliminar lista %@" = "Elimina playlist %@";
+"%@, criterio: %@ %@, %d canciones" = "%@, criterio: %@ %@, %d brani";
+"Reproducir carpeta inteligente %@" = "Riproduci cartella smart %@";
+"Eliminar carpeta inteligente %@" = "Elimina cartella smart %@";
+"%d documentos seleccionados" = "%d documenti selezionati";
+"%@, %d documentos" = "%@, %d documenti";
+"%d documentos antiguos no conservan su archivo original y se compartirán como texto TXT. Los demás se compartirán en su formato original." = "%d documenti meno recenti non conservano il file originale e saranno condivisi in TXT. Gli altri saranno condivisi nel formato originale.";
+"Eliminar definitivamente %d documentos" = "Elimina definitivamente %d documenti";
+"Vas a eliminar definitivamente estos %d documentos: %@. Esta operación no se puede deshacer." = "Stai per eliminare definitivamente questi %d documenti: %@. L’operazione non può essere annullata.";
+"Eliminar definitivamente %@" = "Elimina definitivamente %@";
+"Vas a eliminar «%@». Esta operación no se puede deshacer." = "Stai per eliminare «%@». L’operazione non può essere annullata.";
+"Audiolibro, %d pistas. Pista %d." = "Audiolibro, %d tracce. Traccia %d.";
+"Ir a pista %d, %d por ciento" = "Vai alla traccia %d, %d per cento";
+"Página. %@" = "Pagina. %@";
+"Referencia. %@" = "Riferimento. %@";
+"Nivel %d. %@" = "Livello %d. %@";
+"Documento" = "Documento";

@@ -1865,3 +1865,30 @@
 "Diagnóstico básico:" = "Basic diagnostics:";
 "El enlace del vídeo no está disponible." = "The video link is unavailable.";
 "No hay un enlace disponible para compartir." = "There is no link available to share.";
+
+// Release 1.7: dynamic music and reader controls
+"Reproducción aleatoria: %@" = "Shuffle: %@";
+"Repetición: %@" = "Repeat: %@";
+"Temporizador: %d segundos restantes" = "Timer: %d seconds remaining";
+"Posición: %d de %d segundos" = "Position: %d of %d seconds";
+"Añadir a lista %@" = "Add to playlist %@";
+"Eliminar carpeta %@" = "Delete folder %@";
+"Reproducir lista %@" = "Play playlist %@";
+"%@, archivo no disponible" = "%@, file unavailable";
+"Eliminar lista %@" = "Delete playlist %@";
+"%@, criterio: %@ %@, %d canciones" = "%@, criterion: %@ %@, %d songs";
+"Reproducir carpeta inteligente %@" = "Play smart folder %@";
+"Eliminar carpeta inteligente %@" = "Delete smart folder %@";
+"%d documentos seleccionados" = "%d documents selected";
+"%@, %d documentos" = "%@, %d documents";
+"%d documentos antiguos no conservan su archivo original y se compartirán como texto TXT. Los demás se compartirán en su formato original." = "%d older documents no longer have their original file and will be shared as TXT. The others will be shared in their original format.";
+"Eliminar definitivamente %d documentos" = "Permanently delete %d documents";
+"Vas a eliminar definitivamente estos %d documentos: %@. Esta operación no se puede deshacer." = "You are about to permanently delete these %d documents: %@. This cannot be undone.";
+"Eliminar definitivamente %@" = "Permanently delete %@";
+"Vas a eliminar «%@». Esta operación no se puede deshacer." = "You are about to delete “%@”. This cannot be undone.";
+"Audiolibro, %d pistas. Pista %d." = "Audiobook, %d tracks. Track %d.";
+"Ir a pista %d, %d por ciento" = "Go to track %d, %d percent";
+"Página. %@" = "Page. %@";
+"Referencia. %@" = "Reference. %@";
+"Nivel %d. %@" = "Level %d. %@";
+"Documento" = "Document";

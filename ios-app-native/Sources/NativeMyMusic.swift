@@ -1141,17 +1141,17 @@ struct NativeMyMusicScreen: View {
     }
 
     @ViewBuilder private var musicPlaybackOptions: some View {
-        Button("Reproducción aleatoria: \(player.shuffleEnabled ? "activada" : "desactivada")") { player.toggleShuffle() }
-        Button("Repetición: \(musicRepeatDescription)") { player.changeRepeat() }
+        Button(MusicLocalized.format("Reproducción aleatoria: %@", MusicLocalized.message(player.shuffleEnabled ? "Activado" : "Desactivado"))) { player.toggleShuffle() }
+        Button(MusicLocalized.format("Repetición: %@", musicRepeatDescription)) { player.changeRepeat() }
         Button("Temporizador de 15 minutos") { player.setSleep(minutes: 15) }
             .disabled(player.currentName.isEmpty)
         Button("Temporizador de 30 minutos") { player.setSleep(minutes: 30) }
             .disabled(player.currentName.isEmpty)
         if player.sleepRemaining > 0 {
-            Text("Temporizador: \(player.sleepRemaining) segundos restantes")
+            Text(MusicLocalized.format("Temporizador: %d segundos restantes", player.sleepRemaining))
             Button("Cancelar temporizador") { player.cancelSleep() }
         }
-        Text("Posición: \(Int(player.position)) de \(Int(player.duration)) segundos")
+        Text(MusicLocalized.format("Posición: %d de %d segundos", Int(player.position), Int(player.duration)))
     }
 
     private var musicRepeatDescription: String {
@@ -1185,7 +1185,7 @@ struct NativeMyMusicScreen: View {
             } else {
                 ForEach(visibleFiles) { file in
                     HStack {
-                        Button("Reproducir \(file.name)") {
+                        Button(MusicLocalized.format("Reproducir %@", file.name)) {
                             player.play(
                                 name: file.name,
                                 url: library.audioURL(for: file),
@@ -1204,12 +1204,12 @@ struct NativeMyMusicScreen: View {
                                     albumKeysByURL: albumKeysByURL)
                             }
                             ForEach(library.playlists) { playlist in
-                                Button("Añadir a lista \(playlist.name)") {
+                                Button(MusicLocalized.format("Añadir a lista %@", playlist.name)) {
                                     library.addToPlaylist(file.id, playlistId: playlist.id)
                                 }
                             }
                             ForEach(library.folders) { folder in
-                                Button("Añadir a \(folder.name)") { library.assign(file.id, to: folder.id) }
+                                Button(MusicLocalized.format("Añadir a %@", folder.name)) { library.assign(file.id, to: folder.id) }
                             }
                             if NativeMusicRecognition.clientKey != nil {
                                 Button("Identificar canción") { requestIdentification([file.id]) }
@@ -1233,10 +1233,10 @@ struct NativeMyMusicScreen: View {
                                 editingGenreValue = file.genre ?? ""
                             }
                             ForEach(library.folders) { folder in
-                                Button("Añadir a \(folder.name)") { library.assign(file.id, to: folder.id) }
+                                Button(MusicLocalized.format("Añadir a %@", folder.name)) { library.assign(file.id, to: folder.id) }
                             }
                             ForEach(library.playlists) { playlist in
-                                Button("Añadir a lista \(playlist.name)") { library.addToPlaylist(file.id, playlistId: playlist.id) }
+                                Button(MusicLocalized.format("Añadir a lista %@", playlist.name)) { library.addToPlaylist(file.id, playlistId: playlist.id) }
                             }
                             Button("Eliminar de la biblioteca", role: .destructive) { pendingRemoval = file }
                         }
@@ -1265,12 +1265,12 @@ struct NativeMyMusicScreen: View {
         Section("Mis carpetas") {
             ForEach(library.folders) { folder in
                 HStack {
-                    Text("\(folder.name), \(folder.trackIds.count) canciones")
+                    Text(MusicLocalized.format("%@, %d canciones", folder.name, folder.trackIds.count))
                         .accessibilityLabel(detailedVoiceOver ?
                             MusicLocalized.format("%@, carpeta, %d canciones, guardadas en el iPhone", folder.name, folder.trackIds.count) :
                             MusicLocalized.format("%@, %d canciones", folder.name, folder.trackIds.count))
                     Spacer()
-                    Button("Eliminar carpeta \(folder.name)") {
+                    Button(MusicLocalized.format("Eliminar carpeta %@", folder.name)) {
                         pendingCollectionRemoval = (folder.id, folder.name, "folder")
                     }
                         .accessibilityHint("Solo elimina esta carpeta virtual; las canciones se conservan.")
@@ -1297,8 +1297,8 @@ struct NativeMyMusicScreen: View {
     private var musicPlaylistsSection: some View {
         Section("Listas de reproducción") {
             ForEach(library.playlists) { playlist in
-                Text("\(playlist.name), \(library.playlistEntries(playlist).count) canciones")
-                Button("Reproducir lista \(playlist.name)") {
+                Text(MusicLocalized.format("%@, %d canciones", playlist.name, library.playlistEntries(playlist).count))
+                Button(MusicLocalized.format("Reproducir lista %@", playlist.name)) {
                     mixedQueue.play(entries: library.playlistEntries(playlist), playlistID: playlist.id, localURLs: Dictionary(
                         uniqueKeysWithValues: library.files.map { ($0.id, library.audioURL(for: $0)) }),
                         albumKeysByURL: albumKeysByURL)
@@ -1336,7 +1336,7 @@ struct NativeMyMusicScreen: View {
                     case .local:
                         if entry.localId != nil,
                            !library.files.contains(where: { $0.id == entry.localId }) {
-                            Text("\(entry.title), archivo no disponible")
+                            Text(MusicLocalized.format("%@, archivo no disponible", entry.title))
                         }
                     }
                     HStack {
@@ -1350,7 +1350,7 @@ struct NativeMyMusicScreen: View {
                         .disabled(library.playlistEntries(playlist).last?.id == entry.id)
                     }
                 }
-                Button("Eliminar lista \(playlist.name)") {
+                Button(MusicLocalized.format("Eliminar lista %@", playlist.name)) {
                     pendingCollectionRemoval = (playlist.id, playlist.name, "playlist")
                 }
             }
@@ -1361,14 +1361,14 @@ struct NativeMyMusicScreen: View {
         Section("Carpetas inteligentes") {
             ForEach(library.smartFolders) { folder in
                 let matches = library.matchingTracks(for: folder)
-                Text("\(folder.name), criterio: \(MusicLocalized.message(folder.ruleKind.label)) \(folder.titleContains), \(matches.count) canciones")
-                Button("Reproducir carpeta inteligente \(folder.name)") {
+                Text(MusicLocalized.format("%@, criterio: %@ %@, %d canciones", folder.name, MusicLocalized.message(folder.ruleKind.label), folder.titleContains, matches.count))
+                Button(MusicLocalized.format("Reproducir carpeta inteligente %@", folder.name)) {
                     let items = matches.map { (name: $0.name, url: library.audioURL(for: $0)) }
                     if let first = items.first { player.play(name: first.name, url: first.url, queue: items,
                         albumKeysByURL: albumKeysByURL) }
                 }
                 .disabled(matches.isEmpty)
-                Button("Eliminar carpeta inteligente \(folder.name)") {
+                Button(MusicLocalized.format("Eliminar carpeta inteligente %@", folder.name)) {
                     pendingCollectionRemoval = (folder.id, folder.name, "smartFolder")
                 }
             }

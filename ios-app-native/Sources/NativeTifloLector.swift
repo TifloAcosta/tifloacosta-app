@@ -2045,7 +2045,7 @@ struct NativeReaderLibraryScreen: View {
                     }
                 }
                 if selectionMode {
-                    Text("\(visibleSelection.count) documentos seleccionados")
+                    Text(MusicLocalized.format("%d documentos seleccionados", visibleSelection.count))
                         .accessibilityAddTraits(.updatesFrequently)
                     Button("Seleccionar todos los visibles") {
                         selectedDocumentIDs.formUnion(shownDocuments.map(\.id))
@@ -2182,7 +2182,7 @@ struct NativeReaderLibraryScreen: View {
                             NavigationLink {
                                 folderDocumentsView(folder)
                             } label: {
-                                Text("\(folder), \(library.documents.filter { $0.folderName == folder }.count) documentos")
+                                Text(MusicLocalized.format("%@, %d documentos", folder, library.documents.filter { $0.folderName == folder }.count))
                             }
                             .accessibilityAction(named: Text("Eliminar carpeta")) {
                                 showFolderPicker = false
@@ -2402,7 +2402,7 @@ struct NativeReaderLibraryScreen: View {
             }
             Button("Cancelar", role: .cancel) { pendingShareURLs = [] }
         } message: {
-            Text("\(shareFallbackCount) documentos antiguos no conservan su archivo original y se compartirán como texto TXT. Los demás se compartirán en su formato original.")
+            Text(MusicLocalized.format("%d documentos antiguos no conservan su archivo original y se compartirán como texto TXT. Los demás se compartirán en su formato original.", shareFallbackCount))
         }
         .confirmationDialog("Mover a carpeta",
                             isPresented: Binding(
@@ -2480,7 +2480,7 @@ struct NativeReaderLibraryScreen: View {
         }
         .confirmationDialog("Eliminar documentos seleccionados", isPresented: $showBulkDelete,
                             titleVisibility: .visible) {
-            Button("Eliminar definitivamente \(visibleSelection.count) documentos", role: .destructive) {
+            Button(MusicLocalized.format("Eliminar definitivamente %d documentos", visibleSelection.count), role: .destructive) {
                 do {
                     let removed = try library.deleteDocuments(withIDs: visibleSelection)
                     finishSelection("\(removed) documentos eliminados.")
@@ -2491,11 +2491,11 @@ struct NativeReaderLibraryScreen: View {
             Button("Cancelar", role: .cancel) { showBulkDelete = false }
         } message: {
             let titles = library.documents.filter { visibleSelection.contains($0.id) }.map(\.title)
-            Text("Vas a eliminar definitivamente estos \(titles.count) documentos: \(titles.joined(separator: ", ")). Esta operación no se puede deshacer.")
+            Text(MusicLocalized.format("Vas a eliminar definitivamente estos %d documentos: %@. Esta operación no se puede deshacer.", titles.count, titles.joined(separator: ", ")))
         }
         .confirmationDialog("Eliminar documento", isPresented: $confirmDeletion,
                             titleVisibility: .visible) {
-            Button("Eliminar definitivamente \(documentToDelete?.title ?? "el documento")", role: .destructive) {
+            Button(MusicLocalized.format("Eliminar definitivamente %@", documentToDelete?.title ?? MusicLocalized.message("Documento")), role: .destructive) {
                 if let doc = documentToDelete {
                     do { try library.deleteDocuments(withIDs: [doc.id]) }
                     catch { importError = error.localizedDescription }
@@ -2505,7 +2505,7 @@ struct NativeReaderLibraryScreen: View {
             Button("Cancelar", role: .cancel) { documentToDelete = nil }
         } message: {
             if let doc = documentToDelete {
-                Text("Vas a eliminar «\(doc.title)». Esta operación no se puede deshacer.")
+                Text(MusicLocalized.format("Vas a eliminar «%@». Esta operación no se puede deshacer.", doc.title))
             }
         }
         .alert("No se pudo realizar la operación", isPresented: Binding(
@@ -3709,7 +3709,7 @@ struct NativeReadingScreen: View {
                             Text("No se han encontrado coincidencias.")
                         }
                         ForEach(documentSearchHits) { hit in
-                            Button(hit.excerpt.isEmpty ? "Posición \\(hit.offset)" : hit.excerpt) {
+                            Button(hit.excerpt.isEmpty ? MusicLocalized.format("Posición %d", hit.offset) : hit.excerpt) {
                                 showDocumentSearch = false
                                 jump(to: hit.offset)
                             }
@@ -4362,7 +4362,7 @@ struct NativeReadingScreen: View {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 12) {
                     if isAudioOnly {
-                        Text("Audiolibro, \(tracks.count) pistas. Pista \(trackIndex + 1).")
+                        Text(MusicLocalized.format("Audiolibro, %d pistas. Pista %d.", tracks.count, trackIndex + 1))
                     }
                     ForEach(textLayout.fragments.indices, id: \.self) { index in
                         readerFragment(at: index).id(index)
@@ -4557,7 +4557,7 @@ struct NativeReadingScreen: View {
                         }
                     }
                     ForEach(latest.savedAudioBookmarks, id: \.self) { mark in
-                        Button("Ir a pista \(mark.track + 1), \(mark.percent) por ciento") {
+                        Button(MusicLocalized.format("Ir a pista %d, %d por ciento", mark.track + 1, mark.percent)) {
                             selectAudioLocation(track: mark.track, percent: mark.percent,
                                                 seconds: mark.seconds, resumeIfPlaying: true)
                             showSavedMarks = false
@@ -4586,9 +4586,9 @@ struct NativeReadingScreen: View {
                     if !tracks.isEmpty, let points = latest.daisyNavigation, !points.isEmpty {
                         Section("Navegación DAISY") {
                             ForEach(points) { point in
-                                Button(point.kind == "Página" ? "Página. \(NativeReaderHeadingDisplay.title(point.title))" :
-                                       point.kind == "Referencia" ? "Referencia. \(NativeReaderHeadingDisplay.title(point.title))" :
-                                       "Nivel \(point.level). \(NativeReaderHeadingDisplay.title(point.title))") {
+                                Button(point.kind == "Página" ? MusicLocalized.format("Página. %@", NativeReaderHeadingDisplay.title(point.title)) :
+                                       point.kind == "Referencia" ? MusicLocalized.format("Referencia. %@", NativeReaderHeadingDisplay.title(point.title)) :
+                                       MusicLocalized.format("Nivel %d. %@", point.level, NativeReaderHeadingDisplay.title(point.title))) {
                                     jumpToDaisy(point)
                                 }
                             }

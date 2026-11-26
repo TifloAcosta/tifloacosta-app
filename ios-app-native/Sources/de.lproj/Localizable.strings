@@ -1863,3 +1863,30 @@
 "Diagnóstico básico:" = "Grundlegende Diagnose:";
 "El enlace del vídeo no está disponible." = "Der Videolink ist nicht verfügbar.";
 "No hay un enlace disponible para compartir." = "Es ist kein Link zum Teilen verfügbar.";
+
+// Release 1.7: dynamic music and reader controls
+"Reproducción aleatoria: %@" = "Zufallswiedergabe: %@";
+"Repetición: %@" = "Wiederholung: %@";
+"Temporizador: %d segundos restantes" = "Timer: %d Sekunden verbleibend";
+"Posición: %d de %d segundos" = "Position: %d von %d Sekunden";
+"Añadir a lista %@" = "Zur Wiedergabeliste %@ hinzufügen";
+"Eliminar carpeta %@" = "Ordner %@ löschen";
+"Reproducir lista %@" = "Wiedergabeliste %@ abspielen";
+"%@, archivo no disponible" = "%@, Datei nicht verfügbar";
+"Eliminar lista %@" = "Wiedergabeliste %@ löschen";
+"%@, criterio: %@ %@, %d canciones" = "%@, Kriterium: %@ %@, %d Titel";
+"Reproducir carpeta inteligente %@" = "Intelligenten Ordner %@ abspielen";
+"Eliminar carpeta inteligente %@" = "Intelligenten Ordner %@ löschen";
+"%d documentos seleccionados" = "%d Dokumente ausgewählt";
+"%@, %d documentos" = "%@, %d Dokumente";
+"%d documentos antiguos no conservan su archivo original y se compartirán como texto TXT. Los demás se compartirán en su formato original." = "%d ältere Dokumente haben ihre Originaldatei nicht mehr und werden als TXT geteilt. Die übrigen werden im Originalformat geteilt.";
+"Eliminar definitivamente %d documentos" = "%d Dokumente endgültig löschen";
+"Vas a eliminar definitivamente estos %d documentos: %@. Esta operación no se puede deshacer." = "Du bist dabei, diese %d Dokumente endgültig zu löschen: %@. Dies kann nicht rückgängig gemacht werden.";
+"Eliminar definitivamente %@" = "%@ endgültig löschen";
+"Vas a eliminar «%@». Esta operación no se puede deshacer." = "Du bist dabei, „%@“ zu löschen. Dies kann nicht rückgängig gemacht werden.";
+"Audiolibro, %d pistas. Pista %d." = "Hörbuch, %d Titel. Titel %d.";
+"Ir a pista %d, %d por ciento" = "Zu Titel %d, %d Prozent wechseln";
+"Página. %@" = "Seite. %@";
+"Referencia. %@" = "Verweis. %@";
+"Nivel %d. %@" = "Ebene %d. %@";
+"Documento" = "Dokument";

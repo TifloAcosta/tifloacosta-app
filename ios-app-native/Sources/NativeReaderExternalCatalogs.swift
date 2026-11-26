@@ -35,6 +35,7 @@ private struct NativeOPDSPage {
 
 private enum NativeCatalogError: LocalizedError {
     case invalidURL, invalidCatalog, invalidResponse, tooLarge, unavailableFormat
+    case gutenbergDenied, gutenbergRateLimited
 
     var errorDescription: String? {
         switch self {
@@ -43,6 +44,8 @@ private enum NativeCatalogError: LocalizedError {
         case .invalidResponse: return "La biblioteca ha devuelto una respuesta no válida."
         case .tooLarge: return "El catálogo o el archivo supera el tamaño máximo permitido."
         case .unavailableFormat: return "Esta obra no ofrece una descarga directa en un formato que TifloLector pueda leer."
+        case .gutenbergDenied: return MusicLocalized.message("Proyecto Gutenberg ha rechazado la conexión. Puedes consultar su web oficial.")
+        case .gutenbergRateLimited: return MusicLocalized.message("Proyecto Gutenberg ha limitado temporalmente las consultas. Inténtalo más tarde.")
         }
     }
 }
@@ -177,21 +180,46 @@ private enum NativeOPDSService {
         return supported.contains(ext) ? ext : nil
     }
 
-    static func fetch(_ url: URL) async throws -> NativeOPDSPage {
+    static func isGutenbergURL(_ url: URL) -> Bool {
+        guard let host = url.host?.lowercased() else { return false }
+        return url.scheme?.lowercased() == "https" && ["www.gutenberg.org", "gutenberg.org"].contains(host)
+    }
+
+    static func catalogRequest(_ url: URL) -> URLRequest {
         var request = URLRequest(url: url)
+        if isGutenbergURL(url) {
+            let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.7"
+            request.setValue("TifloAcosta/\(version) (tifloacosta@gmail.com)", forHTTPHeaderField: "User-Agent")
+        }
+        return request
+    }
+
+    static func validateResponse(_ response: URLResponse, requestedURL: URL) throws -> HTTPURLResponse {
+        guard let http = response as? HTTPURLResponse,
+              secureURL(http.url?.absoluteString ?? "") != nil else {
+            throw NativeCatalogError.invalidResponse
+        }
+        if isGutenbergURL(requestedURL) {
+            if http.statusCode == 403 { throw NativeCatalogError.gutenbergDenied }
+            if http.statusCode == 429 { throw NativeCatalogError.gutenbergRateLimited }
+        }
+        guard (200...299).contains(http.statusCode) else { throw NativeCatalogError.invalidResponse }
+        return http
+    }
+
+    static func fetch(_ url: URL) async throws -> NativeOPDSPage {
+        var request = catalogRequest(url)
         request.timeoutInterval = 25
         request.setValue("application/atom+xml, application/opds+json, application/json",
                          forHTTPHeaderField: "Accept")
         let (data, response) = try await URLSession.shared.data(for: request)
-        guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode),
-              secureURL(http.url?.absoluteString ?? "") != nil else {
-            throw NativeCatalogError.invalidResponse
-        }
+        let http = try validateResponse(response, requestedURL: url)
+        if http.mimeType?.lowercased() == "text/html" { throw NativeCatalogError.invalidCatalog }
         guard data.count <= feedLimit else { throw NativeCatalogError.tooLarge }
         if data.first == 123 || data.first == 91 {
-            return try parseJSON(data, base: url)
+            return try parseJSON(data, base: http.url ?? url)
         }
-        return try NativeAtomOPDSParser(base: url).read(data)
+        return try NativeAtomOPDSParser(base: http.url ?? url).read(data)
     }
 
     static func parseJSON(_ data: Data, base: URL) throws -> NativeOPDSPage {
@@ -254,14 +282,11 @@ private enum NativeOPDSService {
               let format = supportedExtension(url: link.url, mime: link.mime) else {
             throw NativeCatalogError.unavailableFormat
         }
-        var request = URLRequest(url: link.url)
+        var request = catalogRequest(link.url)
         request.timeoutInterval = 90
         let (temporary, response) = try await URLSession.shared.download(for: request)
         defer { try? FileManager.default.removeItem(at: temporary) }
-        guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode),
-              secureURL(http.url?.absoluteString ?? "") != nil else {
-            throw NativeCatalogError.invalidResponse
-        }
+        _ = try validateResponse(response, requestedURL: link.url)
         let size = (try? temporary.resourceValues(forKeys: [.fileSizeKey]).fileSize) ?? 0
         guard size > 0 && size <= bookLimit else { throw NativeCatalogError.tooLarge }
         // A provider may redirect to an HTML sign-in form instead of a book.
@@ -381,6 +406,7 @@ private struct NativeReaderOPDSFeedScreen: View {
     @State private var currentURL: URL
     @State private var page: NativeOPDSPage?
     @State private var loading = false
+    @State private var feedFailed = false
     @State private var importing: UUID?
     @State private var searchText = ""
     @State private var message: String?
@@ -402,11 +428,20 @@ private struct NativeReaderOPDSFeedScreen: View {
     }
 
     private func loadFeed() async {
+        let url = currentURL
         loading = true
+        feedFailed = false
         page = nil
-        defer { loading = false }
-        do { page = try await NativeOPDSService.fetch(currentURL) }
-        catch { self.error = error.localizedDescription }
+        defer { if currentURL == url { loading = false } }
+        do {
+            let result = try await NativeOPDSService.fetch(url)
+            guard !Task.isCancelled, currentURL == url else { return }
+            page = result
+        } catch {
+            guard !Task.isCancelled, currentURL == url else { return }
+            feedFailed = true
+            self.error = error.localizedDescription
+        }
     }
 
     private func searchGutenberg() {
@@ -480,7 +515,7 @@ private struct NativeReaderOPDSFeedScreen: View {
 
     private var resultsSection: some View {
         Section("Resultados") {
-            if !loading && filtered.isEmpty {
+            if !loading && !feedFailed && filtered.isEmpty {
                 Text("No se encontraron obras en esta página.")
             }
             ForEach(filtered) { item in itemRow(item) }
@@ -493,6 +528,11 @@ private struct NativeReaderOPDSFeedScreen: View {
             if loading { ProgressView("Consultando biblioteca") }
             if let message {
                 Text(message).accessibilityAddTraits(.updatesFrequently)
+            }
+            if feedFailed && isGutenberg && !loading {
+                Section {
+                    Link("Abrir Proyecto Gutenberg en la web", destination: URL(string: "https://www.gutenberg.org/")!)
+                }
             }
             resultsSection
             if let next = page?.nextURL {

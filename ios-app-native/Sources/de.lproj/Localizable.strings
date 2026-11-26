@@ -1688,3 +1688,8 @@
 "Entrar en Audiocinemateca" = "Audiocinemateca öffnen";
 "Agradecemos a %@ su predisposición y colaboración con Multicines Accesibles." = "Wir danken %@ für die Bereitschaft zur Unterstützung und die Zusammenarbeit mit Multicines Accesibles.";
 "Universo Audesc" = "Universo Audesc";
+
+// Project Gutenberg connection status
+"Proyecto Gutenberg ha rechazado la conexión. Puedes consultar su web oficial." = "Project Gutenberg hat die Verbindung abgelehnt. Du kannst die offizielle Website besuchen.";
+"Proyecto Gutenberg ha limitado temporalmente las consultas. Inténtalo más tarde." = "Project Gutenberg hat die Anfragen vorübergehend begrenzt. Versuche es später erneut.";
+"Abrir Proyecto Gutenberg en la web" = "Project Gutenberg im Web öffnen";

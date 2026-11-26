@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-26",
+  "sourcePublicCommit": "a5616e2967842bd629f7b96eb6a42a5e9285a6f6",
+  "baseline": "90a31757acbf981da1890c80bfcfbe0df30a5287",
+  "publicResources": 240,
+  "developmentBefore": 254,
+  "retainedDevelopmentOnly": 16,
+  "addedPublic": [
+    "es-pildoras-2026-26",
+    "en-pildoras-2026-26"
+  ],
+  "restoredDrive": [
+    {
+      "id": "es-1_JKDyQQoVd1JlYW-X3fGuR2gQDc7gZkO",
+      "title": "Automatización para envío de mensajes de WhatsApp",
+      "lang": "es",
+      "category": "Guías y tutoriales"
+    },
+    {
+      "id": "es-1PRtwgdWmY-rhjGMzew2DxgjTLHfjCgje",
+      "title": "Guía para crear Reels con VoiceOver",
+      "lang": "es",
+      "category": "Guías y tutoriales"
+    },
+    {
+      "id": "es-1-rvaKNcrqnHqDT2_buGUuPhKpRdsEeMq",
+      "title": "Dos por 1 - mensajes sospechosos y WikiTrip",
+      "lang": "es",
+      "category": "Guías y tutoriales"
+    },
+    {
+      "id": "en-1eGgMgxzmCtc-JQmG9cXB4exeTF0T6vlP",
+      "title": "Two in one - suspicious messages and WikiTrip",
+      "lang": "en",
+      "category": "Guides and Tutorials"
+    }
+  ],
+  "pendingDrive": [],
+  "developmentAfter": 260,
+  "verifiedScreenReaders": {
+    "es": 13,
+    "en": 10,
+    "missing": 0,
+    "routeMismatches": 0
+  },
+  "auditBatch": {
+    "categories": 8,
+    "folders": 16,
+    "html": 59,
+    "unmatchedBefore": 30,
+    "routeMismatches": 5,
+    "note": "Twenty Contacts by country files not present; confirm editorial/public data and import. Six potential video-text title aliases need original content comparison; do not duplicate or move automatically. Five matched files have alternate editorial categories; review taxonomy before changing."
+  },
+  "notes": [
+    "Public feed's current news and videos preserved from a5616e2; no older news resurrected.",
+    "No publication, no main writes, no Drive permission changes. Reconcile again against main immediately before eventual publication."
+  ]
+}

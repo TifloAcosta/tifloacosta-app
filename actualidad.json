@@ -1,13 +1,61 @@
 [
   {
-    "id": "9to5mac-fe949681be5d862a",
+    "id": "the-verge-14c3e9f5434fa2eb",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1042938/google-home-familiar-faces-onn-cameras",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-26T00:04:34.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Now Google’s Familiar Faces AI feature works on Walmart’s $35 smart home camera too",
+        "summary": "A couple of Walmart's budget-friendly smart home cameras will be able to recognize people around your house now using Google's familiar face detection feature. A new Google Home update brings Familiar Faces support to the $35 Onn Outdoor Camera Plug-In and $77 Onn Floodlight Camera Hardwired. However, a Google Home Premium subscription is still required […]",
+        "body": "A couple of Walmart's budget-friendly smart home cameras will be able to recognize people around your house now using Google's familiar face detection feature. A new Google Home update brings Familiar Faces support to the $35 Onn Outdoor Camera Plug-In and $77 Onn Floodlight Camera Hardwired. However, a Google Home Premium subscription is still required to access the feature.\n\nBoth cameras and Google's Nest Cam Outdoor (wired, 2nd gen) also have a new remote control in the Google Home app you can use to start or stop a 30-second security siren while watching the camera's live video feed.\n\nEarlier this month, Google announced that Gemini Live …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-043692ee54bcd383",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/25/ios-27-3-introduces-design-changes-for-these-apple-apps/",
+    "originalUrl": "https://9to5mac.com/2026/11/25/1password-confirms-security-incident-heres-what-you-need-to-know/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-25T15:32:08.000Z",
+    "publishedAt": "2026-11-25T23:30:05.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "1Password confirms security incident, here’s what you need to know",
+        "summary": "Password management platform 1Password today disclosed a security incident in which an attacker gained access to internal systems and stole select customer account information. Here are the details. more…",
+        "body": "Password management platform 1Password today disclosed a security incident in which an attacker gained access to internal systems and stole select customer account information. Here are the details.\n\n1Password today published a blog post explaining that an attacker “copied a limited amount of customer account information from a subset” of its users, “including the names and email addresses” they use to sign into the platform.\n\nAccording to the company, the incident began on November 19, when it started investigating indications that an attacker had gained access to an employee’s corporate GitHub account. The attacker then used that account to access source code and push malicious code to backend services, allowing customer account information to be downloaded.\n\nThe company noted that customer vaults were not affected , adding that all vault contents remain secure:\n\nAlthough 1Password did not disclose how many customers were affected, saying only that the breach involved “a subset of our users,” it did specify what information was compromised, including:\n\nHowever, 1Password clarified that the exposed invitation and recovery tokens cannot be used to access accounts on their own, as they also require either an SSO sign-in or a verification code sent to the user’s registered email address.\n\nThat said, the company confirmed that “the attacker also copied source code from private repositories and gained access” to its CI/CD system, which is essentially its DevOps infrastructure used to build, test, and deploy software.\n\nOn that point, 1Password noted that its CI/CD system contains “infrastructure related secrets,” and that it has already rotated or revoked all internal credentials that may have been exposed.\n\nThe company also listed other steps it took in response to the incident, including deactivating the compromised GitHub account, tightening internal security controls, and strengthening the verification codes used in account invitations and recovery emails.\n\nFinally, 1Password said users do not need to make any changes to their accounts. Still, it recommended that they remain vigilant against phishing attempts, as attackers can use stolen account information to craft convincing emails, messages, or calls that appear legitimate, particularly those involving account invitations or recovery requests.\n\nTo learn more about 1Password’s security incident, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-990fcb1623f20cc2",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/25/screens-can-now-turn-iphone-duo-into-a-tiny-macbook/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-25T22:10:00.000Z",
     "categories": [
       "apple",
       "tecnologia-general",
@@ -17,22 +65,47 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "iOS 27.3 introduces design changes for these Apple apps",
-        "summary": "iOS 27.3 includes many new features for Apple’s built-in apps, but it also introduces design changes on the iPhone across Calendar, Safari, Music, and more. Here’s what’s new. more…",
-        "body": "iOS 27.3 includes many new features for Apple’s built-in apps, but it also introduces design changes on the iPhone across Calendar, Safari, Music, and more. Here’s what’s new.\n\nApple is always iterating on the design of its software. While major overhauls like iOS 26’s Liquid Glass don’t come along often, the company makes smaller design changes all the time via software updates. In iOS 27.3, which will launch to all users next month , Apple has design changes coming to four popular apps: Health, Calendar, Safari, and Music.\n\nThe Health app gets the biggest design changes .\n\nAs seen above, Health introduces brand new Insights, Longevity, and Browse tabs that replace the previous options and include a variety of fresh UI elements like a top navigation row, personalized prompts and coaching, educational videos, and a lot more.\n\nApple Calendar’s design updates focus on making key buttons more reachable one-handed.\n\nAs the side-by-side above shows, the buttons for search and creating a new event have moved out of the top-right corner and into the bottom of the screen.\n\nCalendar also now shows the year at the top of the screen next to the current month, and has updated the ‘Today’ button to show the current date instead.\n\nSafari introduces an optional new design for tabs: Vertical Tabs. You can enable these inside Settings ⇾ Apps ⇾ Safari for a different approach to tabs across iPhone, iPad, and Mac. Here’s an example of vertical tabs on iPhone Duo.\n\nVertical Tabs won’t be for everyone, but they’ve proven popular in other browsers, so it’s great to see Safari add the option.\n\nApple Music has a subtle but beautiful design update in iOS 27.3 when viewing lyrics in landscape mode.\n\nSong artwork is now able to break the constraints of a square and blend seamlessly into the scrolling lyrics view. Here are examples from Beta Profiles on X :\n\nThis lyrics view was previously available on iPhone Duo, but now it’s coming to all iPhones.\n\nWhat do you think of iOS 27.3’s design updates in apps? Let us know in the comments."
+        "title": "Screens can now turn iPhone Duo into a tiny MacBook",
+        "summary": "Screens 5.10 delivered two highly-requested desktop features to users earlier this month. Now the app is back with a fun update for iPhone Duo users: tiny laptop mode. more…",
+        "body": "Screens 5.10 delivered two highly-requested desktop features to users earlier this month. Now the app is back with a fun update for iPhone Duo users: tiny laptop mode.\n\niPhone Duo supports various positions including a partially opened configuration. iOS 27 allows apps to respond to the hinge position, offering unique experiences as a result.\n\nEdovia, the makers of Screens, took this as an opportunity to make the remote desktop viewer transform iPhone Duo into what it looks like in this mode: a very miniature notebook computer.\n\n“Simply fold your iPhone Duo halfway to turn it into a pocket-sized workstation, with your remote desktop on the upper half and a custom keyboard and trackpad below,” Edovia says.\n\n“The trackpad supports the same familiar gestures you’ve come to expect from Screens, while the custom keyboard supports multiple languages, follows your selected system keyboard language, and lets you swipe down on keys to access secondary characters, just like on iPad.”\n\nThey show off the update in full on their website here . Screens for iPhone Duo is available on the App Store .\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable"
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-8580c524f0d6da9c",
+    "id": "accessible-android-c19f0af3509c64fc",
     "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1042071/meta-amazon-muse-ai-shopping-discussions",
+    "sourceId": "accessible-android",
+    "sourceName": "Accessible Android",
+    "sourceUrl": "https://accessibleandroid.com/",
+    "originalUrl": "https://accessibleandroid.com/app/speak-it-text-to-speech-reader/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-25T14:12:33.000Z",
+    "publishedAt": "2026-11-25T21:07:00.000Z",
+    "categories": [
+      "android",
+      "apps-accesibles",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Speak It Text to Speech Reader",
+        "summary": "SpeakIt reads aloud what you give it: text you type or paste, PDFs, EPUB, FB2 and Word files, web pages from their link, and printed…",
+        "body": "Published 25 November 2026 by dhr039\n\nSpeakIt reads aloud what you give it: text you type or paste, PDFs, EPUB, FB2 and Word files, web pages from their link, and printed pages photographed with the camera. It uses the voices of the phone’s own speech engine, keeps everything in one Library and picks up where you stopped. No ads and no account.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nSpeakIt is built to be used with TalkBack. All Full Access features are free to use for TalkBack users. Every button has a spoken name. Also a reading goes quiet when TalkBack speaks and carries on afterwards. Note that I am still improving how it works for a TalkBack user. I would value your assessment and will fix what you find.\n\nLast Tested App version and Android version:\n\n8.1.2. Android 17\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-6a5693c1507aeaea",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/11/google-search-alternative-kagi-launches-gmail-rival/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-25T20:57:09.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -41,56 +114,202 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Amazon is reportedly in talks to end Muse AI shopping block",
-        "summary": "Amazon has held talks about letting Meta's Muse AI agent shop on its online marketplace, according to a report from Fortune. The discussions, which could end Amazon's block on Muse, reportedly center on the kinds of products the AI agent recommends and the potential impact on the ecommerce giant's advertising revenue. As reported by Fortune, […]",
-        "body": "Amazon has held talks about letting Meta's Muse AI agent shop on its online marketplace, according to a report from Fortune . The discussions, which could end Amazon's block on Muse , reportedly center on the kinds of products the AI agent recommends and the potential impact on the ecommerce giant's advertising revenue.\n\nAs reported by Fortune , Amazon is concerned that it could lose advertising revenue by allowing Muse on its site, since it depends on actual humans seeing ads across its online marketplace. It's also reportedly worried about the quality of the product search results that Muse will present to users, as well as whether the AI age …\n\nRead the full story at The Verge."
+        "title": "Google search alternative Kagi launches Gmail rival",
+        "summary": "The pitch is an unusual combination of privacy promises and AI features.",
+        "body": "Kagi, a small, Palo Alto, California-based software company that provides a subscription-based search engine as an alternative to Google, has launched a Gmail-like e-mail service. Dubbed Kagi Mail, it makes many of the same claims as the search engine product: privacy, personal data sovereignty, customization, and control.\n\nAdditionally, Kagi is rolling out a calendar as part of the mail service. Right now, both the email and calendar interfaces are web-only, but native Android and iOS apps are planned for the fourth quarter of next year.\n\nThe email interface, currently in public beta, is minimalist. It emphasizes keyboard commands, as well as a private and ad-free experience. (You can see more details in Kagi's blog post about what they mean by private.) Other feature offerings include unlimited aliases and domains, an anti-lock-in policy for user data, 50GB of storage, rule-based filtering with Sieve, an MCP server, and several optional, off-by-default AI features, like chatting with an agent to search email history, do large-scale re-labeling, or define additional filtering rules.\n\nRead full article\n\nComments"
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-ffb050d7f27c2536",
+    "id": "techcrunch-957a3a0d2ba8ef1d",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/25/fcc-approves-spacex-plan-to-put-ai-data-centers-in-space/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-25T20:56:44.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "FCC approves SpaceX plan to put AI data centers in space",
+        "summary": "The FCC dismissed some of the key concerns raised by opponents, including potential threats to scientific research, because the agency determined they fell outside its regulatory authority.",
+        "body": "SpaceX was given conditional approval by the Federal Communications Commission on Wednesday to deploy and operate a constellation of up to 1 million satellites for its orbital data center business, a regulatory victory for Elon Musk and his bid to move AI data centers into space.\n\nThe FCC authorization was granted despite objections from Amazon, Viasat, and the American Astronomical Society, which flagged concerns over orbital debris and congestion, radiofrequency interference, and environmental consequences. Amazon, which is building a competitor to SpaceX’s Starlink service, argued in its petition that the application lacked basic details and described it as a “lofty ambition rather than a real plan.” Despite that lack of detail, Amazon also said the proposal “risks real harm.”\n\nThe FCC dismissed some of the key concerns raised by opponents, including potential threats to scientific research, because the agency determined they fell outside its regulatory authority.\n\nFCC Chair Brendan Carr said in a statement that the action “opens a bold new frontier for the computing infrastructure needed to power America’s leadership and growth.”\n\nMusk thanked Carr in a post on X , writing “Much appreciate. This will be a great asset to America and the world.”\n\nThis initial regulatory approval doesn’t mean orbital data centers are imminent.\n\nSpaceX faces a number of technical and economic challenges, including how to dramatically reduce the cost of manufacturing and launching satellites, cool processors in space, and even how to secure financing for chips that are destined for orbit.\n\nThe company must also clear other regulatory hurdles. The FCC has not yet approved SpaceX’s plans to handle orbital debris for satellites that would operate above 600 kilometers, for instance. SpaceX requested a waiver of existing FCC rules, which requires satellites ending missions below 2,000 kilometers reenter Earth’s atmosphere within five years of completing those missions. The company is interested in moving some of these retired satellites into other orbits around Earth or even around the sun, according to the FCC authorization document .\n\nSpaceX has said it plans to deploy the satellites, known as Starmind, at altitudes ranging from 500 to 1,002 kilometers. The FCC’s approval gives SpaceX the authority to use radiofrequency communications to maintain contact with and control its orbital data centers from Earth if their primary communications systems fail. The Starmind satellites would primarily communicate using lasers to connect with other satellites, including SpaceX’s Starlink.\n\nThe FCC has given SpaceX time to sort out these issues. Under the approval, SpaceX has seven years to get its first operational satellite into orbit and 14 years to deploy the entire constellation."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-78964a8f345820bf",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/25/openai-says-heavy-chatgpt-users-may-hit-limits-sooner-as-it-merges-chat-and-work/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-25T20:03:27.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI says heavy ChatGPT users may hit limits sooner as it merges Chat and Work",
+        "summary": "OpenAI will introduce a single usage meter across ChatGPT as it combines the Chat and Work experiences.",
+        "body": "OpenAI has started rolling out a unified Chat and Work experience in ChatGPT to a few of its users, amid criticism from some subscribers that the merger could restrict their usage.\n\nThe ChatGPT maker began introducing the update to a small group of Pro subscribers, product lead Thibault “Tibo” Sottiaux said in a post on X on Tuesday. The rollout follows OpenAI’s earlier announcement of the merger in an email to users. An OpenAI spokesperson told TechCrunch that while most users are not expected to face more frequent usage resets, a small fraction of its heaviest users may hit their limits sooner.\n\nThat’s among the concerns raised by some ChatGPT subscribers on social media and OpenAI’s community forum recently. The users fear that merging the usage limits for Chat and Work could leave them with less access to advanced reasoning models than they currently have, even as they continue paying the same subscription fees .\n\nUnder the new system, Chat and Work will share a single usage meter across ChatGPT, the OpenAI spokesperson told TechCrunch. Conversations using the Instant model will, however, remain unlimited and will not count toward the shared allowance. Users can also continue using Instant after exhausting their usage limits. The spokesperson added that OpenAI would continue working to improve efficiency so subscribers could get more out of their plans.\n\nWhile the rollout has started for a small group of users, OpenAI plans to bring shared usage limits more broadly in December, per its support page.\n\nSimilar to OpenAI, rival Anthropic also moved to bring its conversational chat service Claude and work-focused Cowork under one interface in September.\n\nThe changes come as AI companies face mounting infrastructure costs and growing demand for increasingly capable models, putting pressure on their computing resources. Bringing conversational and work-related tools into a single interface could also make AI chatbots simpler to use, allowing users to move between chats and more complex tasks without switching tabs."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-55240fe1c9a63b89",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/25/anthropics-dario-amodei-calls-accusations-of-surrendering-human-control-to-ai-absurd/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-25T19:44:24.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Anthropic’s Dario Amodei calls accusations of surrendering human control to AI ‘absurd’",
+        "summary": "Anthropic CEO Dario Amodei pushes back against rivals’ accusations that he favors surrendering human agency to AI, even as leading AI companies increasingly automate their own research and model development.",
+        "body": "Anthropic CEO Dario Amodei is pushing back against claims that Anthropic believes we should “surrender human free will” to AI systems. In a long X post on Wednesday, Amodei called the suggestion “absurd.”\n\n“We should never sacrifice legitimacy or self-determination at the altar of efficiency or security,” he wrote. This argument against autocracy applies word for word against governance by AI, and I feel equally strongly that turning over governance to AI is a bad idea…No one who had carefully read my writing or my interviews could reasonably conclude that I believe anything different.”\n\nThe statement comes after a growing chorus from Anthropic rivals suggesting that human agency could be at risk if AI is developed irresponsibly. Earlier this month, OpenAI CEO Sam Altman said he wanted to ensure people continue to have “agency over the future.”\n\nMeta’s chief AI officer Alexandr Wang also wrote in an essay on X that we “should not be okay with a ‘handover’ of society to AI.”\n\n“It is hard to imagine a world where humanity can maintain control over fully unconstrained recursive self-improvement,” Wang wrote. “Now that we are at a point where the scientific and technical problems on capability progress are likely solved, we must not only make progress in the extremely urgent areas of safety, alignment, and security, but we have to start thinking through how we progress thoughtfully.”\n\nBut in published essays, Amodei claims he has repeatedly advocated for democratic oversight of AI, saying the technology should strengthen democratic institutions and that humans should retain ultimate decision-making power.\n\nAmodei noted that there’s a difference between surrendering human free will broadly and the idea that “as AI systems advance, they become capable of doing specific tasks in a more automated way.” As examples, he gave AI driving a car, designing a cancer drug, or writing end-to-end software.\n\nAmodei suggested drawing a line at recursive self-improvement (RSI), or AI that can improve itself without human assistance. Many safety experts see RSI as inevitably leading to a loss of human control, a point Amodei implicitly acknowledged, writing, “we may want limits on this process.”\n\nStill, Anthropic is laying the groundwork for RSI by incorporating AI into an increasing share of its own research and development. The company said in June that Claude authored more than 80% of the code merged into Anthropic’s codebase. An independent assessment published this month by AI safety research nonprofit METR found that Anthropic’s models are improving at about twice their historical rate, primarily driven by AI-assisted research.\n\nIn its own IPO filings, Anthropic describes how each successive generation of Claude accelerates the development of the next, a process it refers to as “closing the loop.”\n\n“As we said publicly in early November, we don’t expect it to be safe for Claude to build successive frontier models fully autonomously, without meaningful human supervision or understanding,” Amodei wrote.\n\nThe problem with “meaningful human supervision or understanding” is that AI is already advancing faster than engineers and safety experts can fully audit it, leaving them increasingly reliant on other AI systems to act as judge and jury. The issue compounds when AI models engage in deceptive behavior, particularly when they recognize they’re being evaluated, making them harder to trust and control.\n\nStill, Anthropic is by no means the only company that is pursuing RSI or building AI systems to automate more and more human tasks. This week, OpenAI claimed to have solved one of the biggest open problems in computer science — the exact speed limit of matrix multiplication, which is the mathematical engine behind modern computing, including deep learning and physics simulations.\n\nIn his post, Amodei accused competitors of engaging in a “vibes-based commercial and political positioning,” disingenuously throwing around phrases like “human control and agency” or “AI should just be a tool” without approaching the AI race any differently.\n\n“Certainly the products that they offer don’t differ materially in their orientation towards automation of tasks; every company seems to be releasing models more and more capable of task automation,” Amodei wrote. “Every company claims to understand there are risks and downsides of such automation and to offer safeguards.”"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-254b2e837028829c",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/25/apple-has-ipads-running-macos-already-but-dont-get-too-excited/",
+    "originalUrl": "https://9to5mac.com/2026/11/25/ios-27-3-release-date-heres-when-to-expect-new-iphone-features/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-25T13:40:50.000Z",
+    "publishedAt": "2026-11-25T19:38:33.000Z",
     "categories": [
       "apple",
-      "tecnologia-general"
+      "tecnologia-general",
+      "programas-accesibles"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple has iPads running macOS already, but don’t get too excited",
-        "summary": "With iPads running the same chips as Macs , many have wished Apple would give us the option of running macOS on them instead of the somewhat clunky iPadOS windowing system. Apple’s previous arguments against converging devices have been somewhat weakened by the launch of the touchscreen MacBook Pro . A new report says that Apple already has iPads running macOS internally, and that work on a giant iPad continues, but don’t hold your breath for a public launch of either … more…",
-        "body": "With iPads running the same chips as Macs , many have wished Apple would give us the option of running macOS on them instead of the somewhat clunky iPadOS windowing system. Apple’s previous arguments against converging devices have been somewhat weakened by the launch of the touchscreen MacBook Pro .\n\nA new report says that Apple already has iPads running macOS internally, and that work on a giant iPad continues, but don’t hold your breath for a public launch of either …\n\nAs iPad hardware has grown more powerful over the years, the software has struggled to keep up. We saw split-screen capabilities first, with full windowing finally coming to the devices in iPadOS 26 last year.\n\nThe UI is still rather clunky compared to macOS, however, leading a significant number of people to wish that Apple simply offered the option of using the more powerful operating system on its tablet devices.\n\nIn a podcast Q&A, Bloomberg’s Mark Gurman says that Apple is already doing this internally, but there’s no sign of any plans to make it available outside the company.\n\nApple has iPads internally running macOS, and they’ve had that for some time. The fact that they have the underlying architecture of Apple Silicon that’s the same on the iPad and the Mac gives them the flexibility in order to test these types of things.\n\nIn terms if they’re actually going to do it – would they bring macOS to the iPad itself – at this point I don’t think that’s going to happen anytime soon. I’ve checked into this and there’s no ongoing operating system project right now in terms of a brand new operating system for the iPad – there is no work being done to consumerize macOs on the iPad.\n\nGurman says Apple seems set to continue to make piecemeal changes over time to bring iPad capabilities closer to those of the Mac but is showing no signs of full convergence.\n\nHe reiterated that work on a long-rumored giant-sized folding iPad continues.\n\nThe other thing I want to say is that I’m really excited for this potential of Project J312. That is, this giant 19-inch, 20-inch foldable iPad. And it’s basically like a gigantic iPhone Duo with no display on the outside.\n\nHowever, he says there’s no guarantee it will ever launch, saying the timings have already slipped from 2027 through 2028 to 2029, but both cost and yield issues may still kill the project. If it does launch, it’s expected to cost anywhere from $3,000 to $5,000."
+        "title": "iOS 27.3 release date: Here’s when new iPhone features are coming",
+        "summary": "iOS 27.3 is coming soon, packed with new features for iPhone users. Here’s when to expect the next big iPhone software update. more…",
+        "body": "iOS 27.3 is coming soon, packed with new features for iPhone users. Here’s when to expect the next big iPhone software update.\n\nIf you follow Apple closely, the company’s software release patterns quickly become clear.\n\nFor example, iOS 27.2 launched late last month around the same time as releases in years past. The only difference is that normally iOS 27.1 would launch in late October rather than 27.2. But since Apple made iOS 27.1 exclusive to iPhone Duo, all software releases for the iOS 27 cycle will be off by one number—despite following the same timing as ever.\n\nThat means iOS 27.3 is up next, and its release should align with historic patterns for x.2 updates.\n\nApple has confirmed that iOS 27.3 will launch to all users in December once beta testing concludes.\n\nTo get more precise though, here’s a sampling of release patterns for comparable x.2 updates the last few years:\n\nBased on this pattern, iOS 27.3 is expected to release by mid-December .\n\nApple always tries to ship its last software update of the year with a little buffer before taking a holiday break. That way if any major issues arise, the company can develop a quick fix and push it out before much of the company takes time off.\n\nExpect to see iOS 27.3 launch as early as the week of December 7, or on Monday, December 14 at the latest.\n\niOS 27.3 is packed with lots of new features for iPhone users spanning various popular apps.\n\nHere are some of the new features in iOS 27.3:\n\niPhone Duo also benefits from three exciting new features , including face unlock, Reachability, and a new setting to automatically lock the device when closed.\n\nFinally, iOS 27.3 brings the first Apple Intelligence features to China —though Siri AI is still missing.\n\nWhich new iOS 27.3 features are you most interested in? Let us know in the comments.\n\nApple TV is available for just $6.99/ month (over 50% off) for Black Friday."
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-55ea52e4c8db6be1",
+    "id": "the-verge-15610604eec20a8e",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1041221/tapo-c825-security-indoor-2k-camera-video-calls-tracking-pan-tilt",
+    "originalUrl": "https://www.theverge.com/science/1042278/spacex-fcc-starmind-ai-space-data-centers",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-25T13:30:00.000Z",
+    "publishedAt": "2026-11-25T17:44:51.000Z",
     "categories": [
-      "tecnologia-general"
+      "tecnologia-general",
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Tapo’s new indoor security camera includes a touchscreen for video calls",
-        "summary": "TP-Link's Tapo smart home brand announced a new indoor security camera that can help keep an eye on your house while you're away or connect you to family and friends while you're at home. The C825 upgrades a 2K pan-and-tilt camera with a 4-inch touchscreen, so when it's not watching for intruders or misbehaving pets, […]",
-        "body": "TP-Link's Tapo smart home brand announced a new indoor security camera that can help keep an eye on your house while you're away or connect you to family and friends while you're at home. The C825 upgrades a 2K pan-and-tilt camera with a 4-inch touchscreen, so when it's not watching for intruders or misbehaving pets, it can be used to make hands-free video calls.\n\nThe Tapo C825 is available starting today for $149.99. That's a little expensive for a 2K camera, but its tracking capabilities could make up for it not being 4K. Using a rotating base, the C825 can pan 360 degrees while its camera module on top can tilt up and down up to 156 degre …\n\nRead the full story at The Verge."
+        "title": "FCC signs off on SpaceX’s plan to put up to 1 million data center satellites into space",
+        "summary": "In an announcement on Wednesday, the FCC says it authorized SpaceX to deploy up to 1 million AI chip-equipped satellites as part of the Elon Musk-owned company's \"Starmind\" initiative. With several others also pursuing the idea of putting AI data centers in space, including Google and Blue Origin, this is the first approval the agency […]",
+        "body": "In an announcement on Wednesday , the FCC says it authorized SpaceX to deploy up to 1 million AI chip-equipped satellites as part of the Elon Musk-owned company's \"Starmind\" initiative . With several others also pursuing the idea of putting AI data centers in space , including Google and Blue Origin, this is the first approval the agency has granted for a full \"constellation\" of AI satellites.\n\nThe FCC's approval requires SpaceX to deploy at least one satellite by 2033, and meet the 1 million satellite milestone by 2040. The FCC also deferred SpaceX's request to dispose of satellites located above 600km in space \"graveyard\" orbits , rather than …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-c8dbb2e613666af7",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/11/ladybirds-new-alpha-shows-theres-life-beyond-chromium/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-25T17:33:30.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Ladybird browser's first downloadable alpha is surprisingly capable",
+        "summary": "An independent browser engine arrives on Linux and macOS, and we've tried it.",
+        "body": "Note: At the time of writing, I was unaware of criticism directed at Ladybird creator Andreas Kling’s public statements. Readers interested in this background can find further context in accounts by Kelson Vibber and Drew DeVault .\n\nAfter four years of work to build a browser engine from scratch, the Ladybird project released its first downloadable alpha on November 23, offering prebuilt versions for macOS and Linux. Previously, curious users had to compile the browser themselves from its source. Now it's an installable package with automatic updating.\n\nLadybird is most notable for what it isn't: another browser fork. Where Chrome, Edge, Brave, and Opera all run on Google's Blink engine, and Firefox depends on Gecko, Ladybird's rendering engine and its LibJS JavaScript engine were written from scratch. \"The engine is our own, built from the ground up, and not a fork,\" project lead Andreas Kling wrote in Monday's announcement. \"The browser around it is modest, but functional.\"\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-3a9cf2e2c4f2b458",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/tech-policy/2026/11/etsy-clarifies-ai-terms-after-seller-backlash/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-25T17:12:57.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Etsy clarifies AI terms after seller backlash",
+        "summary": "One veteran illustrator dismisses revisions as \"sugar coating.\"",
+        "body": "After backlash from sellers frustrated by Etsy’s new AI policies, which appeared to allow the company to train AI on user artwork, Etsy has now clarified its stance.\n\nIn a note published on Monday, CEO Kruti Patel Goyal discussed recent tweaks to the company's terms of service and admitted that her team \"should’ve given you more context on what the updates meant for your creative content.\"\n\n“Our recent terms update was meant to reflect the evolving technologies we're using to build better tools and experiences for sellers and the Etsy community,” Goyal wrote this week. “It was not meant to enable us to train AI models for the purpose of creating copycats of your items. We do not and will not do that.”\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-d0bc12bf2d52c1ad",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2328122/nothings-ear-note-is-a-pair-of-earbuds-with-built-in-ai-notetaking/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-25T16:03:17.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Nothing's Ear (note) is a pair of earbuds with built-in AI notetaking",
+        "summary": "The company has promised to share more details on December 8.",
+        "body": "I was more excited for Nothing’s latest device when I thought it was an AI vape pen.\n\nAhead of December 8 and too many coordinated leaks to count , Nothing has officially announced its first \"AI-native\" device. Somewhat anticlimactically, the Ear (note) is a pair of earbuds with built-in AI notetaking. As the company told Bloomberg , the earbuds can transcribe and summarize in-person conversations, calls, online meetings and voice memos, in addition to offering traditional audio playback with Hi-Res audio support.\n\n\"Ear (note) is part of Nothing's vision to build the hardware context layer of AI, bringing intelligence closer to the moments, conversations and experiences that shape our everyday lives,\" the company wrote in a press release it shared with Engadget.\n\nNo information on pricing or specs just yet, but Nothing promised to share more details soon. The company describes the Ear (note) as a \"new approach to personal productivity,\" but Nothing is not the first to announce earbuds with built-in AI transcription. This past August, Plaud debuted its own pair of AI-forward earbuds in the form of the Plaud One . That said, if you're a fan of Nothing's design, you'll be sure to appreciate the Sony Walkman-like design the company has gone for, especially when it comes to the new Record and Talk buttons along the bottom of the aluminum case.\n\nThe Ear (note) will launch on December 8."
       }
     },
     "media": null
@@ -120,78 +339,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-9e5cf74590f55758",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/25/the-questions-jensen-huang-and-nvidia-will-still-have-to-answer-about-megaspeed/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-25T13:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The questions Jensen Huang and Nvidia will still have to answer about Megaspeed",
-        "summary": "Huang still faces questions from Congress and his own board about his romantic relationship with an alleged chip smuggler.",
-        "body": "Jensen Huang’s return as CEO to Nvidia hasn’t eased the scrutiny the company confronts. The chipmaker still faces multiple inquiries into allegations that its advanced GPUs were smuggled into China by a customer, the Singapore-based data center operator Megaspeed, in violation of US export rules designed to slow China’s development of frontier AI models.\n\nThe central question for investigators is what Nvidia knew about where those chips ended up, and whether Huang’s affair with a Megaspeed executive gave the company reason to doubt Megaspeed’s assurances. Huang’s return doesn’t settle that. US Attorney General Todd Blanche has suggested Nvidia isn’t a target of an investigation, but California’s attorney general and Congress are pressing ahead, and the Securities & Exchange Commission is reportedly investigating, too.\n\nThe US government opened an investigation into Megaspeed in 2024 and requested information from Nvidia about its billions of dollars in sales to the company, concerned that some of the chips Megaspeed bought for data center projects in Malaysia were in fact being diverted to China. Singapore also began investigating similar allegations in 2025. Megaspeed has denied any wrongdoing.\n\nDiversion of this kind would be a fairly routine issue for a company like Nvidia, whose in-demand chips are the targets of smugglers and re-sellers. When it comes to compliance and liability for export control violations, Nvidia and other chip sellers need assurances that the end users of their chips are obeying the rules. However, they also cannot ignore other information that might call the reliability of those assurances into question, export control attorneys told TechCrunch.\n\nAnd that’s why Jensen Huang’s affair with Megaspeed executive Alice Huang was such a problem for Nvidia, likely even more so than her alleged role as a source for Chinese intelligence agencies. If Nvidia personnel, from lower-level employees up to the CEO, had reason to believe that statements from Megaspeed weren’t reliable, the attorneys said, that would increase the company’s legal risk.\n\n“Government investigators likely would want to know, notwithstanding whatever formal assurances were exchanged between the parties, what anyone at Nvidia actually knew about the end use and end users of the chips,” Dan Fisher-Owens, an attorney at the firm Berliner Corcoran & Rowe, told TechCrunch last week.\n\nThe concern Nvidia’s board faced when it decided to oust Huang is that he knew more about what Megaspeed was doing with Nvidia’s products than was reflected in any of the compliance statements. The Wall Street Journal reported that Alice Huang and her husband, Kang Wei, were part of a network of businesses that funneled chips to a company in Shanghai. Kang also reportedly introduced his wife to Jensen Huang, whom he had known for a decade.\n\nOn Monday, the US government added Megaspeed and its affiliates to a list of companies restricted from US trade due to national security concerns. The US also issued new rules last week barring large data centers that purchase US chips from serving customers in China and other nations seen as problematic by the US government. Nvidia, meanwhile, said it would stop selling licensed chips to China, and laid out plans to hire its first compliance officer and create a new board committee focused on export controls.\n\nNvidia’s board said it reinstated Huang on Monday after receiving “input from senior levels of the United States government” that left it confident his return posed no national security risk. President Donald Trump later said he called into the meeting to give them that assurance.\n\nIn a news conference Tuesday, Blanche said that Nvidia was “a good corporate citizen” and suggested it is not the target of an investigation, but Blanche declined to answer questions about the government’s investigation into Megaspeed, which the Justice Department said was ongoing as recently as last week.\n\n“When you say the export investigation is still ongoing, I don’t know what you’re talking about,” Blanche said.\n\nOther authorities may be more demanding. Nvidia faces investigations by California Attorney General Rob Bonta and, reportedly , the SEC, both tied to its corporate disclosures. While many details of the investigation still aren’t known, short sellers complained about the company’s decision to stop breaking out its exports to Singapore in financial filings after journalists raised concerns about chip diversion.\n\nMembers of Congress from both parties say they want answers from Nvidia, with many citing alarm about China and some questioning the White House’s role in Huang’s return. Three committees in the House of Representatives will privately interview Huang and Nvidia’s top lawyer, Tim Teter, next week. Teter reportedly intervened in the Department of Commerce’s investigation of Megaspeed last year.\n\n“We remain committed to getting answers on the mass smuggling of Nvidia products, their diversion for Chinese military purposes, and their key role in advancing our foremost adversary’s AI capabilities,” the Republican chairs of House committees focused on foreign affairs, intelligence, and China said in a joint statement.\n\nRep. Brian Mast, the chair of the House Foreign Affairs Committee, has also demanded that the Department of Commerce share extensive data regarding its investigation into chip smuggling, including by Megaspeed and its affiliates.\n\nThe Senate Banking Committee will also question Huang in a public hearing on Dec. 3.\n\n“Mr. Huang, Nvidia executives, and the company’s board still owe Congress answers about the company’s compliance with U.S. export controls,” Senator Elizabeth Warren, the ranking Democratic member on the committee, said in a statement. “The Trump Administration also needs to explain to Congress what ‘input’ was given and by which senior officials in the United States government to support his reinstatement.”"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-5c91bd78a4b25969",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/25/an-annoying-mistake-in-macos-was-actually-prep-for-the-latest-macbook-pro/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-25T12:00:57.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "windows"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "An annoying ‘mistake’ in macOS was actually prep for the latest MacBook Pro",
-        "summary": "You may remember that Apple made a seeming mistake in the user interface for macOS 26 , meaning that attempts to resize windows would often fail . The reason for this has now become clear, and Apple has done something both fun and clever in macOS 27 to resolve it … more…",
-        "body": "You may remember that Apple made a seeming mistake in the user interface for macOS 26 , meaning that attempts to resize windows would often fail . The reason for this has now become clear, and Apple has done something both fun and clever in macOS 27 to resolve it …\n\nI was one of a number of people to note that trying to grab the corner of a window in macOS Tahoe in order to resize it would oft e n fail . Developer Norbert Heger pointed out this is because Apple changed the radius of the corners without changing the grabbable area.\n\nIt turns out that my initial click in the window corner instinctively happens in an area where the window doesn’t respond to it. The window expects this click to happen in an area of 19 × 19 pixels, located near the window corner. If the window had no rounded corners at all, 62% of that area would lie inside the window. But due to the huge corner radius in Tahoe, most of it – about 75% – now lies outside the window.\n\nAt the time, the radius change itself looked like an inexplicable mistake on Apple’s part, and the company did revert it. However, Macworld’s Michael Simon appears to have discovered the reason for the original change.\n\nThe new rounder corners on the MacBook Pro with PROLED XDR are basically a perfect match for the macOS 26 radii.\n\nSo if you move a window to the corner of the new machine, it would fit perfectly. However, since Apple reverted the corner radius, it would no longer do so. The company solved this by a clever UI transition.\n\nWhat’s happening there is Golden Gate’s 20-point corner radius is subtly and gradually expanding when It approaches the bottom corner of the screen to match the exact corner of the display, which is much larger. I can’t be certain it’s exactly 26-point, but it sure looks like it to me. The effect is incredible. I’ve watched it like 20 times and I can barely see it changing, yet when it reaches the corner it’s perfectly expanded to match.\n\nYou can see this illustrated by a GIF in the Macworld piece . While the original change annoyed me, Apple’s solution is the perfect example of the company sweating the details."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-e8d1c0d791fbbdaa",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/11/ai-can-do-the-calculations-physicists-are-figuring-out-what-comes-next/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-25T12:00:28.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AI may soon change what it means to be a theoretical physicist",
-        "summary": "Frontier AI is already solving problems that once took top physicists a full day.",
-        "body": "About six months ago, Suvrat Raju, a professor of theoretical physics at the International Centre for Theoretical Sciences in Bengaluru, India, asked a frontier AI model to solve a physics problem. He didn’t ask because he needed to know the answer. He had actually solved this particular problem already. But he had never published the solution—which made it a perfect question to test how good AI was at physics.\n\nLLMs have been trained on the whole Internet, so if a physics problem has been discussed online, it’s likely the model already knows about it and may have memorized the answer. So a fair test of AI capabilities needs to focus on problems that have never appeared online.\n\nThe model didn’t answer Raju’s problem correctly, but it did better than he expected—well, enough to get him thinking that the experiment should be repeated and formalized. With the help of a colleague, he set out to create a theoretical physics benchmark for AI.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "cti-once-b476db0be5046c9b",
     "type": "news",
     "sourceId": "cti-once",
@@ -214,31 +361,6 @@
         "title": "Actualización de software y APP Disponible GOLD 6.1 para iOS y Android: nuevas funciones y mejoras",
         "summary": "El Centro de Tiflotecnología e Innovación (CTI) presenta la versión 6.1 del Gestor ONCE de Libros Digitales (GOLD) para dispositivos iOS y Android . Esta actualización incorpora nuevas funciones y mejoras para facilitar el uso de la aplicación y la lectura de las obras.",
         "body": "El Centro de Tiflotecnología e Innovación (CTI) presenta la versión 6.1 del Gestor ONCE de Libros Digitales (GOLD) para dispositivos iOS y Android . Esta actualización incorpora nuevas funciones y mejoras para facilitar el uso de la aplicación y la lectura de las obras.\n\nLa versión de iOS ha renovado su apariencia incluyendo nuevas opciones y organizando de una manera más accesible las funcionalidades existentes.\n\nLas principales novedades son las siguientes:\n\nLa versión para Android renueva su interfaz e incorpora mejoras en el modo oscuro, la organización de la biblioteca, los controles de reproducción y la accesibilidad.\n\nLas principales novedades, en este caso, son las siguientes:\n\nSe puede acceder a la descarga de esta aplicación mediante los siguientes enlaces:\n\nGOLD para iOS\n\nGOLD para Android"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-4425d73f37f4ddb1",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/news/1042025/microsoft-code-red-outlook-outage",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-25T11:12:42.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Microsoft declares ‘Code Red’ after huge Outlook outage",
-        "summary": "This month's Exchange Online and Microsoft Outlook outage has prompted the software giant to declare an unusual \"Code Red\" internally, Reuters reports. The nearly 24-hour outage took down email for millions of customers, and was triggered by a bug that had been sitting on Microsoft 365 networking gateway servers since July without any impact to […]",
-        "body": "This month's Exchange Online and Microsoft Outlook outage has prompted the software giant to declare an unusual \"Code Red\" internally, Reuters reports . The nearly 24-hour outage took down email for millions of customers, and was triggered by a bug that had been sitting on Microsoft 365 networking gateway servers since July without any impact to servers.\n\nIn a memo to the teams responsible for Exchange Online, Microsoft 365 Core president Jason Henderson revealed the outage was the most significant in history for Microsoft's customers. \"Unfortunately, all the work we have done over the years was not sufficient to protect us on Thursday,\" said …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -315,126 +437,6 @@
         "title": "The battery in your Fitbit Edge is replaceable, but it's not as easy as you'd think",
         "summary": "Google partnered with iFixit for a step-by-step guide to replacing the Fitbit Edge's battery.",
         "body": "You can get a manual from iFixit for free to guide you through the process.\n\nAfter a brief period of people worrying that Google that was abandoning Fitbit devices in favor of the Pixel Watch , the company recently assuaged those fears by releasing two new devices, led by the Fitbit Edge . It's an obvious successor to the Charge series, albeit without Google Pay, or EDA scans for measuring stress.\n\nAn enhancement that might've caught your attention is the product's user-replaceable battery. The dirty secret of most fitness trackers (and smartwatches, for that matter) is that while they can last for years, if their batteries aren't replaced, their capacity will inevitably shrink until it becomes unusable. In theory, as long Google maintains app support and compatible batteries are still in warehouses, an Edge can last indefinitely.\n\nThis isn't quite like replacing the AAs in a flashlight, however, or even the coin battery you might find in an analog watch. You need specialized gear, and the process is delicate enough that there's a risk of sabotaging your Fitbit if you make a mistake.\n\nGoogle's partner on this is iFixit, which provides a free PDF manual once you've signed into their website. Before you begin, however, you need to buy specialized parts and tools, including not just a fresh battery, but replacement screws for the surrounding equipment. That might seem strange, but iFixit says that these replacement parts can only be used once, a claim which may or may not say anything about the original parts as well.\n\nWhere things get risky is after you've managed to pry open the Edge's case. Its O-ring can fall out, and you'll need to reassemble that if you want your device to retain any water resistance. You'll also need a pair of tweezers, and needless to say, poking circuits could accidentally break something, as could static shock. iFixit recommends precautions like a grounding mat, and even avoiding any clothing that could build up a static charge, such as fleece.\n\nFor some owners, the major hurdle is going to be the scale of the operation. The screws and connectors involved are tiny, even by the standards of most electronics. If your hands aren't steady, this process could prove frustrating or outright impossible, speaking as someone who's hand-assembled desktop PCs.\n\nOfficially, no. If you don't want to perform the procedure yourself, Google doesn't offer a paid replacement service. The company might conceivably perform a free swap if you've got a defective battery and you're still under warranty, but you're otherwise expected to handle things yourself. If you do qualify for a battery fix, there's a chance that Google will simply send you a replacement Edge.\n\nAs time goes on, third-party options might arrive, yet Google cautions against using unofficial parts, stating that \"a non-qualified battery and improper disposal may present a risk of fire, explosion, leakage, and/or other hazards.\" The company is, of course, covering itself legally — but there's a grain of truth in that there's no telling what the quality of a generic part may be. Lithium-ion batteries can burst into flames if they're damaged or defective. Even with Google's official parts, you should be prepared to dispose of a battery in a fireproof container.\n\nAll this helps to explain why more wearables haven't gone the replaceable route. Companies don't want to be on the hook for their customers' mistakes, and it remains to be seen how many people will actually take advantage of the option. By the time an Edge's battery wears out, you might be more inclined to buy a newer device than resuscitate last-gen hardware."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-eec3d810cdc805ad",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2321248/starlink-wifi-speed-split-network-app-setting/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-24T23:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Improve your Starlink Wi-Fi speed with this app setting",
-        "summary": "See how a single setting in the Starlink app can improve your home internet speed, and figure out whether switching it on makes sense for your setup.",
-        "body": "Is your Starlink Wi-Fi slower than it should be? A simple change in the app can help, though it comes with a few trade-offs worth knowing first.\n\nWhile Starlink has had a lot of bad press in 2026 — mostly because of reported slowdowns in Ukraine and its general association with Tesla and SpaceX CEO Elon Musk — there's no denying that for some people, it may be their best or only internet option. That's because Starlink satellites have wide global coverage, reaching areas inaccessible not just to landline connections but potentially competing cellular and satellite services as well.\n\nThere are a variety of ways Starlink can be optimized, an obvious one being dish placement. Less obvious, though, is controlling how your system broadcasts Wi-Fi. You'd think the hard part would be capturing signals from space, after all, not bouncing them a few more feet to your laptop or TV.\n\nWhat we're specifically talking about here is splitting your Wi-Fi into separate 2.4 and 5GHz networks in the Starlink app. We'll explain what that means, why it can be beneficial and when you may want to stick with the normal unified setting.\n\nIf you already know why you'd want to split Wi-Fi, let's cut to the chase. All you have to do is find and select the Add Network option, then toggle Split Network . You'll be asked to name the two new networks, which should probably include \"2.4\" and \"5\" so you can tell which network your devices are connecting to.\n\nFor everyone else, it helps to know that most Wi-Fi routers are dual-band , broadcasting over two main frequency bands, 2.4 and 5GHz. Starlink's bundled hardware doesn't currently support the newer 6GHz band, even when it's equipped with Wi-Fi 7. The reason a split might help is that 5GHz is inherently faster than 2.4GHz. Shorter wavelengths translate not just into higher potential speeds but more non-overlapping channels. Overlap can result in congestion and interference. For devices that support 5GHz, then, forcing them to use the band all the time may result in noticeable speed boosts. As with any Wi-Fi network, exact performance figures are going to depend on a variety of factors, including not just your router but the range and kinds of devices connecting to your network.\n\nAs if that weren't enough, some low-power devices, such as many Wi-Fi smart LED light bulbs , are 2.4GHz-only. If they're competing with devices that could be on 5GHz, they might be encountering unnecessary congestion of their own.\n\nThe first potential issue here is range. The 2.4GHz band offers the greatest reach of any Wi-Fi band, typically up to 150 feet (45 meters) indoors, versus 5GHz's 50 to 75 feet (15 to 25 meters). It also offers better penetration through walls and other obstacles. In some scenarios, then, limiting devices to 5GHz may result in a flaky signal or none at all where things were previously stable. Under a unified network, devices can flip between bands automatically as needed.\n\nThe other major concern is that devices on one network ID might not be able to talk to those on the other. They should be able to on paper, and naturally, that won't matter if all they have to do is communicate with the internet. But if you do encounter this issue, it can wreak havoc, particularly with a mix of smart home accessories that require specific bands. You may not be able to configure them all to work together, let alone trigger complex automations.\n\nOne final problem is convenience. Reassigning a bunch of devices to new networks can be a hassle, and to deal with range, you may have to manually switch some mobile devices every time you take them into a particular room. If you're not encountering any performance barriers with your existing setup, you might want to leave Starlink untouched."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-36d1c11bf4e01ea1",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/24/even-the-best-ai-agents-struggle-with-everyday-life/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-24T21:33:29.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Even the best AI agents struggle with everyday life",
-        "summary": "As millions embrace personal AI assistants, a new benchmark reveals that even the most advanced AI models struggle to complete everyday tasks reliably and safely without introducing potential new problems.",
-        "body": "AI companies have spent the last couple of months marketing personal AI agents as tools to take over the digital drudgery of human existence — and millions have been sold on the vision, handing over their shopping schedules, travel plans, and everyday responsibilities to AI assistants. But new research suggests that even the most advanced AI models struggle to reliably and safely navigate the messy details of people’s lives.\n\nAccording to ShellBench, a new benchmark for everyday agent work, even the most advanced models from OpenAI, Anthropic, and Meta failed more than a third of the time. Across all models tested, 15.7% of attempts failed at least one safety requirement, often leading to unintended consequences.\n\nShellBench was developed in collaboration with researchers at The OpenClaw Foundation, Parsewave, Hugging Face, Red Hat, and UC Berkeley, drawing on more than 10 million anonymized, real-world AI agent interactions to see how agents perform on the everyday work people actually delegate to them.\n\nThe research comes as personal AI assistants are finding new popularity among developers, with Meta, OpenAI, and Anthropic all fighting for a piece of the market with Muse, Dots , and Claude Duet , respectively.\n\nIn October, Meta said more than 10 million people in the U.S. and Canada had set up its personal AI agent, Muse, within six weeks of launch, with about a quarter using it daily. That number is expected to grow as Meta implants Muse directly into Instagram DMs . Despite growing popularity among consumers, we still have little evidence about how reliable AI personal assistant products actually are.\n\nShellBench suggests that the unreliable nature of most everyday data sources still causes problems for many state-of-the-art systems. A successful agent should be able to navigate messy personal workspaces containing emails, calendar entries, spreadsheets, receipts, chat logs, outdated information, and phishing attempts, and figure out which information is relevant, what is private, and how to deliver the requested outcome without creating new problems.\n\nIt seems many of today’s AI agents are still not up to the task. Not only did even the highest-performing agents frequently fail to meet the requirements of a task, but they also lacked consistency. When researchers ran each task three times under identical conditions, OpenAI’s GPT-6 Astra, the highest-scoring model, nailed all three attempts less than half the time.\n\nFor autonomous assistants that are meant to run in the background without supervision, it’s a problem if users need to run an agent multiple times to get a result they trust.\n\nAdditionally, about 10% of otherwise correct attempts failed at least one safety criterion. Across the models and harnesses tested, agents failed to, for example, adequately account for a child’s school pickup 79.5% of the time. When handling laptop custody records, agents failed a requirement to identify and withhold a sensitive bank upload token in 18.6% of attempts. In another task, agents recommended duplicate or incorrect invoice payments 40.3% of the time.\n\nThe findings highlight a major issue for users adopting consumer personal AI assistants, namely that there’s always a risk that an agent can create more headaches in the course of trying to fulfill an otherwise ordinary request.\n\nWhile AI benchmarks have largely focused on coding, professional work, or testing on specific tasks, ShellBench is attempting to evaluate how models perform on multi-step personal tasks within different agent harnesses — the software that controls how a model accesses information, uses tools, and takes actions.\n\nWhile the researchers found model choice had a greater overall impact on performance than harness choice, among the more capable models, AI agent performance became more dependent on the harness.\n\nFor example, OpenAI’s GPT-6 Astra outperformed Anthropic’s Claude Fable 5.2 when operating within the Pi harness, but it performed worse when both models were tested within Claude Code.\n\nMeta’s Muse Wonder Full scored 56% in Pi, but only 38.1% in Claude Code. Meta’s Muse Wonder 1.0, meanwhile, averaged a success rate of 39.7% across the five harnesses tested.\n\nNotably, while the researchers tested models from Meta, OpenAI, and Anthropic, they didn’t evaluate them within the native harnesses of Muse, Dots, or Claude Duet, so the results may not be representative of the experience millions of consumers are having with the product today.\n\nTechCrunch has reached out to Meta, OpenAI, Anthropic, and the researchers in the study."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-8454585f08a675c6",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/24/maple-raises-5-3m-to-build-ai-products-that-protect-your-data-even-from-itself/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-24T21:19:52.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Maple raises $5.3M to build AI products that protect your data, even from itself",
-        "summary": "The startup's encrypted AI architecture is designed to prevent even the company itself from accessing users' private data.",
-        "body": "As AI assistants evolve into more capable agents that can access our files, emails, calendar, browser, and more, the amount of trust we’re expected to place in AI companies is growing. One startup called Maple , co-founded by a former Apple engineer who worked on privacy-preserving technologies, is taking a different approach with its AI app, where users’ data remains private — even from the company itself.\n\n“We wanted to build something that was not only encrypted but also could be proven, and that people could go look at the open-source code, and then they could look at what we call trusted execution environments,” explains Maple co-founder and CEO Mark Suman . “They can look at and verify the code that’s running on our servers, so they don’t really have to take our word for it.”\n\n“They can audit everything themselves and know how their data is being handled,” he adds.\n\nThe idea of trust is Maple’s larger theme, as the startup proposes that there’s a way to build an AI app where consumers don’t have to trade privacy for convenience, as its competitors often require with their invasive privacy policies and data collection practices , and sometimes even training on users’ personal data .\n\nInstead of asking users to trust that Maple won’t misuse their personal data, it’s attempting to build a business where it can’t access that data in the first place.\n\nLike other AI apps on the market, Maple allows users to engage in a chat experience where they ask questions and get answers. Meanwhile, its newly launched desktop app, Maple Work , offers a more agentic experience where the AI can control your computer, work with your files and apps, and control your browser to get online tasks handled.\n\nWith the company’s recently closed $5.3 million round, it’s moving on to its next product — a cloud-based agent that will be able to continue its work even if your computer isn’t on. This addition would make Maple more competitive with other popular consumer AI services, like Meta’s Muse , Instinct , and other AI agents that work over chat.\n\nThe oversubscribed seed round was led by Epic Ventures, with participation from Draper Associates, Planetary VC, and Epoch VC, and follows a pre-seed angel round of under a million. Maple plans to raise a Series A in the first half of 2027, given the investor interest.\n\nSuman, who previously spent six years at Apple, already had a background where AI and privacy overlapped, he tells TechCrunch.\n\nAt Apple, he worked on AI and machine learning with a particular focus on computer vision. Given Apple’s stance on consumer privacy, the challenge he faced was building products that would protect people’s identity while benefiting from computer vision techniques. His co-founder, Anthony Ronning (CTO), has a background in defense tech, security, and networking.\n\nRonning started the company that later became Maple AI back in 2023, initially as a privacy-focused fintech. When Suman teamed up with Ronning in August 2024, the idea to create Maple AI was born. The following January, the product became available to the public as a mobile app.\n\nThe app offers a familiar interface for those used to AI chatbots, but under the hood it runs a variety of open models, including versions of DeepSeek , Kimi , GLM , Inkling from Thinking Machines, Google’s Gemma , and OpenAI’s GPT OSS . Users can pick and choose the models they want or, for a simpler experience, just toggle between a quick model and the more powerful one.\n\nThe models themselves run inside a trusted execution environment (TEE) — meaning a server with hardware encryption on it — within a U.S.-based data center. (Maple also offers support for European customers through a partner that runs its server in Europe.)\n\n“We actually don’t have access to [the data] while it’s inside the TEE,” explains Suman. “The data gets encrypted first on your device using a unique password that’s only known by you, the user — we don’t have access to it. It then goes into this TEE, and it gets decrypted inside there. The AI does its thing, and then it re-encrypts it with your password and sends it back to you,” he continues. “So we provide an end-to-end experience that’s very easy for the user, but we actually don’t have access to the raw data as it’s in flight or even when it’s at rest,” he adds.\n\nThis allows Maple to protect its users’ data, even from outsiders — like if hackers breached its system or the government came with a subpoena, for instance. All it could do would be to hand over an encrypted file.\n\n“We just simply don’t want access to it,” Suman says of customers’ data. “That’s not part of our business model. And we also don’t want it to be part of our threat model.”\n\nWith the new desktop app, Maple is looking to small businesses that may want to benefit from AI without the data privacy risks. Inside the app, there’s an integration store where users can connect with other apps, like their Gmail or calendar. The desktop app can also spin up a subagent that works inside another AI app you may have on your desktop, like Claude, Codex, or others that support the Agent Client Protocol (ACP). This allows customers to use their preferred AI app for specific tasks, without having to give it all their information — just what’s needed for the given task.\n\nNext year, Maple plans to enter the enterprise market with pilot work, where it will offer its own version of zero data retention. (Maple doesn’t retain most of the customers’ data, but when it has to, that data is encrypted.) It’s now in the process of completing SOC 2 compliance and security audits to get ready for this expansion.\n\nThe company declined to share its registered customer numbers but noted it’s seen 60x growth over the past three months, as people have been looking for ways to increase their security with AI.\n\nMaple currently generates revenue via subscriptions, which are comparable to those from other AI model providers. Its Pro plan is $20 per month, and it offers two Max plans, Max and Max Plus, at $100 and $200 per month, respectively.\n\nThe Austin- and San Francisco-based startup is a team of four and is actively hiring."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-c24be4c125e085b2",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/11/whats-going-on-with-the-riemann-hypothesis/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-24T20:34:53.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "What's going on with the Riemann hypothesis?",
-        "summary": "A new AI-assisted proof seems to be solid, but we're not sure what it tells us.",
-        "body": "Last week, news broke that a mathematician had used AI to help crack one of the biggest outstanding problems in math: a proof of the Riemann hypothesis . The news follows several other major breakthroughs in math that have either been enabled by or managed entirely by large language model-based systems, a development that has left the entire field of mathematics in a state of upset.\n\nIt's too early to say much about the proof itself—mathematicians are still in the process of digesting it. But we can say a little about how the proof came about, and what it tells us about the state of math.\n\nThe Riemann hypothesis dates from the mid-1800s and was formulated by (you will be surprised to learn) Bernhard Riemann. There's not an obvious way to describe the details of the actual hypothesis simply, but it has implications for the distribution of prime numbers. This gives it significance for areas ranging from number theory to cryptography. As Wikipedia accurately states, \"It is considered by pure mathematicians to be one of the most important problems in the field.\"\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-fdc2703d92d98071",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/11/tidal-will-ban-fully-ai-generated-music-on-december-9/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-24T17:34:34.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Tidal announces ban on AI-generated music; 27 million tracks will be deleted",
-        "summary": "AI songs account for 6.3 percent of Tidal's catalog, but it's about to be zero.",
-        "body": "Most streaming music providers have opted to label AI-generated content on their platforms, and until now, Tidal was one of them. However, the company is about to take a harder stance. Tidal announced that in the coming weeks, it will fully ban AI music because of the harm it does to human artists.\n\nTidal debuted its initial AI policy in July 2026, which included labeling and demonetizing all songs created entirely with AI. That wasn't enough to stem the tide of AI slop, though. Over the past 90 days, Tidal reports that 43 percent of new uploads were completely AI-generated. On November 6, new uploads to Tidal hit a whopping 60 percent AI-generated.\n\nAs things stand, Tidal hosts 27 million tracks labeled as AI, all of which were obviously added in the past couple of years. That accounts for 6.3 percent of Tidal's total catalog. On December 9, Tidal will delete all those songs. The streamer notes this will have essentially no negative impact, because 96 percent of AI-labeled tracks got zero plays in the past 90 days. Throughout its announcement, Tidal is careful to stipulate that it's only talking about music that has been fully created by AI. Artists can still use AI tools as long as the final product contains human elements.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -2500,31 +2502,6 @@
         "title": "The Podcast App",
         "summary": "The Podcast App is a podcast player for audio and video by Magnolia Apps. It lets you play audio and video podcasts in one app,…",
         "body": "Published 26 September 2026 by The Podcast App\n\nThe Podcast App is a podcast player for audio and video by Magnolia Apps. It lets you play audio and video podcasts in one app, download episodes for offline listening, adjust playback speed, skip silence, jump between chapters, and use a sleep timer.\n\nYou can add a show by RSS or search, follow the shows you want, and import or export subscriptions using OPML. You can start listening without an account and sign in if you want synchronization across devices.\n\nOn supported shows, when you skip forward during a known ad break, one tap can jump to where the show resumes. This is never automatic and can be turned off.\n\nThe app does not insert banner or audio ads. Offline downloads and the core player are free, while some optional AI tools require Premium.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nDeveloper submission. We have not had an independent TalkBack audit, so we are not claiming full screen reader support. We would welcome testing and notes from the community, including unlabeled buttons or missing accessibility actions. Please report issues to support@thepodcastapp.dev.\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-8d60a593e8a1f101",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/livecomics/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-25T19:05:40.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "LiveComics",
-        "summary": "LiveComics is a comic, manga, and manhwa reader that performs the page as audio rather than simply displaying it. Every speech bubble is voiced in…",
-        "body": "Published 25 September 2026 by Matt T\n\nLiveComics is a comic, manga, and manhwa reader that performs the page as audio rather than simply displaying it. Every speech bubble is voiced in character, with a separate narrator, while each panel can include its own sound effects and score. The reader advances panel by panel as the scene plays, allowing a whole issue to be followed without seeing the screen.\n\nThe app streams a free shelf of classic public-domain issues. Readers can also import their own CBR and CBZ files on the web and read them on the phone.\n\nA free account covers the core service with no card required. A paid storage tier is available through the website, with no in-app purchases.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nTested with TalkBack. A comic is a purely visual medium, and this app performs the whole issue as audio: every line is voiced in character with a separate narrator, the drawn sound effects actually sound, and a score runs under the scene, so a complete story can be followed with the screen off. On navigation, the library, the store, the menus and the reader controls all work without a mouse and report themselves to the screen reader, and cover tiles are real buttons rather than tappable images. Turning a panel announces your position and nothing else, for example \"page 3, panel 5 of 40\", and that silence is deliberate so the screen reader does not talk over the narration. The panel's own words are available separately, in a hidden region named \"Panel text\" holding the description, the dialogue line by line and the drawn sound lettering; nothing in it is ever announced on its own, so a braille display can read it without fighting the audio. Dialogs take focus when they open and hand it back when they close, Escape closes them, screen changes are announced politely because the app never reloads the page, and segmented controls report which option is selected. Automated checks are clean, with axe reporting 0 serious or critical issues, though that is a floor rather than a claim about real use. For low vision, the reader crops to a single panel, fills the screen with it and then advances on its own as the scene plays, which is magnification you do not have to drive, with no pinching and no hunting for the next balloon. Known issues and limitations, stated plainly: the \"Panel text\" region is easy to miss, because it never announces itself and nothing in the reader tells you it is there; Tab is not trapped inside dialogs; the library's medium filter (All, Comics, Manga, Manhwa) does not report which option is currently selected; there is no audio-first onboarding, so signing up and importing a file still assume you can work an ordinary form; the collision between the screen reader and the narration has never been deliberately tested across a range of devices, so we cannot promise the ducking behaves the same everywhere; and NVDA on Windows and iOS VoiceOver have never been run at all, so with the phone app loading the same code as the website, Windows behaviour in particular is unverified.\n\nLast Tested App version and Android version:\n\nSamsung Galaxy Z Fold 7, Android 16\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility."
       }
     },
     "media": null

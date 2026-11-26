@@ -67,6 +67,12 @@ for (const [identifier,envName,slug] of bundles) {
       throw Error('No se habilitó APP_GROUPS en Apple Developer: '+identifier);
     }
   }
+  // The main app must have iCloud enabled and its private container associated
+  // by an authorized Apple Developer administrator. Do not silently change it.
+  if (identifier === 'com.tifloacosta.app' &&
+      !capabilities.data.some(x => x.attributes?.capabilityType === 'ICLOUD')) {
+    throw Error('Falta habilitar iCloud Documents y asociar iCloud.com.tifloacosta.app en Apple Developer.');
+  }
   const name=slug+'-TestFlight-'+process.env.GITHUB_RUN_ID;
   const created=await api('profiles',{method:'POST',body:JSON.stringify({
     data:{type:'profiles',attributes:{name,profileType:'IOS_APP_STORE'},
@@ -90,6 +96,17 @@ for (const [identifier,envName,slug] of bundles) {
   if(!allowedGroups.includes('group.com.tifloacosta.app')) {
     throw Error('El perfil Apple de '+identifier+
       ' no autoriza group.com.tifloacosta.app. Debe estar asociado al identificador en Apple Developer antes de subir la app.');
+  }
+  if (identifier === 'com.tifloacosta.app') {
+    for (const entitlement of ['com.apple.developer.icloud-container-identifiers',
+      'com.apple.developer.ubiquity-container-identifiers']) {
+      if (!(entitlements[entitlement] || []).includes('iCloud.com.tifloacosta.app')) {
+        throw Error('El perfil no autoriza el contenedor privado iCloud: '+entitlement);
+      }
+    }
+    if (!(entitlements['com.apple.developer.icloud-services'] || []).includes('CloudDocuments')) {
+      throw Error('El perfil no autoriza iCloud Documents.');
+    }
   }
   console.log('App Group autorizado en perfil de '+identifier);
   fs.appendFileSync(process.env.GITHUB_ENV,envName+'='+name+'\n');

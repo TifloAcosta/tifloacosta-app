@@ -11,6 +11,7 @@ final class NativeBackupCoordinator: ObservableObject {
 
     @Published private(set) var isCreating = false
     @Published private(set) var isRestoring = false
+    @Published private(set) var isTransferringCloudBackup = false
     private let store: NativeBackupGenerationStore
 
     enum Failure: Error {
@@ -30,7 +31,7 @@ final class NativeBackupCoordinator: ObservableObject {
                 podcastDownloads: NativePodcastDownloads? = nil,
                 favorites: NativeFavoritesStore? = nil,
                 activity: NativeReadingActivity? = nil) async throws -> NativeBackupManifest {
-        guard !isCreating, !isRestoring else { throw Failure.busy }
+        guard !isCreating, !isRestoring, !isTransferringCloudBackup else { throw Failure.busy }
         guard !sections.isEmpty, sections.isSubset(of: Self.supportedSections) else {
             throw Failure.unsupportedSelection
         }
@@ -96,10 +97,47 @@ final class NativeBackupCoordinator: ObservableObject {
         }.value
     }
 
+    /// Cloud upload is explicit, never automatically triggered by creation.
+    /// Pending means Apple has accepted the local copy, not uploaded all data.
+    func uploadToICloud(generation: UUID) async throws -> NativeBackupCloudStore.UploadState {
+        guard !isCreating, !isRestoring, !isTransferringCloudBackup else { throw Failure.busy }
+        isTransferringCloudBackup = true
+        defer { isTransferringCloudBackup = false }
+        let local = store
+        let worker = Task.detached(priority: .utility) {
+            try NativeBackupCloudStore().upload(generation: generation, local: local)
+        }
+        return try await withTaskCancellationHandler {
+            try await worker.value
+        } onCancel: { worker.cancel() }
+    }
+
+    func iCloudHistory() async throws -> [NativeBackupCloudStore.Entry] {
+        let worker = Task.detached(priority: .utility) { try NativeBackupCloudStore().history() }
+        return try await withTaskCancellationHandler {
+            try await worker.value
+        } onCancel: { worker.cancel() }
+    }
+
+    /// Download and verify without changing the current live libraries.
+    /// The ordinary local restore entry point handles confirmation/rollback.
+    func downloadFromICloud(generation: UUID) async throws -> NativeBackupManifest {
+        guard !isCreating, !isRestoring, !isTransferringCloudBackup else { throw Failure.busy }
+        isTransferringCloudBackup = true
+        defer { isTransferringCloudBackup = false }
+        let local = store
+        let worker = Task.detached(priority: .utility) {
+            try await NativeBackupCloudStore().importGeneration(generation, local: local)
+        }
+        return try await withTaskCancellationHandler {
+            try await worker.value
+        } onCancel: { worker.cancel() }
+    }
+
     /// Verify the complete generation and every selected section before any
     /// future restore operation. A successful preflight is not a restore.
     func preflightRestore(generation: UUID) async throws -> NativeBackupManifest {
-        guard !isCreating, !isRestoring else { throw Failure.busy }
+        guard !isCreating, !isRestoring, !isTransferringCloudBackup else { throw Failure.busy }
         let destination = store
         let worker = Task.detached(priority: .utility) {
             let (manifest, directory) = try destination.verifiedGeneration(generation)
@@ -165,7 +203,7 @@ final class NativeBackupCoordinator: ObservableObject {
                                 activity: NativeReadingActivity? = nil,
                                 approvedOmissions: RestoreOmissionSummary? = nil,
                                 liveStoresAreQuiescent: () -> Bool) async throws -> RestoreReport {
-        guard !isCreating, !isRestoring else { throw Failure.busy }
+        guard !isCreating, !isRestoring, !isTransferringCloudBackup else { throw Failure.busy }
         isRestoring = true
         defer { isRestoring = false }
         let destination = store

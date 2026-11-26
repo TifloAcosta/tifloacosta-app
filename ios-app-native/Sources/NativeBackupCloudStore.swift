@@ -41,7 +41,7 @@ struct NativeBackupCloudStore {
         else { throw Failure.accountChanged }
     }
 
-    private func read<T>(_ url: URL, _ body: (URL) throws -> T) throws -> T {
+    private func read<T>(_ url: URL, _ body: @escaping (URL) throws -> T) throws -> T {
         let coordinator = NSFileCoordinator(filePresenter: nil)
         var coordinationError: NSError?
         var outcome: Result<T, Error>?
@@ -130,7 +130,7 @@ struct NativeBackupCloudStore {
         let session = try session()
         try prepareRoot(session)
         let directories = try read(session.root) {
-            try fm.contentsOfDirectory(at: $0, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])
+            try self.fm.contentsOfDirectory(at: $0, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])
         }
         var result: [Entry] = []
         for directory in directories {

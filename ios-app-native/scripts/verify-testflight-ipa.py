@@ -93,6 +93,15 @@ with zipfile.ZipFile(files[0]) as z:
             if group not in signed_groups:
                 raise SystemExit('La firma de ' + identifier +
                                  ' no incluye ' + group)
+            if identifier == 'com.tifloacosta.app':
+                for source in (profile.get('Entitlements', {}), entitlements):
+                    for key in ('com.apple.developer.icloud-container-identifiers',
+                                'com.apple.developer.ubiquity-container-identifiers'):
+                        if 'iCloud.com.tifloacosta.app' not in source.get(key, []):
+                            raise SystemExit('Falta permiso iCloud del perfil o firma: ' + key)
+                    if 'CloudDocuments' not in source.get('com.apple.developer.icloud-services', []):
+                        raise SystemExit('Falta iCloud Documents en perfil o firma')
+                print('Contenedor privado iCloud autorizado y firmado')
             print('App Group autorizado y firmado para ' + identifier)
 
 print('IPA verificada: app y extensión firmadas con el mismo App Group')

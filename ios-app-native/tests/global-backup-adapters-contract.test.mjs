@@ -337,3 +337,23 @@ test('partial restore approval is specific to the reviewed omissions and include
     assert.match(personal, /let playable = missing\.filter/);
     assert.match(personal, /\$0\.seconds <= \$0\.duration/);
 });
+
+test('iCloud transfer preserves local copies, verifies downloads and gates cloud permissions', () => {
+    const cloud = read('NativeBackupCloudStore.swift');
+    const transport = read('NativeBackupGenerationTransfer.swift');
+    const store = read('NativeBackupGenerationStore.swift');
+    assert.match(cloud, /fm\.url\(forUbiquityContainerIdentifier: Self\.containerIdentifier\)/);
+    assert.match(cloud, /current\.isEqual\(session\.token\)/);
+    assert.match(cloud, /fm\.setUbiquitous\(true, itemAt: staging, destinationURL: target\)/);
+    assert.match(cloud, /ubiquitousItemIsUploaded == true/);
+    assert.match(cloud, /ubiquitousItemHasUnresolvedConflicts == true/);
+    assert.match(cloud, /startDownloadingUbiquitousItem/);
+    assert.match(cloud, /try local\.adoptVerifiedStaging/);
+    assert.match(transport, /written == item\.byteCount/);
+    assert.match(transport, /NativeBackupManifest\.fingerprint/);
+    assert.match(store, /guard existing == manifest/);
+    assert.match(coordinator, /func uploadToICloud/);
+    assert.match(coordinator, /func downloadFromICloud/);
+    assert.match(read('App.entitlements'), /com\.apple\.developer\.ubiquity-container-identifiers/);
+    assert.match(read('App.entitlements'), /CloudDocuments/);
+});

@@ -297,6 +297,7 @@ struct NativeMusicPlatformsScreen: View {
             }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Plataformas musicales")
     }
 }
@@ -353,7 +354,8 @@ private struct NativeRadioResultsScreen: View {
             }
             if let error = directory.error { Text(error) }
         }
-        .navigationTitle(title)
+        .tifloScreenSurface()
+        .navigationTitle(MusicLocalized.message(title))
         .searchable(text: $query, prompt: "Buscar emisoras por nombre")
         .onSubmit(of: .search) {
             var selected = filter
@@ -396,12 +398,13 @@ private struct NativeRadioCategoryScreen: View {
     var body: some View {
         List {
             ForEach(category.options) { option in
-                NavigationLink(option.title) {
+                NavigationLink(MusicLocalized.message(option.title)) {
                     NativeRadioResultsScreen(title: option.title, filter: category.filter(option))
                 }
             }
         }
-        .navigationTitle(category.title)
+        .tifloScreenSurface()
+        .navigationTitle(MusicLocalized.message(category.title))
     }
 }
 
@@ -422,20 +425,21 @@ private struct NativeRadioAdvancedSearch: View {
             TextField("Nombre de emisora", text: $name)
             Picker("País", selection: $countryCode) {
                 Text("Todos").tag("")
-                ForEach(RadioFilterOption.countries) { Text($0.title).tag($0.id) }
+                ForEach(RadioFilterOption.countries) { Text(MusicLocalized.message($0.title)).tag($0.id) }
             }
             Picker("Idioma", selection: $language) {
                 Text("Todos").tag("")
-                ForEach(RadioFilterOption.languages) { Text($0.title).tag($0.id) }
+                ForEach(RadioFilterOption.languages) { Text(MusicLocalized.message($0.title)).tag($0.id) }
             }
             Picker("Estilo", selection: $genre) {
                 Text("Todos").tag("")
-                ForEach(RadioFilterOption.genres) { Text($0.title).tag($0.id) }
+                ForEach(RadioFilterOption.genres) { Text(MusicLocalized.message($0.title)).tag($0.id) }
             }
             NavigationLink("Buscar emisoras") {
                 NativeRadioResultsScreen(title: "Resultados", filter: filter)
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Búsqueda avanzada")
     }
 }
@@ -476,6 +480,7 @@ private struct NativeRadioScreen: View {
                 }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Radio musical gratuita")
     }
 }

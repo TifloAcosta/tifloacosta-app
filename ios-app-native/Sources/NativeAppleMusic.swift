@@ -208,6 +208,7 @@ struct NativeAppleMusicScreen: View {
             }
             if let error = music.error { Text(error) }
         }
+        .tifloScreenSurface()
         .navigationTitle("Apple Music")
         .searchable(text: $query, prompt: "Buscar canciones o artistas")
         .onSubmit(of: .search) { Task { await music.search(query) } }

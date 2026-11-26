@@ -129,6 +129,7 @@ private struct NativeArchiveRecordingScreen: View {
                 Link("Información y derechos en Internet Archive", destination: source)
             }
         }
+        .tifloScreenSurface()
         .navigationTitle(recording.displayTitle)
         .task { await tracks.load(recording.identifier) }
     }
@@ -148,6 +149,7 @@ struct NativeInternetArchiveScreen: View {
             }
             if let error = directory.error { Text(error) }
         }
+        .tifloScreenSurface()
         .navigationTitle("Conciertos y grabaciones")
         .searchable(text: $query, prompt: "Buscar artista o concierto")
         .onSubmit(of: .search) { Task { await directory.search(query) } }

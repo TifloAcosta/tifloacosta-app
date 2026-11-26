@@ -307,7 +307,8 @@ private struct NativeJamendoGenreScreen: View {
             NativeJamendoTrackRows(tracks: directory.tracks, playlists: playlists, addToPlaylist: addToPlaylist)
             if let error = directory.error { Text(error) }
         }
-        .navigationTitle(genre.title)
+        .tifloScreenSurface()
+        .navigationTitle(MusicLocalized.message(genre.title))
         .task { await directory.browse(genre: genre.id) }
     }
 }
@@ -322,7 +323,7 @@ struct NativeJamendoScreen: View {
     var body: some View {
         List {
             Section("Reproductor Jamendo") {
-                Text(player.title.isEmpty ? "Ninguna canción en reproducción" : player.title)
+                Text(player.title.isEmpty ? MusicLocalized.message("Ninguna canción en reproducción") : player.title)
                     .accessibilityAddTraits(.isHeader)
                 Button(player.isPlaying ? "Pausar Jamendo" : "Reanudar Jamendo") { player.toggle() }
                     .disabled(player.title.isEmpty)
@@ -336,12 +337,13 @@ struct NativeJamendoScreen: View {
             }
             Section("Explorar por estilos") {
                 ForEach(JamendoGenre.choices) { genre in
-                    NavigationLink(genre.title) {
+                    NavigationLink(MusicLocalized.message(genre.title)) {
                         NativeJamendoGenreScreen(genre: genre, playlists: playlists, addToPlaylist: addToPlaylist)
                     }
                 }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Jamendo")
         .searchable(text: $query, prompt: "Buscar en Jamendo")
         .onSubmit(of: .search) { Task { await directory.search(query) } }

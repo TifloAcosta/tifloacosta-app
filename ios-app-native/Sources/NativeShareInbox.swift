@@ -388,24 +388,24 @@ struct NativeInboxScreen: View {
                         Text(item.name).font(.body)
                         if let position = item.batchPosition,
                            let count = item.batchCount, !count.isEmpty {
-                            Text("Archivo \(position) de \(count)")
+                            Text(MusicLocalized.format("Archivo %@ de %@", position, count))
                                 .font(.caption).foregroundStyle(.secondary)
                         }
-                        Text(item.kind == "url" ? "Abrir enlace" :
+                        Text(MusicLocalized.message(item.kind == "url" ? "Abrir enlace" :
                             item.needsAudioDestination ? "Elegir destino del audio" :
                             item.destination == "music" ? "Importar en Mi música" :
-                            "Importar en TifloLector")
+                            "Importar en TifloLector"))
                             .font(.caption).foregroundStyle(.secondary)
                     }
                 }
                 .disabled(inbox.activeReaderImportID == item.id)
                 .accessibilityLabel(item.batchPosition.map { position in
-                    "\(item.name). Archivo \(position) de \(item.batchCount ?? "?")"
+                    MusicLocalized.format("%@. Archivo %@ de %@", item.name, position, item.batchCount ?? "?")
                 } ?? item.name)
-                .accessibilityHint(item.kind == "url" ? "Abre el enlace recibido." :
+                .accessibilityHint(MusicLocalized.message(item.kind == "url" ? "Abre el enlace recibido." :
                     item.needsAudioDestination ? "Elige TifloLector o Mi música." :
                     item.destination == "music" ? "Importa el audio en Mi música." :
-                    "Importa y abre el archivo o texto en TifloLector.")
+                    "Importa y abre el archivo o texto en TifloLector."))
                 .accessibilityAction(named: Text("Compartir archivo")) {
                     if let exported = inbox.exportURL(for: item) {
                         NativeShare.present(url: exported)

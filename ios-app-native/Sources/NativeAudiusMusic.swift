@@ -240,6 +240,7 @@ struct NativeAudiusScreen: View {
             }
             if let message = directory.error ?? player.error { Text(message) }
         }
+        .tifloScreenSurface()
         .navigationTitle("Audius: música gratuita")
         .searchable(text: $query, prompt: "Buscar canciones o artistas")
         .onSubmit(of: .search) { Task { await directory.search(query) } }

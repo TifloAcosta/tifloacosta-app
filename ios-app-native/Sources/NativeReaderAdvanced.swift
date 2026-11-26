@@ -74,13 +74,13 @@ struct NativeReaderOCRSettingsScreen: View {
         request.recognitionLevel = accuracyIndex == 1 ? .fast : .accurate
         do {
             let codes = try request.supportedRecognitionLanguages()
-            let spanish = Locale(identifier: "es_ES")
+            let locale = Locale(identifier: NativeAppLanguage.code(for: UserDefaults.standard.integer(forKey: NativeAppLanguage.storageKey)))
             let names = Set(codes.map { code in
-                spanish.localizedString(forLanguageCode: String(code.prefix(2))) ?? code
+                locale.localizedString(forLanguageCode: String(code.prefix(2))) ?? code
             })
             supportedLanguagesDescription = names.sorted().joined(separator: ", ")
         } catch {
-            supportedLanguagesDescription = "No se pudo consultar la lista de idiomas."
+            supportedLanguagesDescription = MusicLocalized.message("No se pudo consultar la lista de idiomas.")
         }
     }
 
@@ -99,7 +99,7 @@ struct NativeReaderOCRSettingsScreen: View {
                     selectedIndex: $accuracyIndex
                 )
                 if !supportedLanguagesDescription.isEmpty {
-                    Text("Idiomas admitidos por el dispositivo: \(supportedLanguagesDescription)")
+                    Text(MusicLocalized.format("Idiomas admitidos por el dispositivo: %@", supportedLanguagesDescription))
                 }
             }
             Section {

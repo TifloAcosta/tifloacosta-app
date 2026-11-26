@@ -1,0 +1,7185 @@
+{
+  "schema": 1,
+  "date": "2026-11-26",
+  "catalogCommit": "ee97022ac036f55b58866c31f0bad7ea86b04ca0",
+  "scope": "Editorial source roots ES and EN; metadata-only inventory; no publication. Source ID mismatch means reconciliation required, not necessarily missing. Historical TXT folders intentionally traversed. Explicit archived links folders excluded.",
+  "completeTraversal": true,
+  "summary": {
+    "visitedFolders": 72,
+    "nestedFolders": 27,
+    "html": 414,
+    "other": 2,
+    "exactMatches": 153,
+    "unresolved": 261,
+    "excludedFolders": 2
+  },
+  "folders": [
+    {
+      "id": "1qUy0-ESqWhmIbYC00gpIdHHMZCPla_1r",
+      "lang": "es",
+      "path": [],
+      "html": 3,
+      "matchedBySource": 0,
+      "unresolvedBySource": 3
+    },
+    {
+      "id": "1fVQp_eDGWoVO_fp7xFGdPllXMMWZalvx",
+      "lang": "en",
+      "path": [],
+      "html": 3,
+      "matchedBySource": 0,
+      "unresolvedBySource": 3
+    },
+    {
+      "id": "1orp23p_xHGywZ96V2wmBzfjugYxAs6wI",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 20,
+      "matchedBySource": 0,
+      "unresolvedBySource": 20
+    },
+    {
+      "id": "1dVWiQO_nognu4GHYULpTaoQeEkYKJyxn",
+      "lang": "es",
+      "path": [
+        "Vídeos del canal en texto"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 4,
+      "matchedBySource": 4,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "18U1brfGfl_VNDPP9pW-cZKB_cE3hpyTJ",
+      "lang": "es",
+      "path": [
+        "Guías y tutoriales"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 6,
+      "matchedBySource": 5,
+      "unresolvedBySource": 1
+    },
+    {
+      "id": "1qfrEpv3cexct5-E_64Na6Mw9bp-x86ze",
+      "lang": "es",
+      "path": [
+        "Píldoras"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 0,
+      "matchedBySource": 0,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1035qkCm0qIEt8xeYEMDqGa9ZfjTbNC5e",
+      "lang": "es",
+      "path": [
+        "IA"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 3,
+      "matchedBySource": 3,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1eGxlvf6l21qzdENNkLei8FrE__zIfsp-",
+      "lang": "es",
+      "path": [
+        "Windows"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 3,
+      "matchedBySource": 3,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1rWuudkwRTs9GJngI5hJMjP2A2923pTJd",
+      "lang": "es",
+      "path": [
+        "Apple Watch"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 1,
+      "matchedBySource": 1,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1Ovi5m0AjWgkQIGJJZxDca1cQbR59ZSrO",
+      "lang": "es",
+      "path": [
+        "iPhone"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 20,
+      "matchedBySource": 9,
+      "unresolvedBySource": 11
+    },
+    {
+      "id": "1USEUrN_T-ZPZJn7_14BKLoC6rKNRlj_n",
+      "lang": "es",
+      "path": [
+        "Catálogos"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 2,
+      "matchedBySource": 2,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1vMFV-naDXARdUuMy0RxGAVKSlakwqTDw",
+      "lang": "es",
+      "path": [
+        "Cámara"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 1,
+      "matchedBySource": 1,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1zu-qZQ_YFbL2-kied2I0zOk-o0jnsZg7",
+      "lang": "es",
+      "path": [
+        "Noticias"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 3,
+      "matchedBySource": 0,
+      "unresolvedBySource": 3
+    },
+    {
+      "id": "1eRK8jgTgRFKr3osxl2lT0593d6lolhUw",
+      "lang": "es",
+      "path": [
+        "Mac"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 4,
+      "matchedBySource": 4,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "183hErpfxpDpn3d-KTQhqAPY4vqaGoyc2",
+      "lang": "es",
+      "path": [
+        "Correos"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 4,
+      "matchedBySource": 4,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1VXywYIKVliWGlO-PZQ_EdGYpGsXFDcYY",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 4,
+      "matchedBySource": 4,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1J4BkEgMFztITtlg2bX9KVamNuDGM2U8p",
+      "lang": "es",
+      "path": [
+        "Gafas"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 2,
+      "matchedBySource": 2,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "16blJ1nAynLoWUkcQXvYW6H3_NfbMPWF1",
+      "lang": "es",
+      "path": [
+        "Escritura"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 1,
+      "matchedBySource": 1,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1yVxkB46-CH9MKaMuqN2yBIaFPIQ556t0",
+      "lang": "es",
+      "path": [
+        "Atajos"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 3,
+      "matchedBySource": 1,
+      "unresolvedBySource": 2
+    },
+    {
+      "id": "1bBj5fvosAKfzSYDnLUPl_Ezc7qu_doVP",
+      "lang": "es",
+      "path": [
+        "APPs"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 13,
+      "matchedBySource": 5,
+      "unresolvedBySource": 8
+    },
+    {
+      "id": "1pz7ZMTg3Fb_EKqsk3x27raJznDNdUlUi",
+      "lang": "es",
+      "path": [
+        "Android"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 5,
+      "matchedBySource": 3,
+      "unresolvedBySource": 2
+    },
+    {
+      "id": "15CHT8tQUIFsRij3R6lz8c2ZPBhqkphjj",
+      "lang": "es",
+      "path": [
+        "Estudios"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 13,
+      "matchedBySource": 12,
+      "unresolvedBySource": 1
+    },
+    {
+      "id": "1wfOpHewRIXds1MiQNv6TxJWOd8frNu50",
+      "lang": "es",
+      "path": [
+        "Colección de tonos"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 0,
+      "matchedBySource": 0,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1-H8BwYfgFrT322G7pvtIG4uwlp6QfqLQ",
+      "lang": "es",
+      "path": [
+        "Nubes"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 2,
+      "matchedBySource": 2,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1qRf9GyVDRokZ0Aqm4IS35YK_nHbu5LrV",
+      "lang": "es",
+      "path": [
+        "Lectura"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 3,
+      "matchedBySource": 2,
+      "unresolvedBySource": 1
+    },
+    {
+      "id": "1wFPoq82nhQMw5-3Mb-7IXWk5mzhHA4SQ",
+      "lang": "en",
+      "path": [
+        "Channel Videos in Text"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 4,
+      "matchedBySource": 4,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1XQylEC8R971gWzfM29NnlskkuGF_rKwt",
+      "lang": "en",
+      "path": [
+        "Shortcuts"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 2,
+      "matchedBySource": 0,
+      "unresolvedBySource": 2
+    },
+    {
+      "id": "1Co5GzLbJGVuY1Cbj_sa2-8quiHyQFkAV",
+      "lang": "en",
+      "path": [
+        "Guides and Tutorials"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 4,
+      "matchedBySource": 3,
+      "unresolvedBySource": 1
+    },
+    {
+      "id": "1fpGXf1WJ2oLL0jlXYUg9Ss-ljjBFRGbd",
+      "lang": "en",
+      "path": [
+        "Pills"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 13,
+      "matchedBySource": 1,
+      "unresolvedBySource": 12
+    },
+    {
+      "id": "1OsrrgX0cVAnGKGxHdasZdD6h7rekrm7B",
+      "lang": "en",
+      "path": [
+        "Apps"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 11,
+      "matchedBySource": 3,
+      "unresolvedBySource": 8
+    },
+    {
+      "id": "1VSb7Eh7UiwpyEPUqkN1PuKWLI5MosSxW",
+      "lang": "en",
+      "path": [
+        "AI"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 2,
+      "matchedBySource": 2,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1y7QGsnnl62vbtv_lgsRkPpxqFwm_7x9L",
+      "lang": "en",
+      "path": [
+        "Screen Readers"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 3,
+      "matchedBySource": 3,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1nQcPXtOV6_ibzxl0ZDXL_V3w2UU7kEqq",
+      "lang": "en",
+      "path": [
+        "Cloud Storage Services"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 2,
+      "matchedBySource": 2,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1PwliY9w6U_XljMgCaZBapHal-tZtN4lF",
+      "lang": "en",
+      "path": [
+        "Apple Watch"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 1,
+      "matchedBySource": 1,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1AMOXuArpEtP9RhFt4Z7F6TUuQM4M9QCy",
+      "lang": "en",
+      "path": [
+        "iPhone"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 19,
+      "matchedBySource": 10,
+      "unresolvedBySource": 9
+    },
+    {
+      "id": "1fgYThtF0l-trK_ADWnYY5N9-4EBjmgEO",
+      "lang": "en",
+      "path": [
+        "Windows"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 3,
+      "matchedBySource": 3,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1HDzPRdvAii3ickCIldbmAemx4mVxHte4",
+      "lang": "en",
+      "path": [
+        "News"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 2,
+      "matchedBySource": 2,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1sxof5_5vGIRXp6PPQCeEd5GJ2TF37e2j",
+      "lang": "en",
+      "path": [
+        "Mac"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 4,
+      "matchedBySource": 4,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1OAEb9SsUAJr1HLxpjCahRNW7usNwHtMW",
+      "lang": "en",
+      "path": [
+        "Smart Glasses"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 1,
+      "matchedBySource": 1,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1eowTAhk1wMOAyyFj-rxTLsR-gxvuSO_C",
+      "lang": "en",
+      "path": [
+        "Research and Studies"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 14,
+      "matchedBySource": 13,
+      "unresolvedBySource": 1
+    },
+    {
+      "id": "18WOPb1fVJ5vDAMl4Fm_rihUXiz-BQUPa",
+      "lang": "en",
+      "path": [
+        "Mail"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 4,
+      "matchedBySource": 4,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1Uj-iavX-xOxJe0293hwwOyxeBeezkYZ0",
+      "lang": "en",
+      "path": [
+        "Ringtones"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 0,
+      "matchedBySource": 0,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1th4nDYRYKbLt8B2gaE4-C_lI8wjLs6X7",
+      "lang": "en",
+      "path": [
+        "Catalog"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 1,
+      "matchedBySource": 1,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1hHqmGqiQsTRguyhBKj0qmd9aLFZmpli4",
+      "lang": "en",
+      "path": [
+        "Camera"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 1,
+      "matchedBySource": 1,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1N_S90S-J6O7DGWEZUMKiXkZDGm6pxFsp",
+      "lang": "en",
+      "path": [
+        "Android"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 5,
+      "matchedBySource": 3,
+      "unresolvedBySource": 2
+    },
+    {
+      "id": "1yTWb6e6Y_4Oxv126moNwI8HSgZC3OPSg",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 24,
+      "matchedBySource": 0,
+      "unresolvedBySource": 24
+    },
+    {
+      "id": "1HzUjyxqxo57ZRydPIMj9YVCgF3tqDjr1",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 31,
+      "matchedBySource": 0,
+      "unresolvedBySource": 31
+    },
+    {
+      "id": "1IUzZQciYxa25058p2ROmeL3aYhdhnxLL",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2024"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 2,
+      "matchedBySource": 0,
+      "unresolvedBySource": 2
+    },
+    {
+      "id": "17jE0J2y-xleKfsD7pZEO0-w3Uo17Xa2j",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 34,
+      "matchedBySource": 0,
+      "unresolvedBySource": 34
+    },
+    {
+      "id": "1XvrdFwosbpDsnfwMU11ouDHlC4l4aWsX",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Archivo histórico TXT"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 6,
+      "matchedBySource": 0,
+      "unresolvedBySource": 6
+    },
+    {
+      "id": "1wtghyLFjvUgyOjyP_Ts5Mea15-K15AKb",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 23,
+      "matchedBySource": 0,
+      "unresolvedBySource": 23
+    },
+    {
+      "id": "1dZTkr2LnFM-m5QOmovxrHspToPd_gCYT",
+      "lang": "es",
+      "path": [
+        "Mac",
+        "Archivo histórico TXT"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 1,
+      "matchedBySource": 0,
+      "unresolvedBySource": 1
+    },
+    {
+      "id": "1let87eBO21ubROPT2d9AHJ4YZkRX8jal",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "VoiceOver"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 1,
+      "matchedBySource": 1,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "151ERCkKVDckkrKJBt86H_SLRQaVUYibk",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "Narrador"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 1,
+      "matchedBySource": 1,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "18wCG2snE_06zbHOwsmC2zjnOZbBtNaWD",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "Jaws"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 4,
+      "matchedBySource": 4,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1oktPsFPVJPBtUClBwaFHs2HaOyYLbyO8",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "NVDA"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 3,
+      "matchedBySource": 3,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1gHdjCtfJEinsepift-hoNNZGm2u-zbBx",
+      "lang": "es",
+      "path": [
+        "APPs",
+        "Archivo histórico TXT"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 2,
+      "matchedBySource": 0,
+      "unresolvedBySource": 2
+    },
+    {
+      "id": "1sLxWuCQsFnFvLAQgHD3eKYqeBM9SyC9s",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 16,
+      "matchedBySource": 0,
+      "unresolvedBySource": 16
+    },
+    {
+      "id": "1WD_LaRgD83w3XpFpe_TDIKgQRwL0OhCB",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Amazon, Google o Apple, qué marca conviene comprar"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 1,
+      "matchedBySource": 1,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "19_EefDeiErg7uXMJVHjvVNoHB1pXMqV1",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 1,
+      "matchedBySource": 0,
+      "unresolvedBySource": 1
+    },
+    {
+      "id": "1yVvklEKLKXp3Ngl368FLt4fyjL9meiWy",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "ceguera en Latinoamérica"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 1,
+      "matchedBySource": 0,
+      "unresolvedBySource": 1
+    },
+    {
+      "id": "1grA0e5j01mpf_Z-Qe4z2hctjGuXEVdiS",
+      "lang": "es",
+      "path": [
+        "Colección de tonos",
+        "Nokia"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 0,
+      "matchedBySource": 0,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1ZzdAhlJFpltF2VTQPQmzGqvN1xwAgLvu",
+      "lang": "es",
+      "path": [
+        "Colección de tonos",
+        "Tonos para el iPhone. (instrumentales. 80 temas)"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 0,
+      "matchedBySource": 0,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1Kko7BN2AU75CUxZJU5rDfnMKl5sE7WRh",
+      "lang": "en",
+      "path": [
+        "Screen Readers",
+        "VoiceOver"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 1,
+      "matchedBySource": 1,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1QkyLFjcII301Jsk1Z3i-8SBr0kn8gE39",
+      "lang": "en",
+      "path": [
+        "Screen Readers",
+        "NVDA"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 3,
+      "matchedBySource": 3,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1a9nFX-NPxWOxj1zYMGwnIAWV9NkhjMCl",
+      "lang": "en",
+      "path": [
+        "Screen Readers",
+        "Narrator"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 1,
+      "matchedBySource": 1,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1f1zwWM-8TGdKP-7EP7Qq96wQcbLYfFt7",
+      "lang": "en",
+      "path": [
+        "Screen Readers",
+        "Jaws"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 2,
+      "matchedBySource": 2,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1uUEIRFAixDFeU72kKZd0zgRdjP1eu7rf",
+      "lang": "en",
+      "path": [
+        "Ringtones",
+        "Nokia"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 0,
+      "matchedBySource": 0,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1m0QEirkItPAy0ldHACkgg9zHHNOJWhV4",
+      "lang": "en",
+      "path": [
+        "Ringtones",
+        "Tonos para el iPhone. (instrumentales. 80 temas)"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 0,
+      "matchedBySource": 0,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "1TyL0COd_t80UE76jNWyy10lcZON-m1mo",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Amazon, Google o Apple, qué marca conviene comprar",
+        "Información por países y regiones"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 7,
+      "matchedBySource": 7,
+      "unresolvedBySource": 0
+    },
+    {
+      "id": "17sZziLzEVlsrr7-nY_8KH9E0UUbtZlpo",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 21,
+      "matchedBySource": 0,
+      "unresolvedBySource": 21
+    },
+    {
+      "id": "1DQEhR5T19j-C8GtcdVuR75Tse43eAihT",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "ceguera en Latinoamérica",
+        "Información por países"
+      ],
+      "mime": "application/vnd.google-apps.folder",
+      "html": 9,
+      "matchedBySource": 0,
+      "unresolvedBySource": 9
+    }
+  ],
+  "documents": [
+    {
+      "id": "1T7AZef1-ok8wzs67rbD6ML2-q8wery6F",
+      "lang": "es",
+      "path": [
+        "FOAL en América Latina.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1u2U26HtnxnYfBwJPzhbWHjUi_ttBmzVu",
+      "lang": "es",
+      "path": [
+        "por qué se queda ciega la gente (Análisis sin bata blanca).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1",
+      "lang": "es",
+      "path": [
+        "Cuando el termómetro se pone chulo"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Q64MlYzjnb1kY6Q6i_frrIa5ku--AWYO",
+      "lang": "en",
+      "path": [
+        "Shared Materials.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Fzh0srtGg_too70q8kDYl2CzgVq8I8gk",
+      "lang": "en",
+      "path": [
+        "why do people go blind.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-medical-study-causes-blindness-2026"
+      ]
+    },
+    {
+      "id": "1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6",
+      "lang": "en",
+      "path": [
+        "When the Thermometer Gets Cocky"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "11AXwJWjmaHQOIeXVhBIccw5EXlGAsunQ",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Venezuela.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1A1pNUlPQCJWlsIegp4cOVplhU82mxGXy",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Uruguay.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1AuWRHMhy75V-SdnixOc9G9K-PJotfQZW",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Rep. Dominicana.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "12mxIzxIYMCw3n7jaoLlshRvv7nXJYMqh",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Perú.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1h43UfeZSSy5LEMdTgNFpEjVZI50kUkmS",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Paraguay.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1JYEbarhBYjE2Bvdsp9jJSMqvhS7WIy_H",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Panamá.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1z_T0ahNN0V4emq2MQzaXORn17snoHLLK",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Nicaragua.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1xeYgdBmczOrxr4yTer0jSJnKaGnwktAd",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para México.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1YUA5slmc1d4as_QUArESgwnFWIXuv-I2",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Honduras.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1xtVQOwQKDIarRp282Swm__JcHt8eIqDo",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Guatemala.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1WbyUVmDQIvlZLCoGzyBC7kbqMmmjYZuZ",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para España.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1gboZpJKDn6Yv0x-CFDRUSAreh7UrbTeL",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para El Salvador.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Ebg9RNpnp5q5oRa2Hc7RaGt2wBv2zTH1",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Ecuador.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "17iHCogpyhUyLCtFjD0o4EIhY_zwArXP_",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Cuba.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1gYHMNXvWf7CVoKPFUNfxE8lZyU-cJnyz",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Costa Rica.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "17cz1tB366lpHPDfoTPguN1wK467lkpDz",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Colombia.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1VB4amy43-oNxgZHMLI_GnFke7bmh7UaV",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Chile.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "122TQ9MALt6HK4KvbxuN4sVrPm9d0d151",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Brasil.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "12rWov4qnOWyrvTnemqauEsxLWJAPy59r",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Bolivia.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1mxIFgj-A6aRmhD9z7z3-OVndndleClEd",
+      "lang": "es",
+      "path": [
+        "Contactos de interés por países",
+        "Contactos de interés para Argentina.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "18tyEZyrSDNZV3iSKTId6xx44Jdz-Wloq",
+      "lang": "es",
+      "path": [
+        "Vídeos del canal en texto",
+        "VoiceOver_Esa_voz_es_nueva_ES.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-video-text-18tyEZyrSDNZV3iSKTId6xx44Jdz-Wloq",
+          "category": "Vídeos del canal en texto",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1a7wZ1HLBWKmNaWVbpnRvMBZfCXzXXsa4",
+      "lang": "es",
+      "path": [
+        "Vídeos del canal en texto",
+        "Gestos_de_VoiceOver_tutorial_adaptado_ES.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-video-text-1a7wZ1HLBWKmNaWVbpnRvMBZfCXzXXsa4",
+          "category": "Vídeos del canal en texto",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1IQ79WwvwNPv9qdB8wq8SyipBh_utLP_9",
+      "lang": "es",
+      "path": [
+        "Vídeos del canal en texto",
+        "Este_atajo_no_pregunta_ve_un_codigo_y_se_pone_a_investigar_tutorial_adaptado.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-video-text-1IQ79WwvwNPv9qdB8wq8SyipBh_utLP_9",
+          "category": "Vídeos del canal en texto",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1frXEmS6ST9MqdNy9ZbpZ3Lhks3QVFi6u",
+      "lang": "es",
+      "path": [
+        "Vídeos del canal en texto",
+        "TifloAcosta_ya_tiene_app_tutorial_adaptado.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-video-text-1frXEmS6ST9MqdNy9ZbpZ3Lhks3QVFi6u",
+          "category": "Vídeos del canal en texto",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1_JKDyQQoVd1JlYW-X3fGuR2gQDc7gZkO",
+      "lang": "es",
+      "path": [
+        "Guías y tutoriales",
+        "Automatización para envío de mensajes de WhatsApp.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1_JKDyQQoVd1JlYW-X3fGuR2gQDc7gZkO",
+          "category": "Guías y tutoriales",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1_JKDyQQoVd1JlYW-X3fGuR2gQDc7gZkO"
+      ]
+    },
+    {
+      "id": "1PRtwgdWmY-rhjGMzew2DxgjTLHfjCgje",
+      "lang": "es",
+      "path": [
+        "Guías y tutoriales",
+        "Guía para crear Reels con VoiceOver.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1PRtwgdWmY-rhjGMzew2DxgjTLHfjCgje",
+          "category": "Guías y tutoriales",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1PRtwgdWmY-rhjGMzew2DxgjTLHfjCgje"
+      ]
+    },
+    {
+      "id": "1-rvaKNcrqnHqDT2_buGUuPhKpRdsEeMq",
+      "lang": "es",
+      "path": [
+        "Guías y tutoriales",
+        "Dos por 1 - mensajes sospechosos y WikiTrip (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1-rvaKNcrqnHqDT2_buGUuPhKpRdsEeMq",
+          "category": "Guías y tutoriales",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1-rvaKNcrqnHqDT2_buGUuPhKpRdsEeMq"
+      ]
+    },
+    {
+      "id": "11efBTOfPgx22mnFsgpboAkhKVloPzfkS",
+      "lang": "es",
+      "path": [
+        "Guías y tutoriales",
+        "Linux para personas ciegas. ¿Es realmente usable con lector de pantalla? (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-11_yUfziaI4rhl-XHNcKNOvhz1en3-3IT"
+      ]
+    },
+    {
+      "id": "1v38XlJafVcVcR6jzn3u7Ag-QQdnGs_Hh",
+      "lang": "es",
+      "path": [
+        "Guías y tutoriales",
+        "El arte de ayudar sin estorbar. Guía escrita desde la experiencia.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1v38XlJafVcVcR6jzn3u7Ag-QQdnGs_Hh",
+          "category": "General",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1v38XlJafVcVcR6jzn3u7Ag-QQdnGs_Hh"
+      ]
+    },
+    {
+      "id": "1eYJutqgY2neCcUDo-UMMlBMOtH5Btm_p",
+      "lang": "es",
+      "path": [
+        "Guías y tutoriales",
+        "Ayer funcionaba (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1eYJutqgY2neCcUDo-UMMlBMOtH5Btm_p",
+          "category": "General",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1eYJutqgY2neCcUDo-UMMlBMOtH5Btm_p"
+      ]
+    },
+    {
+      "id": "1ImO_jIXwDyr5va_8IkYbqSmgSsYAwXjc",
+      "lang": "es",
+      "path": [
+        "IA",
+        "Buscar en internet ya no es lo que era..html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1ImO_jIXwDyr5va_8IkYbqSmgSsYAwXjc",
+          "category": "General",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1ImO_jIXwDyr5va_8IkYbqSmgSsYAwXjc"
+      ]
+    },
+    {
+      "id": "1-CuplaT5g7Ch6ep1uUuqB9m8lHIewkmj",
+      "lang": "es",
+      "path": [
+        "IA",
+        "Gemini 3.0, qué cambia para mí.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1-CuplaT5g7Ch6ep1uUuqB9m8lHIewkmj",
+          "category": "IA",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1-CuplaT5g7Ch6ep1uUuqB9m8lHIewkmj"
+      ]
+    },
+    {
+      "id": "1Wg6jPZJCB1indjb98K-LDuQMJOWt4mfz",
+      "lang": "es",
+      "path": [
+        "IA",
+        "Estudio sobre las inteligencias artificiales actuales.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1Wg6jPZJCB1indjb98K-LDuQMJOWt4mfz",
+          "category": "IA",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1Wg6jPZJCB1indjb98K-LDuQMJOWt4mfz"
+      ]
+    },
+    {
+      "id": "1C1-3PnFVHxvXBewvpLWp5Xg0oxHLBZu9",
+      "lang": "es",
+      "path": [
+        "Windows",
+        "El teclado de Windows, guía completa para usuarios de lector de pantalla (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1C1-3PnFVHxvXBewvpLWp5Xg0oxHLBZu9",
+          "category": "Windows",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1C1-3PnFVHxvXBewvpLWp5Xg0oxHLBZu9"
+      ]
+    },
+    {
+      "id": "1ecKOJiRxoFF3hTQqv0ws0cfOYU9V4FtY",
+      "lang": "es",
+      "path": [
+        "Windows",
+        "Curso práctico de WhatsApp Desktop en Windows con lectores de pantalla.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1ecKOJiRxoFF3hTQqv0ws0cfOYU9V4FtY",
+          "category": "Windows",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1ecKOJiRxoFF3hTQqv0ws0cfOYU9V4FtY"
+      ]
+    },
+    {
+      "id": "1MEAjq6q_m6vlSuMfqwykjLFxUtWjZaGH",
+      "lang": "es",
+      "path": [
+        "Windows",
+        "Catálogo de programas y utilidades accesibles para Windows (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1MEAjq6q_m6vlSuMfqwykjLFxUtWjZaGH",
+          "category": "Windows",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1MEAjq6q_m6vlSuMfqwykjLFxUtWjZaGH"
+      ]
+    },
+    {
+      "id": "1CxrXzCDNgwv8WVQ_2vfiWTk2gTqiXBzO",
+      "lang": "es",
+      "path": [
+        "Apple Watch",
+        "Curso práctico de Apple Watch con VoiceOver.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1CxrXzCDNgwv8WVQ_2vfiWTk2gTqiXBzO",
+          "category": "Apple Watch",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1CxrXzCDNgwv8WVQ_2vfiWTk2gTqiXBzO"
+      ]
+    },
+    {
+      "id": "1MVM0o5i25NveLopgp7vO_h8V_u_9yVrn",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Cómo utilizar y buscar aplicaciones en App Store con VoiceOver.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Jcp58R4uTk-2Swdvz9BdU5f_ph6Rn7Vy",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Cómo dictar mensajes y textos en el iPhone, trucos y sugerencias.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Curso completo de Entrada braille en pantalla en iPhone (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc"
+      ]
+    },
+    {
+      "id": "13crgHIVB9E0YUYNmF6hlyFgi-ymhwb_V",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Apple keynote 2026. Todo lo nuevo de Apple (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-13crgHIVB9E0YUYNmF6hlyFgi-ymhwb_V",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1QnQsFGETKYW1IHOaKNFtFKnVHtMZSVnx",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "iOS_26_3_que_hay_de_nuevo_viejo_TifloAcosta_ES.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1h2qPMUqyOA3emb5zwAsWagVmw1E5H696",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "La_mayor_confusion_del_iPhone_se_llama_iCloud_TifloAcosta_ES.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1NoEKMUa61iHgrDzogxQyRWnXpegyxu7J",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Como saber si te han bloqueado en WhatsApp (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-1jBl5cjf8pH5AeP0zpTGysNY1c8v3JDGX"
+      ]
+    },
+    {
+      "id": "1lRfcCo8YBqWvLfCX2GuqYFL_fwbtkE3v",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Actualizaciones invisibles en iPhone. Qué son y por qué importan (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-1kpUojRKwjJNZGT-ihlVmIpyhGP0SuCnA"
+      ]
+    },
+    {
+      "id": "1ocWCYLJdqwyHOFsaGgCWwj9IbVar3-UY",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "iOS 26.4 sin la nueva Siri pero con cambios que sí interesan (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-1hS5KdXaCeBWsNzoV7TGkxOgHIxNW1dFf"
+      ]
+    },
+    {
+      "id": "1H2oZXqGr1YVkqQzidcuJb2v_jPiEvsA0",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "El truco de VoiceOver que estabas esperando. Tú y la IA a solas, sin intromisiones (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-1eklbvKPJRNVIG3cqtYC3kgze4VWYXHyl"
+      ]
+    },
+    {
+      "id": "1_w42W66cWgm_7Xm1RCR_WaxhBjPHfJLp",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Toque directo en VoiceOver. Cuándo usarlo y cuándo salir corriendo (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-1cc_7Ia-GkC3ZHPvYioBA5Gqm-hkCv_5f"
+      ]
+    },
+    {
+      "id": "1eO788_SqDAA4vQpOv7Qup-450G5KGnTx",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Batería en el iPhone. Todo lo que necesitas saber (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-1b6RsfoqDPcSCjh9GmDa0SDwIIYKBBpBh"
+      ]
+    },
+    {
+      "id": "1pgFJ_novQm4L7sTmNoTQrzfw1l_c8jQK",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Un ciego prevenido vale por dos. Alertas sísmicas en el móvil (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-1C9ianaduKBjRrK9aDLXykhitXKr_Y_Xx"
+      ]
+    },
+    {
+      "id": "1IC8N6iDXy7E_Vd4cfak7v42E2GMCYQeS",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Descargar en iPhone con VoiceOver. La odisea que nadie pidió (pero aquí estamos).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1IC8N6iDXy7E_Vd4cfak7v42E2GMCYQeS",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1IC8N6iDXy7E_Vd4cfak7v42E2GMCYQeS"
+      ]
+    },
+    {
+      "id": "1YJARDsI58Esq9vDYXr9NPrLFQEUTIVNL",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Cómo usa un iPhone alguien que no lo ve (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1YJARDsI58Esq9vDYXr9NPrLFQEUTIVNL",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1YJARDsI58Esq9vDYXr9NPrLFQEUTIVNL"
+      ]
+    },
+    {
+      "id": "1gvutVyw8z7sVs3z0ygTFXQfFDudYdR6Z",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Todo lo que necesitas conocer sobre la RAM y el caché de tu iPhone (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1gvutVyw8z7sVs3z0ygTFXQfFDudYdR6Z",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1gvutVyw8z7sVs3z0ygTFXQfFDudYdR6Z"
+      ]
+    },
+    {
+      "id": "1Z_b2H01fz5u2QoH9ReiY8GdxRW_o4iTW",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Enseña a tu iPhone a reconocer los pitidos de ciertos electrodomésticos (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1Z_b2H01fz5u2QoH9ReiY8GdxRW_o4iTW",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1Z_b2H01fz5u2QoH9ReiY8GdxRW_o4iTW"
+      ]
+    },
+    {
+      "id": "1DhFn8SOhklScG9lhgwOfAO1PkJjTLHOo",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Cambiar de iPhone sin dejar nada atrás (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1DhFn8SOhklScG9lhgwOfAO1PkJjTLHOo",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1DhFn8SOhklScG9lhgwOfAO1PkJjTLHOo"
+      ]
+    },
+    {
+      "id": "1QH45VySl7dmR7bbzQUTZvW_V8X86Gj0t",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Guía práctica para empezar a usar el iPhone con VoiceOver (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1QH45VySl7dmR7bbzQUTZvW_V8X86Gj0t",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1QH45VySl7dmR7bbzQUTZvW_V8X86Gj0t"
+      ]
+    },
+    {
+      "id": "1xT5cXyLJ1IoRq5wYrYmzqxVeHBwJmXdb",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Cuando el iPhone no te deja entrar: código, cuenta Apple, copia de seguridad y restauración (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1xT5cXyLJ1IoRq5wYrYmzqxVeHBwJmXdb",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1xT5cXyLJ1IoRq5wYrYmzqxVeHBwJmXdb"
+      ]
+    },
+    {
+      "id": "1yh_FcJdSqF2ffmTdWLlytchro1gK4yfm",
+      "lang": "es",
+      "path": [
+        "Catálogos",
+        "Catálogo de tutoriales de Canal TifloAcosta.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1yh_FcJdSqF2ffmTdWLlytchro1gK4yfm",
+          "category": "Catálogos",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1qmWq6S_aBbdQhHX06_ctjExK4NJh_6AX",
+      "lang": "es",
+      "path": [
+        "Catálogos",
+        "Catálogo internacional de juegos accesibles para móviles y tabletas (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1qmWq6S_aBbdQhHX06_ctjExK4NJh_6AX",
+          "category": "Catálogos",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1qmWq6S_aBbdQhHX06_ctjExK4NJh_6AX"
+      ]
+    },
+    {
+      "id": "1kiEF21ABd21KWP_RaDZYWL5e6s66eJcY",
+      "lang": "es",
+      "path": [
+        "Cámara",
+        "La cámara del iPhone sin mirar la pantalla.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1kiEF21ABd21KWP_RaDZYWL5e6s66eJcY",
+          "category": "Cámara",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1kiEF21ABd21KWP_RaDZYWL5e6s66eJcY"
+      ]
+    },
+    {
+      "id": "1k3uERbPjKQCaZxlbH278D-ouxdtJqcT7",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Avances en el braille - HTML accesible TifloAcosta.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "19Gij7lJZqZIcmtuYfN6sDeWJZlvEhWXG",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Apple Sports llega a tu país.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "18kU95UWNEgoN8yTVtHxI9woxZEpqunz0",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "RSS, la forma más tranquila de enterarte de todo (Tifloacosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1qKp8KikET3HgUEECCodEzoIaMgLDBYS2",
+      "lang": "es",
+      "path": [
+        "Mac",
+        "Curso de VoiceOver con Mac desde 0. 2026 .html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1qKp8KikET3HgUEECCodEzoIaMgLDBYS2",
+          "category": "Mac",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1qKp8KikET3HgUEECCodEzoIaMgLDBYS2"
+      ]
+    },
+    {
+      "id": "1Nb_1mCDIEV2ayv3MIDcNIb-tUSWNoWir",
+      "lang": "es",
+      "path": [
+        "Mac",
+        "Curso de WhatsApp en Mac con VoiceOver.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1Nb_1mCDIEV2ayv3MIDcNIb-tUSWNoWir",
+          "category": "Mac",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1Nb_1mCDIEV2ayv3MIDcNIb-tUSWNoWir"
+      ]
+    },
+    {
+      "id": "1dSx742s2Li3VJKRXJuhMlDx5jTmsK5jv",
+      "lang": "es",
+      "path": [
+        "Mac",
+        "StayAwake. una utilidad gratuita para Mac que mantiene el equipo despierto mientras usas VoiceOver (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1dSx742s2Li3VJKRXJuhMlDx5jTmsK5jv",
+          "category": "Mac",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1dSx742s2Li3VJKRXJuhMlDx5jTmsK5jv"
+      ]
+    },
+    {
+      "id": "1_hQ87pVewYHhqGixGnTQsyD-khQL5OYl",
+      "lang": "es",
+      "path": [
+        "Mac",
+        "Programas y utilidades esenciales para usuarios de Mac con VoiceOver (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1_hQ87pVewYHhqGixGnTQsyD-khQL5OYl",
+          "category": "Mac",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1_hQ87pVewYHhqGixGnTQsyD-khQL5OYl"
+      ]
+    },
+    {
+      "id": "1DtyE0VG1LhU21RkOQCMaERYcyWfRgSJS",
+      "lang": "es",
+      "path": [
+        "Correos",
+        "Crear una cuenta Gmail con lector de pantalla (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1DtyE0VG1LhU21RkOQCMaERYcyWfRgSJS",
+          "category": "Correos",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1DtyE0VG1LhU21RkOQCMaERYcyWfRgSJS"
+      ]
+    },
+    {
+      "id": "1L7YzsO_mN9Jwb-D7MmaAX-Dnp7A0rQhT",
+      "lang": "es",
+      "path": [
+        "Correos",
+        "Guía práctica para usar Gmail desde el navegador con JAWS.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1L7YzsO_mN9Jwb-D7MmaAX-Dnp7A0rQhT",
+          "category": "Correos",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1L7YzsO_mN9Jwb-D7MmaAX-Dnp7A0rQhT"
+      ]
+    },
+    {
+      "id": "1Lcbr7BGqIUaiUcc5__hsMd8GAp4gxRwx",
+      "lang": "es",
+      "path": [
+        "Correos",
+        "Guía accesible de Thunderbird.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1Lcbr7BGqIUaiUcc5__hsMd8GAp4gxRwx",
+          "category": "Correos",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1Lcbr7BGqIUaiUcc5__hsMd8GAp4gxRwx"
+      ]
+    },
+    {
+      "id": "1Kf-IytP0NI1DOsA0HjKtjemNWrVoCBuI",
+      "lang": "es",
+      "path": [
+        "Correos",
+        "Curso práctico de Outlook con lector de pantalla en Windows (Tifloacosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1Kf-IytP0NI1DOsA0HjKtjemNWrVoCBuI",
+          "category": "Correos",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1Kf-IytP0NI1DOsA0HjKtjemNWrVoCBuI"
+      ]
+    },
+    {
+      "id": "1WWeXnOMRnrcBD2i0gX7BplyeeXOFlYaQ",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "JAWS 2026 y NVDA 2026.2 - comparación práctica.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1WWeXnOMRnrcBD2i0gX7BplyeeXOFlYaQ",
+          "category": "Lectores de pantalla",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "10NvRY9lccAgC2M6HghxgLpprKJjTMXF7",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "Comandos equivalentes JAWS 2026 y NVDA 2026.2.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-10NvRY9lccAgC2M6HghxgLpprKJjTMXF7",
+          "category": "Lectores de pantalla",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Wzf3ADcfQM28i6MMqhULnP6OUDlC7Ntw",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "Curso de Word con JAWS 2026 y NVDA 2026.2 (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1Wzf3ADcfQM28i6MMqhULnP6OUDlC7Ntw",
+          "category": "Lectores de pantalla",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "189nfMh8fJwP_5ET2Qz0Y8Ftv0j3RurZL",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "Curso práctico de Excel con JAWS 2026 y NVDA 2026.2 (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-189nfMh8fJwP_5ET2Qz0Y8Ftv0j3RurZL",
+          "category": "Lectores de pantalla",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1D7sW3KlqT6lEPf7VyvvddypZtD2qGmIY",
+      "lang": "es",
+      "path": [
+        "Gafas",
+        "Gafas inteligentes y personas ciegas - análisis de Ray-Ban Meta y Envision Ally.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1D7sW3KlqT6lEPf7VyvvddypZtD2qGmIY",
+          "category": "Gafas",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1rM6_MRuWo8s3fE4ec92ZBjgb_srgPmGP",
+      "lang": "es",
+      "path": [
+        "Gafas",
+        "Estudio comparativo de gafas inteligentes para personas ciegas hispanohablantes - noviembre 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1rM6_MRuWo8s3fE4ec92ZBjgb_srgPmGP",
+          "category": "Gafas",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1jSA3mUc3dYaAr-H3CFXyIeqVne8vkanv",
+      "lang": "es",
+      "path": [
+        "Escritura",
+        "Uso de teclados externos con VoiceOver en iPhone y iPad. Funciones, atajos y consejos.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1jSA3mUc3dYaAr-H3CFXyIeqVne8vkanv",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1jSA3mUc3dYaAr-H3CFXyIeqVne8vkanv"
+      ]
+    },
+    {
+      "id": "1OPnGAzd5ssCPpZXYDPyNROmGfNTDy_6Y",
+      "lang": "es",
+      "path": [
+        "Atajos",
+        "Tu iPhone habla al cargar. Crea un sonido automático al conectar y quitar el cargador (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-1qh-wpAEAnxR9ILfXiQnjg4kQ28sv9Dn8"
+      ]
+    },
+    {
+      "id": "1eUCkMKilTsuMXNYgSpgdgP2EappRv32g",
+      "lang": "es",
+      "path": [
+        "Atajos",
+        "Crea informes de accesibilidad en segundos desde tu iPhone (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-1B87FrddFAyX0L2BxeYvPBtgEzbIDMDw0"
+      ]
+    },
+    {
+      "id": "19oVnEZYBLwKc6CGF-Oq08KRV7THGM7O5",
+      "lang": "es",
+      "path": [
+        "Atajos",
+        "Tomando atajos con Canal TifloAcosta.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-19oVnEZYBLwKc6CGF-Oq08KRV7THGM7O5",
+          "category": "Atajos",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-19oVnEZYBLwKc6CGF-Oq08KRV7THGM7O5"
+      ]
+    },
+    {
+      "id": "16puKBAPIm_3MVkx9fCVaLiTXNv87QJsY",
+      "lang": "es",
+      "path": [
+        "APPs",
+        "AudioGameAccess, juegos para disfrutar de oído, a solas o en compañía.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Tb43TSDTWaaxjrY5UUv1YuBsYcG2mEhh",
+      "lang": "es",
+      "path": [
+        "APPs",
+        "El Panel de Hoy - guía accesible de usuario.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1vdNx6kIfA_daw4vhoZnYDFZlGUTYMORf",
+      "lang": "es",
+      "path": [
+        "APPs",
+        "YouTube por fin deja quitar los Shorts (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-1283tZd-Mu0UWVOmaaFLC1YYAYM228-ig"
+      ]
+    },
+    {
+      "id": "1fP21tSp4vJZXTAK_p8vZnE1ZHtbj2zga",
+      "lang": "es",
+      "path": [
+        "APPs",
+        "Te enseño cómo usar dos números de WhatsApp en el mismo iPhone (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-1wQLrAgXN4OyGF1WfWBNvUyFtq6w0Q83X"
+      ]
+    },
+    {
+      "id": "1un4rIsME2lUaqWlJ-Ed6sL-95fSoriQO",
+      "lang": "es",
+      "path": [
+        "APPs",
+        "¿Y si hablar otro idioma dejara de ser un muro? (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-1R4ky6ksovb8C7FenO4PrZGeGWkCxx0gS"
+      ]
+    },
+    {
+      "id": "11VB1lyoEzAqiNQBnQK3YucA-lGWaG83Q",
+      "lang": "es",
+      "path": [
+        "APPs",
+        "SonarPad, la app accesible que lo quiere hacer todo (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-1YDPjBBbWykRGs6y4vuCSpNa4blM7_FR4"
+      ]
+    },
+    {
+      "id": "1g08DxAsb1bjfOxVBljX8SXNBE81MI1JT",
+      "lang": "es",
+      "path": [
+        "APPs",
+        "zEdit, por fin editar vídeo y audio con VoiceOver deja de ser una tortura (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-1g_wJDb7abeFmpCZ2XQn2WEyHXv25OwSR"
+      ]
+    },
+    {
+      "id": "1qbNs3I07p5cur3mqHGikzKdTaWChaDzj",
+      "lang": "es",
+      "path": [
+        "APPs",
+        "aGram, por fin Telegram se deja usar bien con VoiceOver (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-1YShD7GWgVnynlsDqO1rwqXkf4Qn1RsUM"
+      ]
+    },
+    {
+      "id": "1FKsaxZ_-NgKsHWWBI_i25X8rEqwQHTgN",
+      "lang": "es",
+      "path": [
+        "APPs",
+        "Lo que no puede faltar en tu iPhone (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1FKsaxZ_-NgKsHWWBI_i25X8rEqwQHTgN",
+          "category": "APPs",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1FKsaxZ_-NgKsHWWBI_i25X8rEqwQHTgN"
+      ]
+    },
+    {
+      "id": "1kIhX2J4rGdTWFplU50SrwxOn5LDYnkv8",
+      "lang": "es",
+      "path": [
+        "APPs",
+        "Te presento EasyWeather(TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1kIhX2J4rGdTWFplU50SrwxOn5LDYnkv8",
+          "category": "APPs",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1kIhX2J4rGdTWFplU50SrwxOn5LDYnkv8"
+      ]
+    },
+    {
+      "id": "1bARy1QpqGYy9ZvqmS74gxZG0px6kpyJk",
+      "lang": "es",
+      "path": [
+        "APPs",
+        "TableEx. Juegos de mesa y cartas accesibles para personas ciegas (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1bARy1QpqGYy9ZvqmS74gxZG0px6kpyJk",
+          "category": "APPs",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1bARy1QpqGYy9ZvqmS74gxZG0px6kpyJk"
+      ]
+    },
+    {
+      "id": "1qzoR-i5zvSFTuMPVhxhfOVJ3bjSVuTZc",
+      "lang": "es",
+      "path": [
+        "APPs",
+        "Braillito, una forma entretenida de conocer el braille (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1qzoR-i5zvSFTuMPVhxhfOVJ3bjSVuTZc",
+          "category": "APPs",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1qzoR-i5zvSFTuMPVhxhfOVJ3bjSVuTZc"
+      ]
+    },
+    {
+      "id": "1zW5_QwwC6WJRMR9qTTv51qLi0FCJ1j3_",
+      "lang": "es",
+      "path": [
+        "APPs",
+        "Apps que te pueden interesar.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1zW5_QwwC6WJRMR9qTTv51qLi0FCJ1j3_",
+          "category": "APPs",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1zW5_QwwC6WJRMR9qTTv51qLi0FCJ1j3_"
+      ]
+    },
+    {
+      "id": "1e0d3KlN1PFAgzn_rhPwdVGSjzxg985OA",
+      "lang": "es",
+      "path": [
+        "Android",
+        "Curso_Braille_Android_TifloAcosta_ES.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1-Le2y1bQooynoGbneHBQg3qBiz50fjyE",
+      "lang": "es",
+      "path": [
+        "Android",
+        "Curso completo de escritura braille en pantalla con Android y TalkBack.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-curso-braille-android-talkback-2026"
+      ]
+    },
+    {
+      "id": "1sxkdwNWtbDitDu-GVRNDOwvNX4n6CaG6",
+      "lang": "es",
+      "path": [
+        "Android",
+        "Curso Jieshuo en Android (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1sxkdwNWtbDitDu-GVRNDOwvNX4n6CaG6",
+          "category": "Android",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1sxkdwNWtbDitDu-GVRNDOwvNX4n6CaG6"
+      ]
+    },
+    {
+      "id": "1G66sYkWuXIwYggrMvHq74W1E1EsX_Vvx",
+      "lang": "es",
+      "path": [
+        "Android",
+        "Curso completo de Android con TalkBack (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1G66sYkWuXIwYggrMvHq74W1E1EsX_Vvx",
+          "category": "Android",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1G66sYkWuXIwYggrMvHq74W1E1EsX_Vvx"
+      ]
+    },
+    {
+      "id": "171jkNluL0wFaCK2HjV-SqKy4tP9cF2Fd",
+      "lang": "es",
+      "path": [
+        "Android",
+        "Files de Google, una buena escoba para el almacenamiento de Android (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-171jkNluL0wFaCK2HjV-SqKy4tP9cF2Fd",
+          "category": "Android",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-171jkNluL0wFaCK2HjV-SqKy4tP9cF2Fd"
+      ]
+    },
+    {
+      "id": "1ctEt4f5dq1Q5ITwj2VpBGgkBVAdVD4SR",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "¿Y ahora cómo voy a hacer mi vida? - Rehabilitación y autonomía después de perder la vista.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1uTEYvSDBUxzvxPmLFkQa78VSqJtEHsGI",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Cuando el mismo iPhone no hace lo mismo (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1uTEYvSDBUxzvxPmLFkQa78VSqJtEHsGI",
+          "category": "Estudios",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1uTEYvSDBUxzvxPmLFkQa78VSqJtEHsGI"
+      ]
+    },
+    {
+      "id": "1A4SO3ybRU3IevF_3a2ZgjDGbXiVynrb6",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "El Futuro de la Radio.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1A4SO3ybRU3IevF_3a2ZgjDGbXiVynrb6",
+          "category": "General",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1A4SO3ybRU3IevF_3a2ZgjDGbXiVynrb6"
+      ]
+    },
+    {
+      "id": "1CfderlYFrafHB4nhy-HCC5At0paQDr5y",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Cuando el captcha es la barrera.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1CfderlYFrafHB4nhy-HCC5At0paQDr5y",
+          "category": "General",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1CfderlYFrafHB4nhy-HCC5At0paQDr5y"
+      ]
+    },
+    {
+      "id": "1QwKn5Tu5BvLNiUgCpVCt_sH3SgXY2TLD",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Cuando siendo ciego compramos a ciegas.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1QwKn5Tu5BvLNiUgCpVCt_sH3SgXY2TLD",
+          "category": "General",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1QwKn5Tu5BvLNiUgCpVCt_sH3SgXY2TLD"
+      ]
+    },
+    {
+      "id": "1fVuM52NOltMRly2QLDbNgb09oOEQ3RU4",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Cambiar de móvil cuando no ves. Consejos para no arrepentirte a la semana.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1fVuM52NOltMRly2QLDbNgb09oOEQ3RU4",
+          "category": "Estudios",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1fVuM52NOltMRly2QLDbNgb09oOEQ3RU4"
+      ]
+    },
+    {
+      "id": "1kJnrhMeEemgAxjglqnH-oq9zX_p0hevv",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "El Kit de movilidad digital.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1kJnrhMeEemgAxjglqnH-oq9zX_p0hevv",
+          "category": "Estudios",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1kJnrhMeEemgAxjglqnH-oq9zX_p0hevv"
+      ]
+    },
+    {
+      "id": "16xWHXKfFtty3nNJYxEOtHTns3GAkzlfN",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Android o iPhone, qué comprar si soy una persona ciega (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-16xWHXKfFtty3nNJYxEOtHTns3GAkzlfN",
+          "category": "Estudios",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-16xWHXKfFtty3nNJYxEOtHTns3GAkzlfN"
+      ]
+    },
+    {
+      "id": "1fpa1se6481mR9SFmwZ3RGtO0_IEoXA3n",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Ceguera, sueño y No24 (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1fpa1se6481mR9SFmwZ3RGtO0_IEoXA3n",
+          "category": "Estudios",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1fpa1se6481mR9SFmwZ3RGtO0_IEoXA3n"
+      ]
+    },
+    {
+      "id": "1l4qE3T2jxW5asmt9hm9hOLK-4C9aLdM0",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "iPhone, iPad o Mac, qué comprar según lo que realmente necesitas.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1l4qE3T2jxW5asmt9hm9hOLK-4C9aLdM0",
+          "category": "Estudios",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1l4qE3T2jxW5asmt9hm9hOLK-4C9aLdM0"
+      ]
+    },
+    {
+      "id": "126dcOqVVxl2MljvPysPT3QIaaDAmQ0SH",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Impresoras braille domésticas (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-126dcOqVVxl2MljvPysPT3QIaaDAmQ0SH",
+          "category": "Estudios",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-126dcOqVVxl2MljvPysPT3QIaaDAmQ0SH"
+      ]
+    },
+    {
+      "id": "1vn8VEbCE0qCPgOWEXo35_5J68YWPdsAO",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Líneas braille. qué son, cómo funcionan y cuál te conviene (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1vn8VEbCE0qCPgOWEXo35_5J68YWPdsAO",
+          "category": "Estudios",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1vn8VEbCE0qCPgOWEXo35_5J68YWPdsAO"
+      ]
+    },
+    {
+      "id": "1q1DZABDaAtHVUdYZYuPwLsP3smSD1WwR",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Seguridad digital sin sustos (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1q1DZABDaAtHVUdYZYuPwLsP3smSD1WwR",
+          "category": "Estudios",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1q1DZABDaAtHVUdYZYuPwLsP3smSD1WwR"
+      ]
+    },
+    {
+      "id": "1AvPj0BRNLoySVc6QF6k28kH9PedWRtRS",
+      "lang": "es",
+      "path": [
+        "Nubes",
+        "iCloud Drive entre el iPhone y Windows (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1AvPj0BRNLoySVc6QF6k28kH9PedWRtRS",
+          "category": "Nubes",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1AvPj0BRNLoySVc6QF6k28kH9PedWRtRS"
+      ]
+    },
+    {
+      "id": "1QluhM_Xwzs4wnmYQcUsxLcXZrJW2KVcK",
+      "lang": "es",
+      "path": [
+        "Nubes",
+        "Google Drive,Guía práctica y accesible para Windows, Mac, iPhone y Android Con JAWS, NVDA, VoiceOver y TalkBack (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1QluhM_Xwzs4wnmYQcUsxLcXZrJW2KVcK",
+          "category": "Nubes",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1QluhM_Xwzs4wnmYQcUsxLcXZrJW2KVcK"
+      ]
+    },
+    {
+      "id": "1JNF1Hbpe3aWX-bzOgLoLm4KTZ7pJKYqB",
+      "lang": "es",
+      "path": [
+        "Lectura",
+        "Vox Libri, un reproductor de libros pensado de verdad para personas ciegas (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-video-text-19kCJGPZV4Wm04qtELfbubezUx2DC5bqv"
+      ]
+    },
+    {
+      "id": "1SgInCwUgLmgEYgL0YbEN2sRPhM_JhzEo",
+      "lang": "es",
+      "path": [
+        "Lectura",
+        "Leer sin pedir permiso.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1SgInCwUgLmgEYgL0YbEN2sRPhM_JhzEo",
+          "category": "Lectura",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1SgInCwUgLmgEYgL0YbEN2sRPhM_JhzEo"
+      ]
+    },
+    {
+      "id": "1SfWvkEsrKx3XtGNV1wMCD4oJfHJuCCLN",
+      "lang": "es",
+      "path": [
+        "Lectura",
+        "Guía práctica para importar documentos HTML en Voice Dream Reader.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1SfWvkEsrKx3XtGNV1wMCD4oJfHJuCCLN",
+          "category": "Lectura",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1SfWvkEsrKx3XtGNV1wMCD4oJfHJuCCLN"
+      ]
+    },
+    {
+      "id": "1LX0pE_XVBAbZ76Vmsc2mw2qJ4rcCU6Bf",
+      "lang": "en",
+      "path": [
+        "Channel Videos in Text",
+        "VoiceOver_Is_that_voice_new_EN.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-video-text-1LX0pE_XVBAbZ76Vmsc2mw2qJ4rcCU6Bf",
+          "category": "Channel Videos in Text",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1k4XM7_ZOPejXYjfb9LJOIms6wGARa4WO",
+      "lang": "en",
+      "path": [
+        "Channel Videos in Text",
+        "VoiceOver_gestures_adapted_tutorial_EN.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-video-text-1k4XM7_ZOPejXYjfb9LJOIms6wGARa4WO",
+          "category": "Channel Videos in Text",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "19ufQzuAWLkFsldrxISp9O_GLDUJ85GGt",
+      "lang": "en",
+      "path": [
+        "Channel Videos in Text",
+        "This_shortcut_sees_a_code_and_starts_investigating_adapted_tutorial.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-video-text-19ufQzuAWLkFsldrxISp9O_GLDUJ85GGt",
+          "category": "Channel Videos in Text",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1CVbXD-R0C58VxBcA48QxRvY7Ku8aA7Rj",
+      "lang": "en",
+      "path": [
+        "Channel Videos in Text",
+        "TifloAcosta_now_has_an_app_adapted_tutorial.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-video-text-1CVbXD-R0C58VxBcA48QxRvY7Ku8aA7Rj",
+          "category": "Channel Videos in Text",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1YJtS-O5KkFaIK_npwh8Lq7J7nZes_yb8",
+      "lang": "en",
+      "path": [
+        "Shortcuts",
+        "Make Your iPhone Speak When Charging. Play a Sound When Connecting or Disconnecting the Charger (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-video-text-1dpQE_6lafcY0xMK4H2PsKR3IOp1MIdae"
+      ]
+    },
+    {
+      "id": "1yL3jLmBqf_fKfXWE_adq_yYZXZVK37ew",
+      "lang": "en",
+      "path": [
+        "Shortcuts",
+        "Create Accessibility Reports in Seconds from Your iPhone (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-video-text-1hPlXxZNQC6eKte1sapvVlu_ykHb3vY6z"
+      ]
+    },
+    {
+      "id": "1eGgMgxzmCtc-JQmG9cXB4exeTF0T6vlP",
+      "lang": "en",
+      "path": [
+        "Guides and Tutorials",
+        "Two in one - suspicious messages and WikiTrip (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1eGgMgxzmCtc-JQmG9cXB4exeTF0T6vlP",
+          "category": "Guides and Tutorials",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1eGgMgxzmCtc-JQmG9cXB4exeTF0T6vlP"
+      ]
+    },
+    {
+      "id": "18UO32Mkv6RbPChuxuv2raAumwyhsgmYP",
+      "lang": "en",
+      "path": [
+        "Guides and Tutorials",
+        "Linux for blind people. Is it really usable with a screen reader? (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-video-text-1K6d6a06A_9H_-1AYopbTPs-jkxCgFELL"
+      ]
+    },
+    {
+      "id": "1GqHYUDA1Y5amL9Dm3HrvR74jCOD3WWMi",
+      "lang": "en",
+      "path": [
+        "Guides and Tutorials",
+        "The Art of Helping Without Getting in the Way (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1GqHYUDA1Y5amL9Dm3HrvR74jCOD3WWMi",
+          "category": "General",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1GqHYUDA1Y5amL9Dm3HrvR74jCOD3WWMi"
+      ]
+    },
+    {
+      "id": "1CkUT59t5FpfcMpAvDLX5FBdo_qP8XrfD",
+      "lang": "en",
+      "path": [
+        "Guides and Tutorials",
+        "It worked yesterday (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1CkUT59t5FpfcMpAvDLX5FBdo_qP8XrfD",
+          "category": "General",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1CkUT59t5FpfcMpAvDLX5FBdo_qP8XrfD"
+      ]
+    },
+    {
+      "id": "1vlw15qhDgkajSZPgDQzFo9whgDaioSwD",
+      "lang": "en",
+      "path": [
+        "Pills",
+        "Pills 24 of 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1vI09TTMryj4L11GktqGEfcJaYIJNxYJi",
+      "lang": "en",
+      "path": [
+        "Pills",
+        "tech pills. 23 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "11jp8KzM06MwlhnXXOdo-Fa16drl0YURf",
+      "lang": "en",
+      "path": [
+        "Pills",
+        "Tech Pills 22 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T",
+      "lang": "en",
+      "path": [
+        "Pills",
+        "Tech Pills 21 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T",
+          "category": "Pills",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1VPDz9sdkuJulXHzpJR_JCnsNiI3AUnjB",
+      "lang": "en",
+      "path": [
+        "Pills",
+        "Tech Pills 20 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1_tRh-NisSiQR82FnC06VDtGT2Uj8TezJ",
+      "lang": "en",
+      "path": [
+        "Pills",
+        "Tech Pills 19 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1-iDGi__VEKFW1p8xHjJs8h8bBEtd9dCF",
+      "lang": "en",
+      "path": [
+        "Pills",
+        "Tech Pills 18 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "13AmA3wudLMGjL-Dm6tGxaXQIV20oiY6n",
+      "lang": "en",
+      "path": [
+        "Pills",
+        "Tech Pills 17 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1ZviWN1pXBD12ehuJjrBuwCjw15kk7Aze",
+      "lang": "en",
+      "path": [
+        "Pills",
+        "Tech Pills 16 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Wqq6OY29bFMqu_wYBzxQkJ2_EW-j84yn",
+      "lang": "en",
+      "path": [
+        "Pills",
+        "Tech Pills 15 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1vWdCopX6p5BSk5D1tEEBTODvLi8poP3A",
+      "lang": "en",
+      "path": [
+        "Pills",
+        "Tech Pills 14 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "15Gb28rtHrxK3RmIsaISSsllBSZeMLycf",
+      "lang": "en",
+      "path": [
+        "Pills",
+        "Tech Pills 13 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1iRzeBGvMMX7uW6dRQvwmaRa4tyhwYenV",
+      "lang": "en",
+      "path": [
+        "Pills",
+        "Tech Pills 12 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1rjypcZ0Zuc-xZdWAYkomjdqcbz36mr_U",
+      "lang": "en",
+      "path": [
+        "Apps",
+        "AudioGameAccess, Games to Enjoy by Ear, Alone or with Others.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1ptfvmW8R61b2ZhKd3NBMLgqzhjFvGx41",
+      "lang": "en",
+      "path": [
+        "Apps",
+        "Vox Libri - Accessible book reader (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "15VbKjOnjQP51k9CcUdYWDACdcgGohdab",
+      "lang": "en",
+      "path": [
+        "Apps",
+        "YouTube Finally Lets You Get Rid of Shorts (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-video-text-1xki8LUVe3iWdG6CvPSr3riw38-KEuB6I"
+      ]
+    },
+    {
+      "id": "14pKROKAzZ726JwgMa7kfwQ6HA2s5ocUz",
+      "lang": "en",
+      "path": [
+        "Apps",
+        "How to Use Two WhatsApp Numbers on the Same iPhone (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-video-text-1V-v2CRxMeRdjfrfe_eqSujixT7jfFoMp"
+      ]
+    },
+    {
+      "id": "1uvgmGfdXj8K2bAUMMpTCNqYPRN3pzACR",
+      "lang": "en",
+      "path": [
+        "Apps",
+        "What If Speaking Another Language Stopped Being a Barrier? (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-video-text-1l0PnRPFpoSJ39asuhcAc-A6lVyxTlbiR"
+      ]
+    },
+    {
+      "id": "1Gl_bvnYIZgR2hBNSoIWjkfftH5A0c8dQ",
+      "lang": "en",
+      "path": [
+        "Apps",
+        "SonarPad, The Accessible App That Wants to Do Everything (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-video-text-1zLjjne41ig3-nxwSTkKIMeUasN0VIv_q"
+      ]
+    },
+    {
+      "id": "17SdFM4qXQttMYsMKCZ4o5WFK8Nmh4fLg",
+      "lang": "en",
+      "path": [
+        "Apps",
+        "zEdit, At Last Editing Video and Audio with VoiceOver Stops Being a Torture (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-video-text-1RQ9MSMjnda9aD-MaYkaq_0oC1MYjY9JK"
+      ]
+    },
+    {
+      "id": "19nyjhrs0BfXX1w97oeM686AbMG16kSeZ",
+      "lang": "en",
+      "path": [
+        "Apps",
+        "aGram, At Last Telegram Is Easy to Use with VoiceOver (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-video-text-1_IoYocPxWXfzdfiPq1g7DvhACOnKqLTB"
+      ]
+    },
+    {
+      "id": "1SBdPkyF-D2Qpp6G-bzAd_jOU0tPyBKWM",
+      "lang": "en",
+      "path": [
+        "Apps",
+        "Braillito, A fun way to discover Braille (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1SBdPkyF-D2Qpp6G-bzAd_jOU0tPyBKWM",
+          "category": "Apps",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1SBdPkyF-D2Qpp6G-bzAd_jOU0tPyBKWM"
+      ]
+    },
+    {
+      "id": "1HWmHoQGwPMInjiBif-sZNEte1Qwi-OrS",
+      "lang": "en",
+      "path": [
+        "Apps",
+        "TableEx. Accessible Board and Card Games for Blind People (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1HWmHoQGwPMInjiBif-sZNEte1Qwi-OrS",
+          "category": "Apps",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1HWmHoQGwPMInjiBif-sZNEte1Qwi-OrS"
+      ]
+    },
+    {
+      "id": "177Ni4DvWPtzmP6C7U4LbjB5GMTLiLzR4",
+      "lang": "en",
+      "path": [
+        "Apps",
+        "What You Should Have on Your iPhone (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-177Ni4DvWPtzmP6C7U4LbjB5GMTLiLzR4",
+          "category": "Apps",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-177Ni4DvWPtzmP6C7U4LbjB5GMTLiLzR4"
+      ]
+    },
+    {
+      "id": "15dnqa0X5uitVAawYdikzUoALi1XzQI6Z",
+      "lang": "en",
+      "path": [
+        "AI",
+        "Searching the Internet Is No Longer What It Used to Be.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-15dnqa0X5uitVAawYdikzUoALi1XzQI6Z",
+          "category": "General",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-15dnqa0X5uitVAawYdikzUoALi1XzQI6Z"
+      ]
+    },
+    {
+      "id": "188XqsYUkC8lLyT-xmrw19Fbufbx9MnGo",
+      "lang": "en",
+      "path": [
+        "AI",
+        "Study of Current Artificial Intelligence Systems (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-188XqsYUkC8lLyT-xmrw19Fbufbx9MnGo",
+          "category": "AI",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-188XqsYUkC8lLyT-xmrw19Fbufbx9MnGo"
+      ]
+    },
+    {
+      "id": "1voNTrrdU7tP1-ddikI4-E-GufwjD7nYr",
+      "lang": "en",
+      "path": [
+        "Screen Readers",
+        "Word Course with JAWS and NVDA. TifloAcosta.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1voNTrrdU7tP1-ddikI4-E-GufwjD7nYr",
+          "category": "Screen Readers",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1qgC5AprH-11X_PQscgLu0zgDyh9RdfMj",
+      "lang": "en",
+      "path": [
+        "Screen Readers",
+        "Practical Excel Course with JAWS and NVDA (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1qgC5AprH-11X_PQscgLu0zgDyh9RdfMj",
+          "category": "Screen Readers",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1qgC5AprH-11X_PQscgLu0zgDyh9RdfMj"
+      ]
+    },
+    {
+      "id": "1QilTDJjfsUkHcYLq3BMJBSLrPnzUa63M",
+      "lang": "en",
+      "path": [
+        "Screen Readers",
+        "Jaws and NVDA Equivalent Commands (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1QilTDJjfsUkHcYLq3BMJBSLrPnzUa63M",
+          "category": "Screen Readers",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1QilTDJjfsUkHcYLq3BMJBSLrPnzUa63M"
+      ]
+    },
+    {
+      "id": "18pv7wNKyodcHCMXiaXEX5Kz-JrrDEub7",
+      "lang": "en",
+      "path": [
+        "Cloud Storage Services",
+        "iCloud Drive between iPhone and Windows (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-18pv7wNKyodcHCMXiaXEX5Kz-JrrDEub7",
+          "category": "Cloud Storage Services",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-18pv7wNKyodcHCMXiaXEX5Kz-JrrDEub7"
+      ]
+    },
+    {
+      "id": "1d-CfhSHvI1Hzt2SY65BwYI3EQw8G23CS",
+      "lang": "en",
+      "path": [
+        "Cloud Storage Services",
+        "Google Drive, A practical and accessible guide for Windows, Mac, iPhone and Android With JAWS, NVDA, VoiceOver and TalkBack (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1d-CfhSHvI1Hzt2SY65BwYI3EQw8G23CS",
+          "category": "Cloud Storage Services",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1d-CfhSHvI1Hzt2SY65BwYI3EQw8G23CS"
+      ]
+    },
+    {
+      "id": "1sZQy31bS_DG1zzMzqu8o1pL35zd-ttv4",
+      "lang": "en",
+      "path": [
+        "Apple Watch",
+        "Practical Apple Watch Course with VoiceOver (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1sZQy31bS_DG1zzMzqu8o1pL35zd-ttv4",
+          "category": "Apple Watch",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1sZQy31bS_DG1zzMzqu8o1pL35zd-ttv4"
+      ]
+    },
+    {
+      "id": "1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "Complete Course on Braille Screen Input on iPhone (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC"
+      ]
+    },
+    {
+      "id": "1NhzNbXNly2cv_QB2WQgxjo5Ex0L4HHuB",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "Apple keynote 2026. Everything new from Apple (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1NhzNbXNly2cv_QB2WQgxjo5Ex0L4HHuB",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1APLLz0fpSjamrkyFKtf8L_NsnV3E9DBt",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "iOS_26_3_whats_new_TifloAcosta_EN.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1pORBQJ7S4FL6YQCvcEiuo6Uv2rcEnhrq",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "The_biggest_iPhone_confusion_is_called_iCloud_TifloAcosta_EN.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1TpiNm9iIk4ogjwT3ZZphSNHsdBfPK7MA",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "How to tell if someone blocked you on WhatsApp (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-video-text-1Ir74IndIPK0xqD5eKBOt0nBuOHpDGJSu"
+      ]
+    },
+    {
+      "id": "1dCWQQyn05fU-DHiRb9oYVWK4m9G3splc",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "Invisible iPhone updates. What they are and why they matter (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-video-text-1o_nWqLndHJySLEUEV7gCoBg3QE3GjfJ6"
+      ]
+    },
+    {
+      "id": "1x2E-rDiEERIAQt_vKMHO3GBpkaowOc3-",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "iOS 26.4 without the new Siri but with changes that actually matter (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-video-text-1jxfsu_AUXt4hTkhKwIbJEiuBhM6PIqIt"
+      ]
+    },
+    {
+      "id": "17Rn7Mwsq_0yaF_7BI64-W8aBdNueZTOB",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "The VoiceOver Trick You Were Waiting For. Just You and AI, Without Interruptions (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-video-text-1CaNZuEThEVd24kW42eo_oe46vkIsPHn-"
+      ]
+    },
+    {
+      "id": "1qyJOX4zd9Z3z_FnyXuqVAc-SGEiT3yGt",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "Direct Touch in VoiceOver. When to Use It and When to Run Away (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-video-text-1l3maUilnCNO4cvLf8UQmfXT4cxOtriIp"
+      ]
+    },
+    {
+      "id": "1OA5h5WqsrkxcnTM3p_aqgSw_yIXxaBv7",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "iPhone Battery. Everything You Need to Know (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-video-text-1Y5cvUp1VpU4G7MsBianGiJ3eJH7Rzacw"
+      ]
+    },
+    {
+      "id": "10Sg0Q-FQrvAcMhZnOkXmnOlOO95ywL9Z",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "A Blind Person Forewarned Is Forearmed. Earthquake Alerts on Your Phone (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "en-video-text-1KvQZhBJ8g3WOMbkMR0Jjvh-8nYsHJSFM"
+      ]
+    },
+    {
+      "id": "14XPltm__NDBu2ICNpVTpGdZBffC3bIwb",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "Downloading on iPhone with VoiceOver (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-14XPltm__NDBu2ICNpVTpGdZBffC3bIwb",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-14XPltm__NDBu2ICNpVTpGdZBffC3bIwb"
+      ]
+    },
+    {
+      "id": "1B92gvq8L1BhvFrAyGt90QsRpbwZnTAXq",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "How a blind person uses an iPhone (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1B92gvq8L1BhvFrAyGt90QsRpbwZnTAXq",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1B92gvq8L1BhvFrAyGt90QsRpbwZnTAXq"
+      ]
+    },
+    {
+      "id": "18WiIo0DRW918qdzjz8Ej7VDreNiZ2rdF",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "Everything You Need to Know About RAM and Cache on Your iPhone (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-18WiIo0DRW918qdzjz8Ej7VDreNiZ2rdF",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-18WiIo0DRW918qdzjz8Ej7VDreNiZ2rdF"
+      ]
+    },
+    {
+      "id": "1_xbSNKnHef1PBBl9Pgmi0gVNAkCqw9wv",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "Teach Your iPhone to Recognize the Beeps of Certain Appliances (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1_xbSNKnHef1PBBl9Pgmi0gVNAkCqw9wv",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1_xbSNKnHef1PBBl9Pgmi0gVNAkCqw9wv"
+      ]
+    },
+    {
+      "id": "1h1KnGhyaA3mpu0oKm8tkDojUMPfIUmti",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "Changing iPhone Without Leaving Anything Behind (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1h1KnGhyaA3mpu0oKm8tkDojUMPfIUmti",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1h1KnGhyaA3mpu0oKm8tkDojUMPfIUmti"
+      ]
+    },
+    {
+      "id": "1pOu-JfqCibjFb8EoURlQXpqtmRvhcuoZ",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "When Your iPhone Won’t Let You In: Passcode, Apple Account, Backup and Restore (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1pOu-JfqCibjFb8EoURlQXpqtmRvhcuoZ",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1pOu-JfqCibjFb8EoURlQXpqtmRvhcuoZ"
+      ]
+    },
+    {
+      "id": "199EJuLuDa80LxFeoT_nnsnVlEin5AnBW",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "Practical Guide to Getting Started with iPhone Using VoiceOver (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-199EJuLuDa80LxFeoT_nnsnVlEin5AnBW",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-199EJuLuDa80LxFeoT_nnsnVlEin5AnBW"
+      ]
+    },
+    {
+      "id": "1NcnFeIx5_HBHgIzs8udKMgGIU0b0sTBr",
+      "lang": "en",
+      "path": [
+        "iPhone",
+        "Using External Keyboards with VoiceOver on iPhone and iPad. Features, Shortcuts and Tips (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1NcnFeIx5_HBHgIzs8udKMgGIU0b0sTBr",
+          "category": "iPhone",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1NcnFeIx5_HBHgIzs8udKMgGIU0b0sTBr"
+      ]
+    },
+    {
+      "id": "1Rl5quAwB5DSSdro9E312evOwzq75jOtx",
+      "lang": "en",
+      "path": [
+        "Windows",
+        "Catalogue of Accessible Programs and Utilities for Windows (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1Rl5quAwB5DSSdro9E312evOwzq75jOtx",
+          "category": "Windows",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1Rl5quAwB5DSSdro9E312evOwzq75jOtx"
+      ]
+    },
+    {
+      "id": "1al0eoXbERt6aimxKwjkb-2Np71YZhD-R",
+      "lang": "en",
+      "path": [
+        "Windows",
+        "The Windows Keyboard: A Complete Guide for Screen Reader Users (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1al0eoXbERt6aimxKwjkb-2Np71YZhD-R",
+          "category": "Windows",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1al0eoXbERt6aimxKwjkb-2Np71YZhD-R"
+      ]
+    },
+    {
+      "id": "1T4JQtTAA7UhR1GRzcek18WJgDZa3uwTQ",
+      "lang": "en",
+      "path": [
+        "Windows",
+        "Practical WhatsApp Desktop Course for Windows. With Screen Readers: JAWS and NVDA (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1T4JQtTAA7UhR1GRzcek18WJgDZa3uwTQ",
+          "category": "Windows",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1T4JQtTAA7UhR1GRzcek18WJgDZa3uwTQ"
+      ]
+    },
+    {
+      "id": "1vcdA-RuOzb-908X42S1fkfpLGy6KBpPY",
+      "lang": "en",
+      "path": [
+        "News",
+        "RSS, the calmest way to stay informed.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1vcdA-RuOzb-908X42S1fkfpLGy6KBpPY",
+          "category": "News",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1vcdA-RuOzb-908X42S1fkfpLGy6KBpPY"
+      ]
+    },
+    {
+      "id": "124egW5QOiuKENPZ-nIUPxN-3WpQQ98LW",
+      "lang": "en",
+      "path": [
+        "News",
+        "RSS feed collection.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-124egW5QOiuKENPZ-nIUPxN-3WpQQ98LW",
+          "category": "News",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-124egW5QOiuKENPZ-nIUPxN-3WpQQ98LW"
+      ]
+    },
+    {
+      "id": "1Ik-v1BREcnbWdOIfqSRIy3YAm-WkSNYx",
+      "lang": "en",
+      "path": [
+        "Mac",
+        "Practical Guide WhatsApp for Mac with VoiceOver (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1Qfn5zjvOriEdIqjFVNNqM1ZWIgcRN4mX",
+          "category": "Mac",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1Qfn5zjvOriEdIqjFVNNqM1ZWIgcRN4mX"
+      ]
+    },
+    {
+      "id": "1oL1upqZzP6nEjy93tiVHHPXg0-RBwYLd",
+      "lang": "en",
+      "path": [
+        "Mac",
+        "Complete VoiceOver Course on Mac accessible.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1oL1upqZzP6nEjy93tiVHHPXg0-RBwYLd",
+          "category": "Mac",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1oL1upqZzP6nEjy93tiVHHPXg0-RBwYLd"
+      ]
+    },
+    {
+      "id": "1cf1As8AKMzShSGHBmYnbX75X3KGkEqcS",
+      "lang": "en",
+      "path": [
+        "Mac",
+        "StayAwake. A Free Mac Utility to Keep Your Computer Awake While Using VoiceOver (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1cf1As8AKMzShSGHBmYnbX75X3KGkEqcS",
+          "category": "Mac",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1cf1As8AKMzShSGHBmYnbX75X3KGkEqcS"
+      ]
+    },
+    {
+      "id": "1cvMcfoM3HiMrcXAZBX-qh0X_s4DbibRk",
+      "lang": "en",
+      "path": [
+        "Mac",
+        "Essential programs and utilities for Mac users with VoiceOver (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1cvMcfoM3HiMrcXAZBX-qh0X_s4DbibRk",
+          "category": "Mac",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1cvMcfoM3HiMrcXAZBX-qh0X_s4DbibRk"
+      ]
+    },
+    {
+      "id": "1MeJvGeKC1Xo3K0wGCpuLpn2sybbTKbUO",
+      "lang": "en",
+      "path": [
+        "Smart Glasses",
+        "Smart Glasses and Blind People (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1MeJvGeKC1Xo3K0wGCpuLpn2sybbTKbUO",
+          "category": "Smart Glasses",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1MeJvGeKC1Xo3K0wGCpuLpn2sybbTKbUO"
+      ]
+    },
+    {
+      "id": "1Pla9qsRkSSMoAlnfixE8nA7J5Um6mCQS",
+      "lang": "en",
+      "path": [
+        "Research and Studies",
+        "How Am I Supposed to Live My Life Now? - Rehabilitation and independence after sight loss.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1ZEgNb3rI49H28DWmDnSUaB2OVFrHyK_9",
+      "lang": "en",
+      "path": [
+        "Research and Studies",
+        "When the same iPhone doesn’t do the same thing (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1ZEgNb3rI49H28DWmDnSUaB2OVFrHyK_9",
+          "category": "Research and Studies",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1ZEgNb3rI49H28DWmDnSUaB2OVFrHyK_9"
+      ]
+    },
+    {
+      "id": "10C6DY2QuW4IXOdybbfhfCvhG_zwd9ND0",
+      "lang": "en",
+      "path": [
+        "Research and Studies",
+        "When CAPTCHA Becomes the Barrier (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-10C6DY2QuW4IXOdybbfhfCvhG_zwd9ND0",
+          "category": "General",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-10C6DY2QuW4IXOdybbfhfCvhG_zwd9ND0"
+      ]
+    },
+    {
+      "id": "1_zCgJmkjUebl3iLNm7E5ySYjJtf4BwaP",
+      "lang": "en",
+      "path": [
+        "Research and Studies",
+        "When Being Blind Means Buying Blind (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1_zCgJmkjUebl3iLNm7E5ySYjJtf4BwaP",
+          "category": "General",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1_zCgJmkjUebl3iLNm7E5ySYjJtf4BwaP"
+      ]
+    },
+    {
+      "id": "1mAV8pWt-UDR7uojeZvmhdrXAoTZQRbZw",
+      "lang": "en",
+      "path": [
+        "Research and Studies",
+        "iPhone, iPad or Mac, What Should You Buy Based on What You Actually Need.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1mAV8pWt-UDR7uojeZvmhdrXAoTZQRbZw",
+          "category": "Research and Studies",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1mAV8pWt-UDR7uojeZvmhdrXAoTZQRbZw"
+      ]
+    },
+    {
+      "id": "1Q6jUzIRoBlbpiHE4Wc6VCDnCH8axd9W4",
+      "lang": "en",
+      "path": [
+        "Research and Studies",
+        "Amazon, Google or Apple, which brand is worth buying.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1Q6jUzIRoBlbpiHE4Wc6VCDnCH8axd9W4",
+          "category": "Research and Studies",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1Q6jUzIRoBlbpiHE4Wc6VCDnCH8axd9W4"
+      ]
+    },
+    {
+      "id": "1bUxovIRd_nuqeMYS8jIvZ8NPndKlf7-8",
+      "lang": "en",
+      "path": [
+        "Research and Studies",
+        "Braille Displays. What They Are, How They Work, and Which One Is Right for You (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1bUxovIRd_nuqeMYS8jIvZ8NPndKlf7-8",
+          "category": "Research and Studies",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1bUxovIRd_nuqeMYS8jIvZ8NPndKlf7-8"
+      ]
+    },
+    {
+      "id": "1cFAKc9ryiOxZ8fEBpch7wJDQOFZgYq9E",
+      "lang": "en",
+      "path": [
+        "Research and Studies",
+        "Braille embossers for home use (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1cFAKc9ryiOxZ8fEBpch7wJDQOFZgYq9E",
+          "category": "Research and Studies",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1cFAKc9ryiOxZ8fEBpch7wJDQOFZgYq9E"
+      ]
+    },
+    {
+      "id": "1WLi-nq4MFZ4y4xk8tO-mfY9JPdQ8J1il",
+      "lang": "en",
+      "path": [
+        "Research and Studies",
+        "Changing Phones When You Are Blind (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1WLi-nq4MFZ4y4xk8tO-mfY9JPdQ8J1il",
+          "category": "Research and Studies",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1WLi-nq4MFZ4y4xk8tO-mfY9JPdQ8J1il"
+      ]
+    },
+    {
+      "id": "1qNZ5of4IuOTkmbO27KQ3FO7R0aqwD4xl",
+      "lang": "en",
+      "path": [
+        "Research and Studies",
+        "Study of Mobility Apps for Blind iPhone Users (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1qNZ5of4IuOTkmbO27KQ3FO7R0aqwD4xl",
+          "category": "Research and Studies",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1qNZ5of4IuOTkmbO27KQ3FO7R0aqwD4xl"
+      ]
+    },
+    {
+      "id": "1J8ZCK1w_N-isRJuPmIqJVI9S1qOg4puc",
+      "lang": "en",
+      "path": [
+        "Research and Studies",
+        "Blindness, sleep and Non24 (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1J8ZCK1w_N-isRJuPmIqJVI9S1qOg4puc",
+          "category": "Research and Studies",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1J8ZCK1w_N-isRJuPmIqJVI9S1qOg4puc"
+      ]
+    },
+    {
+      "id": "14AjSCaEIeI0k-CBX0z4cNmWZCvvCTSqy",
+      "lang": "en",
+      "path": [
+        "Research and Studies",
+        "Android or iPhone, What Should I Buy If I Am Blind (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-14AjSCaEIeI0k-CBX0z4cNmWZCvvCTSqy",
+          "category": "Research and Studies",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-14AjSCaEIeI0k-CBX0z4cNmWZCvvCTSqy"
+      ]
+    },
+    {
+      "id": "1LtXWkQp0pDjoxCB4RYU7ilki4W1WkBFJ",
+      "lang": "en",
+      "path": [
+        "Research and Studies",
+        "Digital Security Without Scares. Essential Guide (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1LtXWkQp0pDjoxCB4RYU7ilki4W1WkBFJ",
+          "category": "Research and Studies",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1LtXWkQp0pDjoxCB4RYU7ilki4W1WkBFJ"
+      ]
+    },
+    {
+      "id": "1fuEwRzPoJefzNo2kAIQshCPSVN-EcpOA",
+      "lang": "en",
+      "path": [
+        "Research and Studies",
+        "Digital Security Without Scares. Complete Guide (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1fuEwRzPoJefzNo2kAIQshCPSVN-EcpOA",
+          "category": "Research and Studies",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1fuEwRzPoJefzNo2kAIQshCPSVN-EcpOA"
+      ]
+    },
+    {
+      "id": "1-11YZnrCZaqcZgDVGPndC4W1-sHDNFYy",
+      "lang": "en",
+      "path": [
+        "Mail",
+        "Practical Outlook Course Using a Screen Reader in Windows (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1-11YZnrCZaqcZgDVGPndC4W1-sHDNFYy",
+          "category": "Mail",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1-11YZnrCZaqcZgDVGPndC4W1-sHDNFYy"
+      ]
+    },
+    {
+      "id": "1MhBnTp55lW3jca6c35gKEFt9Q4YUM6GG",
+      "lang": "en",
+      "path": [
+        "Mail",
+        "Create a Gmail account with a screen reader (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1MhBnTp55lW3jca6c35gKEFt9Q4YUM6GG",
+          "category": "Mail",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1MhBnTp55lW3jca6c35gKEFt9Q4YUM6GG"
+      ]
+    },
+    {
+      "id": "1XDcRlphN5GvMhCPzv5I-TsBajVBloYAy",
+      "lang": "en",
+      "path": [
+        "Mail",
+        "Accessible Thunderbird Guide (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1XDcRlphN5GvMhCPzv5I-TsBajVBloYAy",
+          "category": "Mail",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1XDcRlphN5GvMhCPzv5I-TsBajVBloYAy"
+      ]
+    },
+    {
+      "id": "13D2JQ4bSJO6CCb87KMglFPKKwvAqcS5i",
+      "lang": "en",
+      "path": [
+        "Mail",
+        "Practical Guide to Using Gmail in a Web Browser with JAWS (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-13D2JQ4bSJO6CCb87KMglFPKKwvAqcS5i",
+          "category": "Mail",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-13D2JQ4bSJO6CCb87KMglFPKKwvAqcS5i"
+      ]
+    },
+    {
+      "id": "1fBmI_rBo0nGWUXsrLH2plxIdT-qaa8BB",
+      "lang": "en",
+      "path": [
+        "Catalog",
+        "International Catalog of Accessible Games for Mobile Phones and Tablets (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1fBmI_rBo0nGWUXsrLH2plxIdT-qaa8BB",
+          "category": "Catalog",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1fBmI_rBo0nGWUXsrLH2plxIdT-qaa8BB"
+      ]
+    },
+    {
+      "id": "1wLvd8JmXJR6KCuompDknG7Pq90iKzygC",
+      "lang": "en",
+      "path": [
+        "Camera",
+        "Using the iPhone Camera Without Seeing the Screen (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1wLvd8JmXJR6KCuompDknG7Pq90iKzygC",
+          "category": "Camera",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1wLvd8JmXJR6KCuompDknG7Pq90iKzygC"
+      ]
+    },
+    {
+      "id": "1EklXDBX4A1tTLNMGMnupFq65nyXS6pTy",
+      "lang": "en",
+      "path": [
+        "Android",
+        "Android_Braille_TalkBack_TifloAcosta_EN.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1D6z5OGcyqzaAISX6dcMgZuzgV3uZMkWj",
+      "lang": "en",
+      "path": [
+        "Android",
+        "Complete Course on On-Screen Braille Typing with Android and TalkBack.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "18Tpuaua3HRo-FC6_eHmrnhMADD9GQtRW",
+      "lang": "en",
+      "path": [
+        "Android",
+        "Files by Google, A Handy Broom for Android Storage (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-18Tpuaua3HRo-FC6_eHmrnhMADD9GQtRW",
+          "category": "Android",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-18Tpuaua3HRo-FC6_eHmrnhMADD9GQtRW"
+      ]
+    },
+    {
+      "id": "1veOlIwz6wdjAF1nS4x_9fdTnkIo0u7JA",
+      "lang": "en",
+      "path": [
+        "Android",
+        "Complete Android Course with TalkBack (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1veOlIwz6wdjAF1nS4x_9fdTnkIo0u7JA",
+          "category": "Android",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1veOlIwz6wdjAF1nS4x_9fdTnkIo0u7JA"
+      ]
+    },
+    {
+      "id": "1Gcty0-OWwfAD--XruEZYzUO_9kTatGBC",
+      "lang": "en",
+      "path": [
+        "Android",
+        "Jieshuo Android Practical Course (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1Gcty0-OWwfAD--XruEZYzUO_9kTatGBC",
+          "category": "Android",
+          "folderPath": [],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1Gcty0-OWwfAD--XruEZYzUO_9kTatGBC"
+      ]
+    },
+    {
+      "id": "1CbMWdSKZvgRapDxO-WUU0lp0BsCQG7AM",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras tecnológicas 24 de 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "10-8bAIhrVTvGRzo35gQQLQE49vvkkqXx",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 23 de 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Yk652avn7fcQtfNV28nu0VIkqpcZiRos",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 21 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1bkqhbWO8eYJbqrQrJ6FrjjZoUsSbuPWz",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 22 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Z7EGDnw-wbcGRcBz_-WbqGMVSJBUMUlk",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 20 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "17cxE49VZM2ef5caYYtZ47u1NOr4GWLTj",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 19 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "12C2gN25zEthcukNYjmqPfOQinez-7r-R",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 18 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "147eN6-MiVurqI7cBM34QSFNj4nrTJhBb",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 17 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1YxC-GBVbxNPzCo9A_KqVrPSzMjtXDM6q",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 16 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Y-6xI-paUcSljXeddwqDmzIx3UoizsyJ",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 15 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1BCnGDPAxepZz0gPemk4g97wo0BHiS48P",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 14 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1q7U3T7fpP54V6t9ddVBfYlaJTAmY4C4g",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 13 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1ozmhN7YaeWASLym-_P2h4zcQX7Se_MDs",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 12 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "19xukpf63sT67bElqKW_or0gTTok1ejD2",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 11 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "15yh0mD1G8nbazmuVVfQhZgosIMG-GvYS",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 10 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1-UNVigRQ4C2SnZ3IVaet083ChLaUhNC0",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 9 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1tYISp500g9AX43rcsHh7vzR2FEgUlqga",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 8 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1XvBtQ7w0daUv99ZGQOTKtw2gdQ6U3cqc",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 7 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1qRULOALuBrVYNncI0aFUVKGYYNKv-2aF",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 6 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1JocybmaambSHxxs4KSyFQuVF0vtcVrVJ",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 5 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1u6AVd7RfgivzbbXqz8C8wWMbZaDF5m-N",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 4 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1_c_hietyzNJRmzTidjEpYzLuBzHXQQE4",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 3 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1jOfVW9rcnhnKzSt-M1Cjr_th3TwnvWjt",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 2 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1fwYfFFxGIwCaxeD-ys8nDu9cdyNDi4Vr",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2026",
+        "Píldoras 1 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1F2-ahau8KAwcAFLa4rSJIlhe4JzeFk8_",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 3 septiembre 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-09-03"
+      ]
+    },
+    {
+      "id": "1kEkqXy8KR13KV3PG0VfthkA3s15M5HfI",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 28 agosto 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-08-28"
+      ]
+    },
+    {
+      "id": "1IrjEDjzWz8B6FLu5g0w1hlkKKccmG3lo",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 20 agosto 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-08-20"
+      ]
+    },
+    {
+      "id": "1TC1o7TNBKIVwZoej28FIyLKi12DeTEcU",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 22 octubre 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-10-22"
+      ]
+    },
+    {
+      "id": "1ZW-uwqOBN7pe_nv2SCAC259WEkaapsqp",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 31 enero 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-01-31"
+      ]
+    },
+    {
+      "id": "1SBVY0KsitXzK8TDrV6vxrsFbdFwK7ivt",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 30 mayo 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-05-30"
+      ]
+    },
+    {
+      "id": "1_FN_sWOvXrul4fR_MaDCEDszALvtDbKC",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 30 abril 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-04-30"
+      ]
+    },
+    {
+      "id": "1dnNp9qcBH47X0eAcb_hNCreIQZdciIhD",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 28 junio 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-06-28"
+      ]
+    },
+    {
+      "id": "1XzITUx4wpXoSHKtSCD8i2w8d8oitc1Gz",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 24 junio 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-06-24"
+      ]
+    },
+    {
+      "id": "1-e0VIjkTcD_EAHDpekj3_CXEE6-YfFs7",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 23 marzo 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-03-23"
+      ]
+    },
+    {
+      "id": "1Yo31DZC0WKDrPnS21XC1qmDCbdLLEwNA",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 21 julio 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-07-21"
+      ]
+    },
+    {
+      "id": "1tukhbjKesncCHAhZNs10iyym5e_BacBL",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 20 mayo 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-05-20"
+      ]
+    },
+    {
+      "id": "1JRbaCdc6dKq1tfOug0C0cHoPiFT81Zmi",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 18 enero 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-01-18"
+      ]
+    },
+    {
+      "id": "1wgHvuANjJ4WngfkQpe3nDMvf2aHKV-ZB",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 14 junio 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-06-14"
+      ]
+    },
+    {
+      "id": "1a0VX-ABf_TWd3CB1f1nOx1QDuee06YdH",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 14 abril 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-04-14"
+      ]
+    },
+    {
+      "id": "1lqigncHVuJ_llipDCvTZaw6Yr8X4WLDx",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 13 marzo 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-03-13"
+      ]
+    },
+    {
+      "id": "1KwanHg1Ks6juhNCS5A-eDyNOyNvoLEGY",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 10 mayo 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-05-10"
+      ]
+    },
+    {
+      "id": "1WE3QAbIcJtXurEezcmAIYQdNlekZCSaE",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 9 julio 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-07-09"
+      ]
+    },
+    {
+      "id": "18pXkpYy49Z2Gu7b97rPhOxTitYskDyA3",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 8 junio 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-06-08"
+      ]
+    },
+    {
+      "id": "1BslTAKyslCQ7zJ7v4EIfRibfwgRWhUhC",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 5 agosto 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-08-05"
+      ]
+    },
+    {
+      "id": "1AVKqtykvaqEMHR8fZAn1Jx-htV4MC6yC",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 5 abril 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-04-05"
+      ]
+    },
+    {
+      "id": "134voGfA63Q63Wj3qZubLZuT3gxjovWZl",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 15 octubre 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-10-15"
+      ]
+    },
+    {
+      "id": "1yiVN8sHci_JFTZd4Y0z4BGHhSvwZXHix",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 31 octubre 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-10-31"
+      ]
+    },
+    {
+      "id": "1fWVwqBkZlZFe7w_1Seum1E31OHRNDg7p",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 29 diciembre 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-12-29"
+      ]
+    },
+    {
+      "id": "1f_wD0RsiOmPbcFFxR_18Yfu9kIM8f42t",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 24 septiembre 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-09-24"
+      ]
+    },
+    {
+      "id": "1yGLKEnFXMl7enYijn-Do9koWSUEMSz3Z",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 19 noviembre 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-11-19"
+      ]
+    },
+    {
+      "id": "1bC44LwmuX_WrPQZJjaRBHWaQ41M23Wqd",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 17 diciembre 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-12-17"
+      ]
+    },
+    {
+      "id": "17LgjCVcmBHobTlt6qnE2IiWpaNeWoEel",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 12 noviembre 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-11-12"
+      ]
+    },
+    {
+      "id": "10SahfoOS8MaQWYVRNQYFo3BMHEvOS4X0",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 5 diciembre 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-12-05"
+      ]
+    },
+    {
+      "id": "1ptjcv67VpAPg098l4sIcAhZ3UFkRwvIx",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 4 noviembre 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-11-04"
+      ]
+    },
+    {
+      "id": "1-OsTvctXniEq0vgOWSwQwiseezcYJkFs",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2025",
+        "Píldoras 2 marzo 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2025-03-02"
+      ]
+    },
+    {
+      "id": "1ZHzcqCcPFIfSsOtIRSQNKKsOR-fViLWf",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2024",
+        "Píldoras 9 marzo 2024.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2024-03-09"
+      ]
+    },
+    {
+      "id": "1srzxTeLEOB8lz-9As3-jT_RRQkoUs8XQ",
+      "lang": "es",
+      "path": [
+        "Píldoras",
+        "2024",
+        "Píldoras 24 febrero 2024.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": [
+        "es-pildoras-2024-02-24"
+      ]
+    },
+    {
+      "id": "1XQe4NzCjp26th-x5wDvXemtY7YEdIGAs",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Qué es el LiDAR en los iPhone 'Pro' y qué ofrece.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "12ngUgtfaH7cCaibJ6Sec5OIUvs7xqPHz",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Apple elimina las funciones de Siri utilizadas por los usuarios con discapacidad visual.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1ZsCCQwPIbjwzhmTuGlAc37CGGROwb4C_",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cuidado con el cable de carga de tu iPhone.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1ZgHAtqAku4qtEc3ApbHeBLlJme7_shCk",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo y por qué deberías cambiar el nombre de tu iPhone.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1-5f4GwGaVsnzcOdIXakc7YeADr9AWVGk",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Solo usas los auriculares  de Apple, los que trae los iPhone con cable para escuchar en tu dispositivo.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1x69Tuxb_2FuJklV7OJLIxxTLbs_K4YN0",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo compartir el contenido de la pantalla del iPhone con cualquier persona usando Siri.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1-TQphTgLd9Oka7EszJsqCNmp40w_-M3b",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Los Airtags, funcionamiento y dispositivos compatibles.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "14nh1Z9avpshOGJevEEyn1LTTBM0mVm-B",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo consultar el borrador y presentar la declaración de renta de 2020 desde nuestro iPhone o iPad.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1fgwdeWXenn7dTyUFYKt-b8cMAylCPQaD",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo instalar apps en el iPhone que no están disponibles en tu país.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1FlKsLXb7nf9DbLqSibAZoX9G5vI5TQIu",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Dos tips para Safari que tienes que conocer.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "12mmKH-elKPXTaTuiK0QINGd-IyQUYDO2",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Ya no necesitas conectar el iPhone al Mac o PC para restaurarlo si se ha bloqueado.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1_xlMZjddhe_dTLrYHn-NFE2Oe25aTg7w",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "cambiar el país donde tienes tu AppStore.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1FeU4Azcx4CKMDQ3H098OEOaz_GVikVCJ",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo prestar tu iPhone a un usuario invitado sin mostrar tus datos personales.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "16chydJITZVyh0f2sY7GqActJJ2RKYCY_",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Qué es el virus del calendario y cómo eliminarlo de tu iPhone.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "13J70sQcKoK7gXGHZbLJTx7Ms4QxUjxyX",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo bajar o subir el volumen de las alarmas del iPhone.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1_PTwNBou2nS0PL5t-p07oH1jSxsUha0g",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Así podemos borrar un Apple ID para siempre.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "14XNuTJed1SKBiCoy2Zyj0cgV8F6E8ox8",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Agiliza el comportamiento  en tu iPhone.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1JyuZG8HvqmAdlhRXJSQlHjNTRjGA6qUG",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cuál es la gran diferencia entre forzar el reinicio del iPhone y apagar y volver a encenderlo.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1rk0sF5UZEoLAD6zaXdpqweLACxyMUtx2",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cuánta RAM tiene cada modelo de iPhone, lista completa.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "150eKksegI02AU8TIkG1B39a32kKCYlGG",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo recuperar la contraseña de mi cuenta de Apple.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1CiDoHf4t20wI4JnCETaRkyyaYmeYaL3k",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo proteger tu iPhone ante una ola de calor.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1fyUG_VqD0waL7WaQei1Yjkcxc5Z4kmkO",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo transferir todos nuestros datos de un iPhone a otro.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1rwbnAageE5Qpp39UgWI_lHn7VdGBlQEM",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Qué tamaño de pantalla y resolución ha tenido cada iPhone.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1cYUEODBjeuDOmRm5h1qr8BMAHJEOub50",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Esta es la capacidad de batería de todos los modelos de iPhone de Apple.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "12TgQJhu-kMouex-4kfe7QJLqeMw6oPDM",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Por qué hay que vaciar la caché de WhatsApp y cómo hacerlo en nuestro iPhone.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1lZ_imHY5bg-ND7kpUFeXoCioIw2bI3VR",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Apple informa que la bibración áptica en el teclado provoca gasto en la batería.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1D5jeYwgyXHz74T5v4wYkKGNygdjYQrSV",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "El manual de uso de iPhone oficial de Apple que no sabías que existía.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1mFA1gRkxCYpc2Rtr-UIwZCZwB1HKs8tW",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Mucho más que pagar en la app Cartera, esto es todo lo que puedes hacer con Wallet.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1u_G4lQjVSsKjnwJwILQsCVPFHzaqIPkC",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Trucos y consejos para mejorar el rendimiento de tu iPhone.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1H_cg6iIucr1yb1QUe1L8M3yjzqrgm5d9",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Llevas toda la vida cargando mal tu iPhone. 6 útiles trucos para cargar su batería.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1qAS_VZ5FcqqGBCPNGonHfNEoQ_lUPipV",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "19 recomendaciones para que la batería de tu iPhone dure más.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1j3mWnMgPuyYTOLN8-OXwCYAn8vyzpnMo",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Diferencias de Siri con y sin Apple Intelligence.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "16BwGjKRyUHBDu29--xAXQ_4Nuljh4BK6",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Truco para limpiar nuestro teléfono de polvo y porquerías acumuladas.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1MJdkJfLBfBkk6fi4tNfEreBzfIAwjjAp",
+      "lang": "es",
+      "path": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo usa el iPhone alguien que no lo ve. guía paralela para videntes y usuarios de VoiceOver”.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1lB0Qua-KvLgDqRqJbAg76E10tiC-BBhD",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Archivo histórico TXT",
+        "Novedades Apple.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1_p5Hh6tpZfiLyTrGpU6jOZMl79wcfdIN",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Archivo histórico TXT",
+        "Apple está trabajando en un servicio de suscripción para el iPhone y otros productos de hardware, según Mark Gurman de Bloomberg.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1OJI8wngr5Wv9mhh5seyv_CTY3cW57zVf",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Archivo histórico TXT",
+        "Si fuiste usuario del iPhone 6 o 6s en España, Apple podría tener que compensarte con entre 99 y 189 euros.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1ERPcpSSL9W8LzeqvP6Imvur5N_zOzlpz",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Archivo histórico TXT",
+        "Cómo ver la presentación de iOS 16 en la WWDC22 de Apple.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "18g1_eVGLHq7UW_wyCGKJpw0IGmjvo0t7",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Archivo histórico TXT",
+        "Apple presenta un avance de nuevas funciones de accesibilidad que llegarán este año.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1c7BBN2OjRxFgHlbz9GmiMuZI81Em-q0u",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Archivo histórico TXT",
+        "Todo lo nuevo en Apple.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "10TKIY5ZkO75bFVRgrqpv77UeeaZm04iG",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "RSS, la forma más tranquila de enterarte de todo (TifloAcosta)"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "14XdQvI1K2vSVg5dlokfr-NyiN2gdOwq1",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "colección de fuentes RSS para Perú.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1shAfKN8xnFASB_cWKN1Uz5qipDaq7Umd",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "colección de fuentes RSS para Guatemala.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1BKeMGcbFNwcEo1vCn2a3RHChEZ-E6DUp",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "colección de Fuentes RSS para Argentina.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Dqgjgjx33j5KkLAlmp4_pNvxB4XbgwWV",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para venezuela.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "16j8ap-YOHo9SZwbEO9eEtQQHQ1vZh0JM",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para cuba.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1xVb-ANKjekZBG28m612b8Z8oesjeu1Oc",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para colombia.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Xpljcl9XLUFE9cLo595D13LbED5ZK249",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para Uruguay.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1v6caQ9oXiFLFPtW7de6e57Q4Vg9PgFbt",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para República Dominicana.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1wy_FCdXDPB1S-5A4ckJ3IcLm9EBPETWL",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para Paraguay.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1AIcUU1XfmNljqJgpiSdg8rDk5d52y1hg",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para Panamá.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1cKP2rOJzgQwbxsYr3Vmb_b41DfjiBKEq",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para Nicaragua.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Gn4fEdAQe03tU-8f8kXmGjy6KRYNslDS",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para México.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "157YiErU2qiThVfCIsUoNKNaiDwD6Eogm",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para Honduras.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1VgndGHz1ky0krT9zj-wGoXEHSXrf_t2f",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para Estados Unidos en español.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1-0-rT0Kfkqpbv06gMeXL0Y1PzsEWdIEY",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para España.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1ZUVV7HeLvrRXtLgr4neU4uLtKyimqkM-",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para El Salvador.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "18Qs2VycdAwhZ1EACzOGvTnFTn_N0U_2L",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para Ecuador.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1hWndtfF0y7Q2lEkM5MHlePY3IUVt4nVR",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para Costa rica.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1CobDrAd5F8o1i9g_KFrQhSOTTp_tvxyP",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para Chile.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1iedADwzeg4b-HR5eETdj3xgPYVcZJFJo",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para Brasil.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1jZ9gxtlHFlDtXNAio4q0b08RSounaR2i",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS para Bolivia.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1lNvxuYJe5jlARv6Bv9JRf2eQZLJw1oOb",
+      "lang": "es",
+      "path": [
+        "Noticias",
+        "Fuentes RSS por países",
+        "Colección de fuentes RSS en español.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1eZrPxCPHa2ZhcBJKM2OWy4erkbYgQmCF",
+      "lang": "es",
+      "path": [
+        "Mac",
+        "Archivo histórico TXT",
+        "CenteredHead disponible en la Mac AppStore.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1GDBvk8qCwldqNMA1yMfZ0icAwZN6rTIt",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "VoiceOver",
+        "VoiceOver a tu manera (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1GDBvk8qCwldqNMA1yMfZ0icAwZN6rTIt",
+          "category": "Lectores de pantalla",
+          "folderPath": [
+            "VoiceOver"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1GDBvk8qCwldqNMA1yMfZ0icAwZN6rTIt"
+      ]
+    },
+    {
+      "id": "1p_YZzQ88vLybKEXLc10ko8NvfKyOD8yp",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "Narrador",
+        "Curso práctico de Narrador en Windows 11 - revisión 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1p_YZzQ88vLybKEXLc10ko8NvfKyOD8yp",
+          "category": "Lectores de pantalla",
+          "folderPath": [
+            "Narrador"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1p_YZzQ88vLybKEXLc10ko8NvfKyOD8yp"
+      ]
+    },
+    {
+      "id": "1eUnYMuuyAPskR5bigSc_CURlqtjgW8f1",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "Jaws",
+        "Curso de iniciación a JAWS 2026 en Windows.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1eUnYMuuyAPskR5bigSc_CURlqtjgW8f1",
+          "category": "Lectores de pantalla",
+          "folderPath": [
+            "Jaws"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1eUnYMuuyAPskR5bigSc_CURlqtjgW8f1"
+      ]
+    },
+    {
+      "id": "1Tsh3cPZ-l2moLQAGb9sA7jNaT0I2e2JE",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "Jaws",
+        "Curso avanzado de JAWS 2026 en Windows.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1Tsh3cPZ-l2moLQAGb9sA7jNaT0I2e2JE",
+          "category": "Lectores de pantalla",
+          "folderPath": [
+            "Jaws"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1Tsh3cPZ-l2moLQAGb9sA7jNaT0I2e2JE"
+      ]
+    },
+    {
+      "id": "1T49WtZSFx-zVySg9zPmCcesJLuuupvvf",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "Jaws",
+        "Windows 11 con JAWS 2026 bien configurado y productivo.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1T49WtZSFx-zVySg9zPmCcesJLuuupvvf",
+          "category": "Lectores de pantalla",
+          "folderPath": [
+            "Jaws"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1T49WtZSFx-zVySg9zPmCcesJLuuupvvf"
+      ]
+    },
+    {
+      "id": "1c2tqQwgFseskDK3eQZ25duudnwsVjNEi",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "Jaws",
+        "Marcadores en JAWS 2026 - cómo guardar un punto y volver a él.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1c2tqQwgFseskDK3eQZ25duudnwsVjNEi",
+          "category": "Lectores de pantalla",
+          "folderPath": [
+            "Jaws"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1c2tqQwgFseskDK3eQZ25duudnwsVjNEi"
+      ]
+    },
+    {
+      "id": "1_4wsLaki5iL3xqyoprkxLVA6ntz7BxrY",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "NVDA",
+        "NVDA 2026.3, novedades y compatibilidad de complementos.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1_4wsLaki5iL3xqyoprkxLVA6ntz7BxrY",
+          "category": "Lectores de pantalla",
+          "folderPath": [
+            "NVDA"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1_4wsLaki5iL3xqyoprkxLVA6ntz7BxrY"
+      ]
+    },
+    {
+      "id": "1NL-6sW_U3AGomUH7SR7A3LI71SCb3J62",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "NVDA",
+        "Curso práctico de NVDA 2026.2.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1NL-6sW_U3AGomUH7SR7A3LI71SCb3J62",
+          "category": "Lectores de pantalla",
+          "folderPath": [
+            "NVDA"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1NL-6sW_U3AGomUH7SR7A3LI71SCb3J62"
+      ]
+    },
+    {
+      "id": "1NwFJtCMO7X9xEViZ5TZbeMO7Oe8NkYff",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "NVDA",
+        "Windows 11 con NVDA 2026.2 bien configurado y productivo.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1NwFJtCMO7X9xEViZ5TZbeMO7Oe8NkYff",
+          "category": "Lectores de pantalla",
+          "folderPath": [
+            "NVDA"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1NwFJtCMO7X9xEViZ5TZbeMO7Oe8NkYff"
+      ]
+    },
+    {
+      "id": "1uXFsu4ndEiqrmT2z8fNFNBtouC0pA0ob",
+      "lang": "es",
+      "path": [
+        "APPs",
+        "Archivo histórico TXT",
+        "Próxima APP que ayudará a las personas ciegas basada en realidad aumentada.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1fEeIN8aTWstfU0Zkv-3sAQtdnOoA50Wd",
+      "lang": "es",
+      "path": [
+        "APPs",
+        "Archivo histórico TXT",
+        "Chess King.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "18yWQZOEI4QpsfKgWC24bMplALtvyoQ5S",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025",
+        "canarias 2025, Desde mi punto de... vista.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1oYAsybNJ1oHEhLD9lLHSpphfB_RNJoBm",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025",
+        "Navarra 2025. Servicios concentrados, digitalización imperfecta y autonomía a medias.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1hPhEAND419b89QvmEZw0fJRy_2FIAEiL",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025",
+        "La Rioja 2025. Pocos avances, servicios concentrados y accesibilidad pendiente.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Y8fUFgl5Yb6OgO2XTaoElmLB-JOAPhS2",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025",
+        "Galicia, balance 2025 .html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1PweeDN1hlv-MSrSdITOS44aoo6Ka1IQO",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025",
+        "Discapacidad visual, Euskadi 2025.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1t_bSdejHEhN9X0zO31HCM_OPyU2LCVOF",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025",
+        "Comunidad Valenciana. Balance 2025, La visión oculta.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1E-skICBBiCok3IYWBbhJllqXPQV0vStX",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025",
+        "Cataluña. Balance 2025, La perspectiva invisible.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1dVtn3nrrvrftC9HNS-IyUBYeiOe25zBi",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025",
+        "Castilla y León 2025. Territorio disperso, población envejecida y autonomía limitada.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1piN3AKD-Lx0lhuEeZisxnMG0Q-DpBFuA",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025",
+        "Cantabria 2025 y discapacidad visual, cuando la ausencia de foco también pesa.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1kr2TsNOJMB-G0V_E12uP8C5DXq5Yslpq",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025",
+        "Balance 2025 en la Región de Murcia. Digitalización, cambios urbanos y una accesibilidad que sigue llegando tarde.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Ha4O2CeP8PWEvYDYa-HIm1_5x7rWsclB",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025",
+        "Balance 2025 en Extremadura. Territorio disperso, servicios digitales y una autonomía que sigue en desventaja.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1DS6BOyuL0gFQGIUTzDEvin5UYRglc6bQ",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025",
+        "Balance 2025 en Castilla La Mancha. Dispersión territorial y servicios que siguen sin ser accesibles.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1M-MzU-0XCqUTP_HUdMVvW22exz8a9K4x",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025",
+        "Asturias 2025. Continuidad, estancamiento y barreras persistentes para la discapacidad visual.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "16h7oGRI9Bm3iW70Ax5fEN6lMMojmyhgj",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025",
+        "Aragón 2025. Una comunidad extensa, muchas barreras y poca accesibilidad real.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1I6OU1ef-Ff2mUPm-DgoUw79M0BFuLRwx",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025",
+        "Andalucía 2025. Lo que cambió y lo que no para la discapacidad visual.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Q1XYiYxaJm8t8LCGY5lLKSVtsl_l-eoa",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Balances de accesibilidad 2025",
+        "Madrid 2025 y la discapacidad visual, avances parciales, barreras reales.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "11pzivdiId0Z1z9GEU7nlX5SEX9F4meSS",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Amazon, Google o Apple, qué marca conviene comprar",
+        "Amazon, Google o Apple, qué altavoz inteligente conviene comprar 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-11pzivdiId0Z1z9GEU7nlX5SEX9F4meSS",
+          "category": "Estudios",
+          "folderPath": [
+            "Amazon, Google o Apple, qué marca conviene comprar"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-11pzivdiId0Z1z9GEU7nlX5SEX9F4meSS"
+      ]
+    },
+    {
+      "id": "1rJBafFgHKioNKTSsxyB03RNeuYbrXPA1",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "00 - Índice de tiendas y recursos por país (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1f1Pw6ryynh5IgFX2rcamZvw-NfCpoKPn",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "ceguera en Latinoamérica",
+        "Conclusiones sobre ceguera y baja visión en América Latina 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1GU-SmMM_R1BmnpdLd6SHidE3vqHDwRck",
+      "lang": "en",
+      "path": [
+        "Screen Readers",
+        "VoiceOver",
+        "VoiceOver your way (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1GU-SmMM_R1BmnpdLd6SHidE3vqHDwRck",
+          "category": "Screen Readers",
+          "folderPath": [
+            "VoiceOver"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1GU-SmMM_R1BmnpdLd6SHidE3vqHDwRck"
+      ]
+    },
+    {
+      "id": "1UtLOiwP_SGkHZG6qSWyMIZfTkCl4Gv4Z",
+      "lang": "en",
+      "path": [
+        "Screen Readers",
+        "NVDA",
+        "NVDA 2026.3, news and add-on compatibility.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1UtLOiwP_SGkHZG6qSWyMIZfTkCl4Gv4Z",
+          "category": "Screen Readers",
+          "folderPath": [
+            "NVDA"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-1UtLOiwP_SGkHZG6qSWyMIZfTkCl4Gv4Z"
+      ]
+    },
+    {
+      "id": "19dN09wsyZOrqu-NYXND5njkb-FG0dSuR",
+      "lang": "en",
+      "path": [
+        "Screen Readers",
+        "NVDA",
+        "Practical NVDA Course (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-19dN09wsyZOrqu-NYXND5njkb-FG0dSuR",
+          "category": "Screen Readers",
+          "folderPath": [
+            "NVDA"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-19dN09wsyZOrqu-NYXND5njkb-FG0dSuR"
+      ]
+    },
+    {
+      "id": "14FLKHbqbOzQRUnUOU718jhXR6i0GEd7q",
+      "lang": "en",
+      "path": [
+        "Screen Readers",
+        "NVDA",
+        "Windows 11 With NVDA Properly configured And Productive (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-14FLKHbqbOzQRUnUOU718jhXR6i0GEd7q",
+          "category": "Screen Readers",
+          "folderPath": [
+            "NVDA"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "en-14FLKHbqbOzQRUnUOU718jhXR6i0GEd7q"
+      ]
+    },
+    {
+      "id": "1p_buJDncT9AlEB68XDgb54Njvnqskyb1",
+      "lang": "en",
+      "path": [
+        "Screen Readers",
+        "Narrator",
+        "Practical Course Microsoft Narrator Windows.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1p_buJDncT9AlEB68XDgb54Njvnqskyb1",
+          "category": "Screen Readers",
+          "folderPath": [
+            "Narrator"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1HNgo-S-eoIcEmSepk-uIJ8tCVOXk2XGm",
+      "lang": "en",
+      "path": [
+        "Screen Readers",
+        "Jaws",
+        "Advanced JAWS Course (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1HNgo-S-eoIcEmSepk-uIJ8tCVOXk2XGm",
+          "category": "Screen Readers",
+          "folderPath": [
+            "Jaws"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1aMSFDe4aGb8Ykrhi0cWmCWE2P5c9iqom",
+      "lang": "en",
+      "path": [
+        "Screen Readers",
+        "Jaws",
+        "Windows 11 With Jaws Properly Configured And Producctive (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "en-1aMSFDe4aGb8Ykrhi0cWmCWE2P5c9iqom",
+          "category": "Screen Readers",
+          "folderPath": [
+            "Jaws"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": []
+    },
+    {
+      "id": "1mJAIBrxw3RZhFP1K71m3e2brC0U3ythU",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Amazon, Google o Apple, qué marca conviene comprar",
+        "Información por países y regiones",
+        "Altavoces inteligentes en Venezuela 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1mJAIBrxw3RZhFP1K71m3e2brC0U3ythU",
+          "category": "Estudios",
+          "folderPath": [
+            "Amazon, Google o Apple, qué marca conviene comprar",
+            "Información por países y regiones"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1mJAIBrxw3RZhFP1K71m3e2brC0U3ythU"
+      ]
+    },
+    {
+      "id": "1Mr1tuyf_DmbvEwuMwXcMoJZpjRhRg1p1",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Amazon, Google o Apple, qué marca conviene comprar",
+        "Información por países y regiones",
+        "Altavoces inteligentes en Cuba 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1Mr1tuyf_DmbvEwuMwXcMoJZpjRhRg1p1",
+          "category": "Estudios",
+          "folderPath": [
+            "Amazon, Google o Apple, qué marca conviene comprar",
+            "Información por países y regiones"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1Mr1tuyf_DmbvEwuMwXcMoJZpjRhRg1p1"
+      ]
+    },
+    {
+      "id": "1qH5XJvnEntVFmUyQ2yKACp8V4E0kU8O1",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Amazon, Google o Apple, qué marca conviene comprar",
+        "Información por países y regiones",
+        "Altavoces inteligentes en El Salvador, Guatemala, Honduras, Nicaragua, Panamá, Paraguay y Uruguay 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1qH5XJvnEntVFmUyQ2yKACp8V4E0kU8O1",
+          "category": "Estudios",
+          "folderPath": [
+            "Amazon, Google o Apple, qué marca conviene comprar",
+            "Información por países y regiones"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1qH5XJvnEntVFmUyQ2yKACp8V4E0kU8O1"
+      ]
+    },
+    {
+      "id": "1huNFjgFsOQ4AtWQLPy2ftZzvbZoUt7r4",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Amazon, Google o Apple, qué marca conviene comprar",
+        "Información por países y regiones",
+        "Altavoces inteligentes en Bolivia, Colombia, Ecuador y República Dominicana 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1huNFjgFsOQ4AtWQLPy2ftZzvbZoUt7r4",
+          "category": "Estudios",
+          "folderPath": [
+            "Amazon, Google o Apple, qué marca conviene comprar",
+            "Información por países y regiones"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1huNFjgFsOQ4AtWQLPy2ftZzvbZoUt7r4"
+      ]
+    },
+    {
+      "id": "1mLlzk85kLFcgcR4aSjSYd2B65o4_8F2r",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Amazon, Google o Apple, qué marca conviene comprar",
+        "Información por países y regiones",
+        "Altavoces inteligentes en Argentina, Costa Rica y Perú 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1mLlzk85kLFcgcR4aSjSYd2B65o4_8F2r",
+          "category": "Estudios",
+          "folderPath": [
+            "Amazon, Google o Apple, qué marca conviene comprar",
+            "Información por países y regiones"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1mLlzk85kLFcgcR4aSjSYd2B65o4_8F2r"
+      ]
+    },
+    {
+      "id": "1CBo6TvhLhLn7akHwd5FIjtyD5G81FDrM",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Amazon, Google o Apple, qué marca conviene comprar",
+        "Información por países y regiones",
+        "Altavoces inteligentes en Chile 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1CBo6TvhLhLn7akHwd5FIjtyD5G81FDrM",
+          "category": "Estudios",
+          "folderPath": [
+            "Amazon, Google o Apple, qué marca conviene comprar",
+            "Información por países y regiones"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1CBo6TvhLhLn7akHwd5FIjtyD5G81FDrM"
+      ]
+    },
+    {
+      "id": "1NEo3GRvpN1l_eVAFXt0M5xxuapcfAWYX",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Amazon, Google o Apple, qué marca conviene comprar",
+        "Información por países y regiones",
+        "Altavoces inteligentes en México 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [
+        {
+          "id": "es-1NEo3GRvpN1l_eVAFXt0M5xxuapcfAWYX",
+          "category": "Estudios",
+          "folderPath": [
+            "Amazon, Google o Apple, qué marca conviene comprar",
+            "Información por países y regiones"
+          ],
+          "year": null
+        }
+      ],
+      "titleCandidates": [
+        "es-1NEo3GRvpN1l_eVAFXt0M5xxuapcfAWYX"
+      ]
+    },
+    {
+      "id": "1FmCF21vB45k_PWqHYq7R3KiLRmHR6Ue-",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Honduras (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Tl_J4iSCGBMvMXHlSwsYwZwIwbCg8zDd",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en España (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1NifUe38kTv99Vn0EDu7Izb4muHCW_hBW",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en México (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1ZylSybHWr-D1yyqA6dbay3IPy5pqLInq",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Estados Unidos (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1tP_rnmkNfWp3VMto-WAJTqOYOlahPho3",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Argentina (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1NrzUjPJIDqPJneOkH7uJ9I9bLKmMU7KT",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Bolivia (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1AO_hHTLwQmoIQ2a0oifKpcEPHfHcvG3o",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Brasil (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1abcjouMFl2btoZ5suQ1Hm_58x1e769To",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Chile (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1BhYqYFBLvdp1-Dp6ao1T8q4Ob-K3ROQi",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Colombia (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1LngewIR8faqKDUIMuqkRJz32mrFpNfBN",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Costa Rica (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1k7cs4VO20J0XAoX7evu-nYkM54uLdWdN",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Ecuador (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1kYIml_mS52i84MbCup5mms5p8VefphBx",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en República Dominicana (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1Z-ZlLQ5kR2NMFmb2dJ8INxedFjg1sx5n",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Cuba (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1mJSgFdjRWx4M__MNfk0RkWxj156tB8Ao",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en El Salvador (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1X5lBWXg-8gxKjlC0qc4VQ4jOXa8ZCQWo",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Guatemala (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1-Y8OG1EGayD-rEW1QioWvJF1HiBSb7vF",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Nicaragua (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "177zm8fqTFHnlTASRKsiuKsIaBxpNtYHi",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Panamá (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1BXMp-khMmDK8SC2NwLrz5eScscbc5pfG",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Paraguay (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1jLYJa6VJzZYAR45l3gamVbiKUn3OpH-s",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Perú (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1pA6HVF99LmW8xtnQ3B67qaW_el97yyPt",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Uruguay (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1lapO2tXq2mgUxhLGA4zFW4yHj8N-ANM8",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Tiendas tiflo",
+        "Información por países",
+        "Dónde comprar productos especializados para personas ciegas en Venezuela (TifloAcosta).html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1v6t3SmVzRbqEHitaSOxS3Knv3jIo-pcZ",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "ceguera en Latinoamérica",
+        "Información por países",
+        "Ceguera y baja visión en Argentina 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1-C1mXG-NxRjHKqpQXtgkpzgaNVENLr8g",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "ceguera en Latinoamérica",
+        "Información por países",
+        "Ceguera y baja visión en México 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1li2mKJhiZblvgvWbMOj8ZBB3jb0YxUoY",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "ceguera en Latinoamérica",
+        "Información por países",
+        "Ceguera y baja visión en Costa Rica 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1RyhmjdwuIqEUTQd9dp2ozdY7I_qOf2fM",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "ceguera en Latinoamérica",
+        "Información por países",
+        "Ceguera y baja visión en Chile 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1MD2sGou5VGLFlYeMbj9o28viQwmrXjRV",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "ceguera en Latinoamérica",
+        "Información por países",
+        "Ceguera y baja visión en Colombia 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1clYeYVbT4x4OC_D1lRHYpUeTOCmtGp3M",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "ceguera en Latinoamérica",
+        "Información por países",
+        "Ceguera y baja visión en Ecuador 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1c8BXBPhUIJfkLDl4yaVfRKUqC8M9f3Fp",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "ceguera en Latinoamérica",
+        "Información por países",
+        "Ceguera y baja visión en Perú 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "17iuXB23fcqJt7HLhdaQZahajTCv3ztYa",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "ceguera en Latinoamérica",
+        "Información por países",
+        "Ceguera y baja visión en República Dominicana 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    },
+    {
+      "id": "1D92RjghMUnfQPlqbHUXUVCkh_3j-bnlo",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "ceguera en Latinoamérica",
+        "Información por países",
+        "Ceguera y baja visión en Uruguay 2026.html"
+      ],
+      "mime": "text/html",
+      "match": [],
+      "titleCandidates": []
+    }
+  ],
+  "nonHtml": [
+    {
+      "id": "1B4Nt8xFoMQUlk9mnsbxyXJYVStyR1tMH",
+      "lang": "es",
+      "path": [
+        "Android",
+        "Curso_Braille_Android_TifloAcosta_ES.docx"
+      ],
+      "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "id": "18vsQl8M7_ov7YMPDMfkCyFwcM2qB02UI",
+      "lang": "en",
+      "path": [
+        "Android",
+        "Android_Braille_TalkBack_TifloAcosta_EN.docx"
+      ],
+      "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    }
+  ],
+  "excluded": [
+    {
+      "id": "1qog5e3kFQSQFpmFUhzANfNP26ASHLbCB",
+      "lang": "es",
+      "path": [
+        "Lectores de pantalla",
+        "Jaws",
+        "Archivados - enlaces antiguos"
+      ],
+      "mime": "application/vnd.google-apps.folder"
+    },
+    {
+      "id": "1V_5BfOFiNyjmhjOUVjX6_EyghPZNlz8o",
+      "lang": "es",
+      "path": [
+        "Estudios",
+        "Amazon, Google o Apple, qué marca conviene comprar",
+        "Información por países y regiones",
+        "Archivados - enlaces antiguos"
+      ],
+      "mime": "application/vnd.google-apps.folder"
+    }
+  ],
+  "errors": [],
+  "remaining": []
+}

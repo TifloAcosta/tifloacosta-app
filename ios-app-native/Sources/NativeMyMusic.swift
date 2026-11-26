@@ -93,6 +93,7 @@ private struct MusicPortableTrack: Codable {
     var genre: String? = nil
     var importedAt: Date? = nil
     var playCount: Int? = nil
+    var hasEditedTrackInformation: Bool? = nil
 }
 
 private struct MusicPortableLocation: Codable {
@@ -717,6 +718,60 @@ private final class NativeMusicLibrary: ObservableObject {
         } catch { self.error = MusicLocalized.format("No se pudo restaurar el índice: %@", error.localizedDescription) }
     }
 
+    /// Generate a restorable section archive from one captured index and
+    /// its referenced local songs. Cloud tracks remain references only.
+    func createGlobalBackupArchive() async throws -> URL {
+        guard let index = exportIndex()?.text,
+              let snapshot = try? JSONDecoder().decode(MusicIndexBackup.self, from: Data(index.utf8)) else {
+            throw CocoaError(.fileReadCorruptFile)
+        }
+        let sourceFiles = files
+        let root = directory
+        let worker = Task.detached(priority: .utility) {
+            var tracks = snapshot.catalog.tracks
+            var media: [NativeBackupSectionArchive.File] = []
+            let allowed = Set(["mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf", "flac", "ogg"])
+            for file in sourceFiles {
+                try Task.checkCancellation()
+                let source = root.appendingPathComponent(file.fileName)
+                let ext = source.pathExtension.lowercased()
+                guard allowed.contains(ext),
+                      !file.fileName.isEmpty, file.fileName != ".", file.fileName != "..",
+                      !file.fileName.contains("/"), !file.fileName.contains("\\"),
+                      let track = tracks[file.id.uuidString] else {
+                    throw NativeBackupSectionArchive.Failure.invalidPath
+                }
+                let relative = "audio/\(file.id.uuidString).\(ext)"
+                media.append(.init(path: relative, source: source, trustedRoot: root))
+                tracks[file.id.uuidString] = MusicPortableTrack(id: track.id, title: track.title,
+                    locations: [MusicPortableLocation(provider: "archive", remoteId: relative)],
+                    album: track.album, artist: track.artist, genre: track.genre,
+                    importedAt: track.importedAt, playCount: track.playCount,
+                    hasEditedTrackInformation: file.hasEditedTrackInformation)
+            }
+            guard tracks.count == media.count else { throw CocoaError(.fileReadCorruptFile) }
+            let complete = MusicIndexBackup(format: snapshot.format, version: snapshot.version,
+                createdAt: snapshot.createdAt, includesAudioFiles: true,
+                catalog: MusicPortableCatalog(version: 1, tracks: tracks),
+                folders: snapshot.folders, playlists: snapshot.playlists,
+                smartFolders: snapshot.smartFolders, audioProfiles: snapshot.audioProfiles)
+            let manifest = try JSONEncoder().encode(complete)
+            guard manifest.count <= 8_388_608 else {
+                throw NativeBackupSectionArchive.Failure.exceedsRestoreLimit
+            }
+            return try NativeBackupSectionArchive.create(metadata: ["manifest.json": manifest],
+                files: media, maxBytes: 2_147_483_648, maxEntries: 10_000)
+        }
+        let archive = try await withTaskCancellationHandler {
+            try await worker.value
+        } onCancel: { worker.cancel() }
+        if Task.isCancelled {
+            try? FileManager.default.removeItem(at: archive.deletingLastPathComponent())
+            throw CancellationError()
+        }
+        return archive
+    }
+
     func createCompleteArchive() -> URL? {
         let staging = FileManager.default.temporaryDirectory.appendingPathComponent("music-export-\(UUID().uuidString)", isDirectory: true)
         let output = FileManager.default.temporaryDirectory.appendingPathComponent("MiMusica-completa-\(UUID().uuidString).zip")
@@ -774,7 +829,7 @@ private final class NativeMusicLibrary: ObservableObject {
             var total: Int64 = 0
             for entry in archive {
                 let name = entry.path
-                guard name == "manifest.json" || name.range(of: #"^audio/[a-zA-Z0-9-]+\.(mp3|m4a|aac|wav|flac|ogg)$"#, options: .regularExpression) != nil,
+                guard name == "manifest.json" || name.range(of: #"^audio/[a-zA-Z0-9-]+\.(mp3|m4a|m4b|aac|wav|aif|aiff|caf|flac|ogg)$"#, options: .regularExpression) != nil,
                       entry.type == .file else { throw CocoaError(.fileReadCorruptFile) }
                 total += Int64(entry.uncompressedSize)
                 guard total <= 2_147_483_648 else { throw CocoaError(.fileReadCorruptFile) }
@@ -792,7 +847,7 @@ private final class NativeMusicLibrary: ObservableObject {
             var ids: [String: UUID] = [:]
             for (id, track) in backup.catalog.tracks {
                 guard let stored = track.locations.first(where: { $0.provider == "archive" }),
-                      stored.remoteId.range(of: #"^audio/[a-zA-Z0-9-]+\.(mp3|m4a|aac|wav|flac|ogg)$"#, options: .regularExpression) != nil else { continue }
+                      stored.remoteId.range(of: #"^audio/[a-zA-Z0-9-]+\.(mp3|m4a|m4b|aac|wav|aif|aiff|caf|flac|ogg)$"#, options: .regularExpression) != nil else { continue }
                 let original = staging.appendingPathComponent(stored.remoteId)
                 guard FileManager.default.fileExists(atPath: original.path) else { throw CocoaError(.fileReadCorruptFile) }
                 let newID = UUID()
@@ -802,7 +857,8 @@ private final class NativeMusicLibrary: ObservableObject {
                 createdFiles.append(destination)
                 imported.append(MusicLocalFile(id: newID, name: track.title, fileName: fileName,
                     album: track.album, artist: track.artist, genre: track.genre,
-                    importedAt: track.importedAt, playCount: track.playCount))
+                    importedAt: track.importedAt, playCount: track.playCount,
+                    hasEditedTrackInformation: track.hasEditedTrackInformation))
                 ids[id] = newID
             }
             let additions = backup.folders.map { folder in

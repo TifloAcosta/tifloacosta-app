@@ -246,12 +246,14 @@ private enum NativeGuideContent {
             spanishParagraphs: [
                 "En Configuración puedes elegir el idioma de la aplicación mediante un control ajustable. La preferencia se conserva.",
                 "Abre Ajustes visuales solo cuando quieras cambiar la presentación. Dentro encontrarás contraste, tamaño de letra, espaciado entre líneas y texto reforzado. Puedes restablecer estos ajustes.",
-                "En Aplicación se muestra la versión instalada y el enlace a la web oficial. Los ajustes particulares de lectura se gestionan desde Ajustes de TifloLector."
+                "En Aplicación se muestra la versión instalada y el enlace a la web oficial. Los ajustes particulares de lectura se gestionan desde Ajustes de TifloLector.",
+                "En Copias de seguridad puedes elegir qué contenidos guardar, crear una copia local o en iCloud y programar copias automáticas. Descarga y revisa una copia antes de confirmar la restauración. Los elementos existentes se conservan; los archivos de pódcast se deben volver a descargar."
             ],
             englishParagraphs: [
                 "In Settings you can choose the app language using an adjustable control. Your preference is saved.",
                 "Expand Visual settings only when you want to change the interface. Available options include contrast, text size, line spacing and heavier text, with a reset option.",
-                "The Application section shows the installed version and a link to the website. Document reading preferences are configured in TifloLector Settings."
+                "The Application section shows the installed version and a link to the website. Document reading preferences are configured in TifloLector Settings.",
+                "In Backups you can select the content to save, create a local or iCloud backup and schedule automatic backups. Download and review a backup before confirming restoration. Existing items are kept; podcast files must be downloaded again."
             ]
         )
     ]

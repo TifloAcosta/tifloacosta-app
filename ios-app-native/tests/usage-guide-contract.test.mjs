@@ -38,11 +38,11 @@ test('La guía proporciona títulos y párrafos locales completos en los cuatro 
     const source = readFileSync(new URL('../Sources/' + lang + '.lproj/Guide.strings', import.meta.url), 'utf8');
     const entries = [...source.matchAll(/^"guide\.(\d+)\.(title|paragraph\.\d+)"\s*=\s*"(.+)";$/gm)];
     const keys = entries.map(m => m[1] + '.' + m[2]);
-    assert.equal(keys.length, 59, lang + ' debe cubrir todos los párrafos');
+    assert.equal(keys.length, 60, lang + ' debe cubrir todos los párrafos');
     assert.equal(new Set(keys).size, keys.length, lang + ' incluye claves repetidas');
     for (let section = 1; section <= 12; section++) {
       assert.ok(keys.includes(section + '.title'), lang + ': título ' + section);
-      for (let paragraph = 1; paragraph <= (section === 3 || section === 6 || section === 8 ? (section === 8 ? 5 : 4) : 3); paragraph++) {
+      for (let paragraph = 1; paragraph <= (section === 3 || section === 6 || section === 8 || section === 12 ? (section === 8 ? 5 : 4) : 3); paragraph++) {
         assert.ok(keys.includes(section + '.paragraph.' + paragraph), lang + ': sección ' + section);
       }
     }

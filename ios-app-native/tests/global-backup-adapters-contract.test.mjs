@@ -463,3 +463,33 @@ test('restore preview requires a management session and exact explicit approval 
     assert.match(home, /task\(id: automaticBackupEligible\)/);
     assert.match(home, /canCollectSnapshot: \{ automaticBackupEligible && !Task\.isCancelled \}/);
 });
+
+test('native backup management keeps one route, separate local/cloud operations and reversible preview', () => {
+    const settings = read('NativeUpdatesSettings.swift');
+    const ui = read('NativeBackupManagementScreen.swift');
+    assert.match(settings, /backups\.beginManagement\(\)/);
+    assert.match(settings, /fullScreenCover\(isPresented: \$showBackups, onDismiss: \{ backups\.endManagement\(\) \}/);
+    assert.match(ui, /Toggle\(LocalizedStringKey\(section\.backupLabel\)/);
+    assert.match(ui, /backups\.create\(sections: selected/);
+    assert.match(ui, /backups\.downloadFromICloud/);
+    assert.match(ui, /approvedOmissions: approved, previewOnly: approved == nil/);
+    assert.match(ui, /approved: report\.omissionSummary/);
+    assert.match(ui, /confirmation = \.restore/);
+    assert.match(ui, /@AccessibilityFocusState/);
+    assert.match(ui, /UIAccessibility\.post\(notification: \.announcement/);
+    assert.match(ui, /Button\("Cancelar operación", role: \.cancel\) \{ job\?\.cancel\(\) \}/);
+    assert.match(ui, /interactiveDismissDisabled\(busy\)/);
+    assert.match(ui, /if metadataComplete && !cloudUnavailable/);
+    assert.match(ui, /entries = NativeBackupSyncPolicy\.history\(local: local, remote: \[\]\)/);
+    assert.doesNotMatch(ui, /removeItem|deleteGeneration|restoreAutomatically/);
+});
+test('all dynamic backup labels and confirmation text exist in five non-Spanish catalogs', () => {
+    const ui = read('NativeBackupManagementScreen.swift');
+    const keys = new Set([...ui.matchAll(/"([^"\\]*(?:\\.[^"\\]*)*)"/g)]
+        .map(m => m[1]).filter(x => x.trim() && x !== ', ' && !x.startsWith('tiflo.')));
+    for (const language of ['en', 'pt', 'fr', 'it', 'de']) {
+        const dict = read(language + '.lproj/Localizable.strings');
+        const missing = [...keys].filter(key => !dict.includes('"' + key + '" ='));
+        assert.deepEqual(missing, [], language + ': backup keys missing');
+    }
+});

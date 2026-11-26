@@ -1958,7 +1958,7 @@
 "Confirmar restauración" = "Conferma ripristino";
 "Activar copias automáticas" = "Attiva backup automatici";
 "Desactivar copias automáticas" = "Disattiva backup automatici";
-"Los contenidos seleccionados se guardarán en tu cuenta de iCloud. No se incluyen contraseñas ni claves de acceso." = "I contenuti selezionati verranno salvati nel tuo account iCloud. Password e chiavi di accesso non sono incluse.";
+"Los contenidos seleccionados se guardarán en tu cuenta de iCloud. No se exportan las credenciales de las cuentas de TifloAcosta. Revisa los archivos que puedan contener información privada." = "I contenuti selezionati verranno salvati nel tuo account iCloud. Le credenziali degli account TifloAcosta non vengono esportate. Controlla i file che potrebbero contenere informazioni private.";
 "Se descargará y comprobará la copia. Todavía no se modificarán tus bibliotecas." = "Il backup verrà scaricato e verificato. Le tue librerie non verranno ancora modificate.";
 "Se añadirán los elementos que falten. Los elementos y ajustes que ya existen se conservarán. Revisa el informe antes de continuar." = "Verranno aggiunti gli elementi mancanti. Gli elementi e le impostazioni esistenti saranno conservati. Controlla il rapporto prima di continuare.";
 "Autorizas el envío periódico de los contenidos seleccionados a la cuenta actual de iCloud. Las copias se comprueban cuando TifloAcosta está abierto." = "Autorizzi il caricamento periodico dei contenuti selezionati nell’account iCloud attuale. I backup vengono controllati quando TifloAcosta è aperta.";

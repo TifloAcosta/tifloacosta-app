@@ -6,6 +6,13 @@ final class LocalizationNavigationTests: XCTestCase {
     private let roots = ["Actualidad","Recursos","TifloLector","Mi Música","Multicines Accesibles","Novedades","Descargar desde un enlace","Favoritos","Vídeos","Podcast","Configuración"]
     private let translations: [String: [String: String]] = [
         "es": [
+            "Gestionar copias de seguridad": "Gestionar copias de seguridad",
+            "Crear copia local": "Crear copia local",
+            "Crear copia en iCloud": "Crear copia en iCloud",
+            "Copias automáticas": "Copias automáticas",
+            "Historial de copias": "Historial de copias",
+            "Cerrar": "Cerrar",
+            "Preferencias y favoritos": "Preferencias y favoritos",
             "Actualidad": "Actualidad",
             "Recursos": "Recursos",
             "TifloLector": "TifloLector",
@@ -52,6 +59,13 @@ final class LocalizationNavigationTests: XCTestCase {
             "Comunicar incidencia de accesibilidad": "Comunicar incidencia de accesibilidad"
         ],
         "en": [
+            "Gestionar copias de seguridad": "Manage backups",
+            "Crear copia local": "Create local backup",
+            "Crear copia en iCloud": "Create iCloud backup",
+            "Copias automáticas": "Automatic backups",
+            "Historial de copias": "Backup history",
+            "Cerrar": "Close",
+            "Preferencias y favoritos": "Preferences and favorites",
             "Actualidad": "News",
             "Recursos": "Resources",
             "TifloLector": "TifloReader",
@@ -98,6 +112,13 @@ final class LocalizationNavigationTests: XCTestCase {
             "Comunicar incidencia de accesibilidad": "Report an accessibility issue"
         ],
         "pt": [
+            "Gestionar copias de seguridad": "Gerir cópias de segurança",
+            "Crear copia local": "Criar cópia local",
+            "Crear copia en iCloud": "Criar cópia no iCloud",
+            "Copias automáticas": "Cópias automáticas",
+            "Historial de copias": "Histórico de cópias",
+            "Cerrar": "Fechar",
+            "Preferencias y favoritos": "Preferências e favoritos",
             "Actualidad": "Atualidade",
             "Recursos": "Recursos",
             "TifloLector": "TifloLector",
@@ -144,6 +165,13 @@ final class LocalizationNavigationTests: XCTestCase {
             "Comunicar incidencia de accesibilidad": "Comunicar um problema de acessibilidade"
         ],
         "fr": [
+            "Gestionar copias de seguridad": "Gérer les sauvegardes",
+            "Crear copia local": "Créer une sauvegarde locale",
+            "Crear copia en iCloud": "Créer une sauvegarde iCloud",
+            "Copias automáticas": "Sauvegardes automatiques",
+            "Historial de copias": "Historique des sauvegardes",
+            "Cerrar": "Fermer",
+            "Preferencias y favoritos": "Préférences et favoris",
             "Actualidad": "Actualités",
             "Recursos": "Ressources",
             "TifloLector": "TifloLector",
@@ -190,6 +218,13 @@ final class LocalizationNavigationTests: XCTestCase {
             "Comunicar incidencia de accesibilidad": "Signaler un problème d’accessibilité"
         ],
         "it": [
+            "Gestionar copias de seguridad": "Gestisci backup",
+            "Crear copia local": "Crea backup locale",
+            "Crear copia en iCloud": "Crea backup su iCloud",
+            "Copias automáticas": "Backup automatici",
+            "Historial de copias": "Cronologia dei backup",
+            "Cerrar": "Chiudi",
+            "Preferencias y favoritos": "Preferenze e preferiti",
             "Actualidad": "Attualità",
             "Recursos": "Risorse",
             "TifloLector": "TifloLector",
@@ -236,6 +271,13 @@ final class LocalizationNavigationTests: XCTestCase {
             "Comunicar incidencia de accesibilidad": "Segnala un problema di accessibilità"
         ],
         "de": [
+            "Gestionar copias de seguridad": "Sicherungen verwalten",
+            "Crear copia local": "Lokale Sicherung erstellen",
+            "Crear copia en iCloud": "iCloud-Sicherung erstellen",
+            "Copias automáticas": "Automatische Sicherungen",
+            "Historial de copias": "Sicherungsverlauf",
+            "Cerrar": "Schließen",
+            "Preferencias y favoritos": "Einstellungen und Favoriten",
             "Actualidad": "Aktuelles",
             "Recursos": "Ressourcen",
             "TifloLector": "TifloLector",
@@ -380,6 +422,34 @@ final class LocalizationNavigationTests: XCTestCase {
         for key in ["Consultar y configurar atajos", "Revisar elementos pendientes", "Abrir contacto y redes", "Consultar privacidad y accesibilidad", "Comunicar incidencia de accesibilidad"] {
             find(app, key: key, language: language)
         }
+        let manage = app.buttons.matching(identifier: "tiflo.settings.backups").firstMatch
+        XCTAssertTrue(reveal(app, manage), "Backup entry not reachable")
+        XCTAssertEqual(manage.label, expected("Gestionar copias de seguridad", language))
+        manage.tap()
+        let close = app.buttons.matching(identifier: "tiflo.backup.close").firstMatch
+        XCTAssertTrue(close.waitForExistence(timeout: 30))
+        let local = app.buttons.matching(identifier: "tiflo.backup.create.local").firstMatch
+        XCTAssertTrue(reveal(app, local))
+        XCTAssertEqual(local.label, expected("Crear copia local", language))
+        let cloud = app.buttons.matching(identifier: "tiflo.backup.create.cloud").firstMatch
+        XCTAssertTrue(reveal(app, cloud))
+        XCTAssertEqual(cloud.label, expected("Crear copia en iCloud", language))
+        let preferences = app.switches.matching(identifier: "tiflo.backup.select.preferences").firstMatch
+        XCTAssertTrue(reveal(app, preferences))
+        XCTAssertEqual(preferences.label, expected("Preferencias y favoritos", language))
+        // Audit only: never enable automation or upload test content.
+        find(app, key: "Copias automáticas", language: language)
+        find(app, key: "Historial de copias", language: language)
+        XCTAssertTrue(close.waitForExistence(timeout: 30))
+        XCTAssertEqual(close.label, expected("Cerrar", language))
+        // Initial iCloud lookup is cancelable and bounded by the UI operation.
+        if !close.isEnabled {
+            let progress = app.descendants(matching: .any).matching(identifier: "tiflo.backup.progress").firstMatch
+            let gone = NSPredicate(format: "exists == false")
+            let finished = XCTNSPredicateExpectation(predicate: gone, object: progress)
+            XCTAssertEqual(XCTWaiter.wait(for: [finished], timeout: 40), .completed)
+        }
+        close.tap()
         print("LOCALIZATION_UI_NAVIGATION_PASS \(language)")
     }
 

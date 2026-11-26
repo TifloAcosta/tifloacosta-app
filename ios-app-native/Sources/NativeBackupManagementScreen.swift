@@ -85,7 +85,7 @@ struct NativeBackupManagementScreen: View {
         var message: String {
             switch self {
             case .createCloud, .upload:
-                return "Los contenidos seleccionados se guardarán en tu cuenta de iCloud. No se incluyen contraseñas ni claves de acceso."
+                return "Los contenidos seleccionados se guardarán en tu cuenta de iCloud. No se exportan las credenciales de las cuentas de TifloAcosta. Revisa los archivos que puedan contener información privada."
             case .download:
                 return "Se descargará y comprobará la copia. Todavía no se modificarán tus bibliotecas."
             case .restore:
@@ -156,6 +156,11 @@ struct NativeBackupManagementScreen: View {
     }
 
     private func refreshHistory() async throws {
+        let local = try await backups.history()
+        try Task.checkCancellation()
+        entries = NativeBackupSyncPolicy.history(local: local, remote: [])
+        metadataComplete = false
+        cloudUnavailable = false
         let history = try await backups.synchronizedHistory()
         try Task.checkCancellation()
         entries = history.entries
@@ -305,6 +310,7 @@ struct NativeBackupManagementScreen: View {
             }
             ForEach(NativeBackupManifest.Section.allCases, id: \.self) { section in
                 Toggle(LocalizedStringKey(section.backupLabel), isOn: selectionBinding(section, automatic: true))
+                    .accessibilityIdentifier("tiflo.backup.automatic." + section.rawValue)
             }
             Picker("Periodicidad", selection: $frequency) {
                 ForEach(NativeBackupAutomaticState.Frequency.allCases, id: \.self) { item in
@@ -347,13 +353,19 @@ struct NativeBackupManagementScreen: View {
                     Text(LocalizedStringKey(entry.availability.backupLabel))
                     if entry.hasLocalCopy {
                         Button("Revisar restauración") { restore(generation: entry.generation) }
+                            .buttonStyle(.borderless)
+                            .accessibilityIdentifier("tiflo.backup.review." + entry.generation.uuidString)
                             .disabled(!canCollect)
                             .accessibilityHint("Comprueba los datos sin modificar las bibliotecas.")
                         if entry.availability == .localOnly || entry.availability == .awaitingCloud || entry.availability == .failed {
                             Button("Enviar copia a iCloud") { selectedEntry = entry; confirmation = .upload }
+                                .buttonStyle(.borderless)
+                                .accessibilityIdentifier("tiflo.backup.upload." + entry.generation.uuidString)
                         }
                     } else if entry.canRequestCloudRestore {
                         Button("Descargar copia de iCloud") { selectedEntry = entry; confirmation = .download }
+                            .buttonStyle(.borderless)
+                            .accessibilityIdentifier("tiflo.backup.download." + entry.generation.uuidString)
                     }
                     if entry.availability == .conflict {
                         Text("No se sustituirá ninguna de las versiones.").font(.footnote)
@@ -389,6 +401,7 @@ struct NativeBackupManagementScreen: View {
                 .disabled(!canCollect || busy)
                 .accessibilityIdentifier("tiflo.backup.restore.confirm")
             Button("Cancelar restauración", role: .cancel) { preview = nil }
+                .accessibilityIdentifier("tiflo.backup.restore.cancel")
                 .disabled(busy)
         }
         .listRowBackground(TifloVisual.surfaceRaised)
@@ -428,6 +441,7 @@ struct NativeBackupManagementScreen: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cerrar") { dismiss() }.disabled(busy)
+                        .accessibilityIdentifier("tiflo.backup.close")
                 }
             }
             .interactiveDismissDisabled(busy)

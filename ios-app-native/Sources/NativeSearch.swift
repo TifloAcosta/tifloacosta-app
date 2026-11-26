@@ -24,6 +24,7 @@ private struct NativeSearchMatch: Identifiable {
 
 struct NativeSearchResultsScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
+    @AppStorage("native-ios-language") private var languageIndex = 0
     let query: String
 
     private func normalize(_ value: String) -> String {
@@ -50,16 +51,18 @@ struct NativeSearchResultsScreen: View {
         let words = normalizedQuery.split(whereSeparator: { $0.isWhitespace }).map(String.init)
         guard !words.isEmpty else { return [] }
 
-        let resources = catalog.resources
-            .filter { $0.lang == nil || $0.lang == "es" }
-            .map { NativeSearchMatch(kind: .resource, item: $0) }
+        // Global resource queries reach every indexed document. The
+        // Resources screen retains its explicit language selector.
+        let resources = catalog.resources.map { NativeSearchMatch(kind: .resource, item: $0) }
         let videos = catalog.videos.map { NativeSearchMatch(kind: .video, item: $0) }
+        let preferredLanguage = NativeAppLanguage.code(for: languageIndex)
         let news = catalog.news
-            .filter { $0.lang == nil || $0.lang == "es" }
+            .filter { $0.lang == nil || languageIndex > 1 || $0.lang == preferredLanguage }
             .map { NativeSearchMatch(kind: .news, item: $0) }
 
         return (resources + videos + news)
             .filter { match in
+                if match.kind == .resource { return match.item.matchesResourceQuery(query) }
                 let text = searchableText(match)
                 return words.allSatisfy { text.contains($0) }
             }
@@ -67,6 +70,9 @@ struct NativeSearchResultsScreen: View {
                 let firstScore = relevance(first, normalizedQuery: normalizedQuery)
                 let secondScore = relevance(second, normalizedQuery: normalizedQuery)
                 if firstScore != secondScore { return firstScore < secondScore }
+                let firstLanguage = first.item.lang == preferredLanguage
+                let secondLanguage = second.item.lang == preferredLanguage
+                if firstLanguage != secondLanguage { return firstLanguage }
                 let ordered = first.item.title.localizedStandardCompare(second.item.title)
                 if ordered != .orderedSame { return ordered == .orderedAscending }
                 return first.id < second.id
@@ -109,10 +115,16 @@ struct NativeSearchResultsScreen: View {
                                 NavigationLink {
                                     NativeRemoteResourceScreen(item: match.item)
                                 } label: {
-                                    Text(match.item.title)
-                                        .frame(minHeight: 44, alignment: .leading)
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(match.item.title)
+                                        if !match.item.resourceLocation.isEmpty {
+                                            Text(match.item.resourceLocation).font(.caption).foregroundStyle(.secondary)
+                                        }
+                                    }
+                                    .frame(minHeight: 44, alignment: .leading)
                                 }
                                 .accessibilityLabel(match.item.title)
+                                .accessibilityValue(Text(match.item.resourceLocation))
                             case .news:
                                 NavigationLink {
                                     NativeNewsArticleScreen(item: match.item)

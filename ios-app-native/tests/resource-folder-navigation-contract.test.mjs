@@ -29,3 +29,12 @@ test('empty resource search translated into the five non-source app languages', 
         assert.equal((strings.match(/^"No hay resultados\."\s*=/gm) || []).length, 1, language);
     }
 });
+
+test('home global search uses the same nested resource index, includes all resource languages and announces location', () => {
+    const global = fs.readFileSync(new URL('../Sources/NativeSearch.swift', import.meta.url), 'utf8');
+    assert.match(global, /let resources = catalog\.resources\.map/);
+    assert.match(global, /if match\.kind == \.resource \{ return match\.item\.matchesResourceQuery\(query\) \}/);
+    assert.match(global, /Text\(match\.item\.resourceLocation\)/);
+    assert.match(global, /\.accessibilityValue\(Text\(match\.item\.resourceLocation\)\)/);
+    assert.match(global, /first\.item\.lang == preferredLanguage/);
+});

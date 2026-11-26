@@ -54,5 +54,16 @@
   "notes": [
     "Public feed's current news and videos preserved from a5616e2; no older news resurrected.",
     "No publication, no main writes, no Drive permission changes. Reconcile again against main immediately before eventual publication."
-  ]
+  ],
+  "restoredSearchIndexes": 71,
+  "contentParity": {
+    "resources": 260,
+    "videos": 292,
+    "news": 40,
+    "errors": 0
+  },
+  "globalSearch": {
+    "native": "all resource languages, shared query, full path accessible, preferred language tie break",
+    "web": "full nested path and supplemental text, chosen site language"
+  }
 }

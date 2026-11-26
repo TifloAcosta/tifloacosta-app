@@ -74,3 +74,14 @@ test('global search uses supplemental video metadata and ignores accents', () =>
 test('blank global search returns no results', () => {
   assert.deepEqual(search.searchAcrossSources({ resources:[] }, '   ', 'es'), []);
 });
+
+test('global resource search indexes nested folders and shows the complete path', () => {
+  const sources = {resources: [
+    {id:'deep', lang:'es', title:'Curso práctico', category:'Lectores de pantalla',
+      folderPath:['NVDA','Cursos'], searchText:'configuración avanzada', openUrl:'docs/curso.html'},
+    {id:'other', lang:'es', title:'Guía', category:'Lectores de pantalla', folderPath:['JAWS']}
+  ]};
+  const results = search.searchAcrossSources(sources, 'nvda cursos configuracion', 'es');
+  assert.deepEqual(results.map(x=>x.id), ['deep']);
+  assert.equal(results[0].meta, 'Lectores de pantalla / NVDA / Cursos');
+});

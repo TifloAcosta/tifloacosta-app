@@ -54,13 +54,15 @@
 
     for (const item of Array.isArray(sources.resources) ? sources.resources : []) {
       if (item?.lang && item.lang !== language) continue;
-      const text = `${item?.title || ''} ${item?.category || ''} ${supplementalResourceText(item)}`;
+      const location = [item?.category, ...(Array.isArray(item?.folderPath) ? item.folderPath : [])]
+        .filter(part => typeof part === 'string' && part.trim()).join(' / ');
+      const text = `${item?.title || ''} ${location} ${item?.description || ''} ${item?.summary || ''} ${supplementalResourceText(item)}`;
       if (!queryMatches(text, term)) continue;
       results.push({
         kind: 'resource',
         id: String(item.id || item.title || ''),
         title: String(item.title || ''),
-        meta: String(item.category || ''),
+        meta: location,
         href: String(item.openUrl || item.url || '#')
       });
     }

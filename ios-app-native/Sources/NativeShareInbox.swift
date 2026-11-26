@@ -219,6 +219,9 @@ final class NativeShareInbox: ObservableObject {
     }
 
     private var readerBatchRunning = false
+    var readyForBackupManagement: Bool {
+        !readerBatchRunning && activeReaderImportID == nil && readyToRead == nil
+    }
 
     /// One deliberate batch action applies the chosen destination to all
     /// otherwise pending audio files; errors retain their original manifests.

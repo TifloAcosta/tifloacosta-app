@@ -20,6 +20,7 @@ struct TifloAcostaNativeApp: App {
     @AppStorage("native-ios-color-scheme") private var schemeIndex = 0
     @AppStorage("native-ios-language") private var languageIndex = 0
 
+    @ObservedObject private var backups = NativeBackupCoordinator.shared
     private let recoveryFailed: Bool
 
     init() {
@@ -45,7 +46,7 @@ struct TifloAcostaNativeApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if recoveryFailed {
+            if recoveryFailed || backups.requiresRecovery {
                 VStack(spacing: 16) {
                     Text("No se pudo completar la recuperación de la copia de seguridad.")
                         .font(.headline)

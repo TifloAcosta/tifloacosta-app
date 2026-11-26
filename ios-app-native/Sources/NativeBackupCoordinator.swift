@@ -13,6 +13,40 @@ final class NativeBackupCoordinator: ObservableObject {
     @Published private(set) var isRestoring = false
     @Published private(set) var isTransferringCloudBackup = false
     @Published private(set) var isRunningAutomaticBackup = false
+    @Published private(set) var isManagingBackups = false
+    @Published private(set) var requiresRecovery = false
+    @Published private(set) var progressSection: NativeBackupManifest.Section?
+    @Published private(set) var automaticNotice: AutomaticNotice?
+
+    enum AutomaticNotice: Equatable { case pending, completed, failed }
+
+    var operationInProgress: Bool { backupOperationBusy }
+    var blocksExternalActions: Bool {
+        isManagingBackups || backupOperationBusy || requiresRecovery
+    }
+
+    /// The management modal owns the navigation context. Live stores must
+    /// still pass their individual quiescence checks before restore.
+    func beginManagement() -> Bool {
+        guard !isManagingBackups, !backupOperationBusy, !requiresRecovery else { return false }
+        isManagingBackups = true
+        return true
+    }
+
+    func endManagement() {
+        isManagingBackups = false
+    }
+
+    private func checkRecovery() throws {
+        do {
+            if try NativeBackupRestoreJournal.application.pending() != nil {
+                throw NativeBackupRestoreJournal.Failure.pendingRecovery
+            }
+        } catch {
+            requiresRecovery = true
+            throw error
+        }
+    }
     private let store: NativeBackupGenerationStore
     private let automaticStore: NativeBackupAutomaticStateStore
 
@@ -71,38 +105,46 @@ final class NativeBackupCoordinator: ObservableObject {
         if sections.contains(.preferences), favorites == nil || activity == nil {
             throw Failure.missingLiveStore
         }
+        try checkRecovery()
         isCreating = true
         var archives: [NativeBackupManifest.Section: URL] = [:]
         defer {
             for archive in archives.values {
                 try? FileManager.default.removeItem(at: archive.deletingLastPathComponent())
             }
+            progressSection = nil
             isCreating = false
         }
         if sections.contains(.reader) {
+            progressSection = .reader
             archives[.reader] = try await reader.createGlobalBackupArchive()
         }
         try Task.checkCancellation()
         if sections.contains(.music) {
+            progressSection = .music
             archives[.music] = try await NativeMusicBackupAdapter.createArchive()
         }
         try Task.checkCancellation()
         if sections.contains(.cinema) {
+            progressSection = .cinema
             archives[.cinema] = try await NativeCinemaLocalLibrary.shared.createGlobalBackupArchive()
         }
         try Task.checkCancellation()
         if sections.contains(.podcasts) {
+            progressSection = .podcasts
             guard let podcastLibrary, let podcastDownloads else { throw Failure.missingLiveStore }
             let snapshot = NativePodcastBackupSnapshot.capture(library: podcastLibrary, downloads: podcastDownloads)
             archives[.podcasts] = try await NativeBackupMetadataArchive.create(snapshot)
         }
         try Task.checkCancellation()
         if sections.contains(.radio) {
+            progressSection = .radio
             let snapshot = try NativeRadioBackupAdapter.capture()
             archives[.radio] = try await NativeBackupMetadataArchive.create(snapshot)
         }
         try Task.checkCancellation()
         if sections.contains(.preferences) {
+            progressSection = .preferences
             guard let favorites, let activity else { throw Failure.missingLiveStore }
             let snapshot = try NativeBackupPreferencesSnapshot.capture(favorites: favorites, activity: activity)
             archives[.preferences] = try await NativeBackupMetadataArchive.create(snapshot)
@@ -134,6 +176,7 @@ final class NativeBackupCoordinator: ObservableObject {
     /// Pending means Apple has accepted the local copy, not uploaded all data.
     func uploadToICloud(generation: UUID) async throws -> NativeBackupCloudStore.UploadState {
         guard !backupOperationBusy else { throw Failure.busy }
+        try checkRecovery()
         return try await uploadGeneration(generation: generation, automaticAuthorization: nil)
     }
 
@@ -201,7 +244,7 @@ final class NativeBackupCoordinator: ObservableObject {
                                  activity: NativeReadingActivity? = nil,
                                  now: Date = Date(),
                                  canCollectSnapshot: () -> Bool) async throws -> AutomaticResult {
-        guard !backupOperationBusy else { return .deferred }
+        guard !backupOperationBusy, !isManagingBackups, !requiresRecovery else { return .deferred }
         guard var policy = try automaticStore.load() else { return .disabled }
         let decision = policy.decision(at: now)
         let generation: UUID
@@ -216,9 +259,7 @@ final class NativeBackupCoordinator: ObservableObject {
               podcastDownloads?.downloadingID == nil else { return .deferred }
         isRunningAutomaticBackup = true
         defer { isRunningAutomaticBackup = false }
-        guard try NativeBackupRestoreJournal.application.pending() == nil else {
-            throw NativeBackupRestoreJournal.Failure.pendingRecovery
-        }
+        try checkRecovery()
         // Persist the reservation before any potentially interruptible work.
         try policy.recordAttempt(generation: generation, at: now)
         try automaticStore.save(policy)
@@ -251,6 +292,17 @@ final class NativeBackupCoordinator: ObservableObject {
         // discard it because iCloud has not acknowledged all artifacts yet.
         return .pending(generation)
     }
+
+    func recordAutomaticNotice(_ result: AutomaticResult) {
+        switch result {
+        case .pending: automaticNotice = .pending
+        case .completed: automaticNotice = .completed
+        default: break
+        }
+    }
+
+    func recordAutomaticFailure() { automaticNotice = .failed }
+    func clearAutomaticNotice() { automaticNotice = nil }
 
     func synchronizedHistory() async throws -> SynchronizedHistory {
         let here = try await history()
@@ -291,6 +343,7 @@ final class NativeBackupCoordinator: ObservableObject {
     /// The ordinary local restore entry point handles confirmation/rollback.
     func downloadFromICloud(generation: UUID) async throws -> NativeBackupManifest {
         guard !backupOperationBusy else { throw Failure.busy }
+        try checkRecovery()
         isTransferringCloudBackup = true
         defer { isTransferringCloudBackup = false }
         let local = store
@@ -366,20 +419,27 @@ final class NativeBackupCoordinator: ObservableObject {
         let cinemaHistory: Int
     }
 
-    /// Internal integration only. Do not expose this entry point in the UI
-    /// until a durable recovery journal and the live-store write barrier exist.
-    /// The caller must guarantee exclusive ownership of all live stores
-    /// during the synchronous preparation and commit, including audio callbacks.
+    /// Always preview without mutations, then require explicit approval of
+    /// the exact generation and omissions. The management modal owns the
+    /// navigation context and external actions remain deferred while open.
     func restoreLocalGeneration(generation: UUID, reader: NativeReaderLibrary,
                                 podcastLibrary: NativePodcastLibrary? = nil,
                                 podcastDownloads: NativePodcastDownloads? = nil,
                                 favorites: NativeFavoritesStore? = nil,
                                 activity: NativeReadingActivity? = nil,
                                 approvedOmissions: RestoreOmissionSummary? = nil,
+                                previewOnly: Bool = true,
                                 liveStoresAreQuiescent: () -> Bool) async throws -> RestoreReport {
-        guard !backupOperationBusy else { throw Failure.busy }
+        guard !backupOperationBusy, isManagingBackups, !requiresRecovery else { throw Failure.busy }
+        try checkRecovery()
         isRestoring = true
-        defer { isRestoring = false }
+        defer {
+            // A failed rollback or a journal that could not be retired must
+            // block further navigation in this running process, not just
+            // after the next launch.
+            do { try checkRecovery() } catch {}
+            isRestoring = false
+        }
         let destination = store
         let worker = Task.detached(priority: .utility) {
             let (manifest, directory) = try destination.verifiedGeneration(generation)
@@ -463,7 +523,8 @@ final class NativeBackupCoordinator: ObservableObject {
             omittedCinemaHistory: cinemaHistory,
             preservedExisting: recovery.preservedIdentities)
         let omissions = report.omissionSummary
-        guard !report.hasOmissions || approvedOmissions == omissions else { throw Failure.incompleteRestore(report) }
+        if previewOnly { return report }
+        guard approvedOmissions == omissions else { throw Failure.incompleteRestore(report) }
         guard liveStoresAreQuiescent(), NativeRemotePlaybackOwner.current == nil,
               reader.readyForGlobalRestore, NativeMusicBackupAdapter.readyForRestore,
               podcastLibrary?.readyForGlobalRestore ?? true,

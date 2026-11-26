@@ -230,7 +230,8 @@ test('restore validates scalar choices and voice profiles without overwriting ex
     assert.match(personal, /value\.pauseSeconds\.count == 5/);
     assert.match(personal, /value\.volume\.map/);
     assert.match(personal, /NativeAppLanguage\.codes\.indices\.contains\(value\)/);
-    assert.match(personal, /defaults\.object\(forKey: key\) == nil \{ updates\[key\] = value \}/);
+    assert.match(personal, /if let current = defaults\.object\(forKey: key\)/);
+    assert.match(personal, /else \{ updates\[key\] = value \}/);
     assert.match(personal, /key != "mi-musica-shuffle"/);
     assert.match(personal, /omittedKeys: omitted\.sorted\(\)/);
     assert.match(voiceProfiles, /storage != migratedKey/);
@@ -279,9 +280,9 @@ test('media restore steps preserve original IDs and reverse index and media chan
 
 test('local restore stages every archive before preparing six section steps and executing one transaction', () => {
     const source = coordinator.slice(coordinator.indexOf('func restoreLocalGeneration('));
-    assert.match(source, /guard !backupOperationBusy else \{ throw Failure\.busy \}/);
+    assert.match(source, /guard !backupOperationBusy, isManagingBackups, !requiresRecovery else \{ throw Failure\.busy \}/);
     assert.match(coordinator, /isCreating \|\| isRestoring \|\| isTransferringCloudBackup \|\| isRunningAutomaticBackup/);
-    assert.match(source, /defer \{ isRestoring = false \}/);
+    assert.match(source, /defer \{[\s\S]*?try checkRecovery\(\)[\s\S]*?isRestoring = false/);
     assert.match(source, /destination\.verifiedGeneration\(generation\)/);
     assert.match(source, /NativeBackupSectionArchive\.stageForRestore/);
     assert.match(source, /worker\.cancel\(\)/);
@@ -290,7 +291,8 @@ test('local restore stages every archive before preparing six section steps and 
     for (const name of ['reader','music','cinema','podcasts','radio','preferences']) {
         assert.ok(source.includes('case .' + name + ':'), name);
     }
-    assert.match(source, /guard !report\.hasOmissions \|\| approvedOmissions == omissions/);
+    assert.match(source, /if previewOnly \{ return report \}/);
+    assert.match(source, /guard approvedOmissions == omissions/);
     assert.match(source, /NativeBackupRestoreTransaction\.execute\(expected: selected, steps: steps\)/);
     assert.match(source, /guard liveStoresAreQuiescent\(\)/);
 });
@@ -311,7 +313,7 @@ test('journal records before-state before applying live changes and is replayed 
     assert.match(payload, /allowedKey\(item\.key\)/);
     assert.match(journal, /try handle\.synchronize\(\)/);
     assert.ok(app.indexOf('NativeBackupRestoreJournal.application.recover') < app.indexOf('NativeAppLanguage.initializeIfMissing()'));
-    assert.match(app, /if recoveryFailed \{/);
+    assert.match(app, /if recoveryFailed \|\| backups\.requiresRecovery \{/);
 });
 
 test('global music backup maps EQ to track identity and validates recovered profiles', () => {
@@ -447,4 +449,17 @@ test('automatic backup keeps local recovery independent of cloud and defers on l
     assert.match(merged, /initialMetadataGatheringComplete: false, localSpaceCandidates: \[\], cloudError: error/);
     assert.match(coordinator, /replacePending: Bool = false/);
     assert.match(coordinator, /throw Failure\.pendingAutomaticBackup/);
+});
+
+test('restore preview requires a management session and exact explicit approval even without omissions', () => {
+    const source = coordinator.slice(coordinator.indexOf('func restoreLocalGeneration('));
+    assert.match(source, /previewOnly: Bool = true/);
+    assert.ok(source.indexOf('if previewOnly { return report }') < source.indexOf('try journal.begin('));
+    assert.match(source, /guard approvedOmissions == omissions/);
+    assert.match(source, /isManagingBackups, !requiresRecovery/);
+    assert.match(coordinator, /var blocksExternalActions: Bool/);
+    const home = read('NativeScreens.swift');
+    assert.match(home, /guard !backups\.blocksExternalActions else \{ return \}/);
+    assert.match(home, /task\(id: automaticBackupEligible\)/);
+    assert.match(home, /canCollectSnapshot: \{ automaticBackupEligible && !Task\.isCancelled \}/);
 });

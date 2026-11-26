@@ -73,6 +73,9 @@ struct NativeHomeScreen: View {
     @EnvironmentObject private var podcastPlayer: NativePodcastPlayer
     @EnvironmentObject private var podcastLibrary: NativePodcastLibrary
     @EnvironmentObject private var podcastDownloads: NativePodcastDownloads
+    @EnvironmentObject private var favorites: NativeFavoritesStore
+    @EnvironmentObject private var readingActivity: NativeReadingActivity
+    @ObservedObject private var backups = NativeBackupCoordinator.shared
     @Environment(\.scenePhase) private var scenePhase
     @StateObject private var sharedReadingSpeech = NativeReadingSpeech()
     @EnvironmentObject private var catalog: NativeCatalogStore
@@ -87,8 +90,10 @@ struct NativeHomeScreen: View {
     @State private var lastPodcastProgressSeconds = 0.0
 
     private func processSharedContent() {
+        guard !backups.blocksExternalActions else { return }
         let receivedMusic = inbox.importPendingMusicContent()
         Task {
+            guard !backups.blocksExternalActions else { return }
             await inbox.importPendingReaderContent(into: library)
             if receivedMusic && inbox.readyToRead == nil {
                 navigationPath = NavigationPath()
@@ -98,6 +103,7 @@ struct NativeHomeScreen: View {
     }
 
     private func openRequestedShortcut() {
+        guard !backups.blocksExternalActions else { return }
         let defaults = UserDefaults.standard
         guard let route = defaults.string(forKey: NativeShortcutRoute.key) else { return }
         let destination: NativeDestination?
@@ -121,6 +127,30 @@ struct NativeHomeScreen: View {
         guard let destination else { return }
         navigationPath = NavigationPath()
         navigationPath.append(destination)
+    }
+
+    private var automaticBackupEligible: Bool {
+        scenePhase == .active && navigationPath.isEmpty && !showingSearch &&
+            !backups.isManagingBackups && !backups.requiresRecovery &&
+            inbox.readyForBackupManagement && podcastPlayer.episode == nil
+    }
+
+    private func runAutomaticBackupChecks() async {
+        while automaticBackupEligible && !Task.isCancelled {
+            do {
+                let result = try await backups.runAutomaticBackupIfDue(reader: library,
+                    podcastLibrary: podcastLibrary, podcastDownloads: podcastDownloads,
+                    favorites: favorites, activity: readingActivity,
+                    canCollectSnapshot: { automaticBackupEligible && !Task.isCancelled })
+                backups.recordAutomaticNotice(result)
+            } catch is CancellationError {
+                return
+            } catch {
+                if !Task.isCancelled { backups.recordAutomaticFailure() }
+            }
+            do { try await Task.sleep(nanoseconds: 60_000_000_000) }
+            catch { return }
+        }
     }
 
     private func search() {
@@ -354,6 +384,15 @@ struct NativeHomeScreen: View {
                     openRequestedShortcut()
                 }
             }
+            .onChange(of: backups.blocksExternalActions) { _, blocked in
+                if !blocked && scenePhase == .active {
+                    processSharedContent()
+                    openRequestedShortcut()
+                }
+            }
+            .task(id: automaticBackupEligible) {
+                if automaticBackupEligible { await runAutomaticBackupChecks() }
+            }
             .navigationDestination(isPresented: $showingSearch) {
                 NativeSearchResultsScreen(query: submittedSearch)
             }
@@ -379,7 +418,7 @@ struct NativeHomeScreen: View {
             }
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            if podcastPlayer.episode != nil && !podcastScreenVisible {
+            if podcastPlayer.episode != nil && !podcastScreenVisible && !backups.isManagingBackups {
                 persistentPodcastControls
             }
         }
@@ -392,6 +431,7 @@ struct NativeHomeScreen: View {
             }
         }
         .onReceive(Timer.publish(every: 5, on: .main, in: .common).autoconnect()) { _ in
+            guard !backups.isRestoring, !backups.requiresRecovery else { return }
             guard let episode = podcastPlayer.episode else {
                 lastPodcastProgressEpisodeID = ""
                 lastPodcastProgressSeconds = 0

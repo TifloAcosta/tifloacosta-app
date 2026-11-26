@@ -502,6 +502,18 @@
         "ios-app-native/scripts/test-backup-manifest.sh"
       ],
       "validation": "Prioridad de beta 1.7 aprobada. Primera base de formato versionado por generación y secciones, SHA-256 incremental, verificación previa de tamaño y hash, rechazo de duplicados y enlaces simbólicos en archivos staged. Smoke test macOS escrito, no ejecutado. TifloLector dispone de exportación/restauración ZIP; Mi Música de exportación de índice, restauración completa y copia automática con destino seleccionado. Falta integrar todas las secciones, empaquetado/restauración transaccional, selección y exclusiones explícitas, transporte iCloud, configuración de capacidades y firma, historial, copia automática condicionada, sincronización privada y gestión de conflictos, UI accesible y seis idiomas. No declarar copia remota confirmada sin verificar subida. Prueba real de restauración y cuenta Apple requerida."
+    },
+    {
+      "id": 34,
+      "title": "Recursos: catálogo recursivo completo y navegación y búsqueda por subcarpetas",
+      "status": "partial",
+      "issue": "#367",
+      "evidence": [
+        "ios-app-native/Sources/NativeCatalogStore.swift",
+        "ios-app-native/Sources/NativeScreens.swift",
+        "ios-app-native/tests/resource-folder-navigation-contract.test.mjs"
+      ],
+      "validation": "16 documentos (9 ES y 7 EN) de las cuatro subcarpetas de Lectores de pantalla ausentes de los catálogos web/móvil, originales Drive localizados; excluidos archivados. iOS admite folderPath y searchText opcionales sin cambiar schemaVersion, muestra ruta completa visible/accesible, navega subcarpetas derivadas de documentos a profundidad arbitraria, busca en descendientes y globalmente en todos los recursos del idioma seleccionado aunque exista categoría elegida, conserva Píldoras y acciones. Mensaje de búsqueda sin resultados localizado. Contratos escritos, no ejecutados. Falta generación recursiva del catálogo de fuentes autorizadas, recuperar HTML y verificar enlaces, auditoría de todas las carpetas ES/EN, paridad web/Android, CI y pruebas reales VoiceOver. No cambiar main ni distribuir hasta autorización."
     }
   ],
   "operational": [

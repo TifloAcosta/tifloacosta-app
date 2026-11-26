@@ -53,7 +53,7 @@ test('reader resumes DAISY audio from exact point only after Play', () => {
   assert.match(play, /speech\.seek\(toSeconds: targetSeconds\)/);
   assert.match(play, /pendingDaisyAudioSeconds = nil/);
   const progress = part('private func persistPosition() {', 'private func move(to percent: Int)');
-  assert.match(progress, /pendingDaisyAudioSeconds \?\? latest\.lastAudioSeconds/);
+  assert.match(progress, /pendingDaisyAudioSeconds \?\? storedSeconds/);
 });
 
 test('short navigation feedback and fallback are translated', () => {

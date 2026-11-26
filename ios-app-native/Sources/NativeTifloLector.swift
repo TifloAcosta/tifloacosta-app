@@ -787,7 +787,7 @@ final class NativeReaderLibrary: ObservableObject {
         }
         let count = documents[i].body.count
         let value = max(0, min(count, offset))
-        let percent = count > 0 ? Int((Double(value) * 100 / Double(count)).rounded()) : 0
+        let percent = NativeReaderProgress.textPercent(length: count, offset: value)
         let previous = documents[i].textBookmarks
         var bookmarks = previous ?? []
         guard !bookmarks.contains(where: { $0.offset == value }) else { return .alreadyExists }
@@ -3055,9 +3055,10 @@ struct NativeReadingScreen: View {
         if tracks.isEmpty {
             library.saveTextPosition(document, offset: readingOffset)
         } else {
+            let storedSeconds = trackIndex == latest.lastTrackIndex ? latest.lastAudioSeconds : nil
             library.saveAudioPosition(document, track: trackIndex, percent: currentPercent,
                                       seconds: speech.hasAudio ? speech.audioElapsed
-                                          : (pendingDaisyAudioSeconds ?? latest.lastAudioSeconds))
+                                          : (pendingDaisyAudioSeconds ?? storedSeconds))
         }
         lastSavedPercent = currentPercent
     }
@@ -3079,8 +3080,19 @@ struct NativeReadingScreen: View {
         let value = max(0, min(100, percent))
         currentPercent = value
         readingOffset = Int(Double(textLayout.totalCharacters) * Double(value) / 100)
-        if speech.hasAudio && !speech.isGeneratedSpeech {
-            speech.seek(to: value)
+        if !tracks.isEmpty {
+            if speech.hasAudio && !speech.isGeneratedSpeech {
+                speech.seek(to: value)
+                currentPercent = speech.audioPercent
+                pendingDaisyAudioSeconds = nil
+            } else {
+                // A percent-only seek must replace, not reuse, a saved exact time.
+                pendingDaisyAudioSeconds = nil
+                didRestoreAudioPosition = true
+                library.saveAudioPosition(document, track: trackIndex, percent: value, seconds: nil)
+                lastSavedPercent = value
+                return
+            }
         } else if speech.isPlaying || speech.isPaused {
             let wasPaused = speech.isPaused
             if value == 100 { speech.stop() }
@@ -3399,15 +3411,26 @@ struct NativeReadingScreen: View {
         sleepDeadline = nil
     }
 
-    private func changeTrack(_ delta: Int) {
-        guard tracks.indices.contains(trackIndex + delta) else { return }
-        persistPosition()
-        pendingDaisyAudioSeconds = nil
-        trackIndex += delta
+    private func selectAudioLocation(track: Int, percent: Int, seconds: TimeInterval?,
+                                     resumeIfPlaying: Bool) {
+        guard tracks.indices.contains(track) else { return }
+        let wasPlaying = speech.isPlaying
+        // Save the old track before changing its index, and never seek its player.
+        if speech.hasAudio || speech.isPlaying || speech.isPaused { stopPlayback() }
+        trackIndex = track
+        readingOffset = 0
+        currentPercent = max(0, min(100, percent))
+        pendingDaisyAudioSeconds = seconds.flatMap { $0.isFinite ? max(0, $0) : nil }
         didRestoreAudioPosition = true
-        move(to: 0)
-        playTrack()
-        applySleepTimer()
+        library.saveAudioPosition(document, track: trackIndex, percent: currentPercent,
+                                  seconds: pendingDaisyAudioSeconds)
+        lastSavedPercent = currentPercent
+        if resumeIfPlaying && wasPlaying { play() }
+    }
+
+    private func changeTrack(_ delta: Int) {
+        selectAudioLocation(track: trackIndex + delta, percent: 0, seconds: 0,
+                            resumeIfPlaying: true)
     }
 
     private func jump(to offset: Int, focusReader: Bool = true) {
@@ -3567,15 +3590,8 @@ struct NativeReadingScreen: View {
                 navigationFeedback = MusicLocalized.message("No hay más marcas en esa dirección.")
                 return
             }
-            if speech.isPlaying || speech.isPaused { stopPlayback() }
-            trackIndex = mark.track
-            currentPercent = mark.percent
-            didRestoreAudioPosition = true
-            pendingDaisyAudioSeconds = mark.seconds.flatMap { $0.isFinite ? max(0, $0) : nil }
-            // For older percent-only bookmarks, Play starts at currentPercent.
-            library.saveAudioPosition(document, track: trackIndex, percent: currentPercent,
-                                      seconds: pendingDaisyAudioSeconds)
-            lastSavedPercent = currentPercent
+            selectAudioLocation(track: mark.track, percent: mark.percent, seconds: mark.seconds,
+                                resumeIfPlaying: false)
             navigationFeedback = MusicLocalized.format("Marca: pista %d", mark.track + 1)
             actionMessage = nil
         } else {
@@ -3779,13 +3795,14 @@ struct NativeReadingScreen: View {
         if tracks.isEmpty {
             result = library.addTextBookmark(document, offset: readingOffset)
             let offset = max(0, min(latest.body.count, readingOffset))
-            let percent = latest.body.isEmpty ? 0
-                : Int((Double(offset) * 100 / Double(latest.body.count)).rounded())
+            let percent = NativeReaderProgress.textPercent(length: latest.body.count, offset: offset)
             let format = NativeAppLanguage.message("Marca guardada en %d por ciento.", languageCode: code)
             savedMessage = String(format: format, locale: locale, percent)
         } else {
+            let seconds = speech.hasAudio ? speech.audioElapsed
+                : (pendingDaisyAudioSeconds ?? (trackIndex == latest.lastTrackIndex ? latest.lastAudioSeconds : nil))
             result = library.addAudioBookmark(document, track: trackIndex, percent: currentPercent,
-                                              seconds: speech.hasAudio ? speech.audioElapsed : nil)
+                                              seconds: seconds)
             let format = NativeAppLanguage.message("Marca guardada en la pista %d, %d por ciento.", languageCode: code)
             savedMessage = String(format: format, locale: locale, trackIndex + 1, currentPercent)
         }
@@ -4113,12 +4130,8 @@ struct NativeReadingScreen: View {
                         get: { trackIndex },
                         set: { index in
                             guard tracks.indices.contains(index), index != trackIndex else { return }
-                            pendingDaisyAudioSeconds = nil
-                            trackIndex = index
-                            currentPercent = 0
-                            playTrack()
-                            persistPosition()
-                            applySleepTimer()
+                            selectAudioLocation(track: index, percent: 0, seconds: 0,
+                                                resumeIfPlaying: true)
                         }
                     )
                 )
@@ -4488,17 +4501,8 @@ struct NativeReadingScreen: View {
                     }
                     ForEach(latest.savedAudioBookmarks, id: \.self) { mark in
                         Button("Ir a pista \(mark.track + 1), \(mark.percent) por ciento") {
-                            trackIndex = mark.track
-                            currentPercent = mark.percent
-                            didRestoreAudioPosition = true
-                            readingOffset = 0
-                            playTrack()
-                            if speech.hasAudio, let seconds = mark.seconds {
-                                speech.seek(toSeconds: seconds)
-                                currentPercent = speech.audioPercent
-                            }
-                            persistPosition()
-                            applySleepTimer()
+                            selectAudioLocation(track: mark.track, percent: mark.percent,
+                                                seconds: mark.seconds, resumeIfPlaying: true)
                             showSavedMarks = false
                         }
                         .accessibilityAction(named: Text("Eliminar esta marca")) {

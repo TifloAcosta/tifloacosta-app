@@ -73,6 +73,17 @@ export function validateNewResourceDates(resources) {
   return true;
 }
 
+// A single path representation is shared by the web and all mobile clients.
+export function resourceFolderPath(item) {
+  if (item.folderPath == null) return [];
+  if (!Array.isArray(item.folderPath) || item.folderPath.some(part =>
+      typeof part !== 'string' || !part.trim() || part === '.' || part === '..' ||
+      /[\\/]/.test(part))) {
+    throw new Error('Invalid resource folder path: ' + item.id);
+  }
+  return item.folderPath.map(part => part.trim());
+}
+
 export function buildMobileContent({ resources = [], videos = [], news = [], generatedAt = new Date().toISOString() }) {
   const retainedNews = chronologicalNews(news, generatedAt);
   return {
@@ -84,6 +95,10 @@ export function buildMobileContent({ resources = [], videos = [], news = [], gen
       lang: item.lang,
       category: item.category,
       title: item.title,
+      ...(item.folderPath != null ? { folderPath: resourceFolderPath(item) } : {}),
+      ...(cleanText(item.searchText) ? { searchText: cleanText(item.searchText) } : {}),
+      ...(cleanText(item.description) ? { description: cleanText(item.description) } : {}),
+      ...(cleanText(item.summary) ? { summary: cleanText(item.summary) } : {}),
       url: item.url,
       openUrl: item.openUrl || item.url,
       isNew: Boolean(item.new),

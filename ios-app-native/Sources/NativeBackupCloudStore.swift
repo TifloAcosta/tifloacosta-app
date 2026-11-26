@@ -205,13 +205,31 @@ struct NativeBackupCloudStore {
 
     private func download(_ url: URL, session: Session) async throws {
         try check(session)
-        try fm.startDownloadingUbiquitousItem(at: url)
         let clock = ContinuousClock()
         let deadline = clock.now.advanced(by: .seconds(1800))
+        var requested = false
         while true {
             try check(session)
-            let values = try itemValues(url)
-            if values.ubiquitousItemDownloadingStatus == .current { return }
+            do {
+                let values = try itemValues(url)
+                if values.ubiquitousItemDownloadingStatus == .current { return }
+                if !requested {
+                    try fm.startDownloadingUbiquitousItem(at: url)
+                    requested = true
+                }
+            } catch {
+                // A manifest can reach this device before an archive's
+                // metadata. Retry absence only; never hide a quota, account,
+                // permission, conflict, or other reported provider error.
+                guard isMissing(error) else { throw error }
+                requested = false
+                do {
+                    try fm.startDownloadingUbiquitousItem(at: url)
+                    requested = true
+                } catch {
+                    guard isMissing(error) else { throw error }
+                }
+            }
             guard clock.now < deadline else { throw Failure.downloadTimedOut }
             try await Task.sleep(nanoseconds: 1_000_000_000)
         }

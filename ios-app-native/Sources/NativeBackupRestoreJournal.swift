@@ -61,11 +61,28 @@ struct NativeBackupRestoreJournal {
         encoder.outputFormat = .binary
         let data = try encoder.encode(record)
         guard data.count <= Self.maximumBytes else { throw Failure.invalidRecord }
-        try fm.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
-        let temporary = url.deletingLastPathComponent()
+        var directory = url.deletingLastPathComponent()
+        try fm.createDirectory(at: directory, withIntermediateDirectories: true)
+        let attributes = try fm.attributesOfItem(atPath: directory.path)
+        guard attributes[.type] as? FileAttributeType == .typeDirectory else { throw Failure.invalidRecord }
+        #if os(iOS)
+        // The journal may contain the previous live state, including local-only
+        // values that are not eligible for export. Never include it in iOS
+        // device backups or in the app's explicit iCloud generations.
+        var values = URLResourceValues()
+        values.isExcludedFromBackup = true
+        try directory.setResourceValues(values)
+        try fm.setAttributes([.protectionKey: FileProtectionType.completeUntilFirstUserAuthentication],
+                             ofItemAtPath: directory.path)
+        #endif
+        let temporary = directory
             .appendingPathComponent(".restore-journal-" + UUID().uuidString)
         defer { try? fm.removeItem(at: temporary) }
+        #if os(iOS)
+        try data.write(to: temporary, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+        #else
         try data.write(to: temporary, options: .atomic)
+        #endif
         let handle = try FileHandle(forWritingTo: temporary)
         defer { try? handle.close() }
         try handle.synchronize()

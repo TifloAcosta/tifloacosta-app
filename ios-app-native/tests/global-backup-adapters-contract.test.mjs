@@ -378,3 +378,19 @@ test('cloud history discovers remote-only generations and reports incomplete met
     assert.match(cloud, /var ids = discovery\.ids/);
     assert.match(cloud, /initialMetadataGatheringComplete: discovery\.finished/);
 });
+
+test('local recovery journal is excluded from automatic device backup and protected on iOS', () => {
+    const journal = read('NativeBackupRestoreJournal.swift');
+    assert.match(journal, /values\.isExcludedFromBackup = true/);
+    assert.match(journal, /FileProtectionType\.completeUntilFirstUserAuthentication/);
+    assert.match(journal, /\.completeFileProtectionUntilFirstUserAuthentication/);
+    assert.match(journal, /attributes\[\.type\] as\? FileAttributeType == \.typeDirectory/);
+});
+test('cloud download retries delayed metadata but preserves other errors and cancellation', () => {
+    const cloud = read('NativeBackupCloudStore.swift');
+    const download = section(cloud, 'private func download(', 'func importGeneration(');
+    assert.match(download, /guard isMissing\(error\) else \{ throw error \}/);
+    assert.match(download, /try check\(session\)/);
+    assert.match(download, /clock\.now < deadline/);
+    assert.match(download, /requested = false/);
+});

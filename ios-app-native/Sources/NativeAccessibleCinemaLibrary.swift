@@ -139,6 +139,52 @@ final class NativeCinemaLocalLibrary: ObservableObject {
         }
     }
 
+    /// Back up only user-imported works, never provider downloads or credentials.
+    func createGlobalBackupArchive() async throws -> URL {
+        let snapshot = items
+        let recent = NativeCinemaRecentStore.shared.entries
+        let root = Self.directory
+        let allowed = Self.allowedExtensions
+        let maximumFileSize = Self.maximumFileSize
+        let worker = Task.detached(priority: .utility) {
+            var files: [NativeBackupSectionArchive.File] = []
+            guard Set(snapshot.map(\.id)).count == snapshot.count else {
+                throw NativeBackupSectionArchive.Failure.duplicatePath
+            }
+            for item in snapshot {
+                try Task.checkCancellation()
+                let ext = URL(fileURLWithPath: item.storedName).pathExtension.lowercased()
+                guard allowed.contains(ext),
+                      item.storedName == item.id.uuidString + "." + ext,
+                      item.lastSeconds.isFinite, item.lastSeconds >= 0 else {
+                    throw NativeBackupSectionArchive.Failure.invalidPath
+                }
+                let source = root.appendingPathComponent(item.storedName)
+                let attributes = try source.resourceValues(forKeys: [.fileSizeKey])
+                guard let size = attributes.fileSize, size > 0, Int64(size) <= maximumFileSize else {
+                    throw NativeBackupSectionArchive.Failure.exceedsRestoreLimit
+                }
+                files.append(.init(path: "media/" + item.storedName,
+                                   source: source, trustedRoot: root))
+            }
+            // History contains stable identifiers, titles and progress, not
+            // stream URLs, provider account records or login credentials.
+            let encoder = JSONEncoder()
+            return try NativeBackupSectionArchive.create(
+                metadata: ["catalogo-personal.json": encoder.encode(snapshot),
+                           "historial.json": encoder.encode(recent)],
+                files: files, maxBytes: 4_000_000_000, maxEntries: 10_000)
+        }
+        let archive = try await withTaskCancellationHandler {
+            try await worker.value
+        } onCancel: { worker.cancel() }
+        if Task.isCancelled {
+            try? FileManager.default.removeItem(at: archive.deletingLastPathComponent())
+            throw CancellationError()
+        }
+        return archive
+    }
+
     private func persist(_ values: [NativeCinemaLocalItem]) throws {
         let bytes = try JSONEncoder().encode(values)
         try bytes.write(to: Self.indexURL, options: .atomic)

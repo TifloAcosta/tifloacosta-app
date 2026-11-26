@@ -511,9 +511,19 @@
       "evidence": [
         "ios-app-native/Sources/NativeCatalogStore.swift",
         "ios-app-native/Sources/NativeScreens.swift",
-        "ios-app-native/tests/resource-folder-navigation-contract.test.mjs"
+        "ios-app-native/tests/resource-folder-navigation-contract.test.mjs",
+        "data.js",
+        "mobile-content.json",
+        "scripts/build-mobile-content.mjs",
+        "shared/content-parity.mjs",
+        "shared/resource-inventory.mjs",
+        "scripts/audit-resource-inventory.mjs",
+        "test/resource-inventory.test.mjs",
+        "resource-browser-core.js",
+        "app.js",
+        "test/resource-browser-web.test.mjs"
       ],
-      "validation": "16 documentos (9 ES y 7 EN) de las cuatro subcarpetas de Lectores de pantalla ausentes de los catálogos web/móvil, originales Drive localizados; excluidos archivados. iOS admite folderPath y searchText opcionales sin cambiar schemaVersion, muestra ruta completa visible/accesible, navega subcarpetas derivadas de documentos a profundidad arbitraria, busca en descendientes y globalmente en todos los recursos del idioma seleccionado aunque exista categoría elegida, conserva Píldoras y acciones. Mensaje de búsqueda sin resultados localizado. Contratos escritos, no ejecutados. Falta generación recursiva del catálogo de fuentes autorizadas, recuperar HTML y verificar enlaces, auditoría de todas las carpetas ES/EN, paridad web/Android, CI y pruebas reales VoiceOver. No cambiar main ni distribuir hasta autorización."
+      "validation": "16 documentos (9 ES y 7 EN) de las cuatro subcarpetas de Lectores de pantalla ausentes de los catálogos web/móvil, originales Drive localizados; excluidos archivados. iOS admite folderPath y searchText opcionales sin cambiar schemaVersion, muestra ruta completa visible/accesible, navega subcarpetas derivadas de documentos a profundidad arbitraria, busca en descendientes y globalmente en todos los recursos del idioma seleccionado aunque exista categoría elegida, conserva Píldoras y acciones. Mensaje de búsqueda sin resultados localizado. Contratos escritos, no ejecutados. Falta generación recursiva del catálogo de fuentes autorizadas, recuperar HTML y verificar enlaces, auditoría de todas las carpetas ES/EN, paridad web/Android, CI y pruebas reales VoiceOver. No cambiar main ni distribuir hasta autorización. 26-11-2026: recuperados íntegros 16 HTML originales (9 ES/7 EN), lectura de vuelta coincide con contenido UTF-8 original; 6 NVDA, 6 JAWS, 2 VoiceOver y 2 Narrador. data.js fc0a8d1a65fca3a74e9c4e9d8fe3b431b693e7fb y mobile-content.json bb1f347098643514d20fc4100ade78cb99b35220 contienen 254 recursos, frente a 238 de la rama; todos los IDs previos conservados, 13 ES y 10 EN en Lectores de pantalla. Rutas originales e índice de encabezados (no texto íntegro). Generador conserva folderPath/searchText/descripción/resumen, contrato de paridad compara esos datos. Núcleo de inventario recursivo paginado, excluye archivados/borradores, detecta colisiones, discrepancias y aliases editoriales, sin publicar ni borrar. Fixture ejecutado correctamente en JavaScript; CLI y tests Node escritos, no ejecutados en CI. Primera tanda de ocho categorías ES revisada (12 carpetas); muchos IDs antiguos necesitan cotejo por título/fecha/alias antes de identificar omisiones reales; la auditoría completa requiere más tandas por límite del conector. Web en rama: agrupación multinivel mediante details/summary, filtro por ruta y encabezados, resultado con ubicación; pruebas escritas, pendientes Node y accesibilidad. Android requiere contraste independiente de versión pública. Pendiente aplicar cambios editoriales sobre catálogo main vigente sin perder altas posteriores, comprobar enlaces publicados, ejecutar CI/Xcode y VoiceOver. No distribución ni cambio main."
     }
   ],
   "operational": [

@@ -720,6 +720,83 @@ private final class NativeMusicLibrary: ObservableObject {
 
     /// Generate a restorable section archive from one captured index and
     /// its referenced local songs. Cloud tracks remain references only.
+
+    /// Global restore preserves original UUIDs, unlike the legacy ZIP import.
+    /// Existing tracks and collections always win on identity conflicts.
+    func prepareGlobalBackupRestore(staging: URL) throws
+        -> (NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>, [String]) {
+        let backup = try JSONDecoder().decode(MusicIndexBackup.self,
+            from: Data(contentsOf: staging.appendingPathComponent("manifest.json")))
+        let oldFiles = files, oldFolders = folders, oldLists = playlists, oldSmart = smartFolders
+        var trackIDs = Set(files.map(\.id))
+        var additions: [MusicLocalFile] = []
+        var moves: [NativeBackupFileRestore.Move] = []
+        for (key, track) in backup.catalog.tracks.sorted(by: { $0.key < $1.key }) {
+            guard let id = UUID(uuidString: key), let stored = track.locations.first else {
+                throw CocoaError(.fileReadCorruptFile)
+            }
+            guard trackIDs.insert(id).inserted else { continue }
+            let source = staging.appendingPathComponent(stored.remoteId)
+            let fileName = id.uuidString + "." + source.pathExtension
+            moves.append(.init(source: source, target: directory.appendingPathComponent(fileName)))
+            additions.append(.init(id: id, name: track.title, fileName: fileName,
+                album: track.album, artist: track.artist, genre: track.genre,
+                importedAt: track.importedAt, playCount: track.playCount,
+                hasEditedTrackInformation: track.hasEditedTrackInformation))
+        }
+        var folderIDs = Set(folders.map(\.id)), listIDs = Set(playlists.map(\.id))
+        var smartIDs = Set(smartFolders.map(\.id))
+        var nextFolders = folders, nextLists = playlists, nextSmart = smartFolders
+        var omitted = [String]()
+        for folder in backup.folders {
+            guard let id = UUID(uuidString: folder.id) else { throw CocoaError(.fileReadCorruptFile) }
+            guard folderIDs.insert(id).inserted else { continue }
+            nextFolders.append(.init(id: id, name: folder.name,
+                trackIds: folder.trackIds.compactMap { UUID(uuidString: $0) }))
+        }
+        for list in backup.playlists {
+            guard let id = UUID(uuidString: list.id) else { throw CocoaError(.fileReadCorruptFile) }
+            guard listIDs.insert(id).inserted else { continue }
+            nextLists.append(.init(id: id, name: list.name,
+                trackIds: list.trackIds.compactMap { UUID(uuidString: $0) }, orderedEntries: list.orderedEntries))
+        }
+        for item in backup.smartFolders {
+            guard let id = UUID(uuidString: item.id) else { throw CocoaError(.fileReadCorruptFile) }
+            guard !smartIDs.contains(id) else { continue }
+            guard MusicSmartRuleKind(rawValue: item.rule ?? "title") != nil else {
+                omitted.append("smart-folder:" + item.id)
+                continue
+            }
+            smartIDs.insert(id)
+            nextSmart.append(.init(id: id, name: item.name, titleContains: item.titleContains, rule: item.rule))
+        }
+        // Per-song EQ keys use physical file names; they cannot be copied
+        // without mapping them to the new stored names.
+        omitted.append(contentsOf: backup.audioProfiles.keys.sorted())
+        let combined = files + additions
+        let preparedFolders = nextFolders, preparedLists = nextLists, preparedSmart = nextSmart
+        let encoder = JSONEncoder()
+        let disk = try NativeBackupFileRestore(moves: moves, indexes: [
+            (directory.appendingPathComponent("library.json"), try encoder.encode(combined)),
+            (directory.appendingPathComponent("folders.json"), try encoder.encode(preparedFolders)),
+            (directory.appendingPathComponent("playlists.json"), try encoder.encode(preparedLists)),
+            (directory.appendingPathComponent("smart-folders.json"), try encoder.encode(preparedSmart))
+        ])
+        return (.init(section: .music, apply: {
+            try disk.apply()
+            self.files = combined
+            self.folders = preparedFolders
+            self.playlists = preparedLists
+            self.smartFolders = preparedSmart
+        }, rollback: {
+            try disk.rollback()
+            self.files = oldFiles
+            self.folders = oldFolders
+            self.playlists = oldLists
+            self.smartFolders = oldSmart
+        }), omitted)
+    }
+
     func createGlobalBackupArchive() async throws -> URL {
         guard let index = exportIndex()?.text,
               let snapshot = try? JSONDecoder().decode(MusicIndexBackup.self, from: Data(index.utf8)) else {
@@ -1723,6 +1800,12 @@ struct NativeMyMusicScreen: View {
 /// The global backup service uses the same live music library as the screen.
 @MainActor
 enum NativeMusicBackupAdapter {
+    static func prepareRestore(staging: URL) throws
+        -> (NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>, [String]) {
+        try NativeMusicLibrary.shared.prepareGlobalBackupRestore(staging: staging)
+    }
+
+
     static func createArchive() async throws -> URL {
         try await NativeMusicLibrary.shared.createGlobalBackupArchive()
     }

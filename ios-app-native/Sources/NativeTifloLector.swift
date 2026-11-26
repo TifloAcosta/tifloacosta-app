@@ -591,6 +591,55 @@ final class NativeReaderLibrary: ObservableObject {
 
     /// Independent, explicitly selected backup for the global backup service.
     /// Capture the library on the main actor, then encode and compress off it.
+
+    /// Stage indexes and new media without changing the existing library.
+    /// The coordinator must prevent concurrent imports and playback writes
+    /// between preparation and execution.
+    func prepareGlobalBackupRestore(staging: URL) throws
+        -> NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section> {
+        guard pendingFileImports.isEmpty else { throw CocoaError(.fileWriteUnknown) }
+        let decoder = JSONDecoder()
+        let incoming = try decoder.decode([NativeReadingDocument].self,
+            from: Data(contentsOf: staging.appendingPathComponent("documentos.json")))
+        let incomingFolders = try decoder.decode([String].self,
+            from: Data(contentsOf: staging.appendingPathComponent("carpetas.json")))
+        let oldDocuments = documents, oldFolders = folders
+        let currentIDs = Set(documents.map(\.id))
+        let additions = incoming.filter { !currentIDs.contains($0.id) }
+        let combined = documentsForPersistence() + additions
+        var nextFolders = folders
+        for name in incomingFolders where !nextFolders.contains(where: {
+            $0.localizedCaseInsensitiveCompare(name) == .orderedSame
+        }) { nextFolders.append(name) }
+        nextFolders.sort { $0.localizedStandardCompare($1) == .orderedAscending }
+        let folderValues = nextFolders
+        let support = Self.storageURL.deletingLastPathComponent()
+        var moves: [NativeBackupFileRestore.Move] = []
+        for document in additions {
+            for root in ["ReaderMedia", "ReaderOriginals"] {
+                let relative = root + "/" + document.id.uuidString
+                let source = staging.appendingPathComponent(relative, isDirectory: true)
+                if FileManager.default.fileExists(atPath: source.path) {
+                    moves.append(.init(source: source, target: support.appendingPathComponent(relative)))
+                }
+            }
+        }
+        let disk = try NativeBackupFileRestore(moves: moves,
+            indexes: [(Self.storageURL, try JSONEncoder().encode(combined))])
+        let before = NativeBackupDefaultsBeforeState(defaults: .standard, keys: [folderStorageKey])
+        return .init(section: .reader, apply: {
+            try disk.apply()
+            UserDefaults.standard.set(folderValues, forKey: self.folderStorageKey)
+            self.documents = combined
+            self.folders = folderValues
+        }, rollback: {
+            try disk.rollback()
+            before.restore()
+            self.documents = oldDocuments
+            self.folders = oldFolders
+        })
+    }
+
     func createGlobalBackupArchive() async throws -> URL {
         let snapshot = documentsForPersistence()
         let folderSnapshot = folders

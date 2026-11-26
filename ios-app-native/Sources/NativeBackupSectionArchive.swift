@@ -108,6 +108,44 @@ enum NativeBackupSectionArchive {
     }
 
 
+
+    /// The caller owns the returned private staging directory and must clean
+    /// it up. Run on a worker; no live storage is touched.
+    static func stageForRestore(section: NativeBackupManifest.Section, source: URL) throws -> URL {
+        try verifyContentsForRestore(section: section, source: source)
+        guard let archive = Archive(url: source, accessMode: .read) else { throw Failure.invalidFile }
+        let fm = FileManager.default
+        let staging = fm.temporaryDirectory.appendingPathComponent("global-restore-" + UUID().uuidString, isDirectory: true)
+        try fm.createDirectory(at: staging, withIntermediateDirectories: false)
+        var finished = false
+        defer { if !finished { try? fm.removeItem(at: staging) } }
+        for entry in archive {
+            try Task.checkCancellation()
+            try validatePath(entry.path)
+            guard entry.type == .file else { throw Failure.invalidFile }
+            let target = staging.appendingPathComponent(entry.path)
+            try fm.createDirectory(at: target.deletingLastPathComponent(), withIntermediateDirectories: true)
+            guard !fm.fileExists(atPath: target.path),
+                  fm.createFile(atPath: target.path, contents: nil) else { throw Failure.invalidFile }
+            let output = try FileHandle(forWritingTo: target)
+            defer { try? output.close() }
+            var written: UInt64 = 0
+            let crc = try archive.extract(entry) { chunk in
+                try Task.checkCancellation()
+                guard written <= entry.uncompressedSize,
+                      UInt64(chunk.count) <= entry.uncompressedSize - written else {
+                    throw Failure.exceedsRestoreLimit
+                }
+                try output.write(contentsOf: chunk)
+                written += UInt64(chunk.count)
+            }
+            guard written == entry.uncompressedSize, crc == entry.checksum else { throw Failure.invalidFile }
+        }
+        try Task.checkCancellation()
+        finished = true
+        return staging
+    }
+
     /// Verify actual decompressed size and CRC of each member, not only the
     /// outer ZIP digest. Capture bounded metadata; stream media without retaining it.
     /// No files are extracted to the live library or to temporary storage.

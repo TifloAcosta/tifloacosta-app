@@ -140,6 +140,40 @@ final class NativeCinemaLocalLibrary: ObservableObject {
     }
 
     /// Back up only user-imported works, never provider downloads or credentials.
+
+    /// Merge personal files and history, keeping all existing identities.
+    func prepareGlobalBackupRestore(staging: URL) throws
+        -> (NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>, Int) {
+        let decoder = JSONDecoder()
+        let incoming = try decoder.decode([NativeCinemaLocalItem].self,
+            from: Data(contentsOf: staging.appendingPathComponent("catalogo-personal.json")))
+        let history = try decoder.decode([NativeCinemaRecent].self,
+            from: Data(contentsOf: staging.appendingPathComponent("historial.json")))
+        let old = items
+        let ids = Set(items.map(\.id))
+        let additions = incoming.filter { !ids.contains($0.id) }
+        let combined = items + additions
+        let moves: [NativeBackupFileRestore.Move] = additions.map {
+            .init(source: staging.appendingPathComponent("media").appendingPathComponent($0.storedName),
+                  target: Self.directory.appendingPathComponent($0.storedName))
+        }
+        let historyPlan = try NativeCinemaRecentStore.shared.prepareBackupHistory(history)
+        let disk = try NativeBackupFileRestore(moves: moves, indexes: [
+            (Self.indexURL, try JSONEncoder().encode(combined))
+        ])
+        return (.init(section: .cinema, apply: {
+            try disk.apply()
+            self.items = combined
+            try historyPlan.apply()
+        }, rollback: {
+            var historyError: Error?
+            do { try historyPlan.rollback() } catch { historyError = error }
+            try disk.rollback()
+            self.items = old
+            if let historyError { throw historyError }
+        }), historyPlan.omitted)
+    }
+
     func createGlobalBackupArchive() async throws -> URL {
         let snapshot = items
         let recent = NativeCinemaRecentStore.shared.entries

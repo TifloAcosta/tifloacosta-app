@@ -20,6 +20,30 @@ struct NativeCatalogItem: Decodable, Identifiable {
     let body: String?
     let isNew: Bool?
 
+    // Relative to category; optional for older published catalogs and cache.
+    var folderPath: [String]? = nil
+    var searchText: String? = nil
+
+    var resourceFolderPath: [String] {
+        (folderPath ?? []).map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+    }
+
+    var resourceLocation: String {
+        ([category ?? ""] + resourceFolderPath).filter { !$0.isEmpty }
+            .joined(separator: " / ")
+    }
+
+    func matchesResourceQuery(_ query: String) -> Bool {
+        let options: String.CompareOptions = [.diacriticInsensitive, .caseInsensitive]
+        let terms = query.folding(options: options, locale: .current)
+            .split(whereSeparator: { $0.isWhitespace }).map(String.init)
+        let searchable = [title, resourceLocation, description ?? "", summary ?? "",
+                          excerpt ?? "", searchText ?? ""]
+            .joined(separator: " ").folding(options: options, locale: .current)
+        return terms.allSatisfy { searchable.contains($0) }
+    }
+
     var resourceURL: URL? {
         URL(string: openUrl ?? url ?? "")
     }

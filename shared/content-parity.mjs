@@ -36,6 +36,11 @@ export function inspectContentParity({ feed, resources = [], videos = [] }) {
     for (const prop of ['title', 'category', 'url']) {
       if (mobile[prop] !== item[prop]) errors.push('Recurso no coincide en ' + prop + ': ' + id);
     }
+    const path = value => Array.isArray(value) ? value.map(part => String(part).trim()) : [];
+    if (JSON.stringify(path(mobile.folderPath)) !== JSON.stringify(path(item.folderPath))) errors.push('Ruta de carpeta no coincide: ' + id);
+    for (const prop of ['searchText', 'description', 'summary']) {
+      if (String(mobile[prop] || '').trim() !== String(item[prop] || '').trim()) errors.push('Metadatos de búsqueda no coinciden en ' + prop + ': ' + id);
+    }
     if (mobile.openUrl !== (item.openUrl || item.url)) errors.push('Enlace de apertura no coincide: ' + id);
     if (mobile.isNew !== Boolean(item.new)) errors.push('Novedad no coincide: ' + id);
     const date = item.newsDate || item.publishedAt || '';

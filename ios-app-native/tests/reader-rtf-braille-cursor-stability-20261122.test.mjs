@@ -12,7 +12,7 @@ test('the active braille reader uses the live cursor rather than a stale saved o
 
 test('SwiftUI repaint does not overwrite the braille selection or scroll on unchanged state', () => {
   assert.match(braille, /if view\.font != requestedFont \{ view\.font = requestedFont \}/);
-  assert.match(braille, /guard textChanged \|\| explicitPositionChange else \{ return \}/);
+  assert.match(braille, /guard textChanged \|\| explicitPositionChange \|\| fontChanged else \{ return \}/);
   assert.match(braille, /context\.coordinator\.restoring = true/);
   assert.match(braille, /defer \{ context\.coordinator\.restoring = false \}/);
   assert.match(braille, /if textChanged \|\| movedSelection \{/);

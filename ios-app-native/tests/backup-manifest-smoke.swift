@@ -36,6 +36,38 @@ struct BackupManifestSmoke {
             try decoded.verifyArtifacts(in: root)
             fatalError("Missing file accepted")
         } catch {}
+        let store = NativeBackupGenerationStore(root: root.appendingPathComponent("generations"))
+        let archive = root.appendingPathComponent("staged-reader.zip")
+        try Data("first version".utf8).write(to: archive)
+        let first = try store.publish(archives: [.reader: archive],
+                                      createdAt: Date(timeIntervalSince1970: 100))
+        try Data("second version".utf8).write(to: archive)
+        let second = try store.publish(archives: [.reader: archive],
+                                       createdAt: Date(timeIntervalSince1970: 200))
+        let history = try store.history()
+        precondition(history.map(\.generation) == [second.generation, first.generation])
+        let (verified, directory) = try store.verifiedGeneration(first.generation)
+        precondition(verified == first)
+        let original = try Data(contentsOf: directory.appendingPathComponent("reader.zip"))
+        precondition(original == Data("first version".utf8))
+        do {
+            _ = try store.publish(archives: [.reader: archive], generation: first.generation)
+            fatalError("Existing generation replaced")
+        } catch NativeBackupGenerationStore.Failure.duplicateGeneration {}
+        do {
+            _ = try store.publish(archives: [.reader: archive, .music: root.appendingPathComponent("missing.zip")])
+            fatalError("Missing staged archive accepted")
+        } catch {}
+        let afterFailure = try store.history()
+        precondition(afterFailure == history)
+        let stagedDirectories = try fm.contentsOfDirectory(atPath: store.root.path)
+        precondition(!stagedDirectories.contains(where: { $0.hasPrefix(".staging-") }))
+        try Data("tampered".utf8).write(to: directory.appendingPathComponent("reader.zip"))
+        do {
+            _ = try store.verifiedGeneration(first.generation)
+            fatalError("Damaged backup accepted")
+        } catch NativeBackupManifest.Failure.integrityMismatch {}
+        _ = try store.verifiedGeneration(second.generation)
         print("Backup manifest integrity smoke checks passed")
     }
 }

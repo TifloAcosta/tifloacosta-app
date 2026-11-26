@@ -8,9 +8,9 @@ test('Files multi-selection imports each document without stopping on the first 
   assert.match(source, /allowsMultipleSelection: true/);
   assert.match(source, /func importSelectedFiles\(from urls: \[URL\]/);
   assert.match(source, /for \(index, url\) in urls\.enumerated\(\)/);
-  assert.match(source, /try await importFile\(from: url, onProgress: onProgress\)/);
+  assert.match(source, /try await importFile\(from: url, onOCRStatus: onOCRStatus, onProgress: onProgress\)/);
   assert.match(source, /failures\.append\(url\.lastPathComponent/);
-  assert.match(source, /importSelectedFiles\(from: urls\)/);
+  assert.match(source, /importSelectedFiles\(from: urls, onOCRStatus:/);
 });
 test('VoiceOver sees actual file counts and concise batch result', () => {
   assert.match(source, /MusicLocalized\.format\("Importando %d de %d: %@"/);

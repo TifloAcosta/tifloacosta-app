@@ -21,7 +21,7 @@ test('folder enumeration stays within a scoped URL and skips symlinks', () => {
 
 test('folder progress reports real document counts and continues on individual failures', () => {
   assert.match(reader, /MusicLocalized\.format\("Importando %d de %d: %@"/);
-  assert.match(reader, /try await importSelectedFiles\(from: files, onProgress: onProgress\)/);
+  assert.match(reader, /try await importSelectedFiles\(from: files, onOCRStatus: onOCRStatus, onProgress: onProgress\)/);
   assert.match(reader, /failures\.append\(/);
   assert.match(reader, /Importación terminada\. Documentos importados: %d\. Omitidos: %d\. Fallidos: %d\./);
   assert.match(reader, /UIAccessibility\.post\(notification: \.announcement, argument: importFolderStatus\)/);

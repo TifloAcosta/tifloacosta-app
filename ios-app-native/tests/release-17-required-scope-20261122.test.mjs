@@ -9,7 +9,7 @@ const guardScript = readFileSync(new URL('../scripts/check-release-readiness.mjs
 test('the approved update preserves earlier requirements and adds the TTS lock-screen regression', () => {
   const ids = manifest.requirements.map(x => x.id);
   assert.equal(manifest.version, '1.7');
-  assert.deepEqual(ids, [...Array(20)].map((_, i) => i + 1).concat([22, 23, 24, 25, 26, 27, 28, 29, 30, 31]));
+  assert.deepEqual(ids, [...Array(20)].map((_, i) => i + 1).concat([22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34]));
   for (const id of [26, 27, 28, 29]) {
     assert.equal(manifest.requirements.find(x => x.id === id).issue, '#363');
     const requirement = manifest.requirements.find(x => x.id === id);
@@ -24,6 +24,11 @@ test('the approved update preserves earlier requirements and adds the TTS lock-s
   assert.equal(manifest.requirements.find(x => x.id === 24).issue, '#361');
   assert.equal(manifest.requirements.find(x => x.id === 30).issue, '#365');
   assert.equal(manifest.requirements.find(x => x.id === 31).issue, '#352');
+  for (const [id, issue] of [[32, '#352'], [33, '#366'], [34, '#367']]) {
+    const requirement = manifest.requirements.find(x => x.id === id);
+    assert.equal(requirement.issue, issue);
+    assert.ok(['partial', 'implemented'].includes(requirement.status));
+  }
   assert.match(manifest.requirements.find(x => x.id === 22).title, /Multicines Accesibles/);
   assert.ok(manifest.requirements.some(x => /RTF/.test(x.title)));
 });

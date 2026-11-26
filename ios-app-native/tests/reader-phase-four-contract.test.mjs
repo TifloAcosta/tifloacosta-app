@@ -16,7 +16,7 @@ test('una única entrada Importar conserva Archivos e incorpora bibliotecas en l
 
 test('se preservan títulos de catálogo, biblioteca local y opciones de importación anteriores', () => {
     assert.match(reader, /preferredTitle: String\? = nil/);
-    assert.match(reader, /NativeReaderFormats\.read\(url, documentID: identifier,\s*filename: filename\)/);
+    assert.match(reader, /NativeReaderFormats\.read\(url, documentID: identifier,\s*filename: filename, onOCRStart:/);
     assert.match(reader, /NativeReaderFormats\.deleteStoredFiles\(for: identifier\)/);
     assert.match(catalogs, /await library\.importFile\(from: temporary, originalName: prepared\.lastPathComponent,\s*preferredTitle: title\)/);
 });

@@ -10,6 +10,6 @@ test('PDF and image processing reports page progress and releases temporary imag
 });
 test('selected files and folders use asynchronous OCR with rollback',()=>{
  const s=read('NativeTifloLector.swift');
- for(const key of ['Task.detached(priority: .userInitiated)', 'try await importSelectedFiles(from: files', 'try await importFile(from: url, onProgress: onProgress)', 'await progressTask.value', 'try await persistImportedDocument(document)','NativeReaderFormats.deleteOriginal(for: identifier)']) assert.ok(s.includes(key),key);
+ for(const key of ['Task.detached(priority: .userInitiated)', 'try await importSelectedFiles(from: files', 'try await importFile(from: url, onOCRStatus: onOCRStatus, onProgress: onProgress)', 'await progressTask.value', 'try await persistImportedDocument(document)','NativeReaderFormats.deleteOriginal(for: identifier)']) assert.ok(s.includes(key),key);
  for(const lang of ['en','fr','de','it','pt']) assert.ok(read(lang+'.lproj/Localizable.strings').includes('"Procesando página %d de %d: %@" ='));
 });

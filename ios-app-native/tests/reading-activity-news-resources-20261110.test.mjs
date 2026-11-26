@@ -41,6 +41,10 @@ test('Actualidad tiene filtros por fuente e idioma sin traducir contenido automÃ
 test('Recursos puede buscar por tÃ­tulo y contenido descriptivo', () => {
   assert.match(resources, /\.searchable\(text: \$resourceQuery, prompt: "Buscar recursos"\)/);
   assert.match(resources, /title: "Idioma de los recursos"/);
-  assert.match(resources, /item\.description \?\? ""/);
+  assert.match(resources, /item\.matchesResourceQuery\(resourceQuery\)/);
+  const catalog = source('NativeCatalogStore.swift');
+  assert.match(catalog, /let searchable = \[title, resourceLocation, description \?\? "", summary \?\? "",/);
+  assert.match(catalog, /searchText \?\? ""/);
+  assert.match(catalog, /terms\.allSatisfy \{ searchable\.contains\(\$0\) \}/);
   assert.match(resources, /readingActivity\.toggleReadLater\(\.resource, item: item\)/);
 });

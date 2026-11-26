@@ -332,7 +332,7 @@
     open.addEventListener('click',event=>{event.preventDefault();openResourceMenu(item,open);});
     title.append(open);
     if(item.new){ const badge=document.createElement('span'); badge.className='badge'; badge.textContent=c.newBadge; title.append(' ',badge); }
-    const meta=document.createElement('p'); meta.className='resource-meta'; meta.textContent=item.category;
+    const meta=document.createElement('p'); meta.className='resource-meta'; meta.textContent=[item.category,...resourceBrowser.folderPath(item)].filter(Boolean).join(' / ');
     article.append(title,meta); return article;
   }
 
@@ -431,6 +431,25 @@
       els.results.append(p);return;
     }
     items.forEach(item=>els.results.append(makeCard(item)));
+  }
+  function appendResourceTree(parent, items, path=[]){
+    const groups=resourceBrowser.folderGroups(items,path,lang);
+    for(const folder of groups.folders){
+      const details=document.createElement('details');
+      const summary=document.createElement('summary');
+      summary.textContent=folder.name;
+      details.append(summary);
+      appendResourceTree(details,folder.items,[...path,folder.name]);
+      parent.append(details);
+    }
+    groups.direct.forEach(item=>parent.append(makeCard(item)));
+  }
+  function showResourceTree(items,message,emptyMessage){
+    if(!items.length){showResults(items,message,emptyMessage);return;}
+    els.results.replaceChildren();
+    els.results.hidden=false;
+    els.resultStatus.textContent=message;
+    appendResourceTree(els.results,items);
   }
   function clearResourceResults(){
     els.results.innerHTML='';
@@ -546,8 +565,10 @@
       ? shared.selectResources(data,{lang,category:cat})
       : resourcesForLanguage().filter(item=>item.category===cat);
     const items=resourceBrowser.filterAndSort(selected,els.resourceFilter.value,els.resourceSort.value,lang);
-    if((lang==='es'&&cat==='Píldoras')||(lang==='en'&&cat==='Pills')){showPillsYears(items);return;}
-    showResults(items,c.categoryFound(cat,items.length),c.noResults);
+    const searching=Boolean(els.resourceFilter.value.trim());
+    if(!searching&&((lang==='es'&&cat==='Píldoras')||(lang==='en'&&cat==='Pills'))){showPillsYears(items);return;}
+    if(searching) showResults(items,c.categoryFound(cat,items.length),c.noResults);
+    else showResourceTree(items,c.categoryFound(cat,items.length),c.noResults);
     if (/^apps?$/i.test(cat)) {
       if (!els.resourceFilter.value.trim()) void showAccessibleAppsCatalog(cat);
     }

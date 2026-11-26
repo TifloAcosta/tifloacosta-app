@@ -93,4 +93,23 @@ final class NativeBackupCoordinator: ObservableObject {
             try destination.history()
         }.value
     }
+
+    /// Verify the complete generation and every selected section before any
+    /// future restore operation. A successful preflight is not a restore.
+    func preflightRestore(generation: UUID) async throws -> NativeBackupManifest {
+        guard !isCreating else { throw Failure.busy }
+        let destination = store
+        let worker = Task.detached(priority: .utility) {
+            let (manifest, directory) = try destination.verifiedGeneration(generation)
+            for artifact in manifest.artifacts {
+                try Task.checkCancellation()
+                try NativeBackupSectionArchive.validateForRestore(section: artifact.section,
+                    source: directory.appendingPathComponent(artifact.filename))
+            }
+            return manifest
+        }
+        return try await withTaskCancellationHandler {
+            try await worker.value
+        } onCancel: { worker.cancel() }
+    }
 }

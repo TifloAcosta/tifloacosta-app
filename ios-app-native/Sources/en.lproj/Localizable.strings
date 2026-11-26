@@ -1892,3 +1892,33 @@
 "Referencia. %@" = "Reference. %@";
 "Nivel %d. %@" = "Level %d. %@";
 "Documento" = "Document";
+
+// Release 1.7: dynamic podcast, news, search and video controls
+"Continuar: %@, desde %@" = "Resume: %@, from %@";
+"Olvidar posición: %@" = "Forget position: %@";
+"Escuchar sin conexión: %@" = "Listen offline: %@";
+"Eliminar descarga: %@" = "Delete download: %@";
+"Quitar de favoritos: %@" = "Remove from favorites: %@";
+"Añadir a favoritos: %@" = "Add to favorites: %@";
+"Descargar: %@" = "Download: %@";
+"Reproducir favorito: %@" = "Play favorite: %@";
+"Quitar favorito: %@" = "Remove favorite: %@";
+"Consultar episodios: %@" = "Browse episodes: %@";
+"Dejar de seguir: %@" = "Unfollow: %@";
+"Episodios de %@" = "Episodes of %@";
+"Favoritos guardados: %d" = "Saved favorites: %d";
+"%d noticias encontradas" = "%d news items found";
+"Medio: %@" = "News source: %@";
+"Categorías: %@" = "Categories: %@";
+"%d contenidos encontrados" = "%d items found";
+"%@. Fuente: %@" = "%@. Source: %@";
+"Posición: %d por ciento" = "Position: %d percent";
+"Tiempo: %d de %d segundos" = "Time: %d of %d seconds";
+"Canal: %@" = "Channel: %@";
+"Duración: %d segundos" = "Duration: %d seconds";
+"Comentario público en el vídeo: %@" = "Public comment on the video: %@";
+"Búsqueda: %@" = "Search: %@";
+"%d resultados" = "%d results";
+"%d de %d fragmentos" = "%d of %d segments";
+"Fragmentos traducidos: %d de %d" = "Translated segments: %d of %d";
+"Quitar de Leer después: %@" = "Remove from Read Later: %@";

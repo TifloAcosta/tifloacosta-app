@@ -1890,3 +1890,33 @@
 "Referencia. %@" = "Riferimento. %@";
 "Nivel %d. %@" = "Livello %d. %@";
 "Documento" = "Documento";
+
+// Release 1.7: dynamic podcast, news, search and video controls
+"Continuar: %@, desde %@" = "Riprendi: %@, da %@";
+"Olvidar posición: %@" = "Dimentica posizione: %@";
+"Escuchar sin conexión: %@" = "Ascolta offline: %@";
+"Eliminar descarga: %@" = "Elimina download: %@";
+"Quitar de favoritos: %@" = "Rimuovi dai preferiti: %@";
+"Añadir a favoritos: %@" = "Aggiungi ai preferiti: %@";
+"Descargar: %@" = "Scarica: %@";
+"Reproducir favorito: %@" = "Riproduci preferito: %@";
+"Quitar favorito: %@" = "Rimuovi preferito: %@";
+"Consultar episodios: %@" = "Consulta episodi: %@";
+"Dejar de seguir: %@" = "Smetti di seguire: %@";
+"Episodios de %@" = "Episodi di %@";
+"Favoritos guardados: %d" = "Preferiti salvati: %d";
+"%d noticias encontradas" = "%d notizie trovate";
+"Medio: %@" = "Fonte: %@";
+"Categorías: %@" = "Categorie: %@";
+"%d contenidos encontrados" = "%d contenuti trovati";
+"%@. Fuente: %@" = "%@. Fonte: %@";
+"Posición: %d por ciento" = "Posizione: %d per cento";
+"Tiempo: %d de %d segundos" = "Tempo: %d di %d secondi";
+"Canal: %@" = "Canale: %@";
+"Duración: %d segundos" = "Durata: %d secondi";
+"Comentario público en el vídeo: %@" = "Commento pubblico sul video: %@";
+"Búsqueda: %@" = "Ricerca: %@";
+"%d resultados" = "%d risultati";
+"%d de %d fragmentos" = "%d di %d frammenti";
+"Fragmentos traducidos: %d de %d" = "Frammenti tradotti: %d di %d";
+"Quitar de Leer después: %@" = "Rimuovi da Leggi dopo: %@";

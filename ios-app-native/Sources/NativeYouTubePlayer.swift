@@ -708,7 +708,7 @@ struct NativeYouTubePlayerScreen: View {
                 }
                 .buttonStyle(TifloSecondaryActionStyle())
 
-                Text("Posición: \(engine.percent) por ciento")
+                Text(MusicLocalized.format("Posición: %d por ciento", engine.percent))
                     .font(.body.weight(.semibold))
                     .foregroundStyle(TifloVisual.primaryText)
                     .padding(.vertical, 12)
@@ -725,7 +725,7 @@ struct NativeYouTubePlayerScreen: View {
                     }
 
                 if engine.duration > 0 {
-                    Text("Tiempo: \(Int(engine.currentTime)) de \(Int(engine.duration)) segundos")
+                    Text(MusicLocalized.format("Tiempo: %d de %d segundos", Int(engine.currentTime), Int(engine.duration)))
                         .foregroundStyle(TifloVisual.secondaryText)
                 }
 
@@ -744,14 +744,14 @@ struct NativeYouTubePlayerScreen: View {
                 }
 
                 if !currentVideo.channelTitle.isEmpty {
-                    Text("Canal: \(currentVideo.channelTitle)")
+                    Text(MusicLocalized.format("Canal: %@", currentVideo.channelTitle))
                         .foregroundStyle(TifloVisual.secondaryText)
                 }
                 if let date = NativeNewsMetadata.publication(currentVideo.publishedAt) {
-                    Text("Publicado: \(date)").foregroundStyle(TifloVisual.secondaryText)
+                    Text(MusicLocalized.format("Publicado: %@", date)).foregroundStyle(TifloVisual.secondaryText)
                 }
                 if currentVideo.durationSeconds > 0 {
-                    Text("Duración: \(currentVideo.durationSeconds) segundos")
+                    Text(MusicLocalized.format("Duración: %d segundos", currentVideo.durationSeconds))
                         .foregroundStyle(TifloVisual.secondaryText)
                 }
                 if !currentVideo.description.isEmpty {
@@ -805,7 +805,7 @@ struct NativeYouTubePlayerScreen: View {
                     .disabled(account.busy)
                     .buttonStyle(TifloSecondaryActionStyle())
                     if editingComment {
-                        Text("Comentario público en el vídeo: \(currentVideo.title)")
+                        Text(MusicLocalized.format("Comentario público en el vídeo: %@", currentVideo.title))
                             .foregroundStyle(TifloVisual.secondaryText)
                         TextEditor(text: $commentText)
                             .frame(minHeight: 120)

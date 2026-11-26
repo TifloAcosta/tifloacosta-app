@@ -87,7 +87,7 @@ struct NativeMediaInlineContent: View {
             if store.loading && store.items.isEmpty {
                 ProgressView("Cargando podcasts y vídeos")
             } else {
-                Text("\(filteredItems.count) contenidos encontrados")
+                Text(MusicLocalized.format("%d contenidos encontrados", filteredItems.count))
                     .font(.subheadline)
                     .foregroundStyle(TifloVisual.secondaryText)
                 if filteredItems.isEmpty && store.error == nil {
@@ -100,11 +100,11 @@ struct NativeMediaInlineContent: View {
                     } label: {
                         VStack(alignment: .leading, spacing: 5) {
                             Text(item.title).font(.headline)
-                            Text("\(item.formatLabel). Fuente: \(item.sourceName)")
+                            Text(MusicLocalized.format("%@. Fuente: %@", MusicLocalized.message(item.formatLabel), item.sourceName))
                                 .font(.subheadline)
                                 .foregroundStyle(TifloVisual.secondaryText)
                             if let published = NativeNewsMetadata.publication(item.publishedAt) {
-                                Text("Publicado: \(published)")
+                                Text(MusicLocalized.format("Publicado: %@", published))
                                     .font(.subheadline)
                                     .foregroundStyle(TifloVisual.secondaryText)
                             }

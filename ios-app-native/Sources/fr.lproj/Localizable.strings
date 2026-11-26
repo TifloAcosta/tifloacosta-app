@@ -1890,3 +1890,33 @@
 "Referencia. %@" = "Référence. %@";
 "Nivel %d. %@" = "Niveau %d. %@";
 "Documento" = "Document";
+
+// Release 1.7: dynamic podcast, news, search and video controls
+"Continuar: %@, desde %@" = "Reprendre : %@, à partir de %@";
+"Olvidar posición: %@" = "Oublier la position : %@";
+"Escuchar sin conexión: %@" = "Écouter hors connexion : %@";
+"Eliminar descarga: %@" = "Supprimer le téléchargement : %@";
+"Quitar de favoritos: %@" = "Retirer des favoris : %@";
+"Añadir a favoritos: %@" = "Ajouter aux favoris : %@";
+"Descargar: %@" = "Télécharger : %@";
+"Reproducir favorito: %@" = "Lire le favori : %@";
+"Quitar favorito: %@" = "Retirer le favori : %@";
+"Consultar episodios: %@" = "Consulter les épisodes : %@";
+"Dejar de seguir: %@" = "Ne plus suivre : %@";
+"Episodios de %@" = "Épisodes de %@";
+"Favoritos guardados: %d" = "Favoris enregistrés : %d";
+"%d noticias encontradas" = "%d actualités trouvées";
+"Medio: %@" = "Média : %@";
+"Categorías: %@" = "Catégories : %@";
+"%d contenidos encontrados" = "%d contenus trouvés";
+"%@. Fuente: %@" = "%@. Source : %@";
+"Posición: %d por ciento" = "Position : %d pour cent";
+"Tiempo: %d de %d segundos" = "Temps : %d sur %d secondes";
+"Canal: %@" = "Chaîne : %@";
+"Duración: %d segundos" = "Durée : %d secondes";
+"Comentario público en el vídeo: %@" = "Commentaire public sur la vidéo : %@";
+"Búsqueda: %@" = "Recherche : %@";
+"%d resultados" = "%d résultats";
+"%d de %d fragmentos" = "%d segments sur %d";
+"Fragmentos traducidos: %d de %d" = "Segments traduits : %d sur %d";
+"Quitar de Leer después: %@" = "Retirer de Lire plus tard : %@";

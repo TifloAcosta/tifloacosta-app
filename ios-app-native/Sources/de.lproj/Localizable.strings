@@ -1890,3 +1890,33 @@
 "Referencia. %@" = "Verweis. %@";
 "Nivel %d. %@" = "Ebene %d. %@";
 "Documento" = "Dokument";
+
+// Release 1.7: dynamic podcast, news, search and video controls
+"Continuar: %@, desde %@" = "Fortsetzen: %@, ab %@";
+"Olvidar posición: %@" = "Position vergessen: %@";
+"Escuchar sin conexión: %@" = "Offline anhören: %@";
+"Eliminar descarga: %@" = "Download löschen: %@";
+"Quitar de favoritos: %@" = "Aus Favoriten entfernen: %@";
+"Añadir a favoritos: %@" = "Zu Favoriten hinzufügen: %@";
+"Descargar: %@" = "Herunterladen: %@";
+"Reproducir favorito: %@" = "Favorit abspielen: %@";
+"Quitar favorito: %@" = "Favorit entfernen: %@";
+"Consultar episodios: %@" = "Folgen anzeigen: %@";
+"Dejar de seguir: %@" = "Nicht mehr folgen: %@";
+"Episodios de %@" = "Folgen von %@";
+"Favoritos guardados: %d" = "Gespeicherte Favoriten: %d";
+"%d noticias encontradas" = "%d Meldungen gefunden";
+"Medio: %@" = "Nachrichtenquelle: %@";
+"Categorías: %@" = "Kategorien: %@";
+"%d contenidos encontrados" = "%d Inhalte gefunden";
+"%@. Fuente: %@" = "%@. Quelle: %@";
+"Posición: %d por ciento" = "Position: %d Prozent";
+"Tiempo: %d de %d segundos" = "Zeit: %d von %d Sekunden";
+"Canal: %@" = "Kanal: %@";
+"Duración: %d segundos" = "Dauer: %d Sekunden";
+"Comentario público en el vídeo: %@" = "Öffentlicher Kommentar zum Video: %@";
+"Búsqueda: %@" = "Suche: %@";
+"%d resultados" = "%d Ergebnisse";
+"%d de %d fragmentos" = "%d von %d Abschnitten";
+"Fragmentos traducidos: %d de %d" = "Übersetzte Abschnitte: %d von %d";
+"Quitar de Leer después: %@" = "Aus Später lesen entfernen: %@";

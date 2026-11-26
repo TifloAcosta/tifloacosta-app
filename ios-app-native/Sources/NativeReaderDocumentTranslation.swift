@@ -88,8 +88,8 @@ struct NativeReaderDocumentTranslationScreen: View {
             if isTranslating {
                 Section("Progreso de la traducción") {
                     ProgressView(value: Double(completed), total: Double(max(total, 1)))
-                    Text("\(completed) de \(total) fragmentos")
-                        .accessibilityLabel(Text("Fragmentos traducidos: \(completed) de \(total)"))
+                    Text(MusicLocalized.format("%d de %d fragmentos", completed, total))
+                        .accessibilityLabel(Text(MusicLocalized.format("Fragmentos traducidos: %d de %d", completed, total)))
                 }
             }
             if finished {

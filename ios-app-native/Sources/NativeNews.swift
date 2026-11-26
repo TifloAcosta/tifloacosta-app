@@ -251,7 +251,7 @@ struct NativeNewsScreen: View {
                 if categoryIndex != 0 || sourceIndex != 0 ||
                    !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                     Section("Noticias") {
-                        Text("\(matchingNews.count) noticias encontradas")
+                        Text(MusicLocalized.format("%d noticias encontradas", matchingNews.count))
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                         if matchingNews.isEmpty {
@@ -269,10 +269,10 @@ struct NativeNewsScreen: View {
                                         .accessibilityHidden(true)
                                     VStack(alignment: .leading, spacing: 5) {
                                         Text(item.title).font(.headline)
-                                        Text("Medio: \(NativeNewsMetadata.source(item))")
+                                        Text(MusicLocalized.format("Medio: %@", NativeNewsMetadata.source(item)))
                                             .font(.subheadline).foregroundStyle(TifloVisual.secondaryText)
                                         if let published = NativeNewsMetadata.publication(item.publishedAt) {
-                                            Text("Publicado: \(published)")
+                                            Text(MusicLocalized.format("Publicado: %@", published))
                                                 .font(.subheadline).foregroundStyle(TifloVisual.secondaryText)
                                         }
                                         if let summary = item.summary, !summary.isEmpty {
@@ -414,17 +414,17 @@ struct NativeNewsArticleScreen: View {
                         if let url = NativeNewsMetadata.originalURL(item) { openURL(url) }
                     }
 
-                Text("Medio: \(NativeNewsMetadata.source(item))")
+                Text(MusicLocalized.format("Medio: %@", NativeNewsMetadata.source(item)))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
 
                 if let published = NativeNewsMetadata.publication(item.publishedAt) {
-                    Text("Publicado: \(published)")
+                    Text(MusicLocalized.format("Publicado: %@", published))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
                 if let categories = item.categories, !categories.isEmpty {
-                    Text("Categorías: \(categories.map(NativeNewsMetadata.category).joined(separator: ", "))")
+                    Text(MusicLocalized.format("Categorías: %@", categories.map(NativeNewsMetadata.category).joined(separator: ", ")))
                         .font(.footnote).foregroundStyle(.secondary)
                 }
 

@@ -215,7 +215,7 @@ struct NativeMediaScreen: View {
                 .listRowBackground(TifloVisual.surfaceRaised)
 
                 Section("Escuchar y ver") {
-                    Text("\(filteredItems.count) contenidos encontrados")
+                    Text(MusicLocalized.format("%d contenidos encontrados", filteredItems.count))
                         .font(.subheadline)
                         .foregroundStyle(TifloVisual.secondaryText)
                     if filteredItems.isEmpty {
@@ -233,11 +233,11 @@ struct NativeMediaScreen: View {
                                     .accessibilityHidden(true)
                                 VStack(alignment: .leading, spacing: 5) {
                                     Text(item.title).font(.headline)
-                                    Text("\(item.formatLabel). Fuente: \(item.sourceName)")
+                                    Text(MusicLocalized.format("%@. Fuente: %@", MusicLocalized.message(item.formatLabel), item.sourceName))
                                         .font(.subheadline)
                                         .foregroundStyle(TifloVisual.secondaryText)
                                     if let published = NativeNewsMetadata.publication(item.publishedAt) {
-                                        Text("Publicado: \(published)")
+                                        Text(MusicLocalized.format("Publicado: %@", published))
                                             .font(.subheadline)
                                             .foregroundStyle(TifloVisual.secondaryText)
                                     }
@@ -309,10 +309,10 @@ struct NativeMediaDetailScreen: View {
                 Text(item.title)
                     .font(.title2.bold())
                     .accessibilityAddTraits(.isHeader)
-                Text("\(item.formatLabel). Fuente: \(item.sourceName)")
+                Text(MusicLocalized.format("%@. Fuente: %@", MusicLocalized.message(item.formatLabel), item.sourceName))
                     .foregroundStyle(TifloVisual.secondaryText)
                 if let published = NativeNewsMetadata.publication(item.publishedAt) {
-                    Text("Publicado: \(published)")
+                    Text(MusicLocalized.format("Publicado: %@", published))
                         .foregroundStyle(TifloVisual.secondaryText)
                 }
                 if let summary = item.summary, !summary.isEmpty {

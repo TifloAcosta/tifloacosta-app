@@ -76,12 +76,12 @@ struct NativeSearchResultsScreen: View {
     var body: some View {
         List {
             Section {
-                Text("Búsqueda: \(query)")
+                Text(MusicLocalized.format("Búsqueda: %@", query))
                     .font(.subheadline)
                 if catalog.loading && matches.isEmpty {
                     ProgressView("Buscando en el catálogo")
                 } else {
-                    Text("\(matches.count) resultados")
+                    Text(MusicLocalized.format("%d resultados", matches.count))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }

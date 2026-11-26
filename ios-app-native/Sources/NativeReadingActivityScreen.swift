@@ -49,7 +49,7 @@ struct NativeReadingActivityScreen: View {
                         .accessibilityAction(named: Text("Quitar de Leer después")) {
                             _ = activity.toggleReadLater(kind, item: item)
                         }
-                    Button("Quitar de Leer después: \(item.title)") {
+                    Button(MusicLocalized.format("Quitar de Leer después: %@", item.title)) {
                         _ = activity.toggleReadLater(kind, item: item)
                     }
                 }

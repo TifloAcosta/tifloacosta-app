@@ -355,7 +355,7 @@ struct NativePodcastScreen: View {
                         Text("Posición del episodio")
                     }
                     .accessibilityValue(MusicLocalized.format("%@ de %@", clock(player.seconds), clock(player.duration)))
-                    Text("\(clock(player.seconds)) de \(clock(player.duration))")
+                    Text(MusicLocalized.format("%@ de %@", clock(player.seconds), clock(player.duration)))
                         .font(.footnote).foregroundStyle(.secondary)
                     Button("Cerrar reproductor") {
                         saveCurrentPosition()
@@ -374,10 +374,10 @@ struct NativePodcastScreen: View {
                             id: saved.id, title: saved.title,
                             audioURL: url, publicationDate: ""
                         )
-                        Button("Continuar: \(saved.title), desde \(clock(saved.seconds))") {
+                        Button(MusicLocalized.format("Continuar: %@, desde %@", saved.title, clock(saved.seconds))) {
                             playEpisode(episode)
                         }
-                        Button("Olvidar posición: \(saved.title)") {
+                        Button(MusicLocalized.format("Olvidar posición: %@", saved.title)) {
                             library.clearProgress(for: episode)
                         }
                     }
@@ -395,13 +395,13 @@ struct NativePodcastScreen: View {
                 }
                 ForEach(downloads.entries) { item in
                     if let file = downloads.localURL(for: item.id) {
-                        Button("Escuchar sin conexión: \(item.title)") {
+                        Button(MusicLocalized.format("Escuchar sin conexión: %@", item.title)) {
                             if let original = URL(string: item.sourceURL) {
                                 playEpisode(NativePodcastEpisode(id: item.id, title: item.title,
                                     audioURL: original, publicationDate: ""))
                             }
                         }
-                        Button("Eliminar descarga: \(item.title)") {
+                        Button(MusicLocalized.format("Eliminar descarga: %@", item.title)) {
                             pendingDownloadedRemoval = item
                         }
                     }
@@ -433,11 +433,11 @@ struct NativePodcastScreen: View {
                     .accessibilityAction(named: Text("Descargar episodio")) {
                         Task { await downloads.download(episode) }
                     }
-                    Button(library.isFavorite(episode) ? "Quitar de favoritos: \(episode.title)" : "Añadir a favoritos: \(episode.title)") {
+                    Button(library.isFavorite(episode) ? MusicLocalized.format("Quitar de favoritos: %@", episode.title) : MusicLocalized.format("Añadir a favoritos: %@", episode.title)) {
                         library.toggleFavorite(episode)
                     }
                     if downloads.localURL(for: episode.id) == nil {
-                        Button("Descargar: \(episode.title)") {
+                        Button(MusicLocalized.format("Descargar: %@", episode.title)) {
                             Task { await downloads.download(episode) }
                         }
                         .disabled(downloads.downloadingID != nil)
@@ -451,14 +451,14 @@ struct NativePodcastScreen: View {
                 }
             }
             Section("Seguir pódcast y favoritos") {
-                Text("Favoritos guardados: \(library.favorites.count)")
+                Text(MusicLocalized.format("Favoritos guardados: %d", library.favorites.count))
                 ForEach(library.savedEpisodes) { saved in
                     if let url = URL(string: saved.audioURL) {
-                        Button("Reproducir favorito: \(saved.title)") {
+                        Button(MusicLocalized.format("Reproducir favorito: %@", saved.title)) {
                             playEpisode(NativePodcastEpisode(id: saved.id, title: saved.title,
                                                               audioURL: url, publicationDate: ""))
                         }
-                        Button("Quitar favorito: \(saved.title)") {
+                        Button(MusicLocalized.format("Quitar favorito: %@", saved.title)) {
                             library.toggleFavorite(NativePodcastEpisode(id: saved.id, title: saved.title,
                                                                        audioURL: url, publicationDate: ""))
                         }
@@ -473,27 +473,27 @@ struct NativePodcastScreen: View {
                 if importingOPML { ProgressView("Importando suscripciones") }
                 ForEach(library.followed) { feed in
                     Text(feed.title)
-                    Button("Consultar episodios: \(feed.title)") {
+                    Button(MusicLocalized.format("Consultar episodios: %@", feed.title)) {
                         Task { await loadFollowed(feed) }
                     }
-                    Button("Dejar de seguir: \(feed.title)") { library.unfollow(feed) }
+                    Button(MusicLocalized.format("Dejar de seguir: %@", feed.title)) { library.unfollow(feed) }
                 }
                 if followedFeedBusy { ProgressView("Cargando episodios seguidos") }
                 if !followedFeedStatus.isEmpty { Text(followedFeedStatus) }
                 if !followedEpisodes.isEmpty {
-                    Text("Episodios de \(followedFeedTitle)").font(.headline)
+                    Text(MusicLocalized.format("Episodios de %@", followedFeedTitle)).font(.headline)
                     ForEach(followedEpisodes) { episode in
-                        Button("Reproducir: \(episode.title)") {
+                        Button(MusicLocalized.format("Reproducir: %@", episode.title)) {
                             playEpisode(episode, collection: followedEpisodes)
                         }
                         if downloads.localURL(for: episode.id) == nil {
-                            Button("Descargar: \(episode.title)") {
+                            Button(MusicLocalized.format("Descargar: %@", episode.title)) {
                                 Task { await downloads.download(episode) }
                             }
                             .disabled(downloads.downloadingID != nil)
                         }
-                        Button(library.isFavorite(episode) ? "Quitar de favoritos: \(episode.title)" :
-                               "Añadir a favoritos: \(episode.title)") {
+                        Button(library.isFavorite(episode) ? MusicLocalized.format("Quitar de favoritos: %@", episode.title) :
+                               MusicLocalized.format("Añadir a favoritos: %@", episode.title)) {
                             library.toggleFavorite(episode)
                         }
                     }

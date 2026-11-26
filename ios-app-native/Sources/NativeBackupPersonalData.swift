@@ -141,3 +141,65 @@ enum NativeBackupMetadataArchive {
         return archive
     }
 }
+
+/// Decode metadata-only archives before any live store changes. This does
+/// not confer permission to access remote URLs or apply preferences.
+enum NativeBackupPersonalDataValidation {
+    enum Failure: Error { case invalidSnapshot }
+    static func validate(section: NativeBackupManifest.Section, data: Data) throws {
+        let decoder = JSONDecoder()
+        let eligible = NativeBackupReferencePolicy.eligible
+        let eligibleID = NativeBackupReferencePolicy.eligibleID
+        switch section {
+        case .podcasts:
+            let value = try decoder.decode(NativePodcastBackupSnapshot.self, from: data)
+            guard value.schemaVersion == 1, value.excludedReferences >= 0,
+                  Set(value.followed.map(\.url)).count == value.followed.count,
+                  Set(value.savedEpisodes.map(\.id)).count == value.savedEpisodes.count,
+                  Set(value.playbackProgress.map(\.id)).count == value.playbackProgress.count,
+                  Set(value.previouslyDownloaded.map(\.id)).count == value.previouslyDownloaded.count,
+                  value.followed.allSatisfy({ eligible($0.url) }),
+                  value.favorites.allSatisfy(eligibleID),
+                  value.savedEpisodes.allSatisfy({ eligibleID($0.id) && eligible($0.audioURL) }),
+                  value.playbackProgress.allSatisfy({
+                      eligibleID($0.id) && eligible($0.audioURL) &&
+                      $0.seconds.isFinite && $0.duration.isFinite &&
+                      $0.seconds >= 0 && $0.duration > 0
+                  }),
+                  value.previouslyDownloaded.allSatisfy({
+                      eligibleID($0.id) && eligible($0.sourceURL)
+                  }) else { throw Failure.invalidSnapshot }
+            // Download references are not actual locally downloaded audio.
+            // Their device-specific filename must never be used for restore.
+        case .radio:
+            let value = try decoder.decode(NativeRadioBackupSnapshot.self, from: data)
+            let ids = value.favorites.compactMap { UUID(uuidString: $0.stationID) }
+            guard value.schemaVersion == 1, ids.count == value.favorites.count,
+                  Set(ids).count == ids.count,
+                  value.requiresDirectoryLookup == value.favorites.filter({ $0.streamURL == nil }).count,
+                  value.favorites.allSatisfy({ $0.streamURL.map(eligible) ?? true })
+            else { throw Failure.invalidSnapshot }
+        case .preferences:
+            let value = try decoder.decode(NativeBackupPreferencesSnapshot.self, from: data)
+            guard value.schemaVersion == 1,
+                  Set(value.integers.keys).isSubset(of: Set(NativeBackupPreferencesSnapshot.integerKeys)),
+                  Set(value.booleans.keys).isSubset(of: Set(NativeBackupPreferencesSnapshot.booleanKeys)),
+                  Set(value.numbers.keys).isSubset(of: Set(NativeBackupPreferencesSnapshot.numberKeys)),
+                  Set(value.strings.keys).isSubset(of: Set(NativeBackupPreferencesSnapshot.stringKeys)),
+                  value.numbers.values.allSatisfy({ $0.isFinite }),
+                  value.strings.values.allSatisfy({ $0.utf8.count <= 4096 }),
+                  Set(value.youtubeVideos.map(\.id)).count == value.youtubeVideos.count,
+                  Set(value.youtubeChannels.map(\.id)).count == value.youtubeChannels.count,
+                  value.youtubeVideos.allSatisfy({
+                      NativeYouTubeVideo.validID($0.id) && $0.durationSeconds >= 0 &&
+                      $0.resumeSeconds.isFinite && $0.resumeSeconds >= 0
+                  }),
+                  value.youtubeChannels.allSatisfy({ $0.id.hasPrefix("UC") && $0.id.count == 24 })
+            else { throw Failure.invalidSnapshot }
+            // Range and per-key conflict policy, favorite and voice profile
+            // validation are still required by the eventual apply adapters.
+        default:
+            throw Failure.invalidSnapshot
+        }
+    }
+}

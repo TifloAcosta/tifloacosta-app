@@ -227,7 +227,7 @@ struct NativeAudiusScreen: View {
                         Button("Reproducir") { player.play(id: track.id, title: track.title) }
                         if let addToPlaylist {
                             ForEach(playlists) { playlist in
-                                Button("Añadir a \(playlist.name)") {
+                                Button(MusicLocalized.format("Añadir a %@", playlist.name)) {
                                     addToPlaylist("audius", track.id, track.title,
                                         track.user?.name ?? "Audius", playlist.id)
                                 }

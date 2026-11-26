@@ -1222,7 +1222,7 @@ struct NativeMyMusicScreen: View {
                             Text("Posible canción duplicada").font(.caption).accessibilityHidden(true)
                         }
                         Spacer()
-                        Menu("Acciones de \(file.name)") {
+                        Menu(MusicLocalized.format("Acciones de %@", file.name)) {
                             if NativeMusicRecognition.clientKey != nil {
                                 Button("Identificar canción") { requestIdentification([file.id]) }
                                     .disabled(recognitionTask != nil)

@@ -1920,3 +1920,13 @@
 "%d de %d fragmentos" = "%d segments sur %d";
 "Fragmentos traducidos: %d de %d" = "Segments traduits : %d sur %d";
 "Quitar de Leer después: %@" = "Retirer de Lire plus tard : %@";
+
+// Release 1.7: remaining dynamic provider and cloud controls
+"Abrir carpeta: %@" = "Ouvrir le dossier : %@";
+"Importar %@" = "Importer %@";
+"Carpeta: %@" = "Dossier : %@";
+"Importando %@…" = "Importation de %@…";
+"Contenido: %@" = "Contenu : %@";
+"Vídeo de YouTube" = "Vidéo YouTube";
+"Acciones de %@" = "Actions pour %@";
+"Última actualización correcta: %@" = "Dernière mise à jour réussie : %@";

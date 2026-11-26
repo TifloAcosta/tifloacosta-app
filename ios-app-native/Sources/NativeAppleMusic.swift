@@ -192,7 +192,7 @@ struct NativeAppleMusicScreen: View {
                                 Button("Reproducir") { Task { await music.play(song) } }
                                 if let addToPlaylist {
                                     ForEach(playlists) { playlist in
-                                        Button("Añadir a \(playlist.name)") {
+                                        Button(MusicLocalized.format("Añadir a %@", playlist.name)) {
                                             addToPlaylist("appleMusic", song.id.rawValue,
                                                 song.title, song.artistName, playlist.id)
                                         }

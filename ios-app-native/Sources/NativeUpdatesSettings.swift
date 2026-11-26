@@ -197,7 +197,7 @@ struct NativeUpdatesScreen: View {
                     ProgressView("Actualizando novedades")
                 }
                 if let lastUpdated = catalog.lastUpdated {
-                    Text("Última actualización correcta: \(lastUpdated.formatted(date: .abbreviated, time: .shortened))")
+                    Text(MusicLocalized.format("Última actualización correcta: %@", lastUpdated.formatted(date: .abbreviated, time: .shortened)))
                         .font(.footnote)
                 } else {
                     Text("Todavía no se ha confirmado una actualización correcta.")

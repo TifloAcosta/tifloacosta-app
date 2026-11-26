@@ -193,7 +193,7 @@ struct NativeDownloadsScreen: View {
                 .disabled(store.checking || store.busy || address.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
 
                 if let analysis = store.analysis {
-                    Text("Contenido: \(analysis.type)")
+                    Text(MusicLocalized.format("Contenido: %@", MusicLocalized.message(analysis.type)))
                         .font(.subheadline)
                         .foregroundStyle(TifloVisual.secondaryText)
                     Button(store.busy ? "Descargando en TifloAcosta" : "Descargar en TifloAcosta") {

@@ -16,7 +16,7 @@ struct NativeAcoustIDAccount: View {
                     Button("Solicitar código de vinculación") { beginLink(client) }
                         .disabled(operation != nil)
                     if let approval {
-                        Text("Código: \(approval.code)")
+                        Text(MusicLocalized.format("Código: %@", approval.code))
                             .textSelection(.enabled)
                         Link("Autorizar en AcoustID", destination: approval.url)
                     }

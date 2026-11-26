@@ -41,9 +41,9 @@ struct NativeCloudGooglePickerScreen: View {
                 Section("Archivos seleccionados") {
                     ForEach(selection) { item in
                         if item.isFolder {
-                            Text("Carpeta: \(item.name)")
+                            Text(MusicLocalized.format("Carpeta: %@", item.name))
                         } else {
-                            Button(importingID == item.id ? "Importando \(item.name)…" : "Importar \(item.name)") {
+                            Button(importingID == item.id ? MusicLocalized.format("Importando %@…", item.name) : MusicLocalized.format("Importar %@", item.name)) {
                                 requestImport(item)
                             }
                             .disabled(loading || importingID != nil)

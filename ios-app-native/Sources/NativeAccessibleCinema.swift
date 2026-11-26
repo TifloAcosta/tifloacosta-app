@@ -815,7 +815,7 @@ private struct NativeCinemaPersonalDetailScreen: View {
                     .tifloScreenSurface()
                     .navigationTitle("Información")
                 }
-                Button("Eliminar de mi colección: \(item.title)", role: .destructive) {
+                Button(MusicLocalized.format("Eliminar de mi colección: %@", item.title), role: .destructive) {
                     confirmDeletion = true
                 }
             } else {

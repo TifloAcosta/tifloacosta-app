@@ -78,7 +78,7 @@ struct NativeTapeTerritoryScreen: View {
             ForEach(matches) { film in
                 Section {
                     if let synopsis = film.synopsis, !synopsis.isEmpty { Text(synopsis) }
-                    Button("Reproducir: \(film.title)") {
+                    Button(MusicLocalized.format("Reproducir: %@", film.title)) {
                         playbackFailed = false
                         guard let url = film.describedStream else { return }
                         do { try player.openTapeTerritory(url, title: film.title, slug: film.slug, library: library) }

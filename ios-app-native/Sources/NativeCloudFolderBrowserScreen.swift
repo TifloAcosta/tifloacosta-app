@@ -52,13 +52,13 @@ struct NativeCloudFolderBrowserScreen: View {
                     if items.isEmpty && !busy { Text("No hay archivos en esta carpeta.") }
                     ForEach(items) { item in
                         if item.isFolder {
-                            Button("Abrir carpeta: \(item.name)") {
+                            Button(MusicLocalized.format("Abrir carpeta: %@", item.name)) {
                                 folderHistory.append(folderID)
                                 Task { await loadFolder(id: item.id) }
                             }
                             .disabled(busy)
                         } else {
-                            Button("Importar \(item.name)") { requestImport(item) }
+                            Button(MusicLocalized.format("Importar %@", item.name)) { requestImport(item) }
                                 .disabled(busy || importingID != nil)
                                 .accessibilityLabel(MusicLocalized.format("Importar %@ desde %@", item.name, provider.title))
                         }

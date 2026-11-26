@@ -280,7 +280,7 @@ private struct NativeJamendoTrackRows: View {
                     }
                     if let addToPlaylist {
                         ForEach(playlists) { playlist in
-                            Button("Añadir a \(playlist.name)") {
+                            Button(MusicLocalized.format("Añadir a %@", playlist.name)) {
                                 addToPlaylist("jamendo", track.id, track.name,
                                     track.artistName, playlist.id)
                             }

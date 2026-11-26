@@ -73,7 +73,7 @@ struct NativeOnDemandTranslationScreen: View {
                     .accessibilityAddTraits(.isHeader)
                 Button("Volver a la pantalla anterior") { dismiss() }
                     .accessibilityHint("Cierra la traducción y vuelve al artículo o listado desde el que accediste.")
-                Text("Idioma solicitado: \(targetName)")
+                Text(MusicLocalized.format("Idioma solicitado: %@", targetName))
                     .font(.subheadline).foregroundStyle(.secondary)
                 Text("El documento original se conserva. La traducción solo comienza cuando la solicitas.")
                     .font(.footnote).foregroundStyle(.secondary)

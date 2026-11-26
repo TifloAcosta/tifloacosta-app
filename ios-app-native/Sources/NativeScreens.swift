@@ -726,7 +726,7 @@ struct NativeResourcesScreen: View {
                     ProgressView("Actualizando recursos")
                 }
                 if let lastUpdated = catalog.lastUpdated {
-                    Text("Última actualización correcta: \(lastUpdated.formatted(date: .abbreviated, time: .shortened))")
+                    Text(MusicLocalized.format("Última actualización correcta: %@", lastUpdated.formatted(date: .abbreviated, time: .shortened)))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 } else {
@@ -1344,11 +1344,11 @@ struct NativeYouTubeVideoRow: View {
             Text(video.title)
                 .font(.headline)
                 .foregroundStyle(TifloVisual.primaryText)
-            Text("Canal: \(video.channelTitle)")
+            Text(MusicLocalized.format("Canal: %@", video.channelTitle))
                 .font(.subheadline)
                 .foregroundStyle(TifloVisual.secondaryText)
             if let date = NativeNewsMetadata.publication(video.publishedAt) {
-                Text("Publicado: \(date)")
+                Text(MusicLocalized.format("Publicado: %@", date))
                     .font(.subheadline)
                     .foregroundStyle(TifloVisual.secondaryText)
             } else {

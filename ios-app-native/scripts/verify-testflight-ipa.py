@@ -39,6 +39,14 @@ with zipfile.ZipFile(files[0]) as z:
             raise SystemExit('Falta la configuración del catálogo público de Google Drive en la IPA')
         print('Configuración AcoustID y catálogo público presente, sin revelar valores')
     ext_info = plistlib.loads(z.read(extension_info_path))
+    if os.environ.get('TIFLO_IOS_MARKETING_VERSION') == '1.7':
+        if set(ext_info.get('CFBundleLocalizations', [])) != expected_languages:
+            raise SystemExit('Idiomas declarados incorrectos en extensión Compartir')
+        extension_root = extension_info_path.rsplit('/Info.plist', 1)[0]
+        for language in expected_languages:
+            if extension_root + '/' + language + '.lproj/Localizable.strings' not in z.namelist():
+                raise SystemExit('Falta idioma de Compartir: ' + language)
+        print('Extensión Compartir: seis idiomas empaquetados')
     for info, identifier in [(app_info, 'com.tifloacosta.app'),
                              (ext_info, 'com.tifloacosta.app.ShareExtension')]:
         if info.get('CFBundleIdentifier') != identifier:

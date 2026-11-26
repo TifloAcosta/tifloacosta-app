@@ -12,9 +12,9 @@ enum ShareReadingPreview {
 
         var errorDescription: String? {
             switch self {
-            case .unsupported: "No hay una vista de lectura disponible para este formato."
-            case .empty: "El documento no contiene texto que se pueda leer en la vista rápida."
-            case .oversized: "La vista rápida no puede procesar un capítulo tan grande."
+            case .unsupported: ShareLocale.message("No hay una vista de lectura disponible para este formato.")
+            case .empty: ShareLocale.message("El documento no contiene texto que se pueda leer en la vista rápida.")
+            case .oversized: ShareLocale.message("La vista rápida no puede procesar un capítulo tan grande.")
             }
         }
     }

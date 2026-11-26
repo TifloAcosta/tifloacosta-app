@@ -22,6 +22,9 @@ struct TifloAcostaNativeApp: App {
 
     init() {
         NativeAppLanguage.initializeIfMissing()
+        UserDefaults(suiteName: "group.com.tifloacosta.app")?.set(
+            NativeAppLanguage.code(for: UserDefaults.standard.integer(forKey: NativeAppLanguage.storageKey)),
+            forKey: "native-share-language")
         UNUserNotificationCenter.current().delegate = NativeLocalNotificationDelegate.shared
     }
 
@@ -41,6 +44,10 @@ struct TifloAcostaNativeApp: App {
                 .environmentObject(media)
                 .environmentObject(youtubeAccount)
                 .onAppear { inbox.refresh() }
+                .onChange(of: languageIndex) { _, index in
+                    UserDefaults(suiteName: "group.com.tifloacosta.app")?.set(
+                        NativeAppLanguage.code(for: index), forKey: "native-share-language")
+                }
                 .task { await catalog.refresh(); await podcasts.refresh() }
                 .tint(TifloVisual.actionTint)
                 .environment(\.defaultMinListRowHeight, 48)

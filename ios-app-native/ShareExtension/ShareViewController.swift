@@ -2,6 +2,25 @@ import UIKit
 import AVFoundation
 import UniformTypeIdentifiers
 
+// Uses the language chosen inside TifloAcosta when available, otherwise the device language.
+enum ShareLocale {
+    static var code: String {
+        let codes = ["es", "en", "pt", "fr", "it", "de"]
+        if let value = UserDefaults(suiteName: "group.com.tifloacosta.app")?.string(forKey: "native-share-language"),
+           codes.contains(value) { return value }
+        return Locale.preferredLanguages.compactMap { $0.split(separator: "-").first.map(String.init) }
+            .first(where: { codes.contains($0) }) ?? "es"
+    }
+    static func message(_ key: String) -> String {
+        guard let path = Bundle.main.path(forResource: code, ofType: "lproj"),
+              let bundle = Bundle(path: path) else { return key }
+        return bundle.localizedString(forKey: key, value: key, table: nil)
+    }
+    static func format(_ key: String, _ arguments: CVarArg...) -> String {
+        String(format: message(key), locale: Locale(identifier: code), arguments: arguments)
+    }
+}
+
 // A separate Share Extension process: no Capacitor or WebKit dependency.
 // Receive each selected attachment sequentially into the private App Group inbox.
 final class ShareViewController: UIViewController {
@@ -44,37 +63,37 @@ final class ShareViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         let heading = UILabel()
-        heading.text = "Enviar a TifloAcosta"
+        heading.text = ShareLocale.message("Enviar a TifloAcosta")
         heading.font = .preferredFont(forTextStyle: .title2)
         heading.adjustsFontForContentSizeCategory = true
         heading.textAlignment = .center
-        statusLabel.text = "Preparando contenido…"
+        statusLabel.text = ShareLocale.message("Preparando contenido…")
         statusLabel.numberOfLines = 0
         statusLabel.textAlignment = .center
         statusLabel.font = .preferredFont(forTextStyle: .body)
         statusLabel.adjustsFontForContentSizeCategory = true
         statusLabel.accessibilityTraits = [.staticText]
-        closeButton.setTitle("Cerrar", for: .normal)
+        closeButton.setTitle(ShareLocale.message("Cerrar"), for: .normal)
         closeButton.titleLabel?.font = .preferredFont(forTextStyle: .headline)
         closeButton.addTarget(self, action: #selector(close), for: .touchUpInside)
         closeButton.isEnabled = false
-        previewButton.setTitle("Leer ahora", for: .normal)
+        previewButton.setTitle(ShareLocale.message("Leer ahora"), for: .normal)
         previewButton.titleLabel?.font = .preferredFont(forTextStyle: .headline)
-        previewButton.accessibilityHint = "Abre una vista de lectura accesible dentro de Compartir, sin salir de la aplicación de origen."
+        previewButton.accessibilityHint = ShareLocale.message("Abre una vista de lectura accesible dentro de Compartir, sin salir de la aplicación de origen.")
         previewButton.addTarget(self, action: #selector(showPreview), for: .touchUpInside)
         previewButton.isHidden = true
-        readAloudButton.setTitle("Escuchar", for: .normal)
+        readAloudButton.setTitle(ShareLocale.message("Escuchar"), for: .normal)
         readAloudButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
         readAloudButton.addTarget(self, action: #selector(readAloud), for: .touchUpInside)
         readAloudButton.isHidden = true
-        pauseButton.setTitle("Pausar", for: .normal)
+        pauseButton.setTitle(ShareLocale.message("Pausar"), for: .normal)
         pauseButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
         pauseButton.addTarget(self, action: #selector(togglePause), for: .touchUpInside)
         pauseButton.isHidden = true
-        saveReaderButton.setTitle("Guardar en TifloLector", for: .normal)
+        saveReaderButton.setTitle(ShareLocale.message("Guardar en TifloLector"), for: .normal)
         saveReaderButton.addTarget(self, action: #selector(saveToReader), for: .touchUpInside)
         saveReaderButton.isHidden = true
-        saveMusicButton.setTitle("Guardar en Mi música", for: .normal)
+        saveMusicButton.setTitle(ShareLocale.message("Guardar en Mi música"), for: .normal)
         saveMusicButton.addTarget(self, action: #selector(saveToMusic), for: .touchUpInside)
         saveMusicButton.isHidden = true
         previewTextView.isEditable = false
@@ -83,8 +102,8 @@ final class ShareViewController: UIViewController {
         previewTextView.font = .preferredFont(forTextStyle: .body)
         previewTextView.adjustsFontForContentSizeCategory = true
         previewTextView.isHidden = true
-        previewTextView.accessibilityLabel = "Contenido para leer"
-        previewTextView.accessibilityHint = "Vista rápida. El libro completo quedará disponible en TifloLector al abrir TifloAcosta."
+        previewTextView.accessibilityLabel = ShareLocale.message("Contenido para leer")
+        previewTextView.accessibilityHint = ShareLocale.message("Vista rápida. El libro completo quedará disponible en TifloLector al abrir TifloAcosta.")
         let stack = UIStackView(arrangedSubviews: [
             heading, statusLabel, previewButton, previewTextView,
             readAloudButton, pauseButton, saveReaderButton, saveMusicButton, closeButton
@@ -93,15 +112,35 @@ final class ShareViewController: UIViewController {
         stack.alignment = .fill
         stack.spacing = 16
         stack.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stack)
+        heading.numberOfLines = 0
+        heading.accessibilityTraits.insert(.header)
+        for button in [closeButton, previewButton, readAloudButton, pauseButton, saveReaderButton, saveMusicButton] {
+            button.titleLabel?.numberOfLines = 0
+            button.titleLabel?.adjustsFontForContentSizeCategory = true
+            // A hidden arranged subview must be allowed to collapse.
+            let minimum = button.heightAnchor.constraint(greaterThanOrEqualToConstant: 44)
+            minimum.priority = .defaultHigh
+            minimum.isActive = true
+        }
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.alwaysBounceVertical = true
+        view.addSubview(scroll)
+        scroll.addSubview(stack)
         NSLayoutConstraint.activate([
-            stack.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            stack.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            stack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            stack.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-            stack.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8),
-            previewTextView.heightAnchor.constraint(equalToConstant: 260)
+            scroll.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            scroll.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            scroll.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scroll.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            stack.leadingAnchor.constraint(equalTo: scroll.contentLayoutGuide.leadingAnchor),
+            stack.trailingAnchor.constraint(equalTo: scroll.contentLayoutGuide.trailingAnchor),
+            stack.topAnchor.constraint(equalTo: scroll.contentLayoutGuide.topAnchor, constant: 8),
+            stack.bottomAnchor.constraint(equalTo: scroll.contentLayoutGuide.bottomAnchor, constant: -8),
+            stack.widthAnchor.constraint(equalTo: scroll.frameLayoutGuide.widthAnchor),
         ])
+        let previewHeight = previewTextView.heightAnchor.constraint(equalToConstant: 260)
+        previewHeight.priority = .defaultHigh
+        previewHeight.isActive = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -113,7 +152,7 @@ final class ShareViewController: UIViewController {
 
     private func finish(_ text: String) {
         DispatchQueue.main.async {
-            self.statusLabel.text = text
+            self.statusLabel.text = ShareLocale.message(text)
             self.closeButton.isEnabled = true
             UIAccessibility.post(notification: .screenChanged, argument: self.statusLabel)
         }
@@ -155,7 +194,7 @@ final class ShareViewController: UIViewController {
     @objc private func showPreview() {
         guard !receivedFilename.isEmpty || receivedText != nil else { return }
         previewButton.isEnabled = false
-        statusLabel.text = "Preparando la vista de lectura…"
+        statusLabel.text = ShareLocale.message("Preparando la vista de lectura…")
         if let receivedText {
             presentPreview(receivedText)
             return
@@ -169,7 +208,7 @@ final class ShareViewController: UIViewController {
                 switch result {
                 case .success(let text): self.presentPreview(text)
                 case .failure(let error):
-                    self.statusLabel.text = "No es posible leer una vista rápida: \(error.localizedDescription). El documento está guardado y se importará al abrir TifloAcosta."
+                    self.statusLabel.text = ShareLocale.format("No es posible leer una vista rápida: %@. El documento está guardado y se importará al abrir TifloAcosta.", error.localizedDescription)
                     self.previewButton.isEnabled = true
                     UIAccessibility.post(notification: .announcement, argument: self.statusLabel.text)
                 }
@@ -180,7 +219,7 @@ final class ShareViewController: UIViewController {
     private func presentPreview(_ text: String) {
         previewText = String(text.prefix(30_000))
         guard !previewText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            statusLabel.text = "El archivo no contiene texto legible en la vista rápida."
+            statusLabel.text = ShareLocale.message("El archivo no contiene texto legible en la vista rápida.")
             return
         }
         previewTextView.text = previewText
@@ -188,7 +227,7 @@ final class ShareViewController: UIViewController {
         readAloudButton.isHidden = false
         pauseButton.isHidden = false
         previewButton.isHidden = true
-        statusLabel.text = "Vista rápida del contenido. El documento completo está guardado para TifloLector."
+        statusLabel.text = ShareLocale.message("Vista rápida del contenido. El documento completo está guardado para TifloLector.")
         UIAccessibility.post(notification: .screenChanged, argument: previewTextView)
     }
 
@@ -198,16 +237,16 @@ final class ShareViewController: UIViewController {
         let utterance = AVSpeechUtterance(string: previewText)
         utterance.voice = AVSpeechSynthesisVoice(language: Locale.preferredLanguages.first ?? "es-ES")
         speech.speak(utterance)
-        pauseButton.setTitle("Pausar", for: .normal)
+        pauseButton.setTitle(ShareLocale.message("Pausar"), for: .normal)
     }
 
     @objc private func togglePause() {
         if speech.isPaused {
             speech.continueSpeaking()
-            pauseButton.setTitle("Pausar", for: .normal)
+            pauseButton.setTitle(ShareLocale.message("Pausar"), for: .normal)
         } else if speech.isSpeaking {
             speech.pauseSpeaking(at: .word)
-            pauseButton.setTitle("Continuar", for: .normal)
+            pauseButton.setTitle(ShareLocale.message("Continuar"), for: .normal)
         }
     }
 
@@ -246,23 +285,21 @@ final class ShareViewController: UIViewController {
         guard incomingIndex < incomingQueue.count else {
             itemCompleted = nil
             let failed = failedNames.count
-            let result = "Recibidos: \(receivedCount) de \(incomingQueue.count). " +
-                "Fallidos: \(failed). " +
-                (pendingAudioCount > 0
-                    ? "\(pendingAudioCount) archivos de audio pendientes de elegir destino en Recibidos. "
-                    : "") +
-                (failed > 0
-                    ? "Los archivos con errores permanecen en la aplicación de origen. " +
-                      "Errores: " + failedNames.prefix(3).joined(separator: "; ") + ". "
-                    : "") +
-                "Abre TifloAcosta para incorporar los recibidos."
+            let result = [
+                ShareLocale.format("Recibidos: %d de %d.", receivedCount, incomingQueue.count),
+                ShareLocale.format("Fallidos: %d.", failed),
+                pendingAudioCount > 0 ? ShareLocale.format("%d archivos de audio pendientes de elegir destino en Recibidos.", pendingAudioCount) : "",
+                failed > 0 ? ShareLocale.message("Los archivos con errores permanecen en la aplicación de origen.") : "",
+                failed > 0 ? ShareLocale.format("Errores: %@.", failedNames.prefix(3).joined(separator: "; ")) : "",
+                ShareLocale.message("Abre TifloAcosta para incorporar los recibidos.")
+            ].filter { !$0.isEmpty }.joined(separator: " ")
             finish(result)
             return
         }
         let item = incomingQueue[incomingIndex]
         if incomingQueue.count > 1 {
-            statusLabel.text = "Recibiendo \(incomingIndex + 1) de \(incomingQueue.count): " +
-                (item.provider.suggestedName ?? "Elemento")
+            statusLabel.text = ShareLocale.format("Recibiendo %d de %d: %@", incomingIndex + 1, incomingQueue.count,
+                item.provider.suggestedName ?? ShareLocale.message("Elemento"))
             if Date().timeIntervalSince(lastProgressAnnouncement) >= 5 {
                 UIAccessibility.post(notification: .announcement, argument: statusLabel.text)
                 lastProgressAnnouncement = Date()
@@ -272,7 +309,7 @@ final class ShareViewController: UIViewController {
             guard let self else { return }
             if success { self.receivedCount += 1 }
             else {
-                let name = item.provider.suggestedName ?? "Elemento \(self.incomingIndex + 1)"
+                let name = item.provider.suggestedName ?? ShareLocale.format("Elemento %d", self.incomingIndex + 1)
                 self.failedNames.append(name + ": " + message)
             }
             self.incomingIndex += 1
@@ -289,7 +326,7 @@ final class ShareViewController: UIViewController {
     private func reportItem(_ success: Bool, _ message: String) {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            self.itemCompleted?(success, message)
+            self.itemCompleted?(success, ShareLocale.message(message))
         }
     }
 
@@ -480,7 +517,7 @@ final class ShareViewController: UIViewController {
                 let volume = try manager.attributesOfFileSystem(forPath: inbox.path)
                 if let free = volume[.systemFreeSize] as? NSNumber,
                    free.int64Value - fileSize.int64Value < 16_000_000 {
-                    reportItem(false, String(localized: "No hay espacio suficiente para importar el archivo."))
+                    reportItem(false, ShareLocale.message("No hay espacio suficiente para importar el archivo."))
                     return
                 }
                 let storedName = id + ".data"

@@ -46,11 +46,11 @@ test('single incoming files keep immediate preview and destination controls', ()
 });
 
 test('the user can inspect batch members and failures are not silently discarded', () => {
-  assert.ok(extension.includes('statusLabel.text = "Recibiendo '));
+  assert.ok(extension.includes('statusLabel.text = ShareLocale.format("Recibiendo %d de %d: %@'));
   assert.ok(extension.includes('"Recibidos: '));
   assert.ok(extension.includes('"Fallidos: '));
   assert.ok(extension.includes('incomingQueue.count <= 100'));
-  assert.ok(inbox.includes('Text("Archivo '));
+  assert.ok(inbox.includes('Text(MusicLocalized.format("Archivo %@ de %@'));
 });
 
 test('imported batch summary is accessible and keeps failed items in Recibidos', () => {
@@ -69,3 +69,16 @@ for (const lang of ['en', 'pt', 'fr', 'it', 'de']) {
     assert.ok(strings.includes('"Documentos recibidos importados: %d. Fallidos: %d." = '));
   });
 }
+
+
+test('Share extension uses six languages, multi-item activation and scrollable large text', () => {
+  assert.ok(extension.includes('ShareLocale.message'));
+  assert.ok(extension.includes('native-share-language'));
+  assert.ok(extension.includes('let scroll = UIScrollView()'));
+  const plist = readFileSync(new URL('../ShareExtension/Info.plist', import.meta.url), 'utf8');
+  assert.ok(plist.includes('NSExtensionActivationSupportsFileWithMaxCount</key><integer>100'));
+  for (const code of ['es','en','fr','de','it','pt']) {
+    const strings = readFileSync(new URL('../ShareExtension/Localizations/' + code + '.lproj/Localizable.strings', import.meta.url), 'utf8');
+    for (const key of ['Enviar a TifloAcosta','Recibiendo %d de %d: %@','Fallidos: %d.','Guardar en TifloLector','Cerrar']) assert.ok(strings.includes(JSON.stringify(key) + ' = '), code + ': ' + key);
+  }
+});

@@ -1695,3 +1695,24 @@
 "Abrir Proyecto Gutenberg en la web" = "Ouvrir le projet Gutenberg sur le web";
 "Proyecto Gutenberg no está disponible temporalmente. Inténtalo más tarde." = "Le projet Gutenberg est temporairement indisponible. Réessayez plus tard.";
 "Proyecto Gutenberg solicita esperar hasta %@ antes de volver a conectar." = "Le projet Gutenberg demande d’attendre jusqu’à %@ avant de se reconnecter.";
+
+// Release 1.7: library, cloud and reading progress
+"Introduce una dirección HTTPS válida de un catálogo OPDS." = "Saisissez une adresse HTTPS valide pour un catalogue OPDS.";
+"No se ha podido interpretar este catálogo como OPDS 1 o 2." = "Impossible de lire ce catalogue au format OPDS 1 ou 2.";
+"La biblioteca ha devuelto una respuesta no válida." = "La bibliothèque a renvoyé une réponse non valide.";
+"El catálogo o el archivo supera el tamaño máximo permitido." = "Le catalogue ou le fichier dépasse la taille maximale autorisée.";
+"Esta obra no ofrece una descarga directa en un formato que TifloLector pueda leer." = "Cette œuvre ne propose pas de téléchargement direct dans un format lisible par TifloLector.";
+"Introduce un nombre válido y una biblioteca que no figure ya en la lista." = "Saisissez un nom valide et une bibliothèque qui ne figure pas déjà dans la liste.";
+"Conecta tu cuenta antes de explorar archivos." = "Connectez votre compte avant de parcourir les fichiers.";
+"La autorización de la nube ha caducado o no permite acceder a este archivo." = "L’autorisation du service cloud a expiré ou ne permet pas d’accéder à ce fichier.";
+"No se pudo conectar con el servicio. Comprueba tu conexión." = "Impossible de se connecter au service. Vérifiez votre connexion.";
+"El archivo ya no está disponible en esa ubicación." = "Le fichier n’est plus disponible à cet emplacement.";
+"El servicio de nube devolvió una respuesta no reconocida." = "Le service cloud a renvoyé une réponse inconnue.";
+"El archivo supera el límite de importación de 250 MB." = "Le fichier dépasse la limite d’importation de 250 Mo.";
+"Selecciona un archivo musical compatible." = "Sélectionnez un fichier musical compatible.";
+"Posición %d" = "Position %d";
+"Leído %d por ciento. Falta %d por ciento." = "%d pour cent lus. Il reste %d pour cent.";
+"Pista %d de %d. Escuchado %d por ciento de esta pista; falta %d por ciento." = "Piste %d sur %d. %d pour cent de cette piste écoutés ; il reste %d pour cent.";
+"La duración de audio se mostrará al iniciar la pista." = "La durée audio s’affichera au démarrage de la piste.";
+"Tiempo realizado %@. Tiempo restante %@." = "Temps écoulé %@. Temps restant %@.";
+"Voz reproducida %@. Tiempo restante estimado %@." = "Synthèse vocale lue %@. Temps restant estimé %@.";

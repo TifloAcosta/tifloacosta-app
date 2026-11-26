@@ -41,11 +41,11 @@ private enum NativeCatalogError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .invalidURL: return "Introduce una dirección HTTPS válida de un catálogo OPDS."
-        case .invalidCatalog: return "No se ha podido interpretar este catálogo como OPDS 1 o 2."
-        case .invalidResponse: return "La biblioteca ha devuelto una respuesta no válida."
-        case .tooLarge: return "El catálogo o el archivo supera el tamaño máximo permitido."
-        case .unavailableFormat: return "Esta obra no ofrece una descarga directa en un formato que TifloLector pueda leer."
+        case .invalidURL: return MusicLocalized.message("Introduce una dirección HTTPS válida de un catálogo OPDS.")
+        case .invalidCatalog: return MusicLocalized.message("No se ha podido interpretar este catálogo como OPDS 1 o 2.")
+        case .invalidResponse: return MusicLocalized.message("La biblioteca ha devuelto una respuesta no válida.")
+        case .tooLarge: return MusicLocalized.message("El catálogo o el archivo supera el tamaño máximo permitido.")
+        case .unavailableFormat: return MusicLocalized.message("Esta obra no ofrece una descarga directa en un formato que TifloLector pueda leer.")
         case .gutenbergDenied: return MusicLocalized.message("Proyecto Gutenberg ha rechazado la conexión. Puedes consultar su web oficial.")
         case .gutenbergRateLimited: return MusicLocalized.message("Proyecto Gutenberg ha limitado temporalmente las consultas. Inténtalo más tarde.")
         case .gutenbergUnavailable: return MusicLocalized.message("Proyecto Gutenberg no está disponible temporalmente. Inténtalo más tarde.")
@@ -384,7 +384,7 @@ struct NativeReaderCatalogsScreen: View {
         guard !name.isEmpty, name.count <= 80,
               !saved.contains(where: { $0.url == url }),
               url != NativeExternalCatalog.gutenberg.url else {
-            errorMessage = "Introduce un nombre válido y una biblioteca que no figure ya en la lista."
+            errorMessage = MusicLocalized.message("Introduce un nombre válido y una biblioteca que no figure ya en la lista.")
             return
         }
         saved.append(NativeExternalCatalog(id: UUID().uuidString, name: name, url: url))
@@ -538,7 +538,7 @@ private struct NativeReaderOPDSFeedScreen: View {
             defer { importing = nil }
             do {
                 try await NativeOPDSService.importBook(link, title: item.title, into: library)
-                message = "«\(item.title)» se ha guardado en tu biblioteca."
+                message = MusicLocalized.format("«%@» guardado en TifloLector.", item.title)
             } catch {
                 self.error = error.localizedDescription
             }

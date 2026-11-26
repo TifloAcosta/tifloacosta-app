@@ -99,7 +99,7 @@ private enum NativeReaderImportError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .noReadableText(let name):
-            return "No se ha encontrado texto legible en «\(name)». El OCR y los demás formatos siguen pendientes."
+            return MusicLocalized.format("No se ha encontrado contenido legible en «%@».", name)
         }
     }
 }
@@ -3751,12 +3751,12 @@ struct NativeReadingScreen: View {
         while start < characters.count && characters[start].isWhitespace { start += 1 }
         let excerpt = String(characters[start..<min(characters.count, start + 140)])
             .trimmingCharacters(in: .whitespacesAndNewlines)
-        return excerpt.isEmpty ? "Posición \(index)" : spokenBookmarkExcerpt(excerpt)
+        return excerpt.isEmpty ? MusicLocalized.format("Posición %d", index) : spokenBookmarkExcerpt(excerpt)
     }
 
     private func bookmarkDescription(at percent: Int) -> String {
         let text = latest.body
-        guard !text.isEmpty else { return "\(percent) por ciento" }
+        guard !text.isEmpty else { return MusicLocalized.format("%d por ciento", percent) }
         let characters = Array(text)
         let offset = min(characters.count - 1, max(0, Int(Double(characters.count) * Double(percent) / 100.0)))
         let fragmentStart = (0..<offset).reversed().first {
@@ -3766,7 +3766,8 @@ struct NativeReadingScreen: View {
         while start < characters.count && characters[start].isWhitespace { start += 1 }
         let excerpt = String(characters[start..<min(characters.count, start + 140)])
             .trimmingCharacters(in: .whitespacesAndNewlines)
-        return excerpt.isEmpty ? "\(percent) por ciento" : "\(spokenBookmarkExcerpt(excerpt)), \(percent) por ciento"
+        let position = MusicLocalized.format("%d por ciento", percent)
+        return excerpt.isEmpty ? position : spokenBookmarkExcerpt(excerpt) + ", " + position
     }
 
     private func skipReading(_ direction: Int) {
@@ -4060,19 +4061,19 @@ struct NativeReadingScreen: View {
         // La lectura de voz sintetizada no tiene duración real antes de comenzar.
         // Distinguir siempre el tiempo medido de la estimación.
         let position = tracks.isEmpty
-            ? "Leído \(currentPercent) por ciento. Falta \(100 - currentPercent) por ciento."
-            : "Pista \(trackIndex + 1) de \(tracks.count). Escuchado \(currentPercent) por ciento de esta pista; falta \(100 - currentPercent) por ciento."
+            ? MusicLocalized.format("Leído %d por ciento. Falta %d por ciento.", currentPercent, 100 - currentPercent)
+            : MusicLocalized.format("Pista %d de %d. Escuchado %d por ciento de esta pista; falta %d por ciento.", trackIndex + 1, tracks.count, currentPercent, 100 - currentPercent)
         if !tracks.isEmpty && !speech.hasAudio {
-            return "\(position) La duración de audio se mostrará al iniciar la pista."
+            return position + " " + MusicLocalized.message("La duración de audio se mostrará al iniciar la pista.")
         }
         if speech.hasAudio {
             let elapsed = Int(speech.audioElapsed)
             let remaining = max(0, Int(speech.audioDuration) - elapsed)
-            return "\(position) Tiempo realizado \(formatDuration(elapsed)). Tiempo restante \(formatDuration(remaining))."
+            return position + " " + MusicLocalized.format("Tiempo realizado %@. Tiempo restante %@.", formatDuration(elapsed), formatDuration(remaining))
         }
         let estimate = Int(Double(max(1, wordCount)) * 60.0 / (165.0 * speed))
         let remaining = Int(Double(estimate) * Double(100 - currentPercent) / 100.0)
-        return "\(position) Voz reproducida \(formatDuration(elapsedSpeakingSeconds)). Tiempo restante estimado \(formatDuration(remaining))."
+        return position + " " + MusicLocalized.format("Voz reproducida %@. Tiempo restante estimado %@.", formatDuration(elapsedSpeakingSeconds), formatDuration(remaining))
     }
 
     /// The regular button and VoiceOver Magic Tap share the exact same

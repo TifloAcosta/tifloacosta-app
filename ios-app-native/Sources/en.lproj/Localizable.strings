@@ -1697,3 +1697,24 @@
 "Abrir Proyecto Gutenberg en la web" = "Open Project Gutenberg on the web";
 "Proyecto Gutenberg no está disponible temporalmente. Inténtalo más tarde." = "Project Gutenberg is temporarily unavailable. Try again later.";
 "Proyecto Gutenberg solicita esperar hasta %@ antes de volver a conectar." = "Project Gutenberg asks you to wait until %@ before reconnecting.";
+
+// Release 1.7: library, cloud and reading progress
+"Introduce una dirección HTTPS válida de un catálogo OPDS." = "Enter a valid HTTPS address for an OPDS catalog.";
+"No se ha podido interpretar este catálogo como OPDS 1 o 2." = "This catalog could not be read as OPDS 1 or 2.";
+"La biblioteca ha devuelto una respuesta no válida." = "The library returned an invalid response.";
+"El catálogo o el archivo supera el tamaño máximo permitido." = "The catalog or file exceeds the maximum allowed size.";
+"Esta obra no ofrece una descarga directa en un formato que TifloLector pueda leer." = "This work has no direct download in a format TifloLector can read.";
+"Introduce un nombre válido y una biblioteca que no figure ya en la lista." = "Enter a valid name and a library that is not already listed.";
+"Conecta tu cuenta antes de explorar archivos." = "Connect your account before browsing files.";
+"La autorización de la nube ha caducado o no permite acceder a este archivo." = "Cloud authorization has expired or does not allow access to this file.";
+"No se pudo conectar con el servicio. Comprueba tu conexión." = "Could not connect to the service. Check your connection.";
+"El archivo ya no está disponible en esa ubicación." = "The file is no longer available at that location.";
+"El servicio de nube devolvió una respuesta no reconocida." = "The cloud service returned an unrecognized response.";
+"El archivo supera el límite de importación de 250 MB." = "The file exceeds the 250 MB import limit.";
+"Selecciona un archivo musical compatible." = "Select a supported music file.";
+"Posición %d" = "Position %d";
+"Leído %d por ciento. Falta %d por ciento." = "Read %d percent. %d percent remaining.";
+"Pista %d de %d. Escuchado %d por ciento de esta pista; falta %d por ciento." = "Track %d of %d. %d percent of this track played; %d percent remaining.";
+"La duración de audio se mostrará al iniciar la pista." = "Audio duration will appear when the track starts.";
+"Tiempo realizado %@. Tiempo restante %@." = "Elapsed time %@. Remaining time %@.";
+"Voz reproducida %@. Tiempo restante estimado %@." = "Speech played %@. Estimated remaining time %@.";

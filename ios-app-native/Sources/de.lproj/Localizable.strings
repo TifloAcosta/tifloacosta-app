@@ -1695,3 +1695,24 @@
 "Abrir Proyecto Gutenberg en la web" = "Project Gutenberg im Web öffnen";
 "Proyecto Gutenberg no está disponible temporalmente. Inténtalo más tarde." = "Project Gutenberg ist vorübergehend nicht verfügbar. Versuche es später erneut.";
 "Proyecto Gutenberg solicita esperar hasta %@ antes de volver a conectar." = "Project Gutenberg bittet darum, bis %@ mit einer erneuten Verbindung zu warten.";
+
+// Release 1.7: library, cloud and reading progress
+"Introduce una dirección HTTPS válida de un catálogo OPDS." = "Gib eine gültige HTTPS-Adresse eines OPDS-Katalogs ein.";
+"No se ha podido interpretar este catálogo como OPDS 1 o 2." = "Dieser Katalog konnte nicht als OPDS 1 oder 2 gelesen werden.";
+"La biblioteca ha devuelto una respuesta no válida." = "Die Bibliothek hat eine ungültige Antwort zurückgegeben.";
+"El catálogo o el archivo supera el tamaño máximo permitido." = "Der Katalog oder die Datei überschreitet die zulässige Höchstgröße.";
+"Esta obra no ofrece una descarga directa en un formato que TifloLector pueda leer." = "Dieses Werk bietet keinen direkten Download in einem von TifloLector lesbaren Format.";
+"Introduce un nombre válido y una biblioteca que no figure ya en la lista." = "Gib einen gültigen Namen und eine noch nicht aufgeführte Bibliothek ein.";
+"Conecta tu cuenta antes de explorar archivos." = "Verbinde dein Konto, bevor du Dateien durchsuchst.";
+"La autorización de la nube ha caducado o no permite acceder a este archivo." = "Die Cloud-Autorisierung ist abgelaufen oder erlaubt keinen Zugriff auf diese Datei.";
+"No se pudo conectar con el servicio. Comprueba tu conexión." = "Verbindung zum Dienst fehlgeschlagen. Prüfe deine Verbindung.";
+"El archivo ya no está disponible en esa ubicación." = "Die Datei ist an diesem Speicherort nicht mehr verfügbar.";
+"El servicio de nube devolvió una respuesta no reconocida." = "Der Cloud-Dienst hat eine unbekannte Antwort zurückgegeben.";
+"El archivo supera el límite de importación de 250 MB." = "Die Datei überschreitet die Importgrenze von 250 MB.";
+"Selecciona un archivo musical compatible." = "Wähle eine unterstützte Musikdatei aus.";
+"Posición %d" = "Position %d";
+"Leído %d por ciento. Falta %d por ciento." = "%d Prozent gelesen. %d Prozent verbleiben.";
+"Pista %d de %d. Escuchado %d por ciento de esta pista; falta %d por ciento." = "Titel %d von %d. %d Prozent dieses Titels gehört; %d Prozent verbleiben.";
+"La duración de audio se mostrará al iniciar la pista." = "Die Audiodauer wird beim Start des Titels angezeigt.";
+"Tiempo realizado %@. Tiempo restante %@." = "Vergangene Zeit %@. Verbleibende Zeit %@.";
+"Voz reproducida %@. Tiempo restante estimado %@." = "Sprachausgabe %@. Geschätzte verbleibende Zeit %@.";

@@ -33,15 +33,15 @@ enum NativeCloudStorageError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .unauthenticated: return "Conecta tu cuenta antes de explorar archivos."
-        case .unauthorized: return "La autorización de la nube ha caducado o no permite acceder a este archivo."
-        case .unavailable: return "No se pudo conectar con el servicio. Comprueba tu conexión."
-        case .notFound: return "El archivo ya no está disponible en esa ubicación."
-        case .invalidResponse: return "El servicio de nube devolvió una respuesta no reconocida."
-        case .oversized: return "El archivo supera el límite de importación de 250 MB."
+        case .unauthenticated: return MusicLocalized.message("Conecta tu cuenta antes de explorar archivos.")
+        case .unauthorized: return MusicLocalized.message("La autorización de la nube ha caducado o no permite acceder a este archivo.")
+        case .unavailable: return MusicLocalized.message("No se pudo conectar con el servicio. Comprueba tu conexión.")
+        case .notFound: return MusicLocalized.message("El archivo ya no está disponible en esa ubicación.")
+        case .invalidResponse: return MusicLocalized.message("El servicio de nube devolvió una respuesta no reconocida.")
+        case .oversized: return MusicLocalized.message("El archivo supera el límite de importación de 250 MB.")
         case .oversizedCinema:
             return MusicLocalized.message("El archivo supera el tamaño máximo permitido de 2 GB.")
-        case .unsupportedFile: return "Selecciona un archivo musical compatible."
+        case .unsupportedFile: return MusicLocalized.message("Selecciona un archivo musical compatible.")
         }
     }
 }

@@ -72,8 +72,8 @@ enum NativeVoiceCredentialStore {
         case empty, storage
         var errorDescription: String? {
             switch self {
-            case .empty: return "Pega una clave antes de guardar."
-            case .storage: return "No se pudo acceder al almacén seguro."
+            case .empty: return MusicLocalized.message("Pega una clave antes de guardar.")
+            case .storage: return MusicLocalized.message("No se pudo acceder al almacén seguro.")
             }
         }
     }

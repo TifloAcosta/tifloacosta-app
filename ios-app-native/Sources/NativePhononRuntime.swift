@@ -72,13 +72,13 @@ enum NativePhononRuntime {
         var errorDescription: String? {
             switch self {
             case .engineUnavailable:
-                return "El motor Phonon nativo no está incluido en esta compilación."
+                return MusicLocalized.message("El motor Phonon nativo no está incluido en esta compilación.")
             case .modelMissing:
-                return "Instala primero el modelo Phonon desde Motores externos."
+                return MusicLocalized.message("Instala primero el modelo Phonon desde Motores externos.")
             case .unsupportedLanguage:
-                return "El modelo Phonon instalado no admite ese idioma."
+                return MusicLocalized.message("El modelo Phonon instalado no admite ese idioma.")
             case .empty:
-                return "Phonon no ha generado sonido."
+                return MusicLocalized.message("Phonon no ha generado sonido.")
             }
         }
     }
@@ -151,7 +151,7 @@ final class NativePhononPreview: ObservableObject {
     func listen(voice: String) {
         stop()
         busy = true
-        message = "Preparando muestra Phonon."
+        message = MusicLocalized.message("Preparando muestra Phonon.")
         let token = generation
         task = Task {
             do {

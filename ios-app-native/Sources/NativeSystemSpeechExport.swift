@@ -11,13 +11,13 @@ enum NativeSystemSpeechExport {
         var errorDescription: String? {
             switch self {
             case .noAudio:
-                return "La voz del sistema no produjo audio exportable. Prueba otra voz instalada."
+                return MusicLocalized.message("La voz del sistema no produjo audio exportable. Prueba otra voz instalada.")
             case .unsupportedVoice:
-                return "La voz seleccionada ya no está disponible en el iPhone."
+                return MusicLocalized.message("La voz seleccionada ya no está disponible en el iPhone.")
             case .invalidFormat:
-                return "iOS devolvió un formato de voz que no puede exportarse."
+                return MusicLocalized.message("iOS devolvió un formato de voz que no puede exportarse.")
             case .conversion:
-                return "No se pudo convertir el audio de la voz al formato de exportación."
+                return MusicLocalized.message("No se pudo convertir el audio de la voz al formato de exportación.")
             }
         }
     }

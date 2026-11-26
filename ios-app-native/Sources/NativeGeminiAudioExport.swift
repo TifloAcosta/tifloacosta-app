@@ -64,10 +64,10 @@ enum NativeGeminiAudioExport {
         case tooLong, empty, unsupportedFormat, insufficientStorage
         var errorDescription: String? {
             switch self {
-            case .tooLong: return "Con Gemini, esta exportación admite hasta 60.000 caracteres. Usa una voz local para libros más largos."
-            case .empty: return "El documento no contiene texto."
-            case .insufficientStorage: return "No hay espacio suficiente para crear el audio. Libera almacenamiento en el iPhone y vuelve a intentarlo."
-            case .unsupportedFormat: return "El motor de voz ha devuelto audio con un formato incompatible."
+            case .tooLong: return MusicLocalized.message("Con Gemini, esta exportación admite hasta 60.000 caracteres. Usa una voz local para libros más largos.")
+            case .empty: return MusicLocalized.message("El documento no contiene texto.")
+            case .insufficientStorage: return MusicLocalized.message("No hay espacio suficiente para crear el audio. Libera almacenamiento en el iPhone y vuelve a intentarlo.")
+            case .unsupportedFormat: return MusicLocalized.message("El motor de voz ha devuelto audio con un formato incompatible.")
             }
         }
     }

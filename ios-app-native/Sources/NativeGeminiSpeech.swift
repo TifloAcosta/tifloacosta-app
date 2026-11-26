@@ -10,13 +10,13 @@ enum NativeGeminiSpeech {
         case missingKey, invalidResponse, emptyAudio, invalidPCM, refused, quota, unavailable
         var errorDescription: String? {
             switch self {
-            case .missingKey: return "Configura la clave Gemini en Motores externos."
-            case .invalidResponse: return "Gemini no devolvió audio válido."
-            case .emptyAudio: return "Gemini no generó audio."
-            case .invalidPCM: return "El formato de audio no es compatible."
-            case .refused: return "Google rechazó la clave o sus permisos."
-            case .quota: return "Se ha alcanzado el límite de uso de Gemini."
-            case .unavailable: return "No se pudo utilizar el servicio Gemini."
+            case .missingKey: return MusicLocalized.message("Configura la clave Gemini en Motores externos.")
+            case .invalidResponse: return MusicLocalized.message("Gemini no devolvió audio válido.")
+            case .emptyAudio: return MusicLocalized.message("Gemini no generó audio.")
+            case .invalidPCM: return MusicLocalized.message("El formato de audio no es compatible.")
+            case .refused: return MusicLocalized.message("Google rechazó la clave o sus permisos.")
+            case .quota: return MusicLocalized.message("Se ha alcanzado el límite de uso de Gemini.")
+            case .unavailable: return MusicLocalized.message("No se pudo utilizar el servicio Gemini.")
             }
         }
     }
@@ -102,7 +102,7 @@ final class NativeGeminiPreview: ObservableObject {
     func listen(_ text: String, voice: String) {
         stop()
         busy = true
-        message = "Generando audio. Se aplicarán las cuotas de tu cuenta."
+        message = MusicLocalized.message("Generando audio. Se aplicarán las cuotas de tu cuenta.")
         Task {
             do {
                 let audio = try await NativeGeminiSpeech.generate(text, voice: voice)

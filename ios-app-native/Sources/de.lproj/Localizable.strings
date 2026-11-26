@@ -1758,3 +1758,37 @@
 "El archivo supera el límite de 100 MB." = "Die Datei überschreitet die Grenze von 100 MB.";
 "El archivo está vacío y no se ha guardado." = "Die Datei ist leer und wurde nicht gespeichert.";
 "No se pudo leer este documento: %@" = "Dieses Dokument konnte nicht gelesen werden: %@";
+
+// Release 1.7: speech engines and resource failures
+"Con Gemini, esta exportación admite hasta 60.000 caracteres. Usa una voz local para libros más largos." = "Dieser Gemini-Export unterstützt bis zu 60.000 Zeichen. Verwende für längere Bücher eine lokale Stimme.";
+"El documento no contiene texto." = "Das Dokument enthält keinen Text.";
+"No hay espacio suficiente para crear el audio. Libera almacenamiento en el iPhone y vuelve a intentarlo." = "Es ist nicht genügend Speicherplatz zum Erstellen der Audiodatei vorhanden. Gib Speicher auf dem iPhone frei und versuche es erneut.";
+"El motor de voz ha devuelto audio con un formato incompatible." = "Die Sprachausgabe hat ein nicht unterstütztes Audioformat zurückgegeben.";
+"Gemini no devolvió audio válido." = "Gemini hat keine gültigen Audiodaten zurückgegeben.";
+"Gemini no generó audio." = "Gemini hat keine Audiodaten erzeugt.";
+"El formato de audio no es compatible." = "Das Audioformat wird nicht unterstützt.";
+"Google rechazó la clave o sus permisos." = "Google hat den Schlüssel oder seine Berechtigungen abgelehnt.";
+"Se ha alcanzado el límite de uso de Gemini." = "Das Nutzungslimit für Gemini wurde erreicht.";
+"No se pudo utilizar el servicio Gemini." = "Der Gemini-Dienst konnte nicht verwendet werden.";
+"Generando audio. Se aplicarán las cuotas de tu cuenta." = "Audio wird erzeugt. Die Kontingente deines Kontos gelten.";
+"La descarga de Phonon no coincide con la versión oficial." = "Der Phonon-Download entspricht nicht der offiziellen Version.";
+"El ZIP del modelo Phonon no es válido." = "Die ZIP-Datei des Phonon-Modells ist ungültig.";
+"Faltan archivos del modelo Phonon." = "Dateien des Phonon-Modells fehlen.";
+"El modelo supera el tamaño permitido." = "Das Modell überschreitet die zulässige Größe.";
+"Solo se admite el modelo oficial Phonon 31m en inglés." = "Nur das offizielle englische Phonon-31m-Modell wird unterstützt.";
+"El motor Phonon nativo no está incluido en esta compilación." = "Die native Phonon-Engine ist in diesem Build nicht enthalten.";
+"Instala primero el modelo Phonon desde Motores externos." = "Installiere zuerst das Phonon-Modell unter Externe Engines.";
+"El modelo Phonon instalado no admite ese idioma." = "Das installierte Phonon-Modell unterstützt diese Sprache nicht.";
+"Phonon no ha generado sonido." = "Phonon hat keinen Ton erzeugt.";
+"Preparando muestra Phonon." = "Phonon-Hörprobe wird vorbereitet.";
+"La voz del sistema no produjo audio exportable. Prueba otra voz instalada." = "Die Systemstimme hat kein exportierbares Audio erzeugt. Probiere eine andere installierte Stimme.";
+"La voz seleccionada ya no está disponible en el iPhone." = "Die ausgewählte Stimme ist auf dem iPhone nicht mehr verfügbar.";
+"iOS devolvió un formato de voz que no puede exportarse." = "iOS hat ein Sprachformat zurückgegeben, das nicht exportiert werden kann.";
+"No se pudo convertir el audio de la voz al formato de exportación." = "Das Sprachaudio konnte nicht in das Exportformat konvertiert werden.";
+"Pega una clave antes de guardar." = "Füge vor dem Speichern einen Schlüssel ein.";
+"No se pudo acceder al almacén seguro." = "Auf den sicheren Speicher konnte nicht zugegriffen werden.";
+"Este recurso no tiene un enlace de descarga válido." = "Diese Ressource hat keinen gültigen Downloadlink.";
+"No se ha podido obtener el documento. Comprueba la conexión e inténtalo de nuevo." = "Das Dokument konnte nicht abgerufen werden. Prüfe deine Verbindung und versuche es erneut.";
+"El documento supera el límite de 12 MB para esta descarga." = "Das Dokument überschreitet die Grenze von 12 MB für diesen Download.";
+"El documento no contiene texto legible." = "Das Dokument enthält keinen lesbaren Text.";
+"No se ha podido abrir el selector de Archivos." = "Die Dateiauswahl konnte nicht geöffnet werden.";

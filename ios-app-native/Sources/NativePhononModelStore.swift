@@ -19,11 +19,11 @@ enum NativePhononModelStore {
         case checksum, invalidZIP, incomplete, tooLarge, unsupportedModel
         var errorDescription: String? {
             switch self {
-            case .checksum: return "La descarga de Phonon no coincide con la versión oficial."
-            case .invalidZIP: return "El ZIP del modelo Phonon no es válido."
-            case .incomplete: return "Faltan archivos del modelo Phonon."
-            case .tooLarge: return "El modelo supera el tamaño permitido."
-            case .unsupportedModel: return "Solo se admite el modelo oficial Phonon 31m en inglés."
+            case .checksum: return MusicLocalized.message("La descarga de Phonon no coincide con la versión oficial.")
+            case .invalidZIP: return MusicLocalized.message("El ZIP del modelo Phonon no es válido.")
+            case .incomplete: return MusicLocalized.message("Faltan archivos del modelo Phonon.")
+            case .tooLarge: return MusicLocalized.message("El modelo supera el tamaño permitido.")
+            case .unsupportedModel: return MusicLocalized.message("Solo se admite el modelo oficial Phonon 31m en inglés.")
             }
         }
     }

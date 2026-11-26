@@ -1758,3 +1758,37 @@
 "El archivo supera el límite de 100 MB." = "O ficheiro excede o limite de 100 MB.";
 "El archivo está vacío y no se ha guardado." = "O ficheiro está vazio e não foi guardado.";
 "No se pudo leer este documento: %@" = "Não foi possível ler este documento: %@";
+
+// Release 1.7: speech engines and resource failures
+"Con Gemini, esta exportación admite hasta 60.000 caracteres. Usa una voz local para libros más largos." = "Esta exportação com Gemini admite até 60 000 caracteres. Use uma voz local para livros mais longos.";
+"El documento no contiene texto." = "O documento não contém texto.";
+"No hay espacio suficiente para crear el audio. Libera almacenamiento en el iPhone y vuelve a intentarlo." = "Não há espaço suficiente para criar o áudio. Liberte armazenamento no iPhone e tente novamente.";
+"El motor de voz ha devuelto audio con un formato incompatible." = "O motor de voz devolveu áudio num formato incompatível.";
+"Gemini no devolvió audio válido." = "O Gemini não devolveu áudio válido.";
+"Gemini no generó audio." = "O Gemini não gerou áudio.";
+"El formato de audio no es compatible." = "O formato de áudio não é compatível.";
+"Google rechazó la clave o sus permisos." = "A Google rejeitou a chave ou as suas permissões.";
+"Se ha alcanzado el límite de uso de Gemini." = "Foi atingido o limite de utilização do Gemini.";
+"No se pudo utilizar el servicio Gemini." = "Não foi possível utilizar o serviço Gemini.";
+"Generando audio. Se aplicarán las cuotas de tu cuenta." = "A gerar áudio. Serão aplicados os limites da sua conta.";
+"La descarga de Phonon no coincide con la versión oficial." = "A transferência do Phonon não corresponde à versão oficial.";
+"El ZIP del modelo Phonon no es válido." = "O ZIP do modelo Phonon não é válido.";
+"Faltan archivos del modelo Phonon." = "Faltam ficheiros do modelo Phonon.";
+"El modelo supera el tamaño permitido." = "O modelo excede o tamanho permitido.";
+"Solo se admite el modelo oficial Phonon 31m en inglés." = "Apenas é suportado o modelo oficial Phonon 31m em inglês.";
+"El motor Phonon nativo no está incluido en esta compilación." = "O motor Phonon nativo não está incluído nesta compilação.";
+"Instala primero el modelo Phonon desde Motores externos." = "Instale primeiro o modelo Phonon em Motores externos.";
+"El modelo Phonon instalado no admite ese idioma." = "O modelo Phonon instalado não suporta esse idioma.";
+"Phonon no ha generado sonido." = "O Phonon não gerou som.";
+"Preparando muestra Phonon." = "A preparar amostra Phonon.";
+"La voz del sistema no produjo audio exportable. Prueba otra voz instalada." = "A voz do sistema não produziu áudio exportável. Experimente outra voz instalada.";
+"La voz seleccionada ya no está disponible en el iPhone." = "A voz selecionada já não está disponível no iPhone.";
+"iOS devolvió un formato de voz que no puede exportarse." = "O iOS devolveu um formato de voz que não pode ser exportado.";
+"No se pudo convertir el audio de la voz al formato de exportación." = "Não foi possível converter o áudio da voz para o formato de exportação.";
+"Pega una clave antes de guardar." = "Cole uma chave antes de guardar.";
+"No se pudo acceder al almacén seguro." = "Não foi possível aceder ao armazenamento seguro.";
+"Este recurso no tiene un enlace de descarga válido." = "Este recurso não tem uma ligação de transferência válida.";
+"No se ha podido obtener el documento. Comprueba la conexión e inténtalo de nuevo." = "Não foi possível obter o documento. Verifique a ligação e tente novamente.";
+"El documento supera el límite de 12 MB para esta descarga." = "O documento excede o limite de 12 MB para esta transferência.";
+"El documento no contiene texto legible." = "O documento não contém texto legível.";
+"No se ha podido abrir el selector de Archivos." = "Não foi possível abrir o seletor de Ficheiros.";

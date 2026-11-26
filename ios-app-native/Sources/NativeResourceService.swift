@@ -11,11 +11,11 @@ enum NativeResourceError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .invalidAddress: return "Este recurso no tiene un enlace de descarga válido."
-        case .invalidResponse: return "No se ha podido obtener el documento. Comprueba la conexión e inténtalo de nuevo."
-        case .oversized: return "El documento supera el límite de 12 MB para esta descarga."
-        case .emptyDocument: return "El documento no contiene texto legible."
-        case .unavailablePresentation: return "No se ha podido abrir el selector de Archivos."
+        case .invalidAddress: return MusicLocalized.message("Este recurso no tiene un enlace de descarga válido.")
+        case .invalidResponse: return MusicLocalized.message("No se ha podido obtener el documento. Comprueba la conexión e inténtalo de nuevo.")
+        case .oversized: return MusicLocalized.message("El documento supera el límite de 12 MB para esta descarga.")
+        case .emptyDocument: return MusicLocalized.message("El documento no contiene texto legible.")
+        case .unavailablePresentation: return MusicLocalized.message("No se ha podido abrir el selector de Archivos.")
         }
     }
 }

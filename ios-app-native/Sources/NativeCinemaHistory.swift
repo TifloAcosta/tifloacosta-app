@@ -55,14 +55,14 @@ final class NativeCinemaRecentStore: ObservableObject {
         }
     }
 
-    func prepareBackupHistory(_ incoming: [NativeCinemaRecent]) throws
+    func prepareBackupHistory(_ incoming: [NativeCinemaRecent], recovery: NativeBackupRecoveryBuilder? = nil) throws
         -> (apply: () throws -> Void, rollback: () throws -> Void, omitted: Int) {
         let old = entries
         var ids = Set(entries.map(\.id))
         let missing = incoming.filter { !suppressedKeys.contains($0.id) && ids.insert($0.id).inserted }
         let accepted = Array(missing.prefix(max(0, 100 - entries.count)))
         let combined = entries + accepted
-        let disk = try NativeBackupFileRestore(moves: [], indexes: [(url, try JSONEncoder().encode(combined))])
+        let disk = try NativeBackupFileRestore(moves: [], indexes: [(url, try JSONEncoder().encode(combined))], recovery: recovery)
         return ({
             try disk.apply()
             self.entries = combined

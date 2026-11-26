@@ -723,7 +723,7 @@ private final class NativeMusicLibrary: ObservableObject {
 
     /// Global restore preserves original UUIDs, unlike the legacy ZIP import.
     /// Existing tracks and collections always win on identity conflicts.
-    func prepareGlobalBackupRestore(staging: URL) throws
+    func prepareGlobalBackupRestore(staging: URL, recovery: NativeBackupRecoveryBuilder? = nil) throws
         -> (NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>, [String]) {
         let backup = try JSONDecoder().decode(MusicIndexBackup.self,
             from: Data(contentsOf: staging.appendingPathComponent("manifest.json")))
@@ -781,7 +781,7 @@ private final class NativeMusicLibrary: ObservableObject {
             (directory.appendingPathComponent("folders.json"), try encoder.encode(preparedFolders)),
             (directory.appendingPathComponent("playlists.json"), try encoder.encode(preparedLists)),
             (directory.appendingPathComponent("smart-folders.json"), try encoder.encode(preparedSmart))
-        ])
+        ], recovery: recovery)
         return (.init(section: .music, apply: {
             try disk.apply()
             self.files = combined
@@ -1800,9 +1800,9 @@ struct NativeMyMusicScreen: View {
 /// The global backup service uses the same live music library as the screen.
 @MainActor
 enum NativeMusicBackupAdapter {
-    static func prepareRestore(staging: URL) throws
+    static func prepareRestore(staging: URL, recovery: NativeBackupRecoveryBuilder? = nil) throws
         -> (NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>, [String]) {
-        try NativeMusicLibrary.shared.prepareGlobalBackupRestore(staging: staging)
+        try NativeMusicLibrary.shared.prepareGlobalBackupRestore(staging: staging, recovery: recovery)
     }
 
 

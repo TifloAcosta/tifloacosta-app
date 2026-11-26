@@ -417,7 +417,8 @@ struct NativeBackupDefaultsBeforeState {
     private let defaults: UserDefaults
     private let values: [(String, Any?)]
 
-    init(defaults: UserDefaults, keys: [String]) {
+    init(defaults: UserDefaults, keys: [String], recovery: NativeBackupRecoveryBuilder? = nil) {
+        recovery?.recordDefaults(keys)
         self.defaults = defaults
         self.values = keys.map { ($0, defaults.object(forKey: $0)) }
     }
@@ -444,15 +445,15 @@ enum NativeBackupPreferencesComponents {
     }
 
     static func prepare(_ backup: NativeBackupPreferencesSnapshot,
-                        favorites: NativeFavoritesStore, activity: NativeReadingActivity) throws -> Prepared {
+                        favorites: NativeFavoritesStore, activity: NativeReadingActivity, recovery: NativeBackupRecoveryBuilder? = nil) throws -> Prepared {
         try NativeBackupPersonalDataValidation.validate(section: .preferences,
             data: JSONEncoder().encode(backup))
         let plan = NativeBackupPersonalDataMerge.reading(backup, favorites: favorites.keys,
             savedForLater: activity.savedForLater, recentlyRead: activity.recentlyRead)
         return Prepared(readingPlan: plan,
-            favorites: try favorites.prepareBackupFavorites(plan.favorites),
-            activity: try activity.prepareBackupActivity(plan),
-            youtube: try NativeYouTubePersonalLibrary.shared.prepareBackupLibrary(backup))
+            favorites: try favorites.prepareBackupFavorites(plan.favorites, recovery: recovery),
+            activity: try activity.prepareBackupActivity(plan, recovery: recovery),
+            youtube: try NativeYouTubePersonalLibrary.shared.prepareBackupLibrary(backup, recovery: recovery))
     }
 }
 
@@ -468,7 +469,7 @@ enum NativeBackupSettingsRestore {
     }
 
     static func prepare(_ backup: NativeBackupPreferencesSnapshot,
-                        defaults: UserDefaults = .standard) throws -> Prepared {
+                        defaults: UserDefaults = .standard, recovery: NativeBackupRecoveryBuilder? = nil) throws -> Prepared {
         var updates: [String: Any] = [:]
         var omitted = [String]()
         func offer(_ key: String, _ value: Any, allowed: Bool) {
@@ -491,9 +492,9 @@ enum NativeBackupSettingsRestore {
             offer(key, value, allowed: false)
         }
         let voices = try NativeReaderVoiceProfileStore.prepareBackupProfiles(
-            backup.voiceProfiles, defaults: defaults)
+            backup.voiceProfiles, defaults: defaults, recovery: recovery)
         omitted.append(contentsOf: voices.omittedKeys)
-        let before = NativeBackupDefaultsBeforeState(defaults: defaults, keys: Array(updates.keys))
+        let before = NativeBackupDefaultsBeforeState(defaults: defaults, keys: Array(updates.keys), recovery: recovery)
         let staged = updates
         return Prepared(omittedKeys: omitted.sorted(), apply: {
             for (key, value) in staged { defaults.set(value, forKey: key) }
@@ -518,10 +519,10 @@ enum NativeBackupPreferencesRestore {
     }
 
     static func prepare(_ backup: NativeBackupPreferencesSnapshot,
-                        favorites: NativeFavoritesStore, activity: NativeReadingActivity) throws -> Prepared {
+                        favorites: NativeFavoritesStore, activity: NativeReadingActivity, recovery: NativeBackupRecoveryBuilder? = nil) throws -> Prepared {
         let components = try NativeBackupPreferencesComponents.prepare(backup,
-            favorites: favorites, activity: activity)
-        let settings = try NativeBackupSettingsRestore.prepare(backup)
+            favorites: favorites, activity: activity, recovery: recovery)
+        let settings = try NativeBackupSettingsRestore.prepare(backup, recovery: recovery)
         let parts = [components.favorites, components.activity, components.youtube,
                      (apply: settings.apply, rollback: settings.rollback)]
         let step = NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>(

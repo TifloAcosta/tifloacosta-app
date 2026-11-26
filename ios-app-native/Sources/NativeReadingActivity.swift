@@ -28,10 +28,10 @@ final class NativeReadingActivity: ObservableObject {
 
     /// Component of the preferences transaction. Do not execute independently
     /// of the complete preferences adapter.
-    func prepareBackupActivity(_ plan: NativeBackupPersonalDataMerge.ReadingPlan) throws
+    func prepareBackupActivity(_ plan: NativeBackupPersonalDataMerge.ReadingPlan, recovery: NativeBackupRecoveryBuilder? = nil) throws
         -> (apply: () throws -> Void, rollback: () throws -> Void) {
         let oldLater = savedForLater, oldHistory = recentlyRead
-        let before = NativeBackupDefaultsBeforeState(defaults: .standard, keys: [laterKey, historyKey])
+        let before = NativeBackupDefaultsBeforeState(defaults: .standard, keys: [laterKey, historyKey], recovery: recovery)
         let encoder = JSONEncoder()
         let laterBytes = try encoder.encode(plan.savedForLater)
         let historyBytes = try encoder.encode(plan.recentlyRead)

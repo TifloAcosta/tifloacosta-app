@@ -595,7 +595,7 @@ final class NativeReaderLibrary: ObservableObject {
     /// Stage indexes and new media without changing the existing library.
     /// The coordinator must prevent concurrent imports and playback writes
     /// between preparation and execution.
-    func prepareGlobalBackupRestore(staging: URL) throws
+    func prepareGlobalBackupRestore(staging: URL, recovery: NativeBackupRecoveryBuilder? = nil) throws
         -> NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section> {
         guard pendingFileImports.isEmpty else { throw CocoaError(.fileWriteUnknown) }
         let decoder = JSONDecoder()
@@ -625,8 +625,8 @@ final class NativeReaderLibrary: ObservableObject {
             }
         }
         let disk = try NativeBackupFileRestore(moves: moves,
-            indexes: [(Self.storageURL, try JSONEncoder().encode(combined))])
-        let before = NativeBackupDefaultsBeforeState(defaults: .standard, keys: [folderStorageKey])
+            indexes: [(Self.storageURL, try JSONEncoder().encode(combined))], recovery: recovery)
+        let before = NativeBackupDefaultsBeforeState(defaults: .standard, keys: [folderStorageKey], recovery: recovery)
         return .init(section: .reader, apply: {
             try disk.apply()
             UserDefaults.standard.set(folderValues, forKey: self.folderStorageKey)

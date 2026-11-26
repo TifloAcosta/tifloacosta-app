@@ -21,7 +21,7 @@ final class NativeBackupFileRestore {
     private var attemptedIndexes: [Index] = []
     private let fm = FileManager.default
 
-    init(moves: [Move], indexes: [(URL, Data)]) throws {
+    init(moves: [Move], indexes: [(URL, Data)], recovery: NativeBackupRecoveryBuilder? = nil) throws {
         self.moves = moves
         self.indexes = try indexes.map { url, bytes in
             let before: Data?
@@ -40,6 +40,8 @@ final class NativeBackupFileRestore {
             guard fm.fileExists(atPath: item.source.path),
                   !fm.fileExists(atPath: item.target.path) else { throw CocoaError(.fileWriteFileExists) }
         }
+        try recovery?.recordFiles(indexes: self.indexes.map { ($0.url, $0.before) },
+                                  targets: moves.map(\.target))
     }
 
     func apply() throws {

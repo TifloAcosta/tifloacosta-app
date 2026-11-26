@@ -76,7 +76,7 @@ final class NativePodcastLibrary: ObservableObject {
     /// The caller must execute synchronously after preparation. Pending download
     /// references and omitted progress are returned separately, never fabricated.
     func prepareBackupRestore(_ backup: NativePodcastBackupSnapshot,
-                              downloadedIDs: Set<String>) throws
+                              downloadedIDs: Set<String>, recovery: NativeBackupRecoveryBuilder? = nil) throws
         -> (NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>,
             NativeBackupPersonalDataMerge.PodcastPlan) {
         try NativeBackupPersonalDataValidation.validate(section: .podcasts,
@@ -88,7 +88,7 @@ final class NativePodcastLibrary: ObservableObject {
         let oldSaved = savedEpisodes, oldProgress = playbackProgress
         let defaults = UserDefaults.standard
         let before = NativeBackupDefaultsBeforeState(defaults: defaults,
-            keys: [followedKey, favoriteKey, savedKey, playbackKey])
+            keys: [followedKey, favoriteKey, savedKey, playbackKey], recovery: recovery)
         let encoder = JSONEncoder()
         let nextFollowed = try encoder.encode(plan.followed)
         let nextSaved = try encoder.encode(plan.savedEpisodes)

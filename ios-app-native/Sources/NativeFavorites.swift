@@ -41,10 +41,10 @@ final class NativeFavoritesStore: ObservableObject {
 
 
     /// Component of the preferences transaction, not a complete section step.
-    func prepareBackupFavorites(_ values: Set<NativeFavoriteKey>) throws
+    func prepareBackupFavorites(_ values: Set<NativeFavoriteKey>, recovery: NativeBackupRecoveryBuilder? = nil) throws
         -> (apply: () throws -> Void, rollback: () throws -> Void) {
         let old = keys
-        let before = NativeBackupDefaultsBeforeState(defaults: .standard, keys: [storageKey])
+        let before = NativeBackupDefaultsBeforeState(defaults: .standard, keys: [storageKey], recovery: recovery)
         let bytes = try JSONEncoder().encode(values)
         return ({
             UserDefaults.standard.set(bytes, forKey: self.storageKey)

@@ -87,7 +87,7 @@ enum NativeReaderVoiceProfileStore {
     /// Preserve all existing profiles. Do not trigger legacy migration during
     /// preparation, and never write any value outside the profile namespace.
     static func prepareBackupProfiles(_ profiles: [String: NativeReaderVoiceProfile],
-                                      defaults: UserDefaults = .standard) throws
+                                      defaults: UserDefaults = .standard, recovery: NativeBackupRecoveryBuilder? = nil) throws
         -> (omittedKeys: [String], apply: () throws -> Void, rollback: () throws -> Void) {
         var updates: [String: Data] = [:]
         var omitted = [String]()
@@ -108,7 +108,7 @@ enum NativeReaderVoiceProfileStore {
                 updates[storage] = try JSONEncoder().encode(profile)
             }
         }
-        let before = NativeBackupDefaultsBeforeState(defaults: defaults, keys: Array(updates.keys))
+        let before = NativeBackupDefaultsBeforeState(defaults: defaults, keys: Array(updates.keys), recovery: recovery)
         let staged = updates
         return (omitted.sorted(), {
             for (key, bytes) in staged { defaults.set(bytes, forKey: key) }

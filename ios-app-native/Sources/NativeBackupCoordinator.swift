@@ -172,6 +172,9 @@ final class NativeBackupCoordinator: ObservableObject {
         guard liveStoresAreQuiescent() else { throw Failure.liveStoresNotQuiescent }
         let selected = Set(manifest.artifacts.map(\.section))
         guard Set(staged.keys) == selected else { throw Failure.unsupportedSelection }
+        let recovery = NativeBackupRecoveryBuilder()
+        let journal = NativeBackupRestoreJournal.application
+        guard try journal.pending() == nil else { throw NativeBackupRestoreJournal.Failure.pendingRecovery }
         var steps: [NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>] = []
         var downloads: [NativeDownloadedPodcastEpisode] = []
         var stations: [NativeRadioBackupEntry] = []
@@ -184,12 +187,12 @@ final class NativeBackupCoordinator: ObservableObject {
             try Task.checkCancellation()
             switch section {
             case .reader:
-                steps.append(try reader.prepareGlobalBackupRestore(staging: url))
+                steps.append(try reader.prepareGlobalBackupRestore(staging: url, recovery: recovery))
             case .music:
-                let (step, omitted) = try NativeMusicBackupAdapter.prepareRestore(staging: url)
+                let (step, omitted) = try NativeMusicBackupAdapter.prepareRestore(staging: url, recovery: recovery)
                 steps.append(step); music = omitted
             case .cinema:
-                let (step, omitted) = try NativeCinemaLocalLibrary.shared.prepareGlobalBackupRestore(staging: url)
+                let (step, omitted) = try NativeCinemaLocalLibrary.shared.prepareGlobalBackupRestore(staging: url, recovery: recovery)
                 steps.append(step); cinemaHistory = omitted
             case .podcasts:
                 guard let podcastLibrary, let podcastDownloads else { throw Failure.missingLiveStore }
@@ -199,18 +202,18 @@ final class NativeBackupCoordinator: ObservableObject {
                 let ids = Set(podcastDownloads.entries.filter {
                     podcastDownloads.localURL(for: $0.id) != nil
                 }.map(\.id))
-                let (step, plan) = try podcastLibrary.prepareBackupRestore(snapshot, downloadedIDs: ids)
+                let (step, plan) = try podcastLibrary.prepareBackupRestore(snapshot, downloadedIDs: ids, recovery: recovery)
                 steps.append(step); downloads = plan.downloadReferences; podcastPositions = plan.progressNotImported
             case .radio:
                 let snapshot = try decoder.decode(NativeRadioBackupSnapshot.self,
                     from: Data(contentsOf: url.appendingPathComponent("snapshot.json")))
-                let (step, plan) = try NativeRadioBackupAdapter.prepareBackupRestore(snapshot)
+                let (step, plan) = try NativeRadioBackupAdapter.prepareBackupRestore(snapshot, recovery: recovery)
                 steps.append(step); stations = plan.unresolved
             case .preferences:
                 guard let favorites, let activity else { throw Failure.missingLiveStore }
                 let snapshot = try decoder.decode(NativeBackupPreferencesSnapshot.self,
                     from: Data(contentsOf: url.appendingPathComponent("snapshot.json")))
-                let plan = try NativeBackupPreferencesRestore.prepare(snapshot, favorites: favorites, activity: activity)
+                let plan = try NativeBackupPreferencesRestore.prepare(snapshot, favorites: favorites, activity: activity, recovery: recovery)
                 steps.append(plan.step); settings = plan.omittedKeys; readingHistory = plan.historyNotImported
             }
         }
@@ -220,7 +223,22 @@ final class NativeBackupCoordinator: ObservableObject {
             omittedCinemaHistory: cinemaHistory)
         guard !report.hasOmissions || allowReportedOmissions else { throw Failure.incompleteRestore }
         guard liveStoresAreQuiescent() else { throw Failure.liveStoresNotQuiescent }
-        try NativeBackupRestoreTransaction.execute(expected: selected, steps: steps)
+        let payload = try recovery.payload()
+        let encoder = PropertyListEncoder()
+        encoder.outputFormat = .binary
+        try journal.begin(.init(generation: generation, recoveryPayload: encoder.encode(payload)))
+        do {
+            try NativeBackupRestoreTransaction.execute(expected: selected, steps: steps)
+        } catch {
+            if !(error is NativeBackupRestoreTransaction.Failure<NativeBackupManifest.Section>) {
+                // All attempted steps rolled back. Retain the record if defaults
+                // could not be flushed; a restart will replay the before-state.
+                if UserDefaults.standard.synchronize() { try journal.finish(generation: generation) }
+            }
+            throw error
+        }
+        guard UserDefaults.standard.synchronize() else { throw NativeBackupRecoveryPayload.Failure.invalidPreference }
+        try journal.finish(generation: generation)
         return report
     }
 }

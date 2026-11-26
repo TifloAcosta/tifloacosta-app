@@ -142,7 +142,7 @@ final class NativeCinemaLocalLibrary: ObservableObject {
     /// Back up only user-imported works, never provider downloads or credentials.
 
     /// Merge personal files and history, keeping all existing identities.
-    func prepareGlobalBackupRestore(staging: URL) throws
+    func prepareGlobalBackupRestore(staging: URL, recovery: NativeBackupRecoveryBuilder? = nil) throws
         -> (NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>, Int) {
         let decoder = JSONDecoder()
         let incoming = try decoder.decode([NativeCinemaLocalItem].self,
@@ -157,10 +157,10 @@ final class NativeCinemaLocalLibrary: ObservableObject {
             .init(source: staging.appendingPathComponent("media").appendingPathComponent($0.storedName),
                   target: Self.directory.appendingPathComponent($0.storedName))
         }
-        let historyPlan = try NativeCinemaRecentStore.shared.prepareBackupHistory(history)
+        let historyPlan = try NativeCinemaRecentStore.shared.prepareBackupHistory(history, recovery: recovery)
         let disk = try NativeBackupFileRestore(moves: moves, indexes: [
             (Self.indexURL, try JSONEncoder().encode(combined))
-        ])
+        ], recovery: recovery)
         return (.init(section: .cinema, apply: {
             try disk.apply()
             self.items = combined

@@ -45,7 +45,7 @@ final class NativeYouTubePersonalLibrary: ObservableObject {
 
     /// Component of the global preferences transaction. Preserve current
     /// watch-later choices and positions for matching IDs; add missing records.
-    func prepareBackupLibrary(_ backup: NativeBackupPreferencesSnapshot) throws
+    func prepareBackupLibrary(_ backup: NativeBackupPreferencesSnapshot, recovery: NativeBackupRecoveryBuilder? = nil) throws
         -> (apply: () throws -> Void, rollback: () throws -> Void) {
         let oldVideos = videos, oldChannels = followedChannels
         var videoIDs = Set(videos.map(\.id))
@@ -54,7 +54,7 @@ final class NativeYouTubePersonalLibrary: ObservableObject {
         let nextChannels = (followedChannels + backup.youtubeChannels.filter {
             channelIDs.insert($0.id).inserted
         }).sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
-        let before = NativeBackupDefaultsBeforeState(defaults: .standard, keys: [key, followedKey])
+        let before = NativeBackupDefaultsBeforeState(defaults: .standard, keys: [key, followedKey], recovery: recovery)
         let encoder = JSONEncoder()
         let videoBytes = try encoder.encode(nextVideos)
         let channelBytes = try encoder.encode(nextChannels)

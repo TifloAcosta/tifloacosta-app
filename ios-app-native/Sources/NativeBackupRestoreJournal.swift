@@ -18,6 +18,11 @@ struct NativeBackupRestoreJournal {
 
     enum Failure: Error { case pendingRecovery, invalidRecord, mismatchedGeneration }
     let url: URL
+    static var application: Self {
+        Self(url: FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("GlobalBackupRestore", isDirectory: true)
+            .appendingPathComponent("pending.plist"))
+    }
     private let fm = FileManager.default
     private static let maximumBytes = 512 * 1024 * 1024
 

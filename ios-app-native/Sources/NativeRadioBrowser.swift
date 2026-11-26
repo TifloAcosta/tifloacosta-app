@@ -507,7 +507,7 @@ enum NativeRadioBackupAdapter {
     /// Prepare the same persisted value read by the radio screens' AppStorage.
     /// Unresolved stations remain explicit references in the returned plan.
     static func prepareBackupRestore(_ backup: NativeRadioBackupSnapshot,
-                                     defaults: UserDefaults = .standard) throws
+                                     defaults: UserDefaults = .standard, recovery: NativeBackupRecoveryBuilder? = nil) throws
         -> (NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>,
             NativeBackupPersonalDataMerge.RadioPlan) {
         try NativeBackupPersonalDataValidation.validate(section: .radio,
@@ -518,7 +518,7 @@ enum NativeRadioBackupAdapter {
             try JSONDecoder().decode([NativeRadioStation].self, from: Data(saved.utf8))
         let plan = NativeBackupPersonalDataMerge.radio(backup, existing: existing)
         let next = String(decoding: try JSONEncoder().encode(plan.favorites), as: UTF8.self)
-        let before = NativeBackupDefaultsBeforeState(defaults: defaults, keys: [key])
+        let before = NativeBackupDefaultsBeforeState(defaults: defaults, keys: [key], recovery: recovery)
         let step = NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>(
             section: .radio, apply: { defaults.set(next, forKey: key) },
             rollback: { before.restore() })

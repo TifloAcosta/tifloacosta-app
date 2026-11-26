@@ -241,6 +241,68 @@ private enum AccessibleCinemaDirectory {
 }
 
 struct NativeAccessibleCinemaScreen: View {
+    @StateObject private var personalLibrary = NativeCinemaLocalLibrary.shared
+    @StateObject private var personalPlayer = NativeCinemaAudioPlayer.shared
+    @StateObject private var cinemaRecents = NativeCinemaRecentStore.shared
+
+    var body: some View {
+        List {
+            if personalPlayer.currentID != nil {
+                Section("Reproductor") {
+                    Text(personalPlayer.currentTitle).accessibilityAddTraits(.isHeader)
+                    if personalPlayer.currentCloudIsVideo, let video = personalPlayer.videoPlayer {
+                        NativeCinemaVideoSurface(player: video).frame(height: 210).accessibilityHidden(true)
+                    }
+                    if let failure = personalPlayer.playbackError { Text(failure) }
+                    NativeCinemaTransportControls(player: personalPlayer, library: personalLibrary)
+                }
+            }
+            if cinemaRecents.entries.contains(where: { !$0.finished }) {
+                NavigationLink("Continuar viendo o escuchando") {
+                    List {
+                        ForEach(cinemaRecents.entries.filter { !$0.finished }.prefix(12)) { recent in
+                            NavigationLink {
+                                NativeCinemaResumeScreen(recent: recent)
+                            } label: {
+                                VStack(alignment: .leading) {
+                                    Text(recent.title)
+                                    Text(MusicLocalized.message(recent.providerName))
+                                    Text(MusicLocalized.format("Posición: %@. Duración: %@.", NativeCinemaTransportControls.clock(recent.seconds), NativeCinemaTransportControls.clock(recent.duration)))
+                                }.accessibilityElement(children: .combine)
+                            }
+                        }
+                    }
+                    .tifloScreenSurface()
+                    .navigationTitle("Continuar viendo o escuchando")
+                }
+            }
+            NavigationLink("Buscar obras") { NativeCinemaContentScreen(mode: .search) }
+            NavigationLink("Plataformas") { NativeCinemaPlatformsScreen() }
+            NavigationLink("Mi colección personal") { NativeCinemaContentScreen(mode: .collection) }
+            if !cinemaRecents.entries.isEmpty {
+                NavigationLink("Historial de Multicines") { NativeCinemaHistoryScreen() }
+            }
+            NavigationLink("Dónde ver una película") { NativeCinemaContentScreen(mode: .discovery) }
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Multicines Accesibles")
+        .onAppear { personalPlayer.refresh(library: personalLibrary) }
+    }
+}
+
+private enum NativeCinemaContentMode {
+    case search, collection, discovery
+    var title: String {
+        switch self {
+        case .search: return "Buscar obras"
+        case .collection: return "Mi colección personal"
+        case .discovery: return "Dónde ver una película"
+        }
+    }
+}
+
+private struct NativeCinemaContentScreen: View {
+    let mode: NativeCinemaContentMode
     @State private var searchText = ""
     @State private var audiocinematecaResults: [NativeAudiocinematecaCatalogueIndex.Entry] = []
     @State private var audioAccountStamp: String?
@@ -470,119 +532,7 @@ struct NativeAccessibleCinemaScreen: View {
         importStatus = MusicLocalized.format("Archivo incorporado: %@", item.title)
     }
 
-    var body: some View {
-        List {
-            if personalPlayer.currentCloudReference != nil || (personalPlayer.currentID != nil && !personalItems.contains { $0.id == personalPlayer.currentID }) {
-                Section("Reproductor") {
-                    Text(personalPlayer.currentTitle).accessibilityAddTraits(.isHeader)
-                    if personalPlayer.currentCloudIsVideo, let video = personalPlayer.videoPlayer {
-                        NativeCinemaVideoSurface(player: video).frame(height: 210).accessibilityHidden(true)
-                    }
-                    if let failure = personalPlayer.playbackError { Text(failure) }
-                    NativeCinemaTransportControls(player: personalPlayer, library: personalLibrary)
-                }
-            }
-            if !cinemaRecents.entries.isEmpty {
-                Section("Continuar viendo o escuchando") {
-                    ForEach(cinemaRecents.entries.filter { !$0.finished }.prefix(12)) { recent in
-                        NavigationLink {
-                            NativeCinemaResumeScreen(recent: recent)
-                        } label: {
-                            VStack(alignment: .leading) {
-                                Text(recent.title)
-                                Text(MusicLocalized.message(recent.providerName))
-                                Text(MusicLocalized.format("Posición: %@. Duración: %@.", NativeCinemaTransportControls.clock(recent.seconds), NativeCinemaTransportControls.clock(recent.duration)))
-                            }.accessibilityElement(children: .combine)
-                        }
-                    }
-                    NavigationLink("Historial de Multicines") { NativeCinemaHistoryScreen() }
-                }
-            }
-            Section("Explorar Multicines Accesibles") {
-                TextField("Buscar plataformas y contenidos audiodescritos", text: $searchText)
-                    .textInputAutocapitalization(.sentences)
-                    .submitLabel(.search)
-                    .onSubmit { resetRemoteSearch(); submittedSearch = UUID() }
-                    .accessibilityHint("Busca títulos y fuentes.")
-                NativeAdjustableChoice(
-                    title: "Idioma de audiodescripción",
-                    choices: AccessibleCinemaLanguage.allCases.map(\.rawValue),
-                    selectedIndex: $languageIndex
-                )
-                NativeAdjustableChoice(
-                    title: "Tipo de contenido",
-                    choices: AccessibleCinemaKind.allCases.map(\.rawValue),
-                    selectedIndex: $contentIndex
-                )
-                if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    Button("Buscar obras") { resetRemoteSearch(); submittedSearch = UUID() }
-                    if remoteSearching {
-                        ProgressView("Consultando catálogos…")
-                        Button("Cancelar") { resetRemoteSearch() }
-                    }
-                }
-            }
-            .listRowBackground(TifloVisual.surfaceRaised)
-
-            if remoteSearched || remoteSearching { remoteResults }
-
-            if spanishFilter && !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                Section("Audiocinemateca") {
-                    if NativeAudiocinematecaCredentials.load() != nil {
-                        ForEach(matchingAudiocinemateca.prefix(cinemaSearchLimit)) { item in
-                            NavigationLink {
-                                NativeAudiocinematecaDetail(entry: item)
-                            } label: {
-                                Text(item.title)
-                            }
-                        }
-                        if matchingAudiocinemateca.count > cinemaSearchLimit {
-                            Button("Cargar más resultados") { cinemaSearchLimit += 50 }
-                        }
-                    }
-                    NavigationLink("Explorar catálogo audiodescrito") {
-                        NativeAudiocinematecaBrowser(query: searchText, kind: selectedKind, language: selectedLanguage)
-                    }
-                }
-            }
-
-            if selectedLanguage == .all || selectedLanguage == .english || selectedLanguage == .french || selectedLanguage == .german || selectedLanguage == .italian {
-                Section("Dónde ver una película") {
-                    if selectedLanguage == .all || selectedLanguage == .english {
-                        Link("Audio Description Project", destination: URL(string: "https://adp.acb.org/adp-search")!)
-                    }
-                    if selectedLanguage == .all || selectedLanguage == .french {
-                        Link("Portail de l’audiodescription", destination: URL(string: "https://audiodescription.culture.gouv.fr/")!)
-                        Link("Películas gratuitas", destination: URL(string: "https://audiodescription.beta.gouv.fr/recherche?is_free=1")!)
-                    }
-                    if selectedLanguage == .all || selectedLanguage == .german {
-                        Link("hörfilm.info", destination: URL(string: "https://hoerfilm.info/mediatheken.html")!)
-                    }
-                    if selectedLanguage == .all || selectedLanguage == .italian {
-                        Link("CiecandoScherzando", destination: URL(string: "https://ciecandoscherzando.it/audiodescrizioni/")!)
-                    }
-                }
-            }
-
-            Section("Mi colección personal") {
-                Text("Añade tus propios archivos de audio o vídeo. Se conservarán en el iPhone para reproducirlos en TifloAcosta, con la última posición de escucha.")
-                    .font(.footnote)
-                NativeAdjustableChoice(
-                    title: "Idioma de los archivos que vas a importar",
-                    choices: Array(AccessibleCinemaLanguage.allCases.dropFirst()).map(\.rawValue),
-                    selectedIndex: Binding(
-                        get: { max(0, importLanguageIndex - 1) },
-                        set: { importLanguageIndex = $0 + 1 }))
-                NativeAdjustableChoice(
-                    title: "Tipo de archivo que vas a importar",
-                    choices: Array(AccessibleCinemaKind.allCases.dropFirst()).map(\.rawValue),
-                    selectedIndex: Binding(
-                        get: { max(0, importKindIndex - 1) },
-                        set: { importKindIndex = $0 + 1 }))
-                Button("Importar audio o vídeo desde Archivos") {
-                    selectingPersonalFiles = true
-                }
-                .frame(minHeight: 44, alignment: .leading)
+    @ViewBuilder private var personalRows: some View {
                 if !importStatus.isEmpty {
                     Text(importStatus)
                         .font(.footnote)
@@ -641,9 +591,121 @@ struct NativeAccessibleCinemaScreen: View {
                     }
                     .accessibilityElement(children: .contain)
                 }
+
+    }
+
+    var body: some View {
+        List {
+            if mode == .search {
+            Section("Explorar Multicines Accesibles") {
+                TextField("Buscar plataformas y contenidos audiodescritos", text: $searchText)
+                    .textInputAutocapitalization(.sentences)
+                    .submitLabel(.search)
+                    .onSubmit { resetRemoteSearch(); submittedSearch = UUID() }
+                    .accessibilityHint("Busca títulos y fuentes.")
+                NativeAdjustableChoice(
+                    title: "Idioma de audiodescripción",
+                    choices: AccessibleCinemaLanguage.allCases.map(\.rawValue),
+                    selectedIndex: $languageIndex
+                )
+                NativeAdjustableChoice(
+                    title: "Tipo de contenido",
+                    choices: AccessibleCinemaKind.allCases.map(\.rawValue),
+                    selectedIndex: $contentIndex
+                )
+                if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    Button("Buscar obras") { resetRemoteSearch(); submittedSearch = UUID() }
+                    if remoteSearching {
+                        ProgressView("Consultando catálogos…")
+                        Button("Cancelar") { resetRemoteSearch() }
+                    }
+                }
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
+            if remoteSearched || remoteSearching { remoteResults }
+
+            if spanishFilter && !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                Section("Audiocinemateca") {
+                    if NativeAudiocinematecaCredentials.load() != nil {
+                        ForEach(matchingAudiocinemateca.prefix(cinemaSearchLimit)) { item in
+                            NavigationLink {
+                                NativeAudiocinematecaDetail(entry: item)
+                            } label: {
+                                Text(item.title)
+                            }
+                        }
+                        if matchingAudiocinemateca.count > cinemaSearchLimit {
+                            Button("Cargar más resultados") { cinemaSearchLimit += 50 }
+                        }
+                    }
+                    NavigationLink("Explorar catálogo audiodescrito") {
+                        NativeAudiocinematecaBrowser(query: searchText, kind: selectedKind, language: selectedLanguage)
+                    }
+                }
+            }
+
+
+                if !personalItems.isEmpty && !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    Section("Mi colección personal") {
+                        personalRows
+                    }
+                }
+            }
+            if mode == .discovery {
+                NativeAdjustableChoice(
+                    title: "Idioma de audiodescripción",
+                    choices: AccessibleCinemaLanguage.allCases.map(\.rawValue),
+                    selectedIndex: $languageIndex
+                )
+            if selectedLanguage == .all || selectedLanguage == .english || selectedLanguage == .french || selectedLanguage == .german || selectedLanguage == .italian {
+                Section("Dónde ver una película") {
+                    if selectedLanguage == .all || selectedLanguage == .english {
+                        Link("Audio Description Project", destination: URL(string: "https://adp.acb.org/adp-search")!)
+                    }
+                    if selectedLanguage == .all || selectedLanguage == .french {
+                        Link("Portail de l’audiodescription", destination: URL(string: "https://audiodescription.culture.gouv.fr/")!)
+                        Link("Películas gratuitas", destination: URL(string: "https://audiodescription.beta.gouv.fr/recherche?is_free=1")!)
+                    }
+                    if selectedLanguage == .all || selectedLanguage == .german {
+                        Link("hörfilm.info", destination: URL(string: "https://hoerfilm.info/mediatheken.html")!)
+                    }
+                    if selectedLanguage == .all || selectedLanguage == .italian {
+                        Link("CiecandoScherzando", destination: URL(string: "https://ciecandoscherzando.it/audiodescrizioni/")!)
+                    }
+                }
+            }
+
+
+            }
+            if mode == .collection {
+                Section("Mi colección personal") {
+                    NavigationLink("Importar") {
+                        List {
+                            Section("Importar") {
+                Text("Añade tus propios archivos de audio o vídeo. Se conservarán en el iPhone para reproducirlos en TifloAcosta, con la última posición de escucha.")
+                    .font(.footnote)
+                NativeAdjustableChoice(
+                    title: "Idioma de los archivos que vas a importar",
+                    choices: Array(AccessibleCinemaLanguage.allCases.dropFirst()).map(\.rawValue),
+                    selectedIndex: Binding(
+                        get: { max(0, importLanguageIndex - 1) },
+                        set: { importLanguageIndex = $0 + 1 }))
+                NativeAdjustableChoice(
+                    title: "Tipo de archivo que vas a importar",
+                    choices: Array(AccessibleCinemaKind.allCases.dropFirst()).map(\.rawValue),
+                    selectedIndex: Binding(
+                        get: { max(0, importKindIndex - 1) },
+                        set: { importKindIndex = $0 + 1 }))
+                Button("Importar audio o vídeo desde Archivos") {
+                    selectingPersonalFiles = true
+                }
+                .frame(minHeight: 44, alignment: .leading)
+
+                                if !importStatus.isEmpty {
+                                    Text(importStatus).accessibilityAddTraits(.updatesFrequently)
+                                }
+                            }
             Section("Nubes") {
                 Text("Selecciona tus propios archivos de audio desde una nube conectada. Se importarán a tu colección personal con el idioma y el tipo elegidos arriba.")
                     .font(.footnote)
@@ -665,21 +727,174 @@ struct NativeAccessibleCinemaScreen: View {
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
-            Section("Fuentes de audiodescripción") {
-                if filtered.isEmpty {
-                    ContentUnavailableView("No hay fuentes para estos filtros",
-                                           systemImage: "film",
-                                           description: Text("Prueba otro idioma o tipo de contenido."))
+
+                        }
+                        .tifloScreenSurface()
+                        .navigationTitle("Importar")
+                        .fileImporter(
+                            isPresented: $selectingPersonalFiles,
+                            allowedContentTypes: [.audio, .movie],
+                            allowsMultipleSelection: true
+                        ) { result in
+                            Task { @MainActor in importPersonalFiles(result) }
+                        }
+                    }
+                    NativeAdjustableChoice(
+                        title: "Idioma de audiodescripción",
+                        choices: AccessibleCinemaLanguage.allCases.map(\.rawValue),
+                        selectedIndex: $languageIndex
+                    )
+                    NativeAdjustableChoice(
+                        title: "Tipo de contenido",
+                        choices: AccessibleCinemaKind.allCases.map(\.rawValue),
+                        selectedIndex: $contentIndex
+                    )
+                    personalRows
                 }
-                ForEach(filtered) { source in
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(MusicLocalized.message(source.name))
-                            .font(.headline)
-                            .accessibilityAddTraits(.isHeader)
-                        Text(source.detail)
-                            .font(.subheadline)
-                            .foregroundStyle(TifloVisual.secondaryText)
-                            .fixedSize(horizontal: false, vertical: true)
+                .listRowBackground(TifloVisual.surfaceRaised)
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle(MusicLocalized.message(mode.title))
+        .onChange(of: searchText) { _, _ in resetRemoteSearch() }
+        .onChange(of: languageIndex) { _, _ in resetRemoteSearch() }
+        .onChange(of: contentIndex) { _, _ in resetRemoteSearch() }
+        .task(id: submittedSearch) {
+            if let request = submittedSearch { await performRemoteSearch(request) }
+        }
+        .onAppear {
+            guard mode == .search else { return }
+            let stamp = currentAudioStamp
+            if stamp != audioAccountStamp {
+                audiocinematecaResults = []
+                audioAccountStamp = stamp
+                if submittedSearch != nil {
+                    resetRemoteSearch()
+                    if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty { submittedSearch = UUID() }
+                }
+            }
+            if submittedSearch == nil {
+                Task { @MainActor in
+                    if let account = NativeAudiocinematecaCredentials.load(),
+                       let entries = try? await NativeAudiocinematecaCache.shared.cachedEntries(account: account),
+                       submittedSearch == nil,
+                       let current = NativeAudiocinematecaCredentials.load(),
+                       current.username == account.username, current.password == account.password {
+                        audioAccountStamp = currentAudioStamp
+                        audiocinematecaResults = entries
+                    }
+                }
+            }
+        }
+        .confirmationDialog(
+            MusicLocalized.format("¿Eliminar «%@»?", pendingDeletion?.title ?? ""),
+            isPresented: $confirmDeletion, titleVisibility: .visible
+        ) {
+            Button("Eliminar archivo personal", role: .destructive) {
+                guard let item = pendingDeletion else { return }
+                if personalPlayer.currentID == item.id {
+                    personalPlayer.pauseAndSave(library: personalLibrary)
+                }
+                do { try personalLibrary.remove(item); cinemaRecents.remove(item.id.uuidString) }
+                catch { importStatus = error.localizedDescription }
+                pendingDeletion = nil
+            }
+            Button("Cancelar", role: .cancel) { pendingDeletion = nil }
+        } message: {
+            Text("Se eliminará el archivo guardado en esta colección personal.")
+        }
+        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+            personalPlayer.refresh(library: personalLibrary)
+        }
+        .onDisappear { personalPlayer.refresh(library: personalLibrary) }
+    }
+}
+
+private struct NativeCinemaPlatformsScreen: View {
+    var body: some View {
+        List {
+            NavigationLink("Español") { NativeCinemaLanguageScreen(language: .spain) }
+            NavigationLink("Inglés") { NativeCinemaLanguageScreen(language: .english) }
+            NavigationLink("Francés") { NativeCinemaLanguageScreen(language: .french) }
+            NavigationLink("Portugués") { NativeCinemaLanguageScreen(language: .portuguese) }
+            NavigationLink("Italiano") { NativeCinemaLanguageScreen(language: .italian) }
+            NavigationLink("Alemán") { NativeCinemaLanguageScreen(language: .german) }
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Plataformas")
+    }
+}
+
+private struct NativeCinemaLanguageScreen: View {
+    let language: AccessibleCinemaLanguage
+
+    private var sources: [AccessibleCinemaSource] {
+        AccessibleCinemaDirectory.sources.filter { source in
+            let matches = language == .spain
+                ? source.languages.contains(.spain) || source.languages.contains(.latino)
+                : source.languages.contains(language)
+            return matches && !["audesc-es", "audesc-latino"].contains(source.id)
+        }
+    }
+
+    var body: some View {
+        List {
+            if language == .spain {
+                NavigationLink("Universo Audesc") { NativeCinemaAudescScreen() }
+            }
+            ForEach(sources) { source in
+                NavigationLink {
+                    NativeCinemaProviderScreen(source: source)
+                } label: {
+                    Text(MusicLocalized.message(source.name))
+                }
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle(MusicLocalized.message(language == .spain ? "Español" : language.rawValue))
+    }
+}
+
+private struct NativeCinemaAudescScreen: View {
+    var body: some View {
+        List {
+            ForEach(AccessibleCinemaDirectory.sources.filter { ["audesc-es", "audesc-latino"].contains($0.id) }) { source in
+                NavigationLink {
+                    NativeCinemaProviderScreen(source: source)
+                } label: {
+                    Text(MusicLocalized.message(source.id == "audesc-es" ? "España" : "Latinoamérica"))
+                }
+            }
+            NavigationLink("Información y agradecimientos") {
+                List {
+                    Section("Sobre el acceso") {
+                        Text("Los catálogos públicos se actualizan desde Google Drive cuando la conexión pública está configurada. También puedes elegir carpetas autorizadas con tu propia cuenta.")
+                        Text(MusicLocalized.format("Agradecemos a %@ su predisposición y colaboración con Multicines Accesibles.", "Alfredo Amate"))
+                    }
+                }
+                .tifloScreenSurface()
+                .navigationTitle("Información y agradecimientos")
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Universo Audesc")
+    }
+}
+
+private struct NativeCinemaProviderScreen: View {
+    let source: AccessibleCinemaSource
+
+    private var collaborator: String? {
+        switch source.id {
+        case "audiocinemateca": return "José Manuel Delicado"
+        case "cinema-accessibile": return "Paolo Bernardini (Medialica)"
+        case "tape-territory": return "Mike Bamonte"
+        default: return nil
+        }
+    }
+
+    var body: some View {
+        List {
                         if ["audesc-es", "audesc-latino"].contains(source.id) {
                             if NativeCinemaPublicDrive.configuredKey != nil && NativeCinemaPublicDrive.publisherRoot(for: source.id) != nil {
                                     NavigationLink("Explorar catálogo audiodescrito") {
@@ -713,7 +928,7 @@ struct NativeAccessibleCinemaScreen: View {
                         }
                         if source.id == "rai-play-sound" {
                             NavigationLink("Explorar catálogo audiodescrito") {
-                                NativeRaiPlaySoundScreen(kind: selectedKind)
+                                NativeRaiPlaySoundScreen(kind: .all)
                             }
                         }
                         if source.id == "tape-territory" {
@@ -727,9 +942,10 @@ struct NativeAccessibleCinemaScreen: View {
                             }
                         }
                         if source.id == "audiocinemateca" {
-                            NavigationLink("Explorar catálogo audiodescrito") {
-                                NativeAudiocinematecaBrowser(query: searchText, kind: selectedKind, language: selectedLanguage)
+                            NavigationLink("Entrar en Audiocinemateca") {
+                                NativeAudiocinematecaBrowser(query: "", kind: .all, language: .all)
                             }
+                            Link("Crear cuenta gratuita", destination: URL(string: "https://audiocinemateca.com/usuario/register")!)
                             .frame(minHeight: 44, alignment: .leading)
                         }
                         if let address = source.address {
@@ -741,77 +957,22 @@ struct NativeAccessibleCinemaScreen: View {
                                 .font(.subheadline)
                                 .foregroundStyle(TifloVisual.secondaryText)
                         }
-                    }
-                    .accessibilityElement(children: .contain)
-                }
-            }
-            .listRowBackground(TifloVisual.surfaceRaised)
 
-            Section("Sobre el acceso") {
-                Text("Las plataformas muestran obras audiodescritas según su catálogo, país y permisos. Abrir la web oficial no significa que todas sus películas tengan audiodescripción.")
-                    .font(.footnote)
-                Text("Los catálogos públicos se actualizan desde Google Drive cuando la conexión pública está configurada. También puedes elegir carpetas autorizadas con tu propia cuenta.")
-                    .font(.footnote)
+            NavigationLink("Información y agradecimientos") {
+                List {
+                    Section("Sobre el acceso") {
+                        Text(source.detail)
+                        Text("Las plataformas muestran obras audiodescritas según su catálogo, país y permisos. Abrir la web oficial no significa que todas sus películas tengan audiodescripción.")
+                        if let collaborator {
+                            Text(MusicLocalized.format("Agradecemos a %@ su predisposición y colaboración con Multicines Accesibles.", collaborator))
+                        }
+                    }
+                }
+                .tifloScreenSurface()
+                .navigationTitle("Información y agradecimientos")
             }
         }
         .tifloScreenSurface()
-        .navigationTitle("Multicines Accesibles")
-        .onChange(of: searchText) { _, _ in resetRemoteSearch() }
-        .onChange(of: languageIndex) { _, _ in resetRemoteSearch() }
-        .onChange(of: contentIndex) { _, _ in resetRemoteSearch() }
-        .task(id: submittedSearch) {
-            if let request = submittedSearch { await performRemoteSearch(request) }
-        }
-        .onAppear {
-            let stamp = currentAudioStamp
-            if stamp != audioAccountStamp {
-                audiocinematecaResults = []
-                audioAccountStamp = stamp
-                if submittedSearch != nil {
-                    resetRemoteSearch()
-                    if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty { submittedSearch = UUID() }
-                }
-            }
-            if submittedSearch == nil {
-                Task { @MainActor in
-                    if let account = NativeAudiocinematecaCredentials.load(),
-                       let entries = try? await NativeAudiocinematecaCache.shared.cachedEntries(account: account),
-                       submittedSearch == nil,
-                       let current = NativeAudiocinematecaCredentials.load(),
-                       current.username == account.username, current.password == account.password {
-                        audioAccountStamp = currentAudioStamp
-                        audiocinematecaResults = entries
-                    }
-                }
-            }
-        }
-        .fileImporter(
-            isPresented: $selectingPersonalFiles,
-            allowedContentTypes: [.audio, .movie],
-            allowsMultipleSelection: true
-        ) { result in
-            Task { @MainActor in importPersonalFiles(result) }
-        }
-        .confirmationDialog(
-            MusicLocalized.format("¿Eliminar «%@»?", pendingDeletion?.title ?? ""),
-            isPresented: $confirmDeletion, titleVisibility: .visible
-        ) {
-            Button("Eliminar archivo personal", role: .destructive) {
-                guard let item = pendingDeletion else { return }
-                if personalPlayer.currentID == item.id {
-                    personalPlayer.pauseAndSave(library: personalLibrary)
-                }
-                do { try personalLibrary.remove(item); cinemaRecents.remove(item.id.uuidString) }
-                catch { importStatus = error.localizedDescription }
-                pendingDeletion = nil
-            }
-            Button("Cancelar", role: .cancel) { pendingDeletion = nil }
-        } message: {
-            Text("Se eliminará el archivo guardado en esta colección personal.")
-        }
-        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
-            personalPlayer.refresh(library: personalLibrary)
-        }
-        .onDisappear { personalPlayer.refresh(library: personalLibrary) }
+        .navigationTitle(MusicLocalized.message(source.name))
     }
 }

@@ -203,3 +203,91 @@ enum NativeBackupPersonalDataValidation {
         }
     }
 }
+
+/// Prepared, non-destructive merges. The eventual transaction must capture
+/// current state and persist these values together, never toggle records.
+enum NativeBackupPersonalDataMerge {
+    struct PodcastPlan {
+        let followed: [NativeFollowedPodcast]
+        let favorites: Set<String>
+        let savedEpisodes: [NativePodcastSavedEpisode]
+        let playbackProgress: [NativePodcastPlaybackProgress]
+        let downloadReferences: [NativeDownloadedPodcastEpisode]
+        let progressNotImported: Int
+    }
+
+    /// Keep existing records and progress on conflict. Never pretend that a
+    /// restored download reference contains local audio. Respect the current
+    /// 200-position limit without silently removing an existing position.
+    static func podcasts(_ backup: NativePodcastBackupSnapshot,
+                         followed: [NativeFollowedPodcast], favorites: Set<String>,
+                         saved: [NativePodcastSavedEpisode],
+                         progress: [NativePodcastPlaybackProgress],
+                         downloadedIDs: Set<String>) -> PodcastPlan {
+        let combinedFavorites = favorites.union(backup.favorites)
+        let combinedFollowed = appendMissing(followed, backup.followed, id: { $0.url })
+        let combinedSaved = appendMissing(saved, backup.savedEpisodes.filter {
+            combinedFavorites.contains($0.id)
+        }, id: { $0.id })
+        let currentIDs = Set(progress.map(\.id))
+        let missing = backup.playbackProgress.filter { !currentIDs.contains($0.id) }
+            .sorted { $0.updatedAt == $1.updatedAt ? $0.id < $1.id : $0.updatedAt > $1.updatedAt }
+        let accepted = Array(missing.prefix(max(0, 200 - progress.count)))
+        let combinedProgress = appendMissing(progress, accepted, id: { $0.id })
+        return PodcastPlan(followed: combinedFollowed, favorites: combinedFavorites,
+            savedEpisodes: combinedSaved, playbackProgress: combinedProgress,
+            downloadReferences: backup.previouslyDownloaded.filter { !downloadedIDs.contains($0.id) },
+            progressNotImported: missing.count - accepted.count)
+    }
+
+    struct RadioPlan {
+        let favorites: [NativeRadioStation]
+        let unresolved: [NativeRadioBackupEntry]
+    }
+
+    /// UUID identity is case-insensitive. An unresolved reference remains
+    /// pending lookup; never create a playable station with an empty URL.
+    static func radio(_ backup: NativeRadioBackupSnapshot,
+                      existing: [NativeRadioStation]) -> RadioPlan {
+        var ids = Set(existing.compactMap { UUID(uuidString: $0.stationuuid) })
+        var favorites = existing
+        var unresolved: [NativeRadioBackupEntry] = []
+        for entry in backup.favorites {
+            guard let id = UUID(uuidString: entry.stationID), ids.insert(id).inserted else { continue }
+            guard let stream = entry.streamURL, NativeBackupReferencePolicy.eligible(stream) else {
+                unresolved.append(entry)
+                continue
+            }
+            favorites.append(NativeRadioStation(stationuuid: entry.stationID,
+                name: entry.name, url_resolved: stream, lastcheckok: 0,
+                country: entry.country, tags: entry.tags))
+        }
+        return RadioPlan(favorites: favorites, unresolved: unresolved)
+    }
+
+    struct ReadingPlan {
+        let favorites: Set<NativeFavoriteKey>
+        let savedForLater: Set<NativeFavoriteKey>
+        let recentlyRead: [NativeFavoriteKey]
+        let historyNotImported: Int
+    }
+
+    static func reading(_ backup: NativeBackupPreferencesSnapshot,
+                        favorites: Set<NativeFavoriteKey>, savedForLater: Set<NativeFavoriteKey>,
+                        recentlyRead: [NativeFavoriteKey]) -> ReadingPlan {
+        let allowed: (NativeFavoriteKey) -> Bool = { $0.kind == .resource || $0.kind == .news }
+        let missing = appendMissing(recentlyRead, backup.recentlyRead.filter(allowed), id: { $0 })
+        let additions = missing.dropFirst(recentlyRead.count)
+        let accepted = Array(additions.prefix(max(0, 100 - recentlyRead.count)))
+        return ReadingPlan(favorites: favorites.union(backup.favorites),
+            savedForLater: savedForLater.union(backup.savedForLater.filter(allowed)),
+            recentlyRead: recentlyRead + accepted,
+            historyNotImported: additions.count - accepted.count)
+    }
+
+    private static func appendMissing<T, ID: Hashable>(_ current: [T], _ incoming: [T],
+                                                      id: (T) -> ID) -> [T] {
+        var ids = Set(current.map(id))
+        return current + incoming.filter { ids.insert(id($0)).inserted }
+    }
+}

@@ -59,6 +59,8 @@ final class NativeCinemaRecentStore: ObservableObject {
         -> (apply: () throws -> Void, rollback: () throws -> Void, omitted: Int) {
         let old = entries
         var ids = Set(entries.map(\.id))
+        recovery?.recordPreserved(section: "cinema", kind: "history",
+            identifiers: incoming.filter { ids.contains($0.id) }.map(\.id))
         let missing = incoming.filter { !suppressedKeys.contains($0.id) && ids.insert($0.id).inserted }
         let accepted = Array(missing.prefix(max(0, 100 - entries.count)))
         let combined = entries + accepted

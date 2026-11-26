@@ -255,6 +255,8 @@ final class NativeMusicPlayer: ObservableObject {
                    defaults.object(forKey: "mi-musica-eq-bands") == nil {
                     updates["mi-musica-eq-preset"] = profile.name
                     updates["mi-musica-eq-bands"] = profile.gains.map(Double.init)
+                } else {
+                    recovery?.recordPreserved(section: "music", kind: "equalizer", identifiers: [key])
                 }
                 continue
             }
@@ -271,6 +273,8 @@ final class NativeMusicPlayer: ObservableObject {
             if defaults.object(forKey: target) == nil {
                 if updates[target] != nil { omitted.append(key); continue }
                 updates[target] = data
+            } else {
+                recovery?.recordPreserved(section: "music", kind: "equalizer", identifiers: [target])
             }
         }
         let before = NativeBackupDefaultsBeforeState(defaults: defaults, keys: Array(updates.keys), recovery: recovery)

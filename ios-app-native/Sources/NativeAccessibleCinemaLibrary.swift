@@ -151,6 +151,8 @@ final class NativeCinemaLocalLibrary: ObservableObject {
             from: Data(contentsOf: staging.appendingPathComponent("historial.json")))
         let old = items
         let ids = Set(items.map(\.id))
+        recovery?.recordPreserved(section: "cinema", kind: "personal-item",
+            identifiers: incoming.filter { ids.contains($0.id) }.map { $0.id.uuidString })
         let additions = incoming.filter { !ids.contains($0.id) }
         let combined = items + additions
         let moves: [NativeBackupFileRestore.Move] = additions.map {

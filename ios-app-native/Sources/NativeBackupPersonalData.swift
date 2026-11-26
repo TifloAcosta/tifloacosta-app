@@ -479,7 +479,11 @@ enum NativeBackupSettingsRestore {
         var omitted = [String]()
         func offer(_ key: String, _ value: Any, allowed: Bool) {
             guard allowed else { omitted.append(key); return }
-            if defaults.object(forKey: key) == nil { updates[key] = value }
+            if let current = defaults.object(forKey: key) {
+                if let existing = current as? NSObject, let incoming = value as? NSObject,
+                   existing.isEqual(incoming) { return }
+                recovery?.recordPreserved(section: "preferences", kind: "setting", identifiers: [key])
+            } else { updates[key] = value }
         }
         for (key, value) in backup.integers {
             if key == "native-reader-reading-engine" {

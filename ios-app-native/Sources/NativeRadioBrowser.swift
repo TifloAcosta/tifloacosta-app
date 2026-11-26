@@ -516,6 +516,11 @@ enum NativeRadioBackupAdapter {
         let saved = defaults.string(forKey: key) ?? ""
         let existing = saved.isEmpty ? [] :
             try JSONDecoder().decode([NativeRadioStation].self, from: Data(saved.utf8))
+        let existingIDs = Set(existing.compactMap { UUID(uuidString: $0.stationuuid) })
+        recovery?.recordPreserved(section: "radio", kind: "station", identifiers: backup.favorites.compactMap {
+            guard let id = UUID(uuidString: $0.stationID), existingIDs.contains(id) else { return nil }
+            return id.uuidString
+        })
         let plan = NativeBackupPersonalDataMerge.radio(backup, existing: existing)
         let next = String(decoding: try JSONEncoder().encode(plan.favorites), as: UTF8.self)
         let before = NativeBackupDefaultsBeforeState(defaults: defaults, keys: [key], recovery: recovery)

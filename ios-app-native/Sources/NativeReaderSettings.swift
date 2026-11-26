@@ -106,6 +106,8 @@ enum NativeReaderVoiceProfileStore {
             }
             if defaults.object(forKey: storage) == nil {
                 updates[storage] = try JSONEncoder().encode(profile)
+            } else {
+                recovery?.recordPreserved(section: "preferences", kind: "voice-profile", identifiers: [identifier])
             }
         }
         let before = NativeBackupDefaultsBeforeState(defaults: defaults, keys: Array(updates.keys), recovery: recovery)

@@ -606,6 +606,8 @@ final class NativeReaderLibrary: ObservableObject {
             from: Data(contentsOf: staging.appendingPathComponent("carpetas.json")))
         let oldDocuments = documents, oldFolders = folders
         let currentIDs = Set(documents.map(\.id))
+        recovery?.recordPreserved(section: "reader", kind: "document",
+            identifiers: incoming.filter { currentIDs.contains($0.id) }.map { $0.id.uuidString })
         let additions = incoming.filter { !currentIDs.contains($0.id) }
         let combined = documentsForPersistence() + additions
         var nextFolders = folders

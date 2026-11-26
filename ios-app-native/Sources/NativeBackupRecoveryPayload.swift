@@ -1,4 +1,5 @@
 import Foundation
+import CryptoKit
 
 /// Only exact planned destinations and named defaults are recorded. Recovery
 /// is local, before live stores load; never interpret an archive as a journal.
@@ -183,11 +184,21 @@ struct NativeBackupRecoveryPayload: Codable {
 
 /// Scoped to synchronous preparation. No arbitrary defaults or existing media
 /// are captured; each adapter contributes the precise keys and file targets.
+/// An overlapping identity is not proof of byte-for-byte equality. Keep
+/// the live item and report that the incoming copy was not applied.
+/// Digests avoid putting URLs, titles or private names in approval tokens.
+struct NativeBackupPreservedIdentity: Hashable {
+    let section: String
+    let kind: String
+    let digest: String
+}
+
 final class NativeBackupRecoveryBuilder {
     private let roots: NativeBackupRecoveryPayload.Roots
     private var indexes: [NativeBackupRecoveryPayload.Index] = []
     private var targets: [NativeBackupRecoveryPayload.Path] = []
     private var keys = Set<String>()
+    private var preserved = Set<NativeBackupPreservedIdentity>()
     init(roots: NativeBackupRecoveryPayload.Roots = .application) { self.roots = roots }
 
     func recordFiles(indexes values: [(URL, Data?)], targets urls: [URL]) throws {
@@ -207,6 +218,21 @@ final class NativeBackupRecoveryBuilder {
     }
 
     func recordDefaults(_ values: [String]) { keys.formUnion(values) }
+
+    func recordPreserved(section: String, kind: String, identifiers: [String]) {
+        for identifier in identifiers {
+            let hash = SHA256.hash(data: Data(identifier.utf8)).map { String(format: "%02x", $0) }.joined()
+            preserved.insert(.init(section: section, kind: kind, digest: hash))
+        }
+    }
+
+    var preservedIdentities: [NativeBackupPreservedIdentity] {
+        preserved.sorted {
+            if $0.section != $1.section { return $0.section < $1.section }
+            if $0.kind != $1.kind { return $0.kind < $1.kind }
+            return $0.digest < $1.digest
+        }
+    }
 
     func payload(defaults: UserDefaults = .standard) throws -> NativeBackupRecoveryPayload {
         guard Set(indexes.map(\.path)).count == indexes.count, Set(targets).count == targets.count else {

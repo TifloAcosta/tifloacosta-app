@@ -734,6 +734,11 @@ private final class NativeMusicLibrary: ObservableObject {
             from: Data(contentsOf: staging.appendingPathComponent("manifest.json")))
         let oldFiles = files, oldFolders = folders, oldLists = playlists, oldSmart = smartFolders
         var trackIDs = Set(files.map(\.id))
+        recovery?.recordPreserved(section: "music", kind: "track",
+            identifiers: backup.catalog.tracks.keys.compactMap { key in
+                guard let id = UUID(uuidString: key), trackIDs.contains(id) else { return nil }
+                return id.uuidString
+            })
         var additions: [MusicLocalFile] = []
         var moves: [NativeBackupFileRestore.Move] = []
         for (key, track) in backup.catalog.tracks.sorted(by: { $0.key < $1.key }) {
@@ -751,6 +756,18 @@ private final class NativeMusicLibrary: ObservableObject {
         }
         var folderIDs = Set(folders.map(\.id)), listIDs = Set(playlists.map(\.id))
         var smartIDs = Set(smartFolders.map(\.id))
+        recovery?.recordPreserved(section: "music", kind: "folder", identifiers: backup.folders.compactMap {
+            guard let id = UUID(uuidString: $0.id), folderIDs.contains(id) else { return nil }
+            return id.uuidString
+        })
+        recovery?.recordPreserved(section: "music", kind: "playlist", identifiers: backup.playlists.compactMap {
+            guard let id = UUID(uuidString: $0.id), listIDs.contains(id) else { return nil }
+            return id.uuidString
+        })
+        recovery?.recordPreserved(section: "music", kind: "smart-folder", identifiers: backup.smartFolders.compactMap {
+            guard let id = UUID(uuidString: $0.id), smartIDs.contains(id) else { return nil }
+            return id.uuidString
+        })
         var nextFolders = folders, nextLists = playlists, nextSmart = smartFolders
         var omitted = [String]()
         for folder in backup.folders {
@@ -777,10 +794,11 @@ private final class NativeMusicLibrary: ObservableObject {
         }
         let combined = files + additions
         var songNames: [String: String] = [:]
+        let combinedByID = Dictionary(combined.map { ($0.id, $0) }, uniquingKeysWith: { current, _ in current })
         for (key, track) in backup.catalog.tracks {
             guard let id = UUID(uuidString: key),
                   let location = track.locations.first,
-                  let file = combined.first(where: { $0.id == id }) else { continue }
+                  let file = combinedByID[id] else { continue }
             songNames[(location.remoteId as NSString).lastPathComponent] = file.fileName
         }
         let profilePlan = try NativeMusicPlayer.shared.prepareGlobalBackupProfiles(backup.audioProfiles,

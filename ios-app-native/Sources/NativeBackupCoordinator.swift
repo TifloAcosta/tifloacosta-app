@@ -312,9 +312,11 @@ final class NativeBackupCoordinator: ObservableObject {
         let omittedPodcastPositions: Int
         let omittedReadingHistory: Int
         let omittedCinemaHistory: Int
+        let preservedExisting: [NativeBackupPreservedIdentity]
 
         var omissionSummary: RestoreOmissionSummary {
-            RestoreOmissionSummary(podcastIDs: pendingPodcastDownloads.map(\.id).sorted(),
+            RestoreOmissionSummary(generation: manifest.generation, preservedExisting: preservedExisting,
+                podcastIDs: pendingPodcastDownloads.map(\.id).sorted(),
                 radioIDs: unresolvedRadioStations.map(\.stationID).sorted(),
                 settings: omittedSettings.sorted(), music: omittedMusicProfilesAndRules.sorted(),
                 excludedPodcastReferences: excludedPodcastReferences, podcastPositions: omittedPodcastPositions,
@@ -322,7 +324,7 @@ final class NativeBackupCoordinator: ObservableObject {
         }
 
         var hasOmissions: Bool {
-            !pendingPodcastDownloads.isEmpty || !unresolvedRadioStations.isEmpty ||
+            !preservedExisting.isEmpty || !pendingPodcastDownloads.isEmpty || !unresolvedRadioStations.isEmpty ||
             !omittedSettings.isEmpty || !omittedMusicProfilesAndRules.isEmpty ||
             excludedPodcastReferences > 0 || omittedPodcastPositions > 0 || omittedReadingHistory > 0 || omittedCinemaHistory > 0
         }
@@ -331,6 +333,8 @@ final class NativeBackupCoordinator: ObservableObject {
     /// Approval is scoped to the precise omissions presented to the user.
     /// A retry must not silently accept new omissions after staging again.
     struct RestoreOmissionSummary: Equatable {
+        let generation: UUID
+        let preservedExisting: [NativeBackupPreservedIdentity]
         let podcastIDs: [String]
         let radioIDs: [String]
         let settings: [String]
@@ -435,7 +439,8 @@ final class NativeBackupCoordinator: ObservableObject {
             unresolvedRadioStations: stations, omittedSettings: settings, omittedMusicProfilesAndRules: music,
             excludedPodcastReferences: excludedPodcastReferences,
             omittedPodcastPositions: podcastPositions, omittedReadingHistory: readingHistory,
-            omittedCinemaHistory: cinemaHistory)
+            omittedCinemaHistory: cinemaHistory,
+            preservedExisting: recovery.preservedIdentities)
         let omissions = report.omissionSummary
         guard !report.hasOmissions || approvedOmissions == omissions else { throw Failure.incompleteRestore(report) }
         guard liveStoresAreQuiescent(), NativeRemotePlaybackOwner.current == nil,

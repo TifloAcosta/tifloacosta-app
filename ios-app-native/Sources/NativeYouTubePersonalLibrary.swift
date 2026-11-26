@@ -50,6 +50,10 @@ final class NativeYouTubePersonalLibrary: ObservableObject {
         let oldVideos = videos, oldChannels = followedChannels
         var videoIDs = Set(videos.map(\.id))
         var channelIDs = Set(followedChannels.map(\.id))
+        recovery?.recordPreserved(section: "preferences", kind: "youtube-video",
+            identifiers: backup.youtubeVideos.filter { videoIDs.contains($0.id) }.map(\.id))
+        recovery?.recordPreserved(section: "preferences", kind: "youtube-channel",
+            identifiers: backup.youtubeChannels.filter { channelIDs.contains($0.id) }.map(\.id))
         let nextVideos = videos + backup.youtubeVideos.filter { videoIDs.insert($0.id).inserted }
         let nextChannels = (followedChannels + backup.youtubeChannels.filter {
             channelIDs.insert($0.id).inserted

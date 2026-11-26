@@ -57,7 +57,7 @@ test('coordinator never publishes a subset of a requested selection', () => {
     assert.match(coordinator, /guard !isCreating/);
     assert.match(coordinator, /archives\[.reader\] = try await reader.createGlobalBackupArchive\(\)/);
     assert.match(coordinator, /archives\[.music\] = try await NativeMusicBackupAdapter.createArchive\(\)/);
-    assert.match(coordinator, /let prepared = archives[\s\S]*?destination.publish\(archives: prepared\)/);
+    assert.match(coordinator, /let prepared = archives[\s\S]*?destination.publish\(archives: prepared, generation: generation\)/);
     assert.match(coordinator, /for archive in archives.values/);
 });
 
@@ -418,4 +418,20 @@ test('merged cloud history flags mismatching manifests and only proposes safe re
     assert.match(policy, /protected\.formUnion\(local\.prefix\(keepPerSection\)/);
     assert.match(policy, /entry\.availability == \.both/);
     assert.match(coordinator, /NativeBackupSyncPolicy\.history\(local: here, remote: remote\)/);
+});
+
+test('restore reports all preserved overlapping identities and scopes approval to one generation', () => {
+    const recovery = read('NativeBackupRecoveryPayload.swift');
+    assert.match(recovery, /struct NativeBackupPreservedIdentity: Hashable/);
+    assert.match(recovery, /SHA256\.hash\(data: Data\(identifier\.utf8\)\)/);
+    assert.match(coordinator, /generation: manifest\.generation, preservedExisting: preservedExisting/);
+    assert.match(coordinator, /preservedExisting: recovery\.preservedIdentities/);
+    assert.match(coordinator, /!preservedExisting\.isEmpty/);
+    for (const [file, section] of [
+        ['NativeTifloLector.swift', 'reader'], ['NativeMyMusic.swift', 'music'],
+        ['NativeAccessibleCinemaLibrary.swift', 'cinema'], ['NativePodcastLibrary.swift', 'podcasts'],
+        ['NativeRadioBrowser.swift', 'radio'], ['NativeBackupPersonalData.swift', 'preferences']
+    ]) {
+        assert.ok(read(file).includes('recordPreserved(section: "' + section + '"'), file);
+    }
 });

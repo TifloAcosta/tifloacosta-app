@@ -81,6 +81,14 @@ final class NativePodcastLibrary: ObservableObject {
             NativeBackupPersonalDataMerge.PodcastPlan) {
         try NativeBackupPersonalDataValidation.validate(section: .podcasts,
             data: JSONEncoder().encode(backup))
+        let followedIDs = Set(followed.map(\.url)), savedIDs = Set(savedEpisodes.map(\.id))
+        let progressIDs = Set(playbackProgress.map(\.id))
+        recovery?.recordPreserved(section: "podcasts", kind: "followed",
+            identifiers: backup.followed.filter { followedIDs.contains($0.url) }.map(\.url))
+        recovery?.recordPreserved(section: "podcasts", kind: "saved",
+            identifiers: backup.savedEpisodes.filter { savedIDs.contains($0.id) }.map(\.id))
+        recovery?.recordPreserved(section: "podcasts", kind: "position",
+            identifiers: backup.playbackProgress.filter { progressIDs.contains($0.id) }.map(\.id))
         let plan = NativeBackupPersonalDataMerge.podcasts(backup, followed: followed,
             favorites: favorites, saved: savedEpisodes, progress: playbackProgress,
             downloadedIDs: downloadedIDs)

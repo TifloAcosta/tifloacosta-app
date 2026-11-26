@@ -134,9 +134,7 @@ struct NativeBackupManagementScreen: View {
             if overflow { return MusicLocalized.message("Tamaño desconocido") }
             total = next
         }
-        let formatter = ByteCountFormatter()
-        formatter.countStyle = .file
-        return formatter.string(fromByteCount: total)
+        return total.formatted(.byteCount(style: .file).locale(locale))
     }
 
     private func announce(_ key: String) {

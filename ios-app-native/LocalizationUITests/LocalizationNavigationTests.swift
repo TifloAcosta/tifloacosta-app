@@ -453,6 +453,56 @@ final class LocalizationNavigationTests: XCTestCase {
         print("LOCALIZATION_UI_NAVIGATION_PASS \(language)")
     }
 
+    /// Exercises the real local UI path on the simulator, with no cloud upload,
+    /// no automation and no third-party media. Creation and preview are separate.
+    func testLocalBackupCreationAndRestorePreview() {
+        let app = XCUIApplication()
+        launch(app, index: 0)
+        openRoot(app, key: "Configuración", language: "es")
+        let manage = app.buttons.matching(identifier: "tiflo.settings.backups").firstMatch
+        XCTAssertTrue(reveal(app, manage))
+        manage.tap()
+        let close = app.buttons.matching(identifier: "tiflo.backup.close").firstMatch
+        XCTAssertTrue(close.waitForExistence(timeout: 30))
+        let enabled = XCTNSPredicateExpectation(predicate: NSPredicate(format: "enabled == true"), object: close)
+        XCTAssertEqual(XCTWaiter.wait(for: [enabled], timeout: 45), .completed)
+
+        // Back up only preferences, not any user-imported media or documents.
+        for section in ["reader", "music", "cinema", "podcasts", "radio"] {
+            let item = app.switches.matching(identifier: "tiflo.backup.select." + section).firstMatch
+            XCTAssertTrue(reveal(app, item), section)
+            if item.value as? String == "1" { item.tap() }
+            XCTAssertEqual(item.value as? String, "0")
+        }
+        let preferences = app.switches.matching(identifier: "tiflo.backup.select.preferences").firstMatch
+        XCTAssertTrue(reveal(app, preferences))
+        if preferences.value as? String == "0" { preferences.tap() }
+        XCTAssertEqual(preferences.value as? String, "1")
+        let local = app.buttons.matching(identifier: "tiflo.backup.create.local").firstMatch
+        XCTAssertTrue(reveal(app, local))
+        XCTAssertTrue(local.isEnabled)
+        local.tap()
+        let created = app.staticTexts.matching(NSPredicate(format: "label == %@", "Copia local creada correctamente.")).firstMatch
+        XCTAssertTrue(created.waitForExistence(timeout: 60))
+        let idle = XCTNSPredicateExpectation(predicate: NSPredicate(format: "enabled == true"), object: close)
+        XCTAssertEqual(XCTWaiter.wait(for: [idle], timeout: 45), .completed)
+
+        let review = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "tiflo.backup.review.")).firstMatch
+        XCTAssertTrue(reveal(app, review))
+        review.tap()
+        let confirm = app.buttons.matching(identifier: "tiflo.backup.restore.confirm").firstMatch
+        XCTAssertTrue(confirm.waitForExistence(timeout: 60))
+        XCTAssertTrue(reveal(app, confirm))
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label == %@", "Todavía no se han modificado tus datos. Los elementos existentes se conservarán.")).firstMatch.exists)
+        // Cancel the read-only preview. Never press the restore confirmation.
+        let cancel = app.buttons.matching(identifier: "tiflo.backup.restore.cancel").firstMatch
+        XCTAssertTrue(reveal(app, cancel))
+        cancel.tap()
+        XCTAssertFalse(confirm.exists)
+        XCTAssertTrue(close.isEnabled)
+        close.tap()
+    }
+
     func testSpanish() { audit("es", index: 0) }
     func testEnglish() { audit("en", index: 1) }
     func testPortuguese() { audit("pt", index: 2) }

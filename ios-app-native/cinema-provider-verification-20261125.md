@@ -12,7 +12,8 @@ Exclusiones de la investigación anterior:
 - FOAL, excluido definitivamente por decisión editorial.
 - La Bavarde, MovieReading, Greta & Starks y aplicaciones similares, por servir pistas sincronizadas con una copia independiente.
 - ETC Filmes, por ofrecer tráilers; Cinema da Fundação, por sus sesiones presenciales; Cine MIB, por carecer de acceso comprobado a obras completas.
-- AudioVault y Cegos Brasil, por falta de una ruta oficial de los titulares que acredite el acceso legítimo a sus colecciones.
+- AudioVault: excluido expresamente por decisión editorial del 26-11-2026 tras la respuesta negativa del proveedor. No se ofrece enlace, catálogo, búsqueda, reproducción ni descarga. Solo reconsiderar tras una nueva autorización expresa. La lista nativa ya carecía de este proveedor; no se reduce el número de entradas.
+- Cegos Brasil, por falta de una ruta oficial de los titulares que acredite el acceso legítimo a sus colecciones.
 - My Sound Cinema y CNETV, por falta de catálogo AD operativo comprobado.
 - ITVX, Channel 4, 5, NOS y YouTV, porque se localizaron instrucciones o funciones en sus propias plataformas, pero no una ruta directa comprobada a una colección AD u obra completa disponible.
 - Variantes francesa e italiana de Play Suisse, por falta de confirmación de las pistas del idioma; se mantiene la entrada alemana existente.

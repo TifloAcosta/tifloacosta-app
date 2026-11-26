@@ -63,6 +63,26 @@ enum NativeReaderVoiceProfileStore {
         UserDefaults.standard.set(data, forKey: key(voiceIdentifier))
     }
 
+    /// Export decoded voice profiles only; never export the defaults domain.
+    static func backupProfiles(defaults: UserDefaults = .standard) throws -> [String: NativeReaderVoiceProfile] {
+        var result: [String: NativeReaderVoiceProfile] = [:]
+        for (key, value) in defaults.dictionaryRepresentation() where key.hasPrefix(prefix) {
+            let identifier = String(key.dropFirst(prefix.count))
+            guard !identifier.isEmpty, identifier.utf8.count <= 512,
+                  let data = value as? Data, data.count <= 65_536 else {
+                throw CocoaError(.fileReadCorruptFile)
+            }
+            let profile = try JSONDecoder().decode(NativeReaderVoiceProfile.self, from: data)
+            guard profile.pauseSeconds.count == 5,
+                  profile.pauseSeconds.allSatisfy({ $0.isFinite && $0 >= 0 }),
+                  profile.volume.map({ $0.isFinite && $0 >= 0 && $0 <= 1 }) ?? true else {
+                throw CocoaError(.fileReadCorruptFile)
+            }
+            result[identifier] = profile
+        }
+        return result
+    }
+
     static func remove(for voiceIdentifier: String) {
         migrateIfNeeded()
         UserDefaults.standard.removeObject(forKey: key(voiceIdentifier))

@@ -28,7 +28,7 @@ struct NativeAcoustIDAccount: View {
                             .disabled(operation != nil)
                         Toggle("Identificar al importar con AcoustID", isOn: $automatic)
                     }
-                    if let message { Text(MusicLocalized.message(message)).accessibilityAddTraits(.updatesFrequently) }
+                    if let message { Text(message).accessibilityAddTraits(.updatesFrequently) }
                 }
                 Section("Clave personal de AcoustID") {
                     SecureField("Clave personal de AcoustID", text: $key)

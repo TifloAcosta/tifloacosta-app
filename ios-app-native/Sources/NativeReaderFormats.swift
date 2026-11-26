@@ -12,6 +12,8 @@ struct NativeReaderImportedPayload {
     var daisyNavigation: [NativeDaisyNavigationPoint] = []
     var daisyClips: [NativeDaisyAudioClip] = []
     var textLinks: [NativeReaderTextLink] = []
+    var ocrAttemptedPages: Int = 0
+    var ocrUnreadablePages: Int = 0
 }
 
 enum NativeReaderFormatError: LocalizedError {
@@ -153,7 +155,7 @@ enum NativeReaderFormats {
         "txt", "text", "md", "markdown", "csv", "json", "xml", "log", "srt"
     ]
 
-    static func read(_ url: URL, documentID: UUID, filename: String? = nil, onPage: ((Int, Int) -> Void)? = nil) throws -> NativeReaderImportedPayload {
+    static func read(_ url: URL, documentID: UUID, filename: String? = nil, onOCRStart: (() -> Void)? = nil, onPage: ((Int, Int) -> Void)? = nil) throws -> NativeReaderImportedPayload {
         try Task.checkCancellation()
         let namedURL = filename.map { URL(fileURLWithPath: $0) } ?? url
         let ext = namedURL.pathExtension.lowercased()
@@ -168,6 +170,8 @@ enum NativeReaderFormats {
         let data = ext == "pdf" ? Data() : try Data(contentsOf: url, options: .mappedIfSafe)
         let text: String
         var textLinks: [NativeReaderTextLink] = []
+        var scannedPages = 0
+        var unreadablePages = 0
         switch ext {
         case "pdf":
             guard let pdf = PDFDocument(url: url)
@@ -176,7 +180,6 @@ enum NativeReaderFormats {
                 throw NativeReaderFormatError.empty(url.lastPathComponent)
             }
             var pages: [String] = []
-            var scannedPages = 0
             for index in 0..<pdf.pageCount {
                 try Task.checkCancellation()
                 onPage?(index + 1, pdf.pageCount)
@@ -187,13 +190,18 @@ enum NativeReaderFormats {
                     guard scannedPages <= 150 else {
                         throw NativeReaderFormatError.tooManyScannedPages
                     }
+                    if scannedPages == 1 { onOCRStart?() }
                     pageText = try autoreleasepool { try ocrPDFPage(pdf, at: index) }
+                        .trimmingCharacters(in: .whitespacesAndNewlines)
+                    if pageText.isEmpty { unreadablePages += 1 }
                 }
                 if !pageText.isEmpty { pages.append("Página \(index + 1)\n\n\(pageText)") }
             }
             text = pages.joined(separator: "\n\n")
         case "jpg", "jpeg", "png", "heic", "heif", "tif", "tiff":
             onPage?(1, 1)
+            scannedPages = 1
+            onOCRStart?()
             text = try autoreleasepool { try recognizeText(in: data) }
         case "html", "htm", "rtf":
             text = NativeDocumentText.extract(data, from: namedURL)
@@ -222,7 +230,8 @@ enum NativeReaderFormats {
             throw NativeReaderFormatError.empty(url.lastPathComponent)
         }
         return .init(body: text, fileExtension: ext, trackPaths: [],
-                     textLinks: textLinks)
+                     textLinks: textLinks, ocrAttemptedPages: scannedPages,
+                     ocrUnreadablePages: unreadablePages)
     }
 
     static func storedURL(for relativePath: String) -> URL? {

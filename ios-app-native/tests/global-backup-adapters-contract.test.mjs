@@ -235,3 +235,14 @@ test('restore validates scalar choices and voice profiles without overwriting ex
     assert.match(voiceProfiles, /defaults\.object\(forKey: storage\) == nil/);
     assert.match(voiceProfiles, /try JSONEncoder\(\)\.encode\(profile\)/);
 });
+
+test('preferences transaction exposes omissions and reverses every prepared component', () => {
+    const source = personal.slice(personal.indexOf('enum NativeBackupPreferencesRestore'));
+    assert.match(source, /NativeBackupPreferencesComponents\.prepare/);
+    assert.match(source, /NativeBackupSettingsRestore\.prepare/);
+    assert.match(source, /section: \.preferences, apply:/);
+    assert.match(source, /for part in parts\.reversed\(\)/);
+    assert.match(source, /if let firstError \{ throw firstError \}/);
+    assert.match(source, /omittedKeys: settings\.omittedKeys/);
+    assert.match(source, /historyNotImported: components\.readingPlan\.historyNotImported/);
+});

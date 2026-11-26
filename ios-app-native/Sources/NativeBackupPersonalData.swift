@@ -504,3 +504,41 @@ enum NativeBackupSettingsRestore {
         })
     }
 }
+
+
+/// One reversible preferences step. Deferred or incompatible settings are
+/// explicit in the result and must be displayed before any user confirmation.
+/// The coordinator must not report a complete restore when omissions remain.
+@MainActor
+enum NativeBackupPreferencesRestore {
+    struct Prepared {
+        let step: NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>
+        let omittedKeys: [String]
+        let historyNotImported: Int
+    }
+
+    static func prepare(_ backup: NativeBackupPreferencesSnapshot,
+                        favorites: NativeFavoritesStore, activity: NativeReadingActivity) throws -> Prepared {
+        let components = try NativeBackupPreferencesComponents.prepare(backup,
+            favorites: favorites, activity: activity)
+        let settings = try NativeBackupSettingsRestore.prepare(backup)
+        let parts = [components.favorites, components.activity, components.youtube,
+                     (apply: settings.apply, rollback: settings.rollback)]
+        let step = NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>(
+            section: .preferences, apply: {
+                for part in parts {
+                    try Task.checkCancellation()
+                    try part.apply()
+                }
+            }, rollback: {
+                var firstError: Error?
+                for part in parts.reversed() {
+                    do { try part.rollback() }
+                    catch { if firstError == nil { firstError = error } }
+                }
+                if let firstError { throw firstError }
+            })
+        return Prepared(step: step, omittedKeys: settings.omittedKeys,
+            historyNotImported: components.readingPlan.historyNotImported)
+    }
+}

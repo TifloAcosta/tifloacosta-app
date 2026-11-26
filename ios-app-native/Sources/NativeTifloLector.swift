@@ -802,10 +802,17 @@ final class NativeReaderLibrary: ObservableObject {
         }
     }
 
-    func removeTextBookmark(_ document: NativeReadingDocument, offset: Int) {
-        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
+    func removeTextBookmark(_ document: NativeReadingDocument, offset: Int) throws {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }) else {
+            throw CocoaError(.fileNoSuchFile)
+        }
+        let previous = documents[i].textBookmarks
         documents[i].textBookmarks?.removeAll { $0.offset == offset }
-        try? save()
+        do { try save() }
+        catch {
+            documents[i].textBookmarks = previous
+            throw error
+        }
     }
 
     @discardableResult
@@ -838,16 +845,30 @@ final class NativeReaderLibrary: ObservableObject {
         }
     }
 
-    func removeAudioBookmark(_ document: NativeReadingDocument, mark: NativeAudioBookmark) {
-        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
+    func removeAudioBookmark(_ document: NativeReadingDocument, mark: NativeAudioBookmark) throws {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }) else {
+            throw CocoaError(.fileNoSuchFile)
+        }
+        let previous = documents[i].audioBookmarks
         documents[i].audioBookmarks?.removeAll { $0 == mark }
-        try? save()
+        do { try save() }
+        catch {
+            documents[i].audioBookmarks = previous
+            throw error
+        }
     }
 
-    func removeBookmark(_ document: NativeReadingDocument, at percent: Int) {
-        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
+    func removeBookmark(_ document: NativeReadingDocument, at percent: Int) throws {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }) else {
+            throw CocoaError(.fileNoSuchFile)
+        }
+        let previous = documents[i].markedPositions
         documents[i].markedPositions?.removeAll { $0 == percent }
-        try? save()
+        do { try save() }
+        catch {
+            documents[i].markedPositions = previous
+            throw error
+        }
     }
 
     func savePosition(_ document: NativeReadingDocument, percent: Int) {
@@ -2864,6 +2885,12 @@ struct NativeReadingScreen: View {
     @State private var showDocumentActions = false
     @State private var showDocumentInformation = false
     @State private var showSavedMarks = false
+    private enum BookmarkDeletion {
+        case text(Int), percent(Int), audio(NativeAudioBookmark)
+    }
+    @State private var bookmarkToDelete: BookmarkDeletion?
+    @State private var confirmBookmarkDeletion = false
+    @State private var bookmarkDeletionFailed = false
     @State private var showDocumentSearch = false
     @State private var documentSearchText = ""
     @State private var positionBeforeSearch: Int?
@@ -4475,6 +4502,25 @@ struct NativeReadingScreen: View {
         Button("Cancelar", role: .cancel) {}
     }
 
+    private func requestBookmarkDeletion(_ mark: BookmarkDeletion) {
+        bookmarkToDelete = mark
+        confirmBookmarkDeletion = true
+    }
+
+    private func deleteRequestedBookmark() {
+        guard let mark = bookmarkToDelete else { return }
+        defer { bookmarkToDelete = nil }
+        do {
+            switch mark {
+            case .text(let offset): try library.removeTextBookmark(document, offset: offset)
+            case .percent(let percent): try library.removeBookmark(document, at: percent)
+            case .audio(let audio): try library.removeAudioBookmark(document, mark: audio)
+            }
+        } catch {
+            bookmarkDeletionFailed = true
+        }
+    }
+
     private var bookmarksSheetContent: some View {
             NavigationStack {
                 List {
@@ -4487,7 +4533,7 @@ struct NativeReadingScreen: View {
                             showSavedMarks = false
                         }
                         .accessibilityAction(named: Text("Eliminar esta marca")) {
-                            library.removeTextBookmark(document, offset: mark.offset)
+                            requestBookmarkDeletion(.text(mark.offset))
                         }
                     }
                     ForEach(latest.bookmarks, id: \.self) { percent in
@@ -4496,7 +4542,7 @@ struct NativeReadingScreen: View {
                             showSavedMarks = false
                         }
                         .accessibilityAction(named: Text("Eliminar esta marca")) {
-                            library.removeBookmark(document, at: percent)
+                            requestBookmarkDeletion(.percent(percent))
                         }
                     }
                     ForEach(latest.savedAudioBookmarks, id: \.self) { mark in
@@ -4506,13 +4552,20 @@ struct NativeReadingScreen: View {
                             showSavedMarks = false
                         }
                         .accessibilityAction(named: Text("Eliminar esta marca")) {
-                            library.removeAudioBookmark(document, mark: mark)
+                            requestBookmarkDeletion(.audio(mark))
                         }
                     }
                 }
                 .tifloScreenSurface()
                 .navigationTitle("Marcas guardadas")
                 .toolbar { Button("Cerrar") { showSavedMarks = false } }
+                .confirmationDialog("¿Eliminar esta marca?", isPresented: $confirmBookmarkDeletion, titleVisibility: .visible) {
+                    Button("Eliminar", role: .destructive) { deleteRequestedBookmark() }
+                    Button("Cancelar", role: .cancel) { bookmarkToDelete = nil }
+                }
+                .alert("No se pudo eliminar la marca. Inténtalo de nuevo.", isPresented: $bookmarkDeletionFailed) {
+                    Button("Aceptar", role: .cancel) {}
+                }
             }
     }
 

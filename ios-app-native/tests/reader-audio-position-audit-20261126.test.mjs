@@ -24,3 +24,16 @@ test('bookmarks capture exact pending audio positions and do not round text to c
   assert.match(p, /NativeReaderProgress\.textPercent\(length: latest.body.count, offset: offset\)/);
   assert.match(source, /NativeReaderProgress\.textPercent\(length: count, offset: value\)/);
 });
+
+test('bookmark removal confirms before mutation and rolls back on storage failure', () => {
+  for (const [name, field] of [['removeTextBookmark','textBookmarks'], ['removeAudioBookmark','audioBookmarks'], ['removeBookmark','markedPositions']]) {
+    const p = part('func ' + name + '(', '\n    }');
+    assert.match(p, /throws/);
+    assert.ok(p.includes('let previous = documents[i].' + field));
+    assert.ok(p.includes('documents[i].' + field + ' = previous'));
+    assert.match(p, /throw error/);
+  }
+  assert.match(source, /confirmationDialog\("¿Eliminar esta marca\?"/);
+  assert.match(source, /role: .destructive\) \{ deleteRequestedBookmark\(\) \}/);
+  assert.match(source, /bookmarkDeletionFailed = true/);
+});

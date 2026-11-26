@@ -1510,3 +1510,7 @@
 "Guardando «%@»." = "Enregistrement de « %@ ».";
 
 "Guardado en la biblioteca" = "Enregistré dans la bibliothèque";
+
+"¿Eliminar esta marca?" = "Supprimer ce signet ?";
+
+"No se pudo eliminar la marca. Inténtalo de nuevo." = "Impossible de supprimer le signet. Réessayez.";

@@ -1510,3 +1510,7 @@
 "Guardando «%@»." = "Salvataggio di «%@».";
 
 "Guardado en la biblioteca" = "Salvato nella biblioteca";
+
+"¿Eliminar esta marca?" = "Eliminare questo segnalibro?";
+
+"No se pudo eliminar la marca. Inténtalo de nuevo." = "Impossibile eliminare il segnalibro. Riprova.";

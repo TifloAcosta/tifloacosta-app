@@ -1510,3 +1510,7 @@
 "Guardando «%@»." = "„%@“ wird gespeichert.";
 
 "Guardado en la biblioteca" = "In der Bibliothek gespeichert";
+
+"¿Eliminar esta marca?" = "Dieses Lesezeichen löschen?";
+
+"No se pudo eliminar la marca. Inténtalo de nuevo." = "Das Lesezeichen konnte nicht gelöscht werden. Versuche es erneut.";

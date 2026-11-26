@@ -1512,3 +1512,7 @@
 "Guardando «%@»." = "Saving “%@”.";
 
 "Guardado en la biblioteca" = "Saved to library";
+
+"¿Eliminar esta marca?" = "Delete this bookmark?";
+
+"No se pudo eliminar la marca. Inténtalo de nuevo." = "Could not delete the bookmark. Try again.";

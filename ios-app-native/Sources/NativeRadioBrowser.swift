@@ -3,7 +3,7 @@ import AVFoundation
 import MediaPlayer
 import UIKit
 
-private struct NativeRadioStation: Codable, Identifiable {
+struct NativeRadioStation: Codable, Identifiable {
     let stationuuid: String
     let name: String
     let url_resolved: String

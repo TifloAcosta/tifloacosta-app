@@ -345,7 +345,7 @@ test('iCloud transfer preserves local copies, verifies downloads and gates cloud
     assert.match(cloud, /fm\.url\(forUbiquityContainerIdentifier: Self\.containerIdentifier\)/);
     assert.match(cloud, /current\.isEqual\(session\.token\)/);
     assert.match(cloud, /fm\.setUbiquitous\(true, itemAt: staging, destinationURL: target\)/);
-    assert.match(cloud, /ubiquitousItemIsUploaded == true/);
+    assert.match(cloud, /ubiquitousItemIsUploaded != true/);
     assert.match(cloud, /ubiquitousItemHasUnresolvedConflicts == true/);
     assert.match(cloud, /startDownloadingUbiquitousItem/);
     assert.match(cloud, /try local\.adoptVerifiedStaging/);
@@ -356,4 +356,14 @@ test('iCloud transfer preserves local copies, verifies downloads and gates cloud
     assert.match(coordinator, /func downloadFromICloud/);
     assert.match(read('App.entitlements'), /com\.apple\.developer\.ubiquity-container-identifiers/);
     assert.match(read('App.entitlements'), /CloudDocuments/);
+});
+
+test('cloud history distinguishes conflicts from pending transfer and import checks section schema before publication', () => {
+    const cloud = read('NativeBackupCloudStore.swift');
+    assert.match(cloud, /case pending, uploaded, conflicted, failed/);
+    assert.match(cloud, /catch Failure\.conflict/);
+    assert.match(cloud, /uploadState = \.failed/);
+    assert.ok(cloud.indexOf('try validateSection(item.section') < cloud.indexOf('try local.adoptVerifiedStaging'));
+    assert.match(coordinator, /importGeneration\(generation, local: local\) \{ section, url in/);
+    assert.match(coordinator, /verifyContentsForRestore\(section: section, source: url\)/);
 });

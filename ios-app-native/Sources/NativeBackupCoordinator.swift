@@ -105,7 +105,13 @@ final class NativeBackupCoordinator: ObservableObject {
         defer { isTransferringCloudBackup = false }
         let local = store
         let worker = Task.detached(priority: .utility) {
-            try NativeBackupCloudStore().upload(generation: generation, local: local)
+            let (manifest, directory) = try local.verifiedGeneration(generation)
+            for artifact in manifest.artifacts {
+                try Task.checkCancellation()
+                try NativeBackupSectionArchive.verifyContentsForRestore(section: artifact.section,
+                    source: directory.appendingPathComponent(artifact.filename))
+            }
+            return try NativeBackupCloudStore().upload(generation: generation, local: local)
         }
         return try await withTaskCancellationHandler {
             try await worker.value
@@ -127,7 +133,9 @@ final class NativeBackupCoordinator: ObservableObject {
         defer { isTransferringCloudBackup = false }
         let local = store
         let worker = Task.detached(priority: .utility) {
-            try await NativeBackupCloudStore().importGeneration(generation, local: local)
+            try await NativeBackupCloudStore().importGeneration(generation, local: local) { section, url in
+                try NativeBackupSectionArchive.verifyContentsForRestore(section: section, source: url)
+            }
         }
         return try await withTaskCancellationHandler {
             try await worker.value

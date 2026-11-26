@@ -29,7 +29,6 @@ const main=new Map(languages.map(l=>[l,readDict(path.join(source,l+'.lproj','Loc
 const ext=new Map(six.map(l=>[l,readDict(path.join(share,'Localizations',l+'.lproj','Localizable.strings'))]));
 const sig=value=>[...value.replace(/%%/g,'').matchAll(/%(?:\d+\$)?[-+0 #]*\d*(?:\.\d+)?(?:hh|ll|[hlLzjt])?[@diufFeEgGxXoscpaA]/g)].map(m=>m[0].replace(/%\d+\$/,'%')).sort().join('|');
 const line=(s,i)=>s.slice(0,i).split('\n').length;
-const keyPattern=String.raw+'"((?:\\\\.|[^"\\\\])*)"';
 function collect(files,patterns){
   const found=new Map();
   for(const file of files){
@@ -44,11 +43,11 @@ function collect(files,patterns){
   }
   return found;
 }
-const literal=new RegExp(String.raw+'\b(?:MusicLocalized\.(?:message|format)|NativeAppLanguage\.message)\s*\(\s*'+keyPattern,'g');
-const sharedLiteral=new RegExp(String.raw+'\bShareLocale\.(?:message|format)\s*\(\s*'+keyPattern,'g');
-const ui=new RegExp(String.raw+'\b(?:Menu|ProgressView|ContentUnavailableView|ShareLink|GroupBox|ControlGroup|Slider|Stepper|DatePicker|accessibilityValue|accessibilityRotor|accessibilityCustomContent|accessibilityAction\(\s*named:\s*Text|accessibilityLabel|accessibilityHint|Label|Text|Button|Section|Toggle|Picker|NavigationLink|DisclosureGroup|LabeledContent|TextField|SecureField|navigationTitle|alert|confirmationDialog|IntentDescription)\s*\(\s*'+keyPattern,'g');
-const intent=new RegExp(String.raw+'\bLocalizedStringResource\s*=\s*'+keyPattern,'g');
-const shortTitle=new RegExp(String.raw+'\bshortTitle:\s*'+keyPattern,'g');
+const literal=/\b(?:MusicLocalized\.(?:message|format)|NativeAppLanguage\.message)\s*\(\s*"((?:\\.|[^"\\])*)"/g;
+const sharedLiteral=/\bShareLocale\.(?:message|format)\s*\(\s*"((?:\\.|[^"\\])*)"/g;
+const ui=/\b(?:Menu|ProgressView|ContentUnavailableView|ShareLink|GroupBox|ControlGroup|Slider|Stepper|DatePicker|accessibilityValue|accessibilityRotor|accessibilityCustomContent|accessibilityAction\(\s*named:\s*Text|accessibilityLabel|accessibilityHint|Label|Text|Button|Section|Toggle|Picker|NavigationLink|DisclosureGroup|LabeledContent|TextField|SecureField|navigationTitle|alert|confirmationDialog|IntentDescription)\s*\(\s*"((?:\\.|[^"\\])*)"/g;
+const intent=/\bLocalizedStringResource\s*=\s*"((?:\\.|[^"\\])*)"/g;
+const shortTitle=/\bshortTitle:\s*"((?:\\.|[^"\\])*)"/g;
 const properNames=new Set(['ISBN','iOS','TifloAcosta','Google','YouTube']);
 function missing(found,dicts,exceptions=new Set()){
   const result=[];

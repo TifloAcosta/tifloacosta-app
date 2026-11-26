@@ -176,10 +176,26 @@ final class NativeReaderLibrary: ObservableObject {
                 onProgress(MusicLocalized.format("Procesando página %d de %d: %@", page, total, filename))
             }
         }
-        defer { progress.continuation.finish(); progressTask.cancel() }
+        // A separate one-event stream cannot lose the OCR start notice to
+        // the coalescing page-progress buffer.
+        let ocr = AsyncStream<Void>.makeStream(bufferingPolicy: .bufferingOldest(1))
+        let ocrTask = Task { @MainActor in
+            for await _ in ocr.stream {
+                let message = MusicLocalized.message("Este documento contiene texto en forma de imagen. TifloLector lo reconocerá automáticamente para que puedas leerlo de forma accesible.")
+                onProgress(message)
+                UIAccessibility.post(notification: .announcement, argument: message)
+                return true
+            }
+            return false
+        }
+        defer {
+            progress.continuation.finish()
+            progressTask.cancel()
+            ocr.continuation.finish()
+        }
         do {
             let worker = Task.detached(priority: .userInitiated) {
-                defer { progress.continuation.finish() }
+                defer { progress.continuation.finish(); ocr.continuation.finish() }
                 let accessed = url.startAccessingSecurityScopedResource()
                 defer { if accessed { url.stopAccessingSecurityScopedResource() } }
                 let attributes = try url.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey])
@@ -187,7 +203,9 @@ final class NativeReaderLibrary: ObservableObject {
                     throw CocoaError(.fileReadUnsupportedScheme)
                 }
                 let payload = try NativeReaderFormats.read(url, documentID: identifier,
-                    filename: filename) { page, total in
+                    filename: filename, onOCRStart: {
+                        ocr.continuation.yield(())
+                    }) { page, total in
                     progress.continuation.yield((page, total))
                 }
                 try Task.checkCancellation()
@@ -201,6 +219,7 @@ final class NativeReaderLibrary: ObservableObject {
                 worker.cancel()
             }
             await progressTask.value
+            _ = await ocrTask.value
             let title = preferredTitle?.trimmingCharacters(in: .whitespacesAndNewlines)
             let document = NativeReadingDocument(
                 id: identifier,
@@ -211,9 +230,24 @@ final class NativeReaderLibrary: ObservableObject {
                 daisyNavigation: payload.daisyNavigation, daisyClips: payload.daisyClips,
                 textLinks: payload.textLinks)
             try await persistImportedDocument(document)
+            if payload.ocrAttemptedPages > 0 {
+                let message = payload.ocrUnreadablePages > 0
+                    ? MusicLocalized.format("Reconocimiento parcial. No se encontró texto en %d páginas procesadas. El texto disponible se ha guardado.", payload.ocrUnreadablePages)
+                    : MusicLocalized.message("Reconocimiento completado. El documento está listo para su lectura.")
+                onProgress(message)
+                UIAccessibility.post(notification: .announcement, argument: message)
+            }
             return document
         } catch {
             progressTask.cancel()
+            ocr.continuation.finish()
+            if await ocrTask.value {
+                let message = error is CancellationError
+                    ? MusicLocalized.message("Reconocimiento de texto cancelado.")
+                    : MusicLocalized.message("No se pudo completar el reconocimiento o guardar el documento.")
+                onProgress(message)
+                UIAccessibility.post(notification: .announcement, argument: message)
+            }
             await Task.detached {
                 NativeReaderFormats.deleteStoredFiles(for: identifier)
                 NativeReaderFormats.deleteOriginal(for: identifier)

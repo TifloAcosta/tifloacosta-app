@@ -168,3 +168,38 @@ test('prepared metadata merges preserve current records and do not manufacture d
     assert.match(source, /ids\.insert\(id\(\$0\)\)\.inserted/);
     assert.doesNotMatch(source, /UserDefaults|URLSession|FileManager|\.filename\b/);
 });
+
+test('library restore decodes all three typed indexes and rejects missing or orphaned media', () => {
+    const source = personal.slice(personal.indexOf('enum NativeBackupLibraryValidation'));
+    for (const name of ['NativeReadingDocument','NativeCinemaLocalItem','NativeCinemaRecent']) {
+        assert.ok(source.includes('decoder.decode([' + name + '].self'), name);
+    }
+    assert.match(source, /Set\(documents\.map\(\\\.id\)\)\.count == documents\.count/);
+    assert.match(source, /String\(pieces\[1\]\) == document\.id\.uuidString/);
+    assert.match(source, /\(0\.\.\.100\)\.contains\(document\.lastPercent/);
+    assert.match(source, /NativeMusicBackupValidation\.validate/);
+    assert.match(source, /item\.storedName == item\.id\.uuidString \+ "\." \+ ext/);
+    assert.equal((source.match(/expected == mediaPaths/g)||[]).length, 2);
+    assert.doesNotMatch(source, /UserDefaults|copyItem|removeItem/);
+});
+test('music global restore validates stable track identities, locations and playlist references', () => {
+    const source = music.slice(music.indexOf('enum NativeMusicBackupValidation'));
+    assert.match(source, /decoder|JSONDecoder\(\)/);
+    assert.match(source, /backup\.catalog\.version == 1, backup\.includesAudioFiles/);
+    assert.match(source, /id == track\.id, track\.locations\.count == 1/);
+    assert.match(source, /location\.remoteId == "audio\/" \+ id \+ "\." \+ ext/);
+    assert.match(source, /expected == mediaPaths/);
+    assert.match(source, /Set\(folder\.trackIds\)\.isSubset\(of: trackIDs\)/);
+    assert.match(source, /Set\(playlist\.trackIds\)\.isSubset\(of: trackIDs\)/);
+    assert.match(source, /trackIDs\.contains\(local\.uuidString\)/);
+    assert.match(source, /NativeBackupReferencePolicy\.eligibleID\(remote\)/);
+    assert.doesNotMatch(source, /UUID\(\)|copyItem|UserDefaults/);
+});
+test('streamed library metadata is bounded consistently on creation and restore', () => {
+    assert.match(archive, /maximumLibraryMetadataBytes = 128 \* 1024 \* 1024/);
+    assert.match(archive, /data\.count <= maximumLibraryMetadataBytes - libraryMetadataBytes/);
+    assert.match(archive, /chunk\.count <= maximumLibraryMetadataBytes - metadataBytes/);
+    assert.match(archive, /else if captureLibraryMetadata/);
+    assert.match(archive, /else if !metadataOnly \{ mediaPaths\.insert\(entry\.path\) \}/);
+    assert.match(archive, /NativeBackupLibraryValidation\.validate\(section: section, metadata: metadata, mediaPaths: mediaPaths\)/);
+});

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="NVDA 2026.3 ya está disponible: novedades y precauciones con los complementos">
+<title>NVDA 2026.3 ya está disponible: novedades y precauciones con los complementos | TifloAcosta</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif; line-height: 1.65; margin: 0 auto; padding: 1.25rem; max-width: 76ch; font-size: 1.05rem; }
+header, main, footer { display: block; }
+h1, h2 { line-height: 1.25; }
+h1 { font-size: 1.75rem; margin: 0.35em 0 0.6em; }
+h2 { font-size: 1.25rem; margin: 2rem 0 0.75rem; }
+p, li { margin-bottom: 0.85em; }
+li { padding-left: 0.2rem; }
+a { text-decoration: underline; text-underline-offset: .12em; }
+a:focus-visible, .skip-link:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+.skip-link { position: absolute; left: -10000px; top: auto; }
+.skip-link:focus { position: static; display: inline-block; margin-bottom: 1rem; }
+.meta { font-size: .95rem; }
+footer { border-top: 1px solid currentColor; margin-top: 2.5rem; padding-top: 1rem; }
+@media print { body { max-width: none; padding: 0; font-size: 11pt; } .skip-link { display: none; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Ir al contenido principal</a>
+<header>
+<h1>NVDA 2026.3 ya está disponible: novedades y precauciones con los complementos</h1>
+<p class="meta"><time datetime="2026-10-26">26 de octubre de 2026</time> · TifloAcosta</p>
+</header>
+<main id="contenido">
+<article aria-label="NVDA 2026.3 ya está disponible: novedades y precauciones con los complementos">
+<p>Hola, hola, gente guapa.</p>
+<p>NV Access ha publicado la versión estable de <strong>NVDA 2026.3</strong>, el lector de pantalla gratuito y de código abierto para Windows. Hay novedades que pueden notarse en el uso diario: más agilidad, mejoras al leer documentos, nuevas funciones de braille y más posibilidades en pantallas táctiles. Pero también conviene dedicar unos minutos a comprobar los complementos antes de actualizar.</p>
+<h2>Las novedades principales</h2>
+<p><strong>Más rendimiento y estabilidad.</strong> NVDA recopila y almacena más información de los controles en segundo plano para reducir retrasos, especialmente en el Explorador de archivos y los cuadros combinados. También mejora su respuesta cuando una aplicación deja de funcionar y evita determinados bloqueos al cerrar o reiniciar el lector.</p>
+<p><strong>Lectura continua por frases, párrafos o líneas.</strong> Una nueva opción permite decidir la unidad de lectura de «Leer todo». Cuando el control lo permite, el comportamiento predeterminado es leer por frases. La navegación por frases mediante <kbd>Alt</kbd> + <kbd>Flecha arriba</kbd> y <kbd>Alt</kbd> + <kbd>Flecha abajo</kbd> funciona ahora en más documentos y cuadros de edición.</p>
+<p><strong>Copiar lo último verbalizado.</strong> La combinación <kbd>NVDA</kbd> + <kbd>Control</kbd> + <kbd>X</kbd> copia al portapapeles la última información pronunciada. Práctico cuando NVDA acaba de decir algo que necesitamos conservar.</p>
+<p><strong>Cuadros de diálogo más manejables.</strong> Perfiles de configuración, Gestos de entrada y Diccionarios del habla incorporan menús contextuales y atajos. En Gestos de entrada es posible modificar directamente un gesto existente. Los mensajes explorables también admiten mejor el cambio de tamaño de su ventana.</p>
+<p><strong>Navegación web.</strong> Se añade una opción de selección nativa, desactivada de forma predeterminada, para documentos compatibles de Firefox y navegadores basados en Chromium. La búsqueda en modo exploración puede conservar un historial de consultas, si así se configura.</p>
+<p><strong>Mejoras en la Tienda de complementos.</strong> Se corrigen bloqueos al moverse rápidamente por sus listas y al buscar con un solo carácter. También se mejora el reinicio después de instalar un complemento desde el Explorador de archivos.</p>
+<h2>Braille, pantallas táctiles y reconocimiento de texto</h2>
+<p>En braille se amplía el control de la división de palabras entre líneas, con marcas de continuación; las líneas compatibles pueden aprovechar combinaciones de varias teclas de seguimiento. Hay soporte para las líneas myBraille de Help Tech y nuevas tablas de Liblouis.</p>
+<p>En equipos táctiles aparecen gestos que combinan dos deslizamientos consecutivos y otros que comienzan en los bordes de la pantalla. Los gestos de borde están desactivados de forma predeterminada y requieren activación en los ajustes de interacción táctil.</p>
+<p>El OCR de Windows puede utilizarse con la Cortina de pantalla o la lupa de NVDA activadas en los equipos compatibles. También se ha actualizado eSpeak NG.</p>
+<h2>Importante: ¿pueden dejar de funcionar los complementos?</h2>
+<p><strong>No hay una ruptura general de compatibilidad en NVDA 2026.3.</strong> La actualización que sí rompió la compatibilidad con complementos preparados para NVDA 2025.3.3 y anteriores fue <strong>NVDA 2026.1</strong>. Como regla general, los complementos adaptados a NVDA 2026.1 siguen siendo compatibles con las versiones 2026.2 y 2026.3. Eso no impide que se produzca alguna incidencia concreta.</p>
+<p>Por tanto, quien ya utiliza NVDA 2026.2 con sus complementos funcionando correctamente parte de una situación diferente de quien salta directamente desde NVDA 2025 o mantiene extensiones antiguas sin actualizar.</p>
+<h2>Complementos antiguos que conviene revisar</h2>
+<p>Estos ejemplos corresponden a <strong>versiones concretas</strong> que el catálogo internacional de complementos identifica como probadas por última vez con versiones antiguas de NVDA. No significa que todas las versiones o alternativas con nombres parecidos sean incompatibles:</p>
+<ul>
+<li><strong>Remote Support / NVDA Remote 2.6.4:</strong> última versión probada declarada, NVDA 2024.1. Conviene valorar el acceso remoto incorporado a las versiones actuales de NVDA o alternativas mantenidas como TeleNVDA.</li>
+<li><strong>WhatsAppPlus 2.1.0:</strong> última versión probada, NVDA 2024.1.</li>
+<li><strong>NoBeepsSpeechMode 5.5:</strong> última versión probada, NVDA 2024.1.</li>
+<li><strong>zPortapapeles 0.5.1 y zRadio 0.6:</strong> versiones antiguas registradas hasta NVDA 2023.1. zPortapapeles aparece además clasificado como complemento obsoleto.</li>
+<li><strong>Vocalizer Expressive 1.1 Driver 3.1.11:</strong> última versión probada en el catálogo, NVDA 2024.1. Si dependen de esas voces, comprueben antes de instalar qué controlador actualizado ofrece su proveedor.</li>
+</ul>
+<p>La indicación «última versión probada» de un paquete antiguo <strong>no equivale por sí sola a una prueba de fallo</strong> en NVDA 2026.3: es una razón para comprobar la compatibilidad real antes de dar el salto.</p>
+<h2>Otros complementos populares: información más tranquilizadora</h2>
+<p>En los catálogos consultados figuran versiones de <strong>Braille Extender</strong> y <strong>WordNav</strong> probadas con NVDA 2026.1; y versiones de <strong>Windows App Essentials</strong> y <strong>Resource Monitor</strong> declaradas hasta NVDA 2026.3. <strong>TeleNVDA</strong> figura con una versión reciente probada hasta NVDA 2026.2. El hecho de que alguna ficha todavía indique 2026.1 o 2026.2 no significa automáticamente que falle con 2026.3, aunque tampoco permite garantizar que esté libre de incidencias.</p>
+<p>El dato decisivo no es solamente el nombre del complemento, sino <strong>su versión instalada</strong>, su fecha de actualización y los avisos del desarrollador.</p>
+<h2>Qué hacer antes de actualizar</h2>
+<ol>
+<li>Abran el menú de NVDA con <kbd>NVDA</kbd> + <kbd>N</kbd>, entren en <strong>Herramientas</strong> y abran la <strong>Tienda de complementos</strong>.</li>
+<li>Revisen los complementos instalados, los actualizables y los incompatibles. Instalen las versiones recientes disponibles y reinicien NVDA cuando lo solicite.</li>
+<li>Comprueben por separado los complementos instalados manualmente y, sobre todo, los controladores de voces de terceros.</li>
+<li>Conserven una copia de su configuración si tienen NVDA muy personalizado. Si el programa avisa de incompatibilidades, lean la lista antes de continuar.</li>
+<li>No fuercen la activación de un complemento incompatible sin conocer el riesgo: puede provocar fallos o inestabilidad.</li>
+</ol>
+<p>Tras instalar NVDA, es recomendable <strong>reiniciar Windows</strong>. Si aparece un problema, una forma de investigarlo es arrancar temporalmente NVDA con los complementos deshabilitados. Si desaparece el fallo, revisen las extensiones una por una.</p>
+<h2>Descargas y documentación</h2>
+<p>Para actualizar pueden utilizar <strong>Menú de NVDA, Ayuda, Buscar actualización</strong>, o acudir a la <a href="https://www.nvaccess.org/download/">página oficial de descarga de NVDA</a>.</p>
+<p>La <a href="https://download.nvaccess.org/releases/2026.3/documentation/changes.html">lista completa de novedades de NVDA 2026.3</a> está publicada por NV Access (documentación en inglés). Para consultar las versiones de los complementos está el <a href="https://nvda-addons.org/">Directorio internacional de complementos de NVDA</a>.</p>
+<p>Recuerden que la familia NVDA 2026 necesita Windows de 64 bits: Windows 10 o Windows 11. La compatibilidad con Windows de 32 bits terminó en NVDA 2026.1.</p>
+<h2>En definitiva</h2>
+<p>NVDA 2026.3 trae mejoras de utilidad real y no obliga a renunciar a los complementos modernos. Si están en NVDA 2026.2 y todo funciona, lo razonable es comprobar las actualizaciones disponibles y proceder con normalidad. Quienes todavía dependan de voces o extensiones antiguas deberían verificar primero que podrán seguir utilizándolas.</p>
+<p>Actualizar es estupendo; mejor aún es hacerlo sin descubrir a posteriori que el complemento favorito se quedó de vacaciones.</p>
+<p>Un saludo para todos.</p>
+</article>
+</main>
+<footer>
+<p>Tony Acosta · TifloAcosta</p>
+</footer>
+</body>
+</html>

@@ -28,6 +28,7 @@ jobs:
       GITHUB_TOKEN: ${{ github.token }}
       GITHUB_RUN_NUMBER: ${{ github.run_number }}
       TIFLO_IOS_MARKETING_VERSION: "1.7"
+      TIFLO_ACOUSTID_CLIENT: ${{ vars.TIFLO_ACOUSTID_CLIENT }}
     steps:
       - name: Confirmar rama única de la beta interna
         run: |
@@ -61,6 +62,10 @@ jobs:
           sudo xcode-select --switch "$XCODE/Contents/Developer"
           xcodebuild -version
           brew install xcodegen openssl@3
+      - name: Comprobar identificador AcoustID sin mostrar su valor
+        run: |
+          set -euo pipefail
+          test -n "$TIFLO_ACOUSTID_CLIENT" || { echo "::error::Falta el identificador público AcoustID"; exit 1; }
       - name: Preparar API protegida de App Store Connect
         run: node ios-app-native/scripts/prepare-apple-key.mjs
       - name: Recuperar certificado Apple Distribution existente
@@ -96,6 +101,7 @@ jobs:
             -authenticationKeyPath "$ASC_KEY_PATH" \
             -authenticationKeyID "$API_ID" \
             -authenticationKeyIssuerID "$API_ISSUER" \
+            TIFLO_ACOUSTID_CLIENT="$TIFLO_ACOUSTID_CLIENT" \
             MARKETING_VERSION="$TIFLO_IOS_MARKETING_VERSION" CURRENT_PROJECT_VERSION="$IOS_BUILD_VERSION" archive
       - name: Configurar exportación con los dos perfiles de firma
         run: |

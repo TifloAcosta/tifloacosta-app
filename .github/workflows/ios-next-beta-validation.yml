@@ -113,6 +113,21 @@ jobs:
             -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath "$RUNNER_TEMP/TifloAcosta-17-build" \
             ARCHS=arm64 CODE_SIGNING_ALLOWED=NO TIFLO_ACOUSTID_CLIENT="$TIFLO_ACOUSTID_CLIENT" build
+      - name: Verificar configuración AcoustID y catálogos dentro de la compilación
+        run: |
+          set -euo pipefail
+          app="$(find "$RUNNER_TEMP/TifloAcosta-17-build/Build/Products" -type d -name TifloAcostaNative.app -print -quit)"
+          test -n "$app"
+          python3 - "$app/Info.plist" <<'PYTHON'
+          import os, plistlib, sys
+          with open(sys.argv[1], "rb") as stream:
+              info = plistlib.load(stream)
+          client = os.environ.get("TIFLO_ACOUSTID_CLIENT", "").strip()
+          assert client and info.get("TifloAcoustIDClient") == client, "Identificador AcoustID ausente o distinto"
+          assert str(info.get("TifloCinemaPublicDriveAPIKey", "")).strip(), "Falta configuración Drive público"
+          assert set(info.get("CFBundleLocalizations", [])) == {"es","en","pt","fr","it","de"}, "Idiomas declarados incorrectos"
+          print("Configuración de la beta y seis idiomas comprobados; valores no publicados")
+          PYTHON
       - name: Medir el ejecutable y la aplicación del simulador
         run: |
           app="$(find "$RUNNER_TEMP/TifloAcosta-17-build/Build/Products" -type d -name TifloAcostaNative.app -print -quit)"

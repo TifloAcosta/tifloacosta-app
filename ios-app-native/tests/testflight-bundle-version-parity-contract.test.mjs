@@ -17,3 +17,12 @@ test('IPA verification names the actual mismatched bundle when versions disagree
   assert.match(verifier, /CFBundleVersion/);
   assert.match(verifier, /identifier.*actual_version/s);
 });
+
+
+test('1.7 injects and verifies AcoustID without logging its value', () => {
+  assert.ok(workflow.includes('vars.TIFLO_ACOUSTID_CLIENT'));
+  assert.ok(workflow.includes('TIFLO_ACOUSTID_CLIENT="$TIFLO_ACOUSTID_CLIENT"'));
+  assert.ok(verifier.includes("app_info.get('TifloAcoustIDClient'"));
+  assert.ok(verifier.includes('actual_client != expected_client'));
+  assert.ok(verifier.includes("app_info.get('TifloCinemaPublicDriveAPIKey'"));
+});

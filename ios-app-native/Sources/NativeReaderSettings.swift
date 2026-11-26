@@ -295,9 +295,9 @@ struct NativeReaderPunctuationControls: View {
     @AppStorage("native-reading-pause-sentence") private var sentence = 0.4
     @AppStorage("native-reading-pause-paragraph") private var paragraph = 0.6
 
-    private let choices = (0...30).map {
+    private var choices: [String] { (0...30).map {
         MusicLocalized.format("%.2f segundos", Double($0) * 0.05)
-    }
+    } }
 
     private func selection(_ value: Binding<Double>) -> Binding<Int> {
         Binding(

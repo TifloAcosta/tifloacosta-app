@@ -30,6 +30,14 @@ with zipfile.ZipFile(files[0]) as z:
         if not resource:
             raise SystemExit('Falta el catálogo de idioma ' + language + ' dentro de la IPA')
     print('Seis idiomas de TifloAcosta declarados y empaquetados correctamente')
+    if os.environ.get('TIFLO_IOS_MARKETING_VERSION') == '1.7':
+        expected_client = os.environ.get('TIFLO_ACOUSTID_CLIENT', '').strip()
+        actual_client = str(app_info.get('TifloAcoustIDClient', '')).strip()
+        if not expected_client or actual_client != expected_client:
+            raise SystemExit('Falta o no coincide el identificador AcoustID en la IPA')
+        if not str(app_info.get('TifloCinemaPublicDriveAPIKey', '')).strip():
+            raise SystemExit('Falta la configuración del catálogo público de Google Drive en la IPA')
+        print('Configuración AcoustID y catálogo público presente, sin revelar valores')
     ext_info = plistlib.loads(z.read(extension_info_path))
     for info, identifier in [(app_info, 'com.tifloacosta.app'),
                              (ext_info, 'com.tifloacosta.app.ShareExtension')]:

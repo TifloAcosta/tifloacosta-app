@@ -91,6 +91,31 @@ struct NativeBackupGenerationStore {
         }
     }
 
+    /// Adopt a freshly downloaded private staging directory on the same
+    /// volume, preserving the original ID, date and SHA-256 manifest.
+    /// Never replace an existing generation, even on a conflicting retry.
+    func adoptVerifiedStaging(_ staging: URL, manifest: NativeBackupManifest) throws -> NativeBackupManifest {
+        try Task.checkCancellation()
+        try prepareRoot()
+        try requireDirectory(staging)
+        guard staging.deletingLastPathComponent().standardizedFileURL == root.standardizedFileURL,
+              staging.lastPathComponent.hasPrefix(".cloud-import-") else { throw Failure.invalidDirectory }
+        try NativeBackupGenerationTransfer.validate(manifest, generation: manifest.generation)
+        let stored = try NativeBackupGenerationTransfer.readManifest(staging.appendingPathComponent("manifest.json"),
+                                                                      generation: manifest.generation)
+        guard stored == manifest else { throw Failure.invalidGeneration }
+        try manifest.verifyArtifacts(in: staging)
+        let final = directory(for: manifest.generation)
+        if fm.fileExists(atPath: final.path) {
+            let (existing, _) = try verifiedGeneration(manifest.generation)
+            guard existing == manifest else { throw Failure.duplicateGeneration }
+            return existing
+        }
+        try Task.checkCancellation()
+        try fm.moveItem(at: staging, to: final)
+        return manifest
+    }
+
     /// Verify every archive before handing any archive to a section restorer.
     /// The caller must hold exclusive access to this local immutable generation.
     func verifiedGeneration(_ generation: UUID) throws -> (NativeBackupManifest, URL) {

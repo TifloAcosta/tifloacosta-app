@@ -311,7 +311,7 @@ struct NativeBackupManagementScreen: View {
                     Text(LocalizedStringKey(item.backupLabel)).tag(item)
                 }
             }
-            Button(configuration == nil ? "Activar copias automáticas" : "Guardar programación") {
+            Button(LocalizedStringKey(configuration == nil ? "Activar copias automáticas" : "Guardar programación")) {
                 confirmation = .configure
             }
             .disabled(automaticSections.isEmpty || configurationUnreadable || configuration?.pending != nil)
@@ -334,7 +334,8 @@ struct NativeBackupManagementScreen: View {
                 Text("iCloud todavía está comprobando las copias disponibles.").font(.footnote)
             }
             if entries.isEmpty {
-                Text("No se han encontrado copias de seguridad.")
+                if metadataComplete && !cloudUnavailable { Text("No se han encontrado copias de seguridad.") }
+                else { Text("No se puede confirmar aún si hay copias en iCloud.") }
             }
             ForEach(entries, id: \.generation) { entry in
                 VStack(alignment: .leading, spacing: 8) {

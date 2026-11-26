@@ -126,6 +126,23 @@ jobs:
           assert client and info.get("TifloAcoustIDClient") == client, "Identificador AcoustID ausente o distinto"
           assert str(info.get("TifloCinemaPublicDriveAPIKey", "")).strip(), "Falta configuración Drive público"
           assert set(info.get("CFBundleLocalizations", [])) == {"es","en","pt","fr","it","de"}, "Idiomas declarados incorrectos"
+          from pathlib import Path
+          app = Path(sys.argv[1]).parent
+          languages = {"es","en","pt","fr","it","de"}
+          # Spanish is the source language of the main app's SwiftUI strings.
+          for language in sorted(languages - {"es"}):
+              assert (app / (language + ".lproj") / "Localizable.strings").is_file(), "Falta catálogo principal: " + language
+          extensions = list((app / "PlugIns").glob("*.appex"))
+          assert len(extensions) == 1, "Falta la extensión Compartir o hay más de una"
+          extension = extensions[0]
+          with (extension / "Info.plist").open("rb") as stream:
+              extension_info = plistlib.load(stream)
+          assert extension_info.get("CFBundleIdentifier") == "com.tifloacosta.app.ShareExtension", "Identificador de extensión incorrecto"
+          assert extension_info.get("NSExtension", {}).get("NSExtensionPointIdentifier") == "com.apple.share-services", "Falta punto de entrada Compartir"
+          assert set(extension_info.get("CFBundleLocalizations", [])) == languages, "Idiomas declarados incorrectos en Compartir"
+          for language in sorted(languages):
+              assert (extension / (language + ".lproj") / "Localizable.strings").is_file(), "Falta catálogo de Compartir: " + language
+          print("Catálogos principales y de Compartir comprobados dentro de la app compilada")
           print("Configuración de la beta y seis idiomas comprobados; valores no publicados")
           PYTHON
       - name: Medir el ejecutable y la aplicación del simulador

@@ -9,3 +9,5 @@ xcrun swiftc -swift-version 5 "$root/Sources/NativeBackupRestoreTransaction.swif
 "$work/backup-restore-transaction-smoke"
 xcrun swiftc -swift-version 5 "$root/Sources/NativeBackupRestoreTransaction.swift" "$root/Sources/NativeBackupFileRestore.swift" "$root/tests/backup-file-restore-smoke.swift" -o "$work/backup-file-restore-smoke"
 "$work/backup-file-restore-smoke"
+xcrun swiftc -swift-version 5 "$root/Sources/NativeBackupRestoreJournal.swift" "$root/tests/backup-restore-journal-smoke.swift" -o "$work/backup-restore-journal-smoke"
+"$work/backup-restore-journal-smoke"

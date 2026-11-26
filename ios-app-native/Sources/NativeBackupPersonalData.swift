@@ -291,3 +291,76 @@ enum NativeBackupPersonalDataMerge {
         return current + incoming.filter { ids.insert(id($0)).inserted }
     }
 }
+
+/// Read-only verification of the full library indexes and their exact media
+/// references. No new UUIDs or live store writes are permitted here.
+enum NativeBackupLibraryValidation {
+    static func validate(section: NativeBackupManifest.Section,
+                         metadata: [String: Data], mediaPaths: Set<String>) throws {
+        let decoder = JSONDecoder()
+        func required(_ name: String) throws -> Data {
+            guard let data = metadata[name] else { throw CocoaError(.fileReadCorruptFile) }
+            return data
+        }
+        switch section {
+        case .reader:
+            let documents = try decoder.decode([NativeReadingDocument].self, from: required("documentos.json"))
+            let folders = try decoder.decode([String].self, from: required("carpetas.json"))
+            guard Set(documents.map(\.id)).count == documents.count,
+                  folders.allSatisfy({ !$0.isEmpty && $0.count <= 80 && $0 != "__unfiled__" }),
+                  Set(folders.map { $0.lowercased() }).count == folders.count else {
+                throw CocoaError(.fileReadCorruptFile)
+            }
+            var expected = Set<String>()
+            for document in documents {
+                try Task.checkCancellation()
+                guard (0...100).contains(document.lastPercent ?? 0),
+                      (document.lastTextOffset ?? 0) >= 0,
+                      (document.lastTrackIndex ?? 0) >= 0,
+                      (document.lastAudioSeconds ?? 0).isFinite,
+                      (document.lastAudioSeconds ?? 0) >= 0 else {
+                    throw CocoaError(.fileReadCorruptFile)
+                }
+                for path in (document.trackPaths ?? []) + [document.originalRelativePath].compactMap({ $0 }) {
+                    try NativeBackupSectionArchive.validatePath(path)
+                    let pieces = path.split(separator: "/")
+                    guard pieces.count >= 3,
+                          ["ReaderMedia", "ReaderOriginals"].contains(String(pieces[0])),
+                          String(pieces[1]) == document.id.uuidString else {
+                        throw CocoaError(.fileReadCorruptFile)
+                    }
+                    expected.insert(path)
+                }
+            }
+            guard expected == mediaPaths else { throw CocoaError(.fileReadCorruptFile) }
+        case .music:
+            try NativeMusicBackupValidation.validate(data: required("manifest.json"), mediaPaths: mediaPaths)
+        case .cinema:
+            let items = try decoder.decode([NativeCinemaLocalItem].self, from: required("catalogo-personal.json"))
+            let history = try decoder.decode([NativeCinemaRecent].self, from: required("historial.json"))
+            let allowed = Set(["mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf", "flac", "mp4", "m4v", "mov"])
+            let sources = Set(["personal", "public-es", "public-latino", "drive-es", "drive-latino",
+                               "audiocinemateca", "tape-territory", "movies-for-the-blind"])
+            guard Set(items.map(\.id)).count == items.count,
+                  Set(history.map(\.id)).count == history.count, history.count <= 100,
+                  history.allSatisfy({
+                      sources.contains($0.source) && NativeBackupReferencePolicy.eligibleID($0.id) &&
+                      $0.seconds.isFinite && $0.duration.isFinite && $0.seconds >= 0 && $0.duration >= 0 &&
+                      ($0.source != "personal" || UUID(uuidString: $0.id) != nil)
+                  }) else { throw CocoaError(.fileReadCorruptFile) }
+            var expected = Set<String>()
+            for item in items {
+                try Task.checkCancellation()
+                let ext = (item.storedName as NSString).pathExtension
+                guard allowed.contains(ext), item.storedName == item.id.uuidString + "." + ext,
+                      item.lastSeconds.isFinite, item.lastSeconds >= 0,
+                      expected.insert("media/" + item.storedName).inserted else {
+                    throw CocoaError(.fileReadCorruptFile)
+                }
+            }
+            guard expected == mediaPaths else { throw CocoaError(.fileReadCorruptFile) }
+        default:
+            throw CocoaError(.fileReadCorruptFile)
+        }
+    }
+}

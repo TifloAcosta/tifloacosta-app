@@ -71,7 +71,7 @@ final class NativeBackupCoordinator: ObservableObject {
         try Task.checkCancellation()
         if sections.contains(.preferences) {
             guard let favorites, let activity else { throw Failure.missingLiveStore }
-            let snapshot = NativeBackupPreferencesSnapshot.capture(favorites: favorites, activity: activity)
+            let snapshot = try NativeBackupPreferencesSnapshot.capture(favorites: favorites, activity: activity)
             archives[.preferences] = try await NativeBackupMetadataArchive.create(snapshot)
         }
         try Task.checkCancellation()

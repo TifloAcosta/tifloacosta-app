@@ -151,3 +151,20 @@ test('personal data validation rejects unsupported versions duplicate identifier
     assert.match(source, /eligible\(\$0\.sourceURL\)/);
     assert.doesNotMatch(source, /UserDefaults|URLSession|\.filename\b/);
 });
+
+test('prepared metadata merges preserve current records and do not manufacture downloads or streams', () => {
+    const source = personal.slice(personal.indexOf('enum NativeBackupPersonalDataMerge'));
+    assert.match(source, /favorites\.union\(backup\.favorites\)/);
+    assert.match(source, /appendMissing\(followed, backup\.followed/);
+    assert.match(source, /!currentIDs\.contains\(\$0\.id\)/);
+    assert.match(source, /max\(0, 200 - progress\.count\)/);
+    assert.match(source, /!downloadedIDs\.contains\(\$0\.id\)/);
+    assert.match(source, /progressNotImported: missing\.count - accepted\.count/);
+    assert.match(source, /UUID\(uuidString: entry\.stationID\)/);
+    assert.match(source, /unresolved\.append\(entry\)/);
+    assert.match(source, /guard let stream = entry\.streamURL/);
+    assert.match(source, /max\(0, 100 - recentlyRead\.count\)/);
+    assert.match(source, /recentlyRead: recentlyRead \+ accepted/);
+    assert.match(source, /ids\.insert\(id\(\$0\)\)\.inserted/);
+    assert.doesNotMatch(source, /UserDefaults|URLSession|FileManager|\.filename\b/);
+});

@@ -35,7 +35,7 @@ test('deletions require a named confirmation in reader, music, podcasts and cine
   assert.match(reader, /MusicLocalized\.format\("¿Eliminar la carpeta «%@»\?", folderToDelete \?\? ""\)/);
   assert.match(reader, /Las obras de esta carpeta se conservarán en la biblioteca/);
   assert.match(reader, /Button\("Eliminar carpeta", role: \.destructive\)/);
-  assert.match(reader, /documentToDelete\?\.title \?\? "el documento"/);
+  assert.match(reader, /MusicLocalized\.format\("Eliminar definitivamente %@", documentToDelete\?\.title \?\? MusicLocalized\.message\("Documento"\)\)/);
   assert.match(reader, /titles\.joined\(separator: ", "\)/);
   assert.match(music, /@State private var pendingCollectionRemoval:/);
   assert.match(music, /pendingCollectionRemoval = \(folder\.id, folder\.name, "folder"\)/);

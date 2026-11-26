@@ -86,7 +86,7 @@ test('Toque mágico solo controla la reproducción actual', () => {
 test('Marcas incluyen contexto y borrado anuncia el título exacto', () => {
   assert.match(reader, /private func bookmarkDescription\(at percent: Int\)/);
   assert.match(reader, /Button\(bookmarkDescription\(at: percent\)\)/);
-  assert.match(reader, /Vas a eliminar «\\\(doc\.title\)»/);
+  assert.match(reader, /MusicLocalized\.format\("Vas a eliminar «%@»\. Esta operación no se puede deshacer\.", doc\.title\)/);
 });
 
 test('Navegación y marcas son accesibles junto a los controles principales', () => {

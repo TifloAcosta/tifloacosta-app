@@ -97,3 +97,27 @@ test('release localization: report dynamic strings for manual review',()=>{
   // This inventory requires manual triage; it is not a translation-quality certificate.
   assert.ok(appFiles.length>100 && extensionFiles.length>0);
 });
+
+test('release localization: audit interpolated SwiftUI controls and labels',()=>{
+  const candidates=[];
+  // SwiftUI interpolation may produce %lld, %@ or a formatted placeholder
+  // depending on the expression. Inventory the actual source for review rather
+  // than guessing an equivalent .strings key.
+  const pattern=/\b(?:Text|Button|Label|Section|NavigationLink|Menu|Toggle|Picker|navigationTitle|accessibilityLabel|accessibilityValue|accessibilityHint|alert|confirmationDialog)\s*\([^"\n]*"[^"\n]*\\\(/;
+  for(const file of appFiles){
+    const lines=fs.readFileSync(file,'utf8').split('\n');
+    for(let i=0;i<lines.length;i++){
+      const l=lines[i].trim();
+      if(pattern.test(l)&&!l.startsWith('//'))candidates.push({file:path.relative(root,file),line:i+1,text:l.slice(0,250)});
+    }
+  }
+  console.log('LOCALIZATION_INTERPOLATION_REVIEW '+JSON.stringify({count:candidates.length,candidates}));
+  const read=name=>fs.readFileSync(path.join(source,name),'utf8');
+  const music=read('NativeMyMusic.swift'), reader=read('NativeTifloLector.swift'), account=read('NativeAcoustIDAccount.swift');
+  for(const key of ['Reproducción aleatoria: %@','Repetición: %@','Temporizador: %d segundos restantes','Eliminar carpeta %@','Reproducir lista %@','Eliminar lista %@','Reproducir carpeta inteligente %@','Eliminar carpeta inteligente %@'])
+    assert.ok(music.includes('MusicLocalized.format("'+key+'"'),key);
+  for(const key of ['%d documentos seleccionados','Eliminar definitivamente %d documentos','Eliminar definitivamente %@','Vas a eliminar «%@». Esta operación no se puede deshacer.','Ir a pista %d, %d por ciento','Página. %@','Referencia. %@','Nivel %d. %@'])
+    assert.ok(reader.includes('MusicLocalized.format("'+key+'"'),key);
+  assert.match(account, /@State private var message: LocalizedStringKey\?/);
+  assert.match(account, /if let message \{ Text\(message\)\.accessibilityAddTraits/);
+});

@@ -115,6 +115,16 @@ enum NativeBackupSectionArchive {
         try verifyContentsForRestore(section: section, source: source)
         guard let archive = Archive(url: source, accessMode: .read) else { throw Failure.invalidFile }
         let fm = FileManager.default
+        var expectedBytes: UInt64 = 0
+        for entry in archive {
+            let (next, overflow) = expectedBytes.addingReportingOverflow(entry.uncompressedSize)
+            guard !overflow else { throw Failure.exceedsRestoreLimit }
+            expectedBytes = next
+        }
+        let space = try fm.attributesOfFileSystem(forPath: fm.temporaryDirectory.path)
+        if let available = (space[.systemFreeSize] as? NSNumber)?.uint64Value, expectedBytes > available {
+            throw CocoaError(.fileWriteOutOfSpace)
+        }
         let staging = fm.temporaryDirectory.appendingPathComponent("global-restore-" + UUID().uuidString, isDirectory: true)
         try fm.createDirectory(at: staging, withIntermediateDirectories: false)
         var finished = false

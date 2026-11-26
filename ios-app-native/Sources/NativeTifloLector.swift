@@ -120,6 +120,7 @@ final class NativeReaderLibrary: ObservableObject {
     }
     private var documentsRevision = 0
     private var pendingFileImports: Set<UUID> = []
+    var readyForGlobalRestore: Bool { pendingFileImports.isEmpty }
     @Published private(set) var folders: [String] = []
     private let folderStorageKey = "native-reader-folders"
     // One small preference per opened book; opening must not re-encode the

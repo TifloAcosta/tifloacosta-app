@@ -229,6 +229,72 @@ final class NativeMusicPlayer: ObservableObject {
         return result
     }
 
+
+    /// Resolve portable song keys to the live file names and validate the
+    /// entire profile before staging. Keep current profiles on conflicts.
+    func prepareGlobalBackupProfiles(_ profiles: [String: String], songNames: [String: String],
+                                     playlistIDs: Set<UUID>, albumKeys: Set<String>,
+                                     recovery: NativeBackupRecoveryBuilder?) throws
+        -> (omitted: [String], apply: () throws -> Void, rollback: () throws -> Void) {
+        let defaults = UserDefaults.standard
+        var updates: [String: Any] = [:]
+        var omitted = [String]()
+        let songPrefix = "mi-musica-eq-song-", listPrefix = "mi-musica-eq-playlist-"
+        let albumPrefix = "mi-musica-eq-album-"
+        for (key, encoded) in profiles.sorted(by: { $0.key < $1.key }) {
+            guard key.count < 250, encoded.count <= 6_000,
+                  let data = Data(base64Encoded: encoded),
+                  let profile = try? JSONDecoder().decode(MusicAudioSnapshot.self, from: data),
+                  profile.gains.count == 5,
+                  profile.gains.allSatisfy({ $0.isFinite && (-12...12).contains($0) }),
+                  profile.name.count <= 60 else { omitted.append(key); continue }
+            if key == "mi-musica-eq-general" {
+                guard profile.name == "Personalizado" || Self.presets.contains(where: { $0.name == profile.name })
+                else { omitted.append(key); continue }
+                if defaults.object(forKey: "mi-musica-eq-preset") == nil &&
+                   defaults.object(forKey: "mi-musica-eq-bands") == nil {
+                    updates["mi-musica-eq-preset"] = profile.name
+                    updates["mi-musica-eq-bands"] = profile.gains.map(Double.init)
+                }
+                continue
+            }
+            let target: String
+            if key.hasPrefix(songPrefix), let name = songNames[String(key.dropFirst(songPrefix.count))] {
+                target = songPrefix + name
+            } else if key.hasPrefix(listPrefix), let id = UUID(uuidString: String(key.dropFirst(listPrefix.count))),
+                      playlistIDs.contains(id) {
+                target = listPrefix + id.uuidString
+            } else if key.hasPrefix(albumPrefix), albumKeys.contains(String(key.dropFirst(albumPrefix.count))) {
+                target = key
+            } else { omitted.append(key); continue }
+            guard NativeBackupRecoveryPayload.allowedKey(target) else { omitted.append(key); continue }
+            if defaults.object(forKey: target) == nil {
+                if updates[target] != nil { omitted.append(key); continue }
+                updates[target] = data
+            }
+        }
+        let before = NativeBackupDefaultsBeforeState(defaults: defaults, keys: Array(updates.keys), recovery: recovery)
+        let oldPreset = selectedPreset, oldGains = gains, oldOverride = currentHasOverride
+        let staged = updates
+        return (omitted.sorted(), {
+            for (key, value) in staged { defaults.set(value, forKey: key) }
+            if self.queue.indices.contains(self.index) {
+                self.loadProfile(for: self.queue[self.index].url)
+            } else if let name = staged["mi-musica-eq-preset"] as? String,
+                      let values = staged["mi-musica-eq-bands"] as? [Double] {
+                self.selectedPreset = name
+                self.gains = values.map(Float.init)
+                self.applyEqualizer()
+            }
+        }, {
+            before.restore()
+            self.selectedPreset = oldPreset
+            self.gains = oldGains
+            self.currentHasOverride = oldOverride
+            self.applyEqualizer()
+        })
+    }
+
     func restoreProfiles(_ profiles: [String: String]) {
         let prefixes = ["mi-musica-eq-song-", "mi-musica-eq-playlist-", "mi-musica-eq-album-"]
         for (key, encoded) in profiles.prefix(5_000) {

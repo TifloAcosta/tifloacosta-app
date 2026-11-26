@@ -212,7 +212,12 @@ private final class NativeMusicLibrary: ObservableObject {
         await refreshAlbumMetadata(for: files.filter { $0.album == nil }.map(\.id))
     }
 
+    private var metadataRefreshes = 0
+    var readyForGlobalRestore: Bool { metadataRefreshes == 0 && recognizingTrackIDs.isEmpty }
+
     private func refreshAlbumMetadata(for ids: [UUID], renameImports: Bool = false) async {
+        metadataRefreshes += 1
+        defer { metadataRefreshes -= 1 }
         for id in ids {
             guard !Task.isCancelled, let current = files.first(where: { $0.id == id }) else { continue }
             let original = audioURL(for: current)
@@ -770,10 +775,18 @@ private final class NativeMusicLibrary: ObservableObject {
             smartIDs.insert(id)
             nextSmart.append(.init(id: id, name: item.name, titleContains: item.titleContains, rule: item.rule))
         }
-        // Per-song EQ keys use physical file names; they cannot be copied
-        // without mapping them to the new stored names.
-        omitted.append(contentsOf: backup.audioProfiles.keys.sorted())
         let combined = files + additions
+        var songNames: [String: String] = [:]
+        for (key, track) in backup.catalog.tracks {
+            guard let id = UUID(uuidString: key),
+                  let location = track.locations.first,
+                  let file = combined.first(where: { $0.id == id }) else { continue }
+            songNames[(location.remoteId as NSString).lastPathComponent] = file.fileName
+        }
+        let profilePlan = try NativeMusicPlayer.shared.prepareGlobalBackupProfiles(backup.audioProfiles,
+            songNames: songNames, playlistIDs: Set(nextLists.map(\.id)),
+            albumKeys: Set(combined.compactMap(\.albumKey)), recovery: recovery)
+        omitted.append(contentsOf: profilePlan.omitted)
         let preparedFolders = nextFolders, preparedLists = nextLists, preparedSmart = nextSmart
         let encoder = JSONEncoder()
         let disk = try NativeBackupFileRestore(moves: moves, indexes: [
@@ -788,12 +801,16 @@ private final class NativeMusicLibrary: ObservableObject {
             self.folders = preparedFolders
             self.playlists = preparedLists
             self.smartFolders = preparedSmart
+            try profilePlan.apply()
         }, rollback: {
+            var profileError: Error?
+            do { try profilePlan.rollback() } catch { profileError = error }
             try disk.rollback()
             self.files = oldFiles
             self.folders = oldFolders
             self.playlists = oldLists
             self.smartFolders = oldSmart
+            if let profileError { throw profileError }
         }), omitted)
     }
 
@@ -806,6 +823,7 @@ private final class NativeMusicLibrary: ObservableObject {
         let root = directory
         let worker = Task.detached(priority: .utility) {
             var tracks = snapshot.catalog.tracks
+            var profiles = snapshot.audioProfiles
             var media: [NativeBackupSectionArchive.File] = []
             let allowed = Set(["mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf", "flac", "ogg"])
             for file in sourceFiles {
@@ -819,6 +837,12 @@ private final class NativeMusicLibrary: ObservableObject {
                     throw NativeBackupSectionArchive.Failure.invalidPath
                 }
                 let relative = "audio/\(file.id.uuidString).\(ext)"
+                let oldProfile = "mi-musica-eq-song-" + file.fileName
+                let stableProfile = "mi-musica-eq-song-" + (relative as NSString).lastPathComponent
+                if let profile = snapshot.audioProfiles[oldProfile], oldProfile != stableProfile {
+                    profiles.removeValue(forKey: oldProfile)
+                    profiles[stableProfile] = profile
+                }
                 media.append(.init(path: relative, source: source, trustedRoot: root))
                 tracks[file.id.uuidString] = MusicPortableTrack(id: track.id, title: track.title,
                     locations: [MusicPortableLocation(provider: "archive", remoteId: relative)],
@@ -831,7 +855,7 @@ private final class NativeMusicLibrary: ObservableObject {
                 createdAt: snapshot.createdAt, includesAudioFiles: true,
                 catalog: MusicPortableCatalog(version: 1, tracks: tracks),
                 folders: snapshot.folders, playlists: snapshot.playlists,
-                smartFolders: snapshot.smartFolders, audioProfiles: snapshot.audioProfiles)
+                smartFolders: snapshot.smartFolders, audioProfiles: profiles)
             let manifest = try JSONEncoder().encode(complete)
             guard manifest.count <= 8_388_608 else {
                 throw NativeBackupSectionArchive.Failure.exceedsRestoreLimit
@@ -1800,6 +1824,7 @@ struct NativeMyMusicScreen: View {
 /// The global backup service uses the same live music library as the screen.
 @MainActor
 enum NativeMusicBackupAdapter {
+    static var readyForRestore: Bool { NativeMusicLibrary.shared.readyForGlobalRestore }
     static func prepareRestore(staging: URL, recovery: NativeBackupRecoveryBuilder? = nil) throws
         -> (NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>, [String]) {
         try NativeMusicLibrary.shared.prepareGlobalBackupRestore(staging: staging, recovery: recovery)

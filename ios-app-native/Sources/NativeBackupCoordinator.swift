@@ -169,7 +169,10 @@ final class NativeBackupCoordinator: ObservableObject {
             for url in staged.values { try? FileManager.default.removeItem(at: url) }
         }
         try Task.checkCancellation()
-        guard liveStoresAreQuiescent() else { throw Failure.liveStoresNotQuiescent }
+        guard liveStoresAreQuiescent(), NativeRemotePlaybackOwner.current == nil,
+              reader.readyForGlobalRestore, NativeMusicBackupAdapter.readyForRestore,
+              podcastLibrary?.readyForGlobalRestore ?? true,
+              podcastDownloads?.downloadingID == nil else { throw Failure.liveStoresNotQuiescent }
         let selected = Set(manifest.artifacts.map(\.section))
         guard Set(staged.keys) == selected else { throw Failure.unsupportedSelection }
         let recovery = NativeBackupRecoveryBuilder()
@@ -222,7 +225,10 @@ final class NativeBackupCoordinator: ObservableObject {
             omittedPodcastPositions: podcastPositions, omittedReadingHistory: readingHistory,
             omittedCinemaHistory: cinemaHistory)
         guard !report.hasOmissions || allowReportedOmissions else { throw Failure.incompleteRestore }
-        guard liveStoresAreQuiescent() else { throw Failure.liveStoresNotQuiescent }
+        guard liveStoresAreQuiescent(), NativeRemotePlaybackOwner.current == nil,
+              reader.readyForGlobalRestore, NativeMusicBackupAdapter.readyForRestore,
+              podcastLibrary?.readyForGlobalRestore ?? true,
+              podcastDownloads?.downloadingID == nil else { throw Failure.liveStoresNotQuiescent }
         let payload = try recovery.payload()
         let encoder = PropertyListEncoder()
         encoder.outputFormat = .binary

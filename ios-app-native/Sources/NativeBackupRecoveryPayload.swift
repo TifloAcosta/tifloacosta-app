@@ -55,11 +55,18 @@ struct NativeBackupRecoveryPayload: Codable {
         "native-podcast-continuous-playback", "music.cellularPlayback", "music.cellularDownloads",
         "music.detailedVoiceOver", "native-reading-text-size", "native-reading-pause-comma",
         "native-reading-pause-semicolon", "native-reading-pause-colon", "native-reading-pause-sentence",
-        "native-reading-pause-paragraph"
+        "native-reading-pause-paragraph", "native-reading-voice-id", "native-reader-gemini-voice"
     ]
 
     static func allowedKey(_ key: String) -> Bool {
         if keys.contains(key) { return true }
+        if ["mi-musica-eq-preset", "mi-musica-eq-bands"].contains(key) { return true }
+        let musicPrefixes = ["mi-musica-eq-song-", "mi-musica-eq-playlist-", "mi-musica-eq-album-"]
+        if let prefix = musicPrefixes.first(where: { key.hasPrefix($0) }) {
+            let suffix = key.dropFirst(prefix.count)
+            return !suffix.isEmpty && suffix.utf8.count <= 240 &&
+                !suffix.unicodeScalars.contains(where: { CharacterSet.controlCharacters.contains($0) })
+        }
         let prefix = "native-reader-voice-profile-"
         guard key.hasPrefix(prefix), key != "native-reader-voice-profiles-migrated-v1" else { return false }
         let suffix = key.dropFirst(prefix.count)

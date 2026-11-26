@@ -202,7 +202,12 @@ final class NativePodcastLibrary: ObservableObject {
         }
     }
 
+    private var opmlImports = 0
+    var readyForGlobalRestore: Bool { opmlImports == 0 }
+
     func importOPML(_ url: URL) async throws -> Int {
+        opmlImports += 1
+        defer { opmlImports -= 1 }
         // Import on a worker rather than blocking VoiceOver navigation while parsing.
         let items = try await Task.detached(priority: .userInitiated) { () throws -> [NativeFollowedPodcast] in
             let access = url.startAccessingSecurityScopedResource()

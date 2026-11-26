@@ -1,4 +1,5 @@
 import Foundation
+import AVFoundation
 
 /// A conservative export policy for URL-bearing records. A syntactically
 /// eligible URL is not proof of public access: a later review must let users
@@ -477,7 +478,15 @@ enum NativeBackupSettingsRestore {
             if defaults.object(forKey: key) == nil { updates[key] = value }
         }
         for (key, value) in backup.integers {
-            offer(key, value, allowed: NativeBackupPersonalDataValidation.validInteger(key, value))
+            if key == "native-reader-reading-engine" {
+                let available = value == 0 ||
+                    (value == 1 && defaults.bool(forKey: "native-reader-gemini-validated") &&
+                     NativeVoiceCredentialStore.hasKey("gemini")) ||
+                    (value == 2 && NativePhononRuntime.isUsable)
+                offer(key, value, allowed: available)
+            } else {
+                offer(key, value, allowed: NativeBackupPersonalDataValidation.validInteger(key, value))
+            }
         }
         for (key, value) in backup.booleans {
             offer(key, value, allowed: NativeBackupPreferencesSnapshot.booleanKeys.contains(key) &&
@@ -487,9 +496,16 @@ enum NativeBackupSettingsRestore {
             offer(key, value, allowed: NativeBackupPersonalDataValidation.validNumber(key, value))
         }
         for (key, value) in backup.strings {
-            // Voice IDs, folder selections and repeat mode require device or
-            // live-store resolution. Never activate an unavailable engine.
-            offer(key, value, allowed: false)
+            switch key {
+            case "native-reading-voice-id":
+                offer(key, value, allowed: value.isEmpty || AVSpeechSynthesisVoice(identifier: value) != nil)
+            case "native-reader-gemini-voice":
+                offer(key, value, allowed: NativeGeminiSpeech.voices.contains(value))
+            default:
+                // Folder selection, Phonon voices and repeat mode still need
+                // live-store or asynchronous device resolution.
+                offer(key, value, allowed: false)
+            }
         }
         let voices = try NativeReaderVoiceProfileStore.prepareBackupProfiles(
             backup.voiceProfiles, defaults: defaults, recovery: recovery)

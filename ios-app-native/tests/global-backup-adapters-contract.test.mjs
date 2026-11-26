@@ -266,7 +266,7 @@ test('media restore steps preserve original IDs and reverse index and media chan
     assert.match(audio, /trackIDs\.insert\(id\)\.inserted/);
     assert.match(audio, /additions\.append\(\.init\(id: id/);
     assert.match(audio, /orderedEntries: list\.orderedEntries/);
-    assert.match(audio, /omitted\.append\(contentsOf: backup\.audioProfiles\.keys\.sorted\(\)\)/);
+    assert.match(audio, /omitted\.append\(contentsOf: profilePlan\.omitted\)/);
     assert.doesNotMatch(audio, /UUID\(\)/);
     assert.match(movies, /!ids\.contains\(\$0\.id\)/);
     assert.match(movies, /historyPlan\.rollback/);
@@ -309,4 +309,19 @@ test('journal records before-state before applying live changes and is replayed 
     assert.match(journal, /try handle\.synchronize\(\)/);
     assert.ok(app.indexOf('NativeBackupRestoreJournal.application.recover') < app.indexOf('NativeAppLanguage.initializeIfMissing()'));
     assert.match(app, /if recoveryFailed \{/);
+});
+
+test('global music backup maps EQ to track identity and validates recovered profiles', () => {
+    const player = read('NativeMusicPlayer.swift');
+    assert.match(music, /profiles\[stableProfile\] = profile/);
+    assert.match(music, /songNames\[\(location\.remoteId as NSString\)\.lastPathComponent\] = file\.fileName/);
+    assert.match(music, /try profilePlan\.apply\(\)/);
+    assert.match(music, /try profilePlan\.rollback\(\)/);
+    assert.match(player, /profile\.gains\.count == 5/);
+    assert.match(player, /playlistIDs\.contains\(id\)/);
+    assert.match(player, /albumKeys\.contains/);
+    assert.match(player, /defaults\.object\(forKey: target\) == nil/);
+    assert.match(coordinator, /NativeRemotePlaybackOwner\.current == nil/);
+    assert.match(coordinator, /NativeMusicBackupAdapter\.readyForRestore/);
+    assert.match(archive, /expectedBytes > available/);
 });

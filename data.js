@@ -2572,5 +2572,108 @@ window.TIFLO_RESOURCES = [
     "folderPath": [],
     "searchText": "Two in one - suspicious messages and WikiTrip Guides and Tutorials Two in one: checking suspicious messages and an app that tells you the history around you Two completely different tools Part one: checking suspicious messages with Malwarebytes in ChatGPT Adding Malwarebytes to ChatGPT Copying a suspicious text message A personal shortcut for typing @Malwarebytes Sending the message for analysis What the check reports What this check is useful for Part two: WikiTrip and the history around you First example: Rascacielos de la Avenida 3 de Mayo Second example: Castillo de Paso Alto A different way to listen to your surroundings Settings, the free version, and voices Update note — September 8, 2026 Closing",
     "new": false
+  },
+  {
+    "id": "es-11pzivdiId0Z1z9GEU7nlX5SEX9F4meSS",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Amazon, Google o Apple, qué marca conviene comprar"
+    ],
+    "title": "Amazon, Google o Apple, qué altavoz inteligente conviene comprar 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-11pzivdiId0Z1z9GEU7nlX5SEX9F4meSS.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-11pzivdiId0Z1z9GEU7nlX5SEX9F4meSS.html",
+    "searchText": "Amazon, Google o Apple, qué altavoz inteligente conviene comprar 2026 Amazon Echo Alexa Google Home Gemini Apple HomePod Siri accesibilidad recomendaciones enlaces para comprobar antes de comprar"
+  },
+  {
+    "id": "es-1mJAIBrxw3RZhFP1K71m3e2brC0U3ythU",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Amazon, Google o Apple, qué marca conviene comprar",
+      "Información por países y regiones"
+    ],
+    "title": "Altavoces inteligentes en Venezuela 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-1mJAIBrxw3RZhFP1K71m3e2brC0U3ythU.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1mJAIBrxw3RZhFP1K71m3e2brC0U3ythU.html",
+    "searchText": "Altavoces inteligentes en Venezuela 2026 Amazon Echo Alexa Google Home Gemini Apple HomePod Siri accesibilidad recomendaciones enlaces para comprobar antes de comprar"
+  },
+  {
+    "id": "es-1Mr1tuyf_DmbvEwuMwXcMoJZpjRhRg1p1",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Amazon, Google o Apple, qué marca conviene comprar",
+      "Información por países y regiones"
+    ],
+    "title": "Altavoces inteligentes en Cuba 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-1Mr1tuyf_DmbvEwuMwXcMoJZpjRhRg1p1.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1Mr1tuyf_DmbvEwuMwXcMoJZpjRhRg1p1.html",
+    "searchText": "Altavoces inteligentes en Cuba 2026 Amazon Echo Alexa Google Home Gemini Apple HomePod Siri accesibilidad recomendaciones enlaces para comprobar antes de comprar"
+  },
+  {
+    "id": "es-1qH5XJvnEntVFmUyQ2yKACp8V4E0kU8O1",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Amazon, Google o Apple, qué marca conviene comprar",
+      "Información por países y regiones"
+    ],
+    "title": "Altavoces inteligentes en El Salvador, Guatemala, Honduras, Nicaragua, Panamá, Paraguay y Uruguay 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-1qH5XJvnEntVFmUyQ2yKACp8V4E0kU8O1.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1qH5XJvnEntVFmUyQ2yKACp8V4E0kU8O1.html",
+    "searchText": "Altavoces inteligentes en El Salvador, Guatemala, Honduras, Nicaragua, Panamá, Paraguay y Uruguay 2026 Amazon Echo Alexa Google Home Gemini Apple HomePod Siri accesibilidad recomendaciones enlaces para comprobar antes de comprar"
+  },
+  {
+    "id": "es-1huNFjgFsOQ4AtWQLPy2ftZzvbZoUt7r4",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Amazon, Google o Apple, qué marca conviene comprar",
+      "Información por países y regiones"
+    ],
+    "title": "Altavoces inteligentes en Bolivia, Colombia, Ecuador y República Dominicana 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-1huNFjgFsOQ4AtWQLPy2ftZzvbZoUt7r4.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1huNFjgFsOQ4AtWQLPy2ftZzvbZoUt7r4.html",
+    "searchText": "Altavoces inteligentes en Bolivia, Colombia, Ecuador y República Dominicana 2026 Amazon Echo Alexa Google Home Gemini Apple HomePod Siri accesibilidad recomendaciones enlaces para comprobar antes de comprar"
+  },
+  {
+    "id": "es-1mLlzk85kLFcgcR4aSjSYd2B65o4_8F2r",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Amazon, Google o Apple, qué marca conviene comprar",
+      "Información por países y regiones"
+    ],
+    "title": "Altavoces inteligentes en Argentina, Costa Rica y Perú 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-1mLlzk85kLFcgcR4aSjSYd2B65o4_8F2r.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1mLlzk85kLFcgcR4aSjSYd2B65o4_8F2r.html",
+    "searchText": "Altavoces inteligentes en Argentina, Costa Rica y Perú 2026 Amazon Echo Alexa Google Home Gemini Apple HomePod Siri accesibilidad recomendaciones enlaces para comprobar antes de comprar"
+  },
+  {
+    "id": "es-1CBo6TvhLhLn7akHwd5FIjtyD5G81FDrM",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Amazon, Google o Apple, qué marca conviene comprar",
+      "Información por países y regiones"
+    ],
+    "title": "Altavoces inteligentes en Chile 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-1CBo6TvhLhLn7akHwd5FIjtyD5G81FDrM.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1CBo6TvhLhLn7akHwd5FIjtyD5G81FDrM.html",
+    "searchText": "Altavoces inteligentes en Chile 2026 Amazon Echo Alexa Google Home Gemini Apple HomePod Siri accesibilidad recomendaciones enlaces para comprobar antes de comprar"
+  },
+  {
+    "id": "es-1NEo3GRvpN1l_eVAFXt0M5xxuapcfAWYX",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Amazon, Google o Apple, qué marca conviene comprar",
+      "Información por países y regiones"
+    ],
+    "title": "Altavoces inteligentes en México 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-1NEo3GRvpN1l_eVAFXt0M5xxuapcfAWYX.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1NEo3GRvpN1l_eVAFXt0M5xxuapcfAWYX.html",
+    "searchText": "Altavoces inteligentes en México 2026 Amazon Echo Alexa Google Home Gemini Apple HomePod Siri accesibilidad recomendaciones enlaces para comprobar antes de comprar"
   }
 ];

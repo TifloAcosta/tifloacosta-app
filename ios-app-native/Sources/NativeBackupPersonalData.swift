@@ -364,3 +364,23 @@ enum NativeBackupLibraryValidation {
         }
     }
 }
+
+
+/// In-process rollback snapshot of explicitly named property-list values only.
+/// Restores absence as absence. Not a durable journal or a disk-sync guarantee.
+struct NativeBackupDefaultsBeforeState {
+    private let defaults: UserDefaults
+    private let values: [(String, Any?)]
+
+    init(defaults: UserDefaults, keys: [String]) {
+        self.defaults = defaults
+        self.values = keys.map { ($0, defaults.object(forKey: $0)) }
+    }
+
+    func restore() {
+        for (key, value) in values {
+            if let value { defaults.set(value, forKey: key) }
+            else { defaults.removeObject(forKey: key) }
+        }
+    }
+}

@@ -39,6 +39,22 @@ final class NativeFavoritesStore: ObservableObject {
         }
     }
 
+
+    /// Component of the preferences transaction, not a complete section step.
+    func prepareBackupFavorites(_ values: Set<NativeFavoriteKey>) throws
+        -> (apply: () throws -> Void, rollback: () throws -> Void) {
+        let old = keys
+        let before = NativeBackupDefaultsBeforeState(defaults: .standard, keys: [storageKey])
+        let bytes = try JSONEncoder().encode(values)
+        return ({
+            UserDefaults.standard.set(bytes, forKey: self.storageKey)
+            self.keys = values
+        }, {
+            before.restore()
+            self.keys = old
+        })
+    }
+
     func contains(_ kind: NativeFavoriteKind, item: NativeCatalogItem) -> Bool {
         keys.contains(NativeFavoriteKey(kind, item))
     }

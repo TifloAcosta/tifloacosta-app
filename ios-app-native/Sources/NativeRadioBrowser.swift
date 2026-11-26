@@ -503,6 +503,28 @@ struct NativeRadioBackupSnapshot: Codable {
 
 @MainActor
 enum NativeRadioBackupAdapter {
+
+    /// Prepare the same persisted value read by the radio screens' AppStorage.
+    /// Unresolved stations remain explicit references in the returned plan.
+    static func prepareBackupRestore(_ backup: NativeRadioBackupSnapshot,
+                                     defaults: UserDefaults = .standard) throws
+        -> (NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>,
+            NativeBackupPersonalDataMerge.RadioPlan) {
+        try NativeBackupPersonalDataValidation.validate(section: .radio,
+            data: JSONEncoder().encode(backup))
+        let key = "mi-musica-radio-favorites-v2"
+        let saved = defaults.string(forKey: key) ?? ""
+        let existing = saved.isEmpty ? [] :
+            try JSONDecoder().decode([NativeRadioStation].self, from: Data(saved.utf8))
+        let plan = NativeBackupPersonalDataMerge.radio(backup, existing: existing)
+        let next = String(decoding: try JSONEncoder().encode(plan.favorites), as: UTF8.self)
+        let before = NativeBackupDefaultsBeforeState(defaults: defaults, keys: [key])
+        let step = NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>(
+            section: .radio, apply: { defaults.set(next, forKey: key) },
+            rollback: { before.restore() })
+        return (step, plan)
+    }
+
     static func capture(defaults: UserDefaults = .standard) throws -> NativeRadioBackupSnapshot {
         let saved = defaults.string(forKey: "mi-musica-radio-favorites-v2") ?? ""
         let stations = saved.isEmpty ? [] : try JSONDecoder().decode([NativeRadioStation].self, from: Data(saved.utf8))

@@ -25,6 +25,28 @@ final class NativeReadingActivity: ObservableObject {
         }
     }
 
+
+    /// Component of the preferences transaction. Do not execute independently
+    /// of the complete preferences adapter.
+    func prepareBackupActivity(_ plan: NativeBackupPersonalDataMerge.ReadingPlan) throws
+        -> (apply: () throws -> Void, rollback: () throws -> Void) {
+        let oldLater = savedForLater, oldHistory = recentlyRead
+        let before = NativeBackupDefaultsBeforeState(defaults: .standard, keys: [laterKey, historyKey])
+        let encoder = JSONEncoder()
+        let laterBytes = try encoder.encode(plan.savedForLater)
+        let historyBytes = try encoder.encode(plan.recentlyRead)
+        return ({
+            UserDefaults.standard.set(laterBytes, forKey: self.laterKey)
+            UserDefaults.standard.set(historyBytes, forKey: self.historyKey)
+            self.savedForLater = plan.savedForLater
+            self.recentlyRead = plan.recentlyRead
+        }, {
+            before.restore()
+            self.savedForLater = oldLater
+            self.recentlyRead = oldHistory
+        })
+    }
+
     func isSaved(_ kind: NativeFavoriteKind, item: NativeCatalogItem) -> Bool {
         savedForLater.contains(NativeFavoriteKey(kind, item))
     }

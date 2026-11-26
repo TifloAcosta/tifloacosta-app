@@ -71,6 +71,48 @@ final class NativePodcastLibrary: ObservableObject {
         }
     }
 
+
+    /// Prepare a reversible merge using the live store, not a second instance.
+    /// The caller must execute synchronously after preparation. Pending download
+    /// references and omitted progress are returned separately, never fabricated.
+    func prepareBackupRestore(_ backup: NativePodcastBackupSnapshot,
+                              downloadedIDs: Set<String>) throws
+        -> (NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>,
+            NativeBackupPersonalDataMerge.PodcastPlan) {
+        try NativeBackupPersonalDataValidation.validate(section: .podcasts,
+            data: JSONEncoder().encode(backup))
+        let plan = NativeBackupPersonalDataMerge.podcasts(backup, followed: followed,
+            favorites: favorites, saved: savedEpisodes, progress: playbackProgress,
+            downloadedIDs: downloadedIDs)
+        let oldFollowed = followed, oldFavorites = favorites
+        let oldSaved = savedEpisodes, oldProgress = playbackProgress
+        let defaults = UserDefaults.standard
+        let before = NativeBackupDefaultsBeforeState(defaults: defaults,
+            keys: [followedKey, favoriteKey, savedKey, playbackKey])
+        let encoder = JSONEncoder()
+        let nextFollowed = try encoder.encode(plan.followed)
+        let nextSaved = try encoder.encode(plan.savedEpisodes)
+        let nextProgress = try encoder.encode(plan.playbackProgress)
+        let step = NativeBackupRestoreTransaction.Step<NativeBackupManifest.Section>(
+            section: .podcasts, apply: {
+                defaults.set(nextFollowed, forKey: self.followedKey)
+                defaults.set(plan.favorites.sorted(), forKey: self.favoriteKey)
+                defaults.set(nextSaved, forKey: self.savedKey)
+                defaults.set(nextProgress, forKey: self.playbackKey)
+                self.followed = plan.followed
+                self.favorites = plan.favorites
+                self.savedEpisodes = plan.savedEpisodes
+                self.playbackProgress = plan.playbackProgress
+            }, rollback: {
+                before.restore()
+                self.followed = oldFollowed
+                self.favorites = oldFavorites
+                self.savedEpisodes = oldSaved
+                self.playbackProgress = oldProgress
+            })
+        return (step, plan)
+    }
+
     func progress(for episode: NativePodcastEpisode) -> Double {
         playbackProgress.first(where: { $0.id == episode.id })?.seconds ?? 0
     }

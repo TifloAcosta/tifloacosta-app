@@ -503,6 +503,66 @@ struct NativeAdjustableChoice: View {
     }
 }
 
+/// A folder is derived from the relative path of published documents, not
+/// from its name or title. Direct documents and folders remain separate.
+private struct NativeResourceFolderRows<Row: View>: View {
+    let items: [NativeCatalogItem]
+    let path: [String]
+    let row: (NativeCatalogItem) -> Row
+
+    private var directItems: [NativeCatalogItem] {
+        items.filter { $0.resourceFolderPath == path }
+    }
+
+    private var childFolders: [String] {
+        Set(items.compactMap { item -> String? in
+            let components = item.resourceFolderPath
+            guard components.count > path.count,
+                  Array(components.prefix(path.count)) == path else { return nil }
+            return components[path.count]
+        }).sorted { $0.localizedStandardCompare($1) == .orderedAscending }
+    }
+
+    var body: some View {
+        ForEach(childFolders, id: \.self) { folder in
+            NavigationLink {
+                NativeResourceFolderScreen(items: items, path: path + [folder], row: row)
+            } label: {
+                Label(folder, systemImage: "folder")
+            }
+        }
+        ForEach(directItems) { item in
+            row(item)
+        }
+    }
+}
+
+private struct NativeResourceFolderScreen<Row: View>: View {
+    let items: [NativeCatalogItem]
+    let path: [String]
+    let row: (NativeCatalogItem) -> Row
+    @State private var query = ""
+
+    private var descendants: [NativeCatalogItem] {
+        items.filter { Array($0.resourceFolderPath.prefix(path.count)) == path }
+    }
+
+    var body: some View {
+        List {
+            if query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                NativeResourceFolderRows(items: descendants, path: path, row: row)
+            } else {
+                ForEach(descendants.filter { $0.matchesResourceQuery(query) }) { item in
+                    row(item)
+                }
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle(path.last ?? "")
+        .searchable(text: $query, prompt: "Buscar recursos")
+    }
+}
+
 struct NativeResourcesScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
     @EnvironmentObject private var library: NativeReaderLibrary
@@ -623,19 +683,19 @@ struct NativeResourcesScreen: View {
         )
     }
 
+    private var isSearchingResources: Bool {
+        !resourceQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
     private var filtered: [NativeCatalogItem] {
-        let terms = resourceQuery.trimmingCharacters(in: .whitespacesAndNewlines)
-            .folding(options: [.diacriticInsensitive, .caseInsensitive], locale: Locale(identifier: "es_ES"))
-            .split(whereSeparator: { $0.isWhitespace }).map(String.init)
-        guard !terms.isEmpty || (chosenCategory != nil && categories.contains(chosenCategory!))
+        guard isSearchingResources || (chosenCategory != nil && categories.contains(chosenCategory!))
         else { return [] }
         return spanishResources.filter { item in
-            if let chosenCategory, item.category != chosenCategory { return false }
-            let searchable = [item.title, item.category ?? "", item.description ?? "", item.summary ?? ""]
-                .joined(separator: " ")
-                .folding(options: [.diacriticInsensitive, .caseInsensitive],
-                         locale: Locale(identifier: "es_ES"))
-            return terms.allSatisfy { searchable.contains($0) }
+            if isSearchingResources {
+                // A query searches all categories in the selected language(s).
+                return item.matchesResourceQuery(resourceQuery)
+            }
+            return item.category == chosenCategory
         }
         .sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
     }
@@ -687,12 +747,13 @@ struct NativeResourcesScreen: View {
         } label: {
             VStack(alignment: .leading, spacing: 4) {
                 Text(item.title).font(.body)
-                if let category = item.category {
-                    Text(category).font(.caption).foregroundStyle(.secondary)
+                if !item.resourceLocation.isEmpty {
+                    Text(item.resourceLocation).font(.caption).foregroundStyle(.secondary)
                 }
             }
         }
         .accessibilityLabel(item.title)
+        .accessibilityValue(Text(item.resourceLocation))
         .accessibilityAction(named: Text("Leer")) { read(item) }
         .accessibilityAction(named: Text("Guardar")) { save(item) }
         .accessibilityAction(named: Text("Descargar")) { download(item) }
@@ -757,13 +818,12 @@ struct NativeResourcesScreen: View {
 
             if (chosenCategory != nil && categories.contains(chosenCategory!)) ||
                !resourceQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                Section(chosenCategory ?? "Resultados de búsqueda") {
+                Section(isSearchingResources ? "Resultados de búsqueda" : (chosenCategory ?? "Resultados de búsqueda")) {
                     if filtered.isEmpty {
-                        Text("No hay recursos en la categoría elegida.")
+                        Text(isSearchingResources ? "No hay resultados." : "No hay recursos en la categoría elegida.")
                     }
 
-                    if isPillsCategory &&
-                       resourceQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    if isPillsCategory && !isSearchingResources {
                         ForEach(pillsYears, id: \.self) { year in
                             NavigationLink(String(year)) {
                                 List {
@@ -780,10 +840,12 @@ struct NativeResourcesScreen: View {
                         ForEach(pillsWithoutYear) { item in
                             resourceRow(item)
                         }
-                    } else {
+                    } else if isSearchingResources {
                         ForEach(filtered) { item in
                             resourceRow(item)
                         }
+                    } else {
+                        NativeResourceFolderRows(items: filtered, path: [], row: resourceRow)
                     }
                 }
             }

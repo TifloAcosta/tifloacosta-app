@@ -113,7 +113,7 @@ struct NativeFavoritesScreen: View {
                         } label: {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(entry.item.title)
-                                Text(entry.key.kind.spokenName)
+                                Text(MusicLocalized.message(entry.key.kind.spokenName))
                                     .font(.caption)
                                     .foregroundStyle(TifloVisual.secondaryText)
                             }
@@ -128,7 +128,7 @@ struct NativeFavoritesScreen: View {
                         } label: {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(entry.item.title)
-                                Text(entry.key.kind.spokenName)
+                                Text(MusicLocalized.message(entry.key.kind.spokenName))
                                     .font(.caption)
                                     .foregroundStyle(TifloVisual.secondaryText)
                             }
@@ -143,7 +143,7 @@ struct NativeFavoritesScreen: View {
                         } label: {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(entry.item.title)
-                                Text(entry.key.kind.spokenName)
+                                Text(MusicLocalized.message(entry.key.kind.spokenName))
                                     .font(.caption)
                                     .foregroundStyle(TifloVisual.secondaryText)
                             }

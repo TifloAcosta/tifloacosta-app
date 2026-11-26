@@ -63,7 +63,7 @@ final class NativeShareInbox: ObservableObject {
 
     func refresh() {
         guard let root = inboxURL else {
-            error = "La extensión Compartir necesita el App Group de Apple."
+            error = MusicLocalized.message("La extensión Compartir necesita el App Group de Apple.")
             return
         }
         let manifests = (try? FileManager.default.contentsOfDirectory(

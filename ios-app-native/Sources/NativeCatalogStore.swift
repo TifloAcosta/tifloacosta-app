@@ -158,7 +158,7 @@ final class NativeCatalogStore: ObservableObject {
         if let candidate {
             // Do not replace a newer offline snapshot with an older server copy.
             if let existingDate = catalogGeneratedAt, existingDate > candidate.date {
-                error = "Los servidores ofrecen un catálogo anterior al guardado. Se conserva la versión más reciente de este dispositivo."
+                error = MusicLocalized.message("Los servidores ofrecen un catálogo anterior al guardado. Se conserva la versión más reciente de este dispositivo.")
                 updateMessage = error
                 return
             }
@@ -175,15 +175,15 @@ final class NativeCatalogStore: ObservableObject {
             catalogGeneratedAt = candidate.date
             persistTimestamp(now)
             error = nil
-            updateMessage = "Contenido actualizado desde \(candidate.host): \(candidate.snapshot.resources.count) recursos, \(candidate.snapshot.videos.count) vídeos y \(candidate.snapshot.news.count) noticias."
+            updateMessage = MusicLocalized.format("Contenido actualizado desde %@. Recursos: %d. Vídeos: %d. Noticias: %d.", candidate.host, candidate.snapshot.resources.count, candidate.snapshot.videos.count, candidate.snapshot.news.count)
             return
         }
 
         let detail = failures.joined(separator: ". ")
         if resources.isEmpty && videos.isEmpty && news.isEmpty {
-            error = "No se pudo descargar el catálogo. \(detail)"
+            error = MusicLocalized.format("No se pudo descargar el catálogo. %@", detail)
         } else {
-            error = "No se pudo actualizar el catálogo. Se muestran los contenidos guardados. \(detail)"
+            error = MusicLocalized.format("No se pudo actualizar el catálogo. Se muestran los contenidos guardados. %@", detail)
         }
         updateMessage = error
     }

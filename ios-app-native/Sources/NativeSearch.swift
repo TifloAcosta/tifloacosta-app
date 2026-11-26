@@ -102,7 +102,7 @@ struct NativeSearchResultsScreen: View {
             ForEach(NativeSearchKind.allCases, id: \.self) { kind in
                 let group = matches.filter { $0.kind == kind }
                 if !group.isEmpty {
-                    Section(kind.title) {
+                    Section(MusicLocalized.message(kind.title)) {
                         ForEach(group) { match in
                             switch kind {
                             case .resource:

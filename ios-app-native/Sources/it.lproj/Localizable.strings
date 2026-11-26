@@ -1835,3 +1835,29 @@
 "No se pudo completar la operación con YouTube (%@)." = "Impossibile completare l’operazione con YouTube (%@).";
 "Abriendo identificación segura de Google." = "Apertura dell’accesso sicuro a Google.";
 "Este vídeo no puede reproducirse aquí (código %d). Puedes abrirlo en YouTube." = "Questo video non può essere riprodotto qui (codice %d). Puoi aprirlo su YouTube.";
+
+// Release 1.7: search categories, updates and support diagnostics
+"Recurso" = "Risorsa";
+"Recurso de TifloAcosta" = "Risorsa TifloAcosta";
+"Vídeo del canal TifloAcosta" = "Video del canale TifloAcosta";
+"La extensión Compartir necesita el App Group de Apple." = "L’estensione Condividi richiede l’App Group Apple.";
+"Los servidores ofrecen un catálogo anterior al guardado. Se conserva la versión más reciente de este dispositivo." = "I server offrono un catalogo precedente a quello salvato. Viene mantenuta la versione più recente su questo dispositivo.";
+"Contenido actualizado desde %@. Recursos: %d. Vídeos: %d. Noticias: %d." = "Contenuti aggiornati da %@. Risorse: %d. Video: %d. Notizie: %d.";
+"No se pudo descargar el catálogo. %@" = "Impossibile scaricare il catalogo. %@";
+"No se pudo actualizar el catálogo. Se muestran los contenidos guardados. %@" = "Impossibile aggiornare il catalogo. Vengono mostrati i contenuti salvati. %@";
+"Informe copiado. Puedes pegarlo en el correo o servicio que prefieras." = "Rapporto copiato. Puoi incollarlo nell’e-mail o nel servizio che preferisci.";
+"Sin actualización confirmada" = "Nessun aggiornamento confermato";
+"Catálogo. Recursos: %d. Vídeos: %d. Noticias: %d. Última actualización: %@. Estado: %@." = "Catalogo. Risorse: %d. Video: %d. Notizie: %d. Ultimo aggiornamento: %@. Stato: %@.";
+"Sin error declarado" = "Nessun errore segnalato";
+"Actualización con incidencia" = "Aggiornamento con errore";
+"Sin datos" = "Nessun dato";
+"Aplicación: TifloAcosta para iOS, versión %@" = "Applicazione: TifloAcosta per iOS, versione %@";
+"Sistema: iOS %@" = "Sistema: iOS %@";
+"Dispositivo: %@" = "Dispositivo: %@";
+"VoiceOver: %@" = "VoiceOver: %@";
+"Reducir movimiento: %@" = "Riduci movimento: %@";
+"Texto en negrita del sistema: %@" = "Testo in grassetto di sistema: %@";
+"Sección: %@" = "Sezione: %@";
+"Descripción:" = "Descrizione:";
+"Pasos para reproducir:" = "Passaggi per riprodurre:";
+"Diagnóstico básico:" = "Diagnostica di base:";

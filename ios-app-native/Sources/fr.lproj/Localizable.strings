@@ -1835,3 +1835,29 @@
 "No se pudo completar la operación con YouTube (%@)." = "Impossible de terminer l’opération YouTube (%@).";
 "Abriendo identificación segura de Google." = "Ouverture de la connexion sécurisée à Google.";
 "Este vídeo no puede reproducirse aquí (código %d). Puedes abrirlo en YouTube." = "Cette vidéo ne peut pas être lue ici (code %d). Vous pouvez l’ouvrir dans YouTube.";
+
+// Release 1.7: search categories, updates and support diagnostics
+"Recurso" = "Ressource";
+"Recurso de TifloAcosta" = "Ressource TifloAcosta";
+"Vídeo del canal TifloAcosta" = "Vidéo de la chaîne TifloAcosta";
+"La extensión Compartir necesita el App Group de Apple." = "L’extension de partage nécessite le groupe d’apps Apple.";
+"Los servidores ofrecen un catálogo anterior al guardado. Se conserva la versión más reciente de este dispositivo." = "Les serveurs proposent un catalogue plus ancien que celui enregistré. La version plus récente de cet appareil est conservée.";
+"Contenido actualizado desde %@. Recursos: %d. Vídeos: %d. Noticias: %d." = "Contenu actualisé depuis %@. Ressources : %d. Vidéos : %d. Actualités : %d.";
+"No se pudo descargar el catálogo. %@" = "Impossible de télécharger le catalogue. %@";
+"No se pudo actualizar el catálogo. Se muestran los contenidos guardados. %@" = "Impossible d’actualiser le catalogue. Le contenu enregistré est affiché. %@";
+"Informe copiado. Puedes pegarlo en el correo o servicio que prefieras." = "Rapport copié. Vous pouvez le coller dans le courrier ou le service de votre choix.";
+"Sin actualización confirmada" = "Aucune mise à jour confirmée";
+"Catálogo. Recursos: %d. Vídeos: %d. Noticias: %d. Última actualización: %@. Estado: %@." = "Catalogue. Ressources : %d. Vidéos : %d. Actualités : %d. Dernière mise à jour : %@. État : %@.";
+"Sin error declarado" = "Aucune erreur signalée";
+"Actualización con incidencia" = "Mise à jour avec incident";
+"Sin datos" = "Aucune donnée";
+"Aplicación: TifloAcosta para iOS, versión %@" = "Application : TifloAcosta pour iOS, version %@";
+"Sistema: iOS %@" = "Système : iOS %@";
+"Dispositivo: %@" = "Appareil : %@";
+"VoiceOver: %@" = "VoiceOver : %@";
+"Reducir movimiento: %@" = "Réduire les animations : %@";
+"Texto en negrita del sistema: %@" = "Texte en gras du système : %@";
+"Sección: %@" = "Rubrique : %@";
+"Descripción:" = "Description :";
+"Pasos para reproducir:" = "Étapes de reproduction :";
+"Diagnóstico básico:" = "Diagnostic de base :";

@@ -7,31 +7,33 @@ import UIKit
 enum NativeSupportDiagnostics {
     static var version: String {
         let values = Bundle.main.infoDictionary
-        let release = values?["CFBundleShortVersionString"] as? String ?? "Sin datos"
-        let build = values?["CFBundleVersion"] as? String ?? "Sin datos"
+        let release = values?["CFBundleShortVersionString"] as? String ?? MusicLocalized.message("Sin datos")
+        let build = values?["CFBundleVersion"] as? String ?? MusicLocalized.message("Sin datos")
         return "\(release) (\(build))"
     }
 
     static var systemDetails: String {
-        "Aplicación: TifloAcosta para iOS, versión \(version)\n" +
-        "Sistema: iOS \(UIDevice.current.systemVersion)\n" +
-        "Dispositivo: \(UIDevice.current.model)\n" +
-        "VoiceOver: \(UIAccessibility.isVoiceOverRunning ? "activado" : "desactivado")\n" +
-        "Reducir movimiento: \(UIAccessibility.isReduceMotionEnabled ? "activado" : "desactivado")\n" +
-        "Texto en negrita del sistema: \(UIAccessibility.isBoldTextEnabled ? "activado" : "desactivado")"
+        [
+            MusicLocalized.format("Aplicación: TifloAcosta para iOS, versión %@", version),
+            MusicLocalized.format("Sistema: iOS %@", UIDevice.current.systemVersion),
+            MusicLocalized.format("Dispositivo: %@", UIDevice.current.model),
+            MusicLocalized.format("VoiceOver: %@", MusicLocalized.message(UIAccessibility.isVoiceOverRunning ? "Activado" : "Desactivado")),
+            MusicLocalized.format("Reducir movimiento: %@", MusicLocalized.message(UIAccessibility.isReduceMotionEnabled ? "Activado" : "Desactivado")),
+            MusicLocalized.format("Texto en negrita del sistema: %@", MusicLocalized.message(UIAccessibility.isBoldTextEnabled ? "Activado" : "Desactivado"))
+        ].joined(separator: "\n")
     }
 
     static func report(category: String, detail: String, steps: String,
                        includeDiagnostics: Bool, catalogSummary: String = "") -> String {
-        var result = "Incidencia de TifloAcosta\n" +
-            "Sección: \(category)\n\n" +
-            "Descripción:\n\(detail.trimmingCharacters(in: .whitespacesAndNewlines))"
+        var result = MusicLocalized.message("Incidencia de TifloAcosta") + "\n" +
+            MusicLocalized.format("Sección: %@", MusicLocalized.message(category)) + "\n\n" +
+            MusicLocalized.message("Descripción:") + "\n" + detail.trimmingCharacters(in: .whitespacesAndNewlines)
         if !steps.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            result += "\n\nPasos para reproducir:\n" +
+            result += "\n\n" + MusicLocalized.message("Pasos para reproducir:") + "\n" +
                 steps.trimmingCharacters(in: .whitespacesAndNewlines)
         }
         if includeDiagnostics {
-            result += "\n\nDiagnóstico básico:\n" + systemDetails
+            result += "\n\n" + MusicLocalized.message("Diagnóstico básico:") + "\n" + systemDetails
             if !catalogSummary.isEmpty { result += "\n" + catalogSummary }
         }
         return result
@@ -55,10 +57,8 @@ struct NativeAccessibilityReportScreen: View {
 
     private var catalogSummary: String {
         let updated = catalog.lastUpdated?.formatted(date: .abbreviated, time: .shortened)
-            ?? "Sin actualización confirmada"
-        return "Catálogo: \(catalog.resources.count) recursos, \(catalog.videos.count) vídeos, " +
-            "\(catalog.news.count) noticias. Última actualización: \(updated). " +
-            "Estado: \(catalog.error == nil ? "sin error declarado" : "actualización con incidencia")."
+            ?? MusicLocalized.message("Sin actualización confirmada")
+        return MusicLocalized.format("Catálogo. Recursos: %d. Vídeos: %d. Noticias: %d. Última actualización: %@. Estado: %@.", catalog.resources.count, catalog.videos.count, catalog.news.count, updated, MusicLocalized.message(catalog.error == nil ? "Sin error declarado" : "Actualización con incidencia"))
     }
 
     private var reportText: String {
@@ -80,7 +80,7 @@ struct NativeAccessibilityReportScreen: View {
         components.scheme = "mailto"
         components.path = "tifloacosta@gmail.com"
         components.queryItems = [
-            URLQueryItem(name: "subject", value: "Incidencia de TifloAcosta"),
+            URLQueryItem(name: "subject", value: MusicLocalized.message("Incidencia de TifloAcosta")),
             URLQueryItem(name: "body", value: reportText)
         ]
         return components.url
@@ -136,7 +136,7 @@ struct NativeAccessibilityReportScreen: View {
                 .disabled(!canShare)
                 Button("Copiar informe") {
                     UIPasteboard.general.string = reportText
-                    status = "Informe copiado. Puedes pegarlo en el correo o servicio que prefieras."
+                    status = MusicLocalized.message("Informe copiado. Puedes pegarlo en el correo o servicio que prefieras.")
                     UIAccessibility.post(notification: .announcement, argument: status)
                 }
                 .disabled(!canShare)

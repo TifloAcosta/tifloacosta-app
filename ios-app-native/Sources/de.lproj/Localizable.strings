@@ -1835,3 +1835,29 @@
 "No se pudo completar la operación con YouTube (%@)." = "Der YouTube-Vorgang konnte nicht abgeschlossen werden (%@).";
 "Abriendo identificación segura de Google." = "Die sichere Google-Anmeldung wird geöffnet.";
 "Este vídeo no puede reproducirse aquí (código %d). Puedes abrirlo en YouTube." = "Dieses Video kann hier nicht abgespielt werden (Code %d). Du kannst es in YouTube öffnen.";
+
+// Release 1.7: search categories, updates and support diagnostics
+"Recurso" = "Ressource";
+"Recurso de TifloAcosta" = "TifloAcosta-Ressource";
+"Vídeo del canal TifloAcosta" = "Video des TifloAcosta-Kanals";
+"La extensión Compartir necesita el App Group de Apple." = "Die Teilen-Erweiterung benötigt die Apple-App-Gruppe.";
+"Los servidores ofrecen un catálogo anterior al guardado. Se conserva la versión más reciente de este dispositivo." = "Die Server bieten einen älteren Katalog als den gespeicherten an. Die neuere Version auf diesem Gerät bleibt erhalten.";
+"Contenido actualizado desde %@. Recursos: %d. Vídeos: %d. Noticias: %d." = "Inhalte von %@ aktualisiert. Ressourcen: %d. Videos: %d. Meldungen: %d.";
+"No se pudo descargar el catálogo. %@" = "Der Katalog konnte nicht heruntergeladen werden. %@";
+"No se pudo actualizar el catálogo. Se muestran los contenidos guardados. %@" = "Der Katalog konnte nicht aktualisiert werden. Gespeicherte Inhalte werden angezeigt. %@";
+"Informe copiado. Puedes pegarlo en el correo o servicio que prefieras." = "Bericht kopiert. Du kannst ihn in deine bevorzugte E-Mail oder deinen bevorzugten Dienst einfügen.";
+"Sin actualización confirmada" = "Keine bestätigte Aktualisierung";
+"Catálogo. Recursos: %d. Vídeos: %d. Noticias: %d. Última actualización: %@. Estado: %@." = "Katalog. Ressourcen: %d. Videos: %d. Meldungen: %d. Letzte Aktualisierung: %@. Status: %@.";
+"Sin error declarado" = "Kein Fehler gemeldet";
+"Actualización con incidencia" = "Aktualisierung mit Fehler";
+"Sin datos" = "Keine Daten";
+"Aplicación: TifloAcosta para iOS, versión %@" = "App: TifloAcosta für iOS, Version %@";
+"Sistema: iOS %@" = "System: iOS %@";
+"Dispositivo: %@" = "Gerät: %@";
+"VoiceOver: %@" = "VoiceOver: %@";
+"Reducir movimiento: %@" = "Bewegung reduzieren: %@";
+"Texto en negrita del sistema: %@" = "Fetter Text des Systems: %@";
+"Sección: %@" = "Bereich: %@";
+"Descripción:" = "Beschreibung:";
+"Pasos para reproducir:" = "Schritte zum Reproduzieren:";
+"Diagnóstico básico:" = "Grundlegende Diagnose:";

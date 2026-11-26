@@ -81,9 +81,9 @@ struct NativeUpdatesScreen: View {
         Task {
             do {
                 try await resourceService.saveInReader(item, library: library)
-                announce("«\(item.title)» guardado en TifloLector.")
+                announce(MusicLocalized.format("«%@» guardado en TifloLector.", item.title))
             } catch {
-                announce("No se pudo guardar «\(item.title)»: \(error.localizedDescription)")
+                announce(MusicLocalized.format("No se pudo guardar «%@»: %@", item.title, error.localizedDescription))
             }
         }
     }
@@ -92,9 +92,9 @@ struct NativeUpdatesScreen: View {
         Task {
             do {
                 try await resourceService.exportToFiles(item)
-                announce("Selecciona una carpeta en Archivos para descargar «\(item.title)».")
+                announce(MusicLocalized.format("Selecciona una carpeta en Archivos para descargar «%@».", item.title))
             } catch {
-                announce("No se pudo descargar «\(item.title)»: \(error.localizedDescription)")
+                announce(MusicLocalized.format("No se pudo descargar «%@»: %@", item.title, error.localizedDescription))
             }
         }
     }
@@ -103,7 +103,7 @@ struct NativeUpdatesScreen: View {
         if let url = item.videoURL {
             openURL(url)
         } else {
-            announce("El enlace del vídeo no está disponible.")
+            announce(MusicLocalized.message("El enlace del vídeo no está disponible."))
         }
     }
 
@@ -112,7 +112,7 @@ struct NativeUpdatesScreen: View {
         if let url {
             NativeShare.present(url: url)
         } else {
-            announce("No hay un enlace disponible para compartir.")
+            announce(MusicLocalized.message("No hay un enlace disponible para compartir."))
         }
     }
 
@@ -121,7 +121,7 @@ struct NativeUpdatesScreen: View {
             Text(entry.item.title)
                 .font(.body)
                 .foregroundStyle(TifloVisual.primaryText)
-            Text(entry.kind)
+            Text(MusicLocalized.message(entry.kind))
                 .font(.subheadline)
                 .foregroundStyle(TifloVisual.secondaryText)
         }
@@ -187,7 +187,7 @@ struct NativeUpdatesScreen: View {
                 Button("Actualizar novedades") {
                     Task {
                         await catalog.refresh()
-                        let message = catalog.updateMessage ?? "La actualización está en curso."
+                        let message = catalog.updateMessage ?? MusicLocalized.message("La actualización está en curso.")
                         actionStatus = message
                         UIAccessibility.post(notification: .announcement, argument: message)
                     }

@@ -1837,3 +1837,29 @@
 "No se pudo completar la operación con YouTube (%@)." = "Could not complete the YouTube operation (%@).";
 "Abriendo identificación segura de Google." = "Opening secure Google sign-in.";
 "Este vídeo no puede reproducirse aquí (código %d). Puedes abrirlo en YouTube." = "This video cannot be played here (code %d). You can open it in YouTube.";
+
+// Release 1.7: search categories, updates and support diagnostics
+"Recurso" = "Resource";
+"Recurso de TifloAcosta" = "TifloAcosta resource";
+"Vídeo del canal TifloAcosta" = "TifloAcosta channel video";
+"La extensión Compartir necesita el App Group de Apple." = "The Share extension requires the Apple App Group.";
+"Los servidores ofrecen un catálogo anterior al guardado. Se conserva la versión más reciente de este dispositivo." = "The servers offer an older catalog than the saved one. The newer version on this device is retained.";
+"Contenido actualizado desde %@. Recursos: %d. Vídeos: %d. Noticias: %d." = "Content updated from %@. Resources: %d. Videos: %d. News items: %d.";
+"No se pudo descargar el catálogo. %@" = "Could not download the catalog. %@";
+"No se pudo actualizar el catálogo. Se muestran los contenidos guardados. %@" = "Could not update the catalog. Saved content is shown. %@";
+"Informe copiado. Puedes pegarlo en el correo o servicio que prefieras." = "Report copied. You can paste it into your preferred email or service.";
+"Sin actualización confirmada" = "No confirmed update";
+"Catálogo. Recursos: %d. Vídeos: %d. Noticias: %d. Última actualización: %@. Estado: %@." = "Catalog. Resources: %d. Videos: %d. News items: %d. Last update: %@. Status: %@.";
+"Sin error declarado" = "No error reported";
+"Actualización con incidencia" = "Update encountered a problem";
+"Sin datos" = "No data";
+"Aplicación: TifloAcosta para iOS, versión %@" = "Application: TifloAcosta for iOS, version %@";
+"Sistema: iOS %@" = "System: iOS %@";
+"Dispositivo: %@" = "Device: %@";
+"VoiceOver: %@" = "VoiceOver: %@";
+"Reducir movimiento: %@" = "Reduce Motion: %@";
+"Texto en negrita del sistema: %@" = "System Bold Text: %@";
+"Sección: %@" = "Section: %@";
+"Descripción:" = "Description:";
+"Pasos para reproducir:" = "Steps to reproduce:";
+"Diagnóstico básico:" = "Basic diagnostics:";

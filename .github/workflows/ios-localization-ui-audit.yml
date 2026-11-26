@@ -1,0 +1,56 @@
+name: Auditoría de navegación y traducciones en simulador
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - development/next-public-1.6-500200-20261121
+    paths:
+      - '.github/workflows/ios-localization-ui-audit.yml'
+      - 'ios-app-native/localization-audit-project.yml'
+      - 'ios-app-native/LocalizationUITests/**'
+      - 'ios-app-native/Sources/**'
+      - 'ios-app-native/ShareExtension/**'
+permissions:
+  contents: read
+concurrency:
+  group: localization-audit-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  localization-navigation:
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Elegir Xcode 26
+        run: |
+          set -euo pipefail
+          XCODE="$(find /Applications -maxdepth 1 -type d -name 'Xcode_26*.app' -print | sort | tail -n 1)"
+          test -n "$XCODE"
+          sudo xcode-select --switch "$XCODE/Contents/Developer"
+          xcodebuild -version
+      - name: Preparar proyecto de auditoría independiente
+        run: |
+          brew install xcodegen
+          (cd ios-app-native && xcodegen generate --spec localization-audit-project.yml)
+      - name: Iniciar simulador iPhone
+        run: |
+          set -euo pipefail
+          DEVICE="$(xcrun simctl list devices available -j | python3 -c 'import json,sys; d=json.load(sys.stdin)["devices"]; print(next(v["udid"] for k in sorted(d,reverse=True) if "iOS" in k for v in d[k] if v.get("isAvailable") and v["name"].startswith("iPhone")))')"
+          echo "AUDIT_DEVICE=$DEVICE" >> "$GITHUB_ENV"
+          xcrun simctl boot "$DEVICE" || true
+          xcrun simctl bootstatus "$DEVICE" -b
+      - name: Recorrer interfaz accesible en los seis idiomas
+        run: |
+          set -euo pipefail
+          xcodebuild -project ios-app-native/TifloAcostaNative.xcodeproj \
+            -scheme TifloAcostaLocalizationAudit -configuration Debug \
+            -destination "platform=iOS Simulator,id=$AUDIT_DEVICE" \
+            -derivedDataPath "$RUNNER_TEMP/TifloAcosta-localization-ui" \
+            -resultBundlePath "$RUNNER_TEMP/localization-navigation.xcresult" \
+            -parallel-testing-enabled NO CODE_SIGNING_ALLOWED=NO test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: localization-navigation-xcresult
+          path: ${{ runner.temp }}/localization-navigation.xcresult
+          if-no-files-found: warn

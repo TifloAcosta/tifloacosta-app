@@ -250,6 +250,7 @@ struct NativeHomeScreen: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel(Text(LocalizedStringKey(destination.rawValue)))
+                    .accessibilityIdentifier("tiflo.home." + destination.rawValue)
 
                     if destination != NativeDestination.allCases.last {
                         Divider()

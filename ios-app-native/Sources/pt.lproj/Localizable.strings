@@ -1680,3 +1680,10 @@
 "MP4, M4V y MOV con audio o vídeo compatibles con el reproductor de Apple." = "MP4, M4V e MOV com áudio ou vídeo compatíveis com o leitor da Apple.";
 "Libros DAISY empaquetados en ZIP o con extensión DAISY. Lectura de texto y pistas de audio; la navegación SMIL completa sigue en desarrollo." = "Livros DAISY em ZIP ou com extensão DAISY. Leitura de texto e faixas de áudio; a navegação SMIL completa continua em desenvolvimento.";
 "ZIP con pistas de audio o libros DAISY. No se admiten ZIP arbitrarios, RAR, 7Z ni CBR/CBZ." = "ZIP com faixas de áudio ou livros DAISY. ZIP arbitrários, RAR, 7Z e CBR/CBZ não são suportados.";
+
+// Multicines: navigation and acknowledgements
+"Plataformas" = "Plataformas";
+"Latinoamérica" = "América Latina";
+"Información y agradecimientos" = "Informações e agradecimentos";
+"Entrar en Audiocinemateca" = "Entrar na Audiocinemateca";
+"Agradecemos a %@ su predisposición y colaboración con Multicines Accesibles." = "Agradecemos a %@ pela disponibilidade e colaboração com o Multicines Accesibles.";

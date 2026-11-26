@@ -59,7 +59,7 @@ test('audio navigation works before Play and bookmark swipes do not auto-play', 
   assert.match(skip, /library\.saveAudioPosition\(/);
   assert.doesNotMatch(skip, /Posición: %d por ciento/);
   const marks = part('private func moveBetweenMarks(_ direction: Int) {', '// Quitar de las etiquetas de marcas');
-  assert.match(marks, /pendingDaisyAudioSeconds = mark\.seconds/);
+  assert.match(marks, /selectAudioLocation\(track: mark\.track, percent: mark\.percent, seconds: mark\.seconds,\s+resumeIfPlaying: false\)/);
   assert.match(marks, /navigateText\(to: next, unit: 6\)/);
   assert.doesNotMatch(marks, /playTrack\(/);
 });

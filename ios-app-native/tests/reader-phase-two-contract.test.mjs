@@ -177,7 +177,7 @@ test('DAISY guarda la posición exacta en segundos, conservando libros anteriore
   assert.match(reader, /var lastAudioSeconds: TimeInterval\? = nil/);
   assert.match(reader, /func saveAudioPosition\(_ document: NativeReadingDocument, track: Int, percent: Int,/);
   assert.match(reader, /documents\[i\]\.lastAudioSeconds = position/);
-  assert.match(reader, /seconds: speech\.hasAudio \? speech\.audioElapsed : nil/);
+  assert.match(reader, /let seconds = speech\.hasAudio \? speech\.audioElapsed\s+: \(pendingDaisyAudioSeconds \?\?/);
   assert.match(reader, /speech\.seek\(toSeconds: seconds\)/);
   assert.match(reader, /restoreAudioPosition\(\)/);
   assert.match(reader, /didRestoreAudioPosition = true/);
@@ -187,8 +187,8 @@ test('Las marcas de audio guardan segundos exactos con compatibilidad anterior',
   assert.match(reader, /struct NativeAudioBookmark: Codable, Hashable/);
   assert.match(reader, /var seconds: TimeInterval\? = nil/);
   assert.match(reader, /func addAudioBookmark\(_ document: NativeReadingDocument, track: Int, percent: Int,/);
-  assert.match(reader, /seconds: speech\.hasAudio \? speech\.audioElapsed : nil/);
-  assert.match(reader, /if speech\.hasAudio, let seconds = mark\.seconds/);
+  assert.match(reader, /let seconds = speech\.hasAudio \? speech\.audioElapsed\s+: \(pendingDaisyAudioSeconds \?\?/);
+  assert.match(reader, /selectAudioLocation\(track: mark\.track, percent: mark\.percent,\s+seconds: mark\.seconds, resumeIfPlaying: true\)/);
   assert.match(reader, /speech\.seek\(toSeconds: seconds\)/);
 });
 

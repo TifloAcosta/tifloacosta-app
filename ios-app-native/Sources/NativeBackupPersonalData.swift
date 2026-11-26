@@ -70,6 +70,7 @@ struct NativeBackupPreferencesSnapshot: Codable {
     let recentlyRead: [NativeFavoriteKey]
     let youtubeVideos: [NativeSavedYouTubeVideo]
     let youtubeChannels: [NativeSavedYouTubeChannel]
+    let voiceProfiles: [String: NativeReaderVoiceProfile]
 
     static let integerKeys = [
         "native-ios-language", "native-ios-color-scheme", "native-ios-text-size",
@@ -78,7 +79,7 @@ struct NativeBackupPreferencesSnapshot: Codable {
         "native-reading-pitch-index", "native-voiceover-library-detail-index",
         "native-reading-line-spacing-index", "native-reader-navigation-unit",
         "native-reader-reading-mode", "native-reader-presentation-mode",
-        "native-reader-reading-engine", "native-reader-ocr-accuracy-index",
+        "native-reader-reading-engine", "native-reading-pause-style", "native-reader-ocr-accuracy-index",
         "native-reader-ocr-language-index", "native-cinema-collection-language-index-v1",
         "native-cinema-collection-content-index-v1", "native-cinema-language-index-v1",
         "native-cinema-content-index-v1", "native-cinema-import-language-index-v1",
@@ -87,17 +88,17 @@ struct NativeBackupPreferencesSnapshot: Codable {
     static let booleanKeys = [
         "native-ios-strong-text", "native-reading-strong-text",
         "native-reader-braille-initial-text-focus", "native-podcast-continuous-playback",
-        "music.cellularPlayback", "music.cellularDownloads", "music.detailedVoiceOver"
+        "music.cellularPlayback", "music.cellularDownloads", "music.detailedVoiceOver", "mi-musica-shuffle"
     ]
-    static let numberKeys = ["native-reading-text-size"]
+    static let numberKeys = ["native-reading-text-size", "native-reading-pause-comma", "native-reading-pause-semicolon", "native-reading-pause-colon", "native-reading-pause-sentence", "native-reading-pause-paragraph"]
     static let stringKeys = [
         "native-reading-folder-filter", "native-reading-voice-id",
-        "native-reader-gemini-voice", "native-reader-phonon-voice"
+        "native-reader-gemini-voice", "native-reader-phonon-voice", "mi-musica-repeat"
     ]
 
     @MainActor
     static func capture(favorites: NativeFavoritesStore, activity: NativeReadingActivity,
-                        defaults: UserDefaults = .standard) -> Self {
+                        defaults: UserDefaults = .standard) throws -> Self {
         let integers = Dictionary(uniqueKeysWithValues: integerKeys.compactMap { key -> (String, Int)? in
             defaults.object(forKey: key) == nil ? nil : (key, defaults.integer(forKey: key))
         })
@@ -117,7 +118,8 @@ struct NativeBackupPreferencesSnapshot: Codable {
         return Self(schemaVersion: 1, integers: integers, booleans: booleans, numbers: numbers,
                     strings: strings, favorites: favorites.keys, savedForLater: activity.savedForLater,
                     recentlyRead: activity.recentlyRead, youtubeVideos: youtube.videos,
-                    youtubeChannels: youtube.followedChannels)
+                    youtubeChannels: youtube.followedChannels,
+                    voiceProfiles: try NativeReaderVoiceProfileStore.backupProfiles(defaults: defaults))
     }
 }
 

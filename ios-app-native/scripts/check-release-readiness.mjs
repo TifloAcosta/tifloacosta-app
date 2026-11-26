@@ -9,7 +9,7 @@ if (manifest.version !== '1.7' || manifest.branch !== expectedBranch) {
   throw Error('La versión o rama del inventario no corresponde a la beta 1.7.');
 }
 const requirements = manifest.requirements;
-const mandatoryIDs = Array.from({ length: 30 }, (_, index) => index + 1).filter(id => id !== 21);
+const mandatoryIDs = Array.from({ length: 34 }, (_, index) => index + 1).filter(id => id !== 21);
 if (!Array.isArray(requirements) || requirements.length < mandatoryIDs.length) {
   throw Error('El inventario de la versión 1.7 no conserva todos los requisitos obligatorios.');
 }

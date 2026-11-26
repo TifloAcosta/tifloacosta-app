@@ -203,3 +203,22 @@ test('streamed library metadata is bounded consistently on creation and restore'
     assert.match(archive, /else if !metadataOnly \{ mediaPaths\.insert\(entry\.path\) \}/);
     assert.match(archive, /NativeBackupLibraryValidation\.validate\(section: section, metadata: metadata, mediaPaths: mediaPaths\)/);
 });
+
+test('live personal restore adapters encode before applying and restore both persisted and observed state', () => {
+    const podcast = read('NativePodcastLibrary.swift');
+    const favorites = read('NativeFavorites.swift');
+    const activity = read('NativeReadingActivity.swift');
+    const youtube = read('NativeYouTubePersonalLibrary.swift');
+    assert.match(podcast, /func prepareBackupRestore\(_ backup: NativePodcastBackupSnapshot/);
+    assert.match(podcast, /let nextProgress = try encoder\.encode\(plan\.playbackProgress\)/);
+    assert.match(podcast, /section: \.podcasts, apply:/);
+    assert.match(podcast, /self\.playbackProgress = oldProgress/);
+    assert.match(radio, /section: \.radio, apply: \{ defaults\.set\(next, forKey: key\) \}/);
+    assert.match(radio, /rollback: \{ before\.restore\(\) \}/);
+    assert.match(favorites, /self\.keys = old/);
+    assert.match(activity, /self\.recentlyRead = oldHistory/);
+    assert.match(youtube, /videoIDs\.insert\(\$0\.id\)\.inserted/);
+    assert.match(youtube, /self\.videos = oldVideos/);
+    assert.match(personal, /else \{ defaults\.removeObject\(forKey: key\) \}/);
+    assert.match(personal, /NativeYouTubePersonalLibrary\.shared\.prepareBackupLibrary\(backup\)/);
+});

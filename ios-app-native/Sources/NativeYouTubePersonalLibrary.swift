@@ -42,6 +42,34 @@ final class NativeYouTubePersonalLibrary: ObservableObject {
         }
     }
 
+
+    /// Component of the global preferences transaction. Preserve current
+    /// watch-later choices and positions for matching IDs; add missing records.
+    func prepareBackupLibrary(_ backup: NativeBackupPreferencesSnapshot) throws
+        -> (apply: () throws -> Void, rollback: () throws -> Void) {
+        let oldVideos = videos, oldChannels = followedChannels
+        var videoIDs = Set(videos.map(\.id))
+        var channelIDs = Set(followedChannels.map(\.id))
+        let nextVideos = videos + backup.youtubeVideos.filter { videoIDs.insert($0.id).inserted }
+        let nextChannels = (followedChannels + backup.youtubeChannels.filter {
+            channelIDs.insert($0.id).inserted
+        }).sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
+        let before = NativeBackupDefaultsBeforeState(defaults: .standard, keys: [key, followedKey])
+        let encoder = JSONEncoder()
+        let videoBytes = try encoder.encode(nextVideos)
+        let channelBytes = try encoder.encode(nextChannels)
+        return ({
+            UserDefaults.standard.set(videoBytes, forKey: self.key)
+            UserDefaults.standard.set(channelBytes, forKey: self.followedKey)
+            self.videos = nextVideos
+            self.followedChannels = nextChannels
+        }, {
+            before.restore()
+            self.videos = oldVideos
+            self.followedChannels = oldChannels
+        })
+    }
+
     var watchLater: [NativeSavedYouTubeVideo] {
         videos.filter(\.watchLater).sorted {
             ($0.lastWatchedAt ?? .distantPast) > ($1.lastWatchedAt ?? .distantPast)

@@ -384,3 +384,29 @@ struct NativeBackupDefaultsBeforeState {
         }
     }
 }
+
+
+/// Collect the independently reversible reading and YouTube components. This
+/// is intentionally not a complete preferences restore: scalar settings and
+/// voice profiles must be validated and staged before a section step exists.
+@MainActor
+enum NativeBackupPreferencesComponents {
+    struct Prepared {
+        let readingPlan: NativeBackupPersonalDataMerge.ReadingPlan
+        let favorites: (apply: () throws -> Void, rollback: () throws -> Void)
+        let activity: (apply: () throws -> Void, rollback: () throws -> Void)
+        let youtube: (apply: () throws -> Void, rollback: () throws -> Void)
+    }
+
+    static func prepare(_ backup: NativeBackupPreferencesSnapshot,
+                        favorites: NativeFavoritesStore, activity: NativeReadingActivity) throws -> Prepared {
+        try NativeBackupPersonalDataValidation.validate(section: .preferences,
+            data: JSONEncoder().encode(backup))
+        let plan = NativeBackupPersonalDataMerge.reading(backup, favorites: favorites.keys,
+            savedForLater: activity.savedForLater, recentlyRead: activity.recentlyRead)
+        return Prepared(readingPlan: plan,
+            favorites: try favorites.prepareBackupFavorites(plan.favorites),
+            activity: try activity.prepareBackupActivity(plan),
+            youtube: try NativeYouTubePersonalLibrary.shared.prepareBackupLibrary(backup))
+    }
+}

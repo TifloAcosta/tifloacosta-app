@@ -1931,3 +1931,10 @@
 "Acciones de %@" = "Azioni di %@";
 "Última actualización correcta: %@" = "Ultimo aggiornamento riuscito: %@";
 "No hay resultados." = "Nessun risultato.";
+
+// Automatic OCR status
+"Este documento contiene texto en forma de imagen. TifloLector lo reconocerá automáticamente para que puedas leerlo de forma accesible." = "Questo documento contiene testo sotto forma di immagine. TifloLector lo riconoscerà automaticamente per consentirti una lettura accessibile.";
+"Reconocimiento parcial. No se encontró texto en %d páginas procesadas. El texto disponible se ha guardado." = "Riconoscimento parziale. Nessun testo trovato in %d pagine elaborate. Il testo disponibile è stato salvato.";
+"Reconocimiento completado. El documento está listo para su lectura." = "Riconoscimento completato. Il documento è pronto per la lettura.";
+"Reconocimiento de texto cancelado." = "Riconoscimento del testo annullato.";
+"No se pudo completar el reconocimiento o guardar el documento." = "Impossibile completare il riconoscimento o salvare il documento.";

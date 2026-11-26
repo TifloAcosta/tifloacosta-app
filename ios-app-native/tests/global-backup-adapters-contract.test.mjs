@@ -436,3 +436,15 @@ test('restore reports all preserved overlapping identities and scopes approval t
         assert.ok(read(file).includes('recordPreserved(section: "' + section + '"'), file);
     }
 });
+
+test('automatic backup keeps local recovery independent of cloud and defers on low power', () => {
+    const run = section(coordinator, 'func runAutomaticBackupIfDue(', 'func synchronizedHistory(');
+    const merged = section(coordinator, 'func synchronizedHistory(', 'func iCloudHistory(');
+    assert.match(run, /!ProcessInfo\.processInfo\.isLowPowerModeEnabled/);
+    assert.ok(run.indexOf('createGeneration(sections:') < run.indexOf('uploadGeneration(generation:'));
+    assert.doesNotMatch(run, /verifyAutomaticAuthorization/);
+    assert.match(merged, /remote: \[\]/);
+    assert.match(merged, /initialMetadataGatheringComplete: false, localSpaceCandidates: \[\], cloudError: error/);
+    assert.match(coordinator, /replacePending: Bool = false/);
+    assert.match(coordinator, /throw Failure\.pendingAutomaticBackup/);
+});

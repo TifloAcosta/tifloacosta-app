@@ -20,6 +20,8 @@ final class NativeBackupCoordinator: ObservableObject {
         let entries: [NativeBackupSyncPolicy.Entry]
         let initialMetadataGatheringComplete: Bool
         let localSpaceCandidates: [UUID]
+        /// A failed cloud query must never hide recoverable local copies.
+        let cloudError: Error?
     }
 
     enum AutomaticResult: Equatable {
@@ -27,7 +29,7 @@ final class NativeBackupCoordinator: ObservableObject {
     }
 
     enum Failure: Error {
-        case busy, unsupportedSelection, missingLiveStore, liveStoresNotQuiescent
+        case busy, unsupportedSelection, missingLiveStore, liveStoresNotQuiescent, pendingAutomaticBackup
         case incompleteRestore(RestoreReport)
     }
 
@@ -120,9 +122,12 @@ final class NativeBackupCoordinator: ObservableObject {
 
     func history() async throws -> [NativeBackupManifest] {
         let destination = store
-        return try await Task.detached(priority: .utility) {
+        let worker = Task.detached(priority: .utility) {
             try destination.history()
-        }.value
+        }
+        return try await withTaskCancellationHandler {
+            try await worker.value
+        } onCancel: { worker.cancel() }
     }
 
     /// Cloud upload is explicit, never automatically triggered by creation.
@@ -159,9 +164,15 @@ final class NativeBackupCoordinator: ObservableObject {
     /// Enabling automatic backups requires a foreground, explicit opt-in.
     /// Reconfiguration leaves every prior local and cloud generation intact.
     func configureAutomaticBackups(sections: Set<NativeBackupManifest.Section>,
-                                   frequency: NativeBackupAutomaticState.Frequency) async throws {
+                                   frequency: NativeBackupAutomaticState.Frequency,
+                                   replacePending: Bool = false) async throws {
         guard !backupOperationBusy else { throw Failure.busy }
         guard !sections.isEmpty, sections.isSubset(of: Self.supportedSections) else { throw Failure.unsupportedSelection }
+        // A change of configuration must not silently abandon a reserved
+        // generation. Even explicitly replacing the schedule keeps its files.
+        if try automaticStore.load()?.pending != nil, !replacePending {
+            throw Failure.pendingAutomaticBackup
+        }
         isRunningAutomaticBackup = true
         defer { isRunningAutomaticBackup = false }
         let authorization = UUID()
@@ -198,7 +209,8 @@ final class NativeBackupCoordinator: ObservableObject {
         case .wait: return .notDue
         case .create(let id), .resume(let id): generation = id
         }
-        guard canCollectSnapshot(), NativeRemotePlaybackOwner.current == nil,
+        guard canCollectSnapshot(), !ProcessInfo.processInfo.isLowPowerModeEnabled,
+              NativeRemotePlaybackOwner.current == nil,
               reader.readyForGlobalRestore, NativeMusicBackupAdapter.readyForRestore,
               podcastLibrary?.readyForGlobalRestore ?? true,
               podcastDownloads?.downloadingID == nil else { return .deferred }
@@ -213,20 +225,22 @@ final class NativeBackupCoordinator: ObservableObject {
         let authorization = policy.authorization
         let local = store
         let worker = Task.detached(priority: .utility) {
-            try NativeBackupCloudStore().verifyAutomaticAuthorization(authorization)
-            return try local.hasGeneration(generation)
+            try local.hasGeneration(generation)
         }
         let exists = try await withTaskCancellationHandler {
             try await worker.value
         } onCancel: { worker.cancel() }
         try Task.checkCancellation()
         guard canCollectSnapshot() else { return .deferred }
+        // Local protection works even if iCloud or the network is down.
+        // The cloud transport independently checks the account marker before
+        // transmitting any data; no implicit authorization is granted here.
         if !exists {
             _ = try await createGeneration(sections: policy.sections, generation: generation, reader: reader,
                 podcastLibrary: podcastLibrary, podcastDownloads: podcastDownloads, favorites: favorites, activity: activity)
         }
         try Task.checkCancellation()
-        guard canCollectSnapshot() else { return .deferred }
+        guard canCollectSnapshot(), !ProcessInfo.processInfo.isLowPowerModeEnabled else { return .deferred }
         let uploaded = try await uploadGeneration(generation: generation, automaticAuthorization: authorization)
         if uploaded == .uploaded {
             try policy.markUploaded(generation: generation, at: Date())
@@ -240,7 +254,14 @@ final class NativeBackupCoordinator: ObservableObject {
 
     func synchronizedHistory() async throws -> SynchronizedHistory {
         let here = try await history()
-        let there = try await iCloudHistory()
+        let there: NativeBackupCloudStore.History
+        do {
+            there = try await iCloudHistory()
+        } catch {
+            try Task.checkCancellation()
+            return SynchronizedHistory(entries: NativeBackupSyncPolicy.history(local: here, remote: []),
+                initialMetadataGatheringComplete: false, localSpaceCandidates: [], cloudError: error)
+        }
         let remote = there.entries.map { entry -> NativeBackupSyncPolicy.Remote in
             let status: NativeBackupSyncPolicy.Availability
             switch entry.uploadState {
@@ -256,7 +277,7 @@ final class NativeBackupCoordinator: ObservableObject {
         return SynchronizedHistory(entries: entries,
             initialMetadataGatheringComplete: there.initialMetadataGatheringComplete,
             localSpaceCandidates: NativeBackupSyncPolicy.localSpaceCandidates(history: entries,
-                pending: pending, remoteHistoryComplete: there.initialMetadataGatheringComplete))
+                pending: pending, remoteHistoryComplete: there.initialMetadataGatheringComplete), cloudError: nil)
     }
 
     func iCloudHistory() async throws -> NativeBackupCloudStore.History {

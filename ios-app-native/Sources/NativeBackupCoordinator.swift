@@ -103,7 +103,7 @@ final class NativeBackupCoordinator: ObservableObject {
             let (manifest, directory) = try destination.verifiedGeneration(generation)
             for artifact in manifest.artifacts {
                 try Task.checkCancellation()
-                try NativeBackupSectionArchive.validateForRestore(section: artifact.section,
+                try NativeBackupSectionArchive.verifyContentsForRestore(section: artifact.section,
                     source: directory.appendingPathComponent(artifact.filename))
             }
             return manifest

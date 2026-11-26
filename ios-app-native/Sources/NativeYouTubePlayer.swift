@@ -187,6 +187,7 @@ final class NativeYouTubeSearchStore: ObservableObject {
     private var currentQuery = ""
     private var currentFilter = "video"
     private var currentChannelID: String?
+    private var consumedPageTokens: Set<String> = []
     private let endpoint = URL(string: "https://youtube-auth.tifloacosta.com/search")!
 
     /// Retry once for transient transport/gateway failures, never for
@@ -231,6 +232,7 @@ final class NativeYouTubeSearchStore: ObservableObject {
         if loadMore && nextPageToken.isEmpty { return }
         let requestedPageToken = loadMore ? nextPageToken : ""
         if !loadMore {
+            consumedPageTokens.removeAll()
             searchFailed = false
             currentQuery = cleanQuery
             currentFilter = filter
@@ -286,6 +288,7 @@ final class NativeYouTubeSearchStore: ObservableObject {
                 throw SearchError.message(MusicLocalized.message(
                     "El servicio de YouTube devolvió un error al buscar."))
             }
+            try Task.checkCancellation()
             let page = try JSONDecoder().decode(NativeYouTubeSearchPage.self, from: data)
             // Deduplicate within the current page as well as across earlier
             // pages; one result must remain one VoiceOver focus stop.
@@ -303,14 +306,18 @@ final class NativeYouTubeSearchStore: ObservableObject {
             }
             // Avoid exposing a permanent "show more" action if the upstream
             // mistakenly sends the same pagination token twice.
-            nextPageToken = page.nextPageToken == requestedPageToken
-                ? "" : page.nextPageToken
+            consumedPageTokens.insert(requestedPageToken)
+            nextPageToken = page.nextPageToken == requestedPageToken ||
+                consumedPageTokens.contains(page.nextPageToken) ? "" : page.nextPageToken
             searchFailed = false
             let count = videos.count + channels.count + playlists.count
             message = count == 0 ? "No se encontraron resultados."
                 : "\(count) resultados encontrados hasta el momento."
         } catch {
-            if (error as? URLError)?.code == .cancelled { return }
+            if error is CancellationError || (error as? URLError)?.code == .cancelled {
+                message = nil
+                return
+            }
             searchFailed = true
             message = searchFailureMessage(error)
         }
@@ -378,6 +385,7 @@ final class NativeYouTubePlayerEngine: ObservableObject {
     }
 
     func report(_ data: [String: Any]) {
+        guard webView != nil else { return }
         if let isReady = data["ready"] as? Bool { ready = isReady }
         if let state = data["state"] as? Int {
             if state == 1 {
@@ -392,12 +400,12 @@ final class NativeYouTubePlayerEngine: ObservableObject {
                     NativeRemotePlaybackOwner.claim(.youtube)
                 }
             }
-            if state == 0 && previousState != 0 && hasPlayed && error == nil {
+            if state == 0 && previousState != 0 && hasPlayed && error == nil && !externallyPaused {
                 completedSequence += 1
                 hasPlayed = false
             }
             previousState = state
-            playing = state == 1
+            playing = state == 1 && !externallyPaused
         }
         if let current = data["current"] as? Double, current.isFinite { currentTime = max(0, current) }
         if let total = data["duration"] as? Double, total.isFinite { duration = max(0, total) }
@@ -421,7 +429,6 @@ final class NativeYouTubePlayerEngine: ObservableObject {
     }
 
     func pauseForOtherAudio() {
-        guard playing else { return }
         externallyPaused = true
         run("if(window.tifloPlayer){tifloPlayer.pauseVideo()}")
         playing = false
@@ -450,7 +457,8 @@ final class NativeYouTubePlayerEngine: ObservableObject {
         run("if(window.tifloPlayer){tifloPlayer.seekTo(tifloPlayer.getDuration()*\(clamped)/100,true)}")
     }
     func stop() {
-        externallyPaused = false
+        externallyPaused = true
+        playing = false
         NativeRemotePlaybackOwner.release(.youtube)
         hasPlayed = false // Closing a player must never advance the playlist.
         webView?.evaluateJavaScript("if(window.tifloPlayer){tifloPlayer.stopVideo()}", completionHandler: nil)

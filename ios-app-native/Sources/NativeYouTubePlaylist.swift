@@ -28,6 +28,7 @@ final class NativeYouTubePlaylistStore: ObservableObject {
 
     private var currentPlaylistID = ""
     private var seenSourceItems = 0
+    private var consumedPageTokens: Set<String> = []
     private let endpoint = URL(string: "https://youtube-auth.tifloacosta.com/playlist-items")!
 
     func load(_ playlist: NativeYouTubePlaylist, loadMore: Bool = false) async {
@@ -36,6 +37,7 @@ final class NativeYouTubePlaylistStore: ObservableObject {
         // Capture this page's token; a broken backend must never loop forever.
         let requestedPageToken = loadMore ? nextPageToken : ""
         if !loadMore {
+            consumedPageTokens.removeAll()
             currentPlaylistID = playlist.id
             entries = []
             nextPageToken = ""
@@ -68,6 +70,7 @@ final class NativeYouTubePlaylistStore: ObservableObject {
                 // that the user's playlist has been removed or made private.
                 throw PlaylistLoadError.service
             }
+            try Task.checkCancellation()
             let page = try JSONDecoder().decode(NativeYouTubePlaylistPage.self, from: data)
             // Retain two occurrences of a video at different positions,
             // but never duplicate the same position after a repeated page.
@@ -82,14 +85,18 @@ final class NativeYouTubePlaylistStore: ObservableObject {
                 ))
             }
             seenSourceItems += page.items.count
-            nextPageToken = page.nextPageToken == requestedPageToken
-                ? "" : page.nextPageToken
+            consumedPageTokens.insert(requestedPageToken)
+            nextPageToken = page.nextPageToken == requestedPageToken ||
+                consumedPageTokens.contains(page.nextPageToken) ? "" : page.nextPageToken
             hasLoaded = true
             if entries.isEmpty {
                 message = MusicLocalized.message("No hay vídeos públicos disponibles en esta lista.")
             }
         } catch {
-            if (error as? URLError)?.code == .cancelled { return }
+            if error is CancellationError || (error as? URLError)?.code == .cancelled {
+                message = nil
+                return
+            }
             if let known = error as? PlaylistLoadError {
                 message = known.localizedDescription
             } else if error is DecodingError {

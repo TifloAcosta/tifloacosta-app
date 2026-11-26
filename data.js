@@ -2675,5 +2675,134 @@ window.TIFLO_RESOURCES = [
     "url": "https://tifloacosta.com/docs/es/reader-1NEo3GRvpN1l_eVAFXt0M5xxuapcfAWYX.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1NEo3GRvpN1l_eVAFXt0M5xxuapcfAWYX.html",
     "searchText": "Altavoces inteligentes en México 2026 Amazon Echo Alexa Google Home Gemini Apple HomePod Siri accesibilidad recomendaciones enlaces para comprobar antes de comprar"
+  },
+  {
+    "id": "es-1f1Pw6ryynh5IgFX2rcamZvw-NfCpoKPn",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "ceguera en Latinoamérica"
+    ],
+    "title": "Conclusiones sobre ceguera y baja visión en América Latina 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-1f1Pw6ryynh5IgFX2rcamZvw-NfCpoKPn.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1f1Pw6ryynh5IgFX2rcamZvw-NfCpoKPn.html",
+    "searchText": "Conclusiones sobre ceguera y baja visión en América Latina 2026 certificación rehabilitación educación tecnología lectura accesible autonomía derechos accesibilidad digital"
+  },
+  {
+    "id": "es-1v6t3SmVzRbqEHitaSOxS3Knv3jIo-pcZ",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "ceguera en Latinoamérica",
+      "Información por países"
+    ],
+    "title": "Ceguera y baja visión en Argentina 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-1v6t3SmVzRbqEHitaSOxS3Knv3jIo-pcZ.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1v6t3SmVzRbqEHitaSOxS3Knv3jIo-pcZ.html",
+    "searchText": "Ceguera y baja visión en Argentina 2026 Certificado Único de Discapacidad prestaciones rehabilitación pensiones Biblioteca Argentina para Ciegos Tiflonexos Tiflolibros"
+  },
+  {
+    "id": "es-1-C1mXG-NxRjHKqpQXtgkpzgaNVENLr8g",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "ceguera en Latinoamérica",
+      "Información por países"
+    ],
+    "title": "Ceguera y baja visión en México 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-1-C1mXG-NxRjHKqpQXtgkpzgaNVENLr8g.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1-C1mXG-NxRjHKqpQXtgkpzgaNVENLr8g.html",
+    "searchText": "Ceguera y baja visión en México 2026 CONADIS derechos pensión salud visual habilitación educación tecnología lectura accesible"
+  },
+  {
+    "id": "es-1li2mKJhiZblvgvWbMOj8ZBB3jb0YxUoY",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "ceguera en Latinoamérica",
+      "Información por países"
+    ],
+    "title": "Ceguera y baja visión en Costa Rica 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-1li2mKJhiZblvgvWbMOj8ZBB3jb0YxUoY.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1li2mKJhiZblvgvWbMOj8ZBB3jb0YxUoY.html",
+    "searchText": "Ceguera y baja visión en Costa Rica 2026 CONAPDIS certificación PANACI educación autonomía CENAREC lectura y recursos accesibles"
+  },
+  {
+    "id": "es-1RyhmjdwuIqEUTQd9dp2ozdY7I_qOf2fM",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "ceguera en Latinoamérica",
+      "Información por países"
+    ],
+    "title": "Ceguera y baja visión en Chile 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-1RyhmjdwuIqEUTQd9dp2ozdY7I_qOf2fM.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1RyhmjdwuIqEUTQd9dp2ozdY7I_qOf2fM.html",
+    "searchText": "Ceguera y baja visión en Chile 2026 SENADIS ayudas técnicas Fundación Luz rehabilitación Biblioteca Central para Ciegos Biblioteca Nacional"
+  },
+  {
+    "id": "es-1MD2sGou5VGLFlYeMbj9o28viQwmrXjRV",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "ceguera en Latinoamérica",
+      "Información por países"
+    ],
+    "title": "Ceguera y baja visión en Colombia 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-1MD2sGou5VGLFlYeMbj9o28viQwmrXjRV.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1MD2sGou5VGLFlYeMbj9o28viQwmrXjRV.html",
+    "searchText": "Ceguera y baja visión en Colombia 2026 certificación discapacidad INCI Biblioteca Virtual para Ciegos tecnología accesible imprenta derechos"
+  },
+  {
+    "id": "es-1clYeYVbT4x4OC_D1lRHYpUeTOCmtGp3M",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "ceguera en Latinoamérica",
+      "Información por países"
+    ],
+    "title": "Ceguera y baja visión en Ecuador 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-1clYeYVbT4x4OC_D1lRHYpUeTOCmtGp3M.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1clYeYVbT4x4OC_D1lRHYpUeTOCmtGp3M.html",
+    "searchText": "Ceguera y baja visión en Ecuador 2026 calificación acreditación discapacidad CONADIS pensiones bono Joaquín Gallegos Lara"
+  },
+  {
+    "id": "es-1c8BXBPhUIJfkLDl4yaVfRKUqC8M9f3Fp",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "ceguera en Latinoamérica",
+      "Información por países"
+    ],
+    "title": "Ceguera y baja visión en Perú 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-1c8BXBPhUIJfkLDl4yaVfRKUqC8M9f3Fp.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1c8BXBPhUIJfkLDl4yaVfRKUqC8M9f3Fp.html",
+    "searchText": "Ceguera y baja visión en Perú 2026 Certificado de Discapacidad Registro Nacional Programa CONTIGO Tiflos BNP OMAPED lectura accesible"
+  },
+  {
+    "id": "es-17iuXB23fcqJt7HLhdaQZahajTCv3ztYa",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "ceguera en Latinoamérica",
+      "Información por países"
+    ],
+    "title": "Ceguera y baja visión en República Dominicana 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-17iuXB23fcqJt7HLhdaQZahajTCv3ztYa.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-17iuXB23fcqJt7HLhdaQZahajTCv3ztYa.html",
+    "searchText": "Ceguera y baja visión en República Dominicana 2026 CONADIS certificación pensión Patronato Nacional de Ciegos Centro Olga Estrella Fundación Dominicana de Ciegos CECAPCI"
+  },
+  {
+    "id": "es-1D92RjghMUnfQPlqbHUXUVCkh_3j-bnlo",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "ceguera en Latinoamérica",
+      "Información por países"
+    ],
+    "title": "Ceguera y baja visión en Uruguay 2026",
+    "url": "https://tifloacosta.com/docs/es/reader-1D92RjghMUnfQPlqbHUXUVCkh_3j-bnlo.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1D92RjghMUnfQPlqbHUXUVCkh_3j-bnlo.html",
+    "searchText": "Ceguera y baja visión en Uruguay 2026 Registro Nacional de Personas con Discapacidad Centro Tiburcio Cachón ayudas técnicas empleo pensión invalidez Tratado de Marrakech"
   }
 ];

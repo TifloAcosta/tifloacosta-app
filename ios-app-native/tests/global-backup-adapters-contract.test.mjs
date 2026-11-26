@@ -367,3 +367,14 @@ test('cloud history distinguishes conflicts from pending transfer and import che
     assert.match(coordinator, /importGeneration\(generation, local: local\) \{ section, url in/);
     assert.match(coordinator, /verifyContentsForRestore\(section: section, source: url\)/);
 });
+
+test('cloud history discovers remote-only generations and reports incomplete metadata gathering', () => {
+    const cloud = read('NativeBackupCloudStore.swift');
+    assert.match(cloud, /NSMetadataQueryUbiquitousDataScope/);
+    assert.match(cloud, /NSMetadataQueryDidFinishGathering/);
+    assert.match(cloud, /query\.disableUpdates\(\)/);
+    assert.match(cloud, /query\.enableUpdates\(\)/);
+    assert.match(cloud, /directory\.deletingLastPathComponent\(\)\.standardizedFileURL\.resolvingSymlinksInPath\(\)\.path == expected/);
+    assert.match(cloud, /var ids = discovery\.ids/);
+    assert.match(cloud, /initialMetadataGatheringComplete: discovery\.finished/);
+});

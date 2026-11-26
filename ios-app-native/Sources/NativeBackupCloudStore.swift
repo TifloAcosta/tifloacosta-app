@@ -15,6 +15,13 @@ struct NativeBackupCloudStore {
         let manifest: NativeBackupManifest?
         let uploadState: UploadState
     }
+    struct History {
+        let entries: [Entry]
+        /// True means the initial metadata gathering finished, not that all
+        /// changes on every other device have already reached this device.
+        let initialMetadataGatheringComplete: Bool
+    }
+
     private let fm = FileManager.default
 
     /// A token is only compared in memory. Never log or persist the Apple
@@ -45,7 +52,7 @@ struct NativeBackupCloudStore {
         let coordinator = NSFileCoordinator(filePresenter: nil)
         var coordinationError: NSError?
         var outcome: Result<T, Error>?
-        coordinator.coordinate(readingItemAt: url, options: [], error: &coordinationError) { coordinated in
+        coordinator.coordinate(readingItemAt: url, options: .withoutChanges, error: &coordinationError) { coordinated in
             outcome = Result { try body(coordinated) }
         }
         if let coordinationError { throw coordinationError }
@@ -139,17 +146,25 @@ struct NativeBackupCloudStore {
 
     /// History is advisory. A manifest can arrive before an archive. An
     /// uploaded status is not a substitute for verification before restore.
-    func history() throws -> [Entry] {
+    func history() async throws -> History {
         let session = try session()
         try prepareRoot(session)
+        // File-system listings alone miss cloud-only files on a new iPhone.
+        let discovery = try await NativeBackupCloudDiscovery.find(root: session.root)
+        try check(session)
         let directories = try read(session.root) {
             try self.fm.contentsOfDirectory(at: $0, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])
         }
-        var result: [Entry] = []
+        var ids = discovery.ids
         for directory in directories {
+            guard let id = UUID(uuidString: directory.lastPathComponent),
+                  id.uuidString == directory.lastPathComponent else { continue }
+            ids.insert(id)
+        }
+        var result: [Entry] = []
+        for generation in ids {
             try check(session)
-            guard let generation = UUID(uuidString: directory.lastPathComponent),
-                  generation.uuidString == directory.lastPathComponent else { continue }
+            let directory = session.root.appendingPathComponent(generation.uuidString, isDirectory: true)
             let manifestURL = directory.appendingPathComponent("manifest.json")
             // Listing never downloads the whole copy or blocks on large archives.
             var manifest: NativeBackupManifest?
@@ -180,11 +195,12 @@ struct NativeBackupCloudStore {
             result.append(.init(generation: generation, manifest: manifest, uploadState: uploadState))
         }
         try check(session)
-        return result.sorted {
+        let ordered = result.sorted {
             let a = $0.manifest?.createdAt ?? .distantPast, b = $1.manifest?.createdAt ?? .distantPast
             if a != b { return a > b }
             return $0.generation.uuidString < $1.generation.uuidString
         }
+        return History(entries: ordered, initialMetadataGatheringComplete: discovery.finished)
     }
 
     private func download(_ url: URL, session: Session) async throws {
@@ -244,5 +260,55 @@ struct NativeBackupCloudStore {
         guard latest == manifest else { throw Failure.conflict }
         try check(session)
         return try local.adoptVerifiedStaging(staging, manifest: manifest)
+    }
+}
+
+
+/// Apple documents that remote-only iCloud files may not exist in a local
+/// directory listing. Query only the private app-data scope and filter the
+/// returned URLs to the exact backup root; no account or URL is persisted.
+@MainActor
+private enum NativeBackupCloudDiscovery {
+    private final class GatheringFlag {
+        var finished = false
+    }
+
+    static func find(root: URL) async throws -> (ids: Set<UUID>, finished: Bool) {
+        let query = NSMetadataQuery()
+        query.searchScopes = [NSMetadataQueryUbiquitousDataScope]
+        query.predicate = NSPredicate(format: "%K == %@", NSMetadataItemFSNameKey, "manifest.json")
+        query.notificationBatchingInterval = 0.5
+        let flag = GatheringFlag()
+        let observation = NotificationCenter.default.addObserver(
+            forName: .NSMetadataQueryDidFinishGathering, object: query, queue: .main
+        ) { _ in
+            Task { @MainActor in flag.finished = true }
+        }
+        defer {
+            query.stop()
+            NotificationCenter.default.removeObserver(observation)
+        }
+        guard query.start() else { return ([], false) }
+        let clock = ContinuousClock()
+        let deadline = clock.now.advanced(by: .seconds(15))
+        while !flag.finished && clock.now < deadline {
+            try Task.checkCancellation()
+            try await Task.sleep(nanoseconds: 250_000_000)
+        }
+        try Task.checkCancellation()
+        query.disableUpdates()
+        defer { query.enableUpdates() }
+        var ids = Set<UUID>()
+        let expected = root.standardizedFileURL.resolvingSymlinksInPath().path
+        for case let item as NSMetadataItem in query.results {
+            guard let url = item.value(forAttribute: NSMetadataItemURLKey) as? URL,
+                  url.lastPathComponent == "manifest.json" else { continue }
+            let directory = url.deletingLastPathComponent()
+            guard directory.deletingLastPathComponent().standardizedFileURL.resolvingSymlinksInPath().path == expected,
+                  let id = UUID(uuidString: directory.lastPathComponent),
+                  id.uuidString == directory.lastPathComponent else { continue }
+            ids.insert(id)
+        }
+        return (ids, flag.finished)
     }
 }

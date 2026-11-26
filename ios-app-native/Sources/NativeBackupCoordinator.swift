@@ -118,8 +118,8 @@ final class NativeBackupCoordinator: ObservableObject {
         } onCancel: { worker.cancel() }
     }
 
-    func iCloudHistory() async throws -> [NativeBackupCloudStore.Entry] {
-        let worker = Task.detached(priority: .utility) { try NativeBackupCloudStore().history() }
+    func iCloudHistory() async throws -> NativeBackupCloudStore.History {
+        let worker = Task.detached(priority: .utility) { try await NativeBackupCloudStore().history() }
         return try await withTaskCancellationHandler {
             try await worker.value
         } onCancel: { worker.cancel() }

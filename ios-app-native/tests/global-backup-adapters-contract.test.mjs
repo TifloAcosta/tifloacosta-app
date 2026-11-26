@@ -98,3 +98,29 @@ test('all six selected archives must exist before publication, and missing store
     assert.match(coordinator, /guard Set\(archives.keys\) == sections/);
     assert.match(coordinator, /throw Failure.missingLiveStore/);
 });
+
+test('restore preflight checks the entire generation and each archive without applying data', () => {
+    const preflight = coordinator.slice(coordinator.indexOf('func preflightRestore('));
+    assert.match(preflight, /destination\.verifiedGeneration\(generation\)/);
+    assert.match(preflight, /for artifact in manifest\.artifacts/);
+    assert.match(preflight, /NativeBackupSectionArchive\.validateForRestore/);
+    assert.match(preflight, /Task\.detached\(priority: \.utility\)/);
+    assert.match(preflight, /worker\.cancel\(\)/);
+    assert.doesNotMatch(preflight, /restoreBackup\(|UserDefaults|removeItem|publish\(/);
+});
+test('restore structural checks reject ambiguous ZIP paths and require section metadata', () => {
+    const preflight = archive.slice(archive.indexOf('static func validateForRestore('));
+    assert.match(preflight, /entry\.type == \.file/);
+    assert.match(preflight, /try validatePath\(path\)/);
+    assert.match(preflight, /normalizedPaths\.insert\(normalized\)\.inserted/);
+    assert.match(preflight, /!parents\.contains\(normalized\)/);
+    assert.match(preflight, /!normalizedPaths\.contains\(parent\)/);
+    assert.match(preflight, /required\.isSubset\(of: paths\)/);
+    assert.match(preflight, /Int64\(exactly: entry\.uncompressedSize\)/);
+    assert.match(preflight, /addingReportingOverflow/);
+    assert.match(preflight, /next <= limit, paths\.count <= entryLimit/);
+    for (const name of ['documentos.json','carpetas.json','manifest.json','catalogo-personal.json','historial.json','snapshot.json']) {
+        assert.ok(preflight.includes('"' + name + '"'), name);
+    }
+    assert.doesNotMatch(preflight, /archive\.extract|copyItem|removeItem/);
+});

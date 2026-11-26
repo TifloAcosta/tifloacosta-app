@@ -1720,6 +1720,14 @@ struct NativeMyMusicScreen: View {
 
 // Punto de entrada para los audios recibidos desde la extensión Compartir.
 // Importación idempotente: el UUID del manifiesto es también el ID musical.
+/// The global backup service uses the same live music library as the screen.
+@MainActor
+enum NativeMusicBackupAdapter {
+    static func createArchive() async throws -> URL {
+        try await NativeMusicLibrary.shared.createGlobalBackupArchive()
+    }
+}
+
 @MainActor
 enum NativeMusicSharedAudio {
     static func importFile(_ url: URL, sharingID: UUID) throws {

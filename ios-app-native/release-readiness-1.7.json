@@ -480,6 +480,28 @@
         "ios-app-native/tests/music-import-rollback-phase5-20261120.test.mjs"
       ],
       "validation": "La importación y recepción compartida consultan título e intérprete locales. Las copias aptas se nombran Intérprete - Título.ext sin recodificación, con nombres alternativos cuando existe otro archivo, conservando el UUID y guardando el índice antes de retirar la ruta anterior. Mi Música permite editar título e intérprete desde el menú y las acciones de VoiceOver, y conserva la edición ante lecturas asíncronas de etiquetas. Se añade reconocimiento individual, por lote y automático opcional al importar mediante Chromaprint local y AcoustID con metadatos básicos de MusicBrainz. La gestión de discrepancias conserva el nombre original. La cuenta se puede vincular mediante código o clave personal validada. Las credenciales se guardan localmente en el llavero y se envían por cabeceras HTTPS. Se limita el conjunto de consultas, incluida la vinculación, a una por segundo. La identificación manual sin cuenta lleva a la vinculación y las consultas rechazan redirecciones HTTP. El procedimiento de registro y configuración del identificador público está en el README de iOS. Se añadió una prueba Swift con respuestas controladas de credencial rechazada, coincidencia ambigua, desconexión y cancelación de lote. El uso no comercial, el registro de la app y la variable de repositorio se confirmaron el 26-11-2026. Falta validar en iPhone. Se señalan posibles duplicados por coincidencia normalizada de título e intérprete, sin eliminar archivos. 26-11-2026: revisión final de código: se impide aplicar una consulta si cambió la cuenta, se evita reconocimiento simultáneo de la misma pista, se protege la edición de metadatos y la desactivación de reconocimiento automático mientras espera. Identificación por lote muestra progreso y resultados parciales tras cancelación o credencial rechazada, con mensajes traducidos y pruebas Swift controladas. CI 583 superado. Registro externo de AcoustID y variable pública verificados por la extensión; no se ha realizado consulta real. Confirmación administrativa: https://github.com/TifloAcosta/tifloacosta-app/issues/352#issuecomment-7187577513. Próxima compilación debe comprobar incorporación del identificador sin exponer su valor. 26-11-2026, auditoría transversal: 86 nuevas claves en cada idioma EN/FR/DE/IT/PT (1537 por catálogo), mensajes dinámicos y controles de YouTube, Recursos, lector y Mi Música localizados; controles de velocidad/pausas con formato regional; superficies nativas compartidas de Mi Música, Multicines y cuenta AcoustID. Errores de canales decididos por searchFailed y búsqueda Multicines incompleta reinicia acumuladores al volver. Commit 4534cf3912eb124680c8b3c974d494a6b151d655; 590: 670 pruebas aprobadas, 1 contrato antiguo de botón de selección actualizado. Validación de nuevas correcciones pendiente. No distribución. Flujo de archivado TestFlight ahora inyecta la variable y verifica igualdad del identificador público en IPA; validación del simulador comprueba presencia de AcoustID/Drive y seis idiomas sin revelar valores."
+    },
+    {
+      "id": 32,
+      "title": "TifloLector: aviso accesible antes del OCR automático de imágenes y PDF escaneados",
+      "status": "partial",
+      "issue": "#352",
+      "evidence": [
+        "https://github.com/TifloAcosta/tifloacosta-app/issues/352#issuecomment-7194687704"
+      ],
+      "validation": "Aprobado y registrado; falta implementar aviso previo y resultado real, sin diálogo ni repetición por página, localizar seis idiomas y verificar VoiceOver."
+    },
+    {
+      "id": 33,
+      "title": "Copia de seguridad y sincronización privada iCloud de TifloAcosta",
+      "status": "partial",
+      "issue": "#366",
+      "evidence": [
+        "ios-app-native/Sources/NativeBackupManifest.swift",
+        "ios-app-native/tests/backup-manifest-smoke.swift",
+        "ios-app-native/scripts/test-backup-manifest.sh"
+      ],
+      "validation": "Prioridad de beta 1.7 aprobada. Primera base de formato versionado por generación y secciones, SHA-256 incremental, verificación previa de tamaño y hash, rechazo de duplicados y enlaces simbólicos en archivos staged. Smoke test macOS escrito, no ejecutado. TifloLector dispone de exportación/restauración ZIP; Mi Música de exportación de índice, restauración completa y copia automática con destino seleccionado. Falta integrar todas las secciones, empaquetado/restauración transaccional, selección y exclusiones explícitas, transporte iCloud, configuración de capacidades y firma, historial, copia automática condicionada, sincronización privada y gestión de conflictos, UI accesible y seis idiomas. No declarar copia remota confirmada sin verificar subida. Prueba real de restauración y cuenta Apple requerida."
     }
   ],
   "operational": [

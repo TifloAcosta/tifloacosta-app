@@ -103,7 +103,7 @@ test('restore preflight checks the entire generation and each archive without ap
     const preflight = coordinator.slice(coordinator.indexOf('func preflightRestore('));
     assert.match(preflight, /destination\.verifiedGeneration\(generation\)/);
     assert.match(preflight, /for artifact in manifest\.artifacts/);
-    assert.match(preflight, /NativeBackupSectionArchive\.validateForRestore/);
+    assert.match(preflight, /NativeBackupSectionArchive\.verifyContentsForRestore/);
     assert.match(preflight, /Task\.detached\(priority: \.utility\)/);
     assert.match(preflight, /worker\.cancel\(\)/);
     assert.doesNotMatch(preflight, /restoreBackup\(|UserDefaults|removeItem|publish\(/);
@@ -123,4 +123,31 @@ test('restore structural checks reject ambiguous ZIP paths and require section m
         assert.ok(preflight.includes('"' + name + '"'), name);
     }
     assert.doesNotMatch(preflight, /archive\.extract|copyItem|removeItem/);
+});
+
+test('restore checks CRC and actual decoded bytes before reading metadata snapshots', () => {
+    const source = section(archive, 'static func verifyContentsForRestore(', 'static func validateForRestore(');
+    assert.match(source, /try validateForRestore\(section: section, source: source\)/);
+    assert.match(source, /archive\.extract\(entry\) \{ chunk in/);
+    assert.match(source, /UInt64\(chunk.count\) <= entry.uncompressedSize - written/);
+    assert.match(source, /written == entry.uncompressedSize, checksum == entry.checksum/);
+    assert.match(source, /chunk.count <= 32_000_000 - snapshot.count/);
+    assert.match(source, /NativeBackupPersonalDataValidation\.validate/);
+    assert.doesNotMatch(source, /copyItem|removeItem|UserDefaults/);
+});
+test('personal data validation rejects unsupported versions duplicate identifiers and unapproved preferences', () => {
+    const source = personal.slice(personal.indexOf('enum NativeBackupPersonalDataValidation'));
+    for (const name of ['NativePodcastBackupSnapshot','NativeRadioBackupSnapshot','NativeBackupPreferencesSnapshot']) {
+        assert.ok(source.includes('decoder.decode(' + name + '.self'), name);
+    }
+    assert.equal((source.match(/value\.schemaVersion == 1/g)||[]).length, 3);
+    assert.match(source, /Set\(value\.savedEpisodes\.map\(\\\.id\)\)\.count == value\.savedEpisodes\.count/);
+    assert.match(source, /Set\(ids\)\.count == ids\.count/);
+    assert.match(source, /value\.requiresDirectoryLookup == value\.favorites\.filter/);
+    for (const key of ['integer','boolean','number','string']) {
+        assert.ok(source.includes('NativeBackupPreferencesSnapshot.' + key + 'Keys'));
+    }
+    assert.match(source, /value\.numbers\.values\.allSatisfy/);
+    assert.match(source, /eligible\(\$0\.sourceURL\)/);
+    assert.doesNotMatch(source, /UserDefaults|URLSession|\.filename\b/);
 });

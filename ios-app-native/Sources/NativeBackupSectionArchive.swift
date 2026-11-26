@@ -14,6 +14,12 @@ enum NativeBackupSectionArchive {
         case invalidPath, duplicatePath, invalidFile, exceedsRestoreLimit
     }
 
+    // Bounded JSON decoding; media is still streamed. Match creation and restore.
+    private static let maximumLibraryMetadataBytes = 128 * 1024 * 1024
+    private static let libraryMetadataNames: Set<String> = [
+        "documentos.json", "carpetas.json", "manifest.json", "catalogo-personal.json", "historial.json"
+    ]
+
     static func validatePath(_ path: String) throws {
         let parts = path.split(separator: "/", omittingEmptySubsequences: false)
         guard !parts.isEmpty, !path.contains("\\"), !path.contains(":"),
@@ -49,7 +55,14 @@ enum NativeBackupSectionArchive {
             try fm.createDirectory(at: destination.deletingLastPathComponent(), withIntermediateDirectories: true)
             return destination
         }
+        var libraryMetadataBytes = 0
         for (path, data) in metadata.sorted(by: { $0.key < $1.key }) {
+            if libraryMetadataNames.contains(path) {
+                guard data.count <= maximumLibraryMetadataBytes - libraryMetadataBytes else {
+                    throw Failure.exceedsRestoreLimit
+                }
+                libraryMetadataBytes += data.count
+            }
             try Task.checkCancellation()
             try data.write(to: reserve(path, bytes: Int64(data.count)), options: .atomic)
         }
@@ -96,7 +109,7 @@ enum NativeBackupSectionArchive {
 
 
     /// Verify actual decompressed size and CRC of each member, not only the
-    /// outer ZIP digest. Capture only the bounded metadata-only snapshots.
+    /// outer ZIP digest. Capture bounded metadata; stream media without retaining it.
     /// No files are extracted to the live library or to temporary storage.
     static func verifyContentsForRestore(section: NativeBackupManifest.Section, source: URL) throws {
         try validateForRestore(section: section, source: source)
@@ -105,7 +118,12 @@ enum NativeBackupSectionArchive {
         }
         let metadataOnly = section == .podcasts || section == .radio || section == .preferences
         var snapshot = Data()
+        var metadata: [String: Data] = [:]
+        var mediaPaths = Set<String>()
+        var metadataBytes = 0
         for entry in archive {
+            let captureLibraryMetadata = !metadataOnly && libraryMetadataNames.contains(entry.path)
+            var member = Data()
             try Task.checkCancellation()
             var written: UInt64 = 0
             let checksum = try archive.extract(entry) { chunk in
@@ -120,14 +138,24 @@ enum NativeBackupSectionArchive {
                         throw Failure.exceedsRestoreLimit
                     }
                     snapshot.append(chunk)
+                } else if captureLibraryMetadata {
+                    guard chunk.count <= maximumLibraryMetadataBytes - metadataBytes else {
+                        throw Failure.exceedsRestoreLimit
+                    }
+                    metadataBytes += chunk.count
+                    member.append(chunk)
                 }
             }
             guard written == entry.uncompressedSize, checksum == entry.checksum else {
                 throw Failure.invalidFile
             }
+            if captureLibraryMetadata { metadata[entry.path] = member }
+            else if !metadataOnly { mediaPaths.insert(entry.path) }
         }
         if metadataOnly {
             try NativeBackupPersonalDataValidation.validate(section: section, data: snapshot)
+        } else {
+            try NativeBackupLibraryValidation.validate(section: section, metadata: metadata, mediaPaths: mediaPaths)
         }
     }
 

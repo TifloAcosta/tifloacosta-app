@@ -35,7 +35,7 @@ test('Compartir EPUB importa en lector y no obliga a volver a compartir', () => 
 test('Extensión Compartir ofrece vista previa accesible sin abrir la app', () => {
   const fs = readFileSync(new URL('../ShareExtension/ShareViewController.swift', import.meta.url), 'utf8');
   const preview = readFileSync(new URL('../ShareExtension/ShareReadingPreview.swift', import.meta.url), 'utf8');
-  assert.ok(fs.includes('previewButton.setTitle("Leer ahora"'));
+  assert.ok(fs.includes('previewButton.setTitle(ShareLocale.message("Leer ahora")'));
   assert.ok(fs.includes('UITextView()'));
   assert.ok(fs.includes('AVSpeechSynthesizer()'));
   assert.ok(preview.includes('case "epub"'));

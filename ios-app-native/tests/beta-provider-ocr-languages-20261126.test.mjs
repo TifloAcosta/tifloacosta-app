@@ -16,3 +16,8 @@ test('Beta: music providers preserve the native appearance and localized categor
  assert.ok(read('NativeReaderSettings.swift').includes('Text(LocalizedStringKey(group.details))'));
  assert.ok(read('NativeShareInbox.swift').includes('MusicLocalized.format("%@. Archivo %@ de %@"'));
 });
+
+test('Batch position is converted to a string for object format specifiers', () => {
+ assert.ok(read('NativeShareInbox.swift').includes('MusicLocalized.format("Archivo %@ de %@", String(position), count)'));
+ assert.ok(read('NativeShareInbox.swift').includes('item.name, String(position), item.batchCount'));
+});

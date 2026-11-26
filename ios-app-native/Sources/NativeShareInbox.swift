@@ -388,7 +388,7 @@ struct NativeInboxScreen: View {
                         Text(item.name).font(.body)
                         if let position = item.batchPosition,
                            let count = item.batchCount, !count.isEmpty {
-                            Text(MusicLocalized.format("Archivo %@ de %@", position, count))
+                            Text(MusicLocalized.format("Archivo %@ de %@", String(position), count))
                                 .font(.caption).foregroundStyle(.secondary)
                         }
                         Text(MusicLocalized.message(item.kind == "url" ? "Abrir enlace" :
@@ -400,7 +400,7 @@ struct NativeInboxScreen: View {
                 }
                 .disabled(inbox.activeReaderImportID == item.id)
                 .accessibilityLabel(item.batchPosition.map { position in
-                    MusicLocalized.format("%@. Archivo %@ de %@", item.name, position, item.batchCount ?? "?")
+                    MusicLocalized.format("%@. Archivo %@ de %@", item.name, String(position), item.batchCount ?? "?")
                 } ?? item.name)
                 .accessibilityHint(MusicLocalized.message(item.kind == "url" ? "Abre el enlace recibido." :
                     item.needsAudioDestination ? "Elige TifloLector o Mi música." :

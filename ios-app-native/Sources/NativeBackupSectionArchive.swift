@@ -57,6 +57,10 @@ enum NativeBackupSectionArchive {
             try Task.checkCancellation()
             let source = file.source
             let root = file.trustedRoot.standardizedFileURL
+            let rootValues = try root.resourceValues(forKeys: [.isDirectoryKey, .isSymbolicLinkKey])
+            guard rootValues.isDirectory == true, rootValues.isSymbolicLink == false else {
+                throw Failure.invalidFile
+            }
             let components = source.standardizedFileURL.pathComponents
             let prefix = root.pathComponents
             guard components.count > prefix.count,

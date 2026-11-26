@@ -23,6 +23,12 @@ struct BackupRecoveryPayloadSmoke {
         let builder = NativeBackupRecoveryBuilder(roots: roots)
         try builder.recordFiles(indexes: [(index, old)], targets: [media])
         builder.recordDefaults([key, absentKey])
+        builder.recordPreserved(section: "reader", kind: "document", identifiers: ["same", "same", "different"])
+        builder.recordPreserved(section: "music", kind: "track", identifiers: ["same"])
+        let preserved = builder.preservedIdentities
+        precondition(preserved.count == 3)
+        precondition(preserved.allSatisfy { $0.digest.count == 64 && $0.digest != "same" })
+        precondition(preserved.first?.section == "music")
         let payload = try builder.payload(defaults: defaults)
         let journal = NativeBackupRestoreJournal(url: root.appendingPathComponent("pending.plist"))
         let encoder = PropertyListEncoder()

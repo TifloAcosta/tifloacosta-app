@@ -279,7 +279,8 @@ test('media restore steps preserve original IDs and reverse index and media chan
 
 test('local restore stages every archive before preparing six section steps and executing one transaction', () => {
     const source = coordinator.slice(coordinator.indexOf('func restoreLocalGeneration('));
-    assert.match(source, /guard !isCreating, !isRestoring/);
+    assert.match(source, /guard !backupOperationBusy else \{ throw Failure\.busy \}/);
+    assert.match(coordinator, /isCreating \|\| isRestoring \|\| isTransferringCloudBackup \|\| isRunningAutomaticBackup/);
     assert.match(source, /defer \{ isRestoring = false \}/);
     assert.match(source, /destination\.verifiedGeneration\(generation\)/);
     assert.match(source, /NativeBackupSectionArchive\.stageForRestore/);

@@ -19,7 +19,35 @@ permissions:
   contents: read
 
 jobs:
+  preflight:
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/development/next-public-1.6-500200-20261121'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test and bundle the Worker locally
+        working-directory: youtube-worker
+        run: |
+          npm install --no-audit --no-fund
+          npm test
+          npx --no-install wrangler deploy --dry-run --outdir "$RUNNER_TEMP/youtube-worker"
+      - name: Read active deployments and confirm required secrets
+        working-directory: youtube-worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          npx --no-install wrangler deployments list
+          npx --no-install wrangler secret list > "$RUNNER_TEMP/youtube-worker-secrets.json"
+          jq -e 'map(.name) | contains(["GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "YOUTUBE_SESSION_SECRET", "YOUTUBE_API_KEY"])' "$RUNNER_TEMP/youtube-worker-secrets.json"
+
   deploy:
+    if: github.ref != 'refs/heads/development/next-public-1.6-500200-20261121'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

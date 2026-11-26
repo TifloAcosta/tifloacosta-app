@@ -1498,3 +1498,15 @@
 "No hay resultados confirmados. Consulta también las plataformas originales." = "Aucun résultat confirmé. Consulte aussi les plateformes d’origine.";
 
 "Finalizado" = "Terminé";
+
+"¿Descartar los archivos convertidos que no has guardado en la biblioteca?" = "Supprimer les fichiers convertis non enregistrés dans la bibliothèque ?";
+
+"Descartar e iniciar conversión" = "Supprimer et lancer la conversion";
+
+"Descartar y cerrar" = "Supprimer et fermer";
+
+"Resultados: %@" = "Résultats : %@";
+
+"Guardando «%@»." = "Enregistrement de « %@ ».";
+
+"Guardado en la biblioteca" = "Enregistré dans la bibliothèque";

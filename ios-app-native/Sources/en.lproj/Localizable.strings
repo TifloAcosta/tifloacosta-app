@@ -1500,3 +1500,15 @@
 "No hay resultados confirmados. Consulta también las plataformas originales." = "No confirmed results. Also check the original platforms.";
 
 "Finalizado" = "Completed";
+
+"¿Descartar los archivos convertidos que no has guardado en la biblioteca?" = "Discard converted files you have not saved to the library?";
+
+"Descartar e iniciar conversión" = "Discard and start conversion";
+
+"Descartar y cerrar" = "Discard and close";
+
+"Resultados: %@" = "Results: %@";
+
+"Guardando «%@»." = "Saving “%@”.";
+
+"Guardado en la biblioteca" = "Saved to library";

@@ -36,3 +36,18 @@ test('conversion actions and status descriptions are available in six languages'
     for (const key of keys) assert.ok(catalog.includes('"' + key + '"' + (lang === 'es' ? '' : ' = ')), lang + ': ' + key);
   }
 });
+
+test('conversion retains completed results and asks before discarding unsaved files', () => {
+  assert.match(screen, /NativeConversionWorkspace: Sendable/);
+  assert.match(screen, /withExtendedLifetime\(nextWorkspace\)/);
+  assert.match(screen, /outputs\.contains\(where: \{ !saved\.contains\(\$0\) \}\)/);
+  assert.match(screen, /confirmRestart = true/);
+  assert.match(screen, /confirmClose = true/);
+  assert.match(screen, /Conversión cancelada\."\) \+ " " \+ summary/);
+  assert.match(screen, /ForEach\(outputs, id: \\.self\)/);
+  assert.match(screen, /resultFormat = selected/);
+  for (const lang of ['en','fr','de','it','pt']) {
+    const catalog = read('Sources/' + lang + '.lproj/Localizable.strings');
+    for (const key of ["¿Descartar los archivos convertidos que no has guardado en la biblioteca?","Descartar e iniciar conversión","Descartar y cerrar","Resultados: %@","Guardando «%@».","Guardado en la biblioteca"]) assert.ok(catalog.includes('"' + key + '" = '), lang + ': ' + key);
+  }
+});

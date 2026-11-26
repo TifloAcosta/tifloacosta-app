@@ -18,6 +18,13 @@ struct NativeConversionSelection: Identifiable {
     let sources: [NativeConversionSource]
 }
 
+// Keep the temporary files alive for the worker and the presented result screen.
+private final class NativeConversionWorkspace: Sendable {
+    let directory = FileManager.default.temporaryDirectory
+        .appendingPathComponent("TifloConversion-" + UUID().uuidString, isDirectory: true)
+    deinit { try? FileManager.default.removeItem(at: directory) }
+}
+
 struct NativeDocumentConversionScreen: View {
     @EnvironmentObject private var library: NativeReaderLibrary
     @Environment(\.dismiss) private var dismiss
@@ -32,7 +39,10 @@ struct NativeDocumentConversionScreen: View {
     @State private var status = ""
     @State private var job: Task<Void, Never>?
     @State private var saving = false
-    @State private var workspace: URL?
+    @State private var workspace: NativeConversionWorkspace?
+    @State private var resultFormat: NativeDocumentFormat?
+    @State private var confirmRestart = false
+    @State private var confirmClose = false
 
     private let formats = NativeDocumentFormat.allCases
     private var format: NativeDocumentFormat { formats[formatIndex] }
@@ -65,7 +75,10 @@ struct NativeDocumentConversionScreen: View {
                     }
                     Button("Cancelar conversión", role: .cancel) { job?.cancel() }
                 } else {
-                    Button("Iniciar conversión") { start() }
+                    Button("Iniciar conversión") {
+                        if outputs.contains(where: { !saved.contains($0) }) { confirmRestart = true }
+                        else { start() }
+                    }
                         .disabled(saving || sources.isEmpty)
                 }
                 if !status.isEmpty { Text(status).accessibilityAddTraits(.updatesFrequently) }
@@ -73,6 +86,17 @@ struct NativeDocumentConversionScreen: View {
                     Text(failure)
                 }
                 if !outputs.isEmpty {
+                    Section {
+                        ForEach(outputs, id: \.self) { url in
+                            VStack(alignment: .leading) {
+                                Text(url.lastPathComponent)
+                                if saved.contains(url) { Text("Guardado en la biblioteca").font(.caption) }
+                            }
+                            .accessibilityElement(children: .combine)
+                        }
+                    } header: {
+                        Text(resultFormat.map { MusicLocalized.format("Resultados: %@", $0.label) } ?? MusicLocalized.message("Resultados"))
+                    }
                     Button("Guardar en la biblioteca") { saveResults() }
                         .disabled(saving || job != nil || saved.count == outputs.count)
                     Button("Compartir o exportar a Archivos y nubes") {
@@ -83,22 +107,33 @@ struct NativeDocumentConversionScreen: View {
             }
             .tifloScreenSurface()
             .navigationTitle("Convertir documento")
-            .toolbar { Button("Cerrar") { dismiss() }.disabled(saving || job != nil) }
-            .interactiveDismissDisabled(saving || job != nil)
-            .onDisappear {
-                job?.cancel()
-                if let workspace { try? FileManager.default.removeItem(at: workspace) }
+            .toolbar {
+                Button("Cerrar") {
+                    if outputs.contains(where: { !saved.contains($0) }) { confirmClose = true }
+                    else { dismiss() }
+                }.disabled(saving || job != nil)
             }
+            .interactiveDismissDisabled(saving || job != nil || outputs.contains { !saved.contains($0) })
+            .confirmationDialog("¿Descartar los archivos convertidos que no has guardado en la biblioteca?",
+                isPresented: $confirmRestart, titleVisibility: .visible) {
+                Button("Descartar e iniciar conversión", role: .destructive) { start() }
+                Button("Cancelar", role: .cancel) {}
+            }
+            .confirmationDialog("¿Descartar los archivos convertidos que no has guardado en la biblioteca?",
+                isPresented: $confirmClose, titleVisibility: .visible) {
+                Button("Descartar y cerrar", role: .destructive) { dismiss() }
+                Button("Cancelar", role: .cancel) {}
+            }
+            .onDisappear { job?.cancel() }
         }
     }
 
     private func start() {
         guard job == nil, !saving else { return }
-        if let workspace { try? FileManager.default.removeItem(at: workspace) }
-        let directory = FileManager.default.temporaryDirectory
-            .appendingPathComponent("TifloConversion-" + UUID().uuidString, isDirectory: true)
-        workspace = directory
+        let nextWorkspace = NativeConversionWorkspace()
+        workspace = nextWorkspace
         let selected = format
+        resultFormat = selected
         status = ""
         failures = []
         outputs = []
@@ -107,7 +142,7 @@ struct NativeDocumentConversionScreen: View {
         progress = 0
         job = Task { @MainActor in
             var cancelled = false
-            defer { job = nil }
+            defer { job = nil; withExtendedLifetime(nextWorkspace) {} }
             for (index, source) in sources.enumerated() {
                 guard !Task.isCancelled else { cancelled = true; break }
                 position = index + 1
@@ -117,7 +152,7 @@ struct NativeDocumentConversionScreen: View {
                         progress = (Double(index) + value) / Double(sources.count)
                     }
                 }
-                let target = directory.appendingPathComponent(String(index), isDirectory: true)
+                let target = nextWorkspace.directory.appendingPathComponent(String(index), isDirectory: true)
                 let worker = Task.detached(priority: .userInitiated) {
                     defer { events.continuation.finish() }
                     return try NativeDocumentConversion.convert(source, to: selected, in: target) {
@@ -138,8 +173,9 @@ struct NativeDocumentConversionScreen: View {
                 if cancelled { break }
                 progress = Double(index + 1) / Double(sources.count)
             }
-            status = cancelled || Task.isCancelled ? MusicLocalized.message("Conversión cancelada.")
-                : MusicLocalized.format("Documentos convertidos: %d. Fallidos: %d.", outputs.count, failures.count)
+            let summary = MusicLocalized.format("Documentos convertidos: %d. Fallidos: %d.", outputs.count, failures.count)
+            status = cancelled || Task.isCancelled
+                ? MusicLocalized.message("Conversión cancelada.") + " " + summary : summary
             UIAccessibility.post(notification: .announcement, argument: status)
         }
     }
@@ -151,6 +187,7 @@ struct NativeDocumentConversionScreen: View {
             defer { saving = false }
             var failed = 0
             for url in outputs where !saved.contains(url) {
+                status = MusicLocalized.format("Guardando «%@».", url.lastPathComponent)
                 do {
                     try await library.importFile(from: url)
                     saved.insert(url)

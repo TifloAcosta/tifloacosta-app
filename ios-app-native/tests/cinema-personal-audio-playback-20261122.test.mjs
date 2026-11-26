@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs';
 const read = name => readFileSync(new URL('../Sources/' + name, import.meta.url), 'utf8');
 const screen = read('NativeAccessibleCinema.swift');
 const library = read('NativeAccessibleCinemaLibrary.swift');
+const transport = read('NativeCinemaHistory.swift');
 
 test('cinema imports private audio and video without requiring a ZIP or vendor account', () => {
   assert.match(screen, /Section\("Mi colección personal"\)/);
@@ -26,9 +27,10 @@ test('cinema persists book identity, language, type and exact playback position'
 });
 
 test('playback supports pause, seek, resume and explicit deletion without changing VoiceOver', () => {
-  assert.match(screen, /Button\(personalPlayer\.playing \? "Pausar reproducción" : "Reanudar reproducción"\)/);
-  assert.match(screen, /Retroceder treinta segundos/);
-  assert.match(screen, /Avanzar treinta segundos/);
+  assert.match(screen, /NativeCinemaTransportControls\(player: personalPlayer, library: personalLibrary\)/);
+  assert.match(transport, /Button\(player\.playing \? "Pausar reproducción" : "Reanudar reproducción"\)/);
+  assert.match(transport, /Retroceder treinta segundos/);
+  assert.match(transport, /Avanzar treinta segundos/);
   assert.match(screen, /\.confirmationDialog\(/);
   assert.match(screen, /Button\("Eliminar archivo personal", role: \.destructive\)/);
   assert.match(library, /private var player: AVPlayer\?/);
@@ -52,7 +54,8 @@ test('local video uses a visible AVPlayer layer with one native transport and no
   assert.match(screen, /if item\.isVideoFile, let videoPlayer = personalPlayer\.videoPlayer \{/);
   assert.match(screen, /NativeCinemaVideoSurface\(player: videoPlayer\)/);
   assert.match(screen, /view\.accessibilityElementsHidden = true/);
-  assert.match(screen, /Button\(personalPlayer\.playing \? "Pausar reproducción" : "Reanudar reproducción"\)/);
+  assert.match(screen, /NativeCinemaTransportControls\(player: personalPlayer, library: personalLibrary\)/);
+  assert.match(transport, /Button\(player\.playing \? "Pausar reproducción" : "Reanudar reproducción"\)/);
 });
 
 test('forced pauses persist fractional seconds and a failed audio session never leaves a false playable item', () => {
@@ -79,8 +82,8 @@ test('unsupported media errors are reported without announcing false playback', 
   assert.match(library, /playing = false/);
   assert.match(library, /NativeRemotePlaybackOwner\.release\(\.cinema\)/);
   assert.match(library, /guard playbackError == nil else \{ return \}/);
-  assert.match(screen, /if let playbackError = personalPlayer\.playbackError/);
-  assert.match(screen, /\.disabled\(personalPlayer\.playbackError != nil\)/);
+  assert.match(screen, /let playbackError = personalPlayer\.playbackError/);
+  assert.match(transport, /\.disabled\(player\.playbackError != nil\)/);
   const key = '"No se pudo reproducir este archivo. Comprueba que el formato es compatible." = ';
   for (const lang of ['en','pt','fr','it','de']) {
     const catalog = read(lang + '.lproj/Localizable.strings');

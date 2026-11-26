@@ -63,3 +63,15 @@ test('collection filters are independent and provider search carries its context
   assert.ok(source.includes('NativeAudiocinematecaBrowser(query: query, kind: selectedKind, language: selectedLanguage)'));
   assert.ok(source.includes('var selectedKind: AccessibleCinemaKind = .all'));
 });
+
+test('each personal title opens a single detail, with one shared transport and local confirmation', () => {
+  const rows = source.slice(source.indexOf('private var personalRows'), source.indexOf('var body: some View', source.indexOf('private var personalRows')));
+  const detail = source.slice(source.indexOf('private struct NativeCinemaPersonalDetailScreen'), source.indexOf('private struct NativeCinemaPlatformsScreen'));
+  assert.ok(rows.includes('NativeCinemaPersonalDetailScreen(itemID: item.id)'));
+  assert.ok(!rows.includes('Button('));
+  assert.ok(!rows.includes('NativeCinemaTransportControls'));
+  assert.ok(detail.includes('NativeCinemaTransportControls(player: personalPlayer, library: personalLibrary)'));
+  assert.ok(detail.includes('.confirmationDialog('));
+  assert.ok(detail.includes('personalPlayer.pauseAndSave(library: personalLibrary)'));
+  assert.ok(detail.indexOf('try personalLibrary.remove(item)') < detail.indexOf('dismiss()'));
+});

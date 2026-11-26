@@ -325,8 +325,6 @@ private struct NativeCinemaContentScreen: View {
     @AppStorage("native-cinema-import-kind-index-v1") private var importKindIndex = 1
     @State private var selectingPersonalFiles = false
     @State private var importStatus = ""
-    @State private var pendingDeletion: NativeCinemaLocalItem?
-    @State private var confirmDeletion = false
     // Shared instances allow personal playback to continue after leaving Multicines.
     @StateObject private var personalLibrary = NativeCinemaLocalLibrary.shared
     @StateObject private var personalPlayer = NativeCinemaAudioPlayer.shared
@@ -497,12 +495,6 @@ private struct NativeCinemaContentScreen: View {
         .sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
     }
 
-    private func clock(_ seconds: Double) -> String {
-        let value = Int(max(0, min(seconds.isFinite ? seconds : 0, 86_400_000)))
-        return String(format: "%02d:%02d:%02d", value / 3600,
-                      (value % 3600) / 60, value % 60)
-    }
-
     @MainActor private func importPersonalFiles(_ result: Result<[URL], Error>) {
         switch result {
         case .failure(let error):
@@ -538,65 +530,24 @@ private struct NativeCinemaContentScreen: View {
     }
 
     @ViewBuilder private var personalRows: some View {
-                if !importStatus.isEmpty {
-                    Text(importStatus)
-                        .font(.footnote)
-                        .accessibilityAddTraits(.updatesFrequently)
-                }
-                if personalItems.isEmpty {
-                    Text("No hay obras personales para estos filtros.")
-                        .font(.footnote)
-                        .foregroundStyle(TifloVisual.secondaryText)
-                }
-                ForEach(personalItems) { item in
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(item.title)
-                            .font(.headline)
-                            .accessibilityAddTraits(.isHeader)
-                        Text(MusicLocalized.message(item.language.rawValue) + ", " + MusicLocalized.message(item.kind.rawValue))
-                            .font(.subheadline)
-                        Button("Reproducir: \(item.title)") {
-                            do { try personalPlayer.open(item, library: personalLibrary) }
-                            catch { importStatus = error.localizedDescription }
-                        }
-                        .frame(minHeight: 44, alignment: .leading)
-                        if personalPlayer.currentID == item.id {
-                            if let playbackError = personalPlayer.playbackError {
-                                Text(playbackError)
-                                    .foregroundStyle(TifloVisual.secondaryText)
-                                    .accessibilityAddTraits(.updatesFrequently)
-                            }
-                            if item.isVideoFile, let videoPlayer = personalPlayer.videoPlayer {
-                                NativeCinemaVideoSurface(player: videoPlayer)
-                                    .frame(maxWidth: .infinity)
-                                    .frame(height: 210)
-                                    .accessibilityHidden(true)
-                            }
-                            if personalPlayer.buffering { ProgressView("Cargando reproducción") }
-                            Text("Posición: \(clock(personalPlayer.seconds)). Duración: \(clock(personalPlayer.duration)).")
-                                .font(.subheadline)
-                            Button(personalPlayer.playing ? "Pausar reproducción" : "Reanudar reproducción") {
-                                personalPlayer.toggle(library: personalLibrary)
-                            }
-                            .disabled(personalPlayer.playbackError != nil)
-                            Button("Retroceder treinta segundos") {
-                                personalPlayer.seek(by: -30, library: personalLibrary)
-                            }
-                            Button("Avanzar treinta segundos") {
-                                personalPlayer.seek(by: 30, library: personalLibrary)
-                            }
-                            Button("Detener reproducción") {
-                                personalPlayer.pauseAndSave(library: personalLibrary)
-                            }
-                        }
-                        Button("Eliminar de mi colección: \(item.title)", role: .destructive) {
-                            pendingDeletion = item
-                            confirmDeletion = true
-                        }
-                    }
-                    .accessibilityElement(children: .contain)
-                }
-
+        if !importStatus.isEmpty {
+            Text(importStatus)
+                .font(.footnote)
+                .accessibilityAddTraits(.updatesFrequently)
+        }
+        if personalItems.isEmpty {
+            Text("No hay obras personales para estos filtros.")
+                .font(.footnote)
+                .foregroundStyle(TifloVisual.secondaryText)
+        }
+        ForEach(personalItems) { item in
+            NavigationLink {
+                NativeCinemaPersonalDetailScreen(itemID: item.id)
+            } label: {
+                Text(item.title)
+                    .accessibilityValue(MusicLocalized.message(item.language.rawValue) + ", " + MusicLocalized.message(item.kind.rawValue))
+            }
+        }
     }
 
     var body: some View {
@@ -809,27 +760,89 @@ private struct NativeCinemaContentScreen: View {
                 }
             }
         }
-        .confirmationDialog(
-            MusicLocalized.format("¿Eliminar «%@»?", pendingDeletion?.title ?? ""),
-            isPresented: $confirmDeletion, titleVisibility: .visible
-        ) {
-            Button("Eliminar archivo personal", role: .destructive) {
-                guard let item = pendingDeletion else { return }
-                if personalPlayer.currentID == item.id {
-                    personalPlayer.pauseAndSave(library: personalLibrary)
-                }
-                do { try personalLibrary.remove(item); cinemaRecents.remove(item.id.uuidString) }
-                catch { importStatus = error.localizedDescription }
-                pendingDeletion = nil
-            }
-            Button("Cancelar", role: .cancel) { pendingDeletion = nil }
-        } message: {
-            Text("Se eliminará el archivo guardado en esta colección personal.")
-        }
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
             personalPlayer.refresh(library: personalLibrary)
         }
         .onDisappear { personalPlayer.refresh(library: personalLibrary) }
+    }
+}
+
+@MainActor
+private struct NativeCinemaPersonalDetailScreen: View {
+    let itemID: UUID
+    @Environment(\.dismiss) private var dismiss
+    @StateObject private var personalLibrary = NativeCinemaLocalLibrary.shared
+    @StateObject private var personalPlayer = NativeCinemaAudioPlayer.shared
+    @StateObject private var cinemaRecents = NativeCinemaRecentStore.shared
+    @State private var confirmDeletion = false
+    @State private var playbackStatus = ""
+
+    private var item: NativeCinemaLocalItem? {
+        personalLibrary.items.first { $0.id == itemID }
+    }
+
+    var body: some View {
+        List {
+            if let item {
+                if personalPlayer.currentID == item.id, personalPlayer.playbackError == nil {
+                    Section("Reproductor") {
+                        if item.isVideoFile, let videoPlayer = personalPlayer.videoPlayer {
+                            NativeCinemaVideoSurface(player: videoPlayer)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 210)
+                                .accessibilityHidden(true)
+                        }
+                        NativeCinemaTransportControls(player: personalPlayer, library: personalLibrary)
+                    }
+                } else {
+                    if personalPlayer.currentID == item.id, let playbackError = personalPlayer.playbackError {
+                        Text(playbackError).accessibilityAddTraits(.updatesFrequently)
+                    }
+                    Button("Reproducir") {
+                        playbackStatus = ""
+                        do { try personalPlayer.open(item, library: personalLibrary) }
+                        catch { playbackStatus = error.localizedDescription }
+                    }
+                }
+                if !playbackStatus.isEmpty {
+                    Text(playbackStatus).accessibilityAddTraits(.updatesFrequently)
+                }
+                NavigationLink("Información") {
+                    List {
+                        Text(MusicLocalized.message(item.language.rawValue))
+                        Text(MusicLocalized.message(item.kind.rawValue))
+                    }
+                    .tifloScreenSurface()
+                    .navigationTitle("Información")
+                }
+                Button("Eliminar de mi colección: \(item.title)", role: .destructive) {
+                    confirmDeletion = true
+                }
+            } else {
+                Text(NativeCinemaLocalError.missing.localizedDescription)
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle(item?.title ?? MusicLocalized.message("Mi colección personal"))
+        .confirmationDialog(
+            MusicLocalized.format("¿Eliminar «%@»?", item?.title ?? ""),
+            isPresented: $confirmDeletion, titleVisibility: .visible
+        ) {
+            Button("Eliminar archivo personal", role: .destructive) {
+                guard let item else { return }
+                if personalPlayer.currentID == item.id {
+                    personalPlayer.pauseAndSave(library: personalLibrary)
+                }
+                do {
+                    try personalLibrary.remove(item)
+                    cinemaRecents.remove(item.id.uuidString)
+                    dismiss()
+                } catch { playbackStatus = error.localizedDescription }
+            }
+            Button("Cancelar", role: .cancel) {}
+        } message: {
+            Text("Se eliminará el archivo guardado en esta colección personal.")
+        }
     }
 }
 

@@ -58,7 +58,7 @@ private final class NativeArchiveDirectory: ObservableObject {
             URLQueryItem(name: "sort[]", value: "downloads desc"),
             URLQueryItem(name: "output", value: "json")
         ]
-        guard let target = url.url else { error = "No se pudo preparar la consulta."; return }
+        guard let target = url.url else { error = MusicLocalized.message("No se pudo preparar la consulta."); return }
         do {
             var request = URLRequest(url: target)
             request.timeoutInterval = 20
@@ -69,7 +69,7 @@ private final class NativeArchiveDirectory: ObservableObject {
             error = items.isEmpty ? "No se encontraron grabaciones." : nil
         } catch {
             items = []
-            self.error = "No se pudieron consultar las grabaciones. Comprueba la conexión."
+            self.error = MusicLocalized.message("No se pudieron consultar las grabaciones. Comprueba la conexión.")
         }
     }
 }
@@ -93,7 +93,7 @@ private final class NativeArchiveTracks: ObservableObject {
             error = files.isEmpty ? "Esta grabación no ofrece pistas de audio compatibles." : nil
         } catch {
             files = []
-            self.error = "No se pudieron recuperar las pistas de esta grabación."
+            self.error = MusicLocalized.message("No se pudieron recuperar las pistas de esta grabación.")
         }
     }
 

@@ -46,19 +46,19 @@ final class NativePodcastDownloads: ObservableObject {
 
     func download(_ episode: NativePodcastEpisode) async {
         guard downloadingID == nil else {
-            notice = "Ya hay una descarga en curso."
+            notice = MusicLocalized.message("Ya hay una descarga en curso.")
             return
         }
         guard episode.audioURL.scheme?.lowercased() == "https" else {
-            notice = "Por seguridad, el enlace de descarga debe utilizar HTTPS."
+            notice = MusicLocalized.message("Por seguridad, el enlace de descarga debe utilizar HTTPS.")
             return
         }
         if localURL(for: episode.id) != nil {
-            notice = "Este episodio ya está descargado."
+            notice = MusicLocalized.message("Este episodio ya está descargado.")
             return
         }
         downloadingID = episode.id
-        notice = "Descargando \(episode.title)."
+        notice = MusicLocalized.format("Descargando %@.", episode.title)
         defer { downloadingID = nil }
         do {
             let request = URLRequest(url: episode.audioURL, cachePolicy: .reloadIgnoringLocalCacheData,
@@ -100,9 +100,9 @@ final class NativePodcastDownloads: ObservableObject {
                 title: episode.title, sourceURL: episode.audioURL.absoluteString,
                 filename: filename, savedAt: Date()), at: 0)
             persist()
-            notice = "Descarga terminada: \(episode.title)."
+            notice = MusicLocalized.format("Descarga terminada: %@.", episode.title)
         } catch {
-            notice = "No se pudo descargar \(episode.title): \(error.localizedDescription)"
+            notice = MusicLocalized.format("No se pudo descargar %@: %@", episode.title, error.localizedDescription)
         }
     }
 
@@ -114,9 +114,9 @@ final class NativePodcastDownloads: ObservableObject {
             }
             entries.removeAll { $0.id == item.id }
             persist()
-            notice = "Episodio descargado eliminado: \(item.title)."
+            notice = MusicLocalized.format("Episodio descargado eliminado: %@.", item.title)
         } catch {
-            notice = "No se pudo eliminar la descarga: \(error.localizedDescription)"
+            notice = MusicLocalized.format("No se pudo eliminar la descarga: %@", error.localizedDescription)
         }
     }
 }

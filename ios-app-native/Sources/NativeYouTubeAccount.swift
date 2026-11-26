@@ -115,20 +115,20 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
 
     private func errorText(_ code: String) -> String {
         switch code {
-        case "COMMENTS_DISABLED": return "Los comentarios están desactivados en este vídeo."
-        case "VIDEO_NOT_FOUND", "INVALID_VIDEO": return "El vídeo no está disponible."
+        case "COMMENTS_DISABLED": return MusicLocalized.message("Los comentarios están desactivados en este vídeo.")
+        case "VIDEO_NOT_FOUND", "INVALID_VIDEO": return MusicLocalized.message("El vídeo no está disponible.")
         case "SESSION_EXPIRED", "NATIVE_AUTH_INVALID":
-            return "La sesión con Google ha caducado. Vuelve a iniciar sesión."
-        case "INELIGIBLE_ACCOUNT": return "La cuenta de YouTube no permite realizar esta acción."
-        case "INSUFFICIENT_PERMISSIONS": return "Google no ha concedido los permisos necesarios."
-        case "QUOTA_EXCEEDED", "RATE_LIMITED": return "YouTube ha alcanzado temporalmente su límite de solicitudes."
-        case "COMMENT_TOO_LONG": return "El comentario es demasiado largo."
-        case "YOUTUBE_FORBIDDEN": return "YouTube no permite esta operación con esta cuenta."
-        case "CHANNEL_NOT_FOUND": return "No se encuentra el canal de YouTube."
-        case "NOT_FOUND": return "El servicio no reconoce la consulta del vídeo. Revisa la versión de TifloAcosta."
-        case "YOUTUBE_ERROR": return "YouTube no ha podido responder a la consulta del vídeo. Vuelve a intentarlo."
-        case "NETWORK": return "No se pudo conectar con el servicio de YouTube. Comprueba la conexión."
-        default: return "No se pudo completar la operación con YouTube (\(code))."
+            return MusicLocalized.message("La sesión con Google ha caducado. Vuelve a iniciar sesión.")
+        case "INELIGIBLE_ACCOUNT": return MusicLocalized.message("La cuenta de YouTube no permite realizar esta acción.")
+        case "INSUFFICIENT_PERMISSIONS": return MusicLocalized.message("Google no ha concedido los permisos necesarios.")
+        case "QUOTA_EXCEEDED", "RATE_LIMITED": return MusicLocalized.message("YouTube ha alcanzado temporalmente su límite de solicitudes.")
+        case "COMMENT_TOO_LONG": return MusicLocalized.message("El comentario es demasiado largo.")
+        case "YOUTUBE_FORBIDDEN": return MusicLocalized.message("YouTube no permite esta operación con esta cuenta.")
+        case "CHANNEL_NOT_FOUND": return MusicLocalized.message("No se encuentra el canal de YouTube.")
+        case "NOT_FOUND": return MusicLocalized.message("El servicio no reconoce la consulta del vídeo. Revisa la versión de TifloAcosta.")
+        case "YOUTUBE_ERROR": return MusicLocalized.message("YouTube no ha podido responder a la consulta del vídeo. Vuelve a intentarlo.")
+        case "NETWORK": return MusicLocalized.message("No se pudo conectar con el servicio de YouTube. Comprueba la conexión.")
+        default: return MusicLocalized.format("No se pudo completar la operación con YouTube (%@).", code)
         }
     }
 
@@ -229,7 +229,7 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
         components.queryItems = [URLQueryItem(name: "challenge", value: challenge)]
         guard let authorizationURL = components.url else { return }
         busy = true
-        message = "Abriendo identificación segura de Google."
+        message = MusicLocalized.message("Abriendo identificación segura de Google.")
         let context = NativeYouTubeAuthWindow()
         let session = ASWebAuthenticationSession(url: authorizationURL, callbackURLScheme: "tifloacosta") { [weak self] callback, error in
             Task { @MainActor [weak self] in

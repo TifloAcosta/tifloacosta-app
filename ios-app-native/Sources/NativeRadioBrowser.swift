@@ -80,7 +80,7 @@ private final class NativeRadioDirectory: ObservableObject {
             URLQueryItem(name: "order", value: "votes"),
             URLQueryItem(name: "reverse", value: "true")
         ]
-        guard let url = parts.url else { error = "No se pudo preparar la búsqueda."; return }
+        guard let url = parts.url else { error = MusicLocalized.message("No se pudo preparar la búsqueda."); return }
         do {
             var request = URLRequest(url: url)
             request.setValue("TifloAcosta/1.5", forHTTPHeaderField: "User-Agent")
@@ -96,7 +96,7 @@ private final class NativeRadioDirectory: ObservableObject {
             error = nil
         } catch {
             stations = []
-            self.error = "No se pudieron consultar las emisoras. Comprueba la conexión e inténtalo de nuevo."
+            self.error = MusicLocalized.message("No se pudieron consultar las emisoras. Comprueba la conexión e inténtalo de nuevo.")
         }
     }
 }
@@ -115,7 +115,7 @@ final class NativeRadioPlayer: ObservableObject {
 
     func play(name: String, url: URL) {
         guard url.scheme == "https" else {
-            error = "Esta emisora no dispone de una transmisión segura compatible."
+            error = MusicLocalized.message("Esta emisora no dispone de una transmisión segura compatible.")
             return
         }
         NativeJamendoPlayer.shared.pauseForOtherAudio()
@@ -137,7 +137,7 @@ final class NativeRadioPlayer: ObservableObject {
                     guard let self, self.player?.currentItem === observed else { return }
                     if observed.status == .failed {
                         self.isPlaying = false
-                        self.error = "Este archivo de audio no puede reproducirse con los formatos admitidos por iOS."
+                        self.error = MusicLocalized.message("Este archivo de audio no puede reproducirse con los formatos admitidos por iOS.")
                         self.updateNowPlaying()
                     }
                 }
@@ -150,7 +150,7 @@ final class NativeRadioPlayer: ObservableObject {
             updateNowPlaying()
             error = nil
         } catch {
-            self.error = "No se pudo iniciar la radio: \(error.localizedDescription)"
+            self.error = MusicLocalized.format("No se pudo iniciar la radio: %@", error.localizedDescription)
         }
     }
 

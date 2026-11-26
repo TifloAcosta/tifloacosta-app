@@ -42,14 +42,14 @@ final class NativeOwnUpdatesNotifications: ObservableObject {
         } catch {
             enabled = false
             UserDefaults.standard.set(false, forKey: enabledKey)
-            status = "No se pudieron activar los avisos: \(error.localizedDescription)"
+            status = MusicLocalized.format("No se pudieron activar los avisos: %@", error.localizedDescription)
         }
     }
 
     func disable() {
         enabled = false
         UserDefaults.standard.set(false, forKey: enabledKey)
-        status = "Avisos automáticos desactivados."
+        status = MusicLocalized.message("Avisos automáticos desactivados.")
     }
 
     /// Runs only when the app successfully refreshes its native catalog.
@@ -89,17 +89,17 @@ final class NativeOwnUpdatesNotifications: ObservableObject {
         let settings = await UNUserNotificationCenter.current().notificationSettings()
         guard settings.authorizationStatus == .authorized ||
               settings.authorizationStatus == .provisional else {
-            status = "Los avisos están bloqueados en Ajustes de iOS."
+            status = MusicLocalized.message("Los avisos están bloqueados en Ajustes de iOS.")
             // Do not mark unsent items as seen: they can be retried.
             return
         }
         // One digest prevents a burst of individual alerts after a refresh.
         let content = UNMutableNotificationContent()
-        content.title = "Novedades de TifloAcosta"
+        content.title = MusicLocalized.message("Novedades de TifloAcosta")
         if additions.count == 1, let only = additions.first {
             content.body = only.1
         } else {
-            content.body = "Hay \(additions.count) nuevas incorporaciones propias: documentos o vídeos."
+            content.body = MusicLocalized.format("Hay %d nuevas incorporaciones propias: documentos o vídeos.", additions.count)
         }
         content.sound = nil
         let request = UNNotificationRequest(
@@ -112,7 +112,7 @@ final class NativeOwnUpdatesNotifications: ObservableObject {
             seen.formUnion(currentIDs)
             defaults.set(Array(seen).sorted(), forKey: seenKey)
         } catch {
-            status = "No se pudo mostrar el aviso: \(error.localizedDescription)"
+            status = MusicLocalized.format("No se pudo mostrar el aviso: %@", error.localizedDescription)
         }
     }
 }

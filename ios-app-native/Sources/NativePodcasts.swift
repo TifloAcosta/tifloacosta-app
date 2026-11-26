@@ -87,7 +87,7 @@ final class NativePodcastStore: ObservableObject {
             episodes = Array(delegate.episodes.prefix(100))
             error = nil
         } catch {
-            self.error = "No se pudieron actualizar los episodios."
+            self.error = MusicLocalized.message("No se pudieron actualizar los episodios.")
         }
     }
 }
@@ -547,7 +547,7 @@ struct NativePodcastScreen: View {
                     guard let url = try result.get().first else { return }
                     _ = try await library.importOPML(url)
                 } catch {
-                    library.notice = "No se pudo importar el OPML: \(error.localizedDescription)"
+                    library.notice = MusicLocalized.format("No se pudo importar el OPML: %@", error.localizedDescription)
                 }
             }
         }

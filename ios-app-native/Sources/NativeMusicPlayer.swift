@@ -391,7 +391,7 @@ final class NativeMusicPlayer: ObservableObject {
             updateNowPlaying()
             startTimer()
         } catch {
-            self.error = "No se pudo reproducir la canción: \(error.localizedDescription)"
+            self.error = MusicLocalized.format("No se pudo reproducir la canción: %@", error.localizedDescription)
             stop()
         }
     }

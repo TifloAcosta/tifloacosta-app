@@ -410,7 +410,7 @@ final class NativeYouTubePlayerEngine: ObservableObject {
         if let current = data["current"] as? Double, current.isFinite { currentTime = max(0, current) }
         if let total = data["duration"] as? Double, total.isFinite { duration = max(0, total) }
         if let errorCode = data["error"] as? Int {
-            error = "Este vídeo no puede reproducirse aquí (código \(errorCode)). Puedes abrirlo en YouTube."
+            error = MusicLocalized.format("Este vídeo no puede reproducirse aquí (código %d). Puedes abrirlo en YouTube.", errorCode)
         }
     }
 

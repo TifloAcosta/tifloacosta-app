@@ -151,7 +151,7 @@ final class NativePodcastLibrary: ObservableObject {
     func unfollow(_ item: NativeFollowedPodcast) {
         followed.removeAll { $0.url == item.url }
         save()
-        notice = "Suscripción eliminada."
+        notice = MusicLocalized.message("Suscripción eliminada.")
     }
 
     private func save() {
@@ -179,7 +179,7 @@ final class NativePodcastLibrary: ObservableObject {
         let before = followed.count
         for item in items { follow(title: item.title, url: item.url) }
         let added = followed.count - before
-        notice = "OPML importado. Nuevas suscripciones: \(added)."
+        notice = MusicLocalized.format("OPML importado. Nuevas suscripciones: %d.", added)
         return added
     }
 }

@@ -22,6 +22,23 @@ struct NativeBackupGenerationStore {
         try requireDirectory(root)
     }
 
+    /// Distinguish an unpublished reserved ID from a corrupt existing copy.
+    /// The automatic scheduler must not replace a corrupt or conflicting copy.
+    func hasGeneration(_ generation: UUID) throws -> Bool {
+        let url = directory(for: generation)
+        do {
+            let attrs = try fm.attributesOfItem(atPath: url.path)
+            guard attrs[.type] as? FileAttributeType == .typeDirectory else { throw Failure.invalidGeneration }
+            return true
+        } catch {
+            let error = error as NSError
+            if error.domain == NSCocoaErrorDomain &&
+                [NSFileNoSuchFileError, NSFileReadNoSuchFileError].contains(error.code) { return false }
+            if error.domain == NSPOSIXErrorDomain && error.code == 2 { return false }
+            throw error
+        }
+    }
+
     private func directory(for generation: UUID) -> URL {
         root.appendingPathComponent(generation.uuidString, isDirectory: true)
     }

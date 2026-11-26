@@ -8,6 +8,7 @@ struct NativeBackupCloudStore {
     static let directoryName = "GlobalBackupGenerations-v1"
     enum Failure: Error {
         case noAccount, containerUnavailable, accountChanged, conflict, unavailableItem, downloadTimedOut, invalidDirectory
+        case automaticAuthorizationRequired
     }
     enum UploadState: Equatable { case pending, uploaded, conflicted, failed }
     struct Entry {
@@ -40,6 +41,72 @@ struct NativeBackupCloudStore {
         let result = Session(token: token, root: root)
         try check(result)
         return result
+    }
+
+    /// A marker is random and contains no personal identity or credentials.
+    /// A new Apple account cannot inherit an old device's automatic permission.
+    private func authorizationURL(_ id: UUID, session: Session) -> URL {
+        session.root.deletingLastPathComponent()
+            .appendingPathComponent("BackupAutomationAuthorizations-v1", isDirectory: true)
+            .appendingPathComponent(id.uuidString + ".json")
+    }
+
+    /// Call only after explicit user consent. Never migrate this permission
+    /// through the app's preferences snapshot or device backup.
+    func authorizeAutomaticUploads(_ id: UUID) throws {
+        let session = try session()
+        let target = authorizationURL(id, session: session)
+        let coordinator = NSFileCoordinator(filePresenter: nil)
+        var coordinationError: NSError?
+        var outcome: Result<Void, Error>?
+        coordinator.coordinate(writingItemAt: target.deletingLastPathComponent(), options: [], error: &coordinationError) { url in
+            outcome = Result {
+                try self.check(session)
+                try self.fm.createDirectory(at: url, withIntermediateDirectories: true)
+                let attrs = try self.fm.attributesOfItem(atPath: url.path)
+                guard attrs[.type] as? FileAttributeType == .typeDirectory else { throw Failure.invalidDirectory }
+            }
+        }
+        if let coordinationError { throw coordinationError }
+        guard let outcome else { throw Failure.unavailableItem }
+        try outcome.get()
+        let staging = fm.temporaryDirectory.appendingPathComponent("backup-consent-" + UUID().uuidString)
+        defer { try? fm.removeItem(at: staging) }
+        try Data(id.uuidString.utf8).write(to: staging, options: .atomic)
+        try check(session)
+        guard !fm.fileExists(atPath: target.path) else { throw Failure.conflict }
+        try fm.setUbiquitous(true, itemAt: staging, destinationURL: target)
+        try check(session)
+        try requireAutomaticAuthorization(id, session: session)
+    }
+
+    private func requireAutomaticAuthorization(_ id: UUID, session: Session) throws {
+        try check(session)
+        let url = authorizationURL(id, session: session)
+        do {
+            let values = try itemValues(url)
+            guard values.isUbiquitousItem == true,
+                  values.ubiquitousItemDownloadingStatus == .current else {
+                throw Failure.automaticAuthorizationRequired
+            }
+            let valid = try read(url) { file in
+                let attrs = try self.fm.attributesOfItem(atPath: file.path)
+                guard attrs[.type] as? FileAttributeType == .typeRegular,
+                      (attrs[.size] as? NSNumber)?.intValue == 36 else { return false }
+                let handle = try FileHandle(forReadingFrom: file)
+                defer { try? handle.close() }
+                return try handle.read(upToCount: 37) == Data(id.uuidString.utf8)
+            }
+            guard valid else { throw Failure.automaticAuthorizationRequired }
+        } catch {
+            if isMissing(error) { throw Failure.automaticAuthorizationRequired }
+            throw error
+        }
+        try check(session)
+    }
+
+    func verifyAutomaticAuthorization(_ id: UUID) throws {
+        try requireAutomaticAuthorization(id, session: session())
     }
 
     private func check(_ session: Session) throws {
@@ -116,18 +183,29 @@ struct NativeBackupCloudStore {
     /// Publish a disposable, independently verified copy. setUbiquitous moves
     /// only this staging directory, never the existing local generation.
     /// iCloud may still be uploading individual files when this returns.
-    func upload(generation: UUID, local: NativeBackupGenerationStore) throws -> UploadState {
+    func upload(generation: UUID, local: NativeBackupGenerationStore,
+                automaticAuthorization: UUID? = nil) throws -> UploadState {
         let session = try session()
+        if let automaticAuthorization { try requireAutomaticAuthorization(automaticAuthorization, session: session) }
         let (manifest, source) = try local.verifiedGeneration(generation)
         try NativeBackupGenerationTransfer.validate(manifest, generation: generation)
         try prepareRoot(session)
         let target = session.root.appendingPathComponent(generation.uuidString, isDirectory: true)
         // If a remote generation exists, do not overwrite or delete it.
         if fm.fileExists(atPath: target.path) {
-            let existing = try read(target.appendingPathComponent("manifest.json")) {
-                try NativeBackupGenerationTransfer.readManifest($0, generation: generation)
+            let manifestURL = target.appendingPathComponent("manifest.json")
+            let values = try itemValues(manifestURL)
+            guard values.ubiquitousItemDownloadingStatus == .current else {
+                try fm.startDownloadingUbiquitousItem(at: manifestURL)
+                return .pending
+            }
+            let existing = try read(manifestURL) {
+                try self.check(session)
+                _ = try self.itemValues($0)
+                return try NativeBackupGenerationTransfer.readManifest($0, generation: generation)
             }
             guard existing == manifest else { throw Failure.conflict }
+            if let automaticAuthorization { try requireAutomaticAuthorization(automaticAuthorization, session: session) }
             return try state(manifest: existing, directory: target, session: session)
         }
         let staging = fm.temporaryDirectory.appendingPathComponent("cloud-upload-" + UUID().uuidString, isDirectory: true)
@@ -138,6 +216,7 @@ struct NativeBackupCloudStore {
             try NativeBackupGenerationTransfer.copyArtifact(item, source: source.appendingPathComponent(item.filename), target: url)
         }
         try check(session)
+        if let automaticAuthorization { try requireAutomaticAuthorization(automaticAuthorization, session: session) }
         guard !fm.fileExists(atPath: target.path) else { throw Failure.conflict }
         try fm.setUbiquitous(true, itemAt: staging, destinationURL: target)
         try check(session)

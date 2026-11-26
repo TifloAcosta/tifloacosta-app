@@ -394,3 +394,28 @@ test('cloud download retries delayed metadata but preserves other errors and can
     assert.match(download, /clock\.now < deadline/);
     assert.match(download, /requested = false/);
 });
+
+test('automatic backup is opt-in, account-bound and resumes a reserved generation without automatic restoration', () => {
+    const policy = read('NativeBackupSyncPolicy.swift');
+    const cloud = read('NativeBackupCloudStore.swift');
+    const run = section(coordinator, 'func runAutomaticBackupIfDue(', 'func synchronizedHistory(');
+    assert.match(policy, /if let pending \{ return \.resume\(pending\) \}/);
+    assert.match(policy, /values\.isExcludedFromBackup = true/);
+    assert.match(cloud, /BackupAutomationAuthorizations-v1/);
+    assert.match(cloud, /requireAutomaticAuthorization\(automaticAuthorization, session: session\)/);
+    assert.match(run, /guard var policy = try automaticStore\.load\(\) else \{ return \.disabled \}/);
+    assert.ok(run.indexOf('try automaticStore.save(policy)') < run.indexOf('createGeneration(sections:'));
+    assert.match(run, /local\.hasGeneration\(generation\)/);
+    assert.match(run, /if uploaded == \.uploaded/);
+    assert.doesNotMatch(run, /restoreLocalGeneration|removeItem/);
+    assert.match(coordinator, /func disableAutomaticBackups/);
+    assert.match(coordinator, /isRunningAutomaticBackup/);
+});
+test('merged cloud history flags mismatching manifests and only proposes safe retention candidates', () => {
+    const policy = read('NativeBackupSyncPolicy.swift');
+    assert.match(policy, /here != there\?\.manifest/);
+    assert.match(policy, /guard remoteHistoryComplete, keepPerSection >= 1/);
+    assert.match(policy, /protected\.formUnion\(local\.prefix\(keepPerSection\)/);
+    assert.match(policy, /entry\.availability == \.both/);
+    assert.match(coordinator, /NativeBackupSyncPolicy\.history\(local: here, remote: remote\)/);
+});

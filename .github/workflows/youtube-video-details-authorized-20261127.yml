@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   authorized-video-details:
-    if: github.event_name == 'push' && github.event.before == 'ed1c6593d2d6a4cecbbd1e1414770c0b6488c34e' && github.run_attempt == 1 && github.ref == 'refs/heads/development/next-public-1.6-500200-20261121'
+    if: github.event_name == 'push' && github.event.before == '6ba2764a2845d4639ab00f93dc1d5fc88b692b1d' && github.run_attempt == 1 && github.ref == 'refs/heads/development/next-public-1.6-500200-20261121'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -41,7 +41,7 @@ jobs:
           npx --no-install wrangler secret list > "$RUNNER_TEMP/youtube-worker-secrets.json"
           jq -e 'map(.name) | contains(["GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "YOUTUBE_SESSION_SECRET", "YOUTUBE_API_KEY"])' "$RUNNER_TEMP/youtube-worker-secrets.json"
 
-      - name: Upload candidate, verify configuration, deploy and test with rollback
+      - name: Promote previously verified candidate with propagation check and rollback
         working-directory: youtube-worker
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -49,8 +49,6 @@ jobs:
         run: |
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
-          import {execFileSync} from 'node:child_process';
-          import {readFileSync} from 'node:fs';
           
           const apiBase = 'https://api.cloudflare.com/client/v4/accounts/' +
             process.env.CLOUDFLARE_ACCOUNT_ID + '/workers/scripts/tifloacosta-youtube-actions';
@@ -151,25 +149,45 @@ jobs:
           assert.equal(previous, 'f78ea4c0-8b0c-42f1-a9ef-9ab07db64d6a', 'Unexpected current production version; stop without changing traffic');
           const before = await settings(previous);
           console.log('Previous production version:', previous);
-          const output = process.env.RUNNER_TEMP + '/youtube-worker-upload.jsonl';
-          execFileSync('npx', ['--no-install', 'wrangler', 'versions', 'upload', '--keep-vars'], {
-            stdio: 'inherit', env: {...process.env, WRANGLER_OUTPUT_FILE_PATH: output}
-          });
-          const upload = readFileSync(output, 'utf8').trim().split('\n').map(JSON.parse)
-            .find(entry => entry.type === 'version-upload');
-          const candidate = upload?.version_id;
-          assert.match(candidate ?? '', /^[\da-f-]{36}$/i);
-          assert.notEqual(candidate, previous);
-          console.log('Candidate version:', candidate);
+          const candidate = 'ae938c3d-1152-47da-b159-16e1230e4b13';
+          const preview = 'https://ae938c3d-tifloacosta-youtube-actions.tonytenerife.workers.dev';
           assert.deepEqual(await settings(candidate), before, 'Candidate runtime configuration differs');
-          const preview = upload.preview_url || upload.preview_urls?.find(url => typeof url === 'string');
-          if (preview && new URL(preview).protocol === 'https:' && new URL(preview).hostname.endsWith('.workers.dev')) await smoke(preview);
-          else console.log('No candidate preview URL; production smoke with automatic rollback required.');
+          await smoke(preview);
+          const knownID = 'NWlpMREl2CE';
+          const knownDetails = await request(preview, '/video-details', {videoId: knownID});
+          assert.equal(knownDetails.id, knownID);
+          // The deployment API can report the new version before the custom
+          // domain serves it. Only retry the old route's explicit NOT_FOUND.
+          async function awaitPropagation() {
+            for (let attempt = 0; attempt < 18; attempt++) {
+              assert.equal(await active(), candidate, 'Production changed during propagation');
+              const url = new URL('/video-details', production);
+              url.searchParams.set('videoId', '!');
+              const response = await fetch(url, {
+                headers: {Origin: origin, 'Cache-Control': 'no-cache'},
+                signal: AbortSignal.timeout(10000)
+              });
+              const result = await response.json();
+              if (response.status === 400 && result.error === 'INVALID_VIDEO') {
+                assert.equal(response.headers.get('access-control-allow-origin'), origin);
+                console.log('Production route propagated; attempt', attempt + 1);
+                return;
+              }
+              assert.equal(response.status, 404, 'Unexpected readiness response');
+              assert.equal(result.error, 'NOT_FOUND', 'Not the old route response');
+              await new Promise(resolve => setTimeout(resolve, 5000));
+            }
+            throw new Error('Production route did not propagate within bounded window');
+          }
           assert.equal(await active(), previous, 'Production changed during preparation');
           const switchTo = version_id => api('/deployments', {strategy: 'percentage', versions: [{version_id, percentage: 100}]});
           try {
             await switchTo(candidate);
             assert.equal(await active(), candidate);
+            await awaitPropagation();
+            const published = await request(production, '/video-details', {videoId: knownID});
+            assert.equal(published.id, knownID);
+            assert.equal(published.description, knownDetails.description);
             await smoke(production);
             console.log('Production smoke tests passed for', candidate);
           } catch (error) {

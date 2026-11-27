@@ -75,6 +75,7 @@ struct NativeCloudFolderBrowserScreen: View {
                 }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle(provider.title)
         .task {
             if accounts.connected.contains(provider) { await loadFolder(id: nil) }

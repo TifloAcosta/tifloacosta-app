@@ -10,7 +10,7 @@ test('Final beta: dynamic selectors, progress and error labels in all five trans
   }
 });
 test('Final beta: newly introduced screens inherit the shared native appearance', () => {
-  for (const file of ["NativeAudiocinematecaBrowser","NativeAudiocinematecaAccount","NativeTapeTerritory","NativeMoviesForTheBlind","NativeRaiPlaySoundScreen","NativeAcoustIDAccount","NativeMyMusic"]) {
+  for (const file of ["NativeAudiocinematecaBrowser","NativeAudiocinematecaAccount","NativeTapeTerritory","NativeMoviesForTheBlind","NativeRaiPlaySoundScreen","NativeAcoustIDAccount","NativeMyMusic","NativeCloudFolderBrowserScreen","NativeCloudGooglePickerScreen","NativeBackupManagementScreen","NativeDocumentConversionScreen","NativeYouTubeVideoDetails"]) {
     const swift = source(file + '.swift');
     assert.ok(swift.includes('.tifloScreenSurface()'), file);
   }

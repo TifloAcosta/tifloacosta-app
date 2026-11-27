@@ -13,6 +13,7 @@ struct NativeCloudGooglePickerScreen: View {
     @StateObject private var accounts = NativeCloudAccountStore.shared
     @ObservedObject private var network = NativeMusicConnectionPolicy.shared
     @State private var selection: [NativeCloudItem] = []
+    @State private var selectionRevision: UUID?
     @State private var loading = false
     @State private var importingID: String?
     @State private var alertMessage: String?
@@ -31,6 +32,8 @@ struct NativeCloudGooglePickerScreen: View {
                         Button("Desconectar Google Drive", role: .destructive) {
                             accounts.disconnect(provider: .googleDrive)
                             selection = []
+                            selectionRevision = nil
+                            pendingDownload = nil
                         }
                     }
                 } else {
@@ -53,6 +56,7 @@ struct NativeCloudGooglePickerScreen: View {
                 }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Google Drive")
         .alert("Google Drive", isPresented: Binding(
             get: { alertMessage != nil },
@@ -77,10 +81,19 @@ struct NativeCloudGooglePickerScreen: View {
     }
 
     private func selectFiles() async {
+        guard !loading, importingID == nil else { return }
         loading = true
+        selection = []
+        selectionRevision = nil
+        pendingDownload = nil
         defer { loading = false }
         do {
-            selection = try await accounts.selectGoogleDriveFiles()
+            let items = try await accounts.selectGoogleDriveFiles()
+            try Task.checkCancellation()
+            guard accounts.connected.contains(.googleDrive),
+                  let revision = accounts.sessionRevision(for: .googleDrive) else { return }
+            selectionRevision = revision
+            selection = items
             UIAccessibility.post(notification: .announcement,
                                  argument: MusicLocalized.format("%d elementos seleccionados en Google Drive", selection.count))
         } catch is CancellationError {
@@ -99,6 +112,14 @@ struct NativeCloudGooglePickerScreen: View {
     }
 
     private func importItem(_ item: NativeCloudItem, allowCellular: Bool) async {
+        guard importingID == nil, !loading else { return }
+        guard let revision = selectionRevision, accounts.connected.contains(.googleDrive),
+              accounts.sessionRevision(for: .googleDrive) == revision else {
+            selection = []
+            selectionRevision = nil
+            alertMessage = NativeCloudStorageError.unauthorized.localizedDescription
+            return
+        }
         importingID = item.id
         defer { importingID = nil }
         do {
@@ -109,6 +130,11 @@ struct NativeCloudGooglePickerScreen: View {
             let token = try await accounts.validAccessToken(for: .googleDrive)
             let cloud = try NativeCloudStorage(provider: .googleDrive, accessToken: token)
             let file = try await cloud.download(item, allowsCellular: allowCellular)
+            guard !Task.isCancelled, accounts.connected.contains(.googleDrive),
+                  accounts.sessionRevision(for: .googleDrive) == revision else {
+                try? FileManager.default.removeItem(at: file.deletingLastPathComponent())
+                return
+            }
             if let onImportValidated {
                 try onImportValidated(file)
             } else {

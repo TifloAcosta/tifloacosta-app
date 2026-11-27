@@ -220,13 +220,28 @@ final class NativeCloudAccountStore: NSObject, ObservableObject {
     /// Returns user-picked items for any caller (music, reader or later modules).
     /// With drive.file, arbitrary root enumeration is intentionally unavailable.
     func selectGoogleDriveFiles() async throws -> [NativeCloudItem] {
+        guard busy.isEmpty, !refreshing.contains(.googleDrive) else {
+            throw NativeCloudStorageError.unavailable
+        }
         pickedGoogleDriveIDs = []
         try await connect(provider: .googleDrive)
+        guard connected.contains(.googleDrive), let revision = revisions[.googleDrive] else {
+            throw CancellationError()
+        }
+        let ids = Array(pickedGoogleDriveIDs.prefix(100))
         let token = try await validAccessToken(for: .googleDrive)
         let transport = try NativeCloudStorage(provider: .googleDrive, accessToken: token)
         var items: [NativeCloudItem] = []
-        for id in pickedGoogleDriveIDs.prefix(100) {
+        for id in ids {
+            try Task.checkCancellation()
+            guard revisions[.googleDrive] == revision, connected.contains(.googleDrive) else {
+                throw CancellationError()
+            }
             items.append(try await transport.googleDriveSelection(id: id))
+        }
+        try Task.checkCancellation()
+        guard revisions[.googleDrive] == revision, connected.contains(.googleDrive) else {
+            throw CancellationError()
         }
         return items
     }

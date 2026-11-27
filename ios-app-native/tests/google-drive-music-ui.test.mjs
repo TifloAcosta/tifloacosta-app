@@ -18,3 +18,15 @@ test('downloaded audio retains its title and is imported through existing librar
   assert.match(cloud, /item\.name as NSString/);
   assert.match(cloud, /appendingPathComponent\(UUID\(\)\.uuidString, isDirectory: true\)/);
 });
+
+
+test('Google Drive discards selection and downloads from invalidated account sessions', () => {
+  const account = readFileSync(new URL('../Sources/NativeCloudAccount.swift', import.meta.url), 'utf8');
+  assert.ok(account.includes('let ids = Array(pickedGoogleDriveIDs.prefix(100))'));
+  assert.ok(account.includes('guard revisions[.googleDrive] == revision, connected.contains(.googleDrive) else'));
+  assert.ok(browser.includes('selectionRevision = revision'));
+  assert.ok(browser.includes('guard let revision = selectionRevision, accounts.connected.contains(.googleDrive)'));
+  const download = browser.slice(browser.indexOf('let file = try await cloud.download'));
+  assert.ok(download.indexOf('accounts.sessionRevision(for: .googleDrive) == revision') < download.indexOf('if let onImportValidated'));
+  assert.ok(download.includes('try? FileManager.default.removeItem(at: file.deletingLastPathComponent())'));
+});

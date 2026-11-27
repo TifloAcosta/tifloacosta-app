@@ -1,0 +1,132 @@
+{
+  "date": "2026-11-27",
+  "baseCommit": "978b93266c6df823c73337addd3c519e4b4a3316",
+  "documents": [
+    {
+      "sourceId": "1APLLz0fpSjamrkyFKtf8L_NsnV3E9DBt",
+      "sourcePath": [
+        "iPhone",
+        "iOS_26_3_whats_new_TifloAcosta_EN.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-1APLLz0fpSjamrkyFKtf8L_NsnV3E9DBt",
+      "path": "docs/en/reader-1APLLz0fpSjamrkyFKtf8L_NsnV3E9DBt.html",
+      "relatedVideoResource": "en-video-text-1Dw7TZlbiONYHvWwRUy7O97iXq-MgrJlh",
+      "verification": "source HTML recovered in original category",
+      "size": 11262,
+      "title": "iOS 26.3: What's New?"
+    },
+    {
+      "sourceId": "1pORBQJ7S4FL6YQCvcEiuo6Uv2rcEnhrq",
+      "sourcePath": [
+        "iPhone",
+        "The_biggest_iPhone_confusion_is_called_iCloud_TifloAcosta_EN.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-1pORBQJ7S4FL6YQCvcEiuo6Uv2rcEnhrq",
+      "path": "docs/en/reader-1pORBQJ7S4FL6YQCvcEiuo6Uv2rcEnhrq.html",
+      "relatedVideoResource": "en-video-text-1IfdyTCozylWLU_EAhcJE0JgFL1Lane3o",
+      "verification": "source HTML recovered in original category",
+      "size": 13363,
+      "title": "The biggest iPhone confusion is called iCloud"
+    },
+    {
+      "sourceId": "1TpiNm9iIk4ogjwT3ZZphSNHsdBfPK7MA",
+      "sourcePath": [
+        "iPhone",
+        "How to tell if someone blocked you on WhatsApp (TifloAcosta).html"
+      ],
+      "lang": "en",
+      "resourceId": "en-1TpiNm9iIk4ogjwT3ZZphSNHsdBfPK7MA",
+      "path": "docs/en/reader-1TpiNm9iIk4ogjwT3ZZphSNHsdBfPK7MA.html",
+      "relatedVideoResource": "en-video-text-1Ir74IndIPK0xqD5eKBOt0nBuOHpDGJSu",
+      "verification": "source HTML recovered in original category",
+      "size": 9753,
+      "title": "How to tell if someone blocked you on WhatsApp"
+    },
+    {
+      "sourceId": "1dCWQQyn05fU-DHiRb9oYVWK4m9G3splc",
+      "sourcePath": [
+        "iPhone",
+        "Invisible iPhone updates. What they are and why they matter (TifloAcosta).html"
+      ],
+      "lang": "en",
+      "resourceId": "en-1dCWQQyn05fU-DHiRb9oYVWK4m9G3splc",
+      "path": "docs/en/reader-1dCWQQyn05fU-DHiRb9oYVWK4m9G3splc.html",
+      "relatedVideoResource": "en-video-text-1o_nWqLndHJySLEUEV7gCoBg3QE3GjfJ6",
+      "verification": "source HTML recovered in original category",
+      "size": 7996,
+      "title": "Invisible iPhone updates. What they are and why they matter"
+    },
+    {
+      "sourceId": "1x2E-rDiEERIAQt_vKMHO3GBpkaowOc3-",
+      "sourcePath": [
+        "iPhone",
+        "iOS 26.4 without the new Siri but with changes that actually matter (TifloAcosta).html"
+      ],
+      "lang": "en",
+      "resourceId": "en-1x2E-rDiEERIAQt_vKMHO3GBpkaowOc3-",
+      "path": "docs/en/reader-1x2E-rDiEERIAQt_vKMHO3GBpkaowOc3-.html",
+      "relatedVideoResource": "en-video-text-1jxfsu_AUXt4hTkhKwIbJEiuBhM6PIqIt",
+      "verification": "source HTML recovered in original category",
+      "size": 8131,
+      "title": "iOS 26.4 without the new Siri but with changes that actually matter"
+    },
+    {
+      "sourceId": "17Rn7Mwsq_0yaF_7BI64-W8aBdNueZTOB",
+      "sourcePath": [
+        "iPhone",
+        "The VoiceOver Trick You Were Waiting For. Just You and AI, Without Interruptions (TifloAcosta).html"
+      ],
+      "lang": "en",
+      "resourceId": "en-17Rn7Mwsq_0yaF_7BI64-W8aBdNueZTOB",
+      "path": "docs/en/reader-17Rn7Mwsq_0yaF_7BI64-W8aBdNueZTOB.html",
+      "relatedVideoResource": "en-video-text-1CaNZuEThEVd24kW42eo_oe46vkIsPHn-",
+      "verification": "source HTML recovered in original category",
+      "size": 6915,
+      "title": "The VoiceOver Trick You Were Waiting For. Just You and AI, Without Interruptions"
+    },
+    {
+      "sourceId": "1qyJOX4zd9Z3z_FnyXuqVAc-SGEiT3yGt",
+      "sourcePath": [
+        "iPhone",
+        "Direct Touch in VoiceOver. When to Use It and When to Run Away (TifloAcosta).html"
+      ],
+      "lang": "en",
+      "resourceId": "en-1qyJOX4zd9Z3z_FnyXuqVAc-SGEiT3yGt",
+      "path": "docs/en/reader-1qyJOX4zd9Z3z_FnyXuqVAc-SGEiT3yGt.html",
+      "relatedVideoResource": "en-video-text-1l3maUilnCNO4cvLf8UQmfXT4cxOtriIp",
+      "verification": "source HTML recovered in original category",
+      "size": 9534,
+      "title": "Direct Touch in VoiceOver. When to Use It and When to Run Away"
+    },
+    {
+      "sourceId": "1OA5h5WqsrkxcnTM3p_aqgSw_yIXxaBv7",
+      "sourcePath": [
+        "iPhone",
+        "iPhone Battery. Everything You Need to Know (TifloAcosta).html"
+      ],
+      "lang": "en",
+      "resourceId": "en-1OA5h5WqsrkxcnTM3p_aqgSw_yIXxaBv7",
+      "path": "docs/en/reader-1OA5h5WqsrkxcnTM3p_aqgSw_yIXxaBv7.html",
+      "relatedVideoResource": "en-video-text-1Y5cvUp1VpU4G7MsBianGiJ3eJH7Rzacw",
+      "verification": "source HTML recovered in original category",
+      "size": 7291,
+      "title": "iPhone Battery. Everything You Need to Know"
+    },
+    {
+      "sourceId": "10Sg0Q-FQrvAcMhZnOkXmnOlOO95ywL9Z",
+      "sourcePath": [
+        "iPhone",
+        "A Blind Person Forewarned Is Forearmed. Earthquake Alerts on Your Phone (TifloAcosta).html"
+      ],
+      "lang": "en",
+      "resourceId": "en-10Sg0Q-FQrvAcMhZnOkXmnOlOO95ywL9Z",
+      "path": "docs/en/reader-10Sg0Q-FQrvAcMhZnOkXmnOlOO95ywL9Z.html",
+      "relatedVideoResource": "en-video-text-1KvQZhBJ8g3WOMbkMR0Jjvh-8nYsHJSFM",
+      "verification": "source HTML recovered in original category",
+      "size": 151368,
+      "title": "A Blind Person Forewarned Is Forearmed. Earthquake Alerts on Your Phone"
+    }
+  ]
+}

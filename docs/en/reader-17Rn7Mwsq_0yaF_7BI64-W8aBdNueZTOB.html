@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="Tony Acosta">
+<meta name="publisher" content="TifloAcosta">
+<title>The VoiceOver trick you were waiting for: finally, just you and AI, without interruptions</title>
+<style>:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65;max-width:64rem;margin:0 auto;padding:1.25rem}
+a{overflow-wrap:anywhere;text-underline-offset:.15em}
+a:focus{outline:.2rem solid currentColor;outline-offset:.2rem}
+.skip-link{position:absolute;left:-9999px}
+.skip-link:focus{position:static;display:inline-block;margin-bottom:1rem}
+.brand img{display:block;width:8rem;max-width:40%;height:auto}
+.reader-nav{margin:0 0 1rem}
+.reader-nav a{display:inline-block;font-weight:700;padding:.65rem .9rem;border:2px solid currentColor;border-radius:.4rem;text-decoration:none}
+h1,h2{line-height:1.25}
+h2{margin-top:2rem}
+.meta{margin:.4rem 0 1.2rem}
+.note{border-left:.3rem solid currentColor;padding:.2rem 0 .2rem 1rem;margin:1.5rem 0}
+footer{margin-top:2.5rem}
+@media print{.skip-link,.reader-nav{display:none}body{max-width:none}}</style>
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<nav class="reader-nav" aria-label="Return to TifloAcosta App"><a href="https://tifloacosta.github.io/tifloacosta-app/">Return to TifloAcosta App</a></nav>
+<header>
+<div class="brand"><img src="https://tifloacosta.github.io/tifloacosta-app/tifloacosta-icon-512.png" alt="TifloAcosta"></div>
+<h1>The VoiceOver trick you were waiting for: finally, just you and AI, without interruptions</h1>
+<p class="meta">Accessible written version of a Canal TifloAcosta video. <a href="https://www.youtube.com/watch?v=LoyzsTHhkgk">Watch the original video on YouTube</a>.</p>
+</header>
+<main id="content">
+<section>
+<h2>The problem: VoiceOver wants to join the conversation too</h2>
+<p>When you are having a voice conversation with an AI assistant, what you normally want to hear is the assistant's own spoken response. The problem begins when VoiceOver detects every text change appearing on the screen and starts announcing those changes at the same time.</p>
+<p>The result can be frustrating: the AI answers while VoiceOver talks over it, repeats fragments, or announces updates to the interface. Instead of one smooth conversation, two voices compete for your attention.</p>
+<p>In this video, Tony shows how to prevent that interference with a VoiceOver setting that can be changed from inside the app itself.</p>
+</section>
+
+<section>
+<h2>The setting to check: Live Regions and Announcements</h2>
+<p>VoiceOver can automatically announce certain changes that occur in an interface. This is useful on websites and in apps where information changes without moving VoiceOver focus.</p>
+<p>However, in an AI app that displays the text of a response on screen while also speaking that response aloud, those announcements can become distracting. VoiceOver may try to report the changing text while the AI is speaking.</p>
+<p>Tony's solution is to turn off <strong>Live Regions and Announcements</strong> for that app whenever those announcements interfere with the spoken conversation.</p>
+</section>
+
+<section>
+<h2>Open VoiceOver Quick Settings</h2>
+<p>You do not need to leave the app, open Settings, and work through the full VoiceOver configuration. The change can be made from Quick Settings.</p>
+<ol>
+<li>Stay inside the app where the problem occurs, such as ChatGPT.</li>
+<li>With VoiceOver on, perform a <strong>two-finger quadruple tap</strong>.</li>
+<li>VoiceOver Quick Settings opens.</li>
+<li>Move through the available settings until you find <strong>Live Regions and Announcements</strong> for the current app.</li>
+</ol>
+<p>Apple continues to document the two-finger quadruple tap as the gesture for opening VoiceOver Quick Settings.</p>
+</section>
+
+<section>
+<h2>Turn announcements off for the app</h2>
+<p>In Tony's demonstration, the procedure is performed in ChatGPT. As he moves through Quick Settings, he finds <strong>Live Regions and Announcements ChatGPT</strong>, which is enabled.</p>
+<p>Activate that switch to turn it off. Then close Quick Settings with the appropriate button and return to ChatGPT.</p>
+<p>The change is made in the app you are currently using. If the same behaviour occurs in another AI app, check the setting from inside that app as well.</p>
+</section>
+
+<section>
+<h2>Practical check</h2>
+<p>Tony uses a second device where the setting has already been changed and opens ChatGPT.</p>
+<p>He starts a voice conversation and asks a question. The AI responds normally, but VoiceOver no longer announces every text update appearing on the screen at the same time.</p>
+<p>The difference is simple but important: the AI's spoken answer can be heard without a second layer of VoiceOver speech competing with it.</p>
+</section>
+
+<section>
+<h2>The same idea can help in other AI apps</h2>
+<p>The same approach can be useful in other apps where spoken AI responses are accompanied by dynamically changing on-screen text that VoiceOver begins to announce intrusively.</p>
+<p>If this happens in Gemini, Perplexity, Claude, or another similar app, open Quick Settings from within that app and check <strong>Live Regions and Announcements</strong>.</p>
+<p>This does not mean that Live Regions should be disabled everywhere. They can be extremely useful. The point is to turn them off only in the apps and situations where they interfere with what you actually want to hear.</p>
+</section>
+
+<section class="note" aria-labelledby="clarification">
+<h2 id="clarification">Important: this is not a headphone setting</h2>
+<p>This procedure does not change VoiceOver's audio output, force the use of headphones, or silence the iPhone speaker. Its purpose is different: it prevents VoiceOver from announcing certain dynamic app updates when those announcements become disruptive during a voice conversation.</p>
+<p>If you need to route audio to headphones, that is a separate system audio-routing issue and is not what this video covers.</p>
+</section>
+
+<section>
+<h2>Conclusion</h2>
+<p>When VoiceOver starts repeating what an AI assistant is already saying, the problem may not be the voice conversation itself. VoiceOver may simply be announcing the dynamic updates appearing in the interface.</p>
+<p>Quick Settings provides a fast way to deal with it without leaving the app: use a two-finger quadruple tap, find <strong>Live Regions and Announcements</strong>, turn it off for that app, and return to the conversation.</p>
+<p>The result is exactly what Tony was aiming for in the video: finally, just you and the AI, without VoiceOver insisting on joining in.</p>
+</section>
+</main>
+<footer><p>TifloAcosta revision: 8 September 2026.</p></footer>
+</body>
+</html>

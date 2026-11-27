@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="Tony Acosta">
+<meta name="publisher" content="TifloAcosta">
+<title>Direct Touch in VoiceOver: When to Use It and When to Run Away</title>
+<style>
+:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65;max-width:64rem;margin:0 auto;padding:1.25rem}
+a{overflow-wrap:anywhere;text-underline-offset:.15em}
+a:focus{outline:.2rem solid currentColor;outline-offset:.2rem}
+.skip-link{position:absolute;left:-9999px}
+.skip-link:focus{position:static;display:inline-block;margin-bottom:1rem}
+.brand img{display:block;width:8rem;max-width:40%;height:auto}
+.reader-nav{margin:0 0 1rem}
+.reader-nav a{display:inline-block;font-weight:700;padding:.65rem .9rem;border:2px solid currentColor;border-radius:.4rem;text-decoration:none}
+h1,h2{line-height:1.25}
+h2{margin-top:2rem}
+.meta{margin:.4rem 0 1.2rem}
+.note{border-left:.3rem solid currentColor;padding:.2rem 0 .2rem 1rem;margin:1.5rem 0}
+footer{margin-top:2.5rem}
+@media print{.skip-link,.reader-nav{display:none}body{max-width:none}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<nav class="reader-nav" aria-label="Return to TifloAcosta App"><a href="https://tifloacosta.github.io/tifloacosta-app/">Return to TifloAcosta App</a></nav>
+<header>
+<div class="brand"><img src="https://tifloacosta.github.io/tifloacosta-app/tifloacosta-icon-512.png" alt="TifloAcosta"></div>
+<h1>Direct Touch in VoiceOver: When to Use It… and When to Run Away</h1>
+<p class="meta">Accessible written version of a Canal TifloAcosta video. <a href="https://www.youtube.com/watch?v=nWkdSZewjPg">Watch the original video on YouTube</a>.</p>
+</header>
+<main id="content">
+<section>
+<h2>Introduction</h2>
+<p>VoiceOver lets you control an iPhone through its own system of focus, exploration, and gestures. That works very well in most apps, but there are specific situations where you need a touch to reach the app directly instead of being interpreted by VoiceOver first. That is what Direct Touch is for.</p>
+<p>The trouble starts when a feature designed for a particular purpose remains enabled where it is not needed. An app may then begin to feel unpredictable: focus may appear to jump, familiar gestures may stop producing the expected result, or interaction may no longer resemble normal VoiceOver navigation.</p>
+<p>The main idea in this tutorial is simple: Direct Touch can be extremely useful, but it should be enabled for a reason, and it is worth knowing where to check it when VoiceOver suddenly starts behaving strangely.</p>
+</section>
+<section>
+<h2>What Direct Touch actually does</h2>
+<p>During normal VoiceOver use, touching an item selects it and a double-tap activates it. VoiceOver acts as the layer between your finger and the interface.</p>
+<p>With Direct Touch, an area of an app can receive touches much more like it would if VoiceOver were off. This makes real-time interaction possible with controls or surfaces that do not work well with the usual select-then-activate model.</p>
+<p>A clear example is a touch instrument. In an app such as GarageBand, a user may need to play piano keys or drums directly. Selecting each key with VoiceOver and then double-tapping would make real-time playing impossible. Direct Touch removes that layer in the part of the interface designed for direct interaction.</p>
+<p>It can also be useful in interfaces that expect dragging, swiping, or app-specific gestures. The practical rule is not to enable it just because it exists. Use it when the task itself requires direct interaction with the screen.</p>
+</section>
+<section>
+<h2>Do not confuse it with Direct Touch Typing</h2>
+<p>VoiceOver also uses the term “Direct Touch” as one of its typing styles. That is related, but it is not the same as enabling Direct Touch for an app. Direct Touch Typing affects only the onscreen keyboard and lets you type as if VoiceOver were off in that keyboard area. This tutorial is about the Direct Touch setting that can change how you interact with an app or with specific areas of it.</p>
+</section>
+<section>
+<h2>When you should turn it off</h2>
+<p>If an app that normally works well with VoiceOver suddenly starts responding unpredictably, Direct Touch is one of the first settings worth checking. This does not mean that every problem in WhatsApp, YouTube, or another app is caused by Direct Touch, but leaving it enabled when it is not needed can change the usual interaction model.</p>
+<p>If VoiceOver stops behaving the way you expect, check whether Direct Touch is enabled for that app. If you do not need it, turn it off and try again.</p>
+</section>
+<section>
+<h2>Screen Recognition: useful, but different</h2>
+<p>The same cautious approach applies to Screen Recognition, although it is a different feature. Screen Recognition can help VoiceOver interpret interfaces that would otherwise be difficult to access. However, if an app is already accessible on its own, additional recognition can change how VoiceOver identifies or presents some elements.</p>
+<p>If an app that used to work well suddenly feels different, it is worth checking both Direct Touch and Screen Recognition before assuming that the app itself has broken.</p>
+</section>
+<section>
+<h2>Set up VoiceOver Quick Settings</h2>
+<p>Quick Settings gives you access to a selection of VoiceOver settings from anywhere on the iPhone, without having to work through the full Settings app every time.</p>
+<ol>
+<li>Open <strong>Settings</strong>.</li>
+<li>Choose <strong>Accessibility</strong>.</li>
+<li>Open <strong>VoiceOver</strong>.</li>
+<li>Choose <strong>Quick Settings</strong>.</li>
+<li>Review the list and select the settings you want to make available in the Quick Settings menu. During the demonstration Tony goes through several items, including Activities, speech volume, voice, Braille options, and audio ducking. For this tutorial, make sure <strong>Direct Touch</strong> is included if you want to be able to switch it on or off quickly.</li>
+</ol>
+<p>You can also reorder the items so that the settings you use most often appear near the top.</p>
+</section>
+<section>
+<h2>How to open Quick Settings</h2>
+<p>With VoiceOver running, <strong>tap four times with two fingers</strong>. VoiceOver Quick Settings opens.</p>
+<p>This gesture should not be confused with the Magic Tap. Magic Tap is a different VoiceOver gesture. Quick Settings uses a two-finger quadruple tap.</p>
+<p>Once the panel is open, move through the settings until you reach <strong>Direct Touch</strong>. VoiceOver announces its current state. If it is on in an app where you do not need it, switch it off and close the panel to return to the app.</p>
+</section>
+<section>
+<h2>A practical example in YouTube</h2>
+<p>In the video, Tony demonstrates the procedure inside YouTube. He opens Quick Settings, moves through the available VoiceOver parameters, finds Direct Touch, and switches it off after discovering that it is enabled. He then returns to the YouTube interface.</p>
+<p>The advantage is that you do not have to leave the app, open Settings, find VoiceOver, and then return. Quick Settings lets you check and change the setting in place.</p>
+<p>The same approach can be used in other apps. If WhatsApp, for example, begins responding in an unusual way, you can check Direct Touch while you are still in WhatsApp and turn it off if there is no reason to keep it enabled.</p>
+</section>
+<section>
+<h2>A quick check when VoiceOver starts doing strange things</h2>
+<p>If focus begins jumping, familiar gestures stop working as expected, or an interface suddenly feels different, check the basics before making the diagnosis more complicated. Review Direct Touch and Screen Recognition, turn off anything you do not need, and test the app again.</p>
+<p>These settings will not explain every accessibility problem, but both can significantly change interaction, so ruling them out first can save a great deal of time.</p>
+</section>
+<section class="note" aria-labelledby="update">
+<h2 id="update">Update as of 8 September 2026</h2>
+<p>Apple continues to document that VoiceOver Quick Settings opens with four taps using two fingers and that its contents can be customised under Settings &gt; Accessibility &gt; VoiceOver &gt; Quick Settings.</p>
+<p>Apple also documents Direct Touch as a feature that can be enabled for an app when real-time touch interaction is required. No official documentation was found establishing that iOS generally enables Direct Touch automatically in YouTube or WhatsApp. For that reason, this written version presents it as a setting worth checking when a problem occurs, rather than as an automatic behaviour attributable to Apple.</p>
+</section>
+<section>
+<h2>Conclusion</h2>
+<p>Direct Touch is not good or bad in itself. It is a specialised tool. When an app needs immediate touch interaction, it may be exactly what makes the app usable; when it is not needed, it can turn otherwise normal navigation into a confusing experience.</p>
+<p>The best defence is knowing what it does and keeping it available in Quick Settings. Then, when VoiceOver starts doing something that does not make sense, checking Direct Touch takes only a few seconds and may save a lot of troubleshooting.</p>
+</section>
+</main>
+<footer><p>TifloAcosta revision: 8 September 2026.</p></footer>
+</body>
+</html>

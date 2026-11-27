@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-27",
+  "baseCommit": "9136b110c7f662bf6e4e4785a0008bd99b35ad77",
+  "recovered": [
+    {
+      "sourceId": "1CiDoHf4t20wI4JnCETaRkyyaYmeYaL3k",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo proteger tu iPhone ante una ola de calor.html"
+      ],
+      "path": "docs/es/reader-1CiDoHf4t20wI4JnCETaRkyyaYmeYaL3k.html",
+      "resourceId": "es-1CiDoHf4t20wI4JnCETaRkyyaYmeYaL3k",
+      "sourceBytes": 4939
+    },
+    {
+      "sourceId": "1fyUG_VqD0waL7WaQei1Yjkcxc5Z4kmkO",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo transferir todos nuestros datos de un iPhone a otro.html"
+      ],
+      "path": "docs/es/reader-1fyUG_VqD0waL7WaQei1Yjkcxc5Z4kmkO.html",
+      "resourceId": "es-1fyUG_VqD0waL7WaQei1Yjkcxc5Z4kmkO",
+      "sourceBytes": 4577
+    },
+    {
+      "sourceId": "1rwbnAageE5Qpp39UgWI_lHn7VdGBlQEM",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Qué tamaño de pantalla y resolución ha tenido cada iPhone.html"
+      ],
+      "path": "docs/es/reader-1rwbnAageE5Qpp39UgWI_lHn7VdGBlQEM.html",
+      "resourceId": "es-1rwbnAageE5Qpp39UgWI_lHn7VdGBlQEM",
+      "sourceBytes": 4299
+    },
+    {
+      "sourceId": "1cYUEODBjeuDOmRm5h1qr8BMAHJEOub50",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Esta es la capacidad de batería de todos los modelos de iPhone de Apple.html"
+      ],
+      "path": "docs/es/reader-1cYUEODBjeuDOmRm5h1qr8BMAHJEOub50.html",
+      "resourceId": "es-1cYUEODBjeuDOmRm5h1qr8BMAHJEOub50",
+      "sourceBytes": 4267
+    },
+    {
+      "sourceId": "12TgQJhu-kMouex-4kfe7QJLqeMw6oPDM",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Por qué hay que vaciar la caché de WhatsApp y cómo hacerlo en nuestro iPhone.html"
+      ],
+      "path": "docs/es/reader-12TgQJhu-kMouex-4kfe7QJLqeMw6oPDM.html",
+      "resourceId": "es-12TgQJhu-kMouex-4kfe7QJLqeMw6oPDM",
+      "sourceBytes": 3327
+    },
+    {
+      "sourceId": "1lZ_imHY5bg-ND7kpUFeXoCioIw2bI3VR",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Apple informa que la bibración áptica en el teclado provoca gasto en la batería.html"
+      ],
+      "path": "docs/es/reader-1lZ_imHY5bg-ND7kpUFeXoCioIw2bI3VR.html",
+      "resourceId": "es-1lZ_imHY5bg-ND7kpUFeXoCioIw2bI3VR",
+      "sourceBytes": 1912
+    },
+    {
+      "sourceId": "1D5jeYwgyXHz74T5v4wYkKGNygdjYQrSV",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "El manual de uso de iPhone oficial de Apple que no sabías que existía.html"
+      ],
+      "path": "docs/es/reader-1D5jeYwgyXHz74T5v4wYkKGNygdjYQrSV.html",
+      "resourceId": "es-1D5jeYwgyXHz74T5v4wYkKGNygdjYQrSV",
+      "sourceBytes": 3578
+    }
+  ]
+}

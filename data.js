@@ -4105,5 +4105,89 @@ window.TIFLO_RESOURCES = [
     "url": "https://tifloacosta.com/docs/es/reader-150eKksegI02AU8TIkG1B39a32kKCYlGG.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-150eKksegI02AU8TIkG1B39a32kKCYlGG.html",
     "searchText": "Cómo recuperar la contraseña de mi cuenta de Apple Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1CiDoHf4t20wI4JnCETaRkyyaYmeYaL3k",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Cómo proteger tu iPhone ante una ola de calor",
+    "url": "https://tifloacosta.com/docs/es/reader-1CiDoHf4t20wI4JnCETaRkyyaYmeYaL3k.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1CiDoHf4t20wI4JnCETaRkyyaYmeYaL3k.html",
+    "searchText": "Cómo proteger tu iPhone ante una ola de calor Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1fyUG_VqD0waL7WaQei1Yjkcxc5Z4kmkO",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Cómo transferir todos nuestros datos de un iPhone a otro",
+    "url": "https://tifloacosta.com/docs/es/reader-1fyUG_VqD0waL7WaQei1Yjkcxc5Z4kmkO.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1fyUG_VqD0waL7WaQei1Yjkcxc5Z4kmkO.html",
+    "searchText": "Cómo transferir todos nuestros datos de un iPhone a otro Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1rwbnAageE5Qpp39UgWI_lHn7VdGBlQEM",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Qué tamaño de pantalla y resolución ha tenido cada iPhone",
+    "url": "https://tifloacosta.com/docs/es/reader-1rwbnAageE5Qpp39UgWI_lHn7VdGBlQEM.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1rwbnAageE5Qpp39UgWI_lHn7VdGBlQEM.html",
+    "searchText": "Qué tamaño de pantalla y resolución ha tenido cada iPhone Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1cYUEODBjeuDOmRm5h1qr8BMAHJEOub50",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Esta es la capacidad de batería de todos los modelos de iPhone de Apple",
+    "url": "https://tifloacosta.com/docs/es/reader-1cYUEODBjeuDOmRm5h1qr8BMAHJEOub50.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1cYUEODBjeuDOmRm5h1qr8BMAHJEOub50.html",
+    "searchText": "Esta es la capacidad de batería de todos los modelos de iPhone de Apple Archivo histórico iPhone"
+  },
+  {
+    "id": "es-12TgQJhu-kMouex-4kfe7QJLqeMw6oPDM",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Por qué hay que vaciar la caché de WhatsApp y cómo hacerlo en nuestro iPhone",
+    "url": "https://tifloacosta.com/docs/es/reader-12TgQJhu-kMouex-4kfe7QJLqeMw6oPDM.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-12TgQJhu-kMouex-4kfe7QJLqeMw6oPDM.html",
+    "searchText": "Por qué hay que vaciar la caché de WhatsApp y cómo hacerlo en nuestro iPhone Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1lZ_imHY5bg-ND7kpUFeXoCioIw2bI3VR",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Apple informa que la bibración áptica en el teclado provoca gasto en la batería",
+    "url": "https://tifloacosta.com/docs/es/reader-1lZ_imHY5bg-ND7kpUFeXoCioIw2bI3VR.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1lZ_imHY5bg-ND7kpUFeXoCioIw2bI3VR.html",
+    "searchText": "Apple informa que la bibración áptica en el teclado provoca gasto en la batería Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1D5jeYwgyXHz74T5v4wYkKGNygdjYQrSV",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "El manual de uso de iPhone oficial de Apple que no sabías que existía",
+    "url": "https://tifloacosta.com/docs/es/reader-1D5jeYwgyXHz74T5v4wYkKGNygdjYQrSV.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1D5jeYwgyXHz74T5v4wYkKGNygdjYQrSV.html",
+    "searchText": "El manual de uso de iPhone oficial de Apple que no sabías que existía Archivo histórico iPhone"
   }
 ];

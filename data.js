@@ -4350,5 +4350,27 @@ window.TIFLO_RESOURCES = [
     "openUrl": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-14-2026.html",
     "searchText": "Technology Pills 14 2026 Tech Pills 14 2026 Contents Welcome iOS 27 for everyone: what will really come to your iPhone and what stays out if you do not have Apple Intelligence The iPhone that could lock itself when someone snatches it from your hand WhatsApp, Meta and artificial intelligence: the door Europe does not want to see closed When glasses start looking for us Closing How to request access to the Canal TifloAcosta WhatsApp community",
     "new": false
+  },
+  {
+    "id": "en-pildoras-2026-13",
+    "lang": "en",
+    "category": "Pills",
+    "year": 2026,
+    "title": "Technology Pills 13",
+    "url": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-13-2026.html",
+    "openUrl": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-13-2026.html",
+    "searchText": "Technology Pills 13 2026 Tech Pills 13 2026 Index Airplane Mode on your phone: it is not just for flying Google presents Gemini Omni: an AI for creating and editing video by talking to it WhatsApp is preparing major changes: more privacy, better groups and less dependence on phone numbers Apple keeps moving pieces toward a glucose sensor without finger pricks Farewell Sources consulted Airplane Mode Google Gemini Omni WhatsApp Apple and non-invasive glucose sensing",
+    "new": false
+  },
+  {
+    "id": "en-pildoras-2026-12",
+    "lang": "en",
+    "category": "Pills",
+    "year": 2026,
+    "title": "Technology Pills 12",
+    "url": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-12-2026.html",
+    "openUrl": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-12-2026.html",
+    "searchText": "Technology Pills 12 2026 Tech Pills 12 2026 Contents Samsung changes TalkBack in One UI 9: less fragmentation and an important development for blind Android users What TalkBack is What Samsung had been doing until now What may change with One UI 9 Why this could be good news What may not change A beta is not the final version TalkBack, Jieshuo and the wider picture Samsung and Android compared with iPhone Conclusion iPhone and Android start talking to each other: Quick Share moves closer to AirDrop What exactly is happening How it will work with iPhone The QR code alternative Why this also matters for blind users The role of Europe What should not be exaggerated Conclusion Ray-Ban Display opens up to other apps: an interesting opportunity for blind users, but still with many conditions What Meta has announced The display is not everything Why the Neural Band may matter What kinds of apps could make sense for blind users",
+    "new": false
   }
 ];

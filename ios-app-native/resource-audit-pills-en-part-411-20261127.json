@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-27",
+  "baseCommit": "1a40f5341acf122b277b7d6c438d1888300ea9fa",
+  "recovered": [
+    {
+      "sourceId": "15Gb28rtHrxK3RmIsaISSsllBSZeMLycf",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 13 2026.html"
+      ],
+      "path": "docs/en/pildoras/2026/tech-pills-13-2026.html",
+      "resourceId": "en-pildoras-2026-13",
+      "sourceBytes": 67867,
+      "headings": [
+        "Tech Pills 13 2026",
+        "Index",
+        "Airplane Mode on your phone: it is not just for flying"
+      ]
+    },
+    {
+      "sourceId": "1iRzeBGvMMX7uW6dRQvwmaRa4tyhwYenV",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 12 2026.html"
+      ],
+      "path": "docs/en/pildoras/2026/tech-pills-12-2026.html",
+      "resourceId": "en-pildoras-2026-12",
+      "sourceBytes": 78810,
+      "headings": [
+        "Tech Pills 12 2026",
+        "Contents",
+        "Samsung changes TalkBack in One UI 9: less fragmentation and an important development for blind Android users"
+      ]
+    }
+  ]
+}

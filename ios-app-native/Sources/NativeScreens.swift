@@ -809,7 +809,7 @@ struct NativeResourcesScreen: View {
         .accessibilityAction(named: Text(favorites.contains(.resource, item: item)
             ? "Quitar de favoritos" : "Añadir a favoritos")) {
             let added = favorites.toggle(.resource, item: item)
-            announce(added ? "Añadido a Favoritos" : "Eliminado de Favoritos")
+            announce(MusicLocalized.message(added ? "Añadido a Favoritos" : "Eliminado de Favoritos"))
         }
     }
 
@@ -860,7 +860,7 @@ struct NativeResourcesScreen: View {
                !resourceQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 Section(isSearchingResources ? "Resultados de búsqueda" : (chosenCategory ?? "Resultados de búsqueda")) {
                     if filtered.isEmpty {
-                        Text(isSearchingResources ? "No hay resultados." : "No hay recursos en la categoría elegida.")
+                        Text(MusicLocalized.message(isSearchingResources ? "No hay resultados." : "No hay recursos en la categoría elegida."))
                     }
 
                     if isPillsCategory && !isSearchingResources {

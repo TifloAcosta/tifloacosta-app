@@ -147,3 +147,15 @@ test('release localization: cinema directory fields and dynamic YouTube announce
   assert.match(player, /speak\(MusicLocalized\.format\("Posición: %d por ciento\.", next\)\)/);
   assert.doesNotMatch(player, /\bspeak\("/);
 });
+
+test('podcast feed results and resource announcements use the app language, and long podcast times use hours',()=>{
+  const podcast=fs.readFileSync(path.join(source,'NativePodcasts.swift'),'utf8');
+  const resources=fs.readFileSync(path.join(source,'NativeScreens.swift'),'utf8');
+  for(const key of ["Consultando episodios.","Este canal no tiene episodios de audio compatibles.","Sin episodios nuevos desde la consulta anterior.","Episodios nuevos desde la consulta anterior: %d.","No se pudieron consultar los episodios de este canal."]){
+    assert.ok(podcast.includes('MusicLocalized.message("'+key+'")')||podcast.includes('MusicLocalized.format("'+key+'"'),key);
+    for(const [lang,d] of main)assert.ok(d.has(key),lang+': '+key);
+  }
+  assert.match(podcast,/private func clock\(_ value: Double\) -> String \{\s+NativeYouTubeTime.clock\(value\)/);
+  assert.match(podcast,/\.accessibilityValue\(MusicLocalized.format\("%@ de %@", NativeYouTubeTime.spoken\(player.seconds\), NativeYouTubeTime.spoken\(player.duration\)\)\)/);
+  assert.match(resources,/announce\(MusicLocalized.message\(added \? "Añadido a Favoritos" : "Eliminado de Favoritos"\)\)/);
+});

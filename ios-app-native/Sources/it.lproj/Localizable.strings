@@ -2054,3 +2054,8 @@
 "Phonon para iPhone" = "Phonon per iPhone";
 "Motor Phonon" = "Motore Phonon";
 "Modelos Phonon" = "Modelli Phonon";
+"Consultando episodios." = "Consultazione degli episodi.";
+"Este canal no tiene episodios de audio compatibles." = "Questo canale non ha episodi audio compatibili.";
+"Sin episodios nuevos desde la consulta anterior." = "Nessun nuovo episodio dall’ultima consultazione.";
+"Episodios nuevos desde la consulta anterior: %d." = "Nuovi episodi dall’ultima consultazione: %d.";
+"No se pudieron consultar los episodios de este canal." = "Impossibile consultare gli episodi di questo canale.";

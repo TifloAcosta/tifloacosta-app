@@ -286,7 +286,7 @@ struct NativePodcastScreen: View {
               ["http", "https"].contains(url.scheme?.lowercased() ?? "") else { return }
         followedFeedBusy = true
         followedFeedTitle = feed.title
-        followedFeedStatus = "Consultando episodios."
+        followedFeedStatus = MusicLocalized.message("Consultando episodios.")
         defer { followedFeedBusy = false }
         do {
             var request = URLRequest(url: url)
@@ -302,12 +302,12 @@ struct NativePodcastScreen: View {
             followedEpisodes = Array(delegate.episodes.prefix(100))
             let newCount = library.recordFeedCheck(feed, episodes: followedEpisodes)
             followedFeedStatus = followedEpisodes.isEmpty
-                ? "Este canal no tiene episodios de audio compatibles."
-                : newCount == 0 ? "Sin episodios nuevos desde la consulta anterior."
-                : "Episodios nuevos desde la consulta anterior: \(newCount)."
+                ? MusicLocalized.message("Este canal no tiene episodios de audio compatibles.")
+                : newCount == 0 ? MusicLocalized.message("Sin episodios nuevos desde la consulta anterior.")
+                : MusicLocalized.format("Episodios nuevos desde la consulta anterior: %d.", newCount)
         } catch {
             followedEpisodes = []
-            followedFeedStatus = "No se pudieron consultar los episodios de este canal."
+            followedFeedStatus = MusicLocalized.message("No se pudieron consultar los episodios de este canal.")
         }
     }
 
@@ -331,8 +331,7 @@ struct NativePodcastScreen: View {
     }
 
     private func clock(_ value: Double) -> String {
-        let seconds = Int(max(0, value))
-        return String(format: "%02d:%02d", seconds / 60, seconds % 60)
+        NativeYouTubeTime.clock(value)
     }
 
     var body: some View {
@@ -354,9 +353,10 @@ struct NativePodcastScreen: View {
                     ), in: 0...max(player.duration, 1), step: 1) {
                         Text("Posición del episodio")
                     }
-                    .accessibilityValue(MusicLocalized.format("%@ de %@", clock(player.seconds), clock(player.duration)))
+                    .accessibilityValue(MusicLocalized.format("%@ de %@", NativeYouTubeTime.spoken(player.seconds), NativeYouTubeTime.spoken(player.duration)))
                     Text(MusicLocalized.format("%@ de %@", clock(player.seconds), clock(player.duration)))
                         .font(.footnote).foregroundStyle(.secondary)
+                        .accessibilityLabel(Text(MusicLocalized.format("%@ de %@", NativeYouTubeTime.spoken(player.seconds), NativeYouTubeTime.spoken(player.duration))))
                     Button("Cerrar reproductor") {
                         saveCurrentPosition()
                         player.stop()
@@ -377,6 +377,7 @@ struct NativePodcastScreen: View {
                         Button(MusicLocalized.format("Continuar: %@, desde %@", saved.title, clock(saved.seconds))) {
                             playEpisode(episode)
                         }
+                        .accessibilityLabel(Text(MusicLocalized.format("Continuar: %@, desde %@", saved.title, NativeYouTubeTime.spoken(saved.seconds))))
                         Button(MusicLocalized.format("Olvidar posición: %@", saved.title)) {
                             library.clearProgress(for: episode)
                         }

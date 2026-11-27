@@ -43,7 +43,7 @@
 "El archivo supera el límite de 100 MB." = "Le fichier dépasse la limite de 100 Mo.";
 "El contenido estaba vacío." = "Le contenu était vide.";
 "Elemento guardado en Recibidos." = "Élément enregistré dans « Éléments reçus ».";
-"Audio recibido. Elige Guardar en TifloLector o Guardar en Mi música. Si cierras, quedará pendiente en Recibidos." = "Audio reçu. Choisissez Enregistrer dans TifloLector ou dans Ma musique. Si vous fermez, il restera en attente dans « Éléments reçus ».";
+"Audio recibido. Elige Guardar en TifloLector o Guardar en Mi música. Si cierras, quedará pendiente en Recibidos." = "Audio reçu. Choisissez Enregistrer dans TifloLector ou Enregistrer dans Ma musique. Si vous fermez, il restera en attente dans « Éléments reçus ».";
 "Documento guardado para TifloLector. Puedes leerlo ahora si aparece esa opción. Al abrir TifloAcosta se incorporará a la biblioteca y se abrirá directamente." = "Document enregistré pour TifloLector. Lisez-le maintenant si cette option est disponible. À l'ouverture de TifloAcosta, il sera ajouté à la bibliothèque et ouvert directement.";
 "Enlace recibido. Estará disponible en Recibidos para abrirlo o analizarlo." = "Lien reçu. Il sera disponible dans « Éléments reçus » pour l'ouvrir ou l'analyser.";
 "Texto guardado para TifloLector. Puedes leerlo aquí o abrir TifloAcosta para continuar." = "Texte enregistré pour TifloLector. Lisez-le ici ou ouvrez TifloAcosta pour continuer.";

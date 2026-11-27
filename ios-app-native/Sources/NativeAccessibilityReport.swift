@@ -41,6 +41,7 @@ enum NativeSupportDiagnostics {
 }
 
 struct NativeAccessibilityReportScreen: View {
+    @Environment(\.locale) private var locale
     @EnvironmentObject private var catalog: NativeCatalogStore
     @State private var categoryIndex = 0
     @State private var description = ""
@@ -56,7 +57,7 @@ struct NativeAccessibilityReportScreen: View {
     ]
 
     private var catalogSummary: String {
-        let updated = catalog.lastUpdated?.formatted(.dateTime.year().month(.abbreviated).day().hour().minute().locale(Locale(identifier: NativeAppLanguage.code(for: UserDefaults.standard.integer(forKey: NativeAppLanguage.storageKey)))))
+        let updated = catalog.lastUpdated?.formatted(.dateTime.year().month(.abbreviated).day().hour().minute().locale(locale))
             ?? MusicLocalized.message("Sin actualización confirmada")
         return MusicLocalized.format("Catálogo. Recursos: %d. Vídeos: %d. Noticias: %d. Última actualización: %@. Estado: %@.", catalog.resources.count, catalog.videos.count, catalog.news.count, updated, MusicLocalized.message(catalog.error == nil ? "Sin error declarado" : "Actualización con incidencia"))
     }

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>El Panel de Hoy: guía de usuario - Tony Acosta para TifloAcosta</title>
+<meta content="Guía accesible de usuario para aprender a jugar y sacar partido a El Panel de Hoy. Creada por Tony Acosta para TifloAcosta." name="description"/>
+<style>
+  :root {
+    --text: #111;
+    --muted: #444;
+    --accent: #153f7a;
+    --border: #cfd6df;
+    --soft: #f5f7fa;
+    --max: 58rem;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 1.08rem;
+    line-height: 1.65;
+    color: var(--text);
+    background: #fff;
+  }
+  .wrap {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 1.25rem 1.25rem 3rem;
+  }
+  .brand {
+    margin: 0 0 .5rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  h1, h2, h3 {
+    line-height: 1.25;
+    color: #102f5b;
+  }
+  h1 { font-size: 2rem; margin-top: .4rem; }
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 2.4rem;
+    padding-top: .25rem;
+    border-top: 1px solid var(--border);
+  }
+  h3 { font-size: 1.18rem; margin-top: 1.7rem; }
+  p { margin: .8rem 0; }
+  ul, ol { padding-left: 1.5rem; }
+  li { margin: .45rem 0; }
+  a { color: #0645ad; text-decoration-thickness: .1em; }
+  a:focus {
+    outline: 3px solid #000;
+    outline-offset: 3px;
+  }
+  .intro, .tip, .note {
+    border: 1px solid var(--border);
+    background: var(--soft);
+    padding: 1rem 1.1rem;
+    margin: 1.2rem 0;
+  }
+  .tip strong, .note strong { display: inline; }
+  .toc ol { margin-bottom: 0; }
+  .small { color: var(--muted); font-size: .96rem; }
+  footer {
+    margin-top: 3rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    color: var(--muted);
+  }
+  @media print {
+    body { font-size: 12pt; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: none; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="brand">TifloAcosta</p>
+<h1>El Panel de Hoy: guía de usuario para jugar, ganar coronas y no dejar una casilla con vida</h1>
+<p><strong>Creada por Tony Acosta para TifloAcosta.</strong></p>
+<div class="intro">
+<p>“El Panel de Hoy” es un juego diario de palabras inspirado en la mecánica de “La ruleta de la fortuna”. Cada día hay una frase escondida y toca descubrirla acertando consonantes, comprando vocales y administrando bien las coronas. Hasta aquí, sencillo. El problema empieza cuando uno descubre que también hay minijuegos, tienda, ahorro, retos, invitaciones, rankings y alguna corona que se empeña en desaparecer justo cuando hacía falta.</p><p>Detrás de todo esto está <strong>Fernando De León</strong>, creador de la plataforma y principal culpable de que el juego no solo funcione bien, sino que además haya nacido con la accesibilidad metida en los cimientos. No es una capa añadida después para salir del paso: forma parte de cómo está pensado el juego desde su origen.</p>
+<p>La buena noticia es que la plataforma está concebida desde el principio para funcionar con lectores de pantalla. No se trata de adaptar después un juego visual: la intención es que quien no ve la pantalla reciba la misma información necesaria para jugar.</p>
+<p><a href="https://elpaneldehoy.com/">Entrar en El Panel de Hoy</a></p>
+</div>
+<nav aria-label="Índice de la guía" class="toc">
+<h2>Índice</h2>
+<ol>
+<li><a href="#entrada">Entrar sin contraseña</a></li>
+<li><a href="#panel">El panel principal</a></li>
+<li><a href="#coronas">Las dos cuentas de coronas</a></li>
+<li><a href="#sin-coronas">Cuando la cartera empieza a toser</a></li>
+<li><a href="#minijuegos">Los minijuegos</a></li>
+<li><a href="#tienda">La tienda y sus salvavidas</a></li>
+<li><a href="#retos">Retos entre amigos</a></li>
+<li><a href="#mensajes">Mensajes e invitaciones</a></li>
+<li><a href="#rankings">Los rankings</a></li>
+<li><a href="#accesibilidad">Accesibilidad y lectores de pantalla</a></li>
+<li><a href="#estrategia">Trucos para sacar más partido al juego</a></li>
+<li><a href="#dia">Un día cualquiera en El Panel de Hoy</a></li>
+<li><a href="#evolucion">Una plataforma pensada para seguir creciendo</a></li>
+</ol>
+</nav>
+<section id="entrada">
+<h2>1. Entrar sin contraseña</h2>
+<p>El acceso no utiliza una contraseña tradicional. Escribes tu correo electrónico y recibes un código de cuatro dígitos. Introduces ese código y entras.</p>
+<p>Una vez iniciada la sesión, puede mantenerse activa hasta 365 días en ese dispositivo. En otras palabras: no tendrás que pedir un código nuevo cada mañana antes de enfrentarte al panel, salvo que la sesión haya terminado o cambies de dispositivo.</p>
+</section>
+<section id="panel">
+<h2>2. El panel principal: donde empieza la batalla</h2>
+<p>Cada día hay una única frase para todo el mundo. La frase aparece representada mediante una rejilla de casillas y el objetivo es descubrirla completa.</p>
+<h3>Consonantes: probar no cuesta, y acertar paga</h3>
+<p>Las consonantes son gratuitas. Si aciertas una, además ganas una corona por cada vez que esa letra aparezca en la frase. Si dices una consonante que aparece tres veces, recibes tres coronas.</p><p>Ejemplo rápido: si pruebas la letra S y la frase contiene tres eses, ganas tres coronas. No has pagado nada por intentarlo y, encima, la S te ha invitado a un café.</p>
+<p>Así que aquí tenemos una de esas raras situaciones de la vida en las que preguntar es gratis y acertar encima da dinero.</p>
+<h3>Vocales: aquí sí pasa la caja</h3>
+<p>Cada vocal cuesta tres coronas y puedes comprar como máximo cuatro vocales en una partida. Conviene, por tanto, no lanzarse a comprar vocales como si las coronas caducaran en diez minutos.</p><p>Por ejemplo: tienes 7 coronas y compras una A. Te quedan 4. Si compras después una E, bajas a 1. Así que dos vocales pueden aclararte medio panel... o dejarte mirando la hucha con nostalgia.</p>
+<h3>Resolver la frase</h3>
+<p>Cuando completas correctamente la frase recibes un premio fijo de cinco coronas, además de las coronas que hayas ido ganando al acertar consonantes.</p>
+<h3>Pista extra</h3>
+<p>La pista extra cuesta una corona y solo puede utilizarse una vez por partida.</p>
+<h3>Bono por volver</h3>
+<p>Si jugaste el día anterior, comienzas el nuevo día con tres coronas extra en la cuenta corriente. Es el pequeño “gracias por volver” del juego, y también una buena razón para no abandonar el panel a su suerte durante demasiados días.</p>
+</section>
+<section id="coronas">
+<h2>3. Las dos cuentas de coronas: no metas todo en el mismo bolsillo</h2>
+<p>El juego utiliza dos saldos diferentes. Entenderlos desde el principio evita buena parte de las confusiones.</p>
+<h3>Cuenta corriente</h3>
+<p>Es el dinero del día. Sirve para comprar vocales y utilizar la pista extra en el panel principal. Se recalcula cada día desde cero, añadiendo el bono de fidelización cuando corresponda. Lo que quede hoy no pasa automáticamente a mañana.</p>
+<h3>Cuenta de ahorro</h3>
+<p>Es el saldo que vas acumulando y es el que se utiliza en la tienda. Según cuánto ahorro consigas, puedes alcanzar insignias como Oro, Platino o Diamante. Si el saldo disminuye lo suficiente, la insignia también puede bajar.</p>
+<div class="note">
+<p><strong>Una diferencia fundamental:</strong> cuenta corriente para jugar el panel de hoy; cuenta de ahorro para comprar en la tienda y construir tu reserva a largo plazo.</p>
+</div><p>Ejemplo: ganas 5 coronas en un minijuego. Si todavía necesitas comprar una vocal hoy, puede interesarte mandarlas a la cuenta corriente. Si el panel ya está resuelto, quizá prefieras enviarlas al ahorro para una futura compra en la tienda.</p>
+<p>Cuando ganas coronas en determinados minijuegos o en la lotería de la tienda, puedes elegir si enviarlas a la cuenta corriente para utilizarlas ese mismo día o al ahorro para guardarlas.</p>
+</section>
+<section id="sin-coronas">
+<h2>4. Cuando la cartera empieza a toser</h2>
+<p>Si intentas comprar una vocal o utilizar la pista extra y no tienes coronas suficientes, la partida no te deja tirado en medio de la carretera.</p>
+<p>El juego puede ofrecerte varias salidas: ir a un minijuego para conseguir coronas y volver después al mismo panel; acudir a la tienda; utilizar una Letra de emergencia o una Palabra de rescate que ya tengas comprada; utilizar la pista extra si todavía puedes pagarla; o simplemente cerrar el aviso y seguir jugando sin ayuda.</p>
+<h3>¿Y si prefieres rendirte?</h3>
+<p>También puedes hacerlo. Antes de confirmar, el juego te recuerda las posibles ayudas disponibles. La racha se mantiene jugando cada día y existen protectores de racha que pueden cubrir un día en el que no hayas podido jugar.</p>
+</section>
+<section id="minijuegos">
+<h2>5. Los minijuegos: cuando un panel no era suficiente</h2>
+<p>El Panel de Hoy incorpora dos juegos complementarios. Sirven para seguir jugando y, en determinadas situaciones, para conseguir las coronas que necesitas para regresar al panel principal.</p>
+<h3>Letras Desordenadas</h3>
+<p>Cada día aparecen cinco palabras con sus letras mezcladas. Dispones de tres intentos por palabra.</p>
+<p>Además existe un comprobador llamado “¿Voy bien?” que permite saber si vas por buen camino sin entregarte directamente la solución. Es ayuda, no confesión completa.</p><p>Ejemplo: aparecen las letras «S A C A». La misión es ponerlas en orden hasta llegar a «CASA». Si dudas, “¿Voy bien?” te orienta sin soplarte directamente la respuesta.</p>
+<p>Se puede acceder cuando ya has resuelto el panel principal del día o cuando te has quedado sin coronas en él.</p>
+<h3>Nueve</h3>
+<p>Este minijuego propone nueve palabras cada día, presentadas en un casillero de 3 por 3, y aquí el nombre no engaña: cada palabra tiene exactamente nueve letras. Cada una dispone de una definición y de nueve vidas.</p><p>La particularidad está en que las letras permanecen ocultas detrás de dibujos y hay que ir destapándolas en el orden correcto. Si rompes ese orden, toca volver a empezar con esa palabra. Ejemplo: si la definición conduce a «COCODRILO», tendrás que descubrir sus nueve letras, C-O-C-O-D-R-I-L-O, respetando el orden. Vamos, que aquí levantar dibujos a lo loco tiene premio: empezar otra vez.</p>
+<p>El criterio de acceso es el mismo que en Letras Desordenadas: primero debe haberse cerrado el panel principal porque lo has resuelto o porque te has quedado sin coronas.</p>
+</section>
+<section id="tienda">
+<h2>6. La tienda: aquí las coronas de ahorro empiezan a trabajar</h2>
+<p>Todo lo que se compra en la tienda se paga exclusivamente con la cuenta de ahorro.</p>
+<h3>Letra de emergencia</h3>
+<p>Revela una letra concreta del panel principal. No se utiliza en los minijuegos.</p>
+<h3>Palabra de rescate</h3>
+<p>Revela la palabra o la frase entera del panel principal cuando el atasco ya empieza a parecer una obra de ingeniería. Tampoco se utiliza en los minijuegos.</p>
+<h3>Protector de racha</h3>
+<p>Sirve para cubrir un día sin jugar y evitar que la racha se rompa.</p>
+<h3>Tirada de la suerte</h3>
+<p>Tiene un coste fijo en coronas de ahorro y un número limitado de tiradas al día. Si consigues un premio, queda pendiente hasta que decidas enviarlo al ahorro o a la cuenta corriente del día.</p>
+<h3>Fondo solidario</h3>
+<p>También puedes donar coronas de tu ahorro a una causa común. No recibes un objeto o una ventaja material a cambio: aquí la gracia consiste precisamente en aportar.</p>
+</section>
+<section id="retos">
+<h2>7. Retos entre amigos: ahora el culpable de la frase puede tener nombre y apellidos</h2>
+<p>Cualquier jugador con cuenta puede retar a otro utilizando su nombre de usuario. Quien crea el reto escribe la frase que habrá que descubrir, una pista principal y una pista extra.</p>
+<p>El destinatario recibe un mensaje con el botón “Jugar”. Solo esa persona puede disputar el reto y únicamente mientras siga pendiente de resolver.</p><p>Ejemplo: tú preparas para un amigo la frase «Más vale tarde que nunca», añades una pista y se la envías. Él intenta resolverla y al terminar tú recibes el resultado. Aquí la amistad sigue siendo gratis; las pullas, probablemente también.</p>
+<p>La mecánica se parece al panel principal, aunque tiene sus propias reglas: pueden utilizarse hasta cuatro vocales y cuatro consonantes, hay una pista extra opcional y puedes resolver o rendirte.</p>
+<p>La puntuación va de 0 a 100 y se descuentan puntos conforme compras letras o utilizas la pista extra.</p>
+<p>Estos retos no modifican la economía del juego principal. No ganas ni pierdes coronas reales: se trata de competir y divertirse. Cuando el destinatario resuelve o abandona, quien creó el reto recibe un mensaje con el resultado.</p>
+</section>
+<section id="mensajes">
+<h2>8. Mensajes e invitaciones: porque jugar solo está bien, pero picarse con amigos tiene su encanto</h2>
+<h3>Centro de mensajes</h3>
+<p>Desde el perfil, un icono con forma de sobre reúne los avisos del equipo, las respuestas personales y las notificaciones relacionadas con los retos. Los mensajes pueden responderse desde ese mismo centro.</p>
+<h3>Invitar a otras personas</h3>
+<p>Cada jugador dispone de un código de invitación propio. Si una persona se registra utilizando ese código y completa su primer panel, quien la invitó puede recibir una recompensa; el documento actual menciona, como ejemplo, un protector de racha.</p>
+</section>
+<section id="rankings">
+<h2>9. Los rankings: no todo consiste en resolver antes que el vecino</h2>
+<p>El juego mantiene varios rankings porque hay más de una manera de hacerlo bien. Todos ellos contribuyen a un Ranking Global.</p>
+<ul>
+<li><strong>Racha:</strong> mide los días consecutivos jugando.</li>
+<li><strong>Constancia:</strong> valora la regularidad más allá de una única racha.</li>
+<li><strong>Maestría o eficiencia:</strong> mide cómo resuelves teniendo en cuenta las letras compradas; no depende del número de coronas acumuladas.</li>
+<li><strong>Rendimiento:</strong> calcula el balance neto de coronas del panel del día: lo ganado por consonantes y por resolver, menos lo gastado en vocales y pista extra. No incluye minijuegos ni lotería.</li>
+<li><strong>Ingenio:</strong> recoge tu rendimiento en Letras Desordenadas.</li>
+<li><strong>Agudeza:</strong> refleja tu rendimiento en Nueve.</li>
+</ul>
+<p>Esto significa que alguien puede destacar por constancia, por ahorrar, por resolver con pocas ayudas o por ser especialmente bueno en los minijuegos. No hay una única forma de presumir, por si faltaba algún motivo.</p>
+</section>
+<section id="accesibilidad">
+<h2>10. Accesibilidad: Fernando tuvo la buena idea de pensar en ella antes de que llegáramos nosotros</h2>
+<p>La accesibilidad forma parte del diseño del juego desde el principio. Fernando De León no esperó a que alguien apareciera después diciendo «esto con lector de pantalla no hay quien lo entienda». Aunque visualmente haya rejillas, casillas, insignias, iconos y barras de progreso, la intención es que ninguna información necesaria para jugar quede exclusivamente en la pantalla.</p>
+<h3>Casillas y letras que hablan</h3>
+<p>Las casillas vacías se anuncian de forma que el jugador sepa que falta una letra sin recibir pistas adicionales. A medida que se descubren letras, el lector de pantalla puede anunciar lo que va apareciendo y, al completar la frase, las palabras quedan verbalizadas conforme se cierran.</p>
+<h3>El foco intenta caer donde toca</h3>
+<p>Al abrir una pantalla o un aviso emergente, el foco se coloca en un punto lógico, normalmente su título. Al cerrarlo, vuelve al control que lo abrió. La idea es evitar uno de los deportes favoritos de algunas interfaces: dejar al usuario preguntándose dónde demonios ha aterrizado el lector de pantalla.</p>
+<p>Los avisos y ventanas emergentes que disponen de un botón para cerrar también responden al gesto de retroceso del lector de pantalla.</p>
+<h3>Lo visual también tiene texto</h3>
+<p>Colores, iconos, insignias y barras de progreso cuentan con información textual equivalente. Las estadísticas incluyen sus cifras, los estados tienen etiquetas y los diálogos se identifican para que el lector anuncie que se ha abierto un elemento nuevo y de qué trata.</p>
+<div class="note">
+<p><strong>Principio general de la plataforma:</strong> si una información puede verse y resulta relevante para jugar, debe poder conocerse también mediante el lector de pantalla.</p>
+</div>
+</section>
+<section id="estrategia">
+<h2>11. Trucos para sacar más partido al juego</h2>
+<p>Estas recomendaciones no añaden reglas nuevas: simplemente aprovechan las mecánicas descritas en la plataforma.</p>
+<ol>
+<li><strong>Empieza pensando en consonantes antes de gastar.</strong> Probar consonantes no consume coronas y una consonante acertada puede incluso aumentar tu saldo.</li>
+<li><strong>No compres vocales por inercia.</strong> Cada una cuesta tres coronas y existe un máximo de cuatro. Si ya tienes suficiente información para seguir deduciendo, quizá sea mejor guardar esas coronas.</li>
+<li><strong>Decide para qué necesitas las coronas que ganas.</strong> Si todavía estás peleando con el panel del día, puede interesarte mandar determinadas ganancias a la cuenta corriente. Si ya has terminado y piensas en tienda, protectores o ayudas futuras, el ahorro cobra más sentido.</li>
+<li><strong>Usa los minijuegos como parte del recorrido, no solo como rescate.</strong> Cuando estén disponibles, también cuentan para sus propios rankings y añaden dos formas diferentes de jugar con palabras.</li>
+<li><strong>La tienda es una reserva, no una máquina de gastar por aburrimiento.</strong> Una Letra de emergencia, una Palabra de rescate o un protector de racha pueden valer bastante más el día en que realmente los necesites.</li>
+<li><strong>Los retos son el laboratorio perfecto.</strong> Como no alteran tus coronas reales, permiten practicar y competir con amigos sin poner en riesgo la economía del juego principal.</li>
+<li><strong>Si te importa la racha, acuérdate del protector.</strong> No convierte un despiste en una tragedia nacional, pero puede evitar que una buena racha termine porque un día no pudiste entrar.</li>
+</ol>
+</section>
+<section id="dia">
+<h2>12. Un día cualquiera en El Panel de Hoy</h2>
+<p>En una jornada normal puedes entrar al panel principal, probar consonantes, comprar las vocales que realmente necesites, utilizar una pista si te compensa y tratar de resolver la frase.</p>
+<p>Después puedes pasar a Letras Desordenadas y Nueve cuando se cumplan las condiciones de acceso, gestionar las coronas conseguidas, revisar la tienda, consultar mensajes, mirar cómo vas en los rankings o enviar y recibir retos entre amigos.</p>
+<p>Los retos no tienen el límite diario del panel principal, de modo que el juego no termina necesariamente cuando resuelves la frase del día.</p>
+<div class="tip">
+<p><strong>Versión corta:</strong> hay una partida diaria principal, pero alrededor de ella hay suficiente movimiento como para que entrar, resolver y salir corriendo sea solo una de las posibilidades.</p>
+</div>
+</section>
+<section id="evolucion">
+<h2>13. Una plataforma que no piensa quedarse quieta</h2>
+<p>Fernando De León ha concebido El Panel de Hoy como una plataforma viva, no como un juego terminado al que solo se le cambia la frase cada mañana. La idea es seguir incorporando funciones, pantallas y eventos especiales que renueven la experiencia sin perder de vista la accesibilidad.</p>
+<p>Eso significa que esta guía también tendrá que evolucionar. Cuando aparezcan novedades importantes, la intención de TifloAcosta será actualizar el documento para que siga sirviendo como una guía práctica y no termine convertido en una pieza de museo digital.</p>
+<p>La mejor manera de entender todo esto sigue siendo la más peligrosa para el tiempo libre: entrar, jugar el panel de hoy y comprobar cuánto tardas en decir «una partida más» aunque, técnicamente, el panel diario sea uno.</p>
+<p><a href="https://elpaneldehoy.com/">Abrir El Panel de Hoy</a></p>
+</section>
+<footer>
+<p><strong>Guía creada por Tony Acosta para TifloAcosta.</strong></p>
+<p class="small">Guía elaborada a partir de la documentación funcional facilitada por Fernando De León, creador de El Panel de Hoy. Versión: 11 de septiembre de 2026.</p>
+</footer>
+</div>
+</body>
+</html>

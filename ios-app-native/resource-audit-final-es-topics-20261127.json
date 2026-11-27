@@ -1,0 +1,188 @@
+{
+  "date": "2026-11-27",
+  "baseCommit": "ab02e7a0434c082fe300cf04a2192a9045d952d1",
+  "documents": [
+    {
+      "sourceId": "1k3uERbPjKQCaZxlbH278D-ouxdtJqcT7",
+      "sourcePath": [
+        "Noticias",
+        "Avances en el braille - HTML accesible TifloAcosta.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1k3uERbPjKQCaZxlbH278D-ouxdtJqcT7",
+      "path": "docs/es/reader-1k3uERbPjKQCaZxlbH278D-ouxdtJqcT7.html",
+      "relatedVideoResource": null,
+      "verification": "source HTML recovered in original category",
+      "size": 10832,
+      "title": "Avances en el braille"
+    },
+    {
+      "sourceId": "19Gij7lJZqZIcmtuYfN6sDeWJZlvEhWXG",
+      "sourcePath": [
+        "Noticias",
+        "Apple Sports llega a tu país.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-19Gij7lJZqZIcmtuYfN6sDeWJZlvEhWXG",
+      "path": "docs/es/reader-19Gij7lJZqZIcmtuYfN6sDeWJZlvEhWXG.html",
+      "relatedVideoResource": null,
+      "verification": "source HTML recovered in original category",
+      "size": 4406,
+      "title": "Apple Sports llega a tu país"
+    },
+    {
+      "sourceId": "1OPnGAzd5ssCPpZXYDPyNROmGfNTDy_6Y",
+      "sourcePath": [
+        "Atajos",
+        "Tu iPhone habla al cargar. Crea un sonido automático al conectar y quitar el cargador (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1OPnGAzd5ssCPpZXYDPyNROmGfNTDy_6Y",
+      "path": "docs/es/reader-1OPnGAzd5ssCPpZXYDPyNROmGfNTDy_6Y.html",
+      "relatedVideoResource": "es-video-text-1qh-wpAEAnxR9ILfXiQnjg4kQ28sv9Dn8",
+      "verification": "source HTML recovered in original category",
+      "size": 5900,
+      "title": "Tu iPhone habla al cargar. Crea un sonido automático al conectar y quitar el cargador"
+    },
+    {
+      "sourceId": "1eUCkMKilTsuMXNYgSpgdgP2EappRv32g",
+      "sourcePath": [
+        "Atajos",
+        "Crea informes de accesibilidad en segundos desde tu iPhone (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1eUCkMKilTsuMXNYgSpgdgP2EappRv32g",
+      "path": "docs/es/reader-1eUCkMKilTsuMXNYgSpgdgP2EappRv32g.html",
+      "relatedVideoResource": "es-video-text-1B87FrddFAyX0L2BxeYvPBtgEzbIDMDw0",
+      "verification": "source HTML recovered in original category",
+      "size": 6430,
+      "title": "Crea informes de accesibilidad en segundos desde tu iPhone"
+    },
+    {
+      "sourceId": "16puKBAPIm_3MVkx9fCVaLiTXNv87QJsY",
+      "sourcePath": [
+        "APPs",
+        "AudioGameAccess, juegos para disfrutar de oído, a solas o en compañía.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-16puKBAPIm_3MVkx9fCVaLiTXNv87QJsY",
+      "path": "docs/es/reader-16puKBAPIm_3MVkx9fCVaLiTXNv87QJsY.html",
+      "relatedVideoResource": null,
+      "verification": "source HTML recovered in original category",
+      "size": 6420,
+      "title": "AudioGameAccess, juegos para disfrutar de oído, a solas o en compañía"
+    },
+    {
+      "sourceId": "1Tb43TSDTWaaxjrY5UUv1YuBsYcG2mEhh",
+      "sourcePath": [
+        "APPs",
+        "El Panel de Hoy - guía accesible de usuario.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1Tb43TSDTWaaxjrY5UUv1YuBsYcG2mEhh",
+      "path": "docs/es/reader-1Tb43TSDTWaaxjrY5UUv1YuBsYcG2mEhh.html",
+      "relatedVideoResource": null,
+      "verification": "source HTML recovered in original category",
+      "size": 20526,
+      "title": "El Panel de Hoy - guía accesible de usuario"
+    },
+    {
+      "sourceId": "1vdNx6kIfA_daw4vhoZnYDFZlGUTYMORf",
+      "sourcePath": [
+        "APPs",
+        "YouTube por fin deja quitar los Shorts (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1vdNx6kIfA_daw4vhoZnYDFZlGUTYMORf",
+      "path": "docs/es/reader-1vdNx6kIfA_daw4vhoZnYDFZlGUTYMORf.html",
+      "relatedVideoResource": "es-video-text-1283tZd-Mu0UWVOmaaFLC1YYAYM228-ig",
+      "verification": "source HTML recovered in original category",
+      "size": 5505,
+      "title": "YouTube por fin deja quitar los Shorts"
+    },
+    {
+      "sourceId": "1fP21tSp4vJZXTAK_p8vZnE1ZHtbj2zga",
+      "sourcePath": [
+        "APPs",
+        "Te enseño cómo usar dos números de WhatsApp en el mismo iPhone (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1fP21tSp4vJZXTAK_p8vZnE1ZHtbj2zga",
+      "path": "docs/es/reader-1fP21tSp4vJZXTAK_p8vZnE1ZHtbj2zga.html",
+      "relatedVideoResource": "es-video-text-1wQLrAgXN4OyGF1WfWBNvUyFtq6w0Q83X",
+      "verification": "source HTML recovered in original category",
+      "size": 5553,
+      "title": "Te enseño cómo usar dos números de WhatsApp en el mismo iPhone"
+    },
+    {
+      "sourceId": "1un4rIsME2lUaqWlJ-Ed6sL-95fSoriQO",
+      "sourcePath": [
+        "APPs",
+        "¿Y si hablar otro idioma dejara de ser un muro? (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1un4rIsME2lUaqWlJ-Ed6sL-95fSoriQO",
+      "path": "docs/es/reader-1un4rIsME2lUaqWlJ-Ed6sL-95fSoriQO.html",
+      "relatedVideoResource": "es-video-text-1R4ky6ksovb8C7FenO4PrZGeGWkCxx0gS",
+      "verification": "source HTML recovered in original category",
+      "size": 5703,
+      "title": "¿Y si hablar otro idioma dejara de ser un muro?"
+    },
+    {
+      "sourceId": "11VB1lyoEzAqiNQBnQK3YucA-lGWaG83Q",
+      "sourcePath": [
+        "APPs",
+        "SonarPad, la app accesible que lo quiere hacer todo (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-11VB1lyoEzAqiNQBnQK3YucA-lGWaG83Q",
+      "path": "docs/es/reader-11VB1lyoEzAqiNQBnQK3YucA-lGWaG83Q.html",
+      "relatedVideoResource": "es-video-text-1YDPjBBbWykRGs6y4vuCSpNa4blM7_FR4",
+      "verification": "source HTML recovered in original category",
+      "size": 7097,
+      "title": "SonarPad, la app accesible que lo quiere hacer todo"
+    },
+    {
+      "sourceId": "1g08DxAsb1bjfOxVBljX8SXNBE81MI1JT",
+      "sourcePath": [
+        "APPs",
+        "zEdit, por fin editar vídeo y audio con VoiceOver deja de ser una tortura (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1g08DxAsb1bjfOxVBljX8SXNBE81MI1JT",
+      "path": "docs/es/reader-1g08DxAsb1bjfOxVBljX8SXNBE81MI1JT.html",
+      "relatedVideoResource": "es-video-text-1g_wJDb7abeFmpCZ2XQn2WEyHXv25OwSR",
+      "verification": "source HTML recovered in original category",
+      "size": 5558,
+      "title": "zEdit, por fin editar vídeo y audio con VoiceOver deja de ser una tortura"
+    },
+    {
+      "sourceId": "1qbNs3I07p5cur3mqHGikzKdTaWChaDzj",
+      "sourcePath": [
+        "APPs",
+        "aGram, por fin Telegram se deja usar bien con VoiceOver (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1qbNs3I07p5cur3mqHGikzKdTaWChaDzj",
+      "path": "docs/es/reader-1qbNs3I07p5cur3mqHGikzKdTaWChaDzj.html",
+      "relatedVideoResource": "es-video-text-1YShD7GWgVnynlsDqO1rwqXkf4Qn1RsUM",
+      "verification": "source HTML recovered in original category",
+      "size": 151022,
+      "title": "aGram, por fin Telegram se deja usar bien con VoiceOver"
+    },
+    {
+      "sourceId": "1JNF1Hbpe3aWX-bzOgLoLm4KTZ7pJKYqB",
+      "sourcePath": [
+        "Lectura",
+        "Vox Libri, un reproductor de libros pensado de verdad para personas ciegas (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1JNF1Hbpe3aWX-bzOgLoLm4KTZ7pJKYqB",
+      "path": "docs/es/reader-1JNF1Hbpe3aWX-bzOgLoLm4KTZ7pJKYqB.html",
+      "relatedVideoResource": "es-video-text-19kCJGPZV4Wm04qtELfbubezUx2DC5bqv",
+      "verification": "source HTML recovered in original category",
+      "size": 13139,
+      "title": "Vox Libri, un reproductor de libros pensado de verdad para personas ciegas"
+    }
+  ]
+}

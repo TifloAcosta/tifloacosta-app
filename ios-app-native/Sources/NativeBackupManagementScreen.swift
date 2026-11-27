@@ -428,11 +428,19 @@ struct NativeBackupManagementScreen: View {
                             .accessibilityIdentifier("tiflo.backup.status")
                     }
                 }
-                if let report = preview { restoreSection(report) }
-                manualSection
-                automaticSection
-                historySection
+                if let report = preview {
+                    // The read-only report is a separate step within this modal.
+                    // Do not leave disabled setup and history rows underneath it.
+                    restoreSection(report)
+                } else {
+                    manualSection
+                    automaticSection
+                    historySection
+                }
             }
+            // A new step starts at the top instead of retaining the scroll
+            // position of the history row that opened it.
+            .id(preview != nil)
             .tifloScreenSurface()
             .navigationTitle("Copias de seguridad")
             .navigationBarTitleDisplayMode(.inline)

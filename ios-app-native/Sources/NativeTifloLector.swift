@@ -2661,9 +2661,9 @@ struct NativeReaderLibraryScreen: View {
                     LabeledContent("Título", value: document.title)
                     LabeledContent("Formato", value: document.formatLabel)
                     LabeledContent("Importado", value:
-                        document.importedAt.formatted(date: .abbreviated, time: .shortened))
+                        document.importedAt.formatted(.dateTime.year().month(.abbreviated).day().hour().minute().locale(Locale(identifier: NativeAppLanguage.code(for: UserDefaults.standard.integer(forKey: NativeAppLanguage.storageKey))))))
                     LabeledContent("Marcas", value: "\(library.latest(document).bookmarks.count)")
-                    LabeledContent("Carpeta", value: library.latest(document).folderName ?? "Sin carpeta")
+                    LabeledContent("Carpeta", value: library.latest(document).folderName ?? MusicLocalized.message("Sin carpeta"))
                     let saved = library.latest(document)
                     if let paths = saved.trackPaths, !paths.isEmpty {
                         let track = max(0, min(paths.count - 1, saved.lastTrackIndex ?? 0))
@@ -4814,8 +4814,8 @@ struct NativeReadingScreen: View {
                     LabeledContent("Título", value: latest.title)
                     LabeledContent("Formato", value: latest.formatLabel)
                     LabeledContent("Importado", value:
-                        latest.importedAt.formatted(date: .abbreviated, time: .shortened))
-                    LabeledContent("Carpeta", value: latest.folderName ?? "Sin carpeta")
+                        latest.importedAt.formatted(.dateTime.year().month(.abbreviated).day().hour().minute().locale(Locale(identifier: NativeAppLanguage.code(for: UserDefaults.standard.integer(forKey: NativeAppLanguage.storageKey))))))
+                    LabeledContent("Carpeta", value: latest.folderName ?? MusicLocalized.message("Sin carpeta"))
                     LabeledContent("Marcas", value: "\(latest.bookmarks.count + latest.savedTextBookmarks.count + latest.savedAudioBookmarks.count)")
                     if !latest.body.isEmpty {
                         LabeledContent("Palabras", value: "\(wordCount)")

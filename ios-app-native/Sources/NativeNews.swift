@@ -30,7 +30,7 @@ enum NativeNewsMetadata {
 
     static func source(_ item: NativeCatalogItem) -> String {
         let value = item.sourceName?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        return value.isEmpty ? "Fuente no indicada" : value
+        return value.isEmpty ? MusicLocalized.message("Fuente no indicada") : value
     }
 
     static func publication(_ value: String?) -> String? {
@@ -40,7 +40,7 @@ enum NativeNewsMetadata {
         let standard = ISO8601DateFormatter()
         guard let date = fractional.date(from: value) ?? standard.date(from: value) else { return nil }
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "es_ES")
+        formatter.locale = Locale(identifier: NativeAppLanguage.code(for: UserDefaults.standard.integer(forKey: NativeAppLanguage.storageKey)))
         formatter.timeZone = .current
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
@@ -60,15 +60,15 @@ enum NativeNewsMetadata {
             ?? ""
         let metadata = [
             item.title,
-            "Medio: \(source(item))",
-            publication(item.publishedAt).map { "Publicado: \($0)" } ?? ""
+            MusicLocalized.format("Medio: %@", source(item)),
+            publication(item.publishedAt).map { MusicLocalized.format("Publicado: %@", $0) } ?? ""
         ].filter { !$0.isEmpty }
         return (metadata + [text]).joined(separator: "\n\n")
     }
 
     static func accessibilitySummary(_ item: NativeCatalogItem) -> String {
-        var labels = [item.title, "Medio: \(source(item))"]
-        if let date = publication(item.publishedAt) { labels.append("Publicado: \(date)") }
+        var labels = [item.title, MusicLocalized.format("Medio: %@", source(item))]
+        if let date = publication(item.publishedAt) { labels.append(MusicLocalized.format("Publicado: %@", date)) }
         return labels.joined(separator: ". ")
     }
 }
@@ -424,7 +424,7 @@ struct NativeNewsArticleScreen: View {
                         .foregroundStyle(.secondary)
                 }
                 if let categories = item.categories, !categories.isEmpty {
-                    Text(MusicLocalized.format("Categorías: %@", categories.map(NativeNewsMetadata.category).joined(separator: ", ")))
+                    Text(MusicLocalized.format("Categorías: %@", categories.map { MusicLocalized.message(NativeNewsMetadata.category($0)) }.joined(separator: ", ")))
                         .font(.footnote).foregroundStyle(.secondary)
                 }
 

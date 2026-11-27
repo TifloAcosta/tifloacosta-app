@@ -2095,3 +2095,4 @@
 "No se pudo descargar: %@" = "Impossible de télécharger : %@";
 "Guardado en TifloLector" = "Enregistré dans TifloLector";
 "No se pudo traducir el documento: %@" = "Impossible de traduire le document : %@";
+"Fuente no indicada" = "Source non indiquée";

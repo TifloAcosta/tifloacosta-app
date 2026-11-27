@@ -827,7 +827,7 @@ struct NativeResourcesScreen: View {
                     ProgressView("Actualizando recursos")
                 }
                 if let lastUpdated = catalog.lastUpdated {
-                    Text(MusicLocalized.format("Última actualización correcta: %@", lastUpdated.formatted(date: .abbreviated, time: .shortened)))
+                    Text(MusicLocalized.format("Última actualización correcta: %@", lastUpdated.formatted(.dateTime.year().month(.abbreviated).day().hour().minute().locale(Locale(identifier: NativeAppLanguage.code(for: UserDefaults.standard.integer(forKey: NativeAppLanguage.storageKey)))))))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 } else {

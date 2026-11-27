@@ -2096,3 +2096,4 @@
 "No se pudo descargar: %@" = "Could not download: %@";
 "Guardado en TifloLector" = "Saved in TifloReader";
 "No se pudo traducir el documento: %@" = "Could not translate the document: %@";
+"Fuente no indicada" = "Source not specified";

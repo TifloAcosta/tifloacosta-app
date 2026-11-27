@@ -31,7 +31,7 @@ test('El documento permite leer en voz alta, guardar y exportar sin capa web', (
   assert.match(text, /LazyVStack\(alignment: \.leading/);
   assert.match(text, /Button\("Leer en voz alta"\)/);
   assert.match(text, /Button\("Descargar en Archivos"\)/);
-  assert.match(text, /Button\(imported \? "Guardado en TifloLector" : "Guardar en TifloLector"\)/);
+  assert.match(text, /Button\(MusicLocalized\.message\(imported \? "Guardado en TifloLector" : "Guardar en TifloLector"\)\)/);
   assert.match(service, /library\.importSharedText\(content, title: item\.title\)/);
   assert.match(service, /UIDocumentPickerViewController\(forExporting:/);
   assert.match(text, /<head\\\\b/);

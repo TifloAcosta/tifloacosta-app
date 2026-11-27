@@ -456,3 +456,42 @@ test('playlist items reject foreign origin or invalid playlist identifiers befor
   assert.equal(invalid.status, 400);
   assert.deepEqual(await invalid.json(), { error: 'INVALID_PLAYLIST' });
 });
+
+test('GET /video-details retrieves the full original description without a Google session', async () => {
+  const id = 'abcDEF123_-';
+  const channelId = 'UC' + 'x'.repeat(22);
+  const description = 'Creator text\\nhttps://example.com/guide\\n' + 'Full description. '.repeat(200);
+  let calls = 0;
+  const response = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/video-details?videoId=' + id,
+    { headers: { Origin: env.ALLOWED_ORIGIN } }
+  ), env, async (url, options) => {
+    calls++;
+    const target = new URL(url);
+    assert.equal(target.pathname, '/youtube/v3/videos');
+    assert.equal(target.searchParams.get('part'), 'snippet,contentDetails');
+    assert.equal(target.searchParams.get('id'), id);
+    assert.equal(options?.headers?.Authorization, undefined);
+    return jsonResponse({ items: [{ id, snippet: { title: 'Title',
+      channelId, channelTitle: 'Creator', publishedAt: '2026-10-01T12:00:00Z', description },
+      contentDetails: { duration: 'PT23M45S' } }] });
+  });
+  assert.equal(response.status, 200);
+  const value = await response.json();
+  assert.equal(value.description, description);
+  assert.equal(value.channelId, channelId);
+  assert.equal(value.durationSeconds, 1425);
+  assert.equal(calls, 1);
+});
+
+test('GET /video-details rejects bad origins, bad IDs and unavailable videos', async () => {
+  const url = 'https://youtube-auth.tifloacosta.com/video-details?videoId=abcDEF123_-';
+  const deny = async () => { throw Error('unexpected upstream call'); };
+  const foreign = await handleRequest(new Request(url, { headers: { Origin: 'https://foreign.example' } }), env, deny);
+  assert.equal(foreign.status, 403);
+  const invalid = await handleRequest(new Request(url.replace('abcDEF123_-', 'bad'), { headers: { Origin: env.ALLOWED_ORIGIN } }), env, deny);
+  assert.equal(invalid.status, 400);
+  const missing = await handleRequest(new Request(url, { headers: { Origin: env.ALLOWED_ORIGIN } }), env,
+    async () => jsonResponse({ items: [] }));
+  assert.equal(missing.status, 404);
+});

@@ -367,3 +367,28 @@ export async function listPlaylistVideos(apiKey, playlistId, pageToken = '', fet
     nextPageToken: String(data?.nextPageToken || '')
   };
 }
+
+/** Retrieve the creator's complete public description, not search snippets.
+ *  One videos.list request; no OAuth credentials or stream URLs. */
+export async function getPublicVideoDetails(apiKey, videoId, fetchImpl = fetch) {
+  const id = validVideoId(videoId);
+  const data = await youtubeKeyFetch(query('videos', [
+    ['part', 'snippet,contentDetails'],
+    ['id', id]
+  ]), apiKey, fetchImpl);
+  const item = (Array.isArray(data?.items) ? data.items : [])
+    .find(value => String(value?.id || '') === id);
+  if (!item) throw typedError('VIDEO_NOT_FOUND', 404);
+  const snippet = item.snippet || {};
+  const channelId = String(snippet.channelId || '');
+  return {
+    id,
+    kind: 'video',
+    title: String(snippet.title || ''),
+    channelTitle: String(snippet.channelTitle || ''),
+    channelId: /^UC[A-Za-z0-9_-]{22}$/.test(channelId) ? channelId : null,
+    description: String(snippet.description || ''),
+    publishedAt: String(snippet.publishedAt || ''),
+    durationSeconds: parseIsoDuration(item?.contentDetails?.duration)
+  };
+}

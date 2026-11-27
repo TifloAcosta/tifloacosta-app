@@ -23,7 +23,8 @@ import {
   unsubscribe,
   listMySubscriptions,
   searchVideos,
-  listPlaylistVideos
+  listPlaylistVideos,
+  getPublicVideoDetails
 } from './youtube-api.js';
 
 const PUBLIC_SEARCH_ORIGINS = new Set([
@@ -40,7 +41,7 @@ function corsHeaders(request, env) {
   const origin = request.headers.get('Origin') || '';
   const url = new URL(request.url);
   const allowed = origin === env.ALLOWED_ORIGIN ||
-    (['/search', '/channel-videos', '/playlist-items'].includes(url.pathname) && PUBLIC_SEARCH_ORIGINS.has(origin));
+    (['/search', '/channel-videos', '/playlist-items', '/video-details'].includes(url.pathname) && PUBLIC_SEARCH_ORIGINS.has(origin));
   if (!allowed) return {};
   return {
     'Access-Control-Allow-Origin': origin,
@@ -331,6 +332,20 @@ export async function handleRequest(request, env, deps = {}) {
       return redirect(oauthState?.nativeChallenge
         ? 'tifloacosta://youtube-auth?error=failed'
         : oauthFailure(env), [clearOauth]);
+    }
+  }
+
+  if (url.pathname === '/video-details' && request.method === 'GET') {
+    if (!searchOriginAllowed(request, env)) {
+      return json({ error: 'ORIGIN_NOT_ALLOWED' }, 403, cors);
+    }
+    try {
+      const details = await getPublicVideoDetails(
+        env.YOUTUBE_API_KEY, url.searchParams.get('videoId') || '', fetchImpl
+      );
+      return json(details, 200, { ...cors, 'Cache-Control': 'no-store' });
+    } catch (error) {
+      return errorResponse(error, cors);
     }
   }
 

@@ -110,10 +110,12 @@ final class VisualAuditTests: XCTestCase {
         let diagnostics = app.switches["Incluir diagnóstico básico"].firstMatch
         XCTAssertTrue(reveal(app, diagnostics))
         XCTAssertEqual(diagnostics.value as? String, "0")
-        capture(app, "18-report-diagnostics-off")
-        diagnostics.tap()
-        XCTAssertEqual(diagnostics.value as? String, "1")
         let summary = app.staticTexts.containing(NSPredicate(format: "label CONTAINS %@", "Catálogo. Recursos:")).firstMatch
+        XCTAssertFalse(summary.exists)
+        capture(app, "18-report-diagnostics-off")
+        diagnostics.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)).tap()
+        let enabled = XCTNSPredicateExpectation(predicate: NSPredicate(format: "value == %@", "1"), object: diagnostics)
+        XCTAssertEqual(XCTWaiter.wait(for: [enabled], timeout: 5), .completed)
         XCTAssertTrue(reveal(app, summary), "The optional catalog summary must appear after enabling diagnostics")
         capture(app, "19-report-diagnostics-on")
     }

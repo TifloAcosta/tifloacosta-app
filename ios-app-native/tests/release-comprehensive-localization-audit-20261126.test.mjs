@@ -121,3 +121,14 @@ test('release localization: audit interpolated SwiftUI controls and labels',()=>
   assert.match(account, /@State private var message: LocalizedStringKey\?/);
   assert.match(account, /if let message \{ Text\(message\)\.accessibilityAddTraits/);
 });
+
+
+test('localization simulator project supplies bundle versions for both application and share extension',()=>{
+  const spec=fs.readFileSync(path.join(root,'localization-audit-project.yml'),'utf8');
+  assert.match(spec,/^settings:\n  base:\n    MARKETING_VERSION: "[0-9.]+?"\n    CURRENT_PROJECT_VERSION: "[0-9]+"$/m);
+  for(const dir of [source,share]){
+    const plist=fs.readFileSync(path.join(dir,'Info.plist'),'utf8');
+    assert.match(plist,/<key>CFBundleVersion<\/key><string>\$\(CURRENT_PROJECT_VERSION\)<\/string>/);
+    assert.match(plist,/<key>CFBundleShortVersionString<\/key><string>\$\(MARKETING_VERSION\)<\/string>/);
+  }
+});

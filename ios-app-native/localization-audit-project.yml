@@ -1,6 +1,12 @@
 # Diagnostic-only project configuration, never used for TestFlight.
 include:
   - project.yml
+# Diagnostic simulator bundles must have matching, nonempty version metadata.
+# Distribution continues to supply its own version/build number independently.
+settings:
+  base:
+    MARKETING_VERSION: "1.7"
+    CURRENT_PROJECT_VERSION: "1"
 targets:
   TifloAcostaLocalizationUITests:
     type: bundle.ui-testing

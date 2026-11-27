@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-27",
+  "baseCommit": "ce669ccd7252cce797487963ff84b7e73607f75f",
+  "recovered": [
+    {
+      "sourceId": "1mFA1gRkxCYpc2Rtr-UIwZCZwB1HKs8tW",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Mucho más que pagar en la app Cartera, esto es todo lo que puedes hacer con Wallet.html"
+      ],
+      "path": "docs/es/reader-1mFA1gRkxCYpc2Rtr-UIwZCZwB1HKs8tW.html",
+      "resourceId": "es-1mFA1gRkxCYpc2Rtr-UIwZCZwB1HKs8tW",
+      "sourceBytes": 4070
+    },
+    {
+      "sourceId": "1u_G4lQjVSsKjnwJwILQsCVPFHzaqIPkC",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Trucos y consejos para mejorar el rendimiento de tu iPhone.html"
+      ],
+      "path": "docs/es/reader-1u_G4lQjVSsKjnwJwILQsCVPFHzaqIPkC.html",
+      "resourceId": "es-1u_G4lQjVSsKjnwJwILQsCVPFHzaqIPkC",
+      "sourceBytes": 7763
+    },
+    {
+      "sourceId": "1H_cg6iIucr1yb1QUe1L8M3yjzqrgm5d9",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Llevas toda la vida cargando mal tu iPhone. 6 útiles trucos para cargar su batería.html"
+      ],
+      "path": "docs/es/reader-1H_cg6iIucr1yb1QUe1L8M3yjzqrgm5d9.html",
+      "resourceId": "es-1H_cg6iIucr1yb1QUe1L8M3yjzqrgm5d9",
+      "sourceBytes": 5276
+    },
+    {
+      "sourceId": "1qAS_VZ5FcqqGBCPNGonHfNEoQ_lUPipV",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "19 recomendaciones para que la batería de tu iPhone dure más.html"
+      ],
+      "path": "docs/es/reader-1qAS_VZ5FcqqGBCPNGonHfNEoQ_lUPipV.html",
+      "resourceId": "es-1qAS_VZ5FcqqGBCPNGonHfNEoQ_lUPipV",
+      "sourceBytes": 9438
+    },
+    {
+      "sourceId": "1j3mWnMgPuyYTOLN8-OXwCYAn8vyzpnMo",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Diferencias de Siri con y sin Apple Intelligence.html"
+      ],
+      "path": "docs/es/reader-1j3mWnMgPuyYTOLN8-OXwCYAn8vyzpnMo.html",
+      "resourceId": "es-1j3mWnMgPuyYTOLN8-OXwCYAn8vyzpnMo",
+      "sourceBytes": 5250
+    },
+    {
+      "sourceId": "16BwGjKRyUHBDu29--xAXQ_4Nuljh4BK6",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Truco para limpiar nuestro teléfono de polvo y porquerías acumuladas.html"
+      ],
+      "path": "docs/es/reader-16BwGjKRyUHBDu29--xAXQ_4Nuljh4BK6.html",
+      "resourceId": "es-16BwGjKRyUHBDu29--xAXQ_4Nuljh4BK6",
+      "sourceBytes": 4101
+    },
+    {
+      "sourceId": "1MJdkJfLBfBkk6fi4tNfEreBzfIAwjjAp",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo usa el iPhone alguien que no lo ve. guía paralela para videntes y usuarios de VoiceOver”.html"
+      ],
+      "path": "docs/es/reader-1MJdkJfLBfBkk6fi4tNfEreBzfIAwjjAp.html",
+      "resourceId": "es-1MJdkJfLBfBkk6fi4tNfEreBzfIAwjjAp",
+      "sourceBytes": 9451
+    }
+  ]
+}

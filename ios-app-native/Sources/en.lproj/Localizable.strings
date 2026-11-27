@@ -54,7 +54,7 @@
 "Idioma de la aplicación" = "App language";
 "Inglés" = "English";
 "Inicio" = "Home";
-"Interfaz" = "Appearance";
+"Interfaz" = "Interface";
 "Introduce tu búsqueda" = "Enter your search";
 "La actualización de noticias, vídeos, podcasts y recursos necesita conexión a Internet. Si abres enlaces externos, se aplican las condiciones y políticas de sus respectivos servicios." = "Updating news, videos, podcasts, and resources requires an Internet connection. External links are subject to the respective services' terms and privacy policies.";
 "La interfaz respeta el modo claro u oscuro y el contraste del sistema. El aspecto también puede ajustarse desde Configuración." = "The interface respects system light/dark mode and contrast. Appearance can also be adjusted in Settings.";
@@ -416,8 +416,8 @@
 "Doble toque para abrir el vídeo. Acciones: Abrir en YouTube y Compartir." = "Double-tap to open the video. Actions: Open in YouTube and Share.";
 "Ajusta cada signo con deslizamientos arriba o abajo. Intervalos de 0 a 1,50 segundos, en pasos de 0,05." = "Swipe up or down to adjust each pause in 0.05-second steps, from 0 to 1.50 seconds.";
 "Las pausas se aplican a la lectura con voces del sistema. La duración natural depende de la voz. No modifican los audiolibros grabados ni garantizan los mismos tiempos en Gemini o Phonon." = "Pauses affect system speech only. They do not change recorded audiobooks or guarantee identical pauses in Gemini or Phonon.";
-"La voz seleccionada se utilizará según el ámbito de estos ajustes. La conexión de Gemini se configura en Motores externos." = "The selected voice applies to these settings. Connect Gemini under External engines.";
-"Gemini necesita una clave API guardada en Motores externos antes de reproducir." = "Gemini needs an API key saved in External engines before playback.";
+"La voz seleccionada se utilizará según el ámbito de estos ajustes. La conexión de Gemini se configura en Motores externos." = "The selected voice applies to these settings. Connect Gemini under External voice engines.";
+"Gemini necesita una clave API guardada en Motores externos antes de reproducir." = "Gemini needs an API key saved in External voice engines before playback.";
 "La disponibilidad de Phonon depende de tener instalado un motor compatible dentro de TifloLector." = "Phonon is available only when a compatible voice engine is installed in TifloReader.";
 "Permitir mi Voz personal" = "Allow my Personal Voice";
 "Solicita permiso al sistema para utilizar una Voz personal ya creada." = "Request access to a Personal Voice already created on this iPhone.";
@@ -559,7 +559,7 @@
 "Doble toque para leer. Acción: Quitar de favoritos." = "Double-tap to read. Action: Remove from favorites.";
 "Doble toque para reproducir en TifloAcosta. Acciones: Abrir en YouTube y Quitar de favoritos." = "Double-tap to play in TifloAcosta. Actions: Open in YouTube and Remove from favorites.";
 "Explica qué sucede y qué debería ocurrir." = "Describe what happens and what you expected.";
-"Se incluirán versión de la app y de iOS, tipo genérico de dispositivo, estado de VoiceOver, ajustes de movimiento y texto en negrita y resumen del catálogo. Todo permanece en el dispositivo hasta que decidas compartirlo." = "The report can include app and iOS versions, general device type, VoiceOver state, motion and bold-text settings, and catalog summary. It stays on your device until you share it.";
+"Se incluirán versión de la app y de iOS, tipo genérico de dispositivo, estado de VoiceOver, ajustes de movimiento y texto en negrita y resumen del catálogo. Todo permanece en el dispositivo hasta que decidas compartirlo." = "The report will include app and iOS versions, general device type, VoiceOver state, motion and bold-text settings, and a catalog summary. Everything stays on your device until you decide to share it.";
 "No se adjuntan documentos, historiales, contraseñas, claves de API ni datos de cuentas. Revisa tu texto antes de compartirlo." = "Documents, histories, passwords, API keys and account details are not attached. Review your text before sharing.";
 "El informe solo se comparte cuando eliges una aplicación y confirmas el envío. No se envía automáticamente." = "The report is shared only after you choose an app and confirm. It is never sent automatically.";
 "Todavía no hay contenidos guardados para leer después." = "No items saved to read later.";
@@ -827,7 +827,7 @@
 "Presentación de lectura" = "Reading presentation";
 "Voz: el foco puede comenzar en Reproducir. Visual: lectura manual del texto. Braille: lectura manual del mismo texto con la línea braille conectada a VoiceOver. Los tres modos conservan posición y marcas." = "Voice: focus can start on Play. Visual: read the text manually. Braille: read the same text manually using a braille display connected to VoiceOver. All three modes retain your position and bookmarks.";
 // Beta: modos de lectura y acciones accesibles.
-"Configura Phonon en Motores externos antes de utilizarlo." = "Configure Phonon in External Engines before using it.";
+"Configura Phonon en Motores externos antes de utilizarlo." = "Configure Phonon in External voice engines before using it.";
 "Cómo instalar más voces del sistema" = "How to install more system voices";
 "Configurar línea braille en VoiceOver" = "Configure braille display in VoiceOver";
 "Abre Ajustes del iPhone. La línea braille se configura en Accesibilidad, VoiceOver, Braille." = "Opens iPhone Settings. Configure the braille display in Accessibility, VoiceOver, Braille.";
@@ -838,7 +838,7 @@
 "No se conserva el documento original para compartirlo." = "The original document is not available for sharing.";
 "El paquete DAISY completo no está disponible como ZIP; no se compartirá un archivo incompleto." = "The full DAISY package is not available as a ZIP; an incomplete file will not be shared.";
 "Esta obra no contiene texto que se pueda convertir a voz." = "This document has no text that can be converted to speech.";
-"El motor seleccionado debe prepararse en Motores externos." = "The selected engine must be set up under External Engines.";
+"El motor seleccionado debe prepararse en Motores externos." = "The selected engine must be set up under External voice engines.";
 "Abrir Mi Música en TifloAcosta" = "Open My Music in TifloAcosta";
 "Abre la biblioteca musical de TifloAcosta." = "Opens the TifloAcosta music library.";
 "Abrir Mi Música" = "Open My Music";
@@ -989,9 +989,9 @@
 "Eliminado de Favoritos: %@" = "Removed from Favorites: %@";
 "Todavía no hay un libro abierto anteriormente para continuar." = "No previously opened book to resume.";
 "Continuando %@ desde la posición guardada." = "Resuming %@ from the saved position.";
-"Configura la clave Gemini en Motores externos." = "Set up the Gemini key under External voices.";
+"Configura la clave Gemini en Motores externos." = "Set up the Gemini key under External voice engines.";
 "Generando el primer fragmento con Gemini. La reproducción comenzará cuando Google devuelva el audio." = "Generating the first segment with Gemini. Playback starts when Google returns the audio.";
-"Instala el motor y modelo Phonon en Motores externos." = "Install the Phonon engine and model under External voices.";
+"Instala el motor y modelo Phonon en Motores externos." = "Install the Phonon engine and model under External voice engines.";
 "Faltan archivos de audio de esta obra." = "Audio files are missing from this work.";
 "No se pudo reproducir: %@" = "Could not play: %@";
 "La pista indicada no está disponible." = "The selected track is unavailable.";
@@ -1564,7 +1564,7 @@
 "Filtrar documentos" = "Filter documents";
 "El nombre de la carpeta está vacío, repetido o es demasiado largo." = "The folder name is empty, already used, or too long.";
 "No hay documentos seleccionados para mover." = "No documents selected to move.";
-"No se pudo crear la carpeta. Comprueba que el nombre no esté vacío, repetido o sea demasiado largo." = "Could not create the folder. Check that the name is not empty, already used, or too long.";
+"No se pudo crear la carpeta. Comprueba que el nombre no esté vacío, repetido o sea demasiado largo." = "Could not create the folder. Make sure the name is not empty, is unique, and is not too long.";
 "Vídeo no disponible." = "Video unavailable.";
 "No se pudo reproducir el vídeo con el reproductor de Apple." = "Could not play the video with Apple's player.";
 "No disponible" = "Unavailable";
@@ -1687,7 +1687,7 @@
 "Latinoamérica" = "Latin America";
 "Información y agradecimientos" = "Information and acknowledgements";
 "Entrar en Audiocinemateca" = "Enter Audiocinemateca";
-"Agradecemos a %@ su predisposición y colaboración con Multicines Accesibles." = "Thank you to %@ for their willingness to help and collaboration with Multicines Accesibles.";
+"Agradecemos a %@ su predisposición y colaboración con Multicines Accesibles." = "Thank you to %@ for their willingness to help and collaboration with Accessible Cinemas.";
 "Universo Audesc" = "Universo Audesc";
 
 // Project Gutenberg connection status
@@ -1778,7 +1778,7 @@
 "El modelo supera el tamaño permitido." = "The model exceeds the allowed size.";
 "Solo se admite el modelo oficial Phonon 31m en inglés." = "Only the official English Phonon 31m model is supported.";
 "El motor Phonon nativo no está incluido en esta compilación." = "The native Phonon engine is not included in this build.";
-"Instala primero el modelo Phonon desde Motores externos." = "Install the Phonon model from External engines first.";
+"Instala primero el modelo Phonon desde Motores externos." = "Install the Phonon model from External voice engines first.";
 "El modelo Phonon instalado no admite ese idioma." = "The installed Phonon model does not support that language.";
 "Phonon no ha generado sonido." = "Phonon did not generate sound.";
 "Preparando muestra Phonon." = "Preparing Phonon sample.";

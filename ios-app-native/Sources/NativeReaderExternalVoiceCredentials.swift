@@ -282,7 +282,7 @@ struct NativeReaderExternalVoiceDetailScreen: View {
                 Link("Modelos Phonon", destination: URL(string: "https://huggingface.co/gradium")!)
                 Text("El modelo Core ML debe estar exportado para iPhone y contener bundle.json. Un checkpoint Android o un ZIP de voz aislada no sirve para iOS.")
                 if #available(iOS 18, *) {
-                    Text(phononInstalled ? "Modelo inglés instalado" : "Modelo inglés sin instalar")
+                    Text(MusicLocalized.message(phononInstalled ? "Modelo inglés instalado" : "Modelo inglés sin instalar"))
                     Button("Descargar modelo Phonon inglés") {
                         guard !phononBusy else { return }
                         phononBusy = true
@@ -367,7 +367,7 @@ struct NativeReaderExternalVoiceDetailScreen: View {
             }
             if provider == .gemini {
                 Section("Gemini") {
-                Text(hasGeminiKey ? "Clave guardada" : "Sin clave")
+                Text(MusicLocalized.message(hasGeminiKey ? "Clave guardada" : "Sin clave"))
                     .accessibilityAddTraits(.updatesFrequently)
                 Button("Crear clave API con guía") { showGeminiGuide = true }
                     .accessibilityHint("Abre instrucciones accesibles, Google AI Studio y permite volver a pegar la clave.")

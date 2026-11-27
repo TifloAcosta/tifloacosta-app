@@ -109,8 +109,9 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
     }
 
     private func announce(_ text: String) {
-        message = text
-        UIAccessibility.post(notification: .announcement, argument: text)
+        let localized = MusicLocalized.message(text)
+        message = localized
+        UIAccessibility.post(notification: .announcement, argument: localized)
     }
 
     private func errorText(_ code: String) -> String {
@@ -367,7 +368,7 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
             subscriptions += page.items.filter { !previous.contains($0.id) }
             subscriptionsNextPageToken = page.nextPageToken
             if subscriptions.isEmpty {
-                subscriptionsMessage = "No hay canales suscritos en esta cuenta."
+                subscriptionsMessage = MusicLocalized.message("No hay canales suscritos en esta cuenta.")
             }
         } catch {
             let code = (error as? YouTubeFailure)?.code ?? "NETWORK"

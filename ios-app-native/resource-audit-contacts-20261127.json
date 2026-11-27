@@ -1,0 +1,150 @@
+{
+  "date": "2026-11-27",
+  "collection": [
+    "Contactos de interés por países"
+  ],
+  "sources": 20,
+  "editorialPrivacyReview": "Full visible document text and links inspected: guides to corporate support for Meta, Apple and Amazon, not personal address books. No private personal contact data found. Original source documents retained. Phone numbers and service availability not independently revalidated; editorial freshness check remains open.",
+  "documents": [
+    {
+      "sourceId": "11AXwJWjmaHQOIeXVhBIccw5EXlGAsunQ",
+      "gitBlob": "fdd66daff6c1fc69d32f84d3c3a5fc548b288485",
+      "country": "Venezuela",
+      "resourceId": "es-11AXwJWjmaHQOIeXVhBIccw5EXlGAsunQ",
+      "path": "docs/es/reader-11AXwJWjmaHQOIeXVhBIccw5EXlGAsunQ.html"
+    },
+    {
+      "sourceId": "1A1pNUlPQCJWlsIegp4cOVplhU82mxGXy",
+      "gitBlob": "32947388865acac86d28b593ad39cebff0202473",
+      "country": "Uruguay",
+      "resourceId": "es-1A1pNUlPQCJWlsIegp4cOVplhU82mxGXy",
+      "path": "docs/es/reader-1A1pNUlPQCJWlsIegp4cOVplhU82mxGXy.html"
+    },
+    {
+      "sourceId": "1AuWRHMhy75V-SdnixOc9G9K-PJotfQZW",
+      "gitBlob": "c1fc86faeb98821bdca6e45e880cd7bfc36e0c9c",
+      "country": "la República Dominicana",
+      "resourceId": "es-1AuWRHMhy75V-SdnixOc9G9K-PJotfQZW",
+      "path": "docs/es/reader-1AuWRHMhy75V-SdnixOc9G9K-PJotfQZW.html"
+    },
+    {
+      "sourceId": "12mxIzxIYMCw3n7jaoLlshRvv7nXJYMqh",
+      "gitBlob": "94dd7bfe61f6055bb22ca454a5e1f925e3790ffd",
+      "country": "Perú",
+      "resourceId": "es-12mxIzxIYMCw3n7jaoLlshRvv7nXJYMqh",
+      "path": "docs/es/reader-12mxIzxIYMCw3n7jaoLlshRvv7nXJYMqh.html"
+    },
+    {
+      "sourceId": "1h43UfeZSSy5LEMdTgNFpEjVZI50kUkmS",
+      "gitBlob": "85954a2e2658b849ca7abeb17c373f68e0dd00d6",
+      "country": "Paraguay",
+      "resourceId": "es-1h43UfeZSSy5LEMdTgNFpEjVZI50kUkmS",
+      "path": "docs/es/reader-1h43UfeZSSy5LEMdTgNFpEjVZI50kUkmS.html"
+    },
+    {
+      "sourceId": "1JYEbarhBYjE2Bvdsp9jJSMqvhS7WIy_H",
+      "gitBlob": "57d1510d01edf470b4bfadf4615843f2baa7e63f",
+      "country": "Panamá",
+      "resourceId": "es-1JYEbarhBYjE2Bvdsp9jJSMqvhS7WIy_H",
+      "path": "docs/es/reader-1JYEbarhBYjE2Bvdsp9jJSMqvhS7WIy_H.html"
+    },
+    {
+      "sourceId": "1z_T0ahNN0V4emq2MQzaXORn17snoHLLK",
+      "gitBlob": "a6106bfe37d64b7d63d1ba0c2d5967a59806c235",
+      "country": "Nicaragua",
+      "resourceId": "es-1z_T0ahNN0V4emq2MQzaXORn17snoHLLK",
+      "path": "docs/es/reader-1z_T0ahNN0V4emq2MQzaXORn17snoHLLK.html"
+    },
+    {
+      "sourceId": "1xeYgdBmczOrxr4yTer0jSJnKaGnwktAd",
+      "gitBlob": "e5bc1b4e8290451cb7f6db343fa8af23ed79d5f0",
+      "country": "México",
+      "resourceId": "es-1xeYgdBmczOrxr4yTer0jSJnKaGnwktAd",
+      "path": "docs/es/reader-1xeYgdBmczOrxr4yTer0jSJnKaGnwktAd.html"
+    },
+    {
+      "sourceId": "1YUA5slmc1d4as_QUArESgwnFWIXuv-I2",
+      "gitBlob": "02628e97bb68f2401c14137bcc701b386e1fd7bb",
+      "country": "Honduras",
+      "resourceId": "es-1YUA5slmc1d4as_QUArESgwnFWIXuv-I2",
+      "path": "docs/es/reader-1YUA5slmc1d4as_QUArESgwnFWIXuv-I2.html"
+    },
+    {
+      "sourceId": "1xtVQOwQKDIarRp282Swm__JcHt8eIqDo",
+      "gitBlob": "ec65aa53ad15b08b2e2ee2dfeaca42b6eaea9c8b",
+      "country": "Guatemala",
+      "resourceId": "es-1xtVQOwQKDIarRp282Swm__JcHt8eIqDo",
+      "path": "docs/es/reader-1xtVQOwQKDIarRp282Swm__JcHt8eIqDo.html"
+    },
+    {
+      "sourceId": "1WbyUVmDQIvlZLCoGzyBC7kbqMmmjYZuZ",
+      "gitBlob": "79c94251c8229fba423c1150ed47d50ebd01cac5",
+      "country": "España",
+      "resourceId": "es-1WbyUVmDQIvlZLCoGzyBC7kbqMmmjYZuZ",
+      "path": "docs/es/reader-1WbyUVmDQIvlZLCoGzyBC7kbqMmmjYZuZ.html"
+    },
+    {
+      "sourceId": "1gboZpJKDn6Yv0x-CFDRUSAreh7UrbTeL",
+      "gitBlob": "aa490f526dc31358b3f2a83a77e769903893bea6",
+      "country": "El Salvador",
+      "resourceId": "es-1gboZpJKDn6Yv0x-CFDRUSAreh7UrbTeL",
+      "path": "docs/es/reader-1gboZpJKDn6Yv0x-CFDRUSAreh7UrbTeL.html"
+    },
+    {
+      "sourceId": "1Ebg9RNpnp5q5oRa2Hc7RaGt2wBv2zTH1",
+      "gitBlob": "0e462ebd17cccfed18f32475cdc579d5d1359f0d",
+      "country": "Ecuador",
+      "resourceId": "es-1Ebg9RNpnp5q5oRa2Hc7RaGt2wBv2zTH1",
+      "path": "docs/es/reader-1Ebg9RNpnp5q5oRa2Hc7RaGt2wBv2zTH1.html"
+    },
+    {
+      "sourceId": "17iHCogpyhUyLCtFjD0o4EIhY_zwArXP_",
+      "gitBlob": "e6c6cb28be79a042637d712dc07cde5f0bf68aab",
+      "country": "Cuba",
+      "resourceId": "es-17iHCogpyhUyLCtFjD0o4EIhY_zwArXP_",
+      "path": "docs/es/reader-17iHCogpyhUyLCtFjD0o4EIhY_zwArXP_.html"
+    },
+    {
+      "sourceId": "1gYHMNXvWf7CVoKPFUNfxE8lZyU-cJnyz",
+      "gitBlob": "0c1922a5749ec6209bda4c4481fcec64a68ad7b0",
+      "country": "Costa Rica",
+      "resourceId": "es-1gYHMNXvWf7CVoKPFUNfxE8lZyU-cJnyz",
+      "path": "docs/es/reader-1gYHMNXvWf7CVoKPFUNfxE8lZyU-cJnyz.html"
+    },
+    {
+      "sourceId": "17cz1tB366lpHPDfoTPguN1wK467lkpDz",
+      "gitBlob": "5e8a9a3bc77e5362b9cb708fd76c396ecde03f27",
+      "country": "Colombia",
+      "resourceId": "es-17cz1tB366lpHPDfoTPguN1wK467lkpDz",
+      "path": "docs/es/reader-17cz1tB366lpHPDfoTPguN1wK467lkpDz.html"
+    },
+    {
+      "sourceId": "1VB4amy43-oNxgZHMLI_GnFke7bmh7UaV",
+      "gitBlob": "73b9806d8df0bdb991491b04e9f9a3c21d6c04cc",
+      "country": "Chile",
+      "resourceId": "es-1VB4amy43-oNxgZHMLI_GnFke7bmh7UaV",
+      "path": "docs/es/reader-1VB4amy43-oNxgZHMLI_GnFke7bmh7UaV.html"
+    },
+    {
+      "sourceId": "122TQ9MALt6HK4KvbxuN4sVrPm9d0d151",
+      "gitBlob": "d7ce5d2128f70a0cdfcad3d1ece1716e2dfdc939",
+      "country": "Brasil",
+      "resourceId": "es-122TQ9MALt6HK4KvbxuN4sVrPm9d0d151",
+      "path": "docs/es/reader-122TQ9MALt6HK4KvbxuN4sVrPm9d0d151.html"
+    },
+    {
+      "sourceId": "12rWov4qnOWyrvTnemqauEsxLWJAPy59r",
+      "gitBlob": "9bffba7e3fa310ced58e5ff92e0b1e891a8c8bdc",
+      "country": "Bolivia",
+      "resourceId": "es-12rWov4qnOWyrvTnemqauEsxLWJAPy59r",
+      "path": "docs/es/reader-12rWov4qnOWyrvTnemqauEsxLWJAPy59r.html"
+    },
+    {
+      "sourceId": "1mxIFgj-A6aRmhD9z7z3-OVndndleClEd",
+      "gitBlob": "b8c2dac45c1c33ee3fe8150fe698aa5684a52cfd",
+      "country": "Argentina",
+      "resourceId": "es-1mxIFgj-A6aRmhD9z7z3-OVndndleClEd",
+      "path": "docs/es/reader-1mxIFgj-A6aRmhD9z7z3-OVndndleClEd.html"
+    }
+  ]
+}

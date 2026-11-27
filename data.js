@@ -3557,5 +3557,205 @@ window.TIFLO_RESOURCES = [
     "url": "https://tifloacosta.com/docs/es/reader-1lNvxuYJe5jlARv6Bv9JRf2eQZLJw1oOb.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1lNvxuYJe5jlARv6Bv9JRf2eQZLJw1oOb.html",
     "searchText": "RSS en español para quienes viven en cualquier parte del mundo BBC Mundo DW Español France 24 Euronews Naciones Unidas Global Voices Agencia SINC WIRED Xataka Applesfera"
+  },
+  {
+    "id": "es-11AXwJWjmaHQOIeXVhBIccw5EXlGAsunQ",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde Venezuela",
+    "url": "https://tifloacosta.com/docs/es/reader-11AXwJWjmaHQOIeXVhBIccw5EXlGAsunQ.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-11AXwJWjmaHQOIeXVhBIccw5EXlGAsunQ.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde Venezuela contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-1A1pNUlPQCJWlsIegp4cOVplhU82mxGXy",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde Uruguay",
+    "url": "https://tifloacosta.com/docs/es/reader-1A1pNUlPQCJWlsIegp4cOVplhU82mxGXy.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1A1pNUlPQCJWlsIegp4cOVplhU82mxGXy.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde Uruguay contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-1AuWRHMhy75V-SdnixOc9G9K-PJotfQZW",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde la República Dominicana",
+    "url": "https://tifloacosta.com/docs/es/reader-1AuWRHMhy75V-SdnixOc9G9K-PJotfQZW.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1AuWRHMhy75V-SdnixOc9G9K-PJotfQZW.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde la República Dominicana contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-12mxIzxIYMCw3n7jaoLlshRvv7nXJYMqh",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde Perú",
+    "url": "https://tifloacosta.com/docs/es/reader-12mxIzxIYMCw3n7jaoLlshRvv7nXJYMqh.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-12mxIzxIYMCw3n7jaoLlshRvv7nXJYMqh.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde Perú contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-1h43UfeZSSy5LEMdTgNFpEjVZI50kUkmS",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde Paraguay",
+    "url": "https://tifloacosta.com/docs/es/reader-1h43UfeZSSy5LEMdTgNFpEjVZI50kUkmS.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1h43UfeZSSy5LEMdTgNFpEjVZI50kUkmS.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde Paraguay contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-1JYEbarhBYjE2Bvdsp9jJSMqvhS7WIy_H",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde Panamá",
+    "url": "https://tifloacosta.com/docs/es/reader-1JYEbarhBYjE2Bvdsp9jJSMqvhS7WIy_H.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1JYEbarhBYjE2Bvdsp9jJSMqvhS7WIy_H.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde Panamá contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-1z_T0ahNN0V4emq2MQzaXORn17snoHLLK",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde Nicaragua",
+    "url": "https://tifloacosta.com/docs/es/reader-1z_T0ahNN0V4emq2MQzaXORn17snoHLLK.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1z_T0ahNN0V4emq2MQzaXORn17snoHLLK.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde Nicaragua contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-1xeYgdBmczOrxr4yTer0jSJnKaGnwktAd",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde México",
+    "url": "https://tifloacosta.com/docs/es/reader-1xeYgdBmczOrxr4yTer0jSJnKaGnwktAd.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1xeYgdBmczOrxr4yTer0jSJnKaGnwktAd.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde México contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-1YUA5slmc1d4as_QUArESgwnFWIXuv-I2",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde Honduras",
+    "url": "https://tifloacosta.com/docs/es/reader-1YUA5slmc1d4as_QUArESgwnFWIXuv-I2.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1YUA5slmc1d4as_QUArESgwnFWIXuv-I2.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde Honduras contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-1xtVQOwQKDIarRp282Swm__JcHt8eIqDo",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde Guatemala",
+    "url": "https://tifloacosta.com/docs/es/reader-1xtVQOwQKDIarRp282Swm__JcHt8eIqDo.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1xtVQOwQKDIarRp282Swm__JcHt8eIqDo.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde Guatemala contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-1WbyUVmDQIvlZLCoGzyBC7kbqMmmjYZuZ",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde España",
+    "url": "https://tifloacosta.com/docs/es/reader-1WbyUVmDQIvlZLCoGzyBC7kbqMmmjYZuZ.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1WbyUVmDQIvlZLCoGzyBC7kbqMmmjYZuZ.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde España contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-1gboZpJKDn6Yv0x-CFDRUSAreh7UrbTeL",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde El Salvador",
+    "url": "https://tifloacosta.com/docs/es/reader-1gboZpJKDn6Yv0x-CFDRUSAreh7UrbTeL.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1gboZpJKDn6Yv0x-CFDRUSAreh7UrbTeL.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde El Salvador contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-1Ebg9RNpnp5q5oRa2Hc7RaGt2wBv2zTH1",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde Ecuador",
+    "url": "https://tifloacosta.com/docs/es/reader-1Ebg9RNpnp5q5oRa2Hc7RaGt2wBv2zTH1.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1Ebg9RNpnp5q5oRa2Hc7RaGt2wBv2zTH1.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde Ecuador contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-17iHCogpyhUyLCtFjD0o4EIhY_zwArXP_",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde Cuba",
+    "url": "https://tifloacosta.com/docs/es/reader-17iHCogpyhUyLCtFjD0o4EIhY_zwArXP_.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-17iHCogpyhUyLCtFjD0o4EIhY_zwArXP_.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde Cuba contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-1gYHMNXvWf7CVoKPFUNfxE8lZyU-cJnyz",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde Costa Rica",
+    "url": "https://tifloacosta.com/docs/es/reader-1gYHMNXvWf7CVoKPFUNfxE8lZyU-cJnyz.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1gYHMNXvWf7CVoKPFUNfxE8lZyU-cJnyz.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde Costa Rica contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-17cz1tB366lpHPDfoTPguN1wK467lkpDz",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde Colombia",
+    "url": "https://tifloacosta.com/docs/es/reader-17cz1tB366lpHPDfoTPguN1wK467lkpDz.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-17cz1tB366lpHPDfoTPguN1wK467lkpDz.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde Colombia contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-1VB4amy43-oNxgZHMLI_GnFke7bmh7UaV",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde Chile",
+    "url": "https://tifloacosta.com/docs/es/reader-1VB4amy43-oNxgZHMLI_GnFke7bmh7UaV.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1VB4amy43-oNxgZHMLI_GnFke7bmh7UaV.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde Chile contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-122TQ9MALt6HK4KvbxuN4sVrPm9d0d151",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde Brasil",
+    "url": "https://tifloacosta.com/docs/es/reader-122TQ9MALt6HK4KvbxuN4sVrPm9d0d151.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-122TQ9MALt6HK4KvbxuN4sVrPm9d0d151.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde Brasil contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-12rWov4qnOWyrvTnemqauEsxLWJAPy59r",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde Bolivia",
+    "url": "https://tifloacosta.com/docs/es/reader-12rWov4qnOWyrvTnemqauEsxLWJAPy59r.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-12rWov4qnOWyrvTnemqauEsxLWJAPy59r.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde Bolivia contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-1mxIFgj-A6aRmhD9z7z3-OVndndleClEd",
+    "lang": "es",
+    "category": "Contactos de interés por países",
+    "folderPath": [],
+    "title": "Contacto con Meta, Apple y Amazon desde Argentina",
+    "url": "https://tifloacosta.com/docs/es/reader-1mxIFgj-A6aRmhD9z7z3-OVndndleClEd.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1mxIFgj-A6aRmhD9z7z3-OVndndleClEd.html",
+    "searchText": "Contacto con Meta, Apple y Amazon desde Argentina contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
   }
 ];

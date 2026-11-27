@@ -501,16 +501,28 @@ final class LocalizationNavigationTests: XCTestCase {
 
         let review = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "tiflo.backup.review.")).firstMatch
         XCTAssertTrue(reveal(app, review))
+        XCTAssertTrue(review.isEnabled)
         review.tap()
+        let reportStatus = app.staticTexts.matching(NSPredicate(format: "label == %@", "Informe preparado. Todavía no se han modificado los datos.")).firstMatch
+        let idleAfterReview = XCTNSPredicateExpectation(predicate: NSPredicate(format: "enabled == true"), object: close)
+        XCTAssertEqual(XCTWaiter.wait(for: [idleAfterReview], timeout: 60), .completed)
+        guard reveal(app, reportStatus) else {
+            let actualStatus = app.staticTexts.matching(identifier: "tiflo.backup.status").firstMatch
+            XCTFail("Restore preview did not report success. Status: " + (actualStatus.exists ? actualStatus.label : "not exposed"))
+            return
+        }
+        let explanation = app.staticTexts.matching(NSPredicate(format: "label == %@", "Todavía no se han modificado tus datos. Los elementos existentes se conservarán.")).firstMatch
+        XCTAssertTrue(reveal(app, explanation))
         let confirm = app.buttons.matching(identifier: "tiflo.backup.restore.confirm").firstMatch
-        XCTAssertTrue(confirm.waitForExistence(timeout: 60))
         XCTAssertTrue(reveal(app, confirm))
-        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label == %@", "Todavía no se han modificado tus datos. Los elementos existentes se conservarán.")).firstMatch.exists)
+        XCTAssertTrue(confirm.isEnabled)
+        XCTAssertFalse(app.buttons.matching(identifier: "tiflo.backup.create.local").firstMatch.exists)
         // Cancel the read-only preview. Never press the restore confirmation.
         let cancel = app.buttons.matching(identifier: "tiflo.backup.restore.cancel").firstMatch
         XCTAssertTrue(reveal(app, cancel))
         cancel.tap()
         XCTAssertFalse(confirm.exists)
+        XCTAssertTrue(reveal(app, local))
         XCTAssertTrue(close.isEnabled)
         close.tap()
     }

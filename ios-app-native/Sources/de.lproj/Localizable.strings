@@ -593,7 +593,7 @@
 "Todavía no hay contenidos guardados para leer después." = "Noch keine Inhalte für später gespeichert.";
 "No hay contenidos recientes disponibles en el catálogo." = "Keine zuletzt angesehenen Inhalte verfügbar.";
 "Compartir archivo" = "Datei teilen";
-"Eliminar de Recibidos" = "Aus Empfangenen Dateien löschen";
+"Eliminar de Recibidos" = "Aus „Empfangen“ löschen";
 "Filtrar contenidos multimedia" = "Medieninhalte filtern";
 "Buscar podcasts y vídeos" = "Podcasts und Videos suchen";
 "ISBN" = "ISBN";
@@ -1066,7 +1066,7 @@
 "Pódcast en reproducción: %@" = "Podcast wird abgespielt: %@";
 "DAISY 2.02 (audio)" = "DAISY 2.02 (Audio)";
 "DAISY 2.02 de audio: conserva la voz grabada y permite la navegación por capítulos. No incluye el texto sincronizado." = "DAISY 2.02 mit Audio: Bewahrt die aufgenommene Stimme und ermöglicht die Kapitelnavigation. Enthält keinen synchronisierten Text.";
-"Encabezado: %@. Pulsa Reproducir para escuchar." = "Überschrift: %@. Zum Anhören Wiedergabe wählen.";
+"Encabezado: %@. Pulsa Reproducir para escuchar." = "Überschrift: %@. Wähle „Wiedergeben“, um zuzuhören.";
 "No hay más encabezados en esa dirección." = "Keine weiteren Überschriften in dieser Richtung.";
 "Modo de navegación: %@" = "Navigationsmodus: %@";
 "Modo anterior no disponible. Modo de navegación: %@" = "Vorheriger Modus nicht verfügbar. Navigationsmodus: %@";
@@ -1200,7 +1200,7 @@
 "Vibración en avisos" = "Vibration bei Hinweisen";
 
 // Tipo de punto DAISY y acción accesible, sin iniciar audio.
-"%@: %@. Pulsa Reproducir para escuchar." = "%@: %@. Zum Anhören Wiedergabe drücken.";
+"%@: %@. Pulsa Reproducir para escuchar." = "%@: %@. Wähle „Wiedergeben“, um zuzuhören.";
 
 "Compartir DAISY original" = "Original-DAISY teilen";
 "Convertir texto a MP3 o DAISY con voz" = "Text mit einer Stimme in MP3 oder DAISY umwandeln";
@@ -1213,7 +1213,7 @@
 
 // Reader opening, progress and direct return to beginning.
 "Volver al principio" = "Zum Anfang";
-"Posición inicial. Pulsa Reproducir para comenzar." = "Am Anfang. Zum Starten auf Wiedergabe tippen.";
+"Posición inicial. Pulsa Reproducir para comenzar." = "Am Anfang. Tippe zum Starten auf „Wiedergeben“.";
 "Pista %d de %d, %d por ciento de esta pista." = "Titel %d von %d, %d Prozent dieses Titels.";
 "Progreso guardado: %d por ciento." = "Gespeicherter Fortschritt: %d Prozent.";
 "Sitúa la lectura al principio sin reproducir." = "Zum Anfang springen, ohne abzuspielen.";
@@ -1748,7 +1748,7 @@
 "No se pudo consultar Audius. Comprueba la conexión e inténtalo de nuevo." = "Audius konnte nicht erreicht werden. Prüfe deine Verbindung und versuche es erneut.";
 "Esta pista no tiene un identificador compatible." = "Dieser Titel hat keine kompatible Kennung.";
 "No se pudo iniciar la canción: %@" = "Der Titel konnte nicht gestartet werden: %@";
-"Pega un enlace HTTPS válido y pulsa Analizar enlace." = "Füge einen gültigen HTTPS-Link ein und wähle Link analysieren.";
+"Pega un enlace HTTPS válido y pulsa Analizar enlace." = "Füge einen gültigen HTTPS-Link ein und wähle „Link prüfen“.";
 "Este enlace señala una carpeta. Abre la carpeta en Google Drive y comparte el enlace de un archivo concreto." = "Dieser Link verweist auf einen Ordner. Öffne ihn in Google Drive und teile den Link zu einer bestimmten Datei.";
 "No se ha podido reconocer el archivo de Google Drive. Comprueba el enlace compartido." = "Die Google-Drive-Datei konnte nicht erkannt werden. Prüfe den geteilten Link.";
 "Google Drive no permite descargar este archivo sin autorización. Si es tuyo, revisa Compartir y permite el acceso a quien tenga el enlace. Si no, solicita permiso a la persona propietaria." = "Google Drive erlaubt das Herunterladen dieser Datei nicht ohne Berechtigung. Wenn sie dir gehört, prüfe die Freigabe und erlaube den Zugriff für Personen mit dem Link. Andernfalls bitte den Eigentümer um Zugriff.";

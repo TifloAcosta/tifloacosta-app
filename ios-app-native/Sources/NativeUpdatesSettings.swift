@@ -151,7 +151,7 @@ struct NativeUpdatesScreen: View {
                         .accessibilityAction(named: Text("Compartir")) {
                             share(item, isVideo: false)
                         }
-                        .accessibilityAction(named: Text(favorites.contains(.resource, item: item) ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                        .accessibilityAction(named: Text(MusicLocalized.message(favorites.contains(.resource, item: item) ? "Quitar de favoritos" : "Añadir a favoritos"))) {
                             _ = favorites.toggle(.resource, item: item)
                         }
 
@@ -169,7 +169,7 @@ struct NativeUpdatesScreen: View {
                         .accessibilityAction(named: Text("Compartir")) {
                             share(item, isVideo: true)
                         }
-                        .accessibilityAction(named: Text(favorites.contains(.video, item: item) ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                        .accessibilityAction(named: Text(MusicLocalized.message(favorites.contains(.video, item: item) ? "Quitar de favoritos" : "Añadir a favoritos"))) {
                             _ = favorites.toggle(.video, item: item)
                         }
                     }

@@ -133,7 +133,7 @@ struct NativeMediaInlineContent: View {
                 Text(error)
                     .foregroundStyle(TifloVisual.secondaryText)
             }
-            Button(store.loading ? "Actualizando contenidos multimedia" : "Actualizar contenidos multimedia") {
+            Button(MusicLocalized.message(store.loading ? "Actualizando contenidos multimedia" : "Actualizar contenidos multimedia")) {
                 Task { await store.refresh() }
             }
             .disabled(store.loading)

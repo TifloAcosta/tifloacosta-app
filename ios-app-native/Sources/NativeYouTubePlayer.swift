@@ -678,7 +678,7 @@ struct NativeYouTubePlayerScreen: View {
                     Button {
                         engine.toggle()
                     } label: {
-                        Text(engine.playing ? "Pausar" : "Reproducir")
+                        Text(MusicLocalized.message(engine.playing ? "Pausar" : "Reproducir"))
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     .disabled(!engine.ready)
@@ -773,7 +773,7 @@ struct NativeYouTubePlayerScreen: View {
                     .buttonStyle(TifloSecondaryActionStyle())
                 } else {
                     if let subscribed = account.subscribed {
-                        Button(subscribed ? "Cancelar suscripción al canal" : "Suscribirse al canal") {
+                        Button(MusicLocalized.message(subscribed ? "Cancelar suscripción al canal" : "Suscribirse al canal")) {
                             Task { await account.setSubscribed(!subscribed, videoID: currentVideo.id) }
                         }
                         .disabled(account.busy)

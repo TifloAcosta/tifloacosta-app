@@ -23,7 +23,7 @@ struct NativeCloudGooglePickerScreen: View {
         List {
             Section("Cuenta") {
                 if accounts.isAvailable(.googleDrive) {
-                    Button(loading ? "Abriendo Google Drive…" : "Elegir archivos de Google Drive") {
+                    Button(MusicLocalized.message(loading ? "Abriendo Google Drive…" : "Elegir archivos de Google Drive")) {
                         Task { await selectFiles() }
                     }
                     .disabled(loading || importingID != nil)

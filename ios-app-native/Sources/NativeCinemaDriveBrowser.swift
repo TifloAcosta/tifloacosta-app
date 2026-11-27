@@ -54,7 +54,7 @@ struct NativeCinemaDriveBrowser: View {
                 Text("Se utilizará tu conexión segura de Google Drive. Elige una carpeta que tengas permiso para consultar. Solo se descargarán las obras que selecciones.")
                     .font(.footnote)
                 if accounts.isAvailable(.googleDrive) {
-                    Button(loading ? "Abriendo Google Drive…" : "Elegir carpeta autorizada") {
+                    Button(MusicLocalized.message(loading ? "Abriendo Google Drive…" : "Elegir carpeta autorizada")) {
                         Task { await chooseRootFolder() }
                     }
                     .disabled(loading || downloadingID != nil)

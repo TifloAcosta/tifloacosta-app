@@ -1303,7 +1303,7 @@ struct NativeMyMusicScreen: View {
     @ViewBuilder private var musicTransportControls: some View {
         Text(player.currentName.isEmpty ? MusicLocalized.message("Ninguna canción en reproducción") : player.currentName)
             .accessibilityAddTraits(.isHeader)
-        Button(player.isPlaying ? "Pausar" : "Reproducir") { player.toggle() }
+        Button(MusicLocalized.message(player.isPlaying ? "Pausar" : "Reproducir")) { player.toggle() }
             .disabled(player.currentName.isEmpty)
         Button("Canción anterior") { player.previous() }
             .disabled(player.currentName.isEmpty)

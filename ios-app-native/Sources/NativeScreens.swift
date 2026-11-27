@@ -313,7 +313,7 @@ struct NativeHomeScreen: View {
                     .lineLimit(1)
                     .accessibilityLabel(MusicLocalized.format("Pódcast en reproducción: %@", episode.title))
                 HStack(spacing: 12) {
-                    Button(podcastPlayer.isPlaying ? "Pausar" : "Reproducir") {
+                    Button(MusicLocalized.message(podcastPlayer.isPlaying ? "Pausar" : "Reproducir")) {
                         podcastPlayer.toggle()
                     }
                     Button("Retroceder 30 segundos") { podcastPlayer.skip(-30) }
@@ -1193,7 +1193,7 @@ private struct NativeYouTubePersonalVideosScreen: View {
             }
         }
         .tifloScreenSurface()
-        .navigationTitle(showWatchLater ? "Ver después" : "Continuar viendo")
+        .navigationTitle(MusicLocalized.message(showWatchLater ? "Ver después" : "Continuar viendo"))
         .sheet(item: $selectedVideo) { video in
             NavigationStack { NativeYouTubePlayerScreen(video: video) }
         }

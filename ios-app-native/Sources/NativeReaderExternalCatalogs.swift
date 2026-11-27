@@ -563,7 +563,7 @@ private struct NativeReaderOPDSFeedScreen: View {
                 Text(item.title)
                 if !item.author.isEmpty { Text(item.author).font(.footnote) }
                 if let link = item.acquisition {
-                    Button(importing == item.id ? "Importando" : "Importar a mi biblioteca") {
+                    Button(MusicLocalized.message(importing == item.id ? "Importando" : "Importar a mi biblioteca")) {
                         importEntry(item, link: link)
                     }
                     .disabled(importing != nil)

@@ -339,7 +339,7 @@ struct NativePodcastScreen: View {
             if let episode = player.episode {
                 Section("Reproductor de Podcast") {
                     Text(episode.title).font(.headline)
-                    Button(player.isPlaying ? "Pausar" : "Reproducir") {
+                    Button(MusicLocalized.message(player.isPlaying ? "Pausar" : "Reproducir")) {
                         player.toggle()
                     }
                     HStack {
@@ -425,7 +425,7 @@ struct NativePodcastScreen: View {
                     .accessibilityAction(named: Text("Reproducir")) {
                         playEpisode(episode, collection: store.episodes)
                     }
-                    .accessibilityAction(named: Text(library.isFavorite(episode) ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                    .accessibilityAction(named: Text(MusicLocalized.message(library.isFavorite(episode) ? "Quitar de favoritos" : "Añadir a favoritos"))) {
                         library.toggleFavorite(episode)
                     }
                     .accessibilityAction(named: Text("Compartir")) {

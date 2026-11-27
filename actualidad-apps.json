@@ -120,6 +120,30 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-f9fe521e71f9e98c",
+    "title": "Accessible Virtual Machine (AVM)",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/mac/utilities/accessible-virtual-machine-avm",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "AVM lets you install and run Windows 11 on your Mac entirely with VoiceOver, with no sighted help. It also supports Ubuntu 26.04 LTS for ARM. Recent versions add support for USB devices and update themselves automatically. It's free and open source.",
+    "publishedAt": "2026-11-27T02:01:00.000Z"
+  },
+  {
+    "id": "applevis-apps-81eebdef12584918",
+    "title": "TurnOver",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/mac/utilities/turnover",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "TurnOver is a free, open-source screen reader for the Mac that works alongside VoiceOver. It sits in the menu bar and takes over from VoiceOver in the apps you choose, such as Mail, Safari, Terminal, and Microsoft Word. Much of its design comes from NVDA, with browse mode for web pages and email, single-letter quick navigation, find, say all, and an elements list. It also understands VoiceOver's own commands. Switch to any other app and VoiceOver comes straight back.",
+    "publishedAt": "2026-11-27T02:01:00.000Z"
+  },
+  {
     "id": "applevis-apps-5492509645148c2d",
     "title": "Pikomofu - Cozy Virtual Pet",
     "sourceId": "applevis-apps",
@@ -214,29 +238,5 @@
     "platform": "Apple",
     "summary": "A haptic game you play by touch, without looking at the screen. The screen is black glass. Feel for the one place that is different, and break it. Tap anywhere with one to five fingers, the way you'd play a piano. Each tap answers with a small tick under your fingertip. Somewhere, one place feels different: a little longer, a double tap, or a little harder. When you find it, keep tapping it. A crack runs across the glass, and it breaks, with a deep haptic, a short high glass sound and a soft light. Play it absent-mindedly, with the TV on. Each pane you break still feels like a small win. While you play, no score appears on screen. Numbers show only when you pause, when a Time Attack run ends, or when a pane breaks in a Duel. FOUR WAYS TO PLAY • Calm: No time limit, no score. Find the one place that feels different, and keep breaking the glass • Standard: Each pane you break makes the difference a little subtler (12 levels). If you can't find it, it becomes clearer again. Pause to see your current level and your best • Time Attack: How many panes can you break while the line goes once around the screen in 60 seconds? Cues at the start, every 15 seconds and in the last 3 seconds. Your best is kept • Duel: Two players, one iPhone laid between you, face to face. Each of you has a place of your own that feels different (longer or double tap). Whoever's place breaks first scores, even if the other player broke it. First to 1, 3, 5 or 7 RECORDS • Your best level in Standard and your best count in Time Attack • Records made with Stronger Difference or Sound Hints on are kept apart as assisted records MAKE IT YOURS • Haptic Strength: Gentle, Standard or Strong • Sound volume, and Tap Sound • Touch Trace, and Completion Light (Off, Soft or Bright) • Taps to Break: 5, 7, 10 or 12 (10 to start) • Settings are under the faint gear that appears at the top right when you pause. While playing, hold two fingers for two seconds, then lift them GETTING STARTED • On first launch, a short tutorial of about 30 seconds, on a bigger 2×3 grid • Watch it again any time with Replay Tutorial in Settings FOR EVERYONE • Playable with VoiceOver. The play area takes your taps directly, and the tutorial text, the time left and results in Time Attack, level changes, and points and wins in a Duel are read aloud • Stronger Difference makes the difference clearer and uses only the two clearest kinds • With Sound Hints on, the place that feels different also sounds a little different • Reduce Animation makes broken pieces fade where they are instead of falling. Reduce Motion in iOS Settings is respected too • The whole screen never flashes bright white SOUND • Sounds play along with your music or TV. They don't stop other audio • No sound in Silent Mode. You can play without sound MADE FOR IPHONE HAPTICS • Tact is played by feel, so it is best on iPhone • On devices without haptics, such as iPad, you find the different place by sound (turn the sound on, and turn Silent Mode off) YOURS, ON YOUR IPHONE • No account, and no network connection • Settings and records stay on this iPhone • No ads, no in-app purchases, no tracking Requires an iPhone with iOS 18 or later. Available in English, Japanese, Chinese (Simplified and Traditional), Korean, Spanish, French, German and Portuguese (Brazil).",
     "publishedAt": "2026-11-22T00:46:16.000Z"
-  },
-  {
-    "id": "applevis-apps-b9f78db7af37ce65",
-    "title": "Game World: Accessible Games",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/game-world-accessible-games",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Play Dominoes, Ludo, word games and more with friends. Blind, low-vision and sighted players can play together with VoiceOver support. Join friends in Dominoes and Ludo, challenge computer opponents, or enjoy a game on your own. Explore 10 games: • Dominoes — Challenge friends or computer opponents, or sharpen your skills in practice mode. • Ludo — Race your pawns home in this classic board game with other players or computer opponents. • Blackjack — Take on the dealer in the classic game of 21. • Video Poker — Play five-card draw, choose which cards to hold, and chase a Royal Flush. • Word Builder — Discover hidden words in a wheel of letters. • Hangman — Solve word puzzles one guess at a time. • Trivia Trail — Test your knowledge with timed or untimed play. • Simon — Remember and repeat increasingly challenging sequences. • Battle Cats — Find hidden words in letter grids and explore themed puzzles at your own pace. • Craps — Learn with guided solo practice and spoken roll results. Designed for accessible play: • VoiceOver navigation and spoken gameplay feedback. • Themes and sound settings to personalize your game room. • Multiplayer, computer opponents, and solo experiences across the game collection. • In-game chat to stay connected while you play. From AppA11y, the team behind Dice World and Card World. Download Game World and find your next favorite game. Gold Membership is an auto-renewable subscription. All Access Membership is an auto-renewable subscription. Privacy Policy: https://www.appa11y.com/gameworld/privacy/privacy-en.html (Also added to app description and in the app on the Store screen.) Terms: https://www.appa11y.com/gameworld/terms/terms-en.html (Also added to app description and in the app on the Store screen.) Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/ (Also added to app description)",
-    "publishedAt": "2026-11-21T20:17:29.000Z"
-  },
-  {
-    "id": "applevis-apps-a266de1fcb38950b",
-    "title": "Boat Hunter",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/boat-hunter",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Year 2077. The Atlantic Ocean no longer separates continents. It watches them. For decades, the world learned to smile while sharpening its teeth. Europe and Asia forged an alliance. The American bloc answered with steel, satellites, and fortified trade routes. No one declared open war. No one had to. Peace remained in the speeches, on the screens, and in the treaties. But on the high seas, the truth took another form. The cargo ships never stopped sailing. Food, fuel, minerals, data, weapons—everything kept crossing the ocean under legal flags and flawless orders. Only one thing changed. There are no captains anymore. Now the ships think. Every convoy, every armed destroyer, every autonomous freighter, and every ocean hunter is commanded by artificial intelligences trained to calculate, anticipate, and survive. War no longer needs hatred. It only needs algorithms better than the enemy’s. And you are the finest algorithm ever deployed. You are the most advanced naval combat unit ever built: the fastest hull, the sharpest sensors, the deadliest tactical architecture. You do not sleep. You do not hesitate. You do not forget. Where others detect noise, you see patterns. Where others see waves, you read intentions. Where others react, you have already decided. Your mission is simple to state and nearly impossible to execute: protect your routes, intercept threats, dominate the Atlantic. But the ocean does not forgive mistakes. In its waters travel allies, enemies, and machines that have not yet decided what they will become when the final order arrives. Every radar echo may be a freighter. Every silence may be an ambush. Every encounter may be the beginning of a war the world still insists on denying. There are no heroes here. No parades. No witnesses. Only steel, fog, encrypted signals, and decisions made at the speed of death. On this sea, peace is a display. War is what you are. Welcome to the Atlantic. Enter combat! ---------- Boat Hunter is an accessible naval action and strategy game set in the North Atlantic. You control an autonomous warship on a patrol of consecutive missions, where every decision can put the next operation at risk. MASTER THE OCEAN • Navigate the tactical map, set your heading, and interpret contacts, signals, and radio messages. • Identify allies and enemies: armed ships, merchant vessels, submarines, oil platforms, and floating bases. • Fight at close range with your autocannon and torpedoes. • Repair damage, deploy smoke screens, and decide when to disengage. EVERY MISSION DEMANDS A STRATEGY Reach coordinates, clear hostile sectors, intercept convoys, sink merchant tonnage, defend positions, rescue allies, resupply, and destroy floating targets. Sea conditions, time limits, and enemy behavior will force you to adapt your plans. UPGRADE YOUR SHIP Earn money and score points by completing objectives and sinking enemies. Between missions, upgrade your hull, engine, weapons, damage control, smoke screen, and gunner systems. Higher-quality enemies are more dangerous, but grant greater rewards. Keep your remaining money to begin your next game with an advantage. LEARN AT YOUR OWN PACE A three-mission tutorial teaches you to navigate, aim, and survive. Read the manual and listen to every signal in the sound guide before entering combat. Play visually or through sound and VoiceOver. Choose from three difficulty levels: Deckhand, Captain, and Admiral. Complete as many missions as possible, keep your ship operational, and beat your best score. ---------- This app supports VoiceOver, Zoom, and other iOS accessibility features. If you encounter an accessibility problem, please contact us so we can fix it. Accessibility should be the foundation of a project, not a patch applied to the product.",
-    "publishedAt": "2026-11-20T08:14:56.000Z"
   }
 ]

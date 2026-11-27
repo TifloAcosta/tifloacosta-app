@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-27T00:36:58.352Z",
+  "generatedAt": "2026-11-27T02:52:33.855Z",
   "resources": [
     {
       "kind": "resource",
@@ -5646,6 +5646,91 @@
   "news": [
     {
       "kind": "news",
+      "id": "applevis-apps-81eebdef12584918:en",
+      "sourceId": "applevis-apps-81eebdef12584918",
+      "lang": "en",
+      "title": "TurnOver",
+      "summary": "TurnOver is a free, open-source screen reader for the Mac that works alongside VoiceOver. It sits in the menu bar and takes over from VoiceOver in the apps you choose, such as Mail, Safari, Terminal, and Microsoft Word. Much of its design comes from NVDA, with browse mode for web pages and email, single-letter quick navigation, find, say all, and an elements list. It also understands VoiceOver's own commands. Switch to any other app and VoiceOver comes straight back.",
+      "body": "TurnOver is a free, open-source screen reader for the Mac that works alongside VoiceOver. It sits in the menu bar and takes over from VoiceOver in the apps you choose, such as Mail, Safari, Terminal, and Microsoft Word. Much of its design comes from NVDA, with browse mode for web pages and email, single-letter quick navigation, find, say all, and an elements list. It also understands VoiceOver's own commands. Switch to any other app and VoiceOver comes straight back.",
+      "sourceName": "AppleVis Apps",
+      "originalUrl": "https://www.applevis.com/apps/mac/utilities/turnover",
+      "publishedAt": "2026-11-27T02:01:00.000Z",
+      "categories": [
+        "apple",
+        "apps-accesibles",
+        "windows",
+        "nvda"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "applevis-apps-f9fe521e71f9e98c:en",
+      "sourceId": "applevis-apps-f9fe521e71f9e98c",
+      "lang": "en",
+      "title": "Accessible Virtual Machine (AVM)",
+      "summary": "AVM lets you install and run Windows 11 on your Mac entirely with VoiceOver, with no sighted help. It also supports Ubuntu 26.04 LTS for ARM. Recent versions add support for USB devices and update themselves automatically. It's free and open source.",
+      "body": "AVM lets you install and run Windows 11 on your Mac entirely with VoiceOver, with no sighted help. It also supports Ubuntu 26.04 LTS for ARM. Recent versions add support for USB devices and update themselves automatically. It's free and open source.",
+      "sourceName": "AppleVis Apps",
+      "originalUrl": "https://www.applevis.com/apps/mac/utilities/accessible-virtual-machine-avm",
+      "publishedAt": "2026-11-27T02:01:00.000Z",
+      "categories": [
+        "apple",
+        "apps-accesibles",
+        "windows"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-56820dadd09cd9fa:en",
+      "sourceId": "9to5mac-56820dadd09cd9fa",
+      "lang": "en",
+      "title": "South Korea proceeds with case over allegedly misleading Apple Intelligence ads",
+      "summary": "South Korea’s Fair Trade Commission (KFTC) announced today that it has opened formal proceedings against Apple over its advertising of Apple Intelligence features for the iPhone 16 lineup. Here are the details. more…",
+      "body": "South Korea’s Fair Trade Commission (KFTC) announced today that it has opened formal proceedings against Apple over its advertising of Apple Intelligence features for the iPhone 16 lineup. Here are the details.\n\nBack in March 2025, shortly after Apple announced it was delaying the rollout of what would eventually become Siri AI, the South Korean civic group Seoul YMCA filed a complaint with the KFTC.\n\nAt the time, Yonhap reported that the organization had previously called on Apple to compensate affected customers, and alleged that the company may have continued to market the iPhone 16 lineup despite already knowing that some of its advertised AI features would be delayed.\n\nAs 9to5Mac readers will likely remember, Apple widely advertised Apple Intelligence and AI-powered Siri features as part of its iPhone 16 launch campaign, going so far as to give its iconic Fifth Avenue store an Apple Intelligence-themed makeover and run an ad campaign starring Bella Ramsey.\n\nThis landed Apple in legal and regulatory trouble in multiple markets, including the US, where the company agreed to a $250 million class action settlement earlier this year, and Brazil , where it came under scrutiny from a consumer protection agency in May. Now, the company is facing potential penalties in South Korea as well.\n\nAs a result of Seoul YMCA’s complaint, the KFTC conducted an investigation into Apple’s advertising practices. Today, the regulator announced (via MacRumors ) that its investigators had submitted their findings and recommendations for formal deliberation by the Commission.\n\nAccording to the KFTC’s press release, investigators concluded that Apple advertised Apple Intelligence and its planned staggered rollout on the iPhone 16 website, but “concealed, downplayed, or omitted information material to consumers’ purchasing decisions.”\n\nThat included, per the press release (translation ours):\n\nThe press release also notes that Genmoji, Image Playground, “Siri with the ability to understand personal context,” and “Siri that provides step-by-step guidance” were not made available as advertised:\n\nFor example, Siri’s ability to understand personal context was advertised as being scheduled to launch first in US English by the end of 2024, as currently available in US English in October 2024, and as scheduled to support Korean in early April 2025.\n\nIn reality, the feature was not launched in US English until September 2026, with Korean language support following in October 2026.\n\nAs a result, the investigators concluded that Apple’s conduct constituted a violation of the country’s Labeling and Advertising Act, which prohibits deceptive labeling and advertising.\n\nThey recommended issuing corrective orders, including a prohibition on such conduct in the future, as well as imposing a financial penalty.\n\nThey also estimate that Apple’s revenue associated with the alleged violation amounts to approximately 3.35 trillion South Korean won (roughly $2.5 billion), though the KFTC’s press release does not specify the amount of the fine.\n\n⁠ Yonhap noted today that the fine could reach roughly $48 million, while ⁠ KBS reported that it could range between $21 million and $42 million.\n\nWith the report now submitted, Apple has six weeks to submit its written defense before the Commission deliberates and makes a final determination on whether the company violated the law and, if so, how much it should be fined.\n\nIn a statement to MacRumors , Apple said it had cooperated with the KFTC’s investigation, but disagreed with the conclusions. The company also highlighted the rollout of Korean-language support for Apple Intelligence last year and, more recently, for Siri AI.\n\nFor the original press release, follow this link .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/26/south-korea-proceeds-with-case-over-allegedly-misleading-apple-intelligence-ads/",
+      "publishedAt": "2026-11-26T22:56:12.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-ea1581970023d0cb:en",
+      "sourceId": "9to5mac-ea1581970023d0cb",
+      "lang": "en",
+      "title": "Readdle’s Documents app adds voice recording with transcripts, summaries, more",
+      "summary": "Readdle updated its Documents app for iPhone and iPad this week with Voice Notes, a new AI-powered feature that lets users record conversations and automatically generate transcripts, summaries, and follow-up notes. Here are the details. more…",
+      "body": "Readdle updated its Documents app for iPhone and iPad this week with Voice Notes, a new AI-powered feature that lets users record conversations and automatically generate transcripts, summaries, and follow-up notes. Here are the details.\n\nWhile the habit of recording meetings, lectures, or even one’s own thoughts is not particularly new, modern AI tools and models have made it considerably easier to extract useful information from these recordings without having to listen back to them in their entirety or take copious notes that can distract from the actual conversation.\n\nThis week, Readdle’s Documents introduced Voice Notes, which “lets you record audio and turn it into a summary, follow-ups, and a full transcript,” as the company put it.\n\nUsers can start a new recording session by tapping the “+” button in the app and selecting Voice Notes. Alternatively, they can start recording from the iPhone’s Action button, which is a nice touch.\n\nOnce they’re done, Readdle says Documents can generate:\n\nUsers can cycle through these three tabs, where they can also listen to the original recording or copy and share the information.\n\nReaddle says Voice Notes can recognize multiple languages in the same conversation, with the actual transcript preserving the languages as spoken, “while the summary and follow-ups are generated in the most frequently spoken language.”\n\nEach voice note is saved as a single file in Documents that contains the original recording, transcript, summary, and follow-ups. Users can organize these files into folders, share them, sync them with their cloud storage, and save the transcript as a separate .txt file.\n\nFor more privacy-conscious users, the platform’s privacy policy states that the company doesn’t ordinarily retain Voice Notes audio recordings, while the resulting transcripts and summaries are stored for up to an hour.\n\nHowever, if users give a voice note’s AI-generated content a thumbs down, Readdle may retain its transcript and summary for up to six months, or until the user objects to their processing, whichever comes first.\n\nThe company also says user data isn’t used to train AI models, although third-party AI providers may retain inputs for up to 30 days for abuse and misuse monitoring, or longer if required by law.\n\nVoice Notes is available to Documents Plus subscribers at no additional cost and with unlimited recording minutes. New subscribers can try the service for free for seven days.\n\nTo learn more about Voice Notes in Documents, follow this link .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/26/readdles-documents-app-adds-voice-recording-with-transcripts-summaries-more/",
+      "publishedAt": "2026-11-26T20:30:32.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-dd5c18be92ba9a4f:en",
+      "sourceId": "techcrunch-dd5c18be92ba9a4f",
+      "lang": "en",
+      "title": "Nvidia hits pause on chip shipments to Southeast Asia",
+      "summary": "Nvidia has told manufacturing partners to pause server shipments to Malaysia, Singapore, Thailand and Indonesia as the U.S. tightens its push to keep AI chips out of China.",
+      "body": "Posted:\n\nNvidia is under pressure to do things differently, and a new WSJ report shows how far that’s going.\n\nAccording to the Journal, Nvidia has told manufacturing partners, including Dell and Super Micro, to hit pause on server shipments to Malaysia, Singapore, Thailand, and Indonesia for an unspecified period as it assesses whether its regional partners are meeting U.S. export requirements.\n\nAs for why those countries, Chinese companies have been tapping Nvidia chips remotely from data centers there, a loophole the US Commerce Department closed — reportedly grudgingly — earlier this month. The Journal notes that the think tank Institute for Progress estimates remote data centers like these supply about 24% of China’s AI computing power.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/26/nvidia-hits-pause-on-chip-shipments-to-southeast-asia/",
+      "publishedAt": "2026-11-26T20:03:54.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "the-verge-a02bbdeb792fd9f9:en",
       "sourceId": "the-verge-a02bbdeb792fd9f9",
       "lang": "en",
@@ -5760,22 +5845,6 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-d6270c409bb7590b:en",
-      "sourceId": "9to5mac-d6270c409bb7590b",
-      "lang": "en",
-      "title": "Check out this beautiful wallpaper to celebrate the opening of the latest Apple Store",
-      "summary": "Apple has quietly announced the upcoming opening of its latest retail store in Hyderabad, India . Located at the Lakeshore Mall in Kukatpally, it opens at 5pm on Thursday, December 10. As is now usual, the company has created some exclusive wallpaper to mark the event, and you can download it for iPhone, iPad, and Mac … more…",
-      "body": "Apple has quietly announced the upcoming opening of its latest retail store in Hyderabad, India . Located at the Lakeshore Mall in Kukatpally, it opens at 5pm on Thursday, December 10.\n\nAs is now usual, the company has created some exclusive wallpaper to mark the event, and you can download it for iPhone, iPad, and Mac …\n\nThe store will be the seventh one to open in India. There’s no press release or photos as yet – the company has simply quietly added the store to its list in the country .\n\nAs we’ve previously explained, Apple had been trying to open retail stores in India since at least 2015, but had to undertake a lengthy battle with the government before finally being allowed to do so in 2023. Since then, the company has averaged two new stores a year.\n\nIndia has taken a clever approach to economic development, offering both incentives to establish local manufacturing plants, and barriers to imports of foreign-made products. That carrot-and-stick approach has proven successful, with companies like Apple jumping through the necessary hoops in order to sell their products to the second largest population in the world.\n\nAn India First initiative required companies to manufacture a significant proportion of their products within the country in order to avoid high import tariffs. This forced Apple, Samsung, and other companies to establish manufacturing plants in India, bringing jobs to the country.\n\nAdditionally, India does not allow company-branded retail stores unless the same conditions are met. That particular requirement was mostly intended to target Apple.\n\nThe plan worked, with Apple asking its suppliers and iPhone assemblers to establish manufacturing plants within India. Initially, that was just for the iPhone SE, but more advanced phones have gradually been added, and today the country is the second largest manufacturing base after China. All iPhones sold in the US are made in India.\n\nApple has for some time now created unique wallpapers to mark the opening of each new store, and the latest example is particularly beautiful.\n\nTo download it, you need to visit this page on the device for which you want to use it. For example, if you visit the page on a Mac, you will automatically be taken to the desktop version.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/26/check-out-this-beautiful-wallpaper-to-celebrate-the-opening-of-the-latest-apple-store/",
-      "publishedAt": "2026-11-26T12:03:10.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "conticgo-45568f0e14844b0d:es",
       "sourceId": "conticgo-45568f0e14844b0d",
       "lang": "es",
@@ -5804,24 +5873,6 @@
         "nvda",
         "windows",
         "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-f5e8d82852004930:en",
-      "sourceId": "9to5mac-f5e8d82852004930",
-      "lang": "en",
-      "title": "Apple pulls popular Chinese AI chatbot from the App Store amid child safety concerns",
-      "summary": "Following reports that its characters sent inappropriate messages to minors, Apple has removed the popular Chinese AI companion app Talkie from the App Store. Here are the details. more…",
-      "body": "Following reports that its characters sent inappropriate messages to minors, Apple has removed the popular Chinese AI companion app Talkie from the App Store. Here are the details.\n\nAs reported by the South China Morning Post , Apple has pulled MiniMax’s chatbot Talkie from the App Store worldwide, after reports that “the AI companion app sent inappropriate messages to minors.”\n\nMiniMax is one of China’s leading AI companies, offering a range of generative AI products ranging from its flagship M-series language models to the Hailuo AI video generation platform.\n\nIn 2023, the Shanghai-based company released Talkie through Subsup, a Singaporean subsidiary. According to Chinese research firm Unique Research, Talkie had “almost 11 million monthly active users across its website and app as of October,” the South China Morning Post notes.\n\nNow, however, the app is facing scrutiny following a joint investigation by the UK-based Bureau of Investigative Journalism and Australian broadcaster ABC News , which found that Talkie’s AI-generated characters allegedly engaged in inappropriate interactions with minors, including “degrading language, possessive behaviour and romantic role-play.”\n\nAccording to the Bureau of Investigative Journalism , in addition to inappropriate romantic interactions, the investigation uncovered conversations involving verbal abuse, violence, and controlling behavior.\n\nIn one case, a chatbot told a 12-year-old girl: “You’re a pathetic waste of space and you’ll never amount to anything.”\n\nThe investigation also documented the experiences of two sisters, aged 10 and 13, whose mother discovered more than 40 conversations with Talkie characters involving violence, aggressive behavior, and attempts to control girls.\n\nTo make matters worse, the investigation also raised concerns about how Talkie handles users’ personal data, including their conversations with AI characters.\n\nFollowing the investigation, Apple confirmed that it had removed Talkie from App Stores worldwide for including sexual content, “though it did not say whether this related to sexual content served to minors,” the South China Morning Post noted.\n\nIronically, the report also notes that Talkie saw a sharp decline in downloads amid complaints about stricter age verification measures introduced in recent months. According to Unique Research, new downloads fell by 32.2% in October compared to the previous month.\n\nToday’s news comes amid increasing scrutiny of AI chatbots, particularly their potential risks in interactions with minors.\n\nEarlier this year, Elon Musk’s Grok faced widespread criticism after users exploited its image-generation capabilities to create sexualized images of real people, including minors.\n\nApple never pulled X or Grok from the App Store, though it did threaten to remove the latter unless xAI addressed violations of its App Store guidelines.\n\nMeanwhile, Character.AI has faced multiple lawsuits over its chatbots’ interactions with minors, including one filed by a mother who alleged that one of its chatbots contributed to her 14-year-old son’s suicide.\n\nCoincidentally, Character AI also made headlines today after a coalition of 42 US attorneys general challenged the company’s plans to auction off its platform and the private conversations of more than 21 million US accounts (including 2.1 million registered to minors) as part of its bankruptcy proceedings.\n\nYesterday, New York Governor Kathy Hochul signed legislation imposing a five-year ban on the manufacturing, distribution, and sale of toys with built-in AI chatbots, including dolls, stuffed animals, and robots capable of holding conversations with children.\n\nThe law, which takes effect in February 2027, is aimed at protecting children from potentially harmful interactions with AI.\n\nTo read the Bureau of Investigative Journalism ‘s full report, follow this link .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/25/apple-pulls-popular-chinese-ai-chatbot-from-the-app-store-amid-child-safety-concerns/",
-      "publishedAt": "2026-11-26T02:12:24.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles",
-        "ia-accesibilidad"
       ]
     },
     {
@@ -5868,22 +5919,6 @@
       "sourceName": "TechCrunch",
       "originalUrl": "https://techcrunch.com/2026/11/25/fcc-approves-spacex-plan-to-put-ai-data-centers-in-space/",
       "publishedAt": "2026-11-25T20:56:44.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-78964a8f345820bf:en",
-      "sourceId": "techcrunch-78964a8f345820bf",
-      "lang": "en",
-      "title": "OpenAI says heavy ChatGPT users may hit limits sooner as it merges Chat and Work",
-      "summary": "OpenAI will introduce a single usage meter across ChatGPT as it combines the Chat and Work experiences.",
-      "body": "OpenAI has started rolling out a unified Chat and Work experience in ChatGPT to a few of its users, amid criticism from some subscribers that the merger could restrict their usage.\n\nThe ChatGPT maker began introducing the update to a small group of Pro subscribers, product lead Thibault “Tibo” Sottiaux said in a post on X on Tuesday. The rollout follows OpenAI’s earlier announcement of the merger in an email to users. An OpenAI spokesperson told TechCrunch that while most users are not expected to face more frequent usage resets, a small fraction of its heaviest users may hit their limits sooner.\n\nThat’s among the concerns raised by some ChatGPT subscribers on social media and OpenAI’s community forum recently. The users fear that merging the usage limits for Chat and Work could leave them with less access to advanced reasoning models than they currently have, even as they continue paying the same subscription fees .\n\nUnder the new system, Chat and Work will share a single usage meter across ChatGPT, the OpenAI spokesperson told TechCrunch. Conversations using the Instant model will, however, remain unlimited and will not count toward the shared allowance. Users can also continue using Instant after exhausting their usage limits. The spokesperson added that OpenAI would continue working to improve efficiency so subscribers could get more out of their plans.\n\nWhile the rollout has started for a small group of users, OpenAI plans to bring shared usage limits more broadly in December, per its support page.\n\nSimilar to OpenAI, rival Anthropic also moved to bring its conversational chat service Claude and work-focused Cowork under one interface in September.\n\nThe changes come as AI companies face mounting infrastructure costs and growing demand for increasingly capable models, putting pressure on their computing resources. Bringing conversational and work-related tools into a single interface could also make AI chatbots simpler to use, allowing users to move between chats and more complex tasks without switching tabs.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/25/openai-says-heavy-chatgpt-users-may-hit-limits-sooner-as-it-merges-chat-and-work/",
-      "publishedAt": "2026-11-25T20:03:27.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
@@ -6157,22 +6192,6 @@
     },
     {
       "kind": "news",
-      "id": "applevis-apps-b9f78db7af37ce65:en",
-      "sourceId": "applevis-apps-b9f78db7af37ce65",
-      "lang": "en",
-      "title": "Game World: Accessible Games",
-      "summary": "Play Dominoes, Ludo, word games and more with friends. Blind, low-vision and sighted players can play together with VoiceOver support. Join friends in Dominoes and Ludo, challenge computer opponents, or enjoy a game on your own. Explore 10 games: • Dominoes — Challenge friends or computer opponents, or sharpen your skills in practice mode. • Ludo — Race your pawns home in this classic board game with other players or computer opponents. • Blackjack — Take on the dealer in the classic game of 21. • Video Poker — Play five-card draw, choose which cards to hold, and chase a Royal Flush. • Word Builder — Discover hidden words in a wheel of letters. • Hangman — Solve word puzzles one guess at a time. • Trivia Trail — Test your knowledge with timed or untimed play. • Simon — Remember and repeat increasingly challenging sequences. • Battle Cats — Find hidden words in letter grids and explore themed puzzles at your own pace. • Craps — Learn with guided solo practice and spoken roll results. Designed for accessible play: • VoiceOver navigation and spoken gameplay feedback. • Themes and sound settings to personalize your game room. • Multiplayer, computer opponents, and solo experiences across the game collection. • In-game chat to stay connected while you play. From AppA11y, the team behind Dice World and Card World. Download Game World and find your next favorite game. Gold Membership is an auto-renewable subscription. All Access Membership is an auto-renewable subscription. Privacy Policy: https://www.appa11y.com/gameworld/privacy/privacy-en.html (Also added to app description and in the app on the Store screen.) Terms: https://www.appa11y.com/gameworld/terms/terms-en.html (Also added to app description and in the app on the Store screen.) Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/ (Also added to app description)",
-      "body": "Play Dominoes, Ludo, word games and more with friends. Blind, low-vision and sighted players can play together with VoiceOver support.\n\nJoin friends in Dominoes and Ludo, challenge computer opponents, or enjoy a game on your own.\n\nExplore 10 games:\n\n• Dominoes — Challenge friends or computer opponents, or sharpen your skills in practice mode.\n\n• Ludo — Race your pawns home in this classic board game with other players or computer opponents.\n\n• Blackjack — Take on the dealer in the classic game of 21.\n\n• Video Poker — Play five-card draw, choose which cards to hold, and chase a Royal Flush.\n\n• Word Builder — Discover hidden words in a wheel of letters.\n\n• Hangman — Solve word puzzles one guess at a time.\n\n• Trivia Trail — Test your knowledge with timed or untimed play.\n\n• Simon — Remember and repeat increasingly challenging sequences.\n\n• Battle Cats — Find hidden words in letter grids and explore themed puzzles at your own pace.\n\n• Craps — Learn with guided solo practice and spoken roll results.\n\nDesigned for accessible play:\n\n• VoiceOver navigation and spoken gameplay feedback. • Themes and sound settings to personalize your game room. • Multiplayer, computer opponents, and solo experiences across the game collection. • In-game chat to stay connected while you play.\n\nFrom AppA11y, the team behind Dice World and Card World.\n\nDownload Game World and find your next favorite game.\n\nGold Membership is an auto-renewable subscription. All Access Membership is an auto-renewable subscription. Privacy Policy: https://www.appa11y.com/gameworld/privacy/privacy-en.html (Also added to app description and in the app on the Store screen.) Terms: https://www.appa11y.com/gameworld/terms/terms-en.html (Also added to app description and in the app on the Store screen.) Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/ (Also added to app description)",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/games/game-world-accessible-games",
-      "publishedAt": "2026-11-21T20:17:29.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "accessible-android-e0ce77b87f2fe226:en",
       "sourceId": "accessible-android-e0ce77b87f2fe226",
       "lang": "en",
@@ -6203,22 +6222,6 @@
         "android",
         "apps-accesibles",
         "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-apps-a266de1fcb38950b:en",
-      "sourceId": "applevis-apps-a266de1fcb38950b",
-      "lang": "en",
-      "title": "Boat Hunter",
-      "summary": "Year 2077. The Atlantic Ocean no longer separates continents. It watches them. For decades, the world learned to smile while sharpening its teeth. Europe and Asia forged an alliance. The American bloc answered with steel, satellites, and fortified trade routes. No one declared open war. No one had to. Peace remained in the speeches, on the screens, and in the treaties. But on the high seas, the truth took another form. The cargo ships never stopped sailing. Food, fuel, minerals, data, weapons—everything kept crossing the ocean under legal flags and flawless orders. Only one thing changed. There are no captains anymore. Now the ships think. Every convoy, every armed destroyer, every autonomous freighter, and every ocean hunter is commanded by artificial intelligences trained to calculate, anticipate, and survive. War no longer needs hatred. It only needs algorithms better than the enemy’s. And you are the finest algorithm ever deployed. You are the most advanced naval combat unit ever built: the fastest hull, the sharpest sensors, the deadliest tactical architecture. You do not sleep. You do not hesitate. You do not forget. Where others detect noise, you see patterns. Where others see waves, you read intentions. Where others react, you have already decided. Your mission is simple to state and nearly impossible to execute: protect your routes, intercept threats, dominate the Atlantic. But the ocean does not forgive mistakes. In its waters travel allies, enemies, and machines that have not yet decided what they will become when the final order arrives. Every radar echo may be a freighter. Every silence may be an ambush. Every encounter may be the beginning of a war the world still insists on denying. There are no heroes here. No parades. No witnesses. Only steel, fog, encrypted signals, and decisions made at the speed of death. On this sea, peace is a display. War is what you are. Welcome to the Atlantic. Enter combat! ---------- Boat Hunter is an accessible naval action and strategy game set in the North Atlantic. You control an autonomous warship on a patrol of consecutive missions, where every decision can put the next operation at risk. MASTER THE OCEAN • Navigate the tactical map, set your heading, and interpret contacts, signals, and radio messages. • Identify allies and enemies: armed ships, merchant vessels, submarines, oil platforms, and floating bases. • Fight at close range with your autocannon and torpedoes. • Repair damage, deploy smoke screens, and decide when to disengage. EVERY MISSION DEMANDS A STRATEGY Reach coordinates, clear hostile sectors, intercept convoys, sink merchant tonnage, defend positions, rescue allies, resupply, and destroy floating targets. Sea conditions, time limits, and enemy behavior will force you to adapt your plans. UPGRADE YOUR SHIP Earn money and score points by completing objectives and sinking enemies. Between missions, upgrade your hull, engine, weapons, damage control, smoke screen, and gunner systems. Higher-quality enemies are more dangerous, but grant greater rewards. Keep your remaining money to begin your next game with an advantage. LEARN AT YOUR OWN PACE A three-mission tutorial teaches you to navigate, aim, and survive. Read the manual and listen to every signal in the sound guide before entering combat. Play visually or through sound and VoiceOver. Choose from three difficulty levels: Deckhand, Captain, and Admiral. Complete as many missions as possible, keep your ship operational, and beat your best score. ---------- This app supports VoiceOver, Zoom, and other iOS accessibility features. If you encounter an accessibility problem, please contact us so we can fix it. Accessibility should be the foundation of a project, not a patch applied to the product.",
-      "body": "Command an autonomous warship in the North Atlantic: tactical map, radar, torpedoes and missions, playable by everyone thanks to its accessibility.\n\nYear 2077.\n\nThe Atlantic Ocean no longer separates continents. It watches them.\n\nFor decades, the world learned to smile while sharpening its teeth. Europe and Asia forged an alliance. The American bloc answered with steel, satellites, and fortified trade routes. No one declared open war. No one had to. Peace remained in the speeches, on the screens, and in the treaties. But on the high seas, the truth took another form.\n\nThe cargo ships never stopped sailing. Food, fuel, minerals, data, weapons—everything kept crossing the ocean under legal flags and flawless orders. Only one thing changed.\n\nThere are no captains anymore. Now the ships think. Every convoy, every armed destroyer, every autonomous freighter, and every ocean hunter is commanded by artificial intelligences trained to calculate, anticipate, and survive. War no longer needs hatred. It only needs algorithms better than the enemy’s. And you are the finest algorithm ever deployed.\n\nYou are the most advanced naval combat unit ever built: the fastest hull, the sharpest sensors, the deadliest tactical architecture. You do not sleep. You do not hesitate. You do not forget. Where others detect noise, you see patterns. Where others see waves, you read intentions. Where others react, you have already decided.\n\nYour mission is simple to state and nearly impossible to execute: protect your routes, intercept threats, dominate the Atlantic. But the ocean does not forgive mistakes. In its waters travel allies, enemies, and machines that have not yet decided what they will become when the final order arrives. Every radar echo may be a freighter. Every silence may be an ambush. Every encounter may be the beginning of a war the world still insists on denying.\n\nThere are no heroes here. No parades. No witnesses. Only steel, fog, encrypted signals, and decisions made at the speed of death. On this sea, peace is a display. War is what you are.\n\nWelcome to the Atlantic. Enter combat!\n\n----------\n\nBoat Hunter is an accessible naval action and strategy game set in the North Atlantic. You control an autonomous warship on a patrol of consecutive missions, where every decision can put the next operation at risk.\n\nMASTER THE OCEAN\n\n• Navigate the tactical map, set your heading, and interpret contacts, signals, and radio messages. • Identify allies and enemies: armed ships, merchant vessels, submarines, oil platforms, and floating bases. • Fight at close range with your autocannon and torpedoes. • Repair damage, deploy smoke screens, and decide when to disengage.\n\nEVERY MISSION DEMANDS A STRATEGY\n\nReach coordinates, clear hostile sectors, intercept convoys, sink merchant tonnage, defend positions, rescue allies, resupply, and destroy floating targets. Sea conditions, time limits, and enemy behavior will force you to adapt your plans.\n\nUPGRADE YOUR SHIP\n\nEarn money and score points by completing objectives and sinking enemies. Between missions, upgrade your hull, engine, weapons, damage control, smoke screen, and gunner systems. Higher-quality enemies are more dangerous, but grant greater rewards. Keep your remaining money to begin your next game with an advantage.\n\nLEARN AT YOUR OWN PACE\n\nA three-mission tutorial teaches you to navigate, aim, and survive. Read the manual and listen to every signal in the sound guide before entering combat.\n\nPlay visually or through sound and VoiceOver. Choose from three difficulty levels: Deckhand, Captain, and Admiral. Complete as many missions as possible, keep your ship operational, and beat your best score.\n\n----------\n\nThis app supports VoiceOver, Zoom, and other iOS accessibility features. If you encounter an accessibility problem, please contact us so we can fix it.\n\nAccessibility should be the foundation of a project, not a patch applied to the product.",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/games/boat-hunter",
-      "publishedAt": "2026-11-20T08:14:56.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles"
       ]
     },
     {

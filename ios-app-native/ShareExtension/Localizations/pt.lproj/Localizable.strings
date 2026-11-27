@@ -8,10 +8,10 @@
 "Escuchar" = "Ouvir";
 "Pausar" = "Pausar";
 "Guardar en TifloLector" = "Guardar no TifloLector";
-"Guardar en Mi música" = "Guardar em A minha música";
+"Guardar en Mi música" = "Guardar na secção «A minha música»";
 "Contenido para leer" = "Conteúdo para ler";
 "Vista rápida. El libro completo quedará disponible en TifloLector al abrir TifloAcosta." = "Pré-visualização rápida. O livro completo ficará disponível no TifloLector ao abrir TifloAcosta.";
-"Audio guardado para Mi música. Abre Recibidos en TifloAcosta para incorporarlo." = "Áudio guardado para A minha música. Abra Recebidos no TifloAcosta para o importar.";
+"Audio guardado para Mi música. Abre Recibidos en TifloAcosta para incorporarlo." = "Áudio guardado para «A minha música». Abra Recebidos no TifloAcosta para o importar.";
 "Audio guardado para TifloLector. Abre Recibidos en TifloAcosta para incorporarlo." = "Áudio guardado para o TifloLector. Abra Recebidos no TifloAcosta para o importar.";
 "No se pudo guardar el destino del audio. El archivo permanece en Recibidos." = "Não foi possível guardar o destino do áudio. O ficheiro permanece em Recebidos.";
 "Preparando la vista de lectura…" = "A preparar a pré-visualização de leitura…";
@@ -43,7 +43,7 @@
 "El archivo supera el límite de 100 MB." = "O ficheiro excede o limite de 100 MB.";
 "El contenido estaba vacío." = "O conteúdo estava vazio.";
 "Elemento guardado en Recibidos." = "Elemento guardado em Recebidos.";
-"Audio recibido. Elige Guardar en TifloLector o Guardar en Mi música. Si cierras, quedará pendiente en Recibidos." = "Áudio recebido. Escolha Guardar no TifloLector ou Guardar em A minha música. Se fechar, ficará pendente em Recebidos.";
+"Audio recibido. Elige Guardar en TifloLector o Guardar en Mi música. Si cierras, quedará pendiente en Recibidos." = "Áudio recebido. Escolha Guardar no TifloLector ou Guardar na secção «A minha música». Se fechar, ficará pendente em Recebidos.";
 "Documento guardado para TifloLector. Puedes leerlo ahora si aparece esa opción. Al abrir TifloAcosta se incorporará a la biblioteca y se abrirá directamente." = "Documento guardado para o TifloLector. Leia-o agora se essa opção estiver disponível. Ao abrir TifloAcosta, será adicionado à biblioteca e aberto diretamente.";
 "Enlace recibido. Estará disponible en Recibidos para abrirlo o analizarlo." = "Ligação recebida. Ficará disponível em Recebidos para abrir ou analisar.";
 "Texto guardado para TifloLector. Puedes leerlo aquí o abrir TifloAcosta para continuar." = "Texto guardado para o TifloLector. Leia-o aqui ou abra TifloAcosta para continuar.";

@@ -365,13 +365,13 @@
 "Exportar" = "Export";
 "Lectura con línea braille" = "Reading with a braille display";
 "Lectura continua" = "Continuous reading";
-"TifloLector conserva los párrafos y la posición para navegar con VoiceOver y una línea braille. Puedes utilizar braille y voz al mismo tiempo." = "TifloLector preserves paragraphs and reading position for navigation with VoiceOver and a braille display. You can use braille and speech together.";
-"Los controles de reproducción y ajustes aparecen antes del texto. Al leer manualmente no se inicia la voz ni se desplaza el foco por cuenta de TifloLector." = "Playback controls and settings appear before the text. When reading manually, TifloLector does not start speech or move focus on its own.";
+"TifloLector conserva los párrafos y la posición para navegar con VoiceOver y una línea braille. Puedes utilizar braille y voz al mismo tiempo." = "TifloReader preserves paragraphs and reading position for navigation with VoiceOver and a braille display. You can use braille and speech together.";
+"Los controles de reproducción y ajustes aparecen antes del texto. Al leer manualmente no se inicia la voz ni se desplaza el foco por cuenta de TifloLector." = "Playback controls and settings appear before the text. When reading manually, TifloReader does not start speech or move focus on its own.";
 "Preferencias de VoiceOver" = "VoiceOver preferences";
 "Para configurar tu línea: Ajustes del iPhone, Accesibilidad, VoiceOver, Braille." = "To configure your display: iPhone Settings, Accessibility, VoiceOver, Braille.";
 "Duración del avance automático: ajusta el ritmo de avance de la línea si tu dispositivo lo admite." = "Auto Advance Duration: adjust the display's advance rate if supported by your device.";
 "Cambio de página automático: permite continuar al desplazarte cuando la presentación lo admite." = "Turn Pages when Panning: continue when panning if the text presentation supports it.";
-"Estas opciones pertenecen a VoiceOver; TifloLector no modifica sus valores." = "These options belong to VoiceOver; TifloLector does not change their values.";
+"Estas opciones pertenecen a VoiceOver; TifloLector no modifica sus valores." = "These options belong to VoiceOver; TifloReader does not change their values.";
 "Esta obra todavía no tiene marcas." = "This book has no bookmarks yet.";
 "Eliminar esta marca" = "Delete this bookmark";
 "Navegación DAISY" = "DAISY navigation";
@@ -418,16 +418,16 @@
 "Las pausas se aplican a la lectura con voces del sistema. La duración natural depende de la voz. No modifican los audiolibros grabados ni garantizan los mismos tiempos en Gemini o Phonon." = "Pauses affect system speech only. They do not change recorded audiobooks or guarantee identical pauses in Gemini or Phonon.";
 "La voz seleccionada se utilizará según el ámbito de estos ajustes. La conexión de Gemini se configura en Motores externos." = "The selected voice applies to these settings. Connect Gemini under External engines.";
 "Gemini necesita una clave API guardada en Motores externos antes de reproducir." = "Gemini needs an API key saved in External engines before playback.";
-"La disponibilidad de Phonon depende de tener instalado un motor compatible dentro de TifloLector." = "Phonon is available only when a compatible voice engine is installed in TifloLector.";
+"La disponibilidad de Phonon depende de tener instalado un motor compatible dentro de TifloLector." = "Phonon is available only when a compatible voice engine is installed in TifloReader.";
 "Permitir mi Voz personal" = "Allow my Personal Voice";
 "Solicita permiso al sistema para utilizar una Voz personal ya creada." = "Request access to a Personal Voice already created on this iPhone.";
 "Voz personal no autorizada. El permiso puede cambiarse en Ajustes del iPhone." = "Personal Voice is not authorized. You can change this in iPhone Settings.";
-"Este dispositivo no admite el uso de Voz personal en TifloLector." = "This device does not support Personal Voice in TifloLector.";
+"Este dispositivo no admite el uso de Voz personal en TifloLector." = "This device does not support Personal Voice in TifloReader.";
 "El tono modifica la voz sintetizada, no los audiolibros grabados." = "Pitch affects synthesized voices, not recorded audiobooks.";
 "Buscar más voces" = "Find more voices";
 "Indica dónde descargar voces adicionales de iOS." = "Explains where to download additional iOS voices.";
 "Entendido" = "Got it";
-"Abre Ajustes del iPhone, Accesibilidad, Contenido leído, Voces. Descarga las voces deseadas y vuelve al lector. Después entra de nuevo en Audio para actualizar la lista." = "Open iPhone Settings, Accessibility, Spoken Content, Voices. Download the voices you want, return to TifloLector and reopen Audio to refresh the list.";
+"Abre Ajustes del iPhone, Accesibilidad, Contenido leído, Voces. Descarga las voces deseadas y vuelve al lector. Después entra de nuevo en Audio para actualizar la lista." = "Open iPhone Settings, Accessibility, Spoken Content, Voices. Download the voices you want, return to TifloReader and reopen Audio to refresh the list.";
 "Audio y voces del sistema" = "Audio and system voices";
 "Audio y voces" = "Audio and voices";
 "Presentación del documento" = "Document appearance";
@@ -449,7 +449,7 @@
 "OCR y reconocimiento" = "OCR and text recognition";
 "Navegación y avances" = "Navigation and skipping";
 "Desplazamiento" = "Navigation";
-"Ajustes de TifloLector" = "TifloLector settings";
+"Ajustes de TifloLector" = "TifloReader settings";
 "Palabra o expresión" = "Word or phrase";
 "Escuchar pronunciación" = "Hear pronunciation";
 "Consultar diccionario del iPhone" = "Look up in iPhone Dictionary";
@@ -580,7 +580,7 @@
 "La clave se guarda en el iPhone cuando pulses Guardar. No la compartas. Los controles de Google pueden cambiar." = "Your key is saved on this iPhone when you tap Save. Do not share it. Google’s controls may change.";
 "Crear clave Gemini" = "Create Gemini key";
 "Voces locales. No necesitan clave API." = "Local voices. No API key required.";
-"La aplicación Phonon para VoiceOver no supone automáticamente compatibilidad con el reproductor de TifloLector." = "The Phonon VoiceOver app does not automatically mean TifloLector supports its voices.";
+"La aplicación Phonon para VoiceOver no supone automáticamente compatibilidad con el reproductor de TifloLector." = "The Phonon VoiceOver app does not automatically mean TifloReader supports its voices.";
 "El modelo Core ML debe estar exportado para iPhone y contener bundle.json. Un checkpoint Android o un ZIP de voz aislada no sirve para iOS." = "The Core ML model must be built for iPhone and include bundle.json. Android checkpoints and individual voice ZIPs will not work on iOS.";
 "Descargar modelo Phonon inglés" = "Download English Phonon model";
 "Cancelar descarga" = "Cancel download";
@@ -663,22 +663,22 @@
 "Título Z a A" = "Title Z to A";
 "Último abierto" = "Last opened";
 "Creación rápida de marcas" = "Quick bookmarks";
-"Crear marca en TifloLector" = "Create bookmark in TifloLector";
+"Crear marca en TifloLector" = "Create bookmark in TifloReader";
 "Guarda una marca en la posición actual sin interrumpir la reproducción." = "Save a bookmark at the current position without interrupting playback.";
-"Abre un libro en TifloLector para crear una marca." = "Open a book in TifloLector to create a bookmark.";
+"Abre un libro en TifloLector para crear una marca." = "Open a book in TifloReader to create a bookmark.";
 "Preparar el atajo" = "Set up shortcut";
-"En Atajos, crea uno nuevo, añade la acción Crear marca en TifloLector y guárdalo con ese nombre." = "In Shortcuts, create a shortcut, add the Create Bookmark in TifloLector action and save it with that name.";
+"En Atajos, crea uno nuevo, añade la acción Crear marca en TifloLector y guárdalo con ese nombre." = "In Shortcuts, create a shortcut, add the Create Bookmark in TifloReader action and save it with that name.";
 "Abrir Atajos" = "Open Shortcuts";
 "Triple toque posterior" = "Triple Back Tap";
-"Ve a Ajustes del iPhone, Accesibilidad, Tocar, Tocar atrás y Triple toque. Selecciona el atajo Crear marca en TifloLector." = "In iPhone Settings, go to Accessibility, Touch, Back Tap, Triple Tap. Choose your Create Bookmark in TifloLector shortcut.";
+"Ve a Ajustes del iPhone, Accesibilidad, Tocar, Tocar atrás y Triple toque. Selecciona el atajo Crear marca en TifloLector." = "In iPhone Settings, go to Accessibility, Touch, Back Tap, Triple Tap. Choose your Create Bookmark in TifloReader shortcut.";
 "Botón de Acción" = "Action Button";
-"Ve a Ajustes del iPhone, Botón de Acción, Atajo y selecciona Crear marca en TifloLector." = "In iPhone Settings, open Action Button, Shortcut, then select Create Bookmark in TifloLector.";
+"Ve a Ajustes del iPhone, Botón de Acción, Atajo y selecciona Crear marca en TifloLector." = "In iPhone Settings, open Action Button, Shortcut, then select Create Bookmark in TifloReader.";
 "Durante la lectura" = "While reading";
 "Con un libro abierto, ejecuta el atajo para guardar la posición sin detener la reproducción. También puedes utilizar la acción Crear marca del rotor de VoiceOver." = "With a book open, run the shortcut to bookmark your position without stopping playback. You can also use VoiceOver rotor actions.";
 
 "Elementos compartidos" = "Shared items";
 "Revisar elementos pendientes" = "Review pending items";
-"Los documentos y textos compartidos se incorporan a TifloLector automáticamente. Consulta esta sección para revisar enlaces y elementos que no se hayan podido importar." = "Shared documents and text are added automatically to TifloLector. Check this section for links and items that could not be imported.";
+"Los documentos y textos compartidos se incorporan a TifloLector automáticamente. Consulta esta sección para revisar enlaces y elementos que no se hayan podido importar." = "Shared documents and text are added automatically to TifloReader. Check this section for links and items that could not be imported.";
 "Abrir contacto y redes" = "Open contact and social networks";
 "Consultar privacidad y accesibilidad" = "View privacy and accessibility";
 "Solo avisos de nuevos recursos y vídeos propios al actualizar contenidos. No se envían avisos de Actualidad ni notificaciones con la app cerrada." = "Only new TifloAcosta resources and videos are checked when content is refreshed. No News alerts or notifications while the app is closed.";
@@ -1053,7 +1053,7 @@
 "Selecciona dónde importar el archivo de audio." = "Choose where to import the audio file.";
 "Elegir destino del audio" = "Choose audio destination";
 "Importar en Mi música" = "Import into My Music";
-"Elige TifloLector o Mi música." = "Choose TifloLector or My Music.";
+"Elige TifloLector o Mi música." = "Choose TifloReader or My Music.";
 "Importa el audio en Mi música." = "Import the audio into My Music.";
 "Retroceder diez segundos" = "Rewind ten seconds";
 "Avanzar diez segundos" = "Forward ten seconds";
@@ -1196,8 +1196,8 @@
 "Documentos recibidos importados: %d. Fallidos: %d." = "Shared documents imported: %d. Failed: %d.";
 
 "Sonidos y avisos" = "Sounds and announcements";
-"Confirmaciones de TifloLector" = "TifloLector confirmations";
-"Sonidos de TifloLector" = "TifloLector sounds";
+"Confirmaciones de TifloLector" = "TifloReader confirmations";
+"Sonidos de TifloLector" = "TifloReader sounds";
 "Avisos hablados" = "Spoken announcements";
 "Vibración en avisos" = "Vibration for notifications";
 
@@ -1225,10 +1225,9 @@
 "Los audios fallidos permanecen en Recibidos para reintentar." = "Failed audio files remain in Received for retry.";
 "Audios pendientes" = "Pending audio files";
 "Importar todos los audios pendientes en Mi música" = "Import all pending audio files into My Music";
-"Importar todos los audios pendientes en TifloLector" = "Import all pending audio files into TifloLector";
-
+"Importar todos los audios pendientes en TifloLector" = "Import all pending audio files into TifloReader";
 // Bloque de incidencias nuevas de TifloLector y confirmación de eliminaciones.
-"Vista al entrar en TifloLector" = "View when opening TifloLector";
+"Vista al entrar en TifloLector" = "View when opening TifloReader";
 "Vista general" = "All documents";
 "La navegación con gestos solo está disponible mientras se reproduce." = "Swipe navigation is available only during playback.";
 "¿Eliminar la carpeta «%@»?" = "Delete the folder “%@”?";
@@ -1414,8 +1413,8 @@
 "El formato %@ todavía no dispone de un lector compatible." = "The %@ format is not supported yet.";
 "No se ha encontrado contenido legible en «%@»." = "No readable content was found in “%@”.";
 "No se ha podido abrir el paquete o el ZIP no contiene un libro DAISY ni pistas de audio reconocibles." = "The package could not be opened, or the ZIP contains neither a DAISY book nor recognizable audio tracks.";
-"Algunos elementos no se pudieron importar y permanecen en Recibidos." = "Some items could not be imported and remain in the Inbox.";
-"No se pudo abrir «%@»: %@. El elemento permanece en Recibidos." = "Could not open “%@”: %@. The item remains in the Inbox.";
+"Algunos elementos no se pudieron importar y permanecen en Recibidos." = "Some items could not be imported and remain in “Received”.";
+"No se pudo abrir «%@»: %@. El elemento permanece en Recibidos." = "Could not open “%@”: %@. The item remains in “Received”.";
 "PDF con más de 150 páginas escaneadas. Divide el archivo para realizar OCR." = "The PDF has more than 150 scanned pages. Split the file to run OCR.";
 "Muestra la ruta para llegar a los ajustes de braille." = "Shows how to find braille settings.";
 "Ajustes de braille de VoiceOver" = "VoiceOver Braille Settings";
@@ -1608,7 +1607,7 @@
 "Unidad de avance" = "Skip unit";
 "Generados %d de %d fragmentos" = "Generated %d of %d segments";
 "Error al exportar: %@" = "Export error: %@";
-"«%@» guardado en TifloLector." = "“%@” saved in TifloLector.";
+"«%@» guardado en TifloLector." = "“%@” saved in TifloReader.";
 "No se pudo guardar «%@»: %@" = "Could not save “%@”: %@";
 "Selecciona una carpeta en Archivos para descargar «%@»." = "Choose a folder in Files to download “%@”.";
 "No se pudo descargar «%@»: %@" = "Could not download “%@”: %@";
@@ -1703,7 +1702,7 @@
 "No se ha podido interpretar este catálogo como OPDS 1 o 2." = "This catalog could not be read as OPDS 1 or 2.";
 "La biblioteca ha devuelto una respuesta no válida." = "The library returned an invalid response.";
 "El catálogo o el archivo supera el tamaño máximo permitido." = "The catalog or file exceeds the maximum allowed size.";
-"Esta obra no ofrece una descarga directa en un formato que TifloLector pueda leer." = "This work has no direct download in a format TifloLector can read.";
+"Esta obra no ofrece una descarga directa en un formato que TifloLector pueda leer." = "This work has no direct download in a format TifloReader can read.";
 "Introduce un nombre válido y una biblioteca que no figure ya en la lista." = "Enter a valid name and a library that is not already listed.";
 "Conecta tu cuenta antes de explorar archivos." = "Connect your account before browsing files.";
 "La autorización de la nube ha caducado o no permite acceder a este archivo." = "Cloud authorization has expired or does not allow access to this file.";
@@ -1734,10 +1733,10 @@
 
 // Release 1.7: shortcuts, provider and download errors
 "Abre la sección Actualidad de TifloAcosta." = "Opens the TifloAcosta News section.";
-"Abre la biblioteca de TifloLector en TifloAcosta." = "Opens the TifloLector library in TifloAcosta.";
+"Abre la biblioteca de TifloLector en TifloAcosta." = "Opens the TifloReader library in TifloAcosta.";
 "Reanuda el último libro abierto, desde la posición guardada." = "Resumes the last opened book from its saved position.";
 "Abre los vídeos accesibles de TifloAcosta." = "Opens TifloAcosta’s accessible videos.";
-"Continuar el último libro en TifloLector" = "Resume the last book in TifloLector";
+"Continuar el último libro en TifloLector" = "Resume the last book in TifloReader";
 "Continuar libro" = "Resume book";
 "Pegar clave" = "Paste key";
 "Apple Music no tiene permiso para acceder a tu biblioteca. Puedes autorizarlo en Ajustes del iPhone." = "Apple Music does not have permission to access your library. You can grant it in iPhone Settings.";
@@ -1935,7 +1934,7 @@
 "No hay resultados." = "No results.";
 
 // Automatic OCR status
-"Este documento contiene texto en forma de imagen. TifloLector lo reconocerá automáticamente para que puedas leerlo de forma accesible." = "This document contains text as an image. TifloLector will recognize it automatically so you can read it accessibly.";
+"Este documento contiene texto en forma de imagen. TifloLector lo reconocerá automáticamente para que puedas leerlo de forma accesible." = "This document contains text as an image. TifloReader will recognize it automatically so you can read it accessibly.";
 "Reconocimiento parcial. No se encontró texto en %d páginas procesadas. El texto disponible se ha guardado." = "Partial recognition. No text was found on %d processed pages. The available text has been saved.";
 "Reconocimiento completado. El documento está listo para su lectura." = "Recognition complete. The document is ready to read.";
 "Reconocimiento de texto cancelado." = "Text recognition cancelled.";

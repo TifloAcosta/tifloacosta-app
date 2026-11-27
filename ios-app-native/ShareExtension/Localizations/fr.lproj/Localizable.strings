@@ -11,9 +11,9 @@
 "Guardar en Mi música" = "Enregistrer dans Ma musique";
 "Contenido para leer" = "Contenu à lire";
 "Vista rápida. El libro completo quedará disponible en TifloLector al abrir TifloAcosta." = "Aperçu rapide. Le livre complet sera disponible dans TifloLector à l'ouverture de TifloAcosta.";
-"Audio guardado para Mi música. Abre Recibidos en TifloAcosta para incorporarlo." = "Audio enregistré pour Ma musique. Ouvrez Reçus dans TifloAcosta pour l'importer.";
-"Audio guardado para TifloLector. Abre Recibidos en TifloAcosta para incorporarlo." = "Audio enregistré pour TifloLector. Ouvrez Reçus dans TifloAcosta pour l'importer.";
-"No se pudo guardar el destino del audio. El archivo permanece en Recibidos." = "Impossible d'enregistrer la destination audio. Le fichier reste dans Reçus.";
+"Audio guardado para Mi música. Abre Recibidos en TifloAcosta para incorporarlo." = "Audio enregistré pour Ma musique. Ouvrez « Éléments reçus » dans TifloAcosta pour l'importer.";
+"Audio guardado para TifloLector. Abre Recibidos en TifloAcosta para incorporarlo." = "Audio enregistré pour TifloLector. Ouvrez « Éléments reçus » dans TifloAcosta pour l'importer.";
+"No se pudo guardar el destino del audio. El archivo permanece en Recibidos." = "Impossible d'enregistrer la destination audio. Le fichier reste dans « Éléments reçus ».";
 "Preparando la vista de lectura…" = "Préparation de l'aperçu de lecture…";
 "No es posible leer una vista rápida: %@. El documento está guardado y se importará al abrir TifloAcosta." = "Impossible de lire l'aperçu rapide : %@. Le document est enregistré et sera importé à l'ouverture de TifloAcosta.";
 "El archivo no contiene texto legible en la vista rápida." = "Le fichier ne contient pas de texte lisible dans l'aperçu rapide.";
@@ -23,7 +23,7 @@
 "Se han seleccionado más de 100 elementos. Comparte los archivos en lotes más pequeños." = "Plus de 100 éléments sélectionnés. Partagez les fichiers par lots plus petits.";
 "Recibidos: %d de %d." = "Reçus : %d sur %d.";
 "Fallidos: %d." = "Échecs : %d.";
-"%d archivos de audio pendientes de elegir destino en Recibidos." = "%d fichiers audio attendent le choix d'une destination dans Reçus.";
+"%d archivos de audio pendientes de elegir destino en Recibidos." = "%d fichiers audio attendent le choix d'une destination dans « Éléments reçus ».";
 "Los archivos con errores permanecen en la aplicación de origen." = "Les fichiers en erreur restent dans l'application d'origine.";
 "Errores: %@." = "Erreurs : %@.";
 "Abre TifloAcosta para incorporar los recibidos." = "Ouvrez TifloAcosta pour importer les éléments reçus.";
@@ -42,10 +42,10 @@
 "El ZIP o DAISY supera el límite de 750 MB. El archivo permanece en la aplicación de origen." = "Le ZIP ou DAISY dépasse la limite de 750 Mo. Le fichier reste dans l'application d'origine.";
 "El archivo supera el límite de 100 MB." = "Le fichier dépasse la limite de 100 Mo.";
 "El contenido estaba vacío." = "Le contenu était vide.";
-"Elemento guardado en Recibidos." = "Élément enregistré dans Reçus.";
-"Audio recibido. Elige Guardar en TifloLector o Guardar en Mi música. Si cierras, quedará pendiente en Recibidos." = "Audio reçu. Choisissez Enregistrer dans TifloLector ou dans Ma musique. Si vous fermez, il restera en attente dans Reçus.";
+"Elemento guardado en Recibidos." = "Élément enregistré dans « Éléments reçus ».";
+"Audio recibido. Elige Guardar en TifloLector o Guardar en Mi música. Si cierras, quedará pendiente en Recibidos." = "Audio reçu. Choisissez Enregistrer dans TifloLector ou dans Ma musique. Si vous fermez, il restera en attente dans « Éléments reçus ».";
 "Documento guardado para TifloLector. Puedes leerlo ahora si aparece esa opción. Al abrir TifloAcosta se incorporará a la biblioteca y se abrirá directamente." = "Document enregistré pour TifloLector. Lisez-le maintenant si cette option est disponible. À l'ouverture de TifloAcosta, il sera ajouté à la bibliothèque et ouvert directement.";
-"Enlace recibido. Estará disponible en Recibidos para abrirlo o analizarlo." = "Lien reçu. Il sera disponible dans Reçus pour l'ouvrir ou l'analyser.";
+"Enlace recibido. Estará disponible en Recibidos para abrirlo o analizarlo." = "Lien reçu. Il sera disponible dans « Éléments reçus » pour l'ouvrir ou l'analyser.";
 "Texto guardado para TifloLector. Puedes leerlo aquí o abrir TifloAcosta para continuar." = "Texte enregistré pour TifloLector. Lisez-le ici ou ouvrez TifloAcosta pour continuer.";
 "No se pudo guardar el contenido. Puedes volver a intentarlo." = "Impossible d'enregistrer le contenu. Vous pouvez réessayer.";
 "No hay una vista de lectura disponible para este formato." = "Aucun aperçu de lecture disponible pour ce format.";

@@ -777,7 +777,7 @@
 "Importar canciones" = "Importar músicas";
 "Selecciona archivos de audio. Los originales se conservarán en su ubicación." = "Seleciona ficheiros de áudio. Os originais permanecem no local de origem.";
 "Importar carpeta desde Archivos o nube" = "Importar pasta de Ficheiros ou da nuvem";
-"Elige una carpeta disponible en Archivos. Las canciones se copiarán a Mi Música para escucharlas sin depender de la conexión." = "Escolhe uma pasta em Ficheiros. As músicas serão copiadas para A minha música para ouvires sem ligação.";
+"Elige una carpeta disponible en Archivos. Las canciones se copiarán a Mi Música para escucharlas sin depender de la conexión." = "Escolhe uma pasta em Ficheiros. As músicas serão copiadas para «A minha música» para ouvires sem ligação.";
 "Crear lista de reproducción" = "Criar lista de reprodução";
 "Crear carpeta inteligente" = "Criar pasta inteligente";
 "Copias de seguridad" = "Cópias de segurança";
@@ -813,7 +813,7 @@
 "Puedes añadir canciones desde el menú Acciones de cada canción." = "Podes adicionar músicas no menu Ações de cada canção.";
 "El título contiene" = "O título contém";
 "Su contenido se actualiza automáticamente al añadir o retirar canciones." = "O conteúdo atualiza-se automaticamente quando adicionas ou removes músicas.";
-"La canción dejará de aparecer en Mi Música, pero no se borrará el archivo original." = "A música deixará de aparecer em A minha música, mas o ficheiro original não será eliminado.";
+"La canción dejará de aparecer en Mi Música, pero no se borrará el archivo original." = "A música deixará de aparecer na secção «A minha música», mas o ficheiro original não será eliminado.";
 "Importación de música" = "Importação de música";
 "Reproducción de música" = "Reprodução de música";
 "No compartir y volver a la biblioteca" = "Não partilhar e voltar à biblioteca";
@@ -853,7 +853,7 @@
 "Canciones" = "Músicas";
 "Audius: música gratuita" = "Audius: música gratuita";
 "Organizar mi música" = "Organizar a minha música";
-"Ajustes de Mi Música" = "Definições de A minha música";
+"Ajustes de Mi Música" = "Definições da secção «A minha música»";
 "Perfil de ecualización" = "Perfil do equalizador";
 "Todavía no hay canciones. Usa Organizar mi música para importarlas." = "Ainda não há músicas. Utilize Organizar a minha música para as importar.";
 "Conexión" = "Ligação";
@@ -889,7 +889,7 @@
 "Velocidad específica del documento" = "Velocidade específica do documento";
 "Tono específico del documento" = "Tom específico do documento";
 "Destino de copias" = "Destino das cópias de segurança";
-"Carpeta interna de Mi Música" = "Pasta interna de Minha Música";
+"Carpeta interna de Mi Música" = "Pasta interna da secção «A minha música»";
 "Elegir destino de copias automáticas" = "Escolher destino das cópias automáticas";
 "Restablecer destino interno" = "Restaurar destino interno";
 "Reproducción de lista" = "Reprodução da lista";
@@ -1047,12 +1047,12 @@
 "Lectura braille continua activada" = "Leitura contínua em braille ativada";
 
 "¿Dónde guardar el audio?" = "Onde guardar o áudio?";
-"Mi música" = "Minha música";
+"Mi música" = "A minha música";
 "Selecciona dónde importar el archivo de audio." = "Selecione onde importar o ficheiro de áudio.";
 "Elegir destino del audio" = "Escolher destino do áudio";
-"Importar en Mi música" = "Importar para Minha música";
-"Elige TifloLector o Mi música." = "Escolha TifloLector ou Minha música.";
-"Importa el audio en Mi música." = "Importa o áudio para Minha música.";
+"Importar en Mi música" = "Importar para «A minha música»";
+"Elige TifloLector o Mi música." = "Escolha TifloLector ou A minha música.";
+"Importa el audio en Mi música." = "Importa o áudio para «A minha música».";
 "Retroceder diez segundos" = "Retroceder dez segundos";
 "Avanzar diez segundos" = "Avançar dez segundos";
 "Ya existe una marca en esta posición." = "Já existe um marcador nesta posição.";
@@ -1219,10 +1219,10 @@
 "Sitúa la lectura al principio sin reproducir." = "Vai para o início sem reproduzir.";
 
 // Audio destinations for shared files and accessible batch import.
-"Audios recibidos en Mi música: %d. Fallidos: %d." = "Áudios recebidos em A minha música: %d. Falhas: %d.";
+"Audios recibidos en Mi música: %d. Fallidos: %d." = "Áudios recebidos na secção «A minha música»: %d. Falhas: %d.";
 "Los audios fallidos permanecen en Recibidos para reintentar." = "Os áudios com falha permanecem em Recebidos para voltar a tentar.";
 "Audios pendientes" = "Áudios pendentes";
-"Importar todos los audios pendientes en Mi música" = "Importar todos os áudios pendentes para A minha música";
+"Importar todos los audios pendientes en Mi música" = "Importar todos os áudios pendentes para «A minha música»";
 "Importar todos los audios pendientes en TifloLector" = "Importar todos os áudios pendentes para TifloLector";
 
 // Bloque de incidencias nuevas de TifloLector y confirmación de eliminaciones.

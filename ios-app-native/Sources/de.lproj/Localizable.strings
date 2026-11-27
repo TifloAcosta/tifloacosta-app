@@ -685,7 +685,7 @@
 "En Atajos, crea uno nuevo, añade la acción Crear marca en TifloLector y guárdalo con ese nombre." = "Erstelle in Kurzbefehle einen Kurzbefehl mit der Aktion Lesezeichen in TifloLector erstellen und speichere ihn.";
 "Abrir Atajos" = "Kurzbefehle öffnen";
 "Triple toque posterior" = "Dreimal auf Rückseite tippen";
-"Ve a Ajustes del iPhone, Accesibilidad, Tocar, Tocar atrás y Triple toque. Selecciona el atajo Crear marca en TifloLector." = "Wähle unter iPhone-Einstellungen, Bedienungshilfen, Tippen, Auf Rückseite tippen, Dreimal tippen den Lesezeichen-Kurzbefehl.";
+"Ve a Ajustes del iPhone, Accesibilidad, Tocar, Tocar atrás y Triple toque. Selecciona el atajo Crear marca en TifloLector." = "Wähle unter iPhone-Einstellungen, Bedienungshilfen, Tippen, Auf Rückseite tippen, Dreimal tippen den Kurzbefehl „Lesezeichen in TifloLector erstellen“.";
 "Botón de Acción" = "Aktionstaste";
 "Ve a Ajustes del iPhone, Botón de Acción, Atajo y selecciona Crear marca en TifloLector." = "Öffne Einstellungen, Aktionstaste, Kurzbefehl und wähle Lesezeichen in TifloLector erstellen.";
 "Durante la lectura" = "Beim Lesen";
@@ -1412,8 +1412,8 @@
 "El formato %@ todavía no dispone de un lector compatible." = "Das Format %@ wird noch nicht unterstützt.";
 "No se ha encontrado contenido legible en «%@»." = "In „%@“ wurde kein lesbarer Inhalt gefunden.";
 "No se ha podido abrir el paquete o el ZIP no contiene un libro DAISY ni pistas de audio reconocibles." = "Das Paket konnte nicht geöffnet werden oder die ZIP-Datei enthält weder ein DAISY-Buch noch erkennbare Audiospuren.";
-"Algunos elementos no se pudieron importar y permanecen en Recibidos." = "Einige Elemente konnten nicht importiert werden und bleiben im Eingang.";
-"No se pudo abrir «%@»: %@. El elemento permanece en Recibidos." = "„%@“ konnte nicht geöffnet werden: %@. Das Element bleibt im Eingang.";
+"Algunos elementos no se pudieron importar y permanecen en Recibidos." = "Einige Elemente konnten nicht importiert werden und bleiben unter „Empfangen“.";
+"No se pudo abrir «%@»: %@. El elemento permanece en Recibidos." = "„%@“ konnte nicht geöffnet werden: %@. Das Element bleibt unter „Empfangen“.";
 "PDF con más de 150 páginas escaneadas. Divide el archivo para realizar OCR." = "Die PDF enthält mehr als 150 gescannte Seiten. Teile die Datei für die Texterkennung auf.";
 "Muestra la ruta para llegar a los ajustes de braille." = "Zeigt den Weg zu den Braille-Einstellungen.";
 "Ajustes de braille de VoiceOver" = "Braille-Einstellungen für VoiceOver";

@@ -593,7 +593,7 @@
 "Todavía no hay contenidos guardados para leer después." = "Nessun contenuto salvato per dopo.";
 "No hay contenidos recientes disponibles en el catálogo." = "Nessun contenuto recente disponibile.";
 "Compartir archivo" = "Condividi file";
-"Eliminar de Recibidos" = "Elimina da Ricevuti";
+"Eliminar de Recibidos" = "Elimina da «Elementi ricevuti»";
 "Filtrar contenidos multimedia" = "Filtra contenuti multimediali";
 "Buscar podcasts y vídeos" = "Cerca podcast e video";
 "ISBN" = "ISBN";
@@ -685,7 +685,7 @@
 "En Atajos, crea uno nuevo, añade la acción Crear marca en TifloLector y guárdalo con ese nombre." = "In Comandi Rapidi, crea un comando, aggiungi Crea segnalibro in TifloLector e salvalo con quel nome.";
 "Abrir Atajos" = "Apri Comandi Rapidi";
 "Triple toque posterior" = "Triplo tocco posteriore";
-"Ve a Ajustes del iPhone, Accesibilidad, Tocar, Tocar atrás y Triple toque. Selecciona el atajo Crear marca en TifloLector." = "In Impostazioni iPhone, Accessibilità, Tocco, Tocco posteriore, Triplo tocco, scegli il comando rapido per il segnalibro.";
+"Ve a Ajustes del iPhone, Accesibilidad, Tocar, Tocar atrás y Triple toque. Selecciona el atajo Crear marca en TifloLector." = "In Impostazioni iPhone, Accessibilità, Tocco, Tocco posteriore, Triplo tocco, scegli il comando rapido «Crea segnalibro in TifloLector».";
 "Botón de Acción" = "Tasto Azione";
 "Ve a Ajustes del iPhone, Botón de Acción, Atajo y selecciona Crear marca en TifloLector." = "In Impostazioni iPhone, Tasto Azione, Comando rapido, scegli Crea segnalibro in TifloLector.";
 "Durante la lectura" = "Durante la lettura";
@@ -1220,7 +1220,7 @@
 
 // Audio destinations for shared files and accessible batch import.
 "Audios recibidos en Mi música: %d. Fallidos: %d." = "File audio ricevuti in La mia musica: %d. Non riusciti: %d.";
-"Los audios fallidos permanecen en Recibidos para reintentar." = "I file audio non riusciti restano in Ricevuti per un nuovo tentativo.";
+"Los audios fallidos permanecen en Recibidos para reintentar." = "I file audio non riusciti restano in «Elementi ricevuti» per un nuovo tentativo.";
 "Audios pendientes" = "File audio in attesa";
 "Importar todos los audios pendientes en Mi música" = "Importa tutti i file audio in attesa in La mia musica";
 "Importar todos los audios pendientes en TifloLector" = "Importa tutti i file audio in attesa in TifloLector";
@@ -1412,8 +1412,8 @@
 "El formato %@ todavía no dispone de un lector compatible." = "Il formato %@ non è ancora supportato.";
 "No se ha encontrado contenido legible en «%@»." = "Non è stato trovato contenuto leggibile in «%@».";
 "No se ha podido abrir el paquete o el ZIP no contiene un libro DAISY ni pistas de audio reconocibles." = "Impossibile aprire il pacchetto oppure il file ZIP non contiene un libro DAISY né tracce audio riconoscibili.";
-"Algunos elementos no se pudieron importar y permanecen en Recibidos." = "Non è stato possibile importare alcuni elementi, che restano in Ricevuti.";
-"No se pudo abrir «%@»: %@. El elemento permanece en Recibidos." = "Impossibile aprire «%@»: %@. L’elemento resta in Ricevuti.";
+"Algunos elementos no se pudieron importar y permanecen en Recibidos." = "Non è stato possibile importare alcuni elementi, che restano in «Elementi ricevuti».";
+"No se pudo abrir «%@»: %@. El elemento permanece en Recibidos." = "Impossibile aprire «%@»: %@. L’elemento resta in «Elementi ricevuti».";
 "PDF con más de 150 páginas escaneadas. Divide el archivo para realizar OCR." = "Il PDF contiene più di 150 pagine scansionate. Dividi il file per eseguire l’OCR.";
 "Muestra la ruta para llegar a los ajustes de braille." = "Mostra come accedere alle impostazioni braille.";
 "Ajustes de braille de VoiceOver" = "Impostazioni braille di VoiceOver";

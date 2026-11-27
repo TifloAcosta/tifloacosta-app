@@ -453,8 +453,8 @@ final class LocalizationNavigationTests: XCTestCase {
         print("LOCALIZATION_UI_NAVIGATION_PASS \(language)")
     }
 
-    /// Exercises the real local UI path on the simulator, with no cloud upload,
-    /// no automation and no third-party media. Creation and preview are separate.
+    /// Exercises local creation, read-only preview, cancellation, explicit restore
+    /// and relaunch in the simulator, without cloud upload or third-party media.
     func testLocalBackupCreationAndRestorePreview() {
         let app = XCUIApplication()
         launch(app, index: 0)
@@ -524,6 +524,41 @@ final class LocalizationNavigationTests: XCTestCase {
         XCTAssertFalse(confirm.exists)
         XCTAssertTrue(reveal(app, local))
         XCTAssertTrue(close.isEnabled)
+
+        // Reopen the same immutable generation and actually commit the
+        // preferences-only restoration. This is a disposable simulator
+        // installation; no user files or cloud operations are involved.
+        XCTAssertTrue(reveal(app, review))
+        review.tap()
+        let preparedAgain = XCTNSPredicateExpectation(predicate: NSPredicate(format: "enabled == true"), object: close)
+        XCTAssertEqual(XCTWaiter.wait(for: [preparedAgain], timeout: 60), .completed)
+        XCTAssertTrue(reveal(app, reportStatus))
+        XCTAssertTrue(reveal(app, confirm))
+        XCTAssertTrue(confirm.isEnabled)
+        confirm.tap()
+        let continueRestore = app.buttons.matching(NSPredicate(format: "label == %@", "Continuar")).firstMatch
+        XCTAssertTrue(continueRestore.waitForExistence(timeout: 10), "Restore must require explicit confirmation")
+        continueRestore.tap()
+        let restored = app.staticTexts.matching(NSPredicate(format: "label == %@", "Restauración finalizada. Se han conservado los elementos existentes.")).firstMatch
+        let idleAfterRestore = XCTNSPredicateExpectation(predicate: NSPredicate(format: "enabled == true"), object: close)
+        XCTAssertEqual(XCTWaiter.wait(for: [idleAfterRestore], timeout: 60), .completed)
+        XCTAssertTrue(reveal(app, restored), "Confirmed restore must report success")
+        XCTAssertFalse(confirm.exists)
+        XCTAssertTrue(reveal(app, local))
+        close.tap()
+
+        // Relaunch after commit: an uncleared recovery journal must not
+        // leave this installation blocked or unable to reopen backups.
+        launch(app, index: 0)
+        openRoot(app, key: "Configuración", language: "es")
+        XCTAssertTrue(reveal(app, manage))
+        manage.tap()
+        XCTAssertTrue(close.waitForExistence(timeout: 30))
+        let idleAfterRelaunch = XCTNSPredicateExpectation(predicate: NSPredicate(format: "enabled == true"), object: close)
+        XCTAssertEqual(XCTWaiter.wait(for: [idleAfterRelaunch], timeout: 45), .completed)
+        XCTAssertTrue(reveal(app, local))
+        XCTAssertTrue(reveal(app, review))
+        XCTAssertTrue(review.isEnabled)
         close.tap()
     }
 

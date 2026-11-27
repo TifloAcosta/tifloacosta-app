@@ -822,7 +822,7 @@
 "Braille" = "Braille";
 "Un minuto" = "Un minuto";
 "Presentación de lectura" = "Modalità di lettura";
-"Voz: el foco puede comenzar en Reproducir. Visual: lectura manual del texto. Braille: lectura manual del mismo texto con la línea braille conectada a VoiceOver. Los tres modos conservan posición y marcas." = "Voce: il focus può iniziare su Riproduci. Visuale: lettura manuale del testo. Braille: lettura manuale dello stesso testo con un display braille collegato a VoiceOver. Tutte e tre le modalità mantengono la posizione e i segnalibri.";
+"Voz: el foco puede comenzar en Reproducir. Visual: lectura manual del texto. Braille: lectura manual del mismo texto con la línea braille conectada a VoiceOver. Los tres modos conservan posición y marcas." = "Voce: il focus può iniziare su Riproduci. Visivo: lettura manuale del testo. Braille: lettura manuale dello stesso testo con un display braille collegato a VoiceOver. Tutte e tre le modalità mantengono la posizione e i segnalibri.";
 // Beta: modos de lectura y acciones accesibles.
 "Configura Phonon en Motores externos antes de utilizarlo." = "Configura Phonon in Motori esterni prima di utilizzarlo.";
 "Cómo instalar más voces del sistema" = "Come installare altre voci di sistema";

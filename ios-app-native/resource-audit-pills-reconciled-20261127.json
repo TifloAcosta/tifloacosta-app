@@ -1,0 +1,1005 @@
+{
+  "date": "2026-11-27",
+  "baseCommit": "645ee7416b35c7f1259f4564d72f8f0c8b032073",
+  "method": "Source and catalog identity checked by language/year/edition or stable source ID. All existing HTMLs checked by normalizing visible text and comparing each source line at least 50 characters. This is not a full structural comparison and does not prove exact text under 50 characters, order, formatting or link parity. Nine recovered files separately verified byte for byte. One original greeting omitted when an editorial date heading replaced it; restored as paragraph, date heading retained.",
+  "pills": [
+    {
+      "sourceId": "1vlw15qhDgkajSZPgDQzFo9whgDaioSwD",
+      "sourcePath": [
+        "Pills",
+        "Pills 24 of 2026.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-pildoras-2026-24",
+      "path": "docs/en/pildoras/2026/tech-pills-24-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 65,
+      "matchedBeforeChange": 65
+    },
+    {
+      "sourceId": "1vI09TTMryj4L11GktqGEfcJaYIJNxYJi",
+      "sourcePath": [
+        "Pills",
+        "tech pills. 23 2026.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-tech-pills-23-2026",
+      "path": "docs/en/technology-pills-23-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 241,
+      "matchedBeforeChange": 241
+    },
+    {
+      "sourceId": "11jp8KzM06MwlhnXXOdo-Fa16drl0YURf",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 22 2026.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-tech-pills-22-2026",
+      "path": "docs/en/technology-pills-22-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 180,
+      "matchedBeforeChange": 180,
+      "parts": [
+        "docs/en/technology-pills-22-part1.inc.html",
+        "docs/en/technology-pills-22-part2.inc.html",
+        "docs/en/technology-pills-22-part3.inc.html"
+      ]
+    },
+    {
+      "sourceId": "1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 21 2026.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T",
+      "path": "docs/en/reader-1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 117,
+      "matchedBeforeChange": 117
+    },
+    {
+      "sourceId": "1VPDz9sdkuJulXHzpJR_JCnsNiI3AUnjB",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 20 2026.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-pildoras-2026-20",
+      "path": "docs/en/pildoras/2026/tech-pills-20-2026.html",
+      "verification": "byte-identical",
+      "blob": "da5e58f7a7815b433fc712250bfb0403432ce101"
+    },
+    {
+      "sourceId": "1_tRh-NisSiQR82FnC06VDtGT2Uj8TezJ",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 19 2026.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-pildoras-2026-19",
+      "path": "docs/en/pildoras/2026/tech-pills-19-2026.html",
+      "verification": "byte-identical",
+      "blob": "7df38ff3dd8e3340e8a2f8da9d69fa4404898ce0"
+    },
+    {
+      "sourceId": "1-iDGi__VEKFW1p8xHjJs8h8bBEtd9dCF",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 18 2026.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-pildoras-2026-18",
+      "path": "docs/en/pildoras/2026/tech-pills-18-2026.html",
+      "verification": "byte-identical",
+      "blob": "a8aa780a357aa0105b310204e9f9015d22ebb6c2"
+    },
+    {
+      "sourceId": "13AmA3wudLMGjL-Dm6tGxaXQIV20oiY6n",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 17 2026.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-pildoras-2026-17",
+      "path": "docs/en/pildoras/2026/tech-pills-17-2026.html",
+      "verification": "byte-identical",
+      "blob": "8431fdc4c4bdaf0498c34db980f5a54196a1bf77"
+    },
+    {
+      "sourceId": "1ZviWN1pXBD12ehuJjrBuwCjw15kk7Aze",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 16 2026.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-pildoras-2026-16",
+      "path": "docs/en/pildoras/2026/tech-pills-16-2026.html",
+      "verification": "byte-identical",
+      "blob": "6cc26b87b66f673d8f4b1ea8b87dfd8cd73aa27f"
+    },
+    {
+      "sourceId": "1Wqq6OY29bFMqu_wYBzxQkJ2_EW-j84yn",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 15 2026.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-pildoras-2026-15",
+      "path": "docs/en/pildoras/2026/tech-pills-15-2026.html",
+      "verification": "byte-identical",
+      "blob": "bb0ba43b5d1e51b53dcb709d29d3af7e5a0182d1"
+    },
+    {
+      "sourceId": "1vWdCopX6p5BSk5D1tEEBTODvLi8poP3A",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 14 2026.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-pildoras-2026-14",
+      "path": "docs/en/pildoras/2026/tech-pills-14-2026.html",
+      "verification": "byte-identical",
+      "blob": "b8c1a3fb6f17fd2a173caf120e9ba4dca9999c84"
+    },
+    {
+      "sourceId": "15Gb28rtHrxK3RmIsaISSsllBSZeMLycf",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 13 2026.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-pildoras-2026-13",
+      "path": "docs/en/pildoras/2026/tech-pills-13-2026.html",
+      "verification": "byte-identical",
+      "blob": "a1a35b0065aa7e611b5c4303aea188d5300311c8"
+    },
+    {
+      "sourceId": "1iRzeBGvMMX7uW6dRQvwmaRa4tyhwYenV",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 12 2026.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-pildoras-2026-12",
+      "path": "docs/en/pildoras/2026/tech-pills-12-2026.html",
+      "verification": "byte-identical",
+      "blob": "75879e892ac22e947a3a0f146a47f10592fd5ce7"
+    },
+    {
+      "sourceId": "1CbMWdSKZvgRapDxO-WUU0lp0BsCQG7AM",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras tecnológicas 24 de 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-24",
+      "path": "docs/es/pildoras/2026/pildoras-24-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 69,
+      "matchedBeforeChange": 69
+    },
+    {
+      "sourceId": "10-8bAIhrVTvGRzo35gQQLQE49vvkkqXx",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 23 de 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-23",
+      "path": "docs/es/pildoras/2026/pildoras-23-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 246,
+      "matchedBeforeChange": 246
+    },
+    {
+      "sourceId": "1Yk652avn7fcQtfNV28nu0VIkqpcZiRos",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 21 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-21",
+      "path": "docs/es/pildoras/2026/pildoras-21-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 117,
+      "matchedBeforeChange": 117
+    },
+    {
+      "sourceId": "1bkqhbWO8eYJbqrQrJ6FrjjZoUsSbuPWz",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 22 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-22",
+      "path": "docs/es/pildoras/2026/pildoras-22-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 141,
+      "matchedBeforeChange": 141
+    },
+    {
+      "sourceId": "1Z7EGDnw-wbcGRcBz_-WbqGMVSJBUMUlk",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 20 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-20",
+      "path": "docs/es/pildoras/2026/pildoras-20-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 59,
+      "matchedBeforeChange": 59
+    },
+    {
+      "sourceId": "17cxE49VZM2ef5caYYtZ47u1NOr4GWLTj",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 19 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-19",
+      "path": "docs/es/pildoras/2026/pildoras-19-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 406,
+      "matchedBeforeChange": 406
+    },
+    {
+      "sourceId": "12C2gN25zEthcukNYjmqPfOQinez-7r-R",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 18 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-18",
+      "path": "docs/es/pildoras/2026/pildoras-18-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 245,
+      "matchedBeforeChange": 245
+    },
+    {
+      "sourceId": "147eN6-MiVurqI7cBM34QSFNj4nrTJhBb",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 17 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-17",
+      "path": "docs/es/pildoras/2026/pildoras-17-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 83,
+      "matchedBeforeChange": 83
+    },
+    {
+      "sourceId": "1YxC-GBVbxNPzCo9A_KqVrPSzMjtXDM6q",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 16 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-16",
+      "path": "docs/es/pildoras/2026/pildoras-16-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 105,
+      "matchedBeforeChange": 105
+    },
+    {
+      "sourceId": "1Y-6xI-paUcSljXeddwqDmzIx3UoizsyJ",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 15 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-15",
+      "path": "docs/es/pildoras/2026/pildoras-15-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 90,
+      "matchedBeforeChange": 90
+    },
+    {
+      "sourceId": "1BCnGDPAxepZz0gPemk4g97wo0BHiS48P",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 14 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-14",
+      "path": "docs/es/pildoras/2026/pildoras-14-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 67,
+      "matchedBeforeChange": 67
+    },
+    {
+      "sourceId": "1q7U3T7fpP54V6t9ddVBfYlaJTAmY4C4g",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 13 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-13",
+      "path": "docs/es/pildoras/2026/pildoras-13-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 95,
+      "matchedBeforeChange": 95
+    },
+    {
+      "sourceId": "1ozmhN7YaeWASLym-_P2h4zcQX7Se_MDs",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 12 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-12",
+      "path": "docs/es/pildoras/2026/pildoras-12-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 370,
+      "matchedBeforeChange": 370
+    },
+    {
+      "sourceId": "19xukpf63sT67bElqKW_or0gTTok1ejD2",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 11 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-11",
+      "path": "docs/es/pildoras/2026/pildoras-11-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 363,
+      "matchedBeforeChange": 363
+    },
+    {
+      "sourceId": "15yh0mD1G8nbazmuVVfQhZgosIMG-GvYS",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 10 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-10",
+      "path": "docs/es/pildoras/2026/pildoras-10-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 32,
+      "matchedBeforeChange": 32
+    },
+    {
+      "sourceId": "1-UNVigRQ4C2SnZ3IVaet083ChLaUhNC0",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 9 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-09",
+      "path": "docs/es/pildoras/2026/pildoras-09-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 345,
+      "matchedBeforeChange": 345
+    },
+    {
+      "sourceId": "1tYISp500g9AX43rcsHh7vzR2FEgUlqga",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 8 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-08",
+      "path": "docs/es/pildoras/2026/pildoras-08-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 69,
+      "matchedBeforeChange": 69
+    },
+    {
+      "sourceId": "1XvBtQ7w0daUv99ZGQOTKtw2gdQ6U3cqc",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 7 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-07",
+      "path": "docs/es/pildoras/2026/pildoras-07-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 109,
+      "matchedBeforeChange": 109
+    },
+    {
+      "sourceId": "1qRULOALuBrVYNncI0aFUVKGYYNKv-2aF",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 6 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-06",
+      "path": "docs/es/pildoras/2026/pildoras-06-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 13,
+      "matchedBeforeChange": 13
+    },
+    {
+      "sourceId": "1JocybmaambSHxxs4KSyFQuVF0vtcVrVJ",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 5 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-05",
+      "path": "docs/es/pildoras/2026/pildoras-05-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 54,
+      "matchedBeforeChange": 54
+    },
+    {
+      "sourceId": "1u6AVd7RfgivzbbXqz8C8wWMbZaDF5m-N",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 4 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-04",
+      "path": "docs/es/pildoras/2026/pildoras-04-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 36,
+      "matchedBeforeChange": 36
+    },
+    {
+      "sourceId": "1_c_hietyzNJRmzTidjEpYzLuBzHXQQE4",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 3 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-03",
+      "path": "docs/es/pildoras/2026/pildoras-03-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 52,
+      "matchedBeforeChange": 52
+    },
+    {
+      "sourceId": "1jOfVW9rcnhnKzSt-M1Cjr_th3TwnvWjt",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 2 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-02",
+      "path": "docs/es/pildoras/2026/pildoras-02-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 143,
+      "matchedBeforeChange": 143
+    },
+    {
+      "sourceId": "1fwYfFFxGIwCaxeD-ys8nDu9cdyNDi4Vr",
+      "sourcePath": [
+        "Píldoras",
+        "2026",
+        "Píldoras 1 2026.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2026-01",
+      "path": "docs/es/pildoras/2026/pildoras-01-2026.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 48,
+      "matchedBeforeChange": 48
+    },
+    {
+      "sourceId": "1F2-ahau8KAwcAFLa4rSJIlhe4JzeFk8_",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 3 septiembre 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-09-03",
+      "path": "docs/es/pildoras/2025/pildoras-3-septiembre-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 93,
+      "matchedBeforeChange": 93
+    },
+    {
+      "sourceId": "1kEkqXy8KR13KV3PG0VfthkA3s15M5HfI",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 28 agosto 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-08-28",
+      "path": "docs/es/pildoras/2025/pildoras-28-agosto-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 141,
+      "matchedBeforeChange": 141
+    },
+    {
+      "sourceId": "1IrjEDjzWz8B6FLu5g0w1hlkKKccmG3lo",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 20 agosto 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-08-20",
+      "path": "docs/es/pildoras/2025/pildoras-20-agosto-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 233,
+      "matchedBeforeChange": 233
+    },
+    {
+      "sourceId": "1TC1o7TNBKIVwZoej28FIyLKi12DeTEcU",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 22 octubre 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-10-22",
+      "path": "docs/es/pildoras/2025/pildoras-22-octubre-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 75,
+      "matchedBeforeChange": 75
+    },
+    {
+      "sourceId": "1ZW-uwqOBN7pe_nv2SCAC259WEkaapsqp",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 31 enero 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-01-31",
+      "path": "docs/es/pildoras/2025/pildoras-31-enero-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 120,
+      "matchedBeforeChange": 120
+    },
+    {
+      "sourceId": "1SBVY0KsitXzK8TDrV6vxrsFbdFwK7ivt",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 30 mayo 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-05-30",
+      "path": "docs/es/pildoras/2025/pildoras-30-mayo-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 82,
+      "matchedBeforeChange": 82
+    },
+    {
+      "sourceId": "1_FN_sWOvXrul4fR_MaDCEDszALvtDbKC",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 30 abril 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-04-30",
+      "path": "docs/es/pildoras/2025/pildoras-30-abril-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 155,
+      "matchedBeforeChange": 155
+    },
+    {
+      "sourceId": "1dnNp9qcBH47X0eAcb_hNCreIQZdciIhD",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 28 junio 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-06-28",
+      "path": "docs/es/pildoras/2025/pildoras-28-junio-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 116,
+      "matchedBeforeChange": 116
+    },
+    {
+      "sourceId": "1XzITUx4wpXoSHKtSCD8i2w8d8oitc1Gz",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 24 junio 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-06-24",
+      "path": "docs/es/pildoras/2025/pildoras-24-junio-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 216,
+      "matchedBeforeChange": 216
+    },
+    {
+      "sourceId": "1-e0VIjkTcD_EAHDpekj3_CXEE6-YfFs7",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 23 marzo 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-03-23",
+      "path": "docs/es/pildoras/2025/pildoras-23-marzo-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 146,
+      "matchedBeforeChange": 146
+    },
+    {
+      "sourceId": "1Yo31DZC0WKDrPnS21XC1qmDCbdLLEwNA",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 21 julio 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-07-21",
+      "path": "docs/es/pildoras/2025/pildoras-21-julio-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 48,
+      "matchedBeforeChange": 48
+    },
+    {
+      "sourceId": "1tukhbjKesncCHAhZNs10iyym5e_BacBL",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 20 mayo 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-05-20",
+      "path": "docs/es/pildoras/2025/pildoras-20-mayo-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 64,
+      "matchedBeforeChange": 64
+    },
+    {
+      "sourceId": "1JRbaCdc6dKq1tfOug0C0cHoPiFT81Zmi",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 18 enero 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-01-18",
+      "path": "docs/es/pildoras/2025/pildoras-18-enero-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 58,
+      "matchedBeforeChange": 58
+    },
+    {
+      "sourceId": "1wgHvuANjJ4WngfkQpe3nDMvf2aHKV-ZB",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 14 junio 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-06-14",
+      "path": "docs/es/pildoras/2025/pildoras-14-junio-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 157,
+      "matchedBeforeChange": 157
+    },
+    {
+      "sourceId": "1a0VX-ABf_TWd3CB1f1nOx1QDuee06YdH",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 14 abril 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-04-14",
+      "path": "docs/es/pildoras/2025/pildoras-14-abril-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 30,
+      "matchedBeforeChange": 30
+    },
+    {
+      "sourceId": "1lqigncHVuJ_llipDCvTZaw6Yr8X4WLDx",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 13 marzo 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-03-13",
+      "path": "docs/es/pildoras/2025/pildoras-13-marzo-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 87,
+      "matchedBeforeChange": 87
+    },
+    {
+      "sourceId": "1KwanHg1Ks6juhNCS5A-eDyNOyNvoLEGY",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 10 mayo 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-05-10",
+      "path": "docs/es/pildoras/2025/pildoras-10-mayo-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 230,
+      "matchedBeforeChange": 230
+    },
+    {
+      "sourceId": "1WE3QAbIcJtXurEezcmAIYQdNlekZCSaE",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 9 julio 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-07-09",
+      "path": "docs/es/pildoras/2025/pildoras-9-julio-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 106,
+      "matchedBeforeChange": 106
+    },
+    {
+      "sourceId": "18pXkpYy49Z2Gu7b97rPhOxTitYskDyA3",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 8 junio 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-06-08",
+      "path": "docs/es/pildoras/2025/pildoras-8-junio-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 141,
+      "matchedBeforeChange": 141
+    },
+    {
+      "sourceId": "1BslTAKyslCQ7zJ7v4EIfRibfwgRWhUhC",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 5 agosto 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-08-05",
+      "path": "docs/es/pildoras/2025/pildoras-5-agosto-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 176,
+      "matchedBeforeChange": 176
+    },
+    {
+      "sourceId": "1AVKqtykvaqEMHR8fZAn1Jx-htV4MC6yC",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 5 abril 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-04-05",
+      "path": "docs/es/pildoras/2025/pildoras-5-abril-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 180,
+      "matchedBeforeChange": 180
+    },
+    {
+      "sourceId": "134voGfA63Q63Wj3qZubLZuT3gxjovWZl",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 15 octubre 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-10-15",
+      "path": "docs/es/pildoras/2025/pildoras-15-octubre-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 105,
+      "matchedBeforeChange": 105
+    },
+    {
+      "sourceId": "1yiVN8sHci_JFTZd4Y0z4BGHhSvwZXHix",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 31 octubre 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-10-31",
+      "path": "docs/es/pildoras/2025/pildoras-31-octubre-2025.html",
+      "verification": "normalized-text-one-heading-restored",
+      "sourceParagraphsAtLeast50": 85,
+      "matchedBeforeChange": 84
+    },
+    {
+      "sourceId": "1fWVwqBkZlZFe7w_1Seum1E31OHRNDg7p",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 29 diciembre 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-12-29",
+      "path": "docs/es/pildoras/2025/pildoras-29-diciembre-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 48,
+      "matchedBeforeChange": 48
+    },
+    {
+      "sourceId": "1f_wD0RsiOmPbcFFxR_18Yfu9kIM8f42t",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 24 septiembre 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-09-24",
+      "path": "docs/es/pildoras/2025/pildoras-24-septiembre-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 38,
+      "matchedBeforeChange": 38
+    },
+    {
+      "sourceId": "1yGLKEnFXMl7enYijn-Do9koWSUEMSz3Z",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 19 noviembre 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-11-19",
+      "path": "docs/es/pildoras/2025/pildoras-19-noviembre-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 59,
+      "matchedBeforeChange": 59
+    },
+    {
+      "sourceId": "1bC44LwmuX_WrPQZJjaRBHWaQ41M23Wqd",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 17 diciembre 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-12-17",
+      "path": "docs/es/pildoras/2025/pildoras-17-diciembre-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 57,
+      "matchedBeforeChange": 57
+    },
+    {
+      "sourceId": "17LgjCVcmBHobTlt6qnE2IiWpaNeWoEel",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 12 noviembre 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-11-12",
+      "path": "docs/es/pildoras/2025/pildoras-12-noviembre-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 25,
+      "matchedBeforeChange": 25
+    },
+    {
+      "sourceId": "10SahfoOS8MaQWYVRNQYFo3BMHEvOS4X0",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 5 diciembre 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-12-05",
+      "path": "docs/es/pildoras/2025/pildoras-5-diciembre-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 152,
+      "matchedBeforeChange": 152
+    },
+    {
+      "sourceId": "1ptjcv67VpAPg098l4sIcAhZ3UFkRwvIx",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 4 noviembre 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-11-04",
+      "path": "docs/es/pildoras/2025/pildoras-4-noviembre-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 34,
+      "matchedBeforeChange": 34
+    },
+    {
+      "sourceId": "1-OsTvctXniEq0vgOWSwQwiseezcYJkFs",
+      "sourcePath": [
+        "Píldoras",
+        "2025",
+        "Píldoras 2 marzo 2025.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2025-03-02",
+      "path": "docs/es/pildoras/2025/pildoras-2-marzo-2025.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 114,
+      "matchedBeforeChange": 114
+    },
+    {
+      "sourceId": "1ZHzcqCcPFIfSsOtIRSQNKKsOR-fViLWf",
+      "sourcePath": [
+        "Píldoras",
+        "2024",
+        "Píldoras 9 marzo 2024.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2024-03-09",
+      "path": "docs/es/pildoras/2024/pildoras-09-marzo-2024.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 90,
+      "matchedBeforeChange": 90
+    },
+    {
+      "sourceId": "1srzxTeLEOB8lz-9As3-jT_RRQkoUs8XQ",
+      "sourcePath": [
+        "Píldoras",
+        "2024",
+        "Píldoras 24 febrero 2024.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-pildoras-2024-02-24",
+      "path": "docs/es/pildoras/2024/pildoras-24-febrero-2024.html",
+      "verification": "normalized-text",
+      "sourceParagraphsAtLeast50": 139,
+      "matchedBeforeChange": 139
+    }
+  ],
+  "docx": [
+    {
+      "sourceId": "1B4Nt8xFoMQUlk9mnsbxyXJYVStyR1tMH",
+      "path": "docs/es/curso-braille-android-talkback.html",
+      "resourceId": "es-curso-braille-android-talkback-2026",
+      "sourceParagraphsAtLeast50": 268,
+      "matched": 268
+    },
+    {
+      "sourceId": "18vsQl8M7_ov7YMPDMfkCyFwcM2qB02UI",
+      "path": "docs/en/android-braille-talkback-course.html",
+      "resourceId": "en-android-braille-talkback-course-2026",
+      "sourceParagraphsAtLeast50": 222,
+      "matched": 222
+    }
+  ],
+  "tones": {
+    "es": {
+      "ogg": 13,
+      "mp3": 30,
+      "m4r": 80
+    },
+    "en": {
+      "ogg": 13,
+      "mp3": 30,
+      "m4r": 80
+    },
+    "status": "not included; no public permission confirmed and distribution rights not verified; no Drive permission changes"
+  },
+  "backup": {
+    "testCommit": "ff6a7dc00a229393ed2f6436ccd5447ff1f49203",
+    "run": 45969982831,
+    "status": "queued at earlier check; not proven"
+  },
+  "remaining": "Remaining non-Pills source-ID aliases, public URL and VoiceOver checks; no publication."
+}

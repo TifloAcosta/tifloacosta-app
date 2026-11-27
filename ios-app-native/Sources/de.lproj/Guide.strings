@@ -31,8 +31,8 @@
 "guide.7.paragraph.3" = "Falls ein Inhalt vorübergehend aus dem Katalog verschwindet, bleibt seine gespeicherte Referenz erhalten.";
 "guide.8.title" = "Videos";
 "guide.8.paragraph.1" = "Suche YouTube-Videos mit barrierefreien Steuerelementen oder öffne den TifloAcosta-Kanal.";
-"guide.8.paragraph.2" = "Filtere die Ergebnisse nach Videos, Kanälen, Kurzvideos, Livestreams oder Untertiteln.";
-"guide.8.paragraph.3" = "Spiele Videos im App-Player ab. Über die Bedienungshilfen kannst du Inhalte teilen oder in YouTube öffnen.";
+"guide.8.paragraph.2" = "Filtere die Ergebnisse nach Videos, Kanälen, Wiedergabelisten, Kurzvideos, Livestreams oder Inhalten mit Untertiteln.";
+"guide.8.paragraph.3" = "Spiele Videos im App-Player ab. Mit der VoiceOver-Aktion Videodetails kannst du Informationen zum Video aufrufen. Weitere Aktionen ermöglichen das Teilen oder Öffnen in YouTube.";
 "guide.8.paragraph.4" = "Melde dich bei Google nur für Funktionen an, die ein Konto benötigen, beispielsweise Abonnements.";
 "guide.8.paragraph.5" = "Die Kanalliste lässt sich nach Datum sortieren und um weitere Videos erweitern.";
 "guide.9.title" = "Podcast";

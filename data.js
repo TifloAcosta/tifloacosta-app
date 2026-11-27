@@ -2996,5 +2996,290 @@ window.TIFLO_RESOURCES = [
     "url": "https://tifloacosta.com/docs/es/reader-1Q1XYiYxaJm8t8LCGY5lLKSVtsl_l-eoa.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1Q1XYiYxaJm8t8LCGY5lLKSVtsl_l-eoa.html",
     "searchText": "Madrid 2025 y la discapacidad visual, avances parciales, barreras reales movilidad transporte administración digital sanidad dependencia vivienda seguridad convivencia"
+  },
+  {
+    "id": "es-1rJBafFgHKioNKTSsxyB03RNeuYbrXPA1",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo"
+    ],
+    "title": "00 - Índice de tiendas y recursos por país",
+    "url": "https://tifloacosta.com/docs/es/reader-1rJBafFgHKioNKTSsxyB03RNeuYbrXPA1.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1rJBafFgHKioNKTSsxyB03RNeuYbrXPA1.html",
+    "searchText": "00 - Índice de tiendas y recursos por país Elige tu país Antes de comprar"
+  },
+  {
+    "id": "es-1FmCF21vB45k_PWqHYq7R3KiLRmHR6Ue-",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Honduras",
+    "url": "https://tifloacosta.com/docs/es/reader-1FmCF21vB45k_PWqHYq7R3KiLRmHR6Ue-.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1FmCF21vB45k_PWqHYq7R3KiLRmHR6Ue-.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Honduras UNCIH Fundación Luis Braille ANDEPCIH Escuela Pilar Salinas SEDESOL importación"
+  },
+  {
+    "id": "es-1Tl_J4iSCGBMvMXHlSwsYwZwIwbCg8zDd",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en España",
+    "url": "https://tifloacosta.com/docs/es/reader-1Tl_J4iSCGBMvMXHlSwsYwZwIwbCg8zDd.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1Tl_J4iSCGBMvMXHlSwsYwZwIwbCg8zDd.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en España ONCE Centro de Tiflotecnología e Innovación Venoptix Magnicenter Visión Frágil Iberia Canarias Ceuta Melilla"
+  },
+  {
+    "id": "es-1NifUe38kTv99Vn0EDu7Izb4muHCW_hBW",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en México",
+    "url": "https://tifloacosta.com/docs/es/reader-1NifUe38kTv99Vn0EDu7Izb4muHCW_hBW.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1NifUe38kTv99Vn0EDu7Izb4muHCW_hBW.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en México STA México OrCam Leyer's Puebla ayudas públicas importación"
+  },
+  {
+    "id": "es-1ZylSybHWr-D1yyqA6dbay3IPy5pqLInq",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Estados Unidos",
+    "url": "https://tifloacosta.com/docs/es/reader-1ZylSybHWr-D1yyqA6dbay3IPy5pqLInq.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1ZylSybHWr-D1yyqA6dbay3IPy5pqLInq.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Estados Unidos MaxiAids LS&S Products Independent Living Aids HumanWare WayAround bastón blanco biblioteca nacional rehabilitación vocacional"
+  },
+  {
+    "id": "es-1tP_rnmkNfWp3VMto-WAJTqOYOlahPho3",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Argentina",
+    "url": "https://tifloacosta.com/docs/es/reader-1tP_rnmkNfWp3VMto-WAJTqOYOlahPho3.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1tP_rnmkNfWp3VMto-WAJTqOYOlahPho3.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Argentina TifloTeca Tecnoayudas Biblioteca Argentina para Ciegos Tiflonexos"
+  },
+  {
+    "id": "es-1NrzUjPJIDqPJneOkH7uJ9I9bLKmMU7KT",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Bolivia",
+    "url": "https://tifloacosta.com/docs/es/reader-1NrzUjPJIDqPJneOkH7uJ9I9bLKmMU7KT.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1NrzUjPJIDqPJneOkH7uJ9I9bLKmMU7KT.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Bolivia Instituto Boliviano de la Ceguera FENACIEBO importación"
+  },
+  {
+    "id": "es-1AO_hHTLwQmoIQ2a0oifKpcEPHfHcvG3o",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Brasil",
+    "url": "https://tifloacosta.com/docs/es/reader-1AO_hHTLwQmoIQ2a0oifKpcEPHfHcvG3o.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1AO_hHTLwQmoIQ2a0oifKpcEPHfHcvG3o.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Brasil Laratec Civiam Tecnologia Assistiva Mais Autonomia"
+  },
+  {
+    "id": "es-1abcjouMFl2btoZ5suQ1Hm_58x1e769To",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Chile",
+    "url": "https://tifloacosta.com/docs/es/reader-1abcjouMFl2btoZ5suQ1Hm_58x1e769To.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1abcjouMFl2btoZ5suQ1Hm_58x1e769To.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Chile Braille Chile Blind Productos OpenCluster Tech ayudas técnicas públicas"
+  },
+  {
+    "id": "es-1BhYqYFBLvdp1-Dp6ao1T8q4Ob-K3ROQi",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Colombia",
+    "url": "https://tifloacosta.com/docs/es/reader-1BhYqYFBLvdp1-Dp6ao1T8q4Ob-K3ROQi.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1BhYqYFBLvdp1-Dp6ao1T8q4Ob-K3ROQi.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Colombia Tienda INCI ConVerTIC JAWS ZoomText compra internacional"
+  },
+  {
+    "id": "es-1LngewIR8faqKDUIMuqkRJz32mrFpNfBN",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Costa Rica",
+    "url": "https://tifloacosta.com/docs/es/reader-1LngewIR8faqKDUIMuqkRJz32mrFpNfBN.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1LngewIR8faqKDUIMuqkRJz32mrFpNfBN.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Costa Rica TifloProductos Costa Rica baja visión orientación institucional"
+  },
+  {
+    "id": "es-1k7cs4VO20J0XAoX7evu-nYkM54uLdWdN",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Ecuador",
+    "url": "https://tifloacosta.com/docs/es/reader-1k7cs4VO20J0XAoX7evu-nYkM54uLdWdN.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1k7cs4VO20J0XAoX7evu-nYkM54uLdWdN.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Ecuador ayudas servicios públicos OrCam equipos avanzados compra internacional"
+  },
+  {
+    "id": "es-1kYIml_mS52i84MbCup5mms5p8VefphBx",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en República Dominicana",
+    "url": "https://tifloacosta.com/docs/es/reader-1kYIml_mS52i84MbCup5mms5p8VefphBx.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1kYIml_mS52i84MbCup5mms5p8VefphBx.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en República Dominicana rehabilitación venta equipos avanzados compra internacional"
+  },
+  {
+    "id": "es-1Z-ZlLQ5kR2NMFmb2dJ8INxedFjg1sx5n",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Cuba",
+    "url": "https://tifloacosta.com/docs/es/reader-1Z-ZlLQ5kR2NMFmb2dJ8INxedFjg1sx5n.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1Z-ZlLQ5kR2NMFmb2dJ8INxedFjg1sx5n.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Cuba vía institucional baja visión importación"
+  },
+  {
+    "id": "es-1mJSgFdjRWx4M__MNfk0RkWxj156tB8Ao",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en El Salvador",
+    "url": "https://tifloacosta.com/docs/es/reader-1mJSgFdjRWx4M__MNfk0RkWxj156tB8Ao.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1mJSgFdjRWx4M__MNfk0RkWxj156tB8Ao.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en El Salvador ASCES Tiflo Tienda Centro Eugenia de Dueñas ISRI baja visión"
+  },
+  {
+    "id": "es-1X5lBWXg-8gxKjlC0qc4VQ4jOXa8ZCQWo",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Guatemala",
+    "url": "https://tifloacosta.com/docs/es/reader-1X5lBWXg-8gxKjlC0qc4VQ4jOXa8ZCQWo.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1X5lBWXg-8gxKjlC0qc4VQ4jOXa8ZCQWo.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Guatemala Benemérito Comité Pro Ciegos y Sordos CONADI baja visión"
+  },
+  {
+    "id": "es-1-Y8OG1EGayD-rEW1QioWvJF1HiBSb7vF",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Nicaragua",
+    "url": "https://tifloacosta.com/docs/es/reader-1-Y8OG1EGayD-rEW1QioWvJF1HiBSb7vF.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1-Y8OG1EGayD-rEW1QioWvJF1HiBSb7vF.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Nicaragua Organización Maricela Toledo formación empleo importación"
+  },
+  {
+    "id": "es-177zm8fqTFHnlTASRKsiuKsIaBxpNtYHi",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Panamá",
+    "url": "https://tifloacosta.com/docs/es/reader-177zm8fqTFHnlTASRKsiuKsIaBxpNtYHi.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-177zm8fqTFHnlTASRKsiuKsIaBxpNtYHi.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Panamá CENTEVI Patronato Luz del Ciego IPHE SENADIS FODIS"
+  },
+  {
+    "id": "es-1BXMp-khMmDK8SC2NwLrz5eScscbc5pfG",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Paraguay",
+    "url": "https://tifloacosta.com/docs/es/reader-1BXMp-khMmDK8SC2NwLrz5eScscbc5pfG.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1BXMp-khMmDK8SC2NwLrz5eScscbc5pfG.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Paraguay UNPDV Fundación Visión importación"
+  },
+  {
+    "id": "es-1jLYJa6VJzZYAR45l3gamVbiKUn3OpH-s",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Perú",
+    "url": "https://tifloacosta.com/docs/es/reader-1jLYJa6VJzZYAR45l3gamVbiKUn3OpH-s.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1jLYJa6VJzZYAR45l3gamVbiKUn3OpH-s.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Perú Braille Perú bastones inteligentes"
+  },
+  {
+    "id": "es-1pA6HVF99LmW8xtnQ3B67qaW_el97yyPt",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Uruguay",
+    "url": "https://tifloacosta.com/docs/es/reader-1pA6HVF99LmW8xtnQ3B67qaW_el97yyPt.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1pA6HVF99LmW8xtnQ3B67qaW_el97yyPt.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Uruguay UNCU CENATT rehabilitación compra internacional"
+  },
+  {
+    "id": "es-1lapO2tXq2mgUxhLGA4zFW4yHj8N-ANM8",
+    "lang": "es",
+    "category": "Estudios",
+    "folderPath": [
+      "Tiendas tiflo",
+      "Información por países"
+    ],
+    "title": "Dónde comprar productos especializados para personas ciegas en Venezuela",
+    "url": "https://tifloacosta.com/docs/es/reader-1lapO2tXq2mgUxhLGA4zFW4yHj8N-ANM8.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1lapO2tXq2mgUxhLGA4zFW4yHj8N-ANM8.html",
+    "searchText": "Dónde comprar productos especializados para personas ciegas en Venezuela Proyecto Miren Sociedad Amigos de los Ciegos Clinisac importación"
   }
 ];

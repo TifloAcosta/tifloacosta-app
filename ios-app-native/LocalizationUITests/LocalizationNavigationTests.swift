@@ -6,6 +6,24 @@ final class LocalizationNavigationTests: XCTestCase {
     private let roots = ["Actualidad","Recursos","TifloLector","Mi Música","Multicines Accesibles","Novedades","Descargar desde un enlace","Favoritos","Vídeos","Podcast","Configuración"]
     private let translations: [String: [String: String]] = [
         "es": [
+            "Nubes": "Nubes",
+            "Google Drive": "Google Drive",
+            "Dropbox": "Dropbox",
+            "Leer después e historial": "Leer después e historial",
+            "Actualizar recursos": "Actualizar recursos",
+            "Idioma de los recursos": "Idioma de los recursos",
+            "Categoría": "Categoría",
+            "Mis suscripciones de YouTube": "Mis suscripciones de YouTube",
+            "Canales seguidos sin cuenta Google": "Canales seguidos sin cuenta Google",
+            "Novedades de mis canales": "Novedades de mis canales",
+            "Continuar viendo": "Continuar viendo",
+            "Ver después": "Ver después",
+            "Buscar en todo YouTube": "Buscar en todo YouTube",
+            "Tipo de resultados": "Tipo de resultados",
+            "Continuar escuchando": "Continuar escuchando",
+            "Episodios descargados": "Episodios descargados",
+            "Actualizar episodios": "Actualizar episodios",
+            "Importar suscripciones OPML": "Importar suscripciones OPML",
             "Gestionar copias de seguridad": "Gestionar copias de seguridad",
             "Crear copia local": "Crear copia local",
             "Crear copia en iCloud": "Crear copia en iCloud",
@@ -59,6 +77,24 @@ final class LocalizationNavigationTests: XCTestCase {
             "Comunicar incidencia de accesibilidad": "Comunicar incidencia de accesibilidad"
         ],
         "en": [
+            "Nubes": "Cloud services",
+            "Google Drive": "Google Drive",
+            "Dropbox": "Dropbox",
+            "Leer después e historial": "Read later and history",
+            "Actualizar recursos": "Refresh resources",
+            "Idioma de los recursos": "Resource language",
+            "Categoría": "Category",
+            "Mis suscripciones de YouTube": "My YouTube subscriptions",
+            "Canales seguidos sin cuenta Google": "Followed channels without a Google account",
+            "Novedades de mis canales": "New videos from my channels",
+            "Continuar viendo": "Continue watching",
+            "Ver después": "Watch later",
+            "Buscar en todo YouTube": "Search all YouTube",
+            "Tipo de resultados": "Result type",
+            "Continuar escuchando": "Continue listening",
+            "Episodios descargados": "Downloaded episodes",
+            "Actualizar episodios": "Refresh episodes",
+            "Importar suscripciones OPML": "Import OPML subscriptions",
             "Gestionar copias de seguridad": "Manage backups",
             "Crear copia local": "Create local backup",
             "Crear copia en iCloud": "Create iCloud backup",
@@ -112,6 +148,24 @@ final class LocalizationNavigationTests: XCTestCase {
             "Comunicar incidencia de accesibilidad": "Report an accessibility issue"
         ],
         "pt": [
+            "Nubes": "Nuvens",
+            "Google Drive": "Google Drive",
+            "Dropbox": "Dropbox",
+            "Leer después e historial": "Ler mais tarde e histórico",
+            "Actualizar recursos": "Atualizar recursos",
+            "Idioma de los recursos": "Idioma dos recursos",
+            "Categoría": "Categoria",
+            "Mis suscripciones de YouTube": "As minhas subscrições do YouTube",
+            "Canales seguidos sin cuenta Google": "Canais seguidos sem conta Google",
+            "Novedades de mis canales": "Novidades dos meus canais",
+            "Continuar viendo": "Continuar a ver",
+            "Ver después": "Ver mais tarde",
+            "Buscar en todo YouTube": "Pesquisar em todo o YouTube",
+            "Tipo de resultados": "Tipo de resultados",
+            "Continuar escuchando": "Continuar a ouvir",
+            "Episodios descargados": "Episódios transferidos",
+            "Actualizar episodios": "Atualizar episódios",
+            "Importar suscripciones OPML": "Importar subscrições OPML",
             "Gestionar copias de seguridad": "Gerir cópias de segurança",
             "Crear copia local": "Criar cópia local",
             "Crear copia en iCloud": "Criar cópia no iCloud",
@@ -165,6 +219,24 @@ final class LocalizationNavigationTests: XCTestCase {
             "Comunicar incidencia de accesibilidad": "Comunicar um problema de acessibilidade"
         ],
         "fr": [
+            "Nubes": "Cloud",
+            "Google Drive": "Google Drive",
+            "Dropbox": "Dropbox",
+            "Leer después e historial": "Lire plus tard et historique",
+            "Actualizar recursos": "Actualiser les ressources",
+            "Idioma de los recursos": "Langue des ressources",
+            "Categoría": "Catégorie",
+            "Mis suscripciones de YouTube": "Mes abonnements YouTube",
+            "Canales seguidos sin cuenta Google": "Chaînes suivies sans compte Google",
+            "Novedades de mis canales": "Nouveautés de mes chaînes",
+            "Continuar viendo": "Reprendre la lecture",
+            "Ver después": "Regarder plus tard",
+            "Buscar en todo YouTube": "Rechercher sur tout YouTube",
+            "Tipo de resultados": "Type de résultats",
+            "Continuar escuchando": "Reprendre l’écoute",
+            "Episodios descargados": "Épisodes téléchargés",
+            "Actualizar episodios": "Actualiser les épisodes",
+            "Importar suscripciones OPML": "Importer les abonnements OPML",
             "Gestionar copias de seguridad": "Gérer les sauvegardes",
             "Crear copia local": "Créer une sauvegarde locale",
             "Crear copia en iCloud": "Créer une sauvegarde iCloud",
@@ -218,6 +290,24 @@ final class LocalizationNavigationTests: XCTestCase {
             "Comunicar incidencia de accesibilidad": "Signaler un problème d’accessibilité"
         ],
         "it": [
+            "Nubes": "Cloud",
+            "Google Drive": "Google Drive",
+            "Dropbox": "Dropbox",
+            "Leer después e historial": "Leggi più tardi e cronologia",
+            "Actualizar recursos": "Aggiorna risorse",
+            "Idioma de los recursos": "Lingua delle risorse",
+            "Categoría": "Categoria",
+            "Mis suscripciones de YouTube": "Le mie iscrizioni YouTube",
+            "Canales seguidos sin cuenta Google": "Canali seguiti senza account Google",
+            "Novedades de mis canales": "Novità dai miei canali",
+            "Continuar viendo": "Continua a guardare",
+            "Ver después": "Guarda più tardi",
+            "Buscar en todo YouTube": "Cerca in tutto YouTube",
+            "Tipo de resultados": "Tipo di risultati",
+            "Continuar escuchando": "Continua l’ascolto",
+            "Episodios descargados": "Episodi scaricati",
+            "Actualizar episodios": "Aggiorna episodi",
+            "Importar suscripciones OPML": "Importa iscrizioni OPML",
             "Gestionar copias de seguridad": "Gestisci backup",
             "Crear copia local": "Crea backup locale",
             "Crear copia en iCloud": "Crea backup su iCloud",
@@ -271,6 +361,24 @@ final class LocalizationNavigationTests: XCTestCase {
             "Comunicar incidencia de accesibilidad": "Segnala un problema di accessibilità"
         ],
         "de": [
+            "Nubes": "Cloud-Dienste",
+            "Google Drive": "Google Drive",
+            "Dropbox": "Dropbox",
+            "Leer después e historial": "Später lesen und Verlauf",
+            "Actualizar recursos": "Ressourcen aktualisieren",
+            "Idioma de los recursos": "Sprache der Ressourcen",
+            "Categoría": "Kategorie",
+            "Mis suscripciones de YouTube": "Meine YouTube-Abonnements",
+            "Canales seguidos sin cuenta Google": "Gefolgte Kanäle ohne Google-Konto",
+            "Novedades de mis canales": "Neuigkeiten meiner Kanäle",
+            "Continuar viendo": "Weiter ansehen",
+            "Ver después": "Später ansehen",
+            "Buscar en todo YouTube": "Ganz YouTube durchsuchen",
+            "Tipo de resultados": "Ergebnistyp",
+            "Continuar escuchando": "Weiterhören",
+            "Episodios descargados": "Heruntergeladene Folgen",
+            "Actualizar episodios": "Folgen aktualisieren",
+            "Importar suscripciones OPML": "OPML-Abonnements importieren",
             "Gestionar copias de seguridad": "Sicherungen verwalten",
             "Crear copia local": "Lokale Sicherung erstellen",
             "Crear copia en iCloud": "iCloud-Sicherung erstellen",
@@ -396,6 +504,16 @@ final class LocalizationNavigationTests: XCTestCase {
         find(app, key: "Organizar mi música", language: language)
         find(app, key: "Plataformas musicales", language: language)
         find(app, key: "Ajustes", language: language)
+        find(app, key: "Nubes", language: language).tap()
+        find(app, key: "Google Drive", language: language)
+        find(app, key: "Dropbox", language: language)
+        XCTAssertFalse(app.descendants(matching: .any).matching(NSPredicate(format: "label == %@", "OneDrive")).firstMatch.exists)
+
+        launch(app, index: index)
+        openRoot(app, key: "Recursos", language: language)
+        for key in ["Leer después e historial", "Actualizar recursos", "Idioma de los recursos", "Categoría"] {
+            find(app, key: key, language: language)
+        }
 
         launch(app, index: index)
         openRoot(app, key: "Multicines Accesibles", language: language)
@@ -416,6 +534,21 @@ final class LocalizationNavigationTests: XCTestCase {
         openRoot(app, key: "Vídeos", language: language)
         find(app, key: "Buscar en YouTube", language: language)
         find(app, key: "Vídeos del canal TifloAcosta", language: language)
+        for key in ["Mis suscripciones de YouTube", "Canales seguidos sin cuenta Google",
+                    "Novedades de mis canales", "Continuar viendo", "Ver después"] {
+            find(app, key: key, language: language)
+        }
+        find(app, key: "Buscar en YouTube", language: language).tap()
+        find(app, key: "Buscar en todo YouTube", language: language)
+        find(app, key: "Tipo de resultados", language: language)
+        // Do not submit a search or sign into a third-party account.
+
+        launch(app, index: index)
+        openRoot(app, key: "Podcast", language: language)
+        for key in ["Continuar escuchando", "Episodios descargados",
+                    "Actualizar episodios", "Importar suscripciones OPML"] {
+            find(app, key: key, language: language)
+        }
 
         launch(app, index: index)
         openRoot(app, key: "Configuración", language: language)

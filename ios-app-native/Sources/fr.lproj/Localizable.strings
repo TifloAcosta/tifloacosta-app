@@ -2033,3 +2033,16 @@
 "La consulta del historial no se ha completado." = "La consultation de l’historique des sauvegardes n’est pas terminée.";
 "«%@»: se ha convertido el texto, pero no se pudo recuperar la estructura original." = "«%@» : le texte a été converti, mais la structure originale n’a pas pu être récupérée.";
 "Documentos cuya estructura original no se pudo recuperar: %d." = "Documents dont la structure originale n’a pas pu être récupérée : %d.";
+"Detalles del vídeo" = "Détails de la vidéo";
+"Tiempo: %@ de %@" = "Temps : %@ sur %@";
+"Duración: %@" = "Durée : %@";
+"Continuar viendo desde %@." = "Reprise de la lecture à %@.";
+"Retoma el vídeo desde %@." = "Reprendre la vidéo à %@.";
+"Abrir canal en YouTube" = "Ouvrir la chaîne sur YouTube";
+"Cargando información del vídeo" = "Chargement des informations de la vidéo";
+"Información del catálogo; puede estar incompleta." = "Informations du catalogue ; elles peuvent être incomplètes.";
+"Descripción del vídeo" = "Description de la vidéo";
+"Descripción no disponible" = "Description indisponible";
+"El creador no ha incluido una descripción." = "Le créateur n’a pas ajouté de description.";
+"Copiar descripción" = "Copier la description";
+"Enlaces de la descripción" = "Liens dans la description";

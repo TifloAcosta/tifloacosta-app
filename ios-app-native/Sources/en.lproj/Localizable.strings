@@ -2035,3 +2035,16 @@
 "La consulta del historial no se ha completado." = "The backup history check did not finish.";
 "«%@»: se ha convertido el texto, pero no se pudo recuperar la estructura original." = "«%@»: the text was converted, but the original structure could not be recovered.";
 "Documentos cuya estructura original no se pudo recuperar: %d." = "Documents whose original structure could not be recovered: %d.";
+"Detalles del vídeo" = "Video details";
+"Tiempo: %@ de %@" = "Time: %@ of %@";
+"Duración: %@" = "Duration: %@";
+"Continuar viendo desde %@." = "Resuming playback at %@.";
+"Retoma el vídeo desde %@." = "Resume the video at %@.";
+"Abrir canal en YouTube" = "Open channel on YouTube";
+"Cargando información del vídeo" = "Loading video information";
+"Información del catálogo; puede estar incompleta." = "Catalog information; it may be incomplete.";
+"Descripción del vídeo" = "Video description";
+"Descripción no disponible" = "Description unavailable";
+"El creador no ha incluido una descripción." = "The creator has not included a description.";
+"Copiar descripción" = "Copy description";
+"Enlaces de la descripción" = "Links in the description";

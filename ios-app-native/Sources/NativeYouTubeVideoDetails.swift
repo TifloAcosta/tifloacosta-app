@@ -113,7 +113,7 @@ struct NativeYouTubeVideoDetailsScreen: View {
 
             Section("Descripción del vídeo") {
                 if descriptionText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    Text(remote == nil ? "Descripción no disponible" : "El creador no ha incluido una descripción.")
+                    Text(MusicLocalized.message(remote == nil ? "Descripción no disponible" : "El creador no ha incluido una descripción."))
                 } else {
                     Text(verbatim: descriptionText).textSelection(.enabled)
                     Button("Copiar descripción") { UIPasteboard.general.string = descriptionText }

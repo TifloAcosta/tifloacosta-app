@@ -188,6 +188,16 @@ struct NativeMediaScreen: View {
         if let url = item.originalURL { NativeShare.present(url: url) }
     }
 
+    private func mediaAccessibilityLabel(_ item: NativeMediaItem) -> String {
+        let format = MusicLocalized.message(item.formatLabel)
+        let source = MusicLocalized.format("%@. Fuente: %@", format, item.sourceName)
+        var parts = [item.title, source]
+        if let date = NativeNewsMetadata.publication(item.publishedAt) {
+            parts.append(MusicLocalized.format("Publicado: %@", date))
+        }
+        return parts.joined(separator: ". ")
+    }
+
     var body: some View {
         List {
             Section {
@@ -245,12 +255,7 @@ struct NativeMediaScreen: View {
                             }
                         }
                         .accessibilityElement(children: .ignore)
-                        .accessibilityLabel(
-                            item.title + ". " +
-                            MusicLocalized.format("%@. Fuente: %@", MusicLocalized.message(item.formatLabel), item.sourceName) + ". " +
-                            (NativeNewsMetadata.publication(item.publishedAt)
-                                .map { MusicLocalized.format("Publicado: %@", $0) } ?? "")
-                        )
+                        .accessibilityLabel(Text(mediaAccessibilityLabel(item)))
                         .accessibilityAction(named: Text(item.openLabel)) { open(item) }
                         .accessibilityAction(named: Text("Visitar fuente")) {
                             if let url = item.sourceURL { openURL(url) }

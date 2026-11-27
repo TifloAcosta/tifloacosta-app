@@ -106,8 +106,11 @@ test('a corrupt local song does not stall the queue and final failures remain vi
   assert.match(source('NativeMyMusic.swift'), /else if let problem = mixedQueue\.error \{[\s\S]*?Text\(problem\)/);
 });
 
-test('editorial media accessibility label uses translated source and publication date', () => {
+test('editorial media accessibility label uses translated source and publication date outside ViewBuilder', () => {
   const media = source('NativeMedia.swift');
-  assert.match(media, /item\.title \+ "\. " \+\s+MusicLocalized\.format\("%@\. Fuente: %@", MusicLocalized\.message\(item\.formatLabel\), item\.sourceName\)/);
-  assert.match(media, /\.map \{ MusicLocalized\.format\("Publicado: %@", \$0\) \}/);
+  assert.match(media, /private func mediaAccessibilityLabel\(_ item: NativeMediaItem\) -> String/);
+  assert.match(media, /let format = MusicLocalized\.message\(item\.formatLabel\)/);
+  assert.match(media, /let source = MusicLocalized\.format\("%@\. Fuente: %@", format, item\.sourceName\)/);
+  assert.match(media, /parts\.append\(MusicLocalized\.format\("Publicado: %@", date\)\)/);
+  assert.match(media, /\.accessibilityLabel\(Text\(mediaAccessibilityLabel\(item\)\)\)/);
 });

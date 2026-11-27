@@ -334,8 +334,8 @@ private struct NativeRadioStationRow: View {
             guard let url = station.urlResolved else { return }
             radio.play(name: station.name, url: url)
         }
-        .accessibilityAction(named: Text(favorites.contains(where: { $0.id == station.id })
-            ? "Quitar de favoritas" : "Guardar favorita")) { toggleFavorite() }
+        .accessibilityAction(named: Text(MusicLocalized.message(favorites.contains(where: { $0.id == station.id })
+            ? "Quitar de favoritas" : "Guardar favorita"))) { toggleFavorite() }
     }
 }
 

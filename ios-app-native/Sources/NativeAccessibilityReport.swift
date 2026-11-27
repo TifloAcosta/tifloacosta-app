@@ -56,7 +56,7 @@ struct NativeAccessibilityReportScreen: View {
     ]
 
     private var catalogSummary: String {
-        let updated = catalog.lastUpdated?.formatted(date: .abbreviated, time: .shortened)
+        let updated = catalog.lastUpdated?.formatted(.dateTime.year().month(.abbreviated).day().hour().minute().locale(Locale(identifier: NativeAppLanguage.code(for: UserDefaults.standard.integer(forKey: NativeAppLanguage.storageKey)))))
             ?? MusicLocalized.message("Sin actualización confirmada")
         return MusicLocalized.format("Catálogo. Recursos: %d. Vídeos: %d. Noticias: %d. Última actualización: %@. Estado: %@.", catalog.resources.count, catalog.videos.count, catalog.news.count, updated, MusicLocalized.message(catalog.error == nil ? "Sin error declarado" : "Actualización con incidencia"))
     }

@@ -12,7 +12,7 @@
 "guide.3.paragraph.2" = "Stelle Stimme, Geschwindigkeit und Darstellung ein. Organisiere Bücher mit Filtern, Sortierung, Ordnern und Mehrfachauswahl.";
 "guide.3.paragraph.3" = "Öffne ein Buch aus der Bibliothek zum Lesen oder Anhören. Mit den Bedienungshilfen kannst du Informationen ansehen, das Dokument umbenennen, verschieben oder löschen.";
 "guide.3.paragraph.4" = "Während des Lesens stehen Wiedergabe, Navigation, Fortschritt, Lesezeichen und Audioeinstellungen bereit. Einige Funktionen hängen vom Dateiformat ab.";
-"guide.4.title" = "Empfangene Dateien";
+"guide.4.title" = "Empfangen";
 "guide.4.paragraph.1" = "Hier erscheinen Dateien, die du aus anderen Apps mit TifloAcosta geteilt hast.";
 "guide.4.paragraph.2" = "Wähle eine Datei und importiere sie in TifloLector. Öffne sie anschließend aus deiner Bibliothek.";
 "guide.4.paragraph.3" = "Aktualisiere und verwalte die empfangenen Elemente. Falls eine Datei nicht erkannt wird, prüfe das Format und teile sie erneut.";
@@ -35,11 +35,11 @@
 "guide.8.paragraph.3" = "Spiele Videos im App-Player ab. Über die Bedienungshilfen kannst du Inhalte teilen oder in YouTube öffnen.";
 "guide.8.paragraph.4" = "Melde dich bei Google nur für Funktionen an, die ein Konto benötigen, beispielsweise Abonnements.";
 "guide.8.paragraph.5" = "Die Kanalliste lässt sich nach Datum sortieren und um weitere Videos erweitern.";
-"guide.9.title" = "Podcasts";
+"guide.9.title" = "Podcast";
 "guide.9.paragraph.1" = "Durchsuche die Folgen des TifloAcosta-Podcasts, beginnend mit den neuesten.";
 "guide.9.paragraph.2" = "Öffne eine Folge zum Anhören. Du kannst pausieren, fortsetzen sowie 30 Sekunden vor- oder zurückspringen.";
 "guide.9.paragraph.3" = "Teile Folgen, aktualisiere die Liste oder besuche die verfügbaren externen Plattformen.";
-"guide.10.title" = "Kontakt und soziale Netzwerke";
+"guide.10.title" = "Kontakt und Netzwerke";
 "guide.10.paragraph.1" = "Hier findest du Kontaktmöglichkeiten und Links zu YouTube, Instagram, Facebook und der offiziellen Website.";
 "guide.10.paragraph.2" = "Unter Mein Buch erhältst du Informationen zum Werk La vida vista desde donde estoy.";
 "guide.10.paragraph.3" = "Mit VoiceOver öffnest du einen Link durch Doppeltippen. Bei manchen Links ist auch Teilen möglich.";

@@ -45,12 +45,12 @@ private enum NativeGuideContent {
             spanishParagraphs: [
                 "En Actualidad puedes consultar noticias sobre tecnología y accesibilidad. Utiliza el control ajustable Categoría para elegir un apartado, o el campo Buscar noticias para localizar un tema concreto.",
                 "Al principio también hay un control ajustable para escoger Podcasts, Canales de YouTube o Todos los formatos. Cuando seleccionas contenido multimedia, aparecen los elementos de ese tipo en vez del listado de noticias.",
-                "Abre un título para leerlo. En los resultados de noticias puedes usar las acciones de accesibilidad para leer, guardar en TifloLector, compartir, abrir la fuente original o añadir a Favoritos. Si hay más resultados, utiliza Mostrar diez más."
+                "Abre un título para leerlo. En los resultados de noticias puedes usar las acciones de accesibilidad para leer, guardar en TifloReader, compartir, abrir la fuente original o añadir a Favoritos. Si hay más resultados, utiliza Mostrar diez más."
             ],
             englishParagraphs: [
                 "News provides technology and accessibility articles. Use the Category adjustable control to select a topic, or Search news to look for specific information.",
                 "The adjustable multimedia control lets you choose Podcasts, YouTube channels, or All formats. Choosing a media option displays those items instead of the news list.",
-                "Open an article to read it. Accessibility actions include reading, saving to TifloLector, sharing, opening the original source, or saving as a favorite. Use Show ten more when available."
+                "Open an article to read it. Accessibility actions include reading, saving to TifloReader, sharing, opening the original source, or saving as a favorite. Use Show ten more when available."
             ]
         ),
         NativeGuideSection(
@@ -64,14 +64,14 @@ private enum NativeGuideContent {
             ],
             englishParagraphs: [
                 "Resources contains guides and materials organized by category. Use the Category adjustable control; with VoiceOver, swipe up or down to choose a category. The resource list appears after you make a selection.",
-                "Open a title to read it. Accessibility actions provide reading, saving to TifloLector, downloading, or sharing as supported by the resource.",
+                "Open a title to read it. Accessibility actions provide reading, saving to TifloReader, downloading, or sharing as supported by the resource.",
                 "Selecting another category shows only its resources. Use Back to return."
             ]
         ),
         NativeGuideSection(
             id: "3",
             spanishTitle: "TifloLector",
-            englishTitle: "TifloLector",
+            englishTitle: "TifloReader",
             spanishParagraphs: [
                 "TifloLector es el lector y biblioteca personal. Pulsa Importar para elegir archivos desde Archivos o consultar las bibliotecas en línea disponibles. También puedes recibir contenido mediante Compartir desde otras aplicaciones.",
                 "En Ajustes configuras las preferencias generales de lectura, voz y presentación. Los controles ajustables de Filtrar documentos y Ordenar sirven para encontrar las obras; también puedes organizarlas por carpetas.",
@@ -79,10 +79,10 @@ private enum NativeGuideContent {
                 "Dentro de la lectura encontrarás controles y opciones adaptados al documento: reproducción, navegación, progreso, marcas y ajustes de audio o visuales. Algunas funciones y formatos dependen del tipo de archivo y de su contenido. Las marcas guardadas se consultan desde Marcas."
             ],
             englishParagraphs: [
-                "TifloLector is your personal reading library. Choose Import to pick a file from Files or browse available online libraries. You can also send content using Share from another app.",
+                "TifloReader is your personal reading library. Choose Import to pick a file from Files or browse available online libraries. You can also send content using Share from another app.",
                 "Settings contains reading, speech, and display preferences. Use the adjustable Filter documents and Sort controls to locate items and organize them into folders.",
                 "Open a title in My library to read or play it. Accessibility actions let you inspect a book, configure its own settings, play, move it to a folder, rename, or delete it.",
-                "Inside a document, available controls include playback, navigation, progress, bookmarks, audio and visual options. Available features depend on the file and its contents. Saved bookmarks appear under Marks."
+                "Inside a document, available controls include playback, navigation, progress, bookmarks, audio and visual options. Available features depend on the file and its contents. Saved bookmarks appear under Bookmarks."
             ]
         ),
         NativeGuideSection(
@@ -116,22 +116,22 @@ private enum NativeGuideContent {
         NativeGuideSection(
             id: "4",
             spanishTitle: "Recibidos",
-            englishTitle: "Received items",
+            englishTitle: "Received",
             spanishParagraphs: [
                 "Recibidos reúne los elementos enviados a TifloAcosta desde la opción Compartir de otras aplicaciones, cuando el sistema puede recibirlos.",
                 "Busca el documento compartido en esta sección y utiliza la acción disponible para incorporarlo a TifloLector. Una vez importado, ábrelo desde Mi biblioteca para leerlo; Recibidos no sustituye al lector.",
                 "Puedes actualizar la lista y gestionar los elementos recibidos. Si un archivo no se reconoce, comprueba su formato y vuelve a compartirlo."
             ],
             englishParagraphs: [
-                "Received items contains files sent to TifloAcosta through another app's Share menu, when supported by the system.",
-                "Find the received item and use its import action to add it to TifloLector. Then open My library to read it. Received items is not itself the document reader.",
+                "Received contains files sent to TifloAcosta through another app's Share menu, when supported by the system.",
+                "Find the received item and use its import action to add it to TifloReader. Then open My library to read it. Received is not itself the document reader.",
                 "You can refresh the list and manage incoming items. If a file is not recognized, check its format and share it again."
             ]
         ),
         NativeGuideSection(
             id: "5",
             spanishTitle: "Novedades",
-            englishTitle: "What's new",
+            englishTitle: "What's New",
             spanishParagraphs: [
                 "En Novedades aparecen las incorporaciones recientes de TifloAcosta, como nuevos recursos y vídeos.",
                 "Abre un recurso para leerlo. En los títulos podrás encontrar acciones para leer, guardar, descargar, compartir o añadir a Favoritos, según el contenido.",
@@ -156,7 +156,7 @@ private enum NativeGuideContent {
             englishParagraphs: [
                 "Use this section to save a file from an HTTPS link. Enter the address or choose Paste link if it is on the clipboard.",
                 "Select Analyze link before downloading. The app attempts to identify the file and verify access. Some servers only allow access checks during the actual download.",
-                "Choose Download to TifloAcosta when available. Saved files appear under My downloads. Double-tap a title to import it into TifloLector; sharing and deletion are also available.",
+                "Choose Download in TifloAcosta when available. Saved files appear under My downloads. Double-tap a title to import it into TifloReader; sharing and deletion are also available.",
                 "Private links or links requiring special permissions may not allow direct downloading."
             ]
         ),
@@ -212,7 +212,7 @@ private enum NativeGuideContent {
         NativeGuideSection(
             id: "10",
             spanishTitle: "Contacto y redes",
-            englishTitle: "Contact and social networks",
+            englishTitle: "Contact and Social",
             spanishParagraphs: [
                 "Esta sección reúne información sobre TifloAcosta y los medios para contactar, además de los enlaces a YouTube, Instagram, Facebook y la web oficial.",
                 "En Mi libro puedes consultar información sobre La vida vista desde donde estoy. Los enlaces de contacto o redes abren el servicio correspondiente fuera de la aplicación.",
@@ -227,7 +227,7 @@ private enum NativeGuideContent {
         NativeGuideSection(
             id: "11",
             spanishTitle: "Privacidad y accesibilidad",
-            englishTitle: "Privacy and accessibility",
+            englishTitle: "Privacy and Accessibility",
             spanishParagraphs: [
                 "En Privacidad y accesibilidad puedes consultar la información de privacidad de la aplicación y sus opciones de accesibilidad.",
                 "Lee la información para saber cómo se gestionan los datos y qué recursos utiliza TifloAcosta. Algunos enlaces pueden abrir páginas externas con sus propias condiciones.",
@@ -252,7 +252,7 @@ private enum NativeGuideContent {
             englishParagraphs: [
                 "In Settings you can choose the app language using an adjustable control. Your preference is saved.",
                 "Expand Visual settings only when you want to change the interface. Available options include contrast, text size, line spacing and heavier text, with a reset option.",
-                "The Application section shows the installed version and a link to the website. Document reading preferences are configured in TifloLector Settings.",
+                "The Application section shows the installed version and a link to the website. Document reading preferences are configured in TifloReader Settings.",
                 "In Backups you can select the content to save, create a local or iCloud backup and schedule automatic backups. Download and review a backup before confirming restoration. Existing items are kept; podcast files must be downloaded again."
             ]
         )

@@ -41,20 +41,21 @@ final class NativeCloudAccountStore: NSObject, ObservableObject {
 
     override init() {
         super.init()
-        for provider in NativeCloudProvider.allCases {
+        for provider in NativeCloudProvider.releaseProviders {
             if let config = Self.loadConfiguration(for: provider) {
                 configurations[provider] = config
+                if loadCredential(for: provider) != nil { connected.insert(provider) }
             }
-            if loadCredential(for: provider) != nil { connected.insert(provider) }
         }
     }
 
     /// No account UI is enabled until its own native OAuth registration exists.
     func isAvailable(_ provider: NativeCloudProvider) -> Bool {
-        configurations[provider] != nil
+        provider.enabledForRelease && configurations[provider] != nil
     }
 
     private static func loadConfiguration(for provider: NativeCloudProvider) -> Configuration? {
+        guard provider.enabledForRelease else { return nil }
         let suffix: String
         let auth: String
         let token: String
@@ -262,6 +263,7 @@ final class NativeCloudAccountStore: NSObject, ObservableObject {
     }
 
     func validAccessToken(for provider: NativeCloudProvider) async throws -> String {
+        guard isAvailable(provider) else { throw NativeCloudStorageError.unavailable }
         guard let current = loadCredential(for: provider) else {
             connected.remove(provider)
             throw NativeCloudStorageError.unauthenticated

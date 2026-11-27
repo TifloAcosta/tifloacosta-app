@@ -66,3 +66,7 @@ código de autorización o pegando una clave personal. Para buscar, esta
 implementación pide una clave personal incluso antes de enero de 2027.
 La clave queda en el llavero de este iPhone y se envía solo en cabeceras
 HTTPS. El código de vinculación caduca y no se usa para identificar música.
+
+### Alcance de nubes en iOS 1.7
+
+Google Drive y Dropbox son los proveedores habilitados. OneDrive queda expresamente excluido de esta versión por decisión del titular (27-11-2026), hasta completar su registro administrativo. Se conserva el adaptador interno, pero la política de proveedores impide cargar su configuración o credenciales, iniciar OAuth o crear el transporte. No incluirlo en menús, notas de versión ni requisitos de lanzamiento. Reactivación solo tras autorización y validación de una configuración oficial.

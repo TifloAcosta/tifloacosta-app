@@ -4,6 +4,11 @@ import Foundation
 /// separate adapters; this type never persists or exports an access token.
 enum NativeCloudProvider: String, Codable, CaseIterable, Identifiable {
     case googleDrive, dropbox, oneDrive
+
+    // OneDrive is deferred until its administrative registration is complete.
+    // Keep the adapter for future work, but never activate it in this release.
+    static let releaseProviders: [Self] = [.googleDrive, .dropbox]
+    var enabledForRelease: Bool { Self.releaseProviders.contains(self) }
     var id: String { rawValue }
     var title: String {
         switch self {
@@ -81,6 +86,7 @@ final class NativeCloudStorage {
     }
 
     init(provider: NativeCloudProvider, accessToken: String) throws {
+        guard provider.enabledForRelease else { throw NativeCloudStorageError.unavailable }
         guard !accessToken.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             throw NativeCloudStorageError.unauthenticated
         }

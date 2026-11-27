@@ -35,3 +35,17 @@ test('cloud pages deduplicate IDs and stop cursor cycles; disconnected downloads
   assert.match(browser, /consumedCursors\.contains\(\$0\) \? nil : \$0/);
   assert.match(browser, /let file = try await storage\.download[\s\S]*?accounts\.sessionRevision\(for: provider\) == revision else \{\s+try\? FileManager\.default\.removeItem/);
 });
+
+test('OneDrive is excluded at runtime, even if an old credential or configuration exists', () => {
+  const account = readFileSync(new URL('../Sources/NativeCloudAccount.swift', import.meta.url), 'utf8');
+  const storage = readFileSync(new URL('../Sources/NativeCloudStorage.swift', import.meta.url), 'utf8');
+  const cinema = readFileSync(new URL('../Sources/NativeAccessibleCinema.swift', import.meta.url), 'utf8');
+  const plist = readFileSync(new URL('../Sources/Info.plist', import.meta.url), 'utf8');
+  assert.match(storage, /static let releaseProviders: \[Self\] = \[\.googleDrive, \.dropbox\]/);
+  assert.match(storage, /init\(provider: NativeCloudProvider, accessToken: String\) throws \{\s+guard provider.enabledForRelease/);
+  assert.match(account, /for provider in NativeCloudProvider.releaseProviders/);
+  assert.match(account, /guard provider.enabledForRelease else \{ return nil \}/);
+  assert.match(account, /func validAccessToken\(for provider: NativeCloudProvider\) async throws -> String \{\s+guard isAvailable\(provider\)/);
+  assert.doesNotMatch(plist, /CloudOAuthOneDrive/);
+  for (const screen of [music, cinema]) assert.doesNotMatch(screen, /NativeCloudFolderBrowserScreen\(provider: \.oneDrive/);
+});

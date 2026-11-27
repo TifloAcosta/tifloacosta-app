@@ -1124,7 +1124,7 @@ window.TIFLO_RESOURCES = [
   {
     "id": "es-1eYJutqgY2neCcUDo-UMMlBMOtH5Btm_p",
     "lang": "es",
-    "category": "General",
+    "category": "Guías y tutoriales",
     "title": "Ayer funcionaba",
     "url": "https://tifloacosta.com/docs/es/reader-1eYJutqgY2neCcUDo-UMMlBMOtH5Btm_p.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1eYJutqgY2neCcUDo-UMMlBMOtH5Btm_p.html",
@@ -1133,7 +1133,7 @@ window.TIFLO_RESOURCES = [
   {
     "id": "es-1ImO_jIXwDyr5va_8IkYbqSmgSsYAwXjc",
     "lang": "es",
-    "category": "General",
+    "category": "IA",
     "title": "Buscar en internet ya no es lo que era.",
     "url": "https://tifloacosta.com/docs/es/reader-1ImO_jIXwDyr5va_8IkYbqSmgSsYAwXjc.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1ImO_jIXwDyr5va_8IkYbqSmgSsYAwXjc.html",
@@ -1142,7 +1142,7 @@ window.TIFLO_RESOURCES = [
   {
     "id": "es-1CfderlYFrafHB4nhy-HCC5At0paQDr5y",
     "lang": "es",
-    "category": "General",
+    "category": "Estudios",
     "title": "Cuando el captcha es la barrera",
     "url": "https://tifloacosta.com/docs/es/reader-1CfderlYFrafHB4nhy-HCC5At0paQDr5y.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1CfderlYFrafHB4nhy-HCC5At0paQDr5y.html",
@@ -1151,7 +1151,7 @@ window.TIFLO_RESOURCES = [
   {
     "id": "es-1QwKn5Tu5BvLNiUgCpVCt_sH3SgXY2TLD",
     "lang": "es",
-    "category": "General",
+    "category": "Estudios",
     "title": "Cuando siendo ciego compramos a ciegas",
     "url": "https://tifloacosta.com/docs/es/reader-1QwKn5Tu5BvLNiUgCpVCt_sH3SgXY2TLD.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1QwKn5Tu5BvLNiUgCpVCt_sH3SgXY2TLD.html",
@@ -1160,7 +1160,7 @@ window.TIFLO_RESOURCES = [
   {
     "id": "es-1v38XlJafVcVcR6jzn3u7Ag-QQdnGs_Hh",
     "lang": "es",
-    "category": "General",
+    "category": "Guías y tutoriales",
     "title": "El arte de ayudar sin estorbar. Guía escrita desde la experiencia",
     "url": "https://tifloacosta.com/docs/es/reader-1v38XlJafVcVcR6jzn3u7Ag-QQdnGs_Hh.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1v38XlJafVcVcR6jzn3u7Ag-QQdnGs_Hh.html",
@@ -1169,7 +1169,7 @@ window.TIFLO_RESOURCES = [
   {
     "id": "es-1A4SO3ybRU3IevF_3a2ZgjDGbXiVynrb6",
     "lang": "es",
-    "category": "General",
+    "category": "Estudios",
     "title": "El Futuro de la Radio",
     "url": "https://tifloacosta.com/docs/es/reader-1A4SO3ybRU3IevF_3a2ZgjDGbXiVynrb6.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1A4SO3ybRU3IevF_3a2ZgjDGbXiVynrb6.html",
@@ -1259,7 +1259,7 @@ window.TIFLO_RESOURCES = [
   {
     "id": "es-1jSA3mUc3dYaAr-H3CFXyIeqVne8vkanv",
     "lang": "es",
-    "category": "iPhone",
+    "category": "Escritura",
     "title": "Uso de teclados externos con VoiceOver en iPhone y iPad. Funciones, atajos y consejos",
     "url": "https://tifloacosta.com/docs/es/reader-1jSA3mUc3dYaAr-H3CFXyIeqVne8vkanv.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1jSA3mUc3dYaAr-H3CFXyIeqVne8vkanv.html",
@@ -1511,7 +1511,7 @@ window.TIFLO_RESOURCES = [
   {
     "id": "en-1CkUT59t5FpfcMpAvDLX5FBdo_qP8XrfD",
     "lang": "en",
-    "category": "General",
+    "category": "Guides and Tutorials",
     "title": "It worked yesterday",
     "url": "https://tifloacosta.com/docs/en/reader-1CkUT59t5FpfcMpAvDLX5FBdo_qP8XrfD.html",
     "openUrl": "https://tifloacosta.com/docs/en/reader-1CkUT59t5FpfcMpAvDLX5FBdo_qP8XrfD.html",
@@ -1520,7 +1520,7 @@ window.TIFLO_RESOURCES = [
   {
     "id": "en-15dnqa0X5uitVAawYdikzUoALi1XzQI6Z",
     "lang": "en",
-    "category": "General",
+    "category": "AI",
     "title": "Searching the Internet Is No Longer What It Used to Be",
     "url": "https://tifloacosta.com/docs/en/reader-15dnqa0X5uitVAawYdikzUoALi1XzQI6Z.html",
     "openUrl": "https://tifloacosta.com/docs/en/reader-15dnqa0X5uitVAawYdikzUoALi1XzQI6Z.html",
@@ -1529,7 +1529,7 @@ window.TIFLO_RESOURCES = [
   {
     "id": "en-1GqHYUDA1Y5amL9Dm3HrvR74jCOD3WWMi",
     "lang": "en",
-    "category": "General",
+    "category": "Guides and Tutorials",
     "title": "The Art of Helping Without Getting in the Way",
     "url": "https://tifloacosta.com/docs/en/reader-1GqHYUDA1Y5amL9Dm3HrvR74jCOD3WWMi.html",
     "openUrl": "https://tifloacosta.com/docs/en/reader-1GqHYUDA1Y5amL9Dm3HrvR74jCOD3WWMi.html",
@@ -1538,7 +1538,7 @@ window.TIFLO_RESOURCES = [
   {
     "id": "en-1_zCgJmkjUebl3iLNm7E5ySYjJtf4BwaP",
     "lang": "en",
-    "category": "General",
+    "category": "Research and Studies",
     "title": "When Being Blind Means Buying Blind",
     "url": "https://tifloacosta.com/docs/en/reader-1_zCgJmkjUebl3iLNm7E5ySYjJtf4BwaP.html",
     "openUrl": "https://tifloacosta.com/docs/en/reader-1_zCgJmkjUebl3iLNm7E5ySYjJtf4BwaP.html",
@@ -1547,7 +1547,7 @@ window.TIFLO_RESOURCES = [
   {
     "id": "en-10C6DY2QuW4IXOdybbfhfCvhG_zwd9ND0",
     "lang": "en",
-    "category": "General",
+    "category": "Research and Studies",
     "title": "When CAPTCHA Becomes the Barrier",
     "url": "https://tifloacosta.com/docs/en/reader-10C6DY2QuW4IXOdybbfhfCvhG_zwd9ND0.html",
     "openUrl": "https://tifloacosta.com/docs/en/reader-10C6DY2QuW4IXOdybbfhfCvhG_zwd9ND0.html",
@@ -4803,6 +4803,16 @@ window.TIFLO_RESOURCES = [
     "title": "A Blind Person Forewarned Is Forearmed. Earthquake Alerts on Your Phone",
     "url": "https://tifloacosta.com/docs/en/reader-10Sg0Q-FQrvAcMhZnOkXmnOlOO95ywL9Z.html",
     "openUrl": "https://tifloacosta.com/docs/en/reader-10Sg0Q-FQrvAcMhZnOkXmnOlOO95ywL9Z.html",
+    "new": false
+  },
+  {
+    "id": "es-18kU95UWNEgoN8yTVtHxI9woxZEpqunz0",
+    "lang": "es",
+    "category": "Noticias",
+    "title": "RSS: la forma más tranquila de enterarte de todo",
+    "url": "https://tifloacosta.com/docs/es/reader-10TKIY5ZkO75bFVRgrqpv77UeeaZm04iG.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-10TKIY5ZkO75bFVRgrqpv77UeeaZm04iG.html",
+    "searchText": "RSS: la forma más tranquila de enterarte de todo lector feeds accesibilidad OPML SonarPad iPhone iPad Mac Windows Android",
     "new": false
   }
 ];

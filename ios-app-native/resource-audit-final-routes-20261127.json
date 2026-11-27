@@ -1,0 +1,132 @@
+{
+  "date": "2026-11-27",
+  "baseCommit": "c18e5d4ab44be54cb5e52100d02c0573251fb5c5",
+  "moves": [
+    {
+      "sourceId": "1v38XlJafVcVcR6jzn3u7Ag-QQdnGs_Hh",
+      "id": "es-1v38XlJafVcVcR6jzn3u7Ag-QQdnGs_Hh",
+      "from": [
+        "General"
+      ],
+      "to": [
+        "Guías y tutoriales"
+      ]
+    },
+    {
+      "sourceId": "1eYJutqgY2neCcUDo-UMMlBMOtH5Btm_p",
+      "id": "es-1eYJutqgY2neCcUDo-UMMlBMOtH5Btm_p",
+      "from": [
+        "General"
+      ],
+      "to": [
+        "Guías y tutoriales"
+      ]
+    },
+    {
+      "sourceId": "1ImO_jIXwDyr5va_8IkYbqSmgSsYAwXjc",
+      "id": "es-1ImO_jIXwDyr5va_8IkYbqSmgSsYAwXjc",
+      "from": [
+        "General"
+      ],
+      "to": [
+        "IA"
+      ]
+    },
+    {
+      "sourceId": "1jSA3mUc3dYaAr-H3CFXyIeqVne8vkanv",
+      "id": "es-1jSA3mUc3dYaAr-H3CFXyIeqVne8vkanv",
+      "from": [
+        "iPhone"
+      ],
+      "to": [
+        "Escritura"
+      ]
+    },
+    {
+      "sourceId": "1A4SO3ybRU3IevF_3a2ZgjDGbXiVynrb6",
+      "id": "es-1A4SO3ybRU3IevF_3a2ZgjDGbXiVynrb6",
+      "from": [
+        "General"
+      ],
+      "to": [
+        "Estudios"
+      ]
+    },
+    {
+      "sourceId": "1CfderlYFrafHB4nhy-HCC5At0paQDr5y",
+      "id": "es-1CfderlYFrafHB4nhy-HCC5At0paQDr5y",
+      "from": [
+        "General"
+      ],
+      "to": [
+        "Estudios"
+      ]
+    },
+    {
+      "sourceId": "1QwKn5Tu5BvLNiUgCpVCt_sH3SgXY2TLD",
+      "id": "es-1QwKn5Tu5BvLNiUgCpVCt_sH3SgXY2TLD",
+      "from": [
+        "General"
+      ],
+      "to": [
+        "Estudios"
+      ]
+    },
+    {
+      "sourceId": "1GqHYUDA1Y5amL9Dm3HrvR74jCOD3WWMi",
+      "id": "en-1GqHYUDA1Y5amL9Dm3HrvR74jCOD3WWMi",
+      "from": [
+        "General"
+      ],
+      "to": [
+        "Guides and Tutorials"
+      ]
+    },
+    {
+      "sourceId": "1CkUT59t5FpfcMpAvDLX5FBdo_qP8XrfD",
+      "id": "en-1CkUT59t5FpfcMpAvDLX5FBdo_qP8XrfD",
+      "from": [
+        "General"
+      ],
+      "to": [
+        "Guides and Tutorials"
+      ]
+    },
+    {
+      "sourceId": "15dnqa0X5uitVAawYdikzUoALi1XzQI6Z",
+      "id": "en-15dnqa0X5uitVAawYdikzUoALi1XzQI6Z",
+      "from": [
+        "General"
+      ],
+      "to": [
+        "AI"
+      ]
+    },
+    {
+      "sourceId": "10C6DY2QuW4IXOdybbfhfCvhG_zwd9ND0",
+      "id": "en-10C6DY2QuW4IXOdybbfhfCvhG_zwd9ND0",
+      "from": [
+        "General"
+      ],
+      "to": [
+        "Research and Studies"
+      ]
+    },
+    {
+      "sourceId": "1_zCgJmkjUebl3iLNm7E5ySYjJtf4BwaP",
+      "id": "en-1_zCgJmkjUebl3iLNm7E5ySYjJtf4BwaP",
+      "from": [
+        "General"
+      ],
+      "to": [
+        "Research and Studies"
+      ]
+    }
+  ],
+  "rssAlias": {
+    "sourceId": "18kU95UWNEgoN8yTVtHxI9woxZEpqunz0",
+    "resourceId": "es-18kU95UWNEgoN8yTVtHxI9woxZEpqunz0",
+    "existingResourceId": "es-10TKIY5ZkO75bFVRgrqpv77UeeaZm04iG",
+    "verifiedNormalizedParagraphs": 55
+  }
+}

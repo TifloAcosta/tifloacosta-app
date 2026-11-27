@@ -471,12 +471,24 @@ final class LocalizationNavigationTests: XCTestCase {
         for section in ["reader", "music", "cinema", "podcasts", "radio"] {
             let item = app.switches.matching(identifier: "tiflo.backup.select." + section).firstMatch
             XCTAssertTrue(reveal(app, item), section)
-            if item.value as? String == "1" { item.tap() }
-            XCTAssertEqual(item.value as? String, "0")
+            // SwiftUI exposes the whole labelled row as a Switch. Tap the
+            // actual trailing switch rather than the centre of its label.
+            if item.value as? String == "1" {
+                XCTAssertTrue(item.isEnabled, section)
+                item.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)).tap()
+            }
+            let off = XCTNSPredicateExpectation(predicate: NSPredicate(format: "value == %@", "0"), object: item)
+            XCTAssertEqual(XCTWaiter.wait(for: [off], timeout: 5), .completed, section)
+            XCTAssertEqual(item.value as? String, "0", section)
         }
         let preferences = app.switches.matching(identifier: "tiflo.backup.select.preferences").firstMatch
         XCTAssertTrue(reveal(app, preferences))
-        if preferences.value as? String == "0" { preferences.tap() }
+        if preferences.value as? String == "0" {
+            XCTAssertTrue(preferences.isEnabled)
+            preferences.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)).tap()
+        }
+        let on = XCTNSPredicateExpectation(predicate: NSPredicate(format: "value == %@", "1"), object: preferences)
+        XCTAssertEqual(XCTWaiter.wait(for: [on], timeout: 5), .completed)
         XCTAssertEqual(preferences.value as? String, "1")
         let local = app.buttons.matching(identifier: "tiflo.backup.create.local").firstMatch
         XCTAssertTrue(reveal(app, local))

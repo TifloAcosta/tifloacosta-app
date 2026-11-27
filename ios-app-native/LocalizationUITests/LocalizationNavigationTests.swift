@@ -539,7 +539,10 @@ final class LocalizationNavigationTests: XCTestCase {
             find(app, key: key, language: language)
         }
         find(app, key: "Buscar en YouTube", language: language).tap()
-        find(app, key: "Buscar en todo YouTube", language: language)
+        let searchField = app.textFields.matching(identifier: "tiflo.youtube.search.field").firstMatch
+        XCTAssertTrue(searchField.waitForExistence(timeout: 20), app.debugDescription)
+        XCTAssertTrue(reveal(app, searchField), "Search field not reachable")
+        XCTAssertEqual(searchField.label, expected("Buscar en todo YouTube", language))
         find(app, key: "Tipo de resultados", language: language)
         // Do not submit a search or sign into a third-party account.
 

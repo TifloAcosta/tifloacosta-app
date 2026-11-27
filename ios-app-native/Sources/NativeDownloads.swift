@@ -196,7 +196,7 @@ struct NativeDownloadsScreen: View {
                     address = UIPasteboard.general.string ?? ""
                 }
 
-                Button(store.checking ? "Analizando enlace" : "Analizar enlace") {
+                Button(LocalizedStringKey(store.checking ? "Analizando enlace" : "Analizar enlace")) {
                     Task {
                         await store.analyze(address)
                         announce()
@@ -208,7 +208,7 @@ struct NativeDownloadsScreen: View {
                     Text(MusicLocalized.format("Contenido: %@", MusicLocalized.message(analysis.type)))
                         .font(.subheadline)
                         .foregroundStyle(TifloVisual.secondaryText)
-                    Button(store.busy ? "Descargando en TifloAcosta" : "Descargar en TifloAcosta") {
+                    Button(LocalizedStringKey(store.busy ? "Descargando en TifloAcosta" : "Descargar en TifloAcosta")) {
                         Task {
                             await store.download(analysis)
                             announce()

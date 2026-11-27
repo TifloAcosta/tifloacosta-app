@@ -13,7 +13,8 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: localization-audit-${{ github.ref }}
+  # Migrate the group so the already-running backup audit can finish on its original commit.
+  group: localization-audit-v2-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   localization-navigation:

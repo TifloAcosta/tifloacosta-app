@@ -45,7 +45,7 @@ private enum NativeGuideContent {
             spanishParagraphs: [
                 "En Actualidad puedes consultar noticias sobre tecnología y accesibilidad. Utiliza el control ajustable Categoría para elegir un apartado, o el campo Buscar noticias para localizar un tema concreto.",
                 "Al principio también hay un control ajustable para escoger Podcasts, Canales de YouTube o Todos los formatos. Cuando seleccionas contenido multimedia, aparecen los elementos de ese tipo en vez del listado de noticias.",
-                "Abre un título para leerlo. En los resultados de noticias puedes usar las acciones de accesibilidad para leer, guardar en TifloReader, compartir, abrir la fuente original o añadir a Favoritos. Si hay más resultados, utiliza Mostrar diez más."
+                "Abre un título para leerlo. En los resultados de noticias puedes usar las acciones de accesibilidad para leer, guardar en TifloLector, compartir, abrir la fuente original o añadir a Favoritos. Si hay más resultados, utiliza Mostrar diez más."
             ],
             englishParagraphs: [
                 "News provides technology and accessibility articles. Use the Category adjustable control to select a topic, or Search news to look for specific information.",
@@ -181,15 +181,15 @@ private enum NativeGuideContent {
             englishTitle: "Videos",
             spanishParagraphs: [
                 "Vídeos incluye el buscador accesible de YouTube y la lista de vídeos del canal TifloAcosta. Escribe una búsqueda, ajusta Tipo de resultados si lo necesitas y pulsa Buscar en YouTube.",
-                "Puedes filtrar por vídeos, canales, vídeos cortos, directos o contenido con subtítulos. Abre el resultado que te interese; cuando haya más resultados, utiliza Mostrar diez resultados más.",
-                "Los vídeos se abren en el reproductor de TifloAcosta. En los títulos también hay acciones de accesibilidad para reproducir y, cuando proceda, abrir en YouTube, compartir o comentar.",
+                "Puedes filtrar por vídeos, canales, listas de reproducción, vídeos cortos, directos o contenido con subtítulos. Abre el resultado que te interese; cuando haya más resultados, utiliza Mostrar diez resultados más.",
+                "Los vídeos se abren en el reproductor de TifloAcosta. Usa la acción de accesibilidad Detalles del vídeo para consultar su información. También hay acciones para reproducir y, cuando proceda, abrir en YouTube, compartir o comentar.",
                 "Para usar las funciones de cuenta que las requieran, como consultar tus suscripciones o interactuar con YouTube, inicia sesión con Google. Buscar y reproducir vídeos no exige iniciar sesión.",
                 "El listado del canal TifloAcosta permite ordenar por fecha y mostrar más vídeos."
             ],
             englishParagraphs: [
                 "Videos provides accessible YouTube search and a list of TifloAcosta channel videos. Enter search terms, select a Result type if needed, and choose Search YouTube.",
-                "Search filters include videos, channels, short videos, live streams, and captioned content. Open a result; choose Show ten more results when available.",
-                "Videos open in TifloAcosta's player. Title accessibility actions can provide playback, opening YouTube, sharing or commenting when supported.",
+                "Search filters include videos, channels, playlists, short videos, live streams, and captioned content. Open a result; choose Show ten more results when available.",
+                "Videos open in TifloAcosta's player. Use the Video details accessibility action to view information about a video. Other actions include playback, opening YouTube, sharing or commenting when supported.",
                 "Sign in with Google for account features such as subscriptions and eligible YouTube interactions. Searching and watching do not require signing in.",
                 "The TifloAcosta channel list can be sorted by date and expanded."
             ]

@@ -31,8 +31,8 @@
 "guide.7.paragraph.3" = "Si un contenu disparaît temporairement du catalogue, sa référence enregistrée est conservée.";
 "guide.8.title" = "Vidéos";
 "guide.8.paragraph.1" = "Recherche des vidéos YouTube avec des commandes accessibles ou consulte la chaîne TifloAcosta.";
-"guide.8.paragraph.2" = "Filtre les résultats par vidéos, chaînes, formats courts, directs ou sous-titres.";
-"guide.8.paragraph.3" = "Lis les résultats dans le lecteur de l’application. Les actions d’accessibilité permettent de partager ou d’ouvrir YouTube.";
+"guide.8.paragraph.2" = "Filtre les résultats par vidéos, chaînes, playlists, formats courts, directs ou contenus sous-titrés.";
+"guide.8.paragraph.3" = "Lis les vidéos dans le lecteur de l’application. Utilise l’action d’accessibilité Détails de la vidéo pour consulter les informations. D’autres actions permettent de partager ou d’ouvrir YouTube.";
 "guide.8.paragraph.4" = "Connecte-toi avec Google uniquement pour les fonctions qui nécessitent un compte, comme les abonnements.";
 "guide.8.paragraph.5" = "La liste des vidéos de la chaîne peut être triée par date et afficher davantage de résultats.";
 "guide.9.title" = "Podcast";

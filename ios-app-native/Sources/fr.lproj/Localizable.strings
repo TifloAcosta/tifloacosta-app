@@ -220,7 +220,7 @@
 "TifloLector conserva los párrafos y la posición para navegar con VoiceOver y una línea braille. Puedes utilizar braille y voz al mismo tiempo." = "TifloLector conserve les paragraphes et la position de lecture pour naviguer avec VoiceOver et une plage braille. Le braille et la voix peuvent être utilisés ensemble.";
 "Los controles de reproducción y ajustes aparecen antes del texto. Al leer manualmente no se inicia la voz ni se desplaza el foco por cuenta de TifloLector." = "Les commandes de lecture et les réglages précèdent le texte. En lecture manuelle, TifloLector ne lance pas la voix et ne déplace pas le focus automatiquement.";
 "Preferencias de VoiceOver" = "Préférences VoiceOver";
-"Para configurar tu línea: Ajustes del iPhone, Accesibilidad, VoiceOver, Braille." = "Pour configurer votre plage : Réglages de l’iPhone, Accessibilité, VoiceOver, Braille.";
+"Para configurar tu línea: Ajustes del iPhone, Accesibilidad, VoiceOver, Braille." = "Pour configurer ta plage : Réglages de l’iPhone, Accessibilité, VoiceOver, Braille.";
 "Duración del avance automático: ajusta el ritmo de avance de la línea si tu dispositivo lo admite." = "Durée de défilement automatique : réglez la vitesse si votre appareil le permet.";
 "Cambio de página automático: permite continuar al desplazarte cuando la presentación lo admite." = "Changement de page automatique : poursuivez le défilement si la présentation le permet.";
 "Estas opciones pertenecen a VoiceOver; TifloLector no modifica sus valores." = "Ces options appartiennent à VoiceOver ; TifloLector ne modifie pas leurs valeurs.";
@@ -823,12 +823,12 @@
 "Braille" = "Braille";
 "Un minuto" = "Une minute";
 "Presentación de lectura" = "Présentation de la lecture";
-"Voz: el foco puede comenzar en Reproducir. Visual: lectura manual del texto. Braille: lectura manual del mismo texto con la línea braille conectada a VoiceOver. Los tres modos conservan posición y marcas." = "Voix : le focus peut commencer sur Lecture. Visuel : lecture manuelle du texte. Braille : lecture manuelle du même texte avec une plage braille connectée à VoiceOver. Les trois modes conservent la position et les signets.";
+"Voz: el foco puede comenzar en Reproducir. Visual: lectura manual del texto. Braille: lectura manual del mismo texto con la línea braille conectada a VoiceOver. Los tres modos conservan posición y marcas." = "Voix : le focus peut commencer sur « Lire ». Affichage : lecture manuelle du texte. Braille : lecture manuelle du même texte avec une plage braille connectée à VoiceOver. Les trois modes conservent la position et les signets.";
 // Beta: modos de lectura y acciones accesibles.
 "Configura Phonon en Motores externos antes de utilizarlo." = "Configurez Phonon dans Moteurs externes avant de l’utiliser.";
 "Cómo instalar más voces del sistema" = "Comment installer davantage de voix système";
 "Configurar línea braille en VoiceOver" = "Configurer la plage braille dans VoiceOver";
-"Abre Ajustes del iPhone. La línea braille se configura en Accesibilidad, VoiceOver, Braille." = "Ouvre Réglages de l’iPhone. Configurez la plage braille dans Accessibilité, VoiceOver, Braille.";
+"Abre Ajustes del iPhone. La línea braille se configura en Accesibilidad, VoiceOver, Braille." = "Ouvre les Réglages de l’iPhone. Configure la plage braille dans Accessibilité, VoiceOver, Braille.";
 "Prepara Gemini o Phonon antes de seleccionarlos para leer." = "Préparez Gemini ou Phonon avant de les sélectionner pour la lecture.";
 "Compartir documento" = "Partager le document";
 "Convertir a audio o DAISY" = "Convertir en audio ou DAISY";
@@ -1112,7 +1112,7 @@
 
 "Intenta abrir directamente los ajustes de braille de VoiceOver." = "Essayez d’ouvrir directement les réglages braille de VoiceOver.";
 "No se pudieron abrir los ajustes de braille" = "Impossible d’ouvrir les réglages braille";
-"Abre Ajustes > Accesibilidad > VoiceOver > Braille." = "Ouvrez Réglages > Accessibilité > VoiceOver > Braille.";
+"Abre Ajustes > Accesibilidad > VoiceOver > Braille." = "Ouvre Réglages > Accessibilité > VoiceOver > Braille.";
 "Selecciona el texto que necesites con VoiceOver. Después utiliza el botón Copiar texto seleccionado." = "Sélectionnez le texte souhaité avec VoiceOver, puis utilisez Copier le texte sélectionné.";
 "Copiar texto seleccionado" = "Copier le texte sélectionné";
 "Texto seleccionado copiado." = "Texte sélectionné copié.";

@@ -1609,7 +1609,7 @@
 "«%@» guardado en TifloLector." = "«%@» guardado no TifloLector.";
 "No se pudo guardar «%@»: %@" = "Não foi possível guardar «%@»: %@";
 "Selecciona una carpeta en Archivos para descargar «%@»." = "Selecione uma pasta em Ficheiros para descarregar «%@».";
-"No se pudo descargar «%@»: %@" = "Não foi possível descarregar «%@»: %@";
+"No se pudo descargar «%@»: %@" = "Não foi possível transferir «%@»: %@";
 "¿Borrar el historial de consulta de Actualidad y Recursos?" = "Apagar o histórico de consulta de Atualidade e Recursos?";
 "Lecturas de Actualidad" = "Leituras de Atualidade";
 "Lecturas de Recursos" = "Leituras de Recursos";
@@ -1748,7 +1748,7 @@
 "No se pudo consultar Audius. Comprueba la conexión e inténtalo de nuevo." = "Não foi possível consultar o Audius. Verifique a ligação e tente novamente.";
 "Esta pista no tiene un identificador compatible." = "Esta faixa não tem um identificador compatível.";
 "No se pudo iniciar la canción: %@" = "Não foi possível iniciar a música: %@";
-"Pega un enlace HTTPS válido y pulsa Analizar enlace." = "Cole uma ligação HTTPS válida e selecione Analisar ligação.";
+"Pega un enlace HTTPS válido y pulsa Analizar enlace." = "Cola uma ligação HTTPS válida e seleciona «Analisar ligação».";
 "Este enlace señala una carpeta. Abre la carpeta en Google Drive y comparte el enlace de un archivo concreto." = "Esta ligação aponta para uma pasta. Abra-a no Google Drive e partilhe a ligação de um ficheiro específico.";
 "No se ha podido reconocer el archivo de Google Drive. Comprueba el enlace compartido." = "Não foi possível identificar o ficheiro do Google Drive. Verifique a ligação partilhada.";
 "Google Drive no permite descargar este archivo sin autorización. Si es tuyo, revisa Compartir y permite el acceso a quien tenga el enlace. Si no, solicita permiso a la persona propietaria." = "O Google Drive não permite descarregar este ficheiro sem autorização. Se for seu, verifique Partilhar e permita o acesso a quem tiver a ligação. Caso contrário, peça autorização ao proprietário.";
@@ -1809,7 +1809,7 @@
 "Este episodio ya está descargado." = "Este episódio já foi descarregado.";
 "Descargando %@." = "A descarregar %@.";
 "Descarga terminada: %@." = "Transferência concluída: %@.";
-"No se pudo descargar %@: %@" = "Não foi possível descarregar %@: %@";
+"No se pudo descargar %@: %@" = "Não foi possível transferir %@: %@";
 "Episodio descargado eliminado: %@." = "Episódio descarregado eliminado: %@.";
 "No se pudo eliminar la descarga: %@" = "Não foi possível eliminar a transferência: %@";
 "Suscripción eliminada." = "Subscrição eliminada.";
@@ -1843,7 +1843,7 @@
 "La extensión Compartir necesita el App Group de Apple." = "A extensão Partilhar necessita do App Group da Apple.";
 "Los servidores ofrecen un catálogo anterior al guardado. Se conserva la versión más reciente de este dispositivo." = "Os servidores oferecem um catálogo anterior ao guardado. É mantida a versão mais recente neste dispositivo.";
 "Contenido actualizado desde %@. Recursos: %d. Vídeos: %d. Noticias: %d." = "Conteúdo atualizado a partir de %@. Recursos: %d. Vídeos: %d. Notícias: %d.";
-"No se pudo descargar el catálogo. %@" = "Não foi possível descarregar o catálogo. %@";
+"No se pudo descargar el catálogo. %@" = "Não foi possível transferir o catálogo. %@";
 "No se pudo actualizar el catálogo. Se muestran los contenidos guardados. %@" = "Não foi possível atualizar o catálogo. São apresentados os conteúdos guardados. %@";
 "Informe copiado. Puedes pegarlo en el correo o servicio que prefieras." = "Relatório copiado. Pode colá-lo no e-mail ou serviço que preferir.";
 "Sin actualización confirmada" = "Sem atualização confirmada";
@@ -1898,7 +1898,7 @@
 "Eliminar descarga: %@" = "Eliminar transferência: %@";
 "Quitar de favoritos: %@" = "Retirar dos favoritos: %@";
 "Añadir a favoritos: %@" = "Adicionar aos favoritos: %@";
-"Descargar: %@" = "Descarregar: %@";
+"Descargar: %@" = "Transferir: %@";
 "Reproducir favorito: %@" = "Reproduzir favorito: %@";
 "Quitar favorito: %@" = "Retirar favorito: %@";
 "Consultar episodios: %@" = "Consultar episódios: %@";

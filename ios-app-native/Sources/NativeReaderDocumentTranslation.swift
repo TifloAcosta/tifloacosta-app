@@ -137,7 +137,7 @@ struct NativeReaderDocumentTranslationScreen: View {
             } catch is CancellationError {
                 translationError = NativeAppLanguage.message("Traducción cancelada.", languageCode: currentLanguageCode)
             } catch {
-                translationError = error.localizedDescription
+                translationError = MusicLocalized.format("No se pudo traducir el documento: %@", error.localizedDescription)
             }
             isTranslating = false
             configuration = nil

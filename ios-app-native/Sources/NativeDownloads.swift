@@ -57,17 +57,17 @@ final class NativeDownloadStore: ObservableObject {
         do {
             let item = try NativeAnalyzedDownload.inspect(raw)
             analysis = item
-            var note = "El servidor se comprobará al descargar."
+            var note = MusicLocalized.message("El servidor se comprobará al descargar.")
             var request = URLRequest(url: item.downloadURL)
             request.httpMethod = "HEAD"
             request.timeoutInterval = 15
             do {
                 let (_, response) = try await URLSession.shared.data(for: request)
                 if let http = response as? HTTPURLResponse, http.statusCode == 405 {
-                    note = "El servidor no admite análisis previo; se comprobará al descargar."
+                    note = MusicLocalized.message("El servidor no admite análisis previo; se comprobará al descargar.")
                 } else {
                     try NativeAnalyzedDownload.verifyResponse(response, for: item)
-                    note = "El servidor ha respondido correctamente."
+                    note = MusicLocalized.message("El servidor ha respondido correctamente.")
                 }
             } catch let error as NativeDownloadLinkError {
                 if item.isGoogleDrive {
@@ -86,10 +86,10 @@ final class NativeDownloadStore: ObservableObject {
             } catch {
                 // Some file hosts block HEAD but accept GET. Do not report a
                 // successful accessibility check when none was possible.
-                note = "No se pudo verificar el acceso previo. Se comprobará al descargar."
+                note = MusicLocalized.message("No se pudo verificar el acceso previo. Se comprobará al descargar.")
             }
             canDownload = true
-            message = MusicLocalized.format("%@ reconocido. %@", item.type, note)
+            message = MusicLocalized.format("%@ reconocido. %@", MusicLocalized.message(item.type), note)
         } catch {
             message = error.localizedDescription
         }
@@ -163,9 +163,9 @@ struct NativeDownloadsScreen: View {
         Task {
             do {
                 try await library.importFile(from: file.url)
-                alertText = "«\(file.title)» importado a TifloLector."
+                alertText = MusicLocalized.format("«%@» importado a TifloLector.", file.title)
             } catch {
-                alertText = "No se pudo importar «\(file.title)»: \(error.localizedDescription)"
+                alertText = MusicLocalized.format("No se pudo importar «%@»: %@", file.title, error.localizedDescription)
             }
         }
     }
@@ -272,7 +272,7 @@ struct NativeDownloadsScreen: View {
             Button("Eliminar definitivamente", role: .destructive) {
                 if let file = pendingDeletion {
                     do { try store.delete(file) }
-                    catch { alertText = error.localizedDescription }
+                    catch { alertText = MusicLocalized.format("No se pudo eliminar la descarga: %@", error.localizedDescription) }
                 }
                 pendingDeletion = nil
             }

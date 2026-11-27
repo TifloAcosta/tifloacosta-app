@@ -2083,3 +2083,15 @@
 "Abriendo Google Drive…" = "Apertura di Google Drive…";
 "Importando" = "Importazione";
 "Importar a mi biblioteca" = "Importa nella mia biblioteca";
+"El servidor no admite análisis previo; se comprobará al descargar." = "Il server non supporta la verifica preliminare; verrà verificato durante il download.";
+"El servidor ha respondido correctamente." = "Il server ha risposto correttamente.";
+"No se pudo verificar el acceso previo. Se comprobará al descargar." = "Impossibile verificare l’accesso in anticipo. Verrà verificato durante il download.";
+"«%@» importado a TifloLector." = "«%@» importato in TifloLector.";
+"No se pudo importar «%@»: %@" = "Impossibile importare «%@»: %@";
+"El documento aún no está disponible para leer." = "Il documento non è ancora disponibile per la lettura.";
+"Lectura iniciada." = "Lettura avviata.";
+"Documento guardado en TifloLector." = "Documento salvato in TifloLector.";
+"Selecciona la ubicación para descargar el archivo." = "Scegli dove scaricare il file.";
+"No se pudo descargar: %@" = "Impossibile scaricare: %@";
+"Guardado en TifloLector" = "Salvato in TifloLector";
+"No se pudo traducir el documento: %@" = "Impossibile tradurre il documento: %@";

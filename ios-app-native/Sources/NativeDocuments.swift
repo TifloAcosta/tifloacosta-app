@@ -154,11 +154,11 @@ struct NativeRemoteResourceScreen: View {
 
     private func readAloud() {
         guard !documentText.isEmpty else {
-            announce("El documento aún no está disponible para leer.")
+            announce(MusicLocalized.message("El documento aún no está disponible para leer."))
             return
         }
         speech.play(documentText)
-        announce("Lectura iniciada.")
+        announce(MusicLocalized.message("Lectura iniciada."))
     }
 
     private func saveInReader() {
@@ -169,9 +169,9 @@ struct NativeRemoteResourceScreen: View {
             do {
                 try await resourceService.saveInReader(item, library: library)
                 imported = true
-                announce("Documento guardado en TifloLector.")
+                announce(MusicLocalized.message("Documento guardado en TifloLector."))
             } catch {
-                announce("No se pudo guardar: \(error.localizedDescription)")
+                announce(MusicLocalized.format("No se pudo guardar: %@", error.localizedDescription))
             }
         }
     }
@@ -183,9 +183,9 @@ struct NativeRemoteResourceScreen: View {
             defer { busy = false }
             do {
                 try await resourceService.exportToFiles(item)
-                announce("Selecciona la ubicación para descargar el archivo.")
+                announce(MusicLocalized.message("Selecciona la ubicación para descargar el archivo."))
             } catch {
-                announce("No se pudo descargar: \(error.localizedDescription)")
+                announce(MusicLocalized.format("No se pudo descargar: %@", error.localizedDescription))
             }
         }
     }
@@ -217,11 +217,11 @@ struct NativeRemoteResourceScreen: View {
 
                 if !documentText.isEmpty {
                     VStack(alignment: .leading, spacing: 10) {
-                        Button(readingActivity.isSaved(.resource, item: item)
-                            ? "Quitar de Leer después" : "Guardar para leer después") {
+                        Button(MusicLocalized.message(readingActivity.isSaved(.resource, item: item)
+                            ? "Quitar de Leer después" : "Guardar para leer después")) {
                             let saved = readingActivity.toggleReadLater(.resource, item: item)
-                            announce(saved ? "Recurso guardado para leer después." :
-                                "Recurso retirado de Leer después.")
+                            announce(MusicLocalized.message(saved ? "Recurso guardado para leer después." :
+                                "Recurso retirado de Leer después."))
                         }
                         if #available(iOS 18.0, *) {
                             NavigationLink("Traducir recurso al idioma de la aplicación") {
@@ -235,7 +235,7 @@ struct NativeRemoteResourceScreen: View {
                         }
                         Button("Leer en voz alta") { readAloud() }
                         Button("Detener lectura") { speech.stop() }
-                        Button(imported ? "Guardado en TifloLector" : "Guardar en TifloLector") {
+                        Button(MusicLocalized.message(imported ? "Guardado en TifloLector" : "Guardar en TifloLector")) {
                             saveInReader()
                         }
                         .disabled(imported || busy)

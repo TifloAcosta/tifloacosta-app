@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-27",
+  "baseCommit": "4cfabb6200fb69462524d0c5013e416544708f6f",
+  "recovered": [
+    {
+      "sourceId": "1-TQphTgLd9Oka7EszJsqCNmp40w_-M3b",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Los Airtags, funcionamiento y dispositivos compatibles.html"
+      ],
+      "path": "docs/es/reader-1-TQphTgLd9Oka7EszJsqCNmp40w_-M3b.html",
+      "resourceId": "es-1-TQphTgLd9Oka7EszJsqCNmp40w_-M3b",
+      "sourceBytes": 4677
+    },
+    {
+      "sourceId": "14nh1Z9avpshOGJevEEyn1LTTBM0mVm-B",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo consultar el borrador y presentar la declaración de renta de 2020 desde nuestro iPhone o iPad.html"
+      ],
+      "path": "docs/es/reader-14nh1Z9avpshOGJevEEyn1LTTBM0mVm-B.html",
+      "resourceId": "es-14nh1Z9avpshOGJevEEyn1LTTBM0mVm-B",
+      "sourceBytes": 4546
+    },
+    {
+      "sourceId": "1fgwdeWXenn7dTyUFYKt-b8cMAylCPQaD",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo instalar apps en el iPhone que no están disponibles en tu país.html"
+      ],
+      "path": "docs/es/reader-1fgwdeWXenn7dTyUFYKt-b8cMAylCPQaD.html",
+      "resourceId": "es-1fgwdeWXenn7dTyUFYKt-b8cMAylCPQaD",
+      "sourceBytes": 7364
+    },
+    {
+      "sourceId": "1FlKsLXb7nf9DbLqSibAZoX9G5vI5TQIu",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Dos tips para Safari que tienes que conocer.html"
+      ],
+      "path": "docs/es/reader-1FlKsLXb7nf9DbLqSibAZoX9G5vI5TQIu.html",
+      "resourceId": "es-1FlKsLXb7nf9DbLqSibAZoX9G5vI5TQIu",
+      "sourceBytes": 9809
+    },
+    {
+      "sourceId": "12mmKH-elKPXTaTuiK0QINGd-IyQUYDO2",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Ya no necesitas conectar el iPhone al Mac o PC para restaurarlo si se ha bloqueado.html"
+      ],
+      "path": "docs/es/reader-12mmKH-elKPXTaTuiK0QINGd-IyQUYDO2.html",
+      "resourceId": "es-12mmKH-elKPXTaTuiK0QINGd-IyQUYDO2",
+      "sourceBytes": 3254
+    },
+    {
+      "sourceId": "1_xlMZjddhe_dTLrYHn-NFE2Oe25aTg7w",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "cambiar el país donde tienes tu AppStore.html"
+      ],
+      "path": "docs/es/reader-1_xlMZjddhe_dTLrYHn-NFE2Oe25aTg7w.html",
+      "resourceId": "es-1_xlMZjddhe_dTLrYHn-NFE2Oe25aTg7w",
+      "sourceBytes": 1855
+    },
+    {
+      "sourceId": "1FeU4Azcx4CKMDQ3H098OEOaz_GVikVCJ",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo prestar tu iPhone a un usuario invitado sin mostrar tus datos personales.html"
+      ],
+      "path": "docs/es/reader-1FeU4Azcx4CKMDQ3H098OEOaz_GVikVCJ.html",
+      "resourceId": "es-1FeU4Azcx4CKMDQ3H098OEOaz_GVikVCJ",
+      "sourceBytes": 6093
+    }
+  ]
+}

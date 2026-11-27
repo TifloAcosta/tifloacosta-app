@@ -3937,5 +3937,89 @@ window.TIFLO_RESOURCES = [
     "url": "https://tifloacosta.com/docs/es/reader-1x69Tuxb_2FuJklV7OJLIxxTLbs_K4YN0.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1x69Tuxb_2FuJklV7OJLIxxTLbs_K4YN0.html",
     "searchText": "Cómo compartir el contenido de la pantalla del iPhone con cualquier persona usando Siri Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1-TQphTgLd9Oka7EszJsqCNmp40w_-M3b",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Los Airtags, funcionamiento y dispositivos compatibles",
+    "url": "https://tifloacosta.com/docs/es/reader-1-TQphTgLd9Oka7EszJsqCNmp40w_-M3b.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1-TQphTgLd9Oka7EszJsqCNmp40w_-M3b.html",
+    "searchText": "Los Airtags, funcionamiento y dispositivos compatibles Archivo histórico iPhone"
+  },
+  {
+    "id": "es-14nh1Z9avpshOGJevEEyn1LTTBM0mVm-B",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Cómo consultar el borrador y presentar la declaración de renta de 2020 desde nuestro iPhone o iPad",
+    "url": "https://tifloacosta.com/docs/es/reader-14nh1Z9avpshOGJevEEyn1LTTBM0mVm-B.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-14nh1Z9avpshOGJevEEyn1LTTBM0mVm-B.html",
+    "searchText": "Cómo consultar el borrador y presentar la declaración de renta de 2020 desde nuestro iPhone o iPad Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1fgwdeWXenn7dTyUFYKt-b8cMAylCPQaD",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Cómo instalar apps en el iPhone que no están disponibles en tu país",
+    "url": "https://tifloacosta.com/docs/es/reader-1fgwdeWXenn7dTyUFYKt-b8cMAylCPQaD.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1fgwdeWXenn7dTyUFYKt-b8cMAylCPQaD.html",
+    "searchText": "Cómo instalar apps en el iPhone que no están disponibles en tu país Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1FlKsLXb7nf9DbLqSibAZoX9G5vI5TQIu",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Dos tips para Safari que tienes que conocer",
+    "url": "https://tifloacosta.com/docs/es/reader-1FlKsLXb7nf9DbLqSibAZoX9G5vI5TQIu.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1FlKsLXb7nf9DbLqSibAZoX9G5vI5TQIu.html",
+    "searchText": "Dos tips para Safari que tienes que conocer Archivo histórico iPhone"
+  },
+  {
+    "id": "es-12mmKH-elKPXTaTuiK0QINGd-IyQUYDO2",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Ya no necesitas conectar el iPhone al Mac o PC para restaurarlo si se ha bloqueado",
+    "url": "https://tifloacosta.com/docs/es/reader-12mmKH-elKPXTaTuiK0QINGd-IyQUYDO2.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-12mmKH-elKPXTaTuiK0QINGd-IyQUYDO2.html",
+    "searchText": "Ya no necesitas conectar el iPhone al Mac o PC para restaurarlo si se ha bloqueado Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1_xlMZjddhe_dTLrYHn-NFE2Oe25aTg7w",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "cambiar el país donde tienes tu AppStore",
+    "url": "https://tifloacosta.com/docs/es/reader-1_xlMZjddhe_dTLrYHn-NFE2Oe25aTg7w.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1_xlMZjddhe_dTLrYHn-NFE2Oe25aTg7w.html",
+    "searchText": "cambiar el país donde tienes tu AppStore Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1FeU4Azcx4CKMDQ3H098OEOaz_GVikVCJ",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Cómo prestar tu iPhone a un usuario invitado sin mostrar tus datos personales",
+    "url": "https://tifloacosta.com/docs/es/reader-1FeU4Azcx4CKMDQ3H098OEOaz_GVikVCJ.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1FeU4Azcx4CKMDQ3H098OEOaz_GVikVCJ.html",
+    "searchText": "Cómo prestar tu iPhone a un usuario invitado sin mostrar tus datos personales Archivo histórico iPhone"
   }
 ];

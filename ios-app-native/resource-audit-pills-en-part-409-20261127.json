@@ -1,0 +1,111 @@
+{
+  "date": "2026-11-27",
+  "baseCommit": "ff6a7dc00a229393ed2f6436ccd5447ff1f49203",
+  "recovered": [
+    {
+      "sourceId": "1VPDz9sdkuJulXHzpJR_JCnsNiI3AUnjB",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 20 2026.html"
+      ],
+      "path": "docs/en/pildoras/2026/tech-pills-20-2026.html",
+      "resourceId": "en-pildoras-2026-20",
+      "sourceBytes": 53140,
+      "headings": [
+        "Tech Pills 20 2026",
+        "Welcome",
+        "WhatsApp is preparing a good batch of changes"
+      ]
+    },
+    {
+      "sourceId": "1_tRh-NisSiQR82FnC06VDtGT2Uj8TezJ",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 19 2026.html"
+      ],
+      "path": "docs/en/pildoras/2026/tech-pills-19-2026.html",
+      "resourceId": "en-pildoras-2026-19",
+      "sourceBytes": 104818,
+      "headings": [
+        "Tech Pills 19 2026",
+        "Let's open the box",
+        "The digital euro wants to be accessible from birth: the ECB turns to Fundación ONCE so no one is left out"
+      ]
+    },
+    {
+      "sourceId": "1-iDGi__VEKFW1p8xHjJs8h8bBEtd9dCF",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 18 2026.html"
+      ],
+      "path": "docs/en/pildoras/2026/tech-pills-18-2026.html",
+      "resourceId": "en-pildoras-2026-18",
+      "sourceBytes": 87358,
+      "headings": [
+        "Tech Pills 18 2026",
+        "Apple is preparing a new way to get its devices: pay to use them, upgrade them, or return them",
+        "Apple Upgrade would not be simple financing"
+      ]
+    },
+    {
+      "sourceId": "13AmA3wudLMGjL-Dm6tGxaXQIV20oiY6n",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 17 2026.html"
+      ],
+      "path": "docs/en/pildoras/2026/tech-pills-17-2026.html",
+      "resourceId": "en-pildoras-2026-17",
+      "sourceBytes": 62469,
+      "headings": [
+        "Tech Pills 17 2026",
+        "Contents of this edition",
+        "iOS 26.6 prepares an alert for potentially dangerous messages"
+      ]
+    },
+    {
+      "sourceId": "1ZviWN1pXBD12ehuJjrBuwCjw15kk7Aze",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 16 2026.html"
+      ],
+      "path": "docs/en/pildoras/2026/tech-pills-16-2026.html",
+      "resourceId": "en-pildoras-2026-16",
+      "sourceBytes": 74464,
+      "headings": [
+        "Tech Pills 16 2026",
+        "Contents",
+        "What this issue brings"
+      ]
+    },
+    {
+      "sourceId": "1Wqq6OY29bFMqu_wYBzxQkJ2_EW-j84yn",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 15 2026.html"
+      ],
+      "path": "docs/en/pildoras/2026/tech-pills-15-2026.html",
+      "resourceId": "en-pildoras-2026-15",
+      "sourceBytes": 78648,
+      "headings": [
+        "Tech Pills 15 2026",
+        "Índice",
+        "Introduction"
+      ]
+    },
+    {
+      "sourceId": "1vWdCopX6p5BSk5D1tEEBTODvLi8poP3A",
+      "sourcePath": [
+        "Pills",
+        "Tech Pills 14 2026.html"
+      ],
+      "path": "docs/en/pildoras/2026/tech-pills-14-2026.html",
+      "resourceId": "en-pildoras-2026-14",
+      "sourceBytes": 61217,
+      "headings": [
+        "Tech Pills 14 2026",
+        "Contents",
+        "Welcome"
+      ]
+    }
+  ]
+}

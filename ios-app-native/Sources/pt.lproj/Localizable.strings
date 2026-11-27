@@ -587,7 +587,7 @@
 "Doble toque para leer. Acción: Quitar de favoritos." = "Dá dois toques para ler. Ação: Remover dos favoritos.";
 "Doble toque para reproducir en TifloAcosta. Acciones: Abrir en YouTube y Quitar de favoritos." = "Dá dois toques para reproduzir no TifloAcosta. Ações: Abrir no YouTube e Remover dos favoritos.";
 "Explica qué sucede y qué debería ocurrir." = "Explica o que acontece e o que deveria acontecer.";
-"Se incluirán versión de la app y de iOS, tipo genérico de dispositivo, estado de VoiceOver, ajustes de movimiento y texto en negrita y resumen del catálogo. Todo permanece en el dispositivo hasta que decidas compartirlo." = "O relatório pode incluir versões da app e iOS, tipo de dispositivo, estado do VoiceOver, ajustes visuais e resumo do catálogo. Fica no dispositivo até o partilhares.";
+"Se incluirán versión de la app y de iOS, tipo genérico de dispositivo, estado de VoiceOver, ajustes de movimiento y texto en negrita y resumen del catálogo. Todo permanece en el dispositivo hasta que decidas compartirlo." = "O relatório incluirá as versões da aplicação e do iOS, o tipo genérico de dispositivo, o estado do VoiceOver, as definições de redução de movimento e de texto a negrito e um resumo do catálogo. Tudo permanece no dispositivo até decidires partilhá-lo.";
 "No se adjuntan documentos, historiales, contraseñas, claves de API ni datos de cuentas. Revisa tu texto antes de compartirlo." = "Não são anexados documentos, histórico, palavras-passe, chaves API nem dados de contas. Revê o texto antes de partilhar.";
 "El informe solo se comparte cuando eliges una aplicación y confirmas el envío. No se envía automáticamente." = "O relatório só é partilhado quando escolhes uma aplicação e confirmas. Nunca é enviado automaticamente.";
 "Todavía no hay contenidos guardados para leer después." = "Ainda não há conteúdos guardados para ler mais tarde.";
@@ -988,9 +988,9 @@
 "Eliminado de Favoritos: %@" = "Removido dos favoritos: %@";
 "Todavía no hay un libro abierto anteriormente para continuar." = "Não há nenhum livro aberto anteriormente para retomar.";
 "Continuando %@ desde la posición guardada." = "A retomar %@ da posição guardada.";
-"Configura la clave Gemini en Motores externos." = "Configura a chave Gemini em Vozes externas.";
+"Configura la clave Gemini en Motores externos." = "Configura a chave Gemini em Motores externos.";
 "Generando el primer fragmento con Gemini. La reproducción comenzará cuando Google devuelva el audio." = "A gerar o primeiro fragmento com Gemini. A reprodução começa quando a Google devolver o áudio.";
-"Instala el motor y modelo Phonon en Motores externos." = "Instala o motor e modelo Phonon em Vozes externas.";
+"Instala el motor y modelo Phonon en Motores externos." = "Instala o motor e modelo Phonon em Motores externos.";
 "Faltan archivos de audio de esta obra." = "Faltam ficheiros de áudio desta obra.";
 "No se pudo reproducir: %@" = "Não foi possível reproduzir: %@";
 "La pista indicada no está disponible." = "A faixa selecionada não está disponível.";
@@ -1563,7 +1563,7 @@
 "Filtrar documentos" = "Filtrar documentos";
 "El nombre de la carpeta está vacío, repetido o es demasiado largo." = "O nome da pasta está vazio, repetido ou é demasiado longo.";
 "No hay documentos seleccionados para mover." = "Não há documentos selecionados para mover.";
-"No se pudo crear la carpeta. Comprueba que el nombre no esté vacío, repetido o sea demasiado largo." = "Não foi possível criar a pasta. Verifique se o nome não está vazio, repetido ou é demasiado longo.";
+"No se pudo crear la carpeta. Comprueba que el nombre no esté vacío, repetido o sea demasiado largo." = "Não foi possível criar a pasta. Verifica se o nome está preenchido, é único e não é demasiado longo.";
 "Vídeo no disponible." = "Vídeo indisponível.";
 "No se pudo reproducir el vídeo con el reproductor de Apple." = "Não foi possível reproduzir o vídeo com o leitor da Apple.";
 "No disponible" = "Indisponível";
@@ -1686,7 +1686,7 @@
 "Latinoamérica" = "América Latina";
 "Información y agradecimientos" = "Informações e agradecimentos";
 "Entrar en Audiocinemateca" = "Entrar na Audiocinemateca";
-"Agradecemos a %@ su predisposición y colaboración con Multicines Accesibles." = "Agradecemos a %@ pela disponibilidade e colaboração com o Multicines Accesibles.";
+"Agradecemos a %@ su predisposición y colaboración con Multicines Accesibles." = "Agradecemos a %@ pela disponibilidade e colaboração com o Cinemas Acessíveis.";
 "Universo Audesc" = "Universo Audesc";
 
 // Project Gutenberg connection status

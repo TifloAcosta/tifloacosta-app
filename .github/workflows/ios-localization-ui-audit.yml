@@ -15,7 +15,8 @@ permissions:
 concurrency:
   # Migrate the group so the already-running backup audit can finish on its original commit.
   group: localization-audit-v2-${{ github.ref }}
-  cancel-in-progress: true
+  # Preserve an audit already running while subsequent integration work proceeds.
+  cancel-in-progress: false
 jobs:
   localization-navigation:
     runs-on: macos-15

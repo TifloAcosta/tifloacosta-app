@@ -1466,6 +1466,11 @@ struct NativeMyMusicScreen: View {
                 Button("Detener reproducción de lista") { mixedQueue.stop() }
                 if let problem = mixedQueue.error { Text(problem) }
             }
+        } else if let problem = mixedQueue.error {
+            Section("Reproducción de lista") {
+                Text(problem)
+                Button("Cerrar") { mixedQueue.error = nil }
+            }
         }
     }
 

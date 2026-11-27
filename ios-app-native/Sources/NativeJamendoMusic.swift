@@ -143,10 +143,15 @@ final class NativeJamendoPlayer: ObservableObject {
             if let currentItem = player?.currentItem {
                 endObserver = NotificationCenter.default.addObserver(
                     forName: .AVPlayerItemDidPlayToEndTime, object: currentItem, queue: .main
-                ) { [weak self] _ in
+                ) { [weak self] notification in
                     Task { @MainActor [weak self] in
-                        self?.isPlaying = false
-                        self?.onPlaybackFinished?()
+                        // A queued notification from an earlier item must not
+                        // advance a replacement playlist or reclaim other audio.
+                        guard let self, let ended = notification.object as? AVPlayerItem,
+                              self.player?.currentItem === ended, self.isPlaying,
+                              NativeRemotePlaybackOwner.current == .jamendo else { return }
+                        self.isPlaying = false
+                        self.onPlaybackFinished?()
                     }
                 }
             }

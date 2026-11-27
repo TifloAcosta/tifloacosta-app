@@ -88,6 +88,11 @@ final class NativeMixedMusicQueue: ObservableObject {
                 NativeMusicPlayer.shared.play(name: entry.title, url: url,
                     queue: [(name: entry.title, url: url)], playlistID: playlistID,
                     albumKeysByURL: albumKeysByURL)
+                guard NativeMusicPlayer.shared.isPlaying else {
+                    error = MusicLocalized.message("Esta canción no se pudo reproducir. Se conserva en tu lista.")
+                    currentIndex += 1
+                    continue
+                }
             case .appleMusic:
                 guard let remoteID = entry.appleMusicSongId, !remoteID.isEmpty else {
                     currentIndex += 1

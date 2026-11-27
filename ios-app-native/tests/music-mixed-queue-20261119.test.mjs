@@ -89,3 +89,25 @@ test('mixed playlist transport labels exist in all five translated interface cat
     }
   }
 });
+
+test('completion callbacks are tied to the current item and current playback owner', () => {
+  for (const [file, owner] of [['NativeJamendoMusic.swift','jamendo'],['NativeAudiusMusic.swift','audius']]) {
+    const player = source(file);
+    assert.ok(player.includes('self.player?.currentItem === ended, self.isPlaying'));
+    assert.ok(player.includes('NativeRemotePlaybackOwner.current == .' + owner + ' else { return }'));
+  }
+  assert.match(source('NativeMusicPlayer.swift'), /self\.generation == thisGeneration, self\.isPlaying,\s+NativeRemotePlaybackOwner\.current == \.music/);
+  assert.match(source('NativeAppleMusic.swift'), /self\.completionTimer === timer,\s+NativeRemotePlaybackOwner\.current == \.appleMusic/);
+});
+
+test('a corrupt local song does not stall the queue and final failures remain visible', () => {
+  const queue = source('NativeMixedMusicQueue.swift');
+  assert.match(queue, /guard NativeMusicPlayer\.shared\.isPlaying else \{[\s\S]*?currentIndex \+= 1\s+continue/);
+  assert.match(source('NativeMyMusic.swift'), /else if let problem = mixedQueue\.error \{[\s\S]*?Text\(problem\)/);
+});
+
+test('editorial media accessibility label uses translated source and publication date', () => {
+  const media = source('NativeMedia.swift');
+  assert.match(media, /item\.title \+ "\. " \+\s+MusicLocalized\.format\("%@\. Fuente: %@", MusicLocalized\.message\(item\.formatLabel\), item\.sourceName\)/);
+  assert.match(media, /\.map \{ MusicLocalized\.format\("Publicado: %@", \$0\) \}/);
+});

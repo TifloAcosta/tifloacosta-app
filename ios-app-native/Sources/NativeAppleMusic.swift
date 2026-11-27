@@ -25,6 +25,11 @@ final class NativeAppleMusicPlayer: ObservableObject {
         completionTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] timer in
             Task { @MainActor [weak self] in
                 guard let self else { timer.invalidate(); return }
+                guard self.completionTimer === timer,
+                      NativeRemotePlaybackOwner.current == .appleMusic else {
+                    timer.invalidate()
+                    return
+                }
                 if self.player.state.playbackStatus == .playing { self.observedPlaying = true }
                 if self.observedPlaying && self.player.state.playbackStatus == .stopped {
                     timer.invalidate()

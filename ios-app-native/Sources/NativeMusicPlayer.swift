@@ -475,7 +475,8 @@ final class NativeMusicPlayer: ObservableObject {
         node.scheduleSegment(file, startingFrame: frame, frameCount: count, at: nil,
                              completionCallbackType: .dataPlayedBack) { [weak self] _ in
             Task { @MainActor in
-                guard let self, self.generation == thisGeneration else { return }
+                guard let self, self.generation == thisGeneration, self.isPlaying,
+                      NativeRemotePlaybackOwner.current == .music else { return }
                 if let finished = self.onPlaybackFinished { finished() }
                 else if self.repeatMode == "one" { self.startCurrent() }
                 else { self.next() }

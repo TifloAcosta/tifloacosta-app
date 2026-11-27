@@ -246,9 +246,10 @@ struct NativeMediaScreen: View {
                         }
                         .accessibilityElement(children: .ignore)
                         .accessibilityLabel(
-                            "\(item.title). \(item.formatLabel). Fuente: \(item.sourceName). " +
+                            item.title + ". " +
+                            MusicLocalized.format("%@. Fuente: %@", MusicLocalized.message(item.formatLabel), item.sourceName) + ". " +
                             (NativeNewsMetadata.publication(item.publishedAt)
-                                .map { "Publicado: \($0)" } ?? "")
+                                .map { MusicLocalized.format("Publicado: %@", $0) } ?? "")
                         )
                         .accessibilityAction(named: Text(item.openLabel)) { open(item) }
                         .accessibilityAction(named: Text("Visitar fuente")) {

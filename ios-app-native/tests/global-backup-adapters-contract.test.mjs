@@ -493,3 +493,21 @@ test('all dynamic backup labels and confirmation text exist in five non-Spanish 
         assert.deepEqual(missing, [], language + ': backup keys missing');
     }
 });
+
+test('backup collection rechecks the live-store and foreground gates at each archive boundary', () => {
+    const source = section(coordinator, 'private func createGeneration(', 'func history(');
+    const gate = section(source, 'func checkCollection()', '        if sections.contains(.reader)');
+    assert.match(gate, /try Task\.checkCancellation\(\)/);
+    assert.match(gate, /guard canCollectSnapshot\(\), NativeRemotePlaybackOwner\.current == nil/);
+    assert.match(gate, /reader\.readyForGlobalRestore, NativeMusicBackupAdapter\.readyForRestore/);
+    assert.match(gate, /podcastDownloads\?\.downloadingID == nil/);
+    const boundaries = source.match(/try checkCollection\(\)/g) || [];
+    assert.equal(boundaries.length, 7);
+    assert.ok(source.lastIndexOf('try checkCollection()') < source.indexOf('destination.publish('));
+    assert.match(source, /defer \{[\s\S]*?removeItem\(at: archive\.deletingLastPathComponent\(\)\)/);
+    const ui = read('NativeBackupManagementScreen.swift');
+    assert.match(ui, /canCollectSnapshot: \{ canCollect && !Task\.isCancelled \}/);
+    assert.match(ui, /if cloud \{\s*try Task\.checkCancellation\(\)\s*guard canCollect/);
+    const automatic = section(coordinator, 'func runAutomaticBackupIfDue(', 'func synchronizedHistory(');
+    assert.match(automatic, /canCollectSnapshot: \{ canCollectSnapshot\(\) && !ProcessInfo\.processInfo\.isLowPowerModeEnabled \}/);
+});

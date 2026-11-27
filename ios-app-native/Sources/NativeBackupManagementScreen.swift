@@ -202,9 +202,12 @@ struct NativeBackupManagementScreen: View {
             guard canCollect else { throw NativeBackupCoordinator.Failure.liveStoresNotQuiescent }
             let manifest = try await backups.create(sections: selected, reader: library,
                 podcastLibrary: podcastLibrary, podcastDownloads: podcastDownloads,
-                favorites: favorites, activity: activity)
+                favorites: favorites, activity: activity,
+                canCollectSnapshot: { canCollect && !Task.isCancelled })
             announce("Copia local creada correctamente.")
             if cloud {
+                try Task.checkCancellation()
+                guard canCollect else { throw NativeBackupCoordinator.Failure.liveStoresNotQuiescent }
                 phase = "Enviando copia a iCloud"
                 let result = try await backups.uploadToICloud(generation: manifest.generation)
                 announce(result == .uploaded ? "Copia confirmada en iCloud." : "Copia local guardada. La subida a iCloud está pendiente.")

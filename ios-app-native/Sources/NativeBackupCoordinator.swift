@@ -1,9 +1,8 @@
 import Foundation
 import Combine
 
-/// Coordinates selected sections into one local immutable generation. Until
-/// restore, privacy review, and cloud transport are implemented this
-/// must not be presented as a complete application or iCloud backup.
+/// Coordinates immutable backup generations, explicit restore and cloud
+/// transfer. Existing live records are preserved; never restore automatically.
 @MainActor
 final class NativeBackupCoordinator: ObservableObject {
     static let shared = NativeBackupCoordinator()
@@ -85,16 +84,19 @@ final class NativeBackupCoordinator: ObservableObject {
                 podcastLibrary: NativePodcastLibrary? = nil,
                 podcastDownloads: NativePodcastDownloads? = nil,
                 favorites: NativeFavoritesStore? = nil,
-                activity: NativeReadingActivity? = nil) async throws -> NativeBackupManifest {
-        guard !backupOperationBusy else { throw Failure.busy }
+                activity: NativeReadingActivity? = nil,
+                canCollectSnapshot: () -> Bool) async throws -> NativeBackupManifest {
+        guard !backupOperationBusy, isManagingBackups, !requiresRecovery else { throw Failure.busy }
         return try await createGeneration(sections: sections, generation: UUID(), reader: reader,
-            podcastLibrary: podcastLibrary, podcastDownloads: podcastDownloads, favorites: favorites, activity: activity)
+            podcastLibrary: podcastLibrary, podcastDownloads: podcastDownloads, favorites: favorites,
+            activity: activity, canCollectSnapshot: canCollectSnapshot)
     }
 
     private func createGeneration(sections: Set<NativeBackupManifest.Section>, generation: UUID,
                                   reader: NativeReaderLibrary, podcastLibrary: NativePodcastLibrary?,
                                   podcastDownloads: NativePodcastDownloads?, favorites: NativeFavoritesStore?,
-                                  activity: NativeReadingActivity?) async throws -> NativeBackupManifest {
+                                  activity: NativeReadingActivity?,
+                                  canCollectSnapshot: () -> Bool) async throws -> NativeBackupManifest {
         guard !isCreating, !isRestoring, !isTransferringCloudBackup else { throw Failure.busy }
         guard !sections.isEmpty, sections.isSubset(of: Self.supportedSections) else {
             throw Failure.unsupportedSelection
@@ -115,41 +117,52 @@ final class NativeBackupCoordinator: ObservableObject {
             progressSection = nil
             isCreating = false
         }
+        // Each archive may suspend the main actor. Recheck the foreground
+        // and live-store barriers before starting another section and before
+        // publishing. A partial set is cleaned by the defer above.
+        func checkCollection() throws {
+            try Task.checkCancellation()
+            guard canCollectSnapshot(), NativeRemotePlaybackOwner.current == nil,
+                  reader.readyForGlobalRestore, NativeMusicBackupAdapter.readyForRestore,
+                  podcastLibrary?.readyForGlobalRestore ?? true,
+                  podcastDownloads?.downloadingID == nil else { throw Failure.liveStoresNotQuiescent }
+        }
+        try checkCollection()
         if sections.contains(.reader) {
             progressSection = .reader
             archives[.reader] = try await reader.createGlobalBackupArchive()
         }
-        try Task.checkCancellation()
+        try checkCollection()
         if sections.contains(.music) {
             progressSection = .music
             archives[.music] = try await NativeMusicBackupAdapter.createArchive()
         }
-        try Task.checkCancellation()
+        try checkCollection()
         if sections.contains(.cinema) {
             progressSection = .cinema
             archives[.cinema] = try await NativeCinemaLocalLibrary.shared.createGlobalBackupArchive()
         }
-        try Task.checkCancellation()
+        try checkCollection()
         if sections.contains(.podcasts) {
             progressSection = .podcasts
             guard let podcastLibrary, let podcastDownloads else { throw Failure.missingLiveStore }
             let snapshot = NativePodcastBackupSnapshot.capture(library: podcastLibrary, downloads: podcastDownloads)
             archives[.podcasts] = try await NativeBackupMetadataArchive.create(snapshot)
         }
-        try Task.checkCancellation()
+        try checkCollection()
         if sections.contains(.radio) {
             progressSection = .radio
             let snapshot = try NativeRadioBackupAdapter.capture()
             archives[.radio] = try await NativeBackupMetadataArchive.create(snapshot)
         }
-        try Task.checkCancellation()
+        try checkCollection()
         if sections.contains(.preferences) {
             progressSection = .preferences
             guard let favorites, let activity else { throw Failure.missingLiveStore }
             let snapshot = try NativeBackupPreferencesSnapshot.capture(favorites: favorites, activity: activity)
             archives[.preferences] = try await NativeBackupMetadataArchive.create(snapshot)
         }
-        try Task.checkCancellation()
+        try checkCollection()
         guard Set(archives.keys) == sections else { throw Failure.unsupportedSelection }
         let prepared = archives
         let destination = store
@@ -278,7 +291,8 @@ final class NativeBackupCoordinator: ObservableObject {
         // transmitting any data; no implicit authorization is granted here.
         if !exists {
             _ = try await createGeneration(sections: policy.sections, generation: generation, reader: reader,
-                podcastLibrary: podcastLibrary, podcastDownloads: podcastDownloads, favorites: favorites, activity: activity)
+                podcastLibrary: podcastLibrary, podcastDownloads: podcastDownloads, favorites: favorites, activity: activity,
+                canCollectSnapshot: { canCollectSnapshot() && !ProcessInfo.processInfo.isLowPowerModeEnabled })
         }
         try Task.checkCancellation()
         guard canCollectSnapshot(), !ProcessInfo.processInfo.isLowPowerModeEnabled else { return .deferred }

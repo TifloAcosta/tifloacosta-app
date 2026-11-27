@@ -1,0 +1,146 @@
+name: Diagnóstico de firma iOS 1.7 autorizado - sin envío
+# Autorización explícita de perfiles únicamente, 27-11-2026.
+# Único push de este fichero desde el SHA anterior autorizado, sin reintentos.
+on:
+  push:
+    branches:
+      - development/next-public-1.6-500200-20261121
+    paths:
+      - '.github/workflows/ios-signing-preflight-authorized-20261127.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: tifloacosta-ios-native-testflight
+  cancel-in-progress: false
+jobs:
+  signing-preflight:
+    if: ${{ github.repository == 'TifloAcosta/tifloacosta-app' && github.event.before == '5188487ff1c74c1f0e5346425a8530431cfd607e' && github.run_attempt == 1 }}
+    runs-on: macos-15
+    timeout-minutes: 80
+    env:
+      API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+      API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+      API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+      P12_PASSWORD: ${{ secrets.IOS_SIGNING_KEY_PASSPHRASE }}
+      TIFLO_CINEMA_PUBLIC_DRIVE_API_KEY: ${{ secrets.TIFLO_CINEMA_PUBLIC_DRIVE_API_KEY }}
+      GITHUB_TOKEN: ${{ github.token }}
+      GITHUB_RUN_NUMBER: ${{ github.run_number }}
+      TIFLO_IOS_MARKETING_VERSION: "1.7"
+      TIFLO_SIGNING_PREFLIGHT: "1"
+      TIFLO_ACOUSTID_CLIENT: ${{ vars.TIFLO_ACOUSTID_CLIENT }}
+    steps:
+      - name: Confirmar rama única de la beta interna
+        run: |
+          set -euo pipefail
+          if [ "$GITHUB_REF" != "refs/heads/development/next-public-1.6-500200-20261121" ]; then
+            echo "::error::La beta interna solo puede compilarse desde la rama única de la próxima actualización."
+            exit 1
+          fi
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Comprobar que el único cambio es este diagnóstico autorizado
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = '5188487ff1c74c1f0e5346425a8530431cfd607e'
+          test "$(git diff --name-only HEAD^ HEAD)" = '.github/workflows/ios-signing-preflight-authorized-20261127.yml'
+          test "$GITHUB_RUN_ATTEMPT" = '1'
+      - name: Identificar diagnóstico de firma sin distribución
+        run: |
+          echo 'Diagnóstico de firma: no es una beta aprobada, no sube a Apple ni modifica el inventario.'
+          echo 'Se requiere certificado existente; solo se crearán perfiles para los dos IDs ya configurados.'
+      - name: Validar Actualidad, Recursos y diseño sin HTML
+        run: |
+          set -euo pipefail
+          node --test ios-app-native/tests/*.test.mjs
+          # Única excepción: YouTube exige su reproductor oficial dentro de WebKit.
+          # No permitir pantallas web ni Capacitor en el resto de SwiftUI.
+          if find ios-app-native/Sources -name '*.swift' ! -name 'NativeYouTubePlayer.swift' -print0 | xargs -0 grep -nE 'WKWebView|CAPBridgeViewController|import Capacitor'; then
+            echo "::error::Se ha detectado una interfaz híbrida fuera del reproductor oficial"
+            exit 1
+          fi
+          if grep -nE 'CAPBridgeViewController|import Capacitor' ios-app-native/Sources/NativeYouTubePlayer.swift; then
+            echo "::error::El reproductor de YouTube contiene código híbrido"
+            exit 1
+          fi
+      - name: Seleccionar Xcode 26 y preparar herramientas
+        run: |
+          set -euo pipefail
+          XCODE="$(find /Applications -maxdepth 1 -type d -name 'Xcode_26*.app' -print | sort | tail -n 1)"
+          test -n "$XCODE" || { echo "::error::Xcode 26 no disponible"; exit 1; }
+          sudo xcode-select --switch "$XCODE/Contents/Developer"
+          xcodebuild -version
+          brew install xcodegen openssl@3
+      - name: Comprobar identificador AcoustID sin mostrar su valor
+        run: |
+          set -euo pipefail
+          test -n "$TIFLO_ACOUSTID_CLIENT" || { echo "::error::Falta el identificador público AcoustID"; exit 1; }
+      - name: Preparar API protegida de App Store Connect
+        run: node ios-app-native/scripts/prepare-apple-key.mjs
+      - name: Recuperar certificado Apple Distribution existente
+        run: node ios-app-native/scripts/ensure-signing.mjs
+      - name: Importar certificado sin exponer claves
+        run: bash ios-app-native/scripts/import-distribution-key.sh
+      - name: Crear únicamente perfiles autorizados de app y extensión
+        run: |
+          set -euo pipefail
+          test "$TIFLO_SIGNING_PREFLIGHT" = '1'
+          test "$NEW_P12" = 'false'
+          node ios-app-native/scripts/create-appstore-profiles.mjs
+      - name: Preparar versión, identificadores y logo corporativo
+        run: |
+          set -euo pipefail
+          node ios-app-native/scripts/prepare-testflight-project.mjs
+          python3 ios-app-native/scripts/configure-cinema-drive-key.py --require
+          swift ios-app-native/scripts/make-app-icon.swift tifloacosta-icon-512.png ios-app-native/Sources/Assets.xcassets/AppIcon.appiconset/AppIcon.png
+          test -s ios-app-native/Sources/Assets.xcassets/AppIcon.appiconset/AppIcon.png
+          (cd ios-app-native && xcodegen generate --spec project.yml)
+      - name: Archivar app SwiftUI firmada para distribución Apple
+        run: |
+          set -euo pipefail
+          xcodebuild -project ios-app-native/TifloAcostaNative.xcodeproj \
+            -scheme TifloAcostaNative \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" \
+            TIFLO_ACOUSTID_CLIENT="$TIFLO_ACOUSTID_CLIENT" \
+            MARKETING_VERSION="$TIFLO_IOS_MARKETING_VERSION" CURRENT_PROJECT_VERSION="$IOS_BUILD_VERSION" archive
+      - name: Configurar exportación con los dos perfiles de firma
+        run: |
+          python3 - <<'PY'
+          import os,plistlib
+          options={'method':'app-store-connect','destination':'export',
+                   'signingStyle':'manual','signingCertificate':'Apple Distribution',
+                   'teamID':'3A8G8A62YZ','provisioningProfiles':{
+                       'com.tifloacosta.app':os.environ['IOS_PROFILE_APP_NAME'],
+                       'com.tifloacosta.app.ShareExtension':os.environ['IOS_PROFILE_EXTENSION_NAME']
+                   }}
+          with open(os.environ['RUNNER_TEMP']+'/ExportOptions.plist','wb') as output:
+              plistlib.dump(options,output)
+          PY
+      - name: Exportar IPA para App Store Connect
+        run: |
+          set -euo pipefail
+          xcodebuild -exportArchive \
+            -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" \
+            -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" \
+            -exportPath "$RUNNER_TEMP/native-export"
+      - name: Validar IPA y extensión antes de enviar
+        run: python3 ios-app-native/scripts/verify-testflight-ipa.py
+      - name: Confirmar diagnóstico local sin conservar el binario
+        run: |
+          set -euo pipefail
+          IPA="$(find "$RUNNER_TEMP/native-export" -maxdepth 1 -name '*.ipa' -print -quit)"
+          test -f "$IPA"
+          shasum -a 256 "$IPA"
+          echo 'IPA diagnóstica verificada; no se ha enviado ni se publicará como artefacto.'
+      - name: Limpiar claves y llavero temporal
+        if: always()
+        run: |
+          if [ -n "$ASC_KEY_PATH" ]; then rm -f "$ASC_KEY_PATH"; fi
+          if [ -n "$IOS_TEMP_KEYCHAIN" ]; then security delete-keychain "$IOS_TEMP_KEYCHAIN" || true; fi
+          if [ "$TIFLO_SIGNING_PREFLIGHT" = "1" ]; then
+            rm -rf "$RUNNER_TEMP/native-export" "$RUNNER_TEMP/TifloAcosta.xcarchive" "$RUNNER_TEMP/ios-signing"
+          fi

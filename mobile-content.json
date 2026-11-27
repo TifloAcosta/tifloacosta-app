@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-27T12:28:21.306Z",
+  "generatedAt": "2026-11-27T19:00:58.345Z",
   "resources": [
     {
       "kind": "resource",
@@ -6287,23 +6287,6 @@
         "tecnologia-accesibilidad",
         "proyectos-prototipos",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-65e6860f9912741b:en",
-      "sourceId": "accessible-android-65e6860f9912741b",
-      "lang": "en",
-      "title": "Twangle: Guitar Tuner",
-      "summary": "Twangle is a free tuner for guitar, bass, ukulele, violin, viola, cello, mandolin and banjo, with a chromatic mode for any other instrument or your…",
-      "body": "Published 17 November 2026 by Klaboukes\n\nTwangle is a free tuner for guitar, bass, ukulele, violin, viola, cello, mandolin and banjo, with a chromatic mode for any other instrument or your voice. Play a string and it tells you the note and how far off it is, in cents.\n\nBesides tuning it has a metronome with tap tempo and a speed trainer, chord charts, scales, a capo helper and ear training. Every feature is free: no ads, no purchases, no account. Twangle has no internet permission at all, so the sound from the microphone is analysed on the phone and never recorded or sent anywhere. It is available in 36 languages.\n\nI’m the developer. The code is written with Claude, an AI by Anthropic, to my design, and I test every version myself on real phones.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nTwangle was made to work fully with TalkBack, and I’d like blind and low-vision players to tell me whether it does. Tuner: TalkBack reads the result in words, for example “E 2, 12 cents flat, tighten” or “F sharp 2, in tune”. To avoid constant chatter it waits 0.4 seconds before saying a new note, and it doesn’t announce small changes in cents. The tuner ignores TalkBack’s own voice, so speech doesn’t trigger a false reading. String buttons are labelled (“A 2, selected”); hold one to hear its note and tune by ear. The strum check tells you how many strings are in tune (“4 of 6 in tune”). Vibration guide: on by default while TalkBack is running (Settings, While tuning, Vibration guide). While the tuner hears a string, one tap means tighten and two taps mean loosen. The taps come faster as you get closer, and one long buzz means in tune. The taps make no sound, so they don’t disturb the tuner. More at https://klaboukes.github.io/help.html#without-looking Other tools: chord charts and scales are read string by string (“A 2 string, fret 3, finger 3, C”). The metronome’s tempo is an adjustable slider, and it can vibrate on the beat. Ear training answers are buttons with names. The metronome and the practice tools work without microphone permission. Low vision: there is a high-contrast look (pure black and white, thicker lines, at least 7:1 contrast), turned on automatically when the phone’s high-contrast text is on. Every screen works with text at twice the normal size. Known issue: in the Chords screen, the selected chord root is shown with a grey fill and a thicker edge rather than full contrast. I’m sighted. Every screen’s TalkBack labels are checked by automated tests, and I tested it with TalkBack myself on on a Samsung Galaxy S26 (Android 17) and a Xiaomi 12X (Android 13).. I’d really value answers to two questions: while you tune, what works best for you: speech, vibration, or sounds such as ticks (with earbuds)? And for low-vision players: what does the high-contrast look lack?\n\nLast Tested App version and Android version:\n\nTwangle 2.2.0, on a Samsung Galaxy S26 (Android 17) and a Xiaomi 12X (Android 13).\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/twangle-guitar-tuner/",
-      "publishedAt": "2026-11-17T13:18:58.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad"
       ]
     }
   ]

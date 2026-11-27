@@ -57,3 +57,18 @@ test('all guide paragraphs and titles exist in the six languages', () => {
     for(const key of expected)assert.ok(help.get(key)?.trim(),lang+': '+key);
   }
 });
+
+test('semantic review preserves localized engine and playback control references', () => {
+  for (const lang of languages) {
+    const app = new Map(entries(read(lang+'.lproj/Localizable.strings')));
+    for (const [key,value] of app) {
+      if(key.includes('Motores externos')) assert.ok(value.includes(app.get('Motores externos')),lang+': '+key);
+    }
+    for (const key of ['Foco inicial en Reproducir','Activado: al abrir el documento, el foco se sitúa en Reproducir. Desactivado: el foco se sitúa en el texto. La voz solo comienza cuando pulsas Reproducir.']) {
+      assert.ok(app.get(key)?.includes(app.get('Reproducir')),lang+': '+key);
+    }
+  }
+  const fr = new Map(entries(read('../ShareExtension/Localizations/fr.lproj/Localizable.strings')));
+  const hint = fr.get('Audio recibido. Elige Guardar en TifloLector o Guardar en Mi música. Si cierras, quedará pendiente en Recibidos.');
+  for(const key of ['Guardar en TifloLector','Guardar en Mi música']) assert.ok(hint?.includes(fr.get(key)),key);
+});

@@ -822,12 +822,12 @@
 "Braille" = "Braille";
 "Un minuto" = "Eine Minute";
 "Presentación de lectura" = "Leseansicht";
-"Voz: el foco puede comenzar en Reproducir. Visual: lectura manual del texto. Braille: lectura manual del mismo texto con la línea braille conectada a VoiceOver. Los tres modos conservan posición y marcas." = "Sprache: Der Fokus kann auf Wiedergabe starten. Visuell: Text manuell lesen. Braille: denselben Text manuell mit einer an VoiceOver angeschlossenen Braillezeile lesen. Alle drei Modi behalten Position und Lesezeichen bei.";
+"Voz: el foco puede comenzar en Reproducir. Visual: lectura manual del texto. Braille: lectura manual del mismo texto con la línea braille conectada a VoiceOver. Los tres modos conservan posición y marcas." = "Stimme: Der Fokus kann auf „Wiedergeben“ starten. Darstellung: Text manuell lesen. Braille: denselben Text manuell mit einer an VoiceOver angeschlossenen Braillezeile lesen. Alle drei Modi behalten Position und Lesezeichen bei.";
 // Beta: modos de lectura y acciones accesibles.
 "Configura Phonon en Motores externos antes de utilizarlo." = "Richten Sie Phonon unter Externe Sprachmodule ein, bevor Sie es verwenden.";
 "Cómo instalar más voces del sistema" = "Weitere Systemstimmen installieren";
 "Configurar línea braille en VoiceOver" = "Braillezeile in VoiceOver konfigurieren";
-"Abre Ajustes del iPhone. La línea braille se configura en Accesibilidad, VoiceOver, Braille." = "Öffnet die iPhone-Einstellungen. Richten Sie die Braillezeile unter Bedienungshilfen, VoiceOver, Braille ein.";
+"Abre Ajustes del iPhone. La línea braille se configura en Accesibilidad, VoiceOver, Braille." = "Öffnet die iPhone-Einstellungen. Richte die Braillezeile unter Bedienungshilfen, VoiceOver, Braille ein.";
 "Prepara Gemini o Phonon antes de seleccionarlos para leer." = "Richten Sie Gemini oder Phonon ein, bevor Sie sie zum Lesen auswählen.";
 "Compartir documento" = "Dokument teilen";
 "Convertir a audio o DAISY" = "In Audio oder DAISY umwandeln";

@@ -1,0 +1,120 @@
+{
+  "date": "2026-11-27",
+  "collections": [
+    "Noticias/Archivo histórico TXT",
+    "Mac/Archivo histórico TXT",
+    "APPs/Archivo histórico TXT"
+  ],
+  "sources": 9,
+  "notes": "Original HTML preserved, including existing historical-content warning; not classified as current news. Source references and original Git blobs verified.",
+  "documents": [
+    {
+      "sourceId": "1lB0Qua-KvLgDqRqJbAg76E10tiC-BBhD",
+      "gitBlob": "2f769b08696ce481a652dc4c21ec0238624646bf",
+      "title": "Novedades Apple",
+      "sourcePath": [
+        "Noticias",
+        "Archivo histórico TXT",
+        "Novedades Apple.html"
+      ],
+      "resourceId": "es-1lB0Qua-KvLgDqRqJbAg76E10tiC-BBhD",
+      "path": "docs/es/reader-1lB0Qua-KvLgDqRqJbAg76E10tiC-BBhD.html"
+    },
+    {
+      "sourceId": "1_p5Hh6tpZfiLyTrGpU6jOZMl79wcfdIN",
+      "gitBlob": "20d3ad3c255f678bd6f47ff547e6e559cdade501",
+      "title": "Apple está trabajando en un servicio de suscripción para el iPhone y otros productos de hardware, según Mark Gurman de Bloomberg",
+      "sourcePath": [
+        "Noticias",
+        "Archivo histórico TXT",
+        "Apple está trabajando en un servicio de suscripción para el iPhone y otros productos de hardware, según Mark Gurman de Bloomberg.html"
+      ],
+      "resourceId": "es-1_p5Hh6tpZfiLyTrGpU6jOZMl79wcfdIN",
+      "path": "docs/es/reader-1_p5Hh6tpZfiLyTrGpU6jOZMl79wcfdIN.html"
+    },
+    {
+      "sourceId": "1OJI8wngr5Wv9mhh5seyv_CTY3cW57zVf",
+      "gitBlob": "2fd62cf3deaae17a76334e06972d86bc2c62b90a",
+      "title": "Si fuiste usuario del iPhone 6 o 6s en España, Apple podría tener que compensarte con entre 99 y 189 euros",
+      "sourcePath": [
+        "Noticias",
+        "Archivo histórico TXT",
+        "Si fuiste usuario del iPhone 6 o 6s en España, Apple podría tener que compensarte con entre 99 y 189 euros.html"
+      ],
+      "resourceId": "es-1OJI8wngr5Wv9mhh5seyv_CTY3cW57zVf",
+      "path": "docs/es/reader-1OJI8wngr5Wv9mhh5seyv_CTY3cW57zVf.html"
+    },
+    {
+      "sourceId": "1ERPcpSSL9W8LzeqvP6Imvur5N_zOzlpz",
+      "gitBlob": "61221120c20280094ce572184320126044c61164",
+      "title": "Cómo ver la presentación de iOS 16 en la WWDC22 de Apple",
+      "sourcePath": [
+        "Noticias",
+        "Archivo histórico TXT",
+        "Cómo ver la presentación de iOS 16 en la WWDC22 de Apple.html"
+      ],
+      "resourceId": "es-1ERPcpSSL9W8LzeqvP6Imvur5N_zOzlpz",
+      "path": "docs/es/reader-1ERPcpSSL9W8LzeqvP6Imvur5N_zOzlpz.html"
+    },
+    {
+      "sourceId": "18g1_eVGLHq7UW_wyCGKJpw0IGmjvo0t7",
+      "gitBlob": "5e444406e75d3cc71022f72748dc8ed2882eb453",
+      "title": "Apple presenta un avance de nuevas funciones de accesibilidad que llegarán este año",
+      "sourcePath": [
+        "Noticias",
+        "Archivo histórico TXT",
+        "Apple presenta un avance de nuevas funciones de accesibilidad que llegarán este año.html"
+      ],
+      "resourceId": "es-18g1_eVGLHq7UW_wyCGKJpw0IGmjvo0t7",
+      "path": "docs/es/reader-18g1_eVGLHq7UW_wyCGKJpw0IGmjvo0t7.html"
+    },
+    {
+      "sourceId": "1c7BBN2OjRxFgHlbz9GmiMuZI81Em-q0u",
+      "gitBlob": "acf6e236e5b9b76b20c8f6e0b1fba9d3664473e1",
+      "title": "Todo lo nuevo en Apple",
+      "sourcePath": [
+        "Noticias",
+        "Archivo histórico TXT",
+        "Todo lo nuevo en Apple.html"
+      ],
+      "resourceId": "es-1c7BBN2OjRxFgHlbz9GmiMuZI81Em-q0u",
+      "path": "docs/es/reader-1c7BBN2OjRxFgHlbz9GmiMuZI81Em-q0u.html"
+    },
+    {
+      "sourceId": "1eZrPxCPHa2ZhcBJKM2OWy4erkbYgQmCF",
+      "gitBlob": "439e6186bf9d17d2ae442395e4bc9526b77449ba",
+      "title": "CenteredHead disponible en la Mac AppStore",
+      "sourcePath": [
+        "Mac",
+        "Archivo histórico TXT",
+        "CenteredHead disponible en la Mac AppStore.html"
+      ],
+      "resourceId": "es-1eZrPxCPHa2ZhcBJKM2OWy4erkbYgQmCF",
+      "path": "docs/es/reader-1eZrPxCPHa2ZhcBJKM2OWy4erkbYgQmCF.html"
+    },
+    {
+      "sourceId": "1uXFsu4ndEiqrmT2z8fNFNBtouC0pA0ob",
+      "gitBlob": "b10e7d188963c7494318cf76e5152c83026985af",
+      "title": "Próxima APP que ayudará a las personas ciegas basada en realidad aumentada",
+      "sourcePath": [
+        "APPs",
+        "Archivo histórico TXT",
+        "Próxima APP que ayudará a las personas ciegas basada en realidad aumentada.html"
+      ],
+      "resourceId": "es-1uXFsu4ndEiqrmT2z8fNFNBtouC0pA0ob",
+      "path": "docs/es/reader-1uXFsu4ndEiqrmT2z8fNFNBtouC0pA0ob.html"
+    },
+    {
+      "sourceId": "1fEeIN8aTWstfU0Zkv-3sAQtdnOoA50Wd",
+      "gitBlob": "fcaed621ea631e72c7d6176975fc7cedd87ea8ce",
+      "title": "Chess King",
+      "sourcePath": [
+        "APPs",
+        "Archivo histórico TXT",
+        "Chess King.html"
+      ],
+      "resourceId": "es-1fEeIN8aTWstfU0Zkv-3sAQtdnOoA50Wd",
+      "path": "docs/es/reader-1fEeIN8aTWstfU0Zkv-3sAQtdnOoA50Wd.html"
+    }
+  ]
+}

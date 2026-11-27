@@ -3757,5 +3757,113 @@ window.TIFLO_RESOURCES = [
     "url": "https://tifloacosta.com/docs/es/reader-1mxIFgj-A6aRmhD9z7z3-OVndndleClEd.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1mxIFgj-A6aRmhD9z7z3-OVndndleClEd.html",
     "searchText": "Contacto con Meta, Apple y Amazon desde Argentina contactos de interés soporte técnico atención al cliente accesibilidad VoiceOver iPhone Facebook Instagram WhatsApp correo electrónico teléfono incidencias sugerencias"
+  },
+  {
+    "id": "es-1lB0Qua-KvLgDqRqJbAg76E10tiC-BBhD",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Novedades Apple",
+    "url": "https://tifloacosta.com/docs/es/reader-1lB0Qua-KvLgDqRqJbAg76E10tiC-BBhD.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1lB0Qua-KvLgDqRqJbAg76E10tiC-BBhD.html",
+    "searchText": "Novedades Apple Archivo histórico Apple novedades"
+  },
+  {
+    "id": "es-1_p5Hh6tpZfiLyTrGpU6jOZMl79wcfdIN",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Apple está trabajando en un servicio de suscripción para el iPhone y otros productos de hardware, según Mark Gurman de Bloomberg",
+    "url": "https://tifloacosta.com/docs/es/reader-1_p5Hh6tpZfiLyTrGpU6jOZMl79wcfdIN.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1_p5Hh6tpZfiLyTrGpU6jOZMl79wcfdIN.html",
+    "searchText": "Apple está trabajando en un servicio de suscripción para el iPhone y otros productos de hardware, según Mark Gurman de Bloomberg Archivo histórico suscripción hardware Bloomberg"
+  },
+  {
+    "id": "es-1OJI8wngr5Wv9mhh5seyv_CTY3cW57zVf",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Si fuiste usuario del iPhone 6 o 6s en España, Apple podría tener que compensarte con entre 99 y 189 euros",
+    "url": "https://tifloacosta.com/docs/es/reader-1OJI8wngr5Wv9mhh5seyv_CTY3cW57zVf.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1OJI8wngr5Wv9mhh5seyv_CTY3cW57zVf.html",
+    "searchText": "Si fuiste usuario del iPhone 6 o 6s en España, Apple podría tener que compensarte con entre 99 y 189 euros Archivo histórico iPhone 6 6s compensación España"
+  },
+  {
+    "id": "es-1ERPcpSSL9W8LzeqvP6Imvur5N_zOzlpz",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Cómo ver la presentación de iOS 16 en la WWDC22 de Apple",
+    "url": "https://tifloacosta.com/docs/es/reader-1ERPcpSSL9W8LzeqvP6Imvur5N_zOzlpz.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1ERPcpSSL9W8LzeqvP6Imvur5N_zOzlpz.html",
+    "searchText": "Cómo ver la presentación de iOS 16 en la WWDC22 de Apple Archivo histórico iOS 16 WWDC 2022"
+  },
+  {
+    "id": "es-18g1_eVGLHq7UW_wyCGKJpw0IGmjvo0t7",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Apple presenta un avance de nuevas funciones de accesibilidad que llegarán este año",
+    "url": "https://tifloacosta.com/docs/es/reader-18g1_eVGLHq7UW_wyCGKJpw0IGmjvo0t7.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-18g1_eVGLHq7UW_wyCGKJpw0IGmjvo0t7.html",
+    "searchText": "Apple presenta un avance de nuevas funciones de accesibilidad que llegarán este año Archivo histórico Apple accesibilidad funciones"
+  },
+  {
+    "id": "es-1c7BBN2OjRxFgHlbz9GmiMuZI81Em-q0u",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Todo lo nuevo en Apple",
+    "url": "https://tifloacosta.com/docs/es/reader-1c7BBN2OjRxFgHlbz9GmiMuZI81Em-q0u.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1c7BBN2OjRxFgHlbz9GmiMuZI81Em-q0u.html",
+    "searchText": "Todo lo nuevo en Apple Archivo histórico Apple Event iPhone 17 iPhone Air Apple Watch"
+  },
+  {
+    "id": "es-1eZrPxCPHa2ZhcBJKM2OWy4erkbYgQmCF",
+    "lang": "es",
+    "category": "Mac",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "CenteredHead disponible en la Mac AppStore",
+    "url": "https://tifloacosta.com/docs/es/reader-1eZrPxCPHa2ZhcBJKM2OWy4erkbYgQmCF.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1eZrPxCPHa2ZhcBJKM2OWy4erkbYgQmCF.html",
+    "searchText": "CenteredHead disponible en la Mac AppStore Archivo histórico Mac CenteredHead posición cabeza cámara"
+  },
+  {
+    "id": "es-1uXFsu4ndEiqrmT2z8fNFNBtouC0pA0ob",
+    "lang": "es",
+    "category": "APPs",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Próxima APP que ayudará a las personas ciegas basada en realidad aumentada",
+    "url": "https://tifloacosta.com/docs/es/reader-1uXFsu4ndEiqrmT2z8fNFNBtouC0pA0ob.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1uXFsu4ndEiqrmT2z8fNFNBtouC0pA0ob.html",
+    "searchText": "Próxima APP que ayudará a las personas ciegas basada en realidad aumentada Archivo histórico realidad aumentada inteligencia artificial accesibilidad"
+  },
+  {
+    "id": "es-1fEeIN8aTWstfU0Zkv-3sAQtdnOoA50Wd",
+    "lang": "es",
+    "category": "APPs",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Chess King",
+    "url": "https://tifloacosta.com/docs/es/reader-1fEeIN8aTWstfU0Zkv-3sAQtdnOoA50Wd.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1fEeIN8aTWstfU0Zkv-3sAQtdnOoA50Wd.html",
+    "searchText": "Chess King Archivo histórico ajedrez táctica estrategia aperturas enseñanza"
   }
 ];

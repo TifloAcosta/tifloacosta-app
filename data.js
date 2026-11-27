@@ -3865,5 +3865,77 @@ window.TIFLO_RESOURCES = [
     "url": "https://tifloacosta.com/docs/es/reader-1fEeIN8aTWstfU0Zkv-3sAQtdnOoA50Wd.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1fEeIN8aTWstfU0Zkv-3sAQtdnOoA50Wd.html",
     "searchText": "Chess King Archivo histórico ajedrez táctica estrategia aperturas enseñanza"
+  },
+  {
+    "id": "es-1XQe4NzCjp26th-x5wDvXemtY7YEdIGAs",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Qué es el LiDAR en los iPhone 'Pro' y qué ofrece",
+    "url": "https://tifloacosta.com/docs/es/reader-1XQe4NzCjp26th-x5wDvXemtY7YEdIGAs.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1XQe4NzCjp26th-x5wDvXemtY7YEdIGAs.html",
+    "searchText": "Qué es el LiDAR en los iPhone 'Pro' y qué ofrece Archivo histórico iPhone"
+  },
+  {
+    "id": "es-12ngUgtfaH7cCaibJ6Sec5OIUvs7xqPHz",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Apple elimina las funciones de Siri utilizadas por los usuarios con discapacidad visual",
+    "url": "https://tifloacosta.com/docs/es/reader-12ngUgtfaH7cCaibJ6Sec5OIUvs7xqPHz.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-12ngUgtfaH7cCaibJ6Sec5OIUvs7xqPHz.html",
+    "searchText": "Apple elimina las funciones de Siri utilizadas por los usuarios con discapacidad visual Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1ZsCCQwPIbjwzhmTuGlAc37CGGROwb4C_",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Cuidado con el cable de carga de tu iPhone",
+    "url": "https://tifloacosta.com/docs/es/reader-1ZsCCQwPIbjwzhmTuGlAc37CGGROwb4C_.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1ZsCCQwPIbjwzhmTuGlAc37CGGROwb4C_.html",
+    "searchText": "Cuidado con el cable de carga de tu iPhone Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1ZgHAtqAku4qtEc3ApbHeBLlJme7_shCk",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Cómo y por qué deberías cambiar el nombre de tu iPhone",
+    "url": "https://tifloacosta.com/docs/es/reader-1ZgHAtqAku4qtEc3ApbHeBLlJme7_shCk.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1ZgHAtqAku4qtEc3ApbHeBLlJme7_shCk.html",
+    "searchText": "Cómo y por qué deberías cambiar el nombre de tu iPhone Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1-5f4GwGaVsnzcOdIXakc7YeADr9AWVGk",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Solo usas los auriculares de Apple, los que trae los iPhone con cable para escuchar en tu dispositivo",
+    "url": "https://tifloacosta.com/docs/es/reader-1-5f4GwGaVsnzcOdIXakc7YeADr9AWVGk.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1-5f4GwGaVsnzcOdIXakc7YeADr9AWVGk.html",
+    "searchText": "Solo usas los auriculares de Apple, los que trae los iPhone con cable para escuchar en tu dispositivo Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1x69Tuxb_2FuJklV7OJLIxxTLbs_K4YN0",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Cómo compartir el contenido de la pantalla del iPhone con cualquier persona usando Siri",
+    "url": "https://tifloacosta.com/docs/es/reader-1x69Tuxb_2FuJklV7OJLIxxTLbs_K4YN0.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1x69Tuxb_2FuJklV7OJLIxxTLbs_K4YN0.html",
+    "searchText": "Cómo compartir el contenido de la pantalla del iPhone con cualquier persona usando Siri Archivo histórico iPhone"
   }
 ];

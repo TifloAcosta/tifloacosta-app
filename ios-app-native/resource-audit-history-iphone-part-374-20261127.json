@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-27",
+  "baseCommit": "30314c6ebaec1d01fb4b142fda5aa3072efdbfd6",
+  "recovered": [
+    {
+      "sourceId": "1XQe4NzCjp26th-x5wDvXemtY7YEdIGAs",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Qué es el LiDAR en los iPhone 'Pro' y qué ofrece.html"
+      ],
+      "path": "docs/es/reader-1XQe4NzCjp26th-x5wDvXemtY7YEdIGAs.html",
+      "resourceId": "es-1XQe4NzCjp26th-x5wDvXemtY7YEdIGAs",
+      "sourceBytes": 10882
+    },
+    {
+      "sourceId": "12ngUgtfaH7cCaibJ6Sec5OIUvs7xqPHz",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Apple elimina las funciones de Siri utilizadas por los usuarios con discapacidad visual.html"
+      ],
+      "path": "docs/es/reader-12ngUgtfaH7cCaibJ6Sec5OIUvs7xqPHz.html",
+      "resourceId": "es-12ngUgtfaH7cCaibJ6Sec5OIUvs7xqPHz",
+      "sourceBytes": 3556
+    },
+    {
+      "sourceId": "1ZsCCQwPIbjwzhmTuGlAc37CGGROwb4C_",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cuidado con el cable de carga de tu iPhone.html"
+      ],
+      "path": "docs/es/reader-1ZsCCQwPIbjwzhmTuGlAc37CGGROwb4C_.html",
+      "resourceId": "es-1ZsCCQwPIbjwzhmTuGlAc37CGGROwb4C_",
+      "sourceBytes": 5410
+    },
+    {
+      "sourceId": "1ZgHAtqAku4qtEc3ApbHeBLlJme7_shCk",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo y por qué deberías cambiar el nombre de tu iPhone.html"
+      ],
+      "path": "docs/es/reader-1ZgHAtqAku4qtEc3ApbHeBLlJme7_shCk.html",
+      "resourceId": "es-1ZgHAtqAku4qtEc3ApbHeBLlJme7_shCk",
+      "sourceBytes": 3649
+    },
+    {
+      "sourceId": "1-5f4GwGaVsnzcOdIXakc7YeADr9AWVGk",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Solo usas los auriculares  de Apple, los que trae los iPhone con cable para escuchar en tu dispositivo.html"
+      ],
+      "path": "docs/es/reader-1-5f4GwGaVsnzcOdIXakc7YeADr9AWVGk.html",
+      "resourceId": "es-1-5f4GwGaVsnzcOdIXakc7YeADr9AWVGk",
+      "sourceBytes": 3558
+    },
+    {
+      "sourceId": "1x69Tuxb_2FuJklV7OJLIxxTLbs_K4YN0",
+      "sourcePath": [
+        "iPhone",
+        "Archivo histórico TXT",
+        "Cómo compartir el contenido de la pantalla del iPhone con cualquier persona usando Siri.html"
+      ],
+      "path": "docs/es/reader-1x69Tuxb_2FuJklV7OJLIxxTLbs_K4YN0.html",
+      "resourceId": "es-1x69Tuxb_2FuJklV7OJLIxxTLbs_K4YN0",
+      "sourceBytes": 2437
+    }
+  ]
+}

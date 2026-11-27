@@ -27,8 +27,8 @@ test('Actualidad espera la selección de categoría y admite búsqueda y paginac
 test('VoiceOver anuncia primero título, medio y publicación sin el resumen extenso', () => {
   const news = read('NativeNews.swift');
   assert.match(news, /accessibilityLabel\(NativeNewsMetadata\.accessibilitySummary\(item\)\)/);
-  assert.ok(news.includes('labels = [item.title, "Medio:'));
-  assert.ok(news.includes('labels.append("Publicado:'));
+  assert.ok(news.includes('labels = [item.title, MusicLocalized.format("Medio: %@", source(item))'));
+  assert.ok(news.includes('labels.append(MusicLocalized.format("Publicado: %@", date))'));
   assert.match(news, /summary[\s\S]*?\.lineLimit\(2\)[\s\S]*?\.accessibilityHidden\(true\)/);
   assert.match(news, /ISO8601DateFormatter\(\)/);
   assert.match(news, /formatter\.timeZone = \.current/);
@@ -49,7 +49,7 @@ test('El rotor ofrece leer, guardar, compartir y fuente original', () => {
 
 test('La pantalla de lectura mantiene metadatos y párrafos separados', () => {
   const news = read('NativeNews.swift');
-  for (const text of ['Text(MusicLocalized.format("Medio: %@", NativeNewsMetadata.source(item))', 'Text(MusicLocalized.format("Publicado: %@", published)', 'Text(MusicLocalized.format("Categorías: %@", categories.map(NativeNewsMetadata.category)']) {
+  for (const text of ['Text(MusicLocalized.format("Medio: %@", NativeNewsMetadata.source(item))', 'Text(MusicLocalized.format("Publicado: %@", published)', 'Text(MusicLocalized.format("Categorías: %@", categories.map { MusicLocalized.message(NativeNewsMetadata.category($0)) }']) {
     assert.ok(news.includes(text));
   }
   assert.match(news, /LazyVStack\(alignment: \.leading/);

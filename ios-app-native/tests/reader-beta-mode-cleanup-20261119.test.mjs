@@ -95,7 +95,7 @@ test('library actions offer conversion only for text and complete DAISY sharing'
   assert.match(reader, /private func shareDocumentFromLibrary\(_ document: NativeReadingDocument\)/);
   assert.match(reader, /Button\("Convertir a audio o DAISY"\)/);
   assert.match(reader, /\.navigationTitle\("Convertir a audio o DAISY"\)/);
-  assert.match(reader, /Button\(audioExportBusy \? "Generando…" : "Convertir y guardar"\)/);
+  assert.match(reader, /Button\(MusicLocalized\.message\(audioExportBusy \? "Generando…" : "Convertir y guardar"\)\)/);
   assert.match(reader, /availableExportEngines/);
   assert.match(reader, /availableExportEngines\.map \{ \$0\.title \}/);
 });
@@ -110,7 +110,7 @@ test('a DAISY originally stored with .daisy extension shares a complete ZIP copy
 
 test('playback button explicitly retains VoiceOver focus after a user activation', () => {
   assert.match(reader, /private func activatePlaybackButton\(\)/);
-  assert.match(reader, /Button\(speech\.isPlaying \? "Pausar" : "Reproducir"\)\s*\{\s*activatePlaybackButton\(\)/);
+  assert.match(reader, /Button\(MusicLocalized\.message\(speech\.isPlaying \? "Pausar" : "Reproducir"\)\)\s*\{\s*activatePlaybackButton\(\)/);
   assert.match(reader, /playbackButtonFocused = true/);
 });
 

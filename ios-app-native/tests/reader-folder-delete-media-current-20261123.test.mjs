@@ -13,7 +13,7 @@ const youtube = source('NativeYouTubePlayer.swift');
 test('reader playback button flicks navigate only when it reads Pausar', () => {
   const row = reader.slice(reader.indexOf('private var playbackRow: some View'),
     reader.indexOf('private var trackButtons: some View'));
-  assert.match(row, /Button\(speech\.isPlaying \? "Pausar" : "Reproducir"\)/);
+  assert.match(row, /Button\(MusicLocalized\.message\(speech\.isPlaying \? "Pausar" : "Reproducir"\)\)/);
   assert.match(row, /\.accessibilityAdjustableAction \{ direction in[\s\S]{0,290}guard speech\.isPlaying else \{ return \}/);
   assert.match(row, /case \.increment: moveUnit\(1\)/);
   assert.match(row, /case \.decrement: moveUnit\(-1\)/);

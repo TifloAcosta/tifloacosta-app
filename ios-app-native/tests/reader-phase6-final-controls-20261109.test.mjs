@@ -6,7 +6,7 @@ const source = readFileSync(new URL('../Sources/NativeTifloLector.swift', import
 
 test('La fase 6 ofrece un único botón de Reproducir y Pausar y gestos por unidad', () => {
   const row = source.slice(source.indexOf('private var playbackRow: some View'), source.indexOf('private var trackButtons: some View'));
-  assert.match(row, /Button\(speech\.isPlaying \? "Pausar" : "Reproducir"\)/);
+  assert.match(row, /Button\(MusicLocalized\.message\(speech\.isPlaying \? "Pausar" : "Reproducir"\)\)/);
   assert.match(row, /\.accessibilityAdjustableAction/);
   assert.match(row, /moveUnit\(1\)/);
   assert.match(row, /moveUnit\(-1\)/);

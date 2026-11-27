@@ -1066,7 +1066,7 @@
 "Pódcast en reproducción: %@" = "Podcast en cours : %@";
 "DAISY 2.02 (audio)" = "DAISY 2.02 (audio)";
 "DAISY 2.02 de audio: conserva la voz grabada y permite la navegación por capítulos. No incluye el texto sincronizado." = "DAISY 2.02 audio : conserve la voix enregistrée et la navigation par chapitres. Ne contient pas de texte synchronisé.";
-"Encabezado: %@. Pulsa Reproducir para escuchar." = "Titre : %@. Appuyez sur Lecture pour écouter.";
+"Encabezado: %@. Pulsa Reproducir para escuchar." = "Titre : %@. Touche « Lire » pour écouter.";
 "No hay más encabezados en esa dirección." = "Aucun autre titre dans cette direction.";
 "Modo de navegación: %@" = "Mode de navigation : %@";
 "Modo anterior no disponible. Modo de navegación: %@" = "Mode précédent indisponible. Mode de navigation : %@";
@@ -1200,7 +1200,7 @@
 "Vibración en avisos" = "Vibration des notifications";
 
 // Tipo de punto DAISY y acción accesible, sin iniciar audio.
-"%@: %@. Pulsa Reproducir para escuchar." = "%@ : %@. Appuyez sur Lecture pour écouter.";
+"%@: %@. Pulsa Reproducir para escuchar." = "%@ : %@. Touche « Lire » pour écouter.";
 
 "Compartir DAISY original" = "Partager le DAISY original";
 "Convertir texto a MP3 o DAISY con voz" = "Convertir le texte en MP3 ou DAISY avec une voix";
@@ -1213,7 +1213,7 @@
 
 // Reader opening, progress and direct return to beginning.
 "Volver al principio" = "Revenir au début";
-"Posición inicial. Pulsa Reproducir para comenzar." = "Au début. Appuyez sur Lecture pour commencer.";
+"Posición inicial. Pulsa Reproducir para comenzar." = "Au début. Touche « Lire » pour commencer.";
 "Pista %d de %d, %d por ciento de esta pista." = "Piste %d sur %d, %d pour cent de cette piste.";
 "Progreso guardado: %d por ciento." = "Progression enregistrée : %d pour cent.";
 "Sitúa la lectura al principio sin reproducir." = "Revient au début sans lancer la lecture.";

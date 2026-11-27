@@ -1,0 +1,65 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="Tony Acosta"><meta name="publisher" content="TifloAcosta">
+<title>Make Your iPhone Speak When Charging: Play a Sound When Connecting or Disconnecting the Charger</title>
+<style>
+:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65;max-width:64rem;margin:0 auto;padding:1.25rem}
+a{overflow-wrap:anywhere;text-underline-offset:.15em}
+a:focus{outline:.2rem solid currentColor;outline-offset:.2rem}
+.skip-link{position:absolute;left:-9999px}
+.skip-link:focus{position:static;display:inline-block;margin-bottom:1rem}
+.brand img{display:block;width:8rem;max-width:40%;height:auto}
+.reader-nav{margin:0 0 1rem}
+.reader-nav a{display:inline-block;font-weight:700;padding:.65rem .9rem;border:2px solid currentColor;border-radius:.4rem;text-decoration:none}
+h1,h2{line-height:1.25}
+h2{margin-top:2rem}
+.meta{margin:.4rem 0 1.2rem}
+footer{margin-top:2.5rem}
+@media print{.skip-link,.reader-nav{display:none}body{max-width:none}}
+</style></head><body>
+<a class="skip-link" href="#content">Skip to content</a>
+<nav class="reader-nav" aria-label="Return to TifloAcosta App"><a href="https://tifloacosta.github.io/tifloacosta-app/">Return to TifloAcosta App</a></nav>
+<header><div class="brand"><img src="https://tifloacosta.github.io/tifloacosta-app/tifloacosta-icon-512.png" alt="TifloAcosta"></div>
+<h1>Make Your iPhone Speak When Charging: Play a Sound When Connecting or Disconnecting the Charger</h1><p class="meta">Accessible written version of a Canal TifloAcosta video.</p></header>
+<main id="content">
+<section><h2>Introduction</h2>
+<p>Tony Acosta presents an iOS automation on Canal TifloAcosta that makes the iPhone automatically play an audio file whenever the charger is connected or disconnected.</p>
+</section>
+<section><h2>Preparing the sound file</h2>
+<p>Before creating the automation, Tony explains that the audio file to be used as the alert must already be available.</p>
+<p>He opens the Files app and goes to iCloud Drive. Inside that location he opens the “Shortcuts” folder and places the sound file used in the demonstration there.</p>
+<p>The file is identified as “carga.mp3”. Tony stresses that, when the file path is entered later in the shortcut, the name and extension must match the stored file exactly so that it can be found correctly.</p>
+</section>
+<section><h2>Opening the Automation section</h2>
+<p>Tony opens the Shortcuts app and selects the “Automation” tab in the bottom bar.</p>
+<p>On the automation screen he activates “New Automation”. The list of available triggers opens and he selects “Charger”, which VoiceOver identifies as the option related to the iPhone being connected to power.</p>
+</section>
+<section><h2>Choosing when it should run</h2>
+<p>Under the charger options, “Is Connected” is selected initially. Tony also enables “Is Disconnected” so that the same automation runs both when the charger is connected and when it is removed.</p>
+<p>For the execution method, he changes “Run After Confirmation” to “Run Immediately”, so no manual confirmation is required each time.</p>
+<p>“Notify When Run” remains disabled to avoid an additional notification whenever the automation is triggered.</p>
+<p>He then activates “Next”.</p>
+</section>
+<section><h2>Creating the automation actions</h2>
+<p>On the following screen Tony activates “New Blank Automation”.</p>
+<p>During the demonstration he notes that, if VoiceOver has difficulty activating this control, Screen Recognition from the VoiceOver rotor can be used to make the control interactable.</p>
+<p>Inside the editor, he activates “Search Actions” and types “Get File from Folder”.</p>
+<p>From the results he selects the action corresponding to getting a file from a folder. The automation then shows a structure that retrieves a file from the Shortcuts folder using a specified path.</p>
+<p>Tony uses VoiceOver rotor actions on that instruction to reach the option for editing the path. In the path field he enters “carga.mp3”, matching the file previously stored in the Shortcuts folder.</p>
+</section>
+<section><h2>Adding sound playback</h2>
+<p>Tony returns to “Search Actions” and types “Play Sound”.</p>
+<p>He selects the “Play Sound” action from the results. The automation is therefore made up of one action that retrieves the stored file and another that plays it.</p>
+<p>To finish, he activates “OK” and then “Add” to save the automation.</p>
+</section>
+<section><h2>Practical test</h2>
+<p>Tony tests the finished automation.</p>
+<p>He first disconnects the earphone that was plugged into the phone. He then connects the charger cable to the iPhone. The automation runs immediately and plays the configured sound.</p>
+<p>He disconnects the charger afterwards, and the iPhone runs the automation again and plays the same sound alert.</p>
+</section>
+<section><h2>Conclusion</h2>
+<p>Tony finishes the demonstration by inviting viewers to leave comments, like the video, and share it. He says goodbye until the next Canal TifloAcosta video.</p>
+</section>
+</main><footer><p>TifloAcosta revision: 7 September 2026.</p></footer></body></html>

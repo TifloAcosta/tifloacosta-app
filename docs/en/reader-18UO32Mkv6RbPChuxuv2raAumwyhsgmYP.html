@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="Tony Acosta">
+<meta name="publisher" content="TifloAcosta">
+<title>Linux for blind people: is it really usable with a screen reader?</title>
+<style>:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65;max-width:64rem;margin:0 auto;padding:1.25rem}
+a{overflow-wrap:anywhere;text-underline-offset:.15em}
+a:focus{outline:.2rem solid currentColor;outline-offset:.2rem}
+.skip-link{position:absolute;left:-9999px}
+.skip-link:focus{position:static;display:inline-block;margin-bottom:1rem}
+.brand img{display:block;width:8rem;max-width:40%;height:auto}
+.reader-nav{margin:0 0 1rem}
+.reader-nav a{display:inline-block;font-weight:700;padding:.65rem .9rem;border:2px solid currentColor;border-radius:.4rem;text-decoration:none}
+h1,h2{line-height:1.25}
+h2{margin-top:2rem}
+.meta{margin:.4rem 0 1.2rem}
+.note{border-left:.3rem solid currentColor;padding:.2rem 0 .2rem 1rem;margin:1.5rem 0}
+footer{margin-top:2.5rem}
+@media print{.skip-link,.reader-nav{display:none}body{max-width:none}}</style>
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<nav class="reader-nav" aria-label="Return to TifloAcosta App"><a href="https://tifloacosta.github.io/tifloacosta-app/">Return to TifloAcosta App</a></nav>
+<header>
+<div class="brand"><img src="https://tifloacosta.github.io/tifloacosta-app/tifloacosta-icon-512.png" alt="TifloAcosta"></div>
+<h1>Linux for blind people: is it really usable with a screen reader?</h1>
+<p class="meta">Accessible written version of a Canal TifloAcosta video. <a href="https://www.youtube.com/watch?v=LgndbSoSyvc">Watch the original video on YouTube</a>.</p>
+</header>
+
+<main id="content">
+<section>
+<h2>Three questions before you begin</h2>
+<p>Linux comes up constantly in conversations about technology, servers, programming, and free software, yet for many blind users it remains unfamiliar territory. Before worrying about distributions, desktop environments, or commands, Tony asks three much more practical questions:</p>
+<ol>
+<li>Does it work well with a screen reader?</li>
+<li>Can a blind person use it independently?</li>
+<li>Is it worth the time required to learn it?</li>
+</ol>
+<p>The short answer is that Linux can be accessible, but the experience depends much more heavily than on some other platforms on the distribution, desktop environment, applications, and configuration you choose.</p>
+</section>
+
+<section>
+<h2>Linux is not one single thing</h2>
+<p>Strictly speaking, Linux is the system <em>kernel</em>. It manages essential resources such as the processor, memory, hardware devices, and communication between the hardware and the rest of the software.</p>
+<p>What people normally install and use is a <strong>distribution</strong>: a complete system that combines the Linux kernel with tools, libraries, an installer, package management, applications, and one or more desktop environments.</p>
+<p>Ubuntu, Debian, and Fedora are well-known examples. They do not necessarily have one fixed desktop: depending on the edition and configuration, they may use GNOME, KDE Plasma, or other environments.</p>
+<p>Tony's car analogy still works well: the kernel is the engine, while the distribution is the complete car built around it. The engine matters, but the final experience depends on everything else too.</p>
+</section>
+
+<section>
+<h2>A little history, with one important correction</h2>
+<p>Linus Torvalds began developing the Linux kernel in 1991 while he was a student at the University of Helsinki. The project quickly opened up to collaboration and eventually became one of the most important and widely deployed software projects in the world.</p>
+<p>One common historical shortcut needs correcting: <strong>free software did not begin with Linux</strong>. Richard Stallman announced the GNU Project in 1983, and development began in 1984. By the time Linux appeared in 1991, many GNU tools already existed and were later combined with the Linux kernel to form complete GNU/Linux systems.</p>
+<p>This is why you will see both “Linux”, widely used as a general name, and “GNU/Linux”, which emphasises the combination of the Linux kernel with components from the GNU Project.</p>
+</section>
+
+<section>
+<h2>Linux is closer than it may seem</h2>
+<p>Even if someone has never installed Linux on a personal computer, they are likely to use services that depend on it. Linux is widespread across servers, data centres, and embedded systems.</p>
+<p>Android uses a kernel based on Linux with Android-specific modifications. In addition, every one of the 500 systems in the June 2026 TOP500 supercomputer ranking belongs to the Linux operating-system family.</p>
+<p>Linux is therefore not an obscure platform used only by enthusiasts. Its share of the consumer desktop is a separate question, and so is the accessibility quality of individual desktop applications.</p>
+</section>
+
+<section>
+<h2>Orca: the screen reader for the graphical desktop</h2>
+<p>The main screen reader for blind users working in a GNOME-based graphical desktop is <strong>Orca</strong>, a free and open-source screen reader.</p>
+<p>Orca provides speech and refreshable braille output and uses the AT-SPI accessibility infrastructure. It can work with compatible technologies and applications including GTK, Qt, LibreOffice, Firefox, WebKit, and Chrome or Chromium, although real-world accessibility varies from one app to another.</p>
+<p>In GNOME, Orca can be toggled with <strong>Super + Alt + S</strong>. Ubuntu Desktop documents the same shortcut, and Orca is normally installed by default in the standard desktop edition.</p>
+</section>
+
+<section>
+<h2>Braille on Linux</h2>
+<p>Orca can display the graphical user interface on a refreshable braille display. It commonly relies on <strong>BRLTTY</strong> to communicate with supported braille hardware.</p>
+<p>Compatibility should never be assumed for every device. Before moving to Linux, it is worth checking that the exact display model is supported and that the features you depend on—reading, navigation, input, and routing keys—work properly.</p>
+</section>
+
+<section>
+<h2>The other side of the story: accessibility is not uniform</h2>
+<p>Linux gives users freedom to choose distributions, desktops, and applications, but that same variety makes accessibility less consistent.</p>
+<p>One application may work extremely well with Orca while another, built with a different toolkit or inaccessible custom controls, may be frustrating or unusable.</p>
+<p>There is also a learning curve. Keyboard shortcuts, software installation, permissions, repositories, and some maintenance procedures differ from Windows and macOS.</p>
+<p>So simply saying “Linux is accessible” would be as inaccurate as saying “Linux is unusable for blind people”. The useful question is whether the specific distribution, desktop, and applications a person needs are accessible enough for their workflow.</p>
+</section>
+
+<section>
+<h2>Graphical desktop and text console are not the same thing</h2>
+<p>Linux can be used both in a graphical desktop environment and in text-only virtual consoles.</p>
+<p>On the graphical desktop, Orca is the main reference point. If you open a Terminal application inside GNOME, that terminal window is still part of the graphical environment and can be read by Orca.</p>
+<p><strong>Speakup</strong>, by contrast, is designed for Linux virtual text consoles. It is integrated into the Linux kernel and provides speech access in those consoles without depending on the graphical desktop.</p>
+<p>This distinction matters: a graphical terminal window and a Linux virtual console may look similar conceptually, but technically they are different environments and do not necessarily use the same accessibility path.</p>
+</section>
+
+<section>
+<h2>Trying Linux without installing it: a Live session</h2>
+<p>One of the best ways to decide whether Linux suits you is to try it before changing the computer's internal drive.</p>
+<ol>
+<li>Download the ISO image of a distribution that supports a Live session, such as Ubuntu.</li>
+<li>Create a bootable USB drive from that image.</li>
+<li>Boot the computer from the USB drive.</li>
+<li>Choose the option to try the system without installing it.</li>
+<li>Start Orca and test the desktop, browser, internet connection, audio, braille display, and the applications you actually need.</li>
+<li>When finished, shut down, remove the USB drive, and boot the computer normally.</li>
+</ol>
+<p>A Live session lets you explore the system without installing it to the internal drive. Changes normally disappear when the session ends unless the USB has specifically been configured with persistence.</p>
+</section>
+
+<section>
+<h2>The awkward part for blind users: booting from USB</h2>
+<p>A Live session is safe for the data on the internal drive, but that does not mean every stage is accessible from the very first second.</p>
+<p>Selecting the boot device may require a BIOS or UEFI boot menu that provides no speech output. On some computers a known key and a simple sequence may be enough; on others, sighted assistance may be needed the first time to boot from USB.</p>
+<p>Once an accessible desktop has loaded, the situation is different. Ubuntu, for example, offers accessibility options during startup and allows Orca to be started with Super + Alt + S.</p>
+</section>
+
+<section>
+<h2>So, is it worth it?</h2>
+<p>For someone who enjoys learning, wants a highly configurable system, uses tools that work well on Linux, or values a keyboard- and console-oriented workflow, the answer may be a clear yes.</p>
+<p>For someone who depends on Windows- or macOS-only applications, needs maximum consistency in accessibility, or does not want to invest time learning a new environment, Linux may not be the best immediate replacement.</p>
+<p>It does not have to be an all-or-nothing decision. Linux can begin as a Live USB experiment, a second computer, or even a virtual machine, and the decision can be based on real experience rather than reputation.</p>
+</section>
+
+<section class="note" aria-labelledby="update">
+<h2 id="update">Update as of September 8, 2026</h2>
+<p>The core points in the video remain valid: Orca is still the main GNOME screen reader with speech and braille support, Speakup remains part of Linux console accessibility, and Ubuntu still provides a way to try the desktop from USB without installing it.</p>
+<p>The main caution remains unchanged: there is no single, universal “Linux accessibility” experience. It depends on the distribution, desktop version, and applications involved. Before migrating, test the exact workflow you need.</p>
+</section>
+
+<section>
+<h2>Conclusion</h2>
+<p>Linux is not a mysterious territory reserved for computer geniuses, but neither is it a ready-made meal that works identically for everyone.</p>
+<p>Tony's comparison with a well-stocked kitchen is a good one: the ingredients and tools are there, and you have considerable freedom to organise them your way. That freedom can be a major advantage, but it also means learning where things are and how they fit together.</p>
+<p>For a blind user, the best question is not simply “Is Linux accessible?” but “Does this distribution, with this desktop, this screen reader, and these applications, let me independently do what I need to do?” That is the test that really matters.</p>
+</section>
+</main>
+
+<footer><p>TifloAcosta revision: September 8, 2026.</p></footer>
+</body>
+</html>

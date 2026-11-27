@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="Tony Acosta">
+<meta name="publisher" content="TifloAcosta">
+<title>Toque directo en VoiceOver: cuándo usarlo y cuándo salir corriendo</title>
+<style>
+:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65;max-width:64rem;margin:0 auto;padding:1.25rem}
+a{overflow-wrap:anywhere;text-underline-offset:.15em}
+a:focus{outline:.2rem solid currentColor;outline-offset:.2rem}
+.skip-link{position:absolute;left:-9999px}
+.skip-link:focus{position:static;display:inline-block;margin-bottom:1rem}
+.brand img{display:block;width:8rem;max-width:40%;height:auto}
+.reader-nav{margin:0 0 1rem}
+.reader-nav a{display:inline-block;font-weight:700;padding:.65rem .9rem;border:2px solid currentColor;border-radius:.4rem;text-decoration:none}
+h1,h2{line-height:1.25}
+h2{margin-top:2rem}
+.meta{margin:.4rem 0 1.2rem}
+.note{border-left:.3rem solid currentColor;padding:.2rem 0 .2rem 1rem;margin:1.5rem 0}
+footer{margin-top:2.5rem}
+@media print{.skip-link,.reader-nav{display:none}body{max-width:none}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<nav class="reader-nav" aria-label="Volver a TifloAcosta App"><a href="https://tifloacosta.github.io/tifloacosta-app/">Volver a TifloAcosta App</a></nav>
+<header>
+<div class="brand"><img src="https://tifloacosta.github.io/tifloacosta-app/tifloacosta-icon-512.png" alt="TifloAcosta"></div>
+<h1>Toque directo en VoiceOver: cuándo usarlo… y cuándo salir corriendo</h1>
+<p class="meta">Versión escrita accesible del contenido de un vídeo de Canal TifloAcosta. <a href="https://www.youtube.com/watch?v=nWkdSZewjPg">Ver el vídeo original en YouTube</a>.</p>
+</header>
+<main id="contenido">
+<section>
+<h2>Introducción</h2>
+<p>VoiceOver permite manejar el iPhone mediante un sistema de exploración, foco y gestos propios. Ese sistema funciona muy bien en la mayoría de aplicaciones, pero hay situaciones concretas en las que interesa que un toque llegue directamente a la aplicación, sin que VoiceOver lo interprete primero. Para eso existe el toque directo.</p>
+<p>El problema aparece cuando una función pensada para casos concretos permanece activa donde no hace falta. Entonces una aplicación puede empezar a responder de una forma inesperada: el foco parece saltar, determinados gestos no producen lo esperado o la interacción deja de parecerse a la navegación habitual con VoiceOver.</p>
+<p>La idea central de este tutorial es sencilla: el toque directo puede ser muy útil, pero conviene activarlo únicamente cuando exista una razón para hacerlo y saber dónde comprobarlo cuando algo empieza a comportarse de manera extraña.</p>
+</section>
+<section>
+<h2>Qué hace realmente el toque directo</h2>
+<p>En el uso normal de VoiceOver, tocar un elemento lo selecciona y un doble toque lo activa. VoiceOver actúa como intermediario entre el dedo y la interfaz.</p>
+<p>Con el toque directo, una zona de una aplicación puede recibir los toques de una forma mucho más parecida a como los recibiría si VoiceOver estuviese desactivado. Esto permite interactuar en tiempo real con determinados controles o superficies que no funcionan bien con el esquema habitual de seleccionar y después activar.</p>
+<p>Un ejemplo claro es un instrumento táctil. En una aplicación como GarageBand, una persona puede necesitar tocar directamente las teclas de un piano o los elementos de una batería. Si tuviera que seleccionar cada tecla con VoiceOver y después hacer doble toque, sería imposible tocar en tiempo real. El toque directo elimina esa intermediación en la zona preparada para ello.</p>
+<p>También puede resultar necesario en determinadas interfaces que esperan arrastres, deslizamientos o gestos propios de la aplicación. La regla práctica es que no se activa porque sí: se utiliza cuando la propia tarea necesita que el dedo llegue directamente a la interfaz.</p>
+</section>
+<section>
+<h2>No confundirlo con el tecleo de toque directo</h2>
+<p>VoiceOver utiliza también la expresión “toque directo” dentro de los estilos de tecleo. No es exactamente lo mismo que activar Toque directo para una aplicación. El tecleo de toque directo afecta al teclado en pantalla y permite escribir como si VoiceOver estuviese desactivado únicamente en el teclado. En este tutorial hablamos del ajuste de Toque directo que puede cambiar la interacción con una aplicación o con determinadas áreas de ella.</p>
+</section>
+<section>
+<h2>Cuándo conviene desactivarlo</h2>
+<p>Si una aplicación que normalmente se maneja bien con VoiceOver empieza a responder de forma poco previsible, Toque directo es una de las primeras opciones que merece la pena comprobar. No significa que cualquier fallo de WhatsApp, YouTube u otra aplicación tenga necesariamente esta causa, pero mantenerlo activado sin necesitarlo puede alterar la forma habitual de interactuar.</p>
+<p>Por eso, si VoiceOver empieza a perder el comportamiento esperado, comprueba si Toque directo está activado para esa aplicación. Si no lo necesitas, desactívalo y prueba de nuevo.</p>
+</section>
+<section>
+<h2>Reconocimiento de pantalla: útil, pero es otra cosa</h2>
+<p>El mismo criterio de prudencia sirve para Reconocimiento de pantalla, aunque se trata de una función diferente. El reconocimiento puede ayudar a VoiceOver a interpretar interfaces que de otro modo resultarían poco accesibles. Sin embargo, si una aplicación ya es accesible por sí misma, activar reconocimiento adicional puede cambiar la forma en que VoiceOver identifica o presenta algunos elementos.</p>
+<p>Si una aplicación que antes funcionaba bien empieza a comportarse de forma rara, merece la pena revisar tanto Toque directo como Reconocimiento de pantalla antes de dar por hecho que la aplicación se ha estropeado.</p>
+</section>
+<section>
+<h2>Preparar los Ajustes rápidos de VoiceOver</h2>
+<p>Los Ajustes rápidos permiten acceder desde cualquier parte del iPhone a una selección de parámetros de VoiceOver sin tener que recorrer todo el menú de Ajustes cada vez.</p>
+<ol>
+<li>Abre <strong>Ajustes</strong>.</li>
+<li>Entra en <strong>Accesibilidad</strong>.</li>
+<li>Abre <strong>VoiceOver</strong>.</li>
+<li>Entra en <strong>Ajustes rápidos</strong>.</li>
+<li>Revisa la lista y selecciona los parámetros que quieras tener disponibles en ese menú. Durante la demostración se muestran distintos elementos, entre ellos Actividades, volumen del habla, voz, opciones de braille y atenuación de audio. Para este tutorial, comprueba especialmente que <strong>Toque directo</strong> esté incluido si quieres poder activarlo o desactivarlo con rapidez.</li>
+</ol>
+<p>También puedes reordenar los elementos para colocar al principio los ajustes que utilices con mayor frecuencia.</p>
+</section>
+<section>
+<h2>Cómo abrir los Ajustes rápidos</h2>
+<p>Con VoiceOver activado, toca la pantalla <strong>cuatro veces con dos dedos</strong>. Se abrirá el panel de Ajustes rápidos.</p>
+<p>Este gesto no debe confundirse con el llamado toque mágico. El toque mágico es un gesto diferente de VoiceOver. Para abrir Ajustes rápidos, lo que se utiliza es un toque cuádruple con dos dedos.</p>
+<p>Una vez abierto el panel, desplázate por los ajustes hasta encontrar <strong>Toque directo</strong>. VoiceOver anunciará su estado. Si está activado en una aplicación donde no lo necesitas, cámbialo a desactivado y cierra el panel para volver a la aplicación.</p>
+</section>
+<section>
+<h2>Ejemplo práctico en YouTube</h2>
+<p>En el vídeo, Tony realiza la prueba dentro de YouTube. Abre los Ajustes rápidos, recorre los diferentes parámetros de VoiceOver y localiza Toque directo. Al comprobar que está activado, lo desactiva y vuelve a la interfaz de YouTube.</p>
+<p>La utilidad de este procedimiento es que no obliga a salir de la aplicación, entrar en Ajustes, buscar VoiceOver y regresar después. Los Ajustes rápidos permiten comprobar el estado y modificarlo allí mismo.</p>
+<p>El mismo método sirve para revisar otras aplicaciones. Si, por ejemplo, WhatsApp empieza a responder de una forma poco habitual, puede comprobarse Toque directo desde el propio WhatsApp y desactivarlo si no existe ninguna razón para mantenerlo activo.</p>
+</section>
+<section>
+<h2>Una comprobación rápida cuando VoiceOver empieza a hacer cosas raras</h2>
+<p>Cuando aparezcan saltos de foco, gestos que dejan de producir el resultado habitual o una interfaz que de pronto parece distinta, antes de complicar el diagnóstico conviene revisar lo básico. Comprueba Toque directo y Reconocimiento de pantalla, desactiva lo que no necesites y vuelve a probar la aplicación.</p>
+<p>No todos los problemas de accesibilidad se resuelven así, pero son dos funciones capaces de modificar de forma importante la interacción y merece la pena descartarlas antes de buscar causas más complicadas.</p>
+</section>
+<section class="note" aria-labelledby="actualizacion">
+<h2 id="actualizacion">Actualización a 8 de septiembre de 2026</h2>
+<p>Apple sigue documentando que los Ajustes rápidos de VoiceOver se abren tocando cuatro veces con dos dedos y que su contenido se personaliza desde Ajustes &gt; Accesibilidad &gt; VoiceOver &gt; Ajustes rápidos.</p>
+<p>Apple también documenta Toque directo como una función que puede habilitarse para una aplicación cuando se necesita interacción táctil en tiempo real. No se ha localizado documentación oficial que establezca como comportamiento general que iOS active automáticamente Toque directo en YouTube o WhatsApp. Por esa razón, esta versión escrita lo presenta como un ajuste que conviene comprobar cuando existe un problema, no como una causa automática atribuible a Apple.</p>
+</section>
+<section>
+<h2>Conclusión</h2>
+<p>Toque directo no es una opción buena o mala por sí misma. Es una herramienta especializada. Cuando una aplicación necesita interacción táctil inmediata puede ser exactamente lo que hace falta; cuando no la necesita, puede convertir una navegación perfectamente normal en una experiencia desconcertante.</p>
+<p>La mejor defensa es saber reconocerla y tenerla a mano en los Ajustes rápidos. Así, cuando VoiceOver empiece a hacer algo que no encaja, comprobar Toque directo cuesta unos segundos y puede ahorrar bastante tiempo.</p>
+</section>
+</main>
+<footer><p>Revisión TifloAcosta: 8 de septiembre de 2026.</p></footer>
+</body>
+</html>

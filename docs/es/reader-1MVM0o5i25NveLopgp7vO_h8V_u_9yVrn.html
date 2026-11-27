@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Tony Acosta">
+<meta name="organization" content="Canal TifloAcosta">
+<meta name="description" content="Guía práctica para que una persona ciega usuaria de VoiceOver saque más partido a la App Store de Apple.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía práctica para usar la App Store con VoiceOver</title>
+<style>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.08rem;
+    line-height: 1.65;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1.2rem;
+    color: #111;
+    background: #fff;
+}
+h1, h2, h3 {
+    line-height: 1.3;
+}
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.4rem;
+}
+h2 {
+    font-size: 1.45rem;
+    margin-top: 2.2rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.2rem;
+}
+h3 {
+    font-size: 1.2rem;
+    margin-top: 1.6rem;
+}
+nav {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin: 1.4rem 0;
+}
+a {
+    color: #0645ad;
+}
+.bloque {
+    background: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 0.8rem;
+    margin: 1rem 0;
+    white-space: pre-wrap;
+}
+.aviso {
+    border-left: 4px solid #444;
+    padding-left: 1rem;
+    margin: 1rem 0;
+}
+.volver {
+    margin-top: 1.5rem;
+}
+</style>
+</head>
+<body>
+<header id="inicio">
+<p>Canal TifloAcosta</p>
+<h1>Guía práctica para usar la App Store con VoiceOver</h1>
+<p>Objetivo: ayudar a una persona ciega usuaria de iPhone o iPad a buscar, evaluar, descargar, recuperar y seguir aplicaciones en la App Store de una forma más eficaz.</p>
+<p>Esta guía está pensada para uso práctico. No pretende convertir la App Store en una herramienta perfecta, porque para eso habría que rediseñar medio escaparate digital, pero sí ayuda a reducir pérdidas de tiempo, compras dudosas y búsquedas sin resultado.</p>
+</header>
+
+<nav aria-label="Índice" id="indice">
+<h2>Índice</h2>
+<p><a href="#por-que-cuesta">1. Por qué cuesta tanto usar la App Store con VoiceOver</a></p>
+<p><a href="#mapa">2. Mapa básico de la App Store</a></p>
+<p><a href="#antes">3. Antes de buscar: define qué necesitas</a></p>
+<p><a href="#buscar">4. Cómo buscar mejor dentro de la App Store</a></p>
+<p><a href="#buscar-fuera">5. Buscar fuera de la App Store para encontrar mejor dentro</a></p>
+<p><a href="#ficha">6. Cómo revisar la ficha de una app antes de instalarla</a></p>
+<p><a href="#accesibilidad">7. Cómo averiguar si una app puede ser accesible</a></p>
+<p><a href="#ofertas">8. Cómo enterarse de ofertas, bajadas de precio y apps nuevas</a></p>
+<p><a href="#compras">9. Compras, suscripciones, reembolsos y restauración</a></p>
+<p><a href="#actualizaciones">10. Actualizaciones y versiones nuevas</a></p>
+<p><a href="#descubrir">11. Cómo descubrir apps útiles sin depender solo de la tienda</a></p>
+<p><a href="#metodo">12. Método recomendado de trabajo</a></p>
+<p><a href="#ejemplos">13. Ejemplos prácticos de búsqueda</a></p>
+<p><a href="#seguridad">14. Seguridad y privacidad antes de instalar</a></p>
+<p><a href="#errores">15. Errores frecuentes</a></p>
+<p><a href="#resumen">16. Resumen final</a></p>
+<p><a href="#enlaces">17. Enlaces útiles</a></p>
+</nav>
+
+<main>
+<section id="por-que-cuesta">
+<h2>1. Por qué cuesta tanto usar la App Store con VoiceOver</h2>
+<p>A una persona ciega puede costarle usar la App Store por varias razones. No es torpeza del usuario. La tienda está diseñada principalmente como escaparate visual y comercial. VoiceOver puede leer sus elementos, pero eso no significa que la experiencia sea rápida, limpia o productiva.</p>
+<h3>Razones principales</h3>
+<p>La App Store mezcla búsqueda, publicidad, recomendaciones, artículos editoriales, capturas de pantalla, vídeos, reseñas, botones de compra, categorías y sugerencias. Para quien ve, esa mezcla puede ser visualmente manejable. Para quien usa VoiceOver, se convierte en una larga secuencia de elementos que hay que escuchar uno a uno.</p>
+<p>El buscador no siempre entiende lo que realmente necesitas. Muchas veces encuentra apps por nombre, categoría, palabras clave o popularidad, pero no por la necesidad concreta de una persona ciega.</p>
+<p>La tienda no permite filtrar de forma fiable por “funciona bien con VoiceOver”. Puede aparecer una sección de funciones de accesibilidad en la ficha de algunas apps, pero eso no sustituye la experiencia real de usuarios ciegos.</p>
+<p>Muchas fichas de apps dependen de capturas de pantalla y vídeos promocionales. Para una persona ciega, esa información puede aportar poco o nada si no está bien descrita.</p>
+<p>Las reseñas de la App Store no siempre sirven para saber si una app es accesible. La mayoría de usuarios que reseñan una app no hablan de VoiceOver, etiquetas de botones, navegación por encabezados, gestos, foco o lectura de campos.</p>
+<p>Las apps gratuitas pueden incluir compras dentro de la app, anuncios o suscripciones. El botón “Obtener” no significa necesariamente que la app sea gratuita en su uso real. Significa que se descarga sin pagar en ese momento. La pequeña trampa moderna, envuelta en papel de regalo.</p>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+
+<section id="mapa">
+<h2>2. Mapa básico de la App Store</h2>
+<p>En el iPhone, la App Store se organiza con pestañas en la parte inferior. Con VoiceOver, puedes llegar a ellas deslizando o tocando cerca del borde inferior de la pantalla.</p>
+<h3>Pestañas principales</h3>
+<p>Hoy: muestra artículos destacados, recomendaciones, historias, eventos dentro de apps y ofertas seleccionadas.</p>
+<p>Juegos: permite buscar juegos por categorías y recomendaciones.</p>
+<p>Apps: muestra lanzamientos, éxitos y categorías de aplicaciones.</p>
+<p>Arcade: contiene juegos de Apple Arcade. Requiere suscripción y, en general, los juegos de Apple Arcade no incluyen anuncios ni compras dentro de la app.</p>
+<p>Buscar: es la pestaña más útil cuando sabes qué quieres encontrar.</p>
+<h3>Consejo para VoiceOver</h3>
+<p>Si quieres productividad, no empieces por “Hoy”. Empieza por “Buscar”. La pestaña “Hoy” puede servir para descubrir cosas, pero no es la forma más eficaz cuando necesitas resolver una necesidad concreta.</p>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+
+<section id="antes">
+<h2>3. Antes de buscar: define qué necesitas</h2>
+<p>El error más común es abrir la App Store y escribir una palabra general. Eso suele producir resultados imprecisos.</p>
+<h3>Preguntas útiles antes de buscar</h3>
+<p>Qué quiero hacer exactamente.</p>
+<p>Lo necesito en español o me sirve en inglés.</p>
+<p>Debe funcionar sin conexión a internet.</p>
+<p>Debe ser gratuita, de pago único o acepto suscripción.</p>
+<p>Necesito que funcione especialmente bien con VoiceOver.</p>
+<p>Necesito que sea para iPhone, para iPad, para Apple Watch, para Mac o para varios dispositivos.</p>
+<p>Voy a usarla una vez o de forma habitual.</p>
+<p>Necesito una app sencilla o una herramienta avanzada.</p>
+<h3>Ejemplo</h3>
+<p>Búsqueda mala:</p>
+<div class="bloque">documentos</div>
+<p>Búsquedas mejores:</p>
+<div class="bloque">leer PDF con VoiceOver
+OCR español iPhone
+escanear texto accesible
+PDF reader screen reader
+document scanner OCR Spanish</div>
+<p>La búsqueda buena no se basa solo en el nombre de la app. Se basa en la función que necesitas.</p>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+
+<section id="buscar">
+<h2>4. Cómo buscar mejor dentro de la App Store</h2>
+<h3>Ruta básica</h3>
+<p>Abre App Store.</p>
+<p>Ve a la pestaña Buscar.</p>
+<p>Activa el campo de búsqueda.</p>
+<p>Escribe una búsqueda concreta.</p>
+<p>Revisa los resultados, pero no instales la primera app sin abrir su ficha.</p>
+<h3>Busca también en inglés</h3>
+<p>Muchas apps buenas tienen nombre, descripción o palabras clave en inglés. Aunque luego la app pueda estar traducida, la búsqueda en español puede no encontrarla bien.</p>
+<div class="bloque">VoiceOver
+screen reader
+blind
+low vision
+OCR
+image description
+audio description
+text recognition
+scanner
+PDF accessibility
+accessible game
+navigation for blind</div>
+<h3>Busca por función y no solo por categoría</h3>
+<div class="bloque">tomar notas con audio
+leer documentos escaneados
+organizar tareas recurrentes
+transcribir audio
+describir imágenes
+grabar pantalla con voz
+editar audio accesible</div>
+<h3>Busca por desarrollador</h3>
+<p>Si una app conocida funciona bien, revisa más apps del mismo desarrollador. En la ficha suele aparecer el nombre del desarrollador. Esto es útil cuando una empresa tiene varias apps relacionadas.</p>
+<h3>Evita búsquedas demasiado genéricas</h3>
+<p>Palabras como “scanner”, “AI”, “photo”, “music”, “notes”, “PDF” o “chat” pueden devolver cientos de resultados. Añade siempre una segunda palabra que concrete la función.</p>
+<div class="bloque">scanner OCR español
+AI image description VoiceOver
+PDF read aloud offline
+notes audio transcription</div>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+
+<section id="buscar-fuera">
+<h2>5. Buscar fuera de la App Store para encontrar mejor dentro</h2>
+<p>Una forma muy práctica de usar mejor la App Store es no empezar siempre dentro de la App Store. Puede parecer absurdo, pero funciona. El buscador interno de la tienda no siempre es el mejor camino para encontrar lo que buscas.</p>
+<h3>Buscar en Safari o en Google</h3>
+<div class="bloque">mejor app OCR iPhone VoiceOver App Store
+accessible podcast app iOS VoiceOver
+site:apps.apple.com iPhone OCR español
+site:applevis.com OCR iPhone VoiceOver</div>
+<h3>Usar la App Store en la web</h3>
+<p>Apple tiene una versión web de la App Store en apps.apple.com. Sirve para explorar y buscar apps desde el navegador. No instala directamente las apps, pero permite encontrar la ficha y abrirla después en la App Store del dispositivo.</p>
+<h3>Ventaja para personas ciegas</h3>
+<p>En Safari, a veces resulta más cómodo leer una ficha, compartir un enlace o guardar una referencia. Luego se puede abrir la app en la App Store cuando ya sabes exactamente qué app quieres.</p>
+<h3>Usar buscadores con palabras de accesibilidad</h3>
+<div class="bloque">VoiceOver
+screen reader
+blind users
+AppleVis
+accessible
+low vision
+works with VoiceOver
+not accessible VoiceOver</div>
+<p>Buscar también lo negativo ayuda. Si una app da muchos problemas, a veces aparecen quejas antes que recomendaciones.</p>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+
+<section id="ficha">
+<h2>6. Cómo revisar la ficha de una app antes de instalarla</h2>
+<p>Antes de tocar “Obtener” o el precio, abre la ficha de la app y revisa la información importante. Esto evita instalar por impulso.</p>
+<h3>Datos que conviene revisar</h3>
+<p>Nombre exacto de la app.</p>
+<p>Desarrollador.</p>
+<p>Valoraciones y reseñas.</p>
+<p>Fecha de la última actualización.</p>
+<p>Historial de versiones.</p>
+<p>Tamaño del archivo.</p>
+<p>Compatibilidad con iPhone, iPad, Mac, Apple Watch o Apple Vision.</p>
+<p>Idiomas compatibles.</p>
+<p>Clasificación por edades.</p>
+<p>Compras dentro de la app.</p>
+<p>Suscripciones.</p>
+<p>Funciones de accesibilidad compatibles, si aparecen.</p>
+<p>Información de privacidad.</p>
+<h3>Última actualización</h3>
+<p>Una app sin actualizar durante años no tiene por qué ser mala, pero es una señal a revisar. Si la app depende de internet, servicios externos, mapas, IA, bancos, mensajería o redes sociales, una actualización antigua puede ser mala señal.</p>
+<h3>Compras dentro de la app</h3>
+<p>Si VoiceOver anuncia “compras dentro de la app”, no significa necesariamente que sea mala, pero conviene entrar en esa información o revisar la ficha. Algunas apps ofrecen una versión gratuita casi inútil y esconden lo importante tras una suscripción.</p>
+<h3>Botón Obtener, precio o volver a descargar</h3>
+<p>Obtener: se descarga sin pagar en ese momento.</p>
+<p>Precio: se paga antes de descargar.</p>
+<p>Volver a descargar: ya habías descargado o comprado esa app antes, y puedes recuperarla si sigue disponible.</p>
+<h3>No confundir instalación con calidad</h3>
+<p>Que una app esté en la App Store no significa que sea accesible, útil o respetuosa con los datos. Significa que ha pasado los controles de publicación de Apple. Son cosas distintas, aunque el marketing intente mezclarlas con entusiasmo sospechoso.</p>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+
+<section id="accesibilidad">
+<h2>7. Cómo averiguar si una app puede ser accesible</h2>
+<p>La App Store puede indicar funciones de accesibilidad compatibles en algunas fichas, pero eso no basta. Para una persona ciega, lo importante es la experiencia real con VoiceOver.</p>
+<h3>Señales positivas</h3>
+<p>La app se menciona en AppleVis.</p>
+<p>Hay reseñas de usuarios ciegos.</p>
+<p>El desarrollador responde a comentarios sobre accesibilidad.</p>
+<p>La app tiene una interfaz sencilla.</p>
+<p>Las funciones principales no dependen de arrastrar elementos visuales.</p>
+<p>Los botones tienen nombres claros.</p>
+<p>La app se actualiza con frecuencia razonable.</p>
+<p>La descripción menciona VoiceOver, accesibilidad, personas ciegas o baja visión.</p>
+<h3>Señales de cuidado</h3>
+<p>Muchas funciones dependen de gráficos, mapas, edición visual o gestos no estándar.</p>
+<p>La app usa muchos iconos sin texto visible.</p>
+<p>Las reseñas mencionan que después de una actualización “ya no se puede usar”.</p>
+<p>La app no se actualiza desde hace años.</p>
+<p>Tiene suscripciones agresivas o pantallas de compra al abrir.</p>
+<p>No hay forma clara de contactar con el desarrollador.</p>
+<h3>Usar AppleVis</h3>
+<p>AppleVis tiene directorios de apps para iOS, iPadOS, Mac, Apple Watch y Apple TV. También tiene foros, noticias, podcasts, seguimiento de errores y comentarios de usuarios ciegos. Es una de las fuentes más útiles para saber cómo se comporta realmente una app con VoiceOver.</p>
+<h3>Cómo buscar en AppleVis</h3>
+<p>Entra en AppleVis.</p>
+<p>Busca el nombre de la app.</p>
+<p>Si no aparece, busca por categoría.</p>
+<p>Lee comentarios recientes, no solo entradas antiguas.</p>
+<p>Comprueba si alguien menciona la versión actual de iOS.</p>
+<h3>Prueba básica tras instalar</h3>
+<p>Abre la app.</p>
+<p>Recorre la pantalla inicial con VoiceOver.</p>
+<p>Comprueba si los botones tienen nombre.</p>
+<p>Busca ajustes de accesibilidad o idioma.</p>
+<p>Prueba la función principal, no solo la pantalla de bienvenida.</p>
+<p>Si en cinco minutos solo oyes “botón, botón, botón”, la app ya está presentando su candidatura al museo de las malas decisiones.</p>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+
+<section id="ofertas">
+<h2>8. Cómo enterarse de ofertas, bajadas de precio y apps nuevas</h2>
+<p>La App Store muestra ofertas y eventos dentro de apps, pero no es la mejor herramienta para seguir bajadas de precio o descubrir apps que acaban de salir.</p>
+<h3>App recomendada para seguimiento: AppRaven</h3>
+<p>AppRaven es una app útil para seguir ofertas, descuentos, apps que pasan a estar gratis temporalmente, historial de precios, listas de deseos, colecciones creadas por usuarios y novedades de desarrolladores.</p>
+<p>Puede servir para ver apps de pago que están gratis o rebajadas, crear una lista de deseos, recibir avisos cuando una app baja de precio, seguir desarrolladores concretos, ver apps nuevas o actualizaciones, consultar colecciones creadas por otros usuarios y revisar historial de precios antes de comprar.</p>
+<h3>Advertencia sobre AppRaven</h3>
+<p>AppRaven puede ser muy potente, pero precisamente por eso puede resultar cargada al principio. Conviene empezar solo con dos funciones: buscar una app y añadirla a una lista de seguimiento. Ya habrá tiempo para explorar lo demás, si la humanidad sobrevive a otro menú de opciones.</p>
+<h3>Otra opción: Apps Gone Free & Daily Tips</h3>
+<p>Apps Gone Free & Daily Tips, de AppAdvice, ofrece selecciones de apps de pago que pasan a estar gratis o con promociones. Puede ser útil para enterarse de ofertas diarias, aunque hay que revisar siempre si la oferta es de acceso permanente, temporal o una prueba que luego se convierte en suscripción.</p>
+<h3>Consejo importante sobre ofertas</h3>
+<p>No descargues todo lo que esté gratis. Gratis no significa útil. Tampoco significa accesible. Y a veces significa “te regalo la descarga para venderte la suscripción dentro”.</p>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+
+<section id="compras">
+<h2>9. Compras, suscripciones, reembolsos y restauración</h2>
+<h3>Ver historial de compras</h3>
+<p>En la App Store puedes revisar el historial de compras, incluyendo apps gratuitas y de pago, compras dentro de la app y suscripciones.</p>
+<div class="bloque">App Store.
+Botón Mi cuenta o foto de perfil.
+Apps e historial de compras.
+Historial de compras.</div>
+<h3>Ver apps descargadas anteriormente</h3>
+<div class="bloque">App Store.
+Botón Mi cuenta o foto de perfil.
+Apps e historial de compras.
+Tus apps.
+Buscar la app.
+Volver a descargar.</div>
+<h3>Cancelar suscripciones</h3>
+<div class="bloque">Ajustes.
+Tu nombre.
+Suscripciones.
+Entrar en la suscripción.
+Cancelar suscripción.</div>
+<h3>Restaurar compras dentro de una app</h3>
+<p>Si compraste una versión Pro o una función adicional y al reinstalar la app no aparece, busca dentro de la app una opción llamada Restaurar compras, Restore Purchases o similar. Suele estar en ajustes, tienda interna, opciones o menú principal.</p>
+<h3>Solicitar reembolso</h3>
+<p>Si una compra cumple los requisitos, Apple permite solicitar reembolso desde reportaproblem.apple.com. No siempre se concede, pero existe el procedimiento.</p>
+<h3>Consejo para evitar problemas</h3>
+<p>Antes de aceptar una prueba gratuita, apunta la fecha en Recordatorios. Muchas pruebas gratuitas se convierten en suscripción. El olvido es el mejor comercial de las suscripciones, y eso no es casualidad.</p>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+
+<section id="actualizaciones">
+<h2>10. Actualizaciones y versiones nuevas</h2>
+<h3>Actualizaciones automáticas</h3>
+<p>Las apps descargadas de la App Store suelen actualizarse automáticamente por omisión. Esto es cómodo, pero puede tener un problema: una actualización puede mejorar una app o romper su accesibilidad.</p>
+<h3>Actualizar manualmente</h3>
+<div class="bloque">App Store.
+Botón Mi cuenta o foto de perfil.
+Actualizaciones de apps.
+Actualizar junto a una app concreta o Actualizar todo.</div>
+<h3>Cuándo no conviene actualizar de inmediato</h3>
+<p>Si una app es imprescindible para trabajar.</p>
+<p>Si la comunidad ha informado de problemas de accesibilidad en la nueva versión.</p>
+<p>Si una actualización mayor cambia toda la interfaz.</p>
+<p>Si dependes de esa app para una tarea urgente.</p>
+<h3>Cómo vigilar cambios</h3>
+<p>Lee el apartado “Novedades” o “Version History”.</p>
+<p>Busca el nombre de la app en AppleVis.</p>
+<p>Revisa comentarios recientes de otros usuarios.</p>
+<p>Si usas AppRaven, puedes seguir actualizaciones de apps concretas.</p>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+
+<section id="descubrir">
+<h2>11. Cómo descubrir apps útiles sin depender solo de la tienda</h2>
+<h3>Fuentes recomendadas</h3>
+<p>AppleVis: para apps probadas o comentadas por usuarios ciegos.</p>
+<p>Listas de correo y comunidades de usuarios de iPhone con VoiceOver.</p>
+<p>Canales especializados en accesibilidad y tecnología.</p>
+<p>Foros de desarrolladores o soporte de la app.</p>
+<p>AppRaven: para ofertas, listas, novedades y seguimiento.</p>
+<p>Apps Gone Free & Daily Tips: para ofertas diarias y selecciones.</p>
+<p>La propia App Store, pero usada como paso final, no como única fuente.</p>
+<h3>Orden práctico de descubrimiento</h3>
+<p>Primero identifica la necesidad.</p>
+<p>Después busca experiencias reales de usuarios.</p>
+<p>Luego revisa la ficha en la App Store.</p>
+<p>Después instala, si la app parece prometedora.</p>
+<p>Por último, prueba la función principal con VoiceOver antes de pagar suscripciones o versiones Pro.</p>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+
+<section id="metodo">
+<h2>12. Método recomendado de trabajo</h2>
+<h3>Paso 1. Escribe la necesidad</h3>
+<div class="bloque">Necesito una app para describir imágenes desde el iPhone usando VoiceOver.</div>
+<h3>Paso 2. Crea tres búsquedas</h3>
+<div class="bloque">describir imágenes VoiceOver iPhone
+AI image description VoiceOver
+site:applevis.com image description iOS</div>
+<h3>Paso 3. Revisa AppleVis o comunidades</h3>
+<p>Busca si hay usuarios ciegos que hayan probado la app.</p>
+<h3>Paso 4. Abre la ficha en la App Store</h3>
+<p>Comprueba desarrollador, fecha de actualización, compras dentro de la app, privacidad, idiomas y reseñas.</p>
+<h3>Paso 5. Instala solo si pasa la revisión mínima</h3>
+<p>No instales diez apps a la vez. Instala una o dos, pruébalas y elimina lo que no sirva.</p>
+<h3>Paso 6. Si es de pago o suscripción, prueba antes</h3>
+<p>No pagues una suscripción anual si no has comprobado que la función principal es accesible. Esto parece obvio, pero las pantallas de compra están diseñadas para que lo obvio se vaya de vacaciones.</p>
+<h3>Paso 7. Guarda la app útil</h3>
+<p>Si te sirve, ponla en una carpeta adecuada, añádela a AppRaven si quieres seguir actualizaciones o precio, y apunta para qué la usas.</p>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+
+<section id="ejemplos">
+<h2>13. Ejemplos prácticos de búsqueda</h2>
+<h3>Buscar una app para OCR</h3>
+<div class="bloque">OCR español
+escanear texto
+scanner OCR
+text recognition
+document scanner VoiceOver
+site:applevis.com OCR iPhone VoiceOver
+best OCR app iPhone blind users</div>
+<h3>Buscar una app de grabación accesible</h3>
+<div class="bloque">audio recorder VoiceOver
+grabadora notas voz accesible
+record audio transcription iPhone</div>
+<h3>Buscar una app para tomar notas</h3>
+<div class="bloque">notes VoiceOver iPhone
+notas audio texto iPhone
+accessible markdown editor iOS</div>
+<h3>Buscar juegos accesibles</h3>
+<div class="bloque">accessible game VoiceOver
+audio game iPhone
+blind accessible iOS game
+site:applevis.com iOS accessible games</div>
+<h3>Buscar apps nuevas de un desarrollador</h3>
+<p>Si una app te gusta, abre su ficha y busca el nombre del desarrollador. Después puedes revisar “Más de este desarrollador” o seguirlo en AppRaven si está disponible.</p>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+
+<section id="seguridad">
+<h2>14. Seguridad y privacidad antes de instalar</h2>
+<h3>Revisa la privacidad</h3>
+<p>La App Store incluye información de privacidad declarada por el desarrollador. Puede indicar datos vinculados al usuario, datos usados para rastreo, datos no vinculados y otros detalles.</p>
+<h3>Ten cuidado con estas señales</h3>
+<p>Una linterna que pide contactos.</p>
+<p>Una calculadora que pide ubicación precisa.</p>
+<p>Una app sencilla que exige crear cuenta sin necesidad clara.</p>
+<p>Una app que abre una suscripción antes de explicar qué hace.</p>
+<p>Una app que promete demasiado con lenguaje exagerado.</p>
+<h3>Permisos dentro de iOS</h3>
+<div class="bloque">Ajustes.
+Privacidad y seguridad.
+Revisar ubicación, contactos, fotos, micrófono, cámara y otros permisos.</div>
+<h3>No confundas privacidad con accesibilidad</h3>
+<p>Una app puede ser accesible y recopilar muchos datos. También puede ser privada y resultar imposible de usar con VoiceOver. Hay que revisar ambas cosas.</p>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+
+<section id="errores">
+<h2>15. Errores frecuentes</h2>
+<p>Instalar la primera app que aparece en los resultados.</p>
+<p>Confiar solo en la puntuación de estrellas.</p>
+<p>No revisar compras dentro de la app.</p>
+<p>No mirar la última actualización.</p>
+<p>No comprobar si la app está en español o si permite trabajar en inglés sin problema.</p>
+<p>No buscar opiniones de usuarios ciegos.</p>
+<p>Pagar una suscripción antes de probar la función principal.</p>
+<p>No guardar el nombre exacto de una app útil.</p>
+<p>No revisar el historial de compras cuando se quiere recuperar una app.</p>
+<p>Actualizar apps críticas sin revisar antes si hay quejas de accesibilidad.</p>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+
+<section id="resumen">
+<h2>16. Resumen final</h2>
+<p>La App Store puede usarse con VoiceOver, pero no siempre es cómoda ni eficaz. Para sacarle partido hay que usar una estrategia.</p>
+<p>Lo más práctico es buscar por necesidad, no por palabras genéricas.</p>
+<p>Conviene combinar búsquedas en la App Store con búsquedas en Safari, AppleVis y comunidades de usuarios.</p>
+<p>Antes de instalar, hay que revisar desarrollador, reseñas, compras dentro de la app, suscripciones, fecha de actualización, idiomas, compatibilidad, privacidad y señales de accesibilidad.</p>
+<p>Para ofertas y seguimiento de apps, AppRaven puede ser una herramienta muy útil.</p>
+<p>Para comprobar accesibilidad real, AppleVis y las comunidades de usuarios ciegos siguen siendo imprescindibles.</p>
+<p>Una buena búsqueda no termina cuando aparece una app. Termina cuando sabes si esa app resuelve tu necesidad, si puedes usarla con VoiceOver y si su modelo de pago te conviene.</p>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+
+<section id="enlaces">
+<h2>17. Enlaces útiles</h2>
+<p><a href="https://apps.apple.com">App Store en la web</a></p>
+<p><a href="https://www.applevis.com/apps/ios/browse">AppleVis: directorio de apps para iOS y iPadOS</a></p>
+<p><a href="https://www.applevis.com/forum/ios-ipados">AppleVis: foro de iOS y iPadOS</a></p>
+<p><a href="https://apps.apple.com/us/app/appraven-apps-gone-free/id1490607195">AppRaven en la App Store</a></p>
+<p><a href="https://apps.apple.com/us/app/apps-gone-free-daily-tips/id470693788">Apps Gone Free & Daily Tips en la App Store</a></p>
+<p><a href="https://reportaproblem.apple.com">Solicitar reembolsos o informar de problemas con compras de Apple</a></p>
+<p class="volver"><a href="#indice">Volver al índice</a></p>
+</section>
+</main>
+
+<footer>
+<h2>Créditos</h2>
+<p>Documento preparado por Tony Acosta para Canal TifloAcosta.</p>
+<p><a href="#inicio">Volver al inicio</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,174 @@
+{
+  "date": "2026-11-27",
+  "baseCommit": "03fbaea24729f05c3d27324ad7d34636e956a9bd",
+  "documents": [
+    {
+      "sourceId": "11efBTOfPgx22mnFsgpboAkhKVloPzfkS",
+      "sourcePath": [
+        "Guías y tutoriales",
+        "Linux para personas ciegas. ¿Es realmente usable con lector de pantalla? (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-11efBTOfPgx22mnFsgpboAkhKVloPzfkS",
+      "path": "docs/es/reader-11efBTOfPgx22mnFsgpboAkhKVloPzfkS.html",
+      "relatedVideoResource": "es-video-text-11_yUfziaI4rhl-XHNcKNOvhz1en3-3IT",
+      "verification": "source HTML recovered in original category",
+      "size": 12630,
+      "title": "Linux para personas ciegas. ¿Es realmente usable con lector de pantalla?"
+    },
+    {
+      "sourceId": "1MVM0o5i25NveLopgp7vO_h8V_u_9yVrn",
+      "sourcePath": [
+        "iPhone",
+        "Cómo utilizar y buscar aplicaciones en App Store con VoiceOver.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1MVM0o5i25NveLopgp7vO_h8V_u_9yVrn",
+      "path": "docs/es/reader-1MVM0o5i25NveLopgp7vO_h8V_u_9yVrn.html",
+      "relatedVideoResource": null,
+      "verification": "source HTML recovered in original category",
+      "size": 26581,
+      "title": "Cómo utilizar y buscar aplicaciones en App Store con VoiceOver"
+    },
+    {
+      "sourceId": "1Jcp58R4uTk-2Swdvz9BdU5f_ph6Rn7Vy",
+      "sourcePath": [
+        "iPhone",
+        "Cómo dictar mensajes y textos en el iPhone, trucos y sugerencias.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1Jcp58R4uTk-2Swdvz9BdU5f_ph6Rn7Vy",
+      "path": "docs/es/reader-1Jcp58R4uTk-2Swdvz9BdU5f_ph6Rn7Vy.html",
+      "relatedVideoResource": null,
+      "verification": "source HTML recovered in original category",
+      "size": 3864,
+      "title": "Cómo dictar mensajes y textos en el iPhone, trucos y sugerencias"
+    },
+    {
+      "sourceId": "1QnQsFGETKYW1IHOaKNFtFKnVHtMZSVnx",
+      "sourcePath": [
+        "iPhone",
+        "iOS_26_3_que_hay_de_nuevo_viejo_TifloAcosta_ES.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1QnQsFGETKYW1IHOaKNFtFKnVHtMZSVnx",
+      "path": "docs/es/reader-1QnQsFGETKYW1IHOaKNFtFKnVHtMZSVnx.html",
+      "relatedVideoResource": "es-video-text-1oDsqTFQuVx7HbhtBeJOm3t02uevEPHF0",
+      "verification": "source HTML recovered in original category",
+      "size": 12775,
+      "title": "iOS 26.3, ¿Qué hay de nuevo viejo? 🐰 📱"
+    },
+    {
+      "sourceId": "1h2qPMUqyOA3emb5zwAsWagVmw1E5H696",
+      "sourcePath": [
+        "iPhone",
+        "La_mayor_confusion_del_iPhone_se_llama_iCloud_TifloAcosta_ES.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1h2qPMUqyOA3emb5zwAsWagVmw1E5H696",
+      "path": "docs/es/reader-1h2qPMUqyOA3emb5zwAsWagVmw1E5H696.html",
+      "relatedVideoResource": "es-video-text-1m5CyjRCIO06j8RnitR6eiej9XIHhjN4J",
+      "verification": "source HTML recovered in original category",
+      "size": 15444,
+      "title": "La mayor confusión del iPhone se llama iCloud"
+    },
+    {
+      "sourceId": "1NoEKMUa61iHgrDzogxQyRWnXpegyxu7J",
+      "sourcePath": [
+        "iPhone",
+        "Como saber si te han bloqueado en WhatsApp (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1NoEKMUa61iHgrDzogxQyRWnXpegyxu7J",
+      "path": "docs/es/reader-1NoEKMUa61iHgrDzogxQyRWnXpegyxu7J.html",
+      "relatedVideoResource": "es-video-text-1jBl5cjf8pH5AeP0zpTGysNY1c8v3JDGX",
+      "verification": "source HTML recovered in original category",
+      "size": 10864,
+      "title": "Cómo saber si te han bloqueado en WhatsApp"
+    },
+    {
+      "sourceId": "1lRfcCo8YBqWvLfCX2GuqYFL_fwbtkE3v",
+      "sourcePath": [
+        "iPhone",
+        "Actualizaciones invisibles en iPhone. Qué son y por qué importan (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1lRfcCo8YBqWvLfCX2GuqYFL_fwbtkE3v",
+      "path": "docs/es/reader-1lRfcCo8YBqWvLfCX2GuqYFL_fwbtkE3v.html",
+      "relatedVideoResource": "es-video-text-1kpUojRKwjJNZGT-ihlVmIpyhGP0SuCnA",
+      "verification": "source HTML recovered in original category",
+      "size": 8898,
+      "title": "Actualizaciones invisibles en iPhone. Qué son y por qué importan"
+    },
+    {
+      "sourceId": "1ocWCYLJdqwyHOFsaGgCWwj9IbVar3-UY",
+      "sourcePath": [
+        "iPhone",
+        "iOS 26.4 sin la nueva Siri pero con cambios que sí interesan (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1ocWCYLJdqwyHOFsaGgCWwj9IbVar3-UY",
+      "path": "docs/es/reader-1ocWCYLJdqwyHOFsaGgCWwj9IbVar3-UY.html",
+      "relatedVideoResource": "es-video-text-1hS5KdXaCeBWsNzoV7TGkxOgHIxNW1dFf",
+      "verification": "source HTML recovered in original category",
+      "size": 9022,
+      "title": "iOS 26.4 sin la nueva Siri pero con cambios que sí interesan"
+    },
+    {
+      "sourceId": "1H2oZXqGr1YVkqQzidcuJb2v_jPiEvsA0",
+      "sourcePath": [
+        "iPhone",
+        "El truco de VoiceOver que estabas esperando. Tú y la IA a solas, sin intromisiones (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1H2oZXqGr1YVkqQzidcuJb2v_jPiEvsA0",
+      "path": "docs/es/reader-1H2oZXqGr1YVkqQzidcuJb2v_jPiEvsA0.html",
+      "relatedVideoResource": "es-video-text-1eklbvKPJRNVIG3cqtYC3kgze4VWYXHyl",
+      "verification": "source HTML recovered in original category",
+      "size": 7632,
+      "title": "El truco de VoiceOver que estabas esperando. Tú y la IA a solas, sin intromisiones"
+    },
+    {
+      "sourceId": "1_w42W66cWgm_7Xm1RCR_WaxhBjPHfJLp",
+      "sourcePath": [
+        "iPhone",
+        "Toque directo en VoiceOver. Cuándo usarlo y cuándo salir corriendo (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1_w42W66cWgm_7Xm1RCR_WaxhBjPHfJLp",
+      "path": "docs/es/reader-1_w42W66cWgm_7Xm1RCR_WaxhBjPHfJLp.html",
+      "relatedVideoResource": "es-video-text-1cc_7Ia-GkC3ZHPvYioBA5Gqm-hkCv_5f",
+      "verification": "source HTML recovered in original category",
+      "size": 10596,
+      "title": "Toque directo en VoiceOver. Cuándo usarlo y cuándo salir corriendo"
+    },
+    {
+      "sourceId": "1eO788_SqDAA4vQpOv7Qup-450G5KGnTx",
+      "sourcePath": [
+        "iPhone",
+        "Batería en el iPhone. Todo lo que necesitas saber (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1eO788_SqDAA4vQpOv7Qup-450G5KGnTx",
+      "path": "docs/es/reader-1eO788_SqDAA4vQpOv7Qup-450G5KGnTx.html",
+      "relatedVideoResource": "es-video-text-1b6RsfoqDPcSCjh9GmDa0SDwIIYKBBpBh",
+      "verification": "source HTML recovered in original category",
+      "size": 7969,
+      "title": "Batería en el iPhone. Todo lo que necesitas saber"
+    },
+    {
+      "sourceId": "1pgFJ_novQm4L7sTmNoTQrzfw1l_c8jQK",
+      "sourcePath": [
+        "iPhone",
+        "Un ciego prevenido vale por dos. Alertas sísmicas en el móvil (TifloAcosta).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-1pgFJ_novQm4L7sTmNoTQrzfw1l_c8jQK",
+      "path": "docs/es/reader-1pgFJ_novQm4L7sTmNoTQrzfw1l_c8jQK.html",
+      "relatedVideoResource": "es-video-text-1C9ianaduKBjRrK9aDLXykhitXKr_Y_Xx",
+      "verification": "source HTML recovered in original category",
+      "size": 151967,
+      "title": "Un ciego prevenido vale por dos. Alertas sísmicas en el móvil"
+    }
+  ]
+}

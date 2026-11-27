@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="Tony Acosta">
+<meta name="publisher" content="TifloAcosta">
+<title>Linux para personas ciegas: ¿es realmente usable con lector de pantalla?</title>
+<style>:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65;max-width:64rem;margin:0 auto;padding:1.25rem}
+a{overflow-wrap:anywhere;text-underline-offset:.15em}
+a:focus{outline:.2rem solid currentColor;outline-offset:.2rem}
+.skip-link{position:absolute;left:-9999px}
+.skip-link:focus{position:static;display:inline-block;margin-bottom:1rem}
+.brand img{display:block;width:8rem;max-width:40%;height:auto}
+.reader-nav{margin:0 0 1rem}
+.reader-nav a{display:inline-block;font-weight:700;padding:.65rem .9rem;border:2px solid currentColor;border-radius:.4rem;text-decoration:none}
+h1,h2{line-height:1.25}
+h2{margin-top:2rem}
+.meta{margin:.4rem 0 1.2rem}
+.note{border-left:.3rem solid currentColor;padding:.2rem 0 .2rem 1rem;margin:1.5rem 0}
+footer{margin-top:2.5rem}
+@media print{.skip-link,.reader-nav{display:none}body{max-width:none}}</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<nav class="reader-nav" aria-label="Volver a TifloAcosta App"><a href="https://tifloacosta.github.io/tifloacosta-app/">Volver a TifloAcosta App</a></nav>
+<header>
+<div class="brand"><img src="https://tifloacosta.github.io/tifloacosta-app/tifloacosta-icon-512.png" alt="TifloAcosta"></div>
+<h1>Linux para personas ciegas: ¿es realmente usable con lector de pantalla?</h1>
+<p class="meta">Versión escrita accesible del contenido de un vídeo de Canal TifloAcosta. <a href="https://www.youtube.com/watch?v=LgndbSoSyvc">Ver el vídeo original en YouTube</a>.</p>
+</header>
+
+<main id="contenido">
+<section>
+<h2>Tres preguntas antes de empezar</h2>
+<p>Linux aparece constantemente en conversaciones sobre tecnología, servidores, programación y software libre. Sin embargo, para muchas personas ciegas sigue siendo un terreno poco conocido. Antes de pensar en distribuciones, escritorios o comandos, Tony plantea tres preguntas mucho más prácticas:</p>
+<ol>
+<li>¿Funciona bien con un lector de pantalla?</li>
+<li>¿Se puede manejar con autonomía?</li>
+<li>¿Compensa el tiempo necesario para aprenderlo?</li>
+</ol>
+<p>La respuesta corta es que Linux sí puede utilizarse de forma accesible, pero la experiencia depende mucho más que en otros sistemas de la distribución elegida, el entorno de escritorio, las aplicaciones y la configuración.</p>
+</section>
+
+<section>
+<h2>Linux no es una única cosa</h2>
+<p>En sentido estricto, Linux es el núcleo o <em>kernel</em> del sistema. Es la parte que gestiona recursos esenciales del ordenador, como el procesador, la memoria, los dispositivos y la comunicación entre el hardware y el resto del software.</p>
+<p>Lo que instalamos y usamos normalmente es una <strong>distribución</strong>: un sistema completo que reúne el kernel Linux con herramientas, bibliotecas, instalador, gestor de paquetes, aplicaciones y uno o varios entornos de escritorio.</p>
+<p>Ubuntu, Debian y Fedora son ejemplos conocidos de distribuciones. No tienen necesariamente un escritorio único: según la edición y la configuración pueden utilizar GNOME, KDE Plasma u otros entornos.</p>
+<p>La comparación del vídeo sigue siendo útil: el kernel sería el motor y la distribución, el coche completo construido alrededor de él. El motor importa, pero la experiencia final depende de todo lo demás.</p>
+</section>
+
+<section>
+<h2>Un poco de historia, con una precisión importante</h2>
+<p>Linus Torvalds comenzó a desarrollar el kernel Linux en 1991 cuando era estudiante en la Universidad de Helsinki. El proyecto se abrió rápidamente a la colaboración y terminó convirtiéndose en uno de los desarrollos de software más importantes y extendidos del mundo.</p>
+<p>Conviene corregir, sin embargo, una idea que aparece con frecuencia al resumir esta historia: <strong>el software libre no nació con Linux</strong>. El Proyecto GNU había sido anunciado por Richard Stallman en 1983 y su desarrollo comenzó en 1984. Cuando Linux apareció en 1991, ya existían muchas de las herramientas que después se combinaron con el nuevo kernel para formar sistemas completos GNU/Linux.</p>
+<p>Por eso es habitual encontrar tanto la denominación “Linux”, usada como nombre general, como “GNU/Linux”, que subraya la combinación del kernel Linux con componentes del proyecto GNU.</p>
+</section>
+
+<section>
+<h2>Linux está mucho más cerca de lo que parece</h2>
+<p>Aunque una persona nunca haya instalado Linux en su ordenador, es muy probable que utilice servicios que dependen de él. Linux está muy extendido en servidores, centros de datos y sistemas integrados.</p>
+<p>Android utiliza un kernel basado en Linux con modificaciones específicas del sistema. Además, en la lista TOP500 de junio de 2026, los 500 superordenadores clasificados pertenecen a la familia de sistemas operativos Linux.</p>
+<p>Es decir, Linux no es una rareza minoritaria reservada a un puñado de aficionados. Otra cosa distinta es su presencia en el escritorio doméstico y, dentro de ese escritorio, la calidad de la accesibilidad de cada aplicación.</p>
+</section>
+
+<section>
+<h2>Orca: el lector de pantalla del entorno gráfico</h2>
+<p>La herramienta principal para una persona ciega que utiliza un escritorio gráfico basado en GNOME es <strong>Orca</strong>, un lector de pantalla libre y de código abierto.</p>
+<p>Orca proporciona salida por voz y por línea braille y se apoya en la infraestructura de accesibilidad AT-SPI. Puede trabajar con aplicaciones y tecnologías compatibles como GTK, Qt, LibreOffice, Firefox, WebKit y Chrome o Chromium, aunque el nivel de accesibilidad real puede variar de una aplicación a otra.</p>
+<p>En GNOME, Orca puede activarse y desactivarse con <strong>Super + Alt + S</strong>. En Ubuntu Desktop también se documenta este mismo atajo y Orca suele venir instalado de forma predeterminada en la edición de escritorio.</p>
+</section>
+
+<section>
+<h2>Braille en Linux</h2>
+<p>Orca puede mostrar la interfaz en una línea braille actualizable. Para ello suele apoyarse en <strong>BRLTTY</strong>, que se encarga de la comunicación con muchos modelos de líneas braille.</p>
+<p>La compatibilidad no debe darse por sentada con cualquier dispositivo. Antes de cambiar de sistema conviene comprobar que la línea concreta esté soportada y que las funciones necesarias —lectura, navegación, escritura y teclas de enrutamiento— trabajen correctamente.</p>
+</section>
+
+<section>
+<h2>La otra cara: la accesibilidad no es uniforme</h2>
+<p>Linux ofrece libertad para elegir distribución, escritorio y aplicaciones, pero esa misma variedad hace que la experiencia accesible sea menos homogénea.</p>
+<p>Una aplicación puede funcionar muy bien con Orca mientras otra, construida con una tecnología diferente o con controles no expuestos correctamente a AT-SPI, puede resultar incómoda o directamente inaccesible.</p>
+<p>También hay que contar con una curva de aprendizaje. Las combinaciones de teclas, la instalación de programas, los permisos, los repositorios y algunos procedimientos de mantenimiento son distintos a Windows o macOS.</p>
+<p>Por tanto, decir simplemente “Linux es accesible” sería tan impreciso como decir “Linux no sirve para personas ciegas”. Lo correcto es valorar la distribución, el escritorio y las aplicaciones concretas que cada persona necesita.</p>
+</section>
+
+<section>
+<h2>Entorno gráfico y consola: no son lo mismo</h2>
+<p>Linux permite trabajar tanto en un entorno gráfico como en consolas virtuales de texto.</p>
+<p>En el escritorio gráfico, Orca es la referencia principal. Si abres una aplicación de Terminal dentro de GNOME, esa ventana sigue formando parte del entorno gráfico y puede ser leída por Orca.</p>
+<p><strong>Speakup</strong>, en cambio, está pensado para las consolas virtuales de texto del sistema. Está integrado en el kernel Linux y permite trabajar mediante voz en esas consolas sin depender del escritorio gráfico.</p>
+<p>Esta distinción es importante: “Terminal” y “consola de texto” pueden parecer lo mismo desde fuera, pero técnicamente no lo son y no utilizan necesariamente el mismo camino de accesibilidad.</p>
+</section>
+
+<section>
+<h2>Probar Linux sin instalarlo: el modo Live</h2>
+<p>Una de las mejores formas de saber si Linux encaja contigo es probarlo antes de modificar el disco del ordenador.</p>
+<ol>
+<li>Descarga la imagen ISO de una distribución que permita sesión Live, como Ubuntu.</li>
+<li>Crea una memoria USB de arranque con esa imagen.</li>
+<li>Arranca el ordenador desde la memoria USB.</li>
+<li>Elige la opción para probar el sistema sin instalarlo.</li>
+<li>Activa Orca y comprueba el escritorio, el navegador, la conexión a internet, el sonido, tu línea braille y las aplicaciones que realmente necesitas.</li>
+<li>Al terminar, apaga el equipo, retira la memoria USB y vuelve a arrancar normalmente.</li>
+</ol>
+<p>Una sesión Live permite explorar el sistema sin instalarlo en el disco, aunque los cambios realizados durante la prueba normalmente no se conservan al apagar salvo que se haya preparado un USB con persistencia.</p>
+</section>
+
+<section>
+<h2>El punto delicado para una persona ciega: arrancar desde USB</h2>
+<p>La idea de probar una distribución Live es segura para el contenido del disco, pero eso no significa que todo el proceso sea accesible desde el primer segundo.</p>
+<p>Seleccionar el dispositivo de arranque puede requerir entrar en un menú de BIOS o UEFI que no tenga salida por voz. En algunos equipos bastará con una tecla conocida y una secuencia sencilla; en otros puede hacer falta ayuda visual para arrancar por primera vez desde el USB.</p>
+<p>Una vez cargado un escritorio accesible, la situación cambia. Ubuntu, por ejemplo, permite activar opciones de accesibilidad durante el proceso de inicio e iniciar Orca con Super + Alt + S.</p>
+</section>
+
+<section>
+<h2>Entonces, ¿merece la pena?</h2>
+<p>Para quien disfruta aprendiendo, quiere un sistema muy configurable, utiliza herramientas que funcionan bien en Linux o necesita un entorno especialmente orientado al teclado y a la consola, la respuesta puede ser claramente sí.</p>
+<p>Para quien depende de aplicaciones exclusivas de Windows o macOS, necesita máxima uniformidad de accesibilidad o no quiere invertir tiempo en aprender un entorno nuevo, quizá no sea la mejor sustitución inmediata.</p>
+<p>Linux no tiene por qué plantearse como un salto definitivo. Puede empezar como una prueba en USB, una segunda máquina o incluso una máquina virtual, y a partir de la experiencia real decidir si merece más espacio.</p>
+</section>
+
+<section class="note" aria-labelledby="actualizacion">
+<h2 id="actualizacion">Actualización a 8 de septiembre de 2026</h2>
+<p>Los fundamentos explicados en el vídeo siguen siendo válidos: Orca continúa siendo el lector de pantalla de referencia para GNOME, mantiene soporte de voz y braille, Speakup continúa formando parte de la infraestructura de accesibilidad de la consola Linux y Ubuntu sigue ofreciendo la posibilidad de probar el escritorio desde USB sin instalarlo.</p>
+<p>La principal precaución sigue siendo la misma: no existe una única “accesibilidad de Linux”. La experiencia depende de la distribución, la versión del escritorio y las aplicaciones utilizadas. Antes de migrar, conviene probar exactamente el flujo de trabajo que cada persona necesita.</p>
+</section>
+
+<section>
+<h2>Conclusión</h2>
+<p>Linux no es un territorio reservado a genios de la informática, pero tampoco es un plato preparado que se abre y funciona exactamente igual para todo el mundo.</p>
+<p>La comparación de Tony con una cocina bien surtida encaja perfectamente: hay ingredientes, herramientas y libertad para organizarlo todo a tu manera. Esa libertad puede ser una ventaja enorme, pero también exige aprender dónde está cada cosa y cómo combinarla.</p>
+<p>Para una persona ciega, la pregunta no debería ser simplemente “¿Linux es accesible?”, sino una bastante más útil: “¿esta distribución, con este escritorio, este lector de pantalla y estas aplicaciones, me permite hacer de forma autónoma lo que necesito?”. Esa es la prueba que realmente importa.</p>
+</section>
+</main>
+
+<footer><p>Revisión TifloAcosta: 8 de septiembre de 2026.</p></footer>
+</body>
+</html>

@@ -5,6 +5,7 @@ import zipfile
 import plistlib
 import subprocess
 import tempfile
+from icloud_profile_services import profile_allows_cloud_documents, signed_claims_cloud_documents
 
 files = glob.glob(os.environ['RUNNER_TEMP'] + '/native-export/*.ipa')
 if len(files) != 1:
@@ -99,8 +100,11 @@ with zipfile.ZipFile(files[0]) as z:
                                 'com.apple.developer.ubiquity-container-identifiers'):
                         if 'iCloud.com.tifloacosta.app' not in source.get(key, []):
                             raise SystemExit('Falta permiso iCloud del perfil o firma: ' + key)
-                    if 'CloudDocuments' not in source.get('com.apple.developer.icloud-services', []):
-                        raise SystemExit('Falta iCloud Documents en perfil o firma')
+                # Un perfil es una lista de autorización; la firma debe declarar el servicio concreto.
+                if not profile_allows_cloud_documents(profile.get('Entitlements', {}).get('com.apple.developer.icloud-services')):
+                    raise SystemExit('Falta autorización CloudDocuments en el perfil')
+                if not signed_claims_cloud_documents(entitlements.get('com.apple.developer.icloud-services')):
+                    raise SystemExit('Falta declaración explícita CloudDocuments en la firma')
                 print('Contenedor privado iCloud autorizado y firmado')
             print('App Group autorizado y firmado para ' + identifier)
 

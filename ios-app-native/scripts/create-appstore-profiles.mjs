@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
+import { profileAllowsCloudDocuments } from './icloud-profile-services.mjs';
 
 const required = ['API_ID', 'API_ISSUER', 'ASC_KEY_PATH', 'IOS_TEMP_KEYCHAIN', 'GITHUB_RUN_ID'];
 for (const key of required) if (!process.env[key]) throw Error('Falta configuración de firma: ' + key);
@@ -76,25 +77,40 @@ for (const [identifier,envName,slug] of bundles) {
       !capabilities.data.some(x => x.attributes?.capabilityType === 'ICLOUD')) {
     throw Error('Falta habilitar iCloud Documents y asociar iCloud.com.tifloacosta.app en Apple Developer.');
   }
-  const name=slug+'-TestFlight-'+process.env.GITHUB_RUN_ID;
-  const created=await api('profiles',{method:'POST',body:JSON.stringify({
+  const reuse=identifier === 'com.tifloacosta.app' && process.env.TIFLO_SIGNING_PREFLIGHT === '1' ? process.env.TIFLO_REUSE_APP_PROFILE : '';
+  const name=reuse || slug+'-TestFlight-'+process.env.GITHUB_RUN_ID;
+  let created;
+  if (reuse) {
+    const list=await api('profiles?filter%5Bname%5D='+encodeURIComponent(name));
+    const matches=list.data.filter(x=>x.attributes?.name===name);
+    if(matches.length!==1) throw Error('No se encontró unívocamente el perfil previo');
+    created=await api('profiles/'+matches[0].id);
+  } else {
+    created=await api('profiles',{method:'POST',body:JSON.stringify({
     data:{type:'profiles',attributes:{name,profileType:'IOS_APP_STORE'},
       relationships:{
         bundleId:{data:{type:'bundleIds',id:bundle.id}},
         certificates:{data:[{type:'certificates',id:cert.id}]}
       }
     }
-  })});
+    })});
+  }
   const profile=created.data;
+  if(reuse && (profile?.attributes?.profileState !== 'ACTIVE' || profile.attributes.profileType !== 'IOS_APP_STORE'))
+    throw Error('El perfil previo ya no está activo para App Store');
   if(!profile?.attributes?.profileContent || !profile.attributes.uuid)
     throw Error('Apple no devolvió el perfil '+identifier);
   const profilePath=path.join(outputDirectory,profile.attributes.uuid+'.mobileprovision');
   fs.writeFileSync(profilePath,
     Buffer.from(profile.attributes.profileContent,'base64'),{mode:0o600});
   const decoded=execFileSync('security',['cms','-D','-i',profilePath]);
-  const entitlements=JSON.parse(execFileSync('python3',['-c',
-    'import plistlib,json,sys; print(json.dumps(plistlib.loads(sys.stdin.buffer.read()).get("Entitlements", {})))'
+  const inspected=JSON.parse(execFileSync('python3',['-c',
+    'import plistlib,json,sys,hashlib; p=plistlib.loads(sys.stdin.buffer.read()); print(json.dumps({"entitlements":p.get("Entitlements", {}),"certificates":[hashlib.sha1(c).hexdigest().upper() for c in p.get("DeveloperCertificates", [])]}))'
   ],{input:decoded,encoding:'utf8'}));
+  const entitlements=inspected.entitlements;
+  if (!inspected.certificates.includes(signingSHA)) throw Error('El perfil no corresponde al certificado recuperado');
+  if (entitlements['application-identifier'] !== '3A8G8A62YZ.'+identifier) throw Error('El perfil no corresponde al identificador de app esperado');
+  if (reuse) console.log('Perfil principal existente recuperado sin duplicarlo.');
   const allowedGroups=entitlements['com.apple.security.application-groups'] || [];
   if(!allowedGroups.includes('group.com.tifloacosta.app')) {
     throw Error('El perfil Apple de '+identifier+
@@ -107,7 +123,7 @@ for (const [identifier,envName,slug] of bundles) {
         throw Error('El perfil no autoriza el contenedor privado iCloud: '+entitlement);
       }
     }
-    if (!(entitlements['com.apple.developer.icloud-services'] || []).includes('CloudDocuments')) {
+    if (!profileAllowsCloudDocuments(entitlements['com.apple.developer.icloud-services'])) {
       throw Error('El perfil no autoriza iCloud Documents.');
     }
   }

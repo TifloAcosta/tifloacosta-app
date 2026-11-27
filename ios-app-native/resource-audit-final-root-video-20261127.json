@@ -1,0 +1,160 @@
+{
+  "date": "2026-11-27",
+  "baseCommit": "1436c84b42f94049b99464df219b5766dfcede65",
+  "documents": [
+    {
+      "sourceId": "1T7AZef1-ok8wzs67rbD6ML2-q8wery6F",
+      "sourcePath": [
+        "FOAL en América Latina.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-foal-america-latina-2026",
+      "path": "docs/es/foal-america-latina.html",
+      "verification": "normalized-text",
+      "matched": 160,
+      "total": 160
+    },
+    {
+      "sourceId": "1u2U26HtnxnYfBwJPzhbWHjUi_ttBmzVu",
+      "sourcePath": [
+        "por qué se queda ciega la gente (Análisis sin bata blanca).html"
+      ],
+      "lang": "es",
+      "resourceId": "es-estudio-medico-causas-ceguera-2026",
+      "path": "docs/es/por-que-se-queda-ciega-la-gente.html",
+      "verification": "normalized-text",
+      "matched": 65,
+      "total": 65
+    },
+    {
+      "sourceId": "1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1",
+      "sourcePath": [
+        "Cuando el termómetro se pone chulo"
+      ],
+      "lang": "es",
+      "resourceId": "es-1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1",
+      "path": "docs/es/reader-1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1.html",
+      "verification": "source HTML UTF-8 recovered"
+    },
+    {
+      "sourceId": "1Q64MlYzjnb1kY6Q6i_frrIa5ku--AWYO",
+      "sourcePath": [
+        "Shared Materials.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-1Q64MlYzjnb1kY6Q6i_frrIa5ku--AWYO",
+      "path": "docs/en/reader-1Q64MlYzjnb1kY6Q6i_frrIa5ku--AWYO.html",
+      "verification": "source HTML UTF-8 recovered"
+    },
+    {
+      "sourceId": "1Fzh0srtGg_too70q8kDYl2CzgVq8I8gk",
+      "sourcePath": [
+        "why do people go blind.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-medical-study-causes-blindness-2026",
+      "path": "docs/en/why-do-people-go-blind.html",
+      "verification": "normalized-text",
+      "matched": 66,
+      "total": 66
+    },
+    {
+      "sourceId": "1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6",
+      "sourcePath": [
+        "When the Thermometer Gets Cocky"
+      ],
+      "lang": "en",
+      "resourceId": "en-1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6",
+      "path": "docs/en/reader-1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6.html",
+      "verification": "source HTML UTF-8 recovered"
+    },
+    {
+      "sourceId": "18tyEZyrSDNZV3iSKTId6xx44Jdz-Wloq",
+      "sourcePath": [
+        "Vídeos del canal en texto",
+        "VoiceOver_Esa_voz_es_nueva_ES.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-video-text-18tyEZyrSDNZV3iSKTId6xx44Jdz-Wloq",
+      "path": "docs/es/video-text-18tyEZyrSDNZV3iSKTId6xx44Jdz-Wloq.html",
+      "verification": "stable source ID, category matches"
+    },
+    {
+      "sourceId": "1a7wZ1HLBWKmNaWVbpnRvMBZfCXzXXsa4",
+      "sourcePath": [
+        "Vídeos del canal en texto",
+        "Gestos_de_VoiceOver_tutorial_adaptado_ES.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-video-text-1a7wZ1HLBWKmNaWVbpnRvMBZfCXzXXsa4",
+      "path": "docs/es/video-text-1a7wZ1HLBWKmNaWVbpnRvMBZfCXzXXsa4.html",
+      "verification": "stable source ID, category matches"
+    },
+    {
+      "sourceId": "1IQ79WwvwNPv9qdB8wq8SyipBh_utLP_9",
+      "sourcePath": [
+        "Vídeos del canal en texto",
+        "Este_atajo_no_pregunta_ve_un_codigo_y_se_pone_a_investigar_tutorial_adaptado.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-video-text-1IQ79WwvwNPv9qdB8wq8SyipBh_utLP_9",
+      "path": "docs/es/video-text-1IQ79WwvwNPv9qdB8wq8SyipBh_utLP_9.html",
+      "verification": "stable source ID, category matches"
+    },
+    {
+      "sourceId": "1frXEmS6ST9MqdNy9ZbpZ3Lhks3QVFi6u",
+      "sourcePath": [
+        "Vídeos del canal en texto",
+        "TifloAcosta_ya_tiene_app_tutorial_adaptado.html"
+      ],
+      "lang": "es",
+      "resourceId": "es-video-text-1frXEmS6ST9MqdNy9ZbpZ3Lhks3QVFi6u",
+      "path": "docs/es/video-text-1frXEmS6ST9MqdNy9ZbpZ3Lhks3QVFi6u.html",
+      "verification": "stable source ID, category matches"
+    },
+    {
+      "sourceId": "1LX0pE_XVBAbZ76Vmsc2mw2qJ4rcCU6Bf",
+      "sourcePath": [
+        "Channel Videos in Text",
+        "VoiceOver_Is_that_voice_new_EN.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-video-text-1LX0pE_XVBAbZ76Vmsc2mw2qJ4rcCU6Bf",
+      "path": "docs/en/video-text-1LX0pE_XVBAbZ76Vmsc2mw2qJ4rcCU6Bf.html",
+      "verification": "stable source ID, category matches"
+    },
+    {
+      "sourceId": "1k4XM7_ZOPejXYjfb9LJOIms6wGARa4WO",
+      "sourcePath": [
+        "Channel Videos in Text",
+        "VoiceOver_gestures_adapted_tutorial_EN.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-video-text-1k4XM7_ZOPejXYjfb9LJOIms6wGARa4WO",
+      "path": "docs/en/video-text-1k4XM7_ZOPejXYjfb9LJOIms6wGARa4WO.html",
+      "verification": "stable source ID, category matches"
+    },
+    {
+      "sourceId": "19ufQzuAWLkFsldrxISp9O_GLDUJ85GGt",
+      "sourcePath": [
+        "Channel Videos in Text",
+        "This_shortcut_sees_a_code_and_starts_investigating_adapted_tutorial.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-video-text-19ufQzuAWLkFsldrxISp9O_GLDUJ85GGt",
+      "path": "docs/en/video-text-19ufQzuAWLkFsldrxISp9O_GLDUJ85GGt.html",
+      "verification": "stable source ID, category matches"
+    },
+    {
+      "sourceId": "1CVbXD-R0C58VxBcA48QxRvY7Ku8aA7Rj",
+      "sourcePath": [
+        "Channel Videos in Text",
+        "TifloAcosta_now_has_an_app_adapted_tutorial.html"
+      ],
+      "lang": "en",
+      "resourceId": "en-video-text-1CVbXD-R0C58VxBcA48QxRvY7Ku8aA7Rj",
+      "path": "docs/en/video-text-1CVbXD-R0C58VxBcA48QxRvY7Ku8aA7Rj.html",
+      "verification": "stable source ID, category matches"
+    }
+  ]
+}

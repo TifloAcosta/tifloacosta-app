@@ -4372,5 +4372,32 @@ window.TIFLO_RESOURCES = [
     "openUrl": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-12-2026.html",
     "searchText": "Technology Pills 12 2026 Tech Pills 12 2026 Contents Samsung changes TalkBack in One UI 9: less fragmentation and an important development for blind Android users What TalkBack is What Samsung had been doing until now What may change with One UI 9 Why this could be good news What may not change A beta is not the final version TalkBack, Jieshuo and the wider picture Samsung and Android compared with iPhone Conclusion iPhone and Android start talking to each other: Quick Share moves closer to AirDrop What exactly is happening How it will work with iPhone The QR code alternative Why this also matters for blind users The role of Europe What should not be exaggerated Conclusion Ray-Ban Display opens up to other apps: an interesting opportunity for blind users, but still with many conditions What Meta has announced The display is not everything Why the Neural Band may matter What kinds of apps could make sense for blind users",
     "new": false
+  },
+  {
+    "id": "es-1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1",
+    "lang": "es",
+    "category": "Estudios médicos",
+    "title": "Cuando el termómetro se pone chulo",
+    "url": "https://tifloacosta.com/docs/es/reader-1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1.html",
+    "new": false
+  },
+  {
+    "id": "en-1Q64MlYzjnb1kY6Q6i_frrIa5ku--AWYO",
+    "lang": "en",
+    "category": "TifloAcosta Guides",
+    "title": "All TifloAcosta materials, finally in one place where they won't get lost",
+    "url": "https://tifloacosta.com/docs/en/reader-1Q64MlYzjnb1kY6Q6i_frrIa5ku--AWYO.html",
+    "openUrl": "https://tifloacosta.com/docs/en/reader-1Q64MlYzjnb1kY6Q6i_frrIa5ku--AWYO.html",
+    "new": false
+  },
+  {
+    "id": "en-1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6",
+    "lang": "en",
+    "category": "Medical Studies",
+    "title": "When the Thermometer Gets Cocky",
+    "url": "https://tifloacosta.com/docs/en/reader-1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6.html",
+    "openUrl": "https://tifloacosta.com/docs/en/reader-1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6.html",
+    "new": false
   }
 ];

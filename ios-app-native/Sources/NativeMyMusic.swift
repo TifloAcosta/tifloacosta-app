@@ -1326,7 +1326,9 @@ struct NativeMyMusicScreen: View {
             Text(MusicLocalized.format("Temporizador: %d segundos restantes", player.sleepRemaining))
             Button("Cancelar temporizador") { player.cancelSleep() }
         }
-        Text(MusicLocalized.format("Posición: %d de %d segundos", Int(player.position), Int(player.duration)))
+        Text(MusicLocalized.format("Tiempo: %@ de %@", NativeYouTubeTime.clock(player.position), NativeYouTubeTime.clock(player.duration)))
+            .accessibilityLabel(Text(MusicLocalized.format("Tiempo: %@ de %@",
+                NativeYouTubeTime.spoken(player.position), NativeYouTubeTime.spoken(player.duration))))
     }
 
     private var musicRepeatDescription: String {

@@ -159,3 +159,16 @@ test('podcast feed results and resource announcements use the app language, and 
   assert.match(podcast,/\.accessibilityValue\(MusicLocalized.format\("%@ de %@", NativeYouTubeTime.spoken\(player.seconds\), NativeYouTubeTime.spoken\(player.duration\)\)\)/);
   assert.match(resources,/announce\(MusicLocalized.message\(added \? "Añadido a Favoritos" : "Eliminado de Favoritos"\)\)/);
 });
+
+
+test('music empty playback labels follow the chosen language and elapsed time uses localized clock units',()=>{
+  const apple=fs.readFileSync(path.join(source,'NativeAppleMusic.swift'),'utf8');
+  const audius=fs.readFileSync(path.join(source,'NativeAudiusMusic.swift'),'utf8');
+  const music=fs.readFileSync(path.join(source,'NativeMyMusic.swift'),'utf8');
+  assert.ok(apple.includes('music.currentTitle.isEmpty ? MusicLocalized.message("Ninguna canción en reproducción") : music.currentTitle'));
+  assert.ok(audius.includes('player.title.isEmpty ? MusicLocalized.message("Ninguna canción en reproducción") : player.title'));
+  assert.ok(music.includes('MusicLocalized.format("Tiempo: %@ de %@", NativeYouTubeTime.clock(player.position), NativeYouTubeTime.clock(player.duration))'));
+  assert.ok(music.includes('NativeYouTubeTime.spoken(player.position), NativeYouTubeTime.spoken(player.duration)'));
+  assert.ok(!music.includes('MusicLocalized.format("Posición: %d de %d segundos"'));
+  for(const [lang,catalog] of main)for(const key of ['Ninguna canción en reproducción','Tiempo: %@ de %@'])assert.ok(catalog.has(key),lang+': '+key);
+});

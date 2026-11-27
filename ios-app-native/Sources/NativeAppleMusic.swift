@@ -192,7 +192,7 @@ struct NativeAppleMusicScreen: View {
             }
             if music.authorized {
                 Section("Reproductor") {
-                    Text(music.currentTitle.isEmpty ? "Ninguna canción" : music.currentTitle)
+                    Text(music.currentTitle.isEmpty ? MusicLocalized.message("Ninguna canción en reproducción") : music.currentTitle)
                     Button(music.isPlaying ? "Pausar" : "Reanudar") {
                         Task { await music.toggle() }
                     }

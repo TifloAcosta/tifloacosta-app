@@ -2,7 +2,8 @@
 // si es necesario, la compilación al grupo de probadores internos existente.
 // No publica en la App Store ni incorpora probadores externos.
 import crypto from 'node:crypto';
-const required=['API_ID','API_ISSUER','API_PRIVATE','TARGET_BUILD','UPLOAD_STARTED_AT'];
+const preflight = process.argv[2] === '--preflight';
+const required=['API_ID','API_ISSUER','API_PRIVATE',...(preflight ? [] : ['TARGET_BUILD','UPLOAD_STARTED_AT'])];
 for(const key of required)if(!process.env[key])throw Error('Falta configuración protegida: '+key);
 let privateKey=process.env.API_PRIVATE.trim().replace(/^["']|["']$/g,'')
   .replace(/\\r\\n/g,'\n').replace(/\\n/g,'\n');
@@ -36,6 +37,19 @@ const group=groups.data.find(x=>x.attributes.name==='Probadores TifloAcosta'
   && x.attributes.isInternalGroup===true);
 if(!group)throw Error('No existe el grupo interno Probadores TifloAcosta');
 
+if (preflight) {
+  if (groups.links?.next) throw Error('Lista de grupos incompleta; no se puede excluir distribución adicional.');
+  if (groups.data.some(x => x.id !== group.id && x.attributes?.hasAccessToAllBuilds === true))
+    throw Error('Otro grupo tiene acceso automático a todas las compilaciones. Revisar antes de subir.');
+  const trains = await api('preReleaseVersions?filter%5Bapp%5D='+encodeURIComponent(app.id)+'&filter%5Bversion%5D=1.7&filter%5Bplatform%5D=IOS&limit=200');
+  if (trains.links?.next) throw Error('Lista de versiones preliminares incompleta.');
+  for (const train of trains.data) {
+    const builds = await api('builds?filter%5BpreReleaseVersion%5D='+encodeURIComponent(train.id)+'&limit=1');
+    if (builds.data.length || builds.links?.next) throw Error('Apple ya registra una compilación 1.7; verificarla antes de iniciar otra subida.');
+  }
+  console.log('Comprobación de solo lectura: grupo interno confirmado; sin compilaciones 1.7 registradas ni otros grupos automáticos.');
+  process.exit(0);
+}
 let assigned=false;
 for(let attempt=1;attempt<=15;attempt++){
   const list=await api('builds?filter%5Bapp%5D='+app.id+

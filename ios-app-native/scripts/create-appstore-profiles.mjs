@@ -59,7 +59,7 @@ for (const [identifier,envName,slug] of bundles) {
     x => x.attributes?.capabilityType === 'APP_GROUPS'
   );
   if (!hasAppGroups) {
-    if (process.env.TIFLO_SIGNING_PREFLIGHT === '1') {
+    if (process.env.TIFLO_SIGNING_PREFLIGHT === '1' || process.env.TIFLO_SIGNING_EXISTING_ONLY === '1') {
       throw Error('Diagnóstico sin cambios de capacidades: falta APP_GROUPS en '+identifier);
     }
     await api('bundleIdCapabilities', {method:'POST',body:JSON.stringify({
@@ -77,7 +77,9 @@ for (const [identifier,envName,slug] of bundles) {
       !capabilities.data.some(x => x.attributes?.capabilityType === 'ICLOUD')) {
     throw Error('Falta habilitar iCloud Documents y asociar iCloud.com.tifloacosta.app en Apple Developer.');
   }
-  const reuse=identifier === 'com.tifloacosta.app' && process.env.TIFLO_SIGNING_PREFLIGHT === '1' ? process.env.TIFLO_REUSE_APP_PROFILE : '';
+  const existingOnly = process.env.TIFLO_SIGNING_EXISTING_ONLY === '1';
+  const reuse = existingOnly ? (identifier === 'com.tifloacosta.app' ? process.env.TIFLO_REUSE_APP_PROFILE : process.env.TIFLO_REUSE_SHARE_PROFILE) : (identifier === 'com.tifloacosta.app' && process.env.TIFLO_SIGNING_PREFLIGHT === '1' ? process.env.TIFLO_REUSE_APP_PROFILE : '');
+  if (existingOnly && !reuse) throw Error('Firma sin crear perfiles: falta el nombre del perfil existente para '+identifier);
   const name=reuse || slug+'-TestFlight-'+process.env.GITHUB_RUN_ID;
   let created;
   if (reuse) {
@@ -110,7 +112,7 @@ for (const [identifier,envName,slug] of bundles) {
   const entitlements=inspected.entitlements;
   if (!inspected.certificates.includes(signingSHA)) throw Error('El perfil no corresponde al certificado recuperado');
   if (entitlements['application-identifier'] !== '3A8G8A62YZ.'+identifier) throw Error('El perfil no corresponde al identificador de app esperado');
-  if (reuse) console.log('Perfil principal existente recuperado sin duplicarlo.');
+  if (reuse) console.log('Perfil existente recuperado sin duplicarlo.');
   const allowedGroups=entitlements['com.apple.security.application-groups'] || [];
   if(!allowedGroups.includes('group.com.tifloacosta.app')) {
     throw Error('El perfil Apple de '+identifier+

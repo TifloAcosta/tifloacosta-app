@@ -38,6 +38,9 @@ jobs:
       GITHUB_RUN_NUMBER: ${{ github.run_number }}
       TIFLO_IOS_MARKETING_VERSION: "1.7"
       TIFLO_SIGNING_PREFLIGHT: ${{ inputs.mode == 'sign-only' && '1' || '0' }}
+      TIFLO_SIGNING_EXISTING_ONLY: '1'
+      TIFLO_REUSE_APP_PROFILE: TifloAcosta-App-TestFlight-46032271719
+      TIFLO_REUSE_SHARE_PROFILE: TifloAcosta-Share-TestFlight-46033031744
       TIFLO_ACOUSTID_CLIENT: ${{ vars.TIFLO_ACOUSTID_CLIENT }}
     steps:
       - name: Confirmar rama única de la beta interna
@@ -102,6 +105,8 @@ jobs:
         run: node ios-app-native/scripts/prepare-apple-key.mjs
       - name: Recuperar certificado Apple Distribution existente
         run: node ios-app-native/scripts/ensure-signing.mjs
+      - name: Confirmar reutilización de certificado sin emitir otro
+        run: test "$NEW_P12" = 'false'
       - name: Conservar P12 protegido si se generó un certificado
         if: ${{ inputs.mode == 'upload' && env.NEW_P12 == 'true' }}
         uses: actions/upload-artifact@v4
@@ -109,6 +114,9 @@ jobs:
           name: TifloAcosta-P12-protegido
           path: ${{ runner.temp }}/ios-signing/TifloAcosta.p12
           retention-days: 90
+      - name: Comprobar que no existe otra compilación 1.7 en Apple
+        if: ${{ inputs.mode == 'upload' }}
+        run: node .github/scripts/verify-native-testflight.mjs --preflight
       - name: Importar certificado sin exponer claves
         run: bash ios-app-native/scripts/import-distribution-key.sh
       - name: Crear perfiles de app y extensión para TestFlight
@@ -126,7 +134,7 @@ jobs:
           set -euo pipefail
           PROVISION_ARGS=()
           if [ "$TIFLO_SIGNING_PREFLIGHT" != "1" ]; then
-            PROVISION_ARGS=(-allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER")
+            test "$TIFLO_SIGNING_EXISTING_ONLY" = "1" || { echo "::error::Se exige reutilizar los perfiles existentes"; exit 1; }
           fi
           xcodebuild -project ios-app-native/TifloAcostaNative.xcodeproj \
             -scheme TifloAcostaNative \
@@ -154,7 +162,7 @@ jobs:
           set -euo pipefail
           PROVISION_ARGS=()
           if [ "$TIFLO_SIGNING_PREFLIGHT" != "1" ]; then
-            PROVISION_ARGS=(-allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER")
+            test "$TIFLO_SIGNING_EXISTING_ONLY" = "1" || { echo "::error::Se exige reutilizar los perfiles existentes"; exit 1; }
           fi
           xcodebuild -exportArchive \
             -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" \

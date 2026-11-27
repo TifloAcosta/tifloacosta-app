@@ -40,8 +40,8 @@ try{
     }catch{fs.rmSync(p12,{force:true});}
   }
 }catch(error){console.log('No se encontró archivo de firma reutilizable: '+String(error.message).slice(0,140));}
-if (process.env.TIFLO_SIGNING_PREFLIGHT === '1') {
-  throw Error('Diagnóstico sin emisión de certificados: no se recuperó un P12 existente.');
+if (process.env.TIFLO_SIGNING_PREFLIGHT === '1' || process.env.TIFLO_SIGNING_EXISTING_ONLY === '1') {
+  throw Error('Firma sin emisión de certificados: no se recuperó un P12 existente.');
 }
 // Generate a new key pair locally and request the public certificate via the
 // existing App Store Connect API key. No signing secrets enter Git logs.

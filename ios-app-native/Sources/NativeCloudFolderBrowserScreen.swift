@@ -16,6 +16,7 @@ struct NativeCloudFolderBrowserScreen: View {
     @State private var folderHistory: [String?] = []
     @State private var items: [NativeCloudItem] = []
     @State private var nextCursor: String?
+    @State private var consumedCursors: Set<String> = []
     @State private var busy = false
     @State private var importingID: String?
     @State private var error: String?
@@ -36,6 +37,8 @@ struct NativeCloudFolderBrowserScreen: View {
                         folderHistory = []
                         folderID = nil
                         nextCursor = nil
+                        consumedCursors = []
+                        pendingDownload = nil
                     }
                     Button("Actualizar archivos") { Task { await loadFolder(id: folderID) } }
                         .disabled(busy)
@@ -45,16 +48,18 @@ struct NativeCloudFolderBrowserScreen: View {
                 Section("Archivos y carpetas") {
                     if !folderHistory.isEmpty {
                         Button("Volver a la carpeta anterior") {
-                            let previous = folderHistory.removeLast()
-                            Task { await loadFolder(id: previous) }
+                            let previous = folderHistory.last ?? nil
+                            let history = Array(folderHistory.dropLast())
+                            Task { await loadFolder(id: previous, history: history) }
                         }
+                        .disabled(busy || importingID != nil)
                     }
                     if items.isEmpty && !busy { Text("No hay archivos en esta carpeta.") }
                     ForEach(items) { item in
                         if item.isFolder {
                             Button(MusicLocalized.format("Abrir carpeta: %@", item.name)) {
-                                folderHistory.append(folderID)
-                                Task { await loadFolder(id: item.id) }
+                                let history = folderHistory + [folderID]
+                                Task { await loadFolder(id: item.id, history: history) }
                             }
                             .disabled(busy)
                         } else {
@@ -104,16 +109,23 @@ struct NativeCloudFolderBrowserScreen: View {
         }
     }
 
-    private func loadFolder(id: String?) async {
+    private func loadFolder(id: String?, history: [String?]? = nil) async {
+        let revision = accounts.sessionRevision(for: provider)
         busy = true
         defer { busy = false }
         do {
             let token = try await accounts.validAccessToken(for: provider)
             let storage = try NativeCloudStorage(provider: provider, accessToken: token)
             let page = try await storage.listFolder(id: id)
+            try Task.checkCancellation()
+            guard accounts.connected.contains(provider),
+                  accounts.sessionRevision(for: provider) == revision else { return }
             folderID = id
-            items = page.items
-            nextCursor = page.nextCursor
+            if let history { folderHistory = history }
+            var seen = Set<String>()
+            items = page.items.filter { seen.insert($0.id).inserted }
+            consumedCursors = []
+            nextCursor = page.nextCursor.flatMap { $0.isEmpty ? nil : $0 }
             UIAccessibility.post(notification: .announcement, argument: MusicLocalized.format("%d elementos", items.count))
         } catch {
             self.error = error.localizedDescription
@@ -121,15 +133,22 @@ struct NativeCloudFolderBrowserScreen: View {
     }
 
     private func loadNextPage() async {
-        guard let cursor = nextCursor else { return }
+        guard !busy, let cursor = nextCursor, !consumedCursors.contains(cursor) else { return }
+        let revision = accounts.sessionRevision(for: provider)
         busy = true
         defer { busy = false }
         do {
             let token = try await accounts.validAccessToken(for: provider)
             let storage = try NativeCloudStorage(provider: provider, accessToken: token)
             let page = try await storage.listFolder(id: folderID, cursor: cursor)
-            items.append(contentsOf: page.items)
-            nextCursor = page.nextCursor
+            try Task.checkCancellation()
+            guard accounts.connected.contains(provider),
+                  accounts.sessionRevision(for: provider) == revision else { return }
+            var seen = Set(items.map(\.id))
+            items.append(contentsOf: page.items.filter { seen.insert($0.id).inserted })
+            consumedCursors.insert(cursor)
+            nextCursor = page.nextCursor.flatMap { $0.isEmpty || consumedCursors.contains($0) ? nil : $0 }
+            UIAccessibility.post(notification: .announcement, argument: MusicLocalized.format("%d elementos", items.count))
         } catch {
             self.error = error.localizedDescription
         }
@@ -144,6 +163,8 @@ struct NativeCloudFolderBrowserScreen: View {
     }
 
     private func importItem(_ item: NativeCloudItem, allowCellular: Bool) async {
+        guard importingID == nil, !busy else { return }
+        let revision = accounts.sessionRevision(for: provider)
         importingID = item.id
         defer { importingID = nil }
         do {
@@ -154,6 +175,11 @@ struct NativeCloudFolderBrowserScreen: View {
             let token = try await accounts.validAccessToken(for: provider)
             let storage = try NativeCloudStorage(provider: provider, accessToken: token)
             let file = try await storage.download(item, allowsCellular: allowCellular)
+            guard !Task.isCancelled, accounts.connected.contains(provider),
+                  accounts.sessionRevision(for: provider) == revision else {
+                try? FileManager.default.removeItem(at: file.deletingLastPathComponent())
+                return
+            }
             if let onImportValidated {
                 try onImportValidated(file)
             } else {

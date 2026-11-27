@@ -33,6 +33,10 @@ final class NativeCloudAccountStore: NSObject, ObservableObject {
 
     private let keychainService = "com.tifloacosta.app.cloud-accounts"
     private var browserSession: ASWebAuthenticationSession?
+    private var revisions: [NativeCloudProvider: UUID] = [:]
+    private var refreshing: Set<NativeCloudProvider> = []
+
+    func sessionRevision(for provider: NativeCloudProvider) -> UUID? { revisions[provider] }
     private var configurations: [NativeCloudProvider: Configuration] = [:]
 
     override init() {
@@ -104,17 +108,25 @@ final class NativeCloudAccountStore: NSObject, ObservableObject {
     private func save(_ credential: Credential, for provider: NativeCloudProvider) throws {
         let data = try JSONEncoder().encode(credential)
         let query = keychainQuery(for: provider)
-        SecItemDelete(query as CFDictionary)
-        var entry = query
-        entry[kSecValueData as String] = data
-        entry[kSecAttrAccessible as String] = kSecAttrAccessibleWhenUnlockedThisDeviceOnly
-        guard SecItemAdd(entry as CFDictionary, nil) == errSecSuccess else {
+        let attributes: [String: Any] = [
+            kSecValueData as String: data,
+            kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlockedThisDeviceOnly
+        ]
+        let status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
+        if status == errSecItemNotFound {
+            var entry = query
+            for (key, value) in attributes { entry[key] = value }
+            guard SecItemAdd(entry as CFDictionary, nil) == errSecSuccess else {
+                throw NativeCloudStorageError.unavailable
+            }
+        } else if status != errSecSuccess {
             throw NativeCloudStorageError.unavailable
         }
         connected.insert(provider)
     }
 
     func disconnect(provider: NativeCloudProvider) {
+        revisions[provider] = UUID()
         SecItemDelete(keychainQuery(for: provider) as CFDictionary)
         connected.remove(provider)
     }
@@ -133,7 +145,8 @@ final class NativeCloudAccountStore: NSObject, ObservableObject {
     }
 
     func connect(provider: NativeCloudProvider) async throws {
-        guard let configuration = configurations[provider], !busy.contains(provider) else {
+        guard let configuration = configurations[provider], busy.isEmpty,
+              !refreshing.contains(provider) else {
             throw NativeCloudStorageError.unavailable
         }
         let verifier = Self.randomVerifier()
@@ -164,6 +177,8 @@ final class NativeCloudAccountStore: NSObject, ObservableObject {
             ])
         }
         guard let authorizationURL = url.url else { throw NativeCloudStorageError.invalidResponse }
+        let revision = UUID()
+        revisions[provider] = revision
         busy.insert(provider)
         defer { busy.remove(provider); browserSession = nil }
         let callback = try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<URL, Error>) in
@@ -188,7 +203,11 @@ final class NativeCloudAccountStore: NSObject, ObservableObject {
               response?.queryItems?.first(where: { $0.name == "state" })?.value == state,
               let code = response?.queryItems?.first(where: { $0.name == "code" })?.value,
               !code.isEmpty else { throw NativeCloudStorageError.unauthorized }
+        try Task.checkCancellation()
+        guard revisions[provider] == revision else { throw CancellationError() }
         let credential = try await exchange(code: code, verifier: verifier, configuration: configuration)
+        try Task.checkCancellation()
+        guard revisions[provider] == revision else { throw CancellationError() }
         try save(credential, for: provider)
         if provider == .googleDrive {
             let selected = response?.queryItems?.first(where: { $0.name == "picked_file_ids" })?.value ?? ""
@@ -226,7 +245,8 @@ final class NativeCloudAccountStore: NSObject, ObservableObject {
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         var body = URLComponents()
         body.queryItems = parameters.sorted(by: { $0.key < $1.key }).map { URLQueryItem(name: $0.key, value: $0.value) }
-        request.httpBody = body.percentEncodedQuery?.data(using: .utf8)
+        request.httpBody = body.percentEncodedQuery?
+            .replacingOccurrences(of: "+", with: "%2B").data(using: .utf8)
         let (data, response) = try await URLSession.shared.data(for: request)
         guard (response as? HTTPURLResponse)?.statusCode == 200,
               data.count < 100_000,
@@ -251,10 +271,19 @@ final class NativeCloudAccountStore: NSObject, ObservableObject {
             disconnect(provider: provider)
             throw NativeCloudStorageError.unauthenticated
         }
+        guard !busy.contains(provider), refreshing.insert(provider).inserted else {
+            throw NativeCloudStorageError.unavailable
+        }
+        defer { refreshing.remove(provider) }
+        let revision = revisions[provider]
         let renewed = try await tokenRequest(configuration: configuration, parameters: [
             "grant_type": "refresh_token", "refresh_token": refresh,
             "client_id": configuration.clientID
         ], previousRefreshToken: refresh)
+        try Task.checkCancellation()
+        guard revisions[provider] == revision, connected.contains(provider) else {
+            throw CancellationError()
+        }
         try save(renewed, for: provider)
         return renewed.accessToken
     }

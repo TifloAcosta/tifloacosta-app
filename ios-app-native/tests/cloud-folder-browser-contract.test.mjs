@@ -23,3 +23,15 @@ test('OneDrive remains available in the shared implementation but is hidden from
   assert.doesNotMatch(music, /NativeCloudFolderBrowserScreen\(provider: \.oneDrive/);
   assert.match(browser, /validAccessToken\(for: provider\)/);
 });
+
+test('folder navigation commits history only after a successful current-account response', () => {
+  assert.match(browser, /let history = folderHistory \+ \[folderID\]/);
+  assert.doesNotMatch(browser, /folderHistory\.removeLast\(\)|folderHistory\.append\(folderID\)/);
+  assert.match(browser, /let page = try await storage\.listFolder\(id: id\)[\s\S]*?accounts\.sessionRevision\(for: provider\) == revision else \{ return \}\s+folderID = id\s+if let history \{ folderHistory = history \}/);
+});
+test('cloud pages deduplicate IDs and stop cursor cycles; disconnected downloads are discarded', () => {
+  assert.match(browser, /var seen = Set\(items\.map\(\\\.id\)\)/);
+  assert.match(browser, /consumedCursors\.insert\(cursor\)/);
+  assert.match(browser, /consumedCursors\.contains\(\$0\) \? nil : \$0/);
+  assert.match(browser, /let file = try await storage\.download[\s\S]*?accounts\.sessionRevision\(for: provider\) == revision else \{\s+try\? FileManager\.default\.removeItem/);
+});

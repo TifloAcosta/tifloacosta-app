@@ -28,3 +28,12 @@ test('sessions reside in device keychain and missing provider registration fails
   assert.match(account, /guard let configuration = configurations\[provider\]/);
   assert.doesNotMatch(account, /UserDefaults|print\(|NSLog\(|client_secret|case mega/);
 });
+
+test('late OAuth exchanges and token renewals cannot resurrect disconnected credentials', () => {
+  assert.match(account, /func disconnect\(provider: NativeCloudProvider\) \{\s+revisions\[provider\] = UUID\(\)/);
+  assert.match(account, /guard revisions\[provider\] == revision else \{ throw CancellationError\(\) \}\s+try save\(credential/);
+  assert.match(account, /guard revisions\[provider\] == revision, connected.contains\(provider\)/);
+  assert.match(account, /refreshing.insert\(provider\).inserted/);
+  assert.match(account, /SecItemUpdate\(query as CFDictionary, attributes as CFDictionary\)/);
+  assert.match(account, /replacingOccurrences\(of: "\+", with: "%2B"\)/);
+});

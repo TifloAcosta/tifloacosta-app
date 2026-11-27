@@ -4021,5 +4021,89 @@ window.TIFLO_RESOURCES = [
     "url": "https://tifloacosta.com/docs/es/reader-1FeU4Azcx4CKMDQ3H098OEOaz_GVikVCJ.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1FeU4Azcx4CKMDQ3H098OEOaz_GVikVCJ.html",
     "searchText": "Cómo prestar tu iPhone a un usuario invitado sin mostrar tus datos personales Archivo histórico iPhone"
+  },
+  {
+    "id": "es-16chydJITZVyh0f2sY7GqActJJ2RKYCY_",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Qué es el virus del calendario y cómo eliminarlo de tu iPhone",
+    "url": "https://tifloacosta.com/docs/es/reader-16chydJITZVyh0f2sY7GqActJJ2RKYCY_.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-16chydJITZVyh0f2sY7GqActJJ2RKYCY_.html",
+    "searchText": "Qué es el virus del calendario y cómo eliminarlo de tu iPhone Archivo histórico iPhone"
+  },
+  {
+    "id": "es-13J70sQcKoK7gXGHZbLJTx7Ms4QxUjxyX",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Cómo bajar o subir el volumen de las alarmas del iPhone",
+    "url": "https://tifloacosta.com/docs/es/reader-13J70sQcKoK7gXGHZbLJTx7Ms4QxUjxyX.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-13J70sQcKoK7gXGHZbLJTx7Ms4QxUjxyX.html",
+    "searchText": "Cómo bajar o subir el volumen de las alarmas del iPhone Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1_PTwNBou2nS0PL5t-p07oH1jSxsUha0g",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Así podemos borrar un Apple ID para siempre",
+    "url": "https://tifloacosta.com/docs/es/reader-1_PTwNBou2nS0PL5t-p07oH1jSxsUha0g.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1_PTwNBou2nS0PL5t-p07oH1jSxsUha0g.html",
+    "searchText": "Así podemos borrar un Apple ID para siempre Archivo histórico iPhone"
+  },
+  {
+    "id": "es-14XNuTJed1SKBiCoy2Zyj0cgV8F6E8ox8",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Agiliza el comportamiento en tu iPhone",
+    "url": "https://tifloacosta.com/docs/es/reader-14XNuTJed1SKBiCoy2Zyj0cgV8F6E8ox8.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-14XNuTJed1SKBiCoy2Zyj0cgV8F6E8ox8.html",
+    "searchText": "Agiliza el comportamiento en tu iPhone Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1JyuZG8HvqmAdlhRXJSQlHjNTRjGA6qUG",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Cuál es la gran diferencia entre forzar el reinicio del iPhone y apagar y volver a encenderlo",
+    "url": "https://tifloacosta.com/docs/es/reader-1JyuZG8HvqmAdlhRXJSQlHjNTRjGA6qUG.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1JyuZG8HvqmAdlhRXJSQlHjNTRjGA6qUG.html",
+    "searchText": "Cuál es la gran diferencia entre forzar el reinicio del iPhone y apagar y volver a encenderlo Archivo histórico iPhone"
+  },
+  {
+    "id": "es-1rk0sF5UZEoLAD6zaXdpqweLACxyMUtx2",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Cuánta RAM tiene cada modelo de iPhone, lista completa",
+    "url": "https://tifloacosta.com/docs/es/reader-1rk0sF5UZEoLAD6zaXdpqweLACxyMUtx2.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1rk0sF5UZEoLAD6zaXdpqweLACxyMUtx2.html",
+    "searchText": "Cuánta RAM tiene cada modelo de iPhone, lista completa Archivo histórico iPhone"
+  },
+  {
+    "id": "es-150eKksegI02AU8TIkG1B39a32kKCYlGG",
+    "lang": "es",
+    "category": "iPhone",
+    "folderPath": [
+      "Archivo histórico TXT"
+    ],
+    "title": "Cómo recuperar la contraseña de mi cuenta de Apple",
+    "url": "https://tifloacosta.com/docs/es/reader-150eKksegI02AU8TIkG1B39a32kKCYlGG.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-150eKksegI02AU8TIkG1B39a32kKCYlGG.html",
+    "searchText": "Cómo recuperar la contraseña de mi cuenta de Apple Archivo histórico iPhone"
   }
 ];

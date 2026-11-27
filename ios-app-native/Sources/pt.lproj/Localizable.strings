@@ -827,7 +827,7 @@
 "Configura Phonon en Motores externos antes de utilizarlo." = "Configure o Phonon em Motores externos antes de o utilizar.";
 "Cómo instalar más voces del sistema" = "Como instalar mais vozes do sistema";
 "Configurar línea braille en VoiceOver" = "Configurar linha braille no VoiceOver";
-"Abre Ajustes del iPhone. La línea braille se configura en Accesibilidad, VoiceOver, Braille." = "Abre as Definições do iPhone. Configure a linha braille em Acessibilidade, VoiceOver, Braille.";
+"Abre Ajustes del iPhone. La línea braille se configura en Accesibilidad, VoiceOver, Braille." = "Abre as Definições do iPhone. Configura a linha braille em Acessibilidade, VoiceOver, Braille.";
 "Prepara Gemini o Phonon antes de seleccionarlos para leer." = "Configure o Gemini ou o Phonon antes de os selecionar para leitura.";
 "Compartir documento" = "Partilhar documento";
 "Convertir a audio o DAISY" = "Converter em áudio ou DAISY";
@@ -1414,7 +1414,7 @@
 "No se ha podido abrir el paquete o el ZIP no contiene un libro DAISY ni pistas de audio reconocibles." = "Não foi possível abrir o pacote, ou o ZIP não contém um livro DAISY nem faixas de áudio reconhecíveis.";
 "Algunos elementos no se pudieron importar y permanecen en Recibidos." = "Não foi possível importar alguns elementos, que permanecem em Recebidos.";
 "No se pudo abrir «%@»: %@. El elemento permanece en Recibidos." = "Não foi possível abrir «%@»: %@. O elemento permanece em Recebidos.";
-"PDF con más de 150 páginas escaneadas. Divide el archivo para realizar OCR." = "O PDF tem mais de 150 páginas digitalizadas. Divida o ficheiro para executar o OCR.";
+"PDF con más de 150 páginas escaneadas. Divide el archivo para realizar OCR." = "O PDF tem mais de 150 páginas digitalizadas. Divide o ficheiro para executar o OCR.";
 "Muestra la ruta para llegar a los ajustes de braille." = "Mostra como chegar às definições de braille.";
 "Ajustes de braille de VoiceOver" = "Definições de braille do VoiceOver";
 "Convertir documento" = "Converter documento";
@@ -1954,7 +1954,7 @@
 "Conflicto entre copias" = "Conflito entre cópias";
 "Error de sincronización" = "Erro de sincronização";
 "Enviar copia a iCloud" = "Enviar cópia para o iCloud";
-"Descargar copia de iCloud" = "Descarregar cópia do iCloud";
+"Descargar copia de iCloud" = "Transferir cópia do iCloud";
 "Confirmar restauración" = "Confirmar restauro";
 "Activar copias automáticas" = "Ativar cópias automáticas";
 "Desactivar copias automáticas" = "Desativar cópias automáticas";

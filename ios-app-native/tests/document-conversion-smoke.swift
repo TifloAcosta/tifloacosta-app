@@ -19,6 +19,28 @@ struct DocumentConversionSmoke {
             links: [.init(offset: linkOffset, title: "Leer guía", url: "https://example.com/a?x=1&y=2", targetOffset: nil),
                 .init(offset: body.distance(from: body.startIndex, to: body.range(of: "Volver")!.lowerBound),
                       title: "Volver", url: "#chapter", targetOffset: 0)])
+        // Real-world HTML uses void elements, unquoted attributes, HTML
+        // entities and implicit closing tags that XMLParser rejects.
+        let ordinaryHTML = root.appendingPathComponent("ordinary.html")
+        let ordinary = """
+        <!doctype html><html lang=es><head><meta charset=utf-8><title>Ejemplo</title></head>
+        <body><h2 id=cap>Capítulo&nbsp;1</h2><p>Texto &eacute;<br><a href='#cap'>Volver</a>
+        <p><a href='https://example.org/guia'>Guía</a><img src='https://example.org/remote.png' alt='Foto externa'>
+        <ul><li>Uno<li>Dos</ul><script>if (a < b) alert('no')</script><a href='javascript:alert(1)'>No ejecutar</a>
+        </body></html>
+        """
+        try Data(ordinary.utf8).write(to: ordinaryHTML)
+        let ordinarySource = NativeConversionSource(filename: "ordinary.html", title: "Ejemplo",
+            format: "html", text: "Capítulo 1 Texto é Volver Guía Foto externa Uno Dos No ejecutar", links: [], original: ordinaryHTML)
+        let ordinaryResult = try NativeDocumentConversion.convert(ordinarySource, to: .html,
+            in: root.appendingPathComponent("ordinary-html"))
+        let ordinaryOutput = try String(contentsOf: ordinaryResult, encoding: .utf8)
+        precondition(ordinaryOutput.contains("<h2 id=\"c0-cap\">") && ordinaryOutput.contains("Texto é") &&
+            ordinaryOutput.contains("href=\"#c0-cap\"") && ordinaryOutput.contains("href=\"https://example.org/guia\"") &&
+            ordinaryOutput.contains("<li>Uno</li>") && ordinaryOutput.contains("<li>Dos</li>") &&
+            ordinaryOutput.contains("Foto externa") && !ordinaryOutput.contains("<script") &&
+            !ordinaryOutput.contains("javascript:") && !ordinaryOutput.contains("remote.png"))
+
         var results: [NativeDocumentFormat: URL] = [:]
         for format in NativeDocumentFormat.allCases {
             var lastProgress = 0.0

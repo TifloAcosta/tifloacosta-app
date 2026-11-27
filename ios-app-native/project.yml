@@ -39,9 +39,9 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.app
         SWIFT_OBJC_BRIDGING_HEADER: Sources/NativeCinemaCompression.h
-        HEADER_SEARCH_PATHS: "$(inherited) \"$(DERIVED_FILE_DIR)/TifloPDF/include\" \"$(DERIVED_FILE_DIR)/TifloChromaprint/include\""
+        HEADER_SEARCH_PATHS: "$(inherited) \"$(DERIVED_FILE_DIR)/TifloPDF/include\" \"$(DERIVED_FILE_DIR)/TifloChromaprint/include\" \"$(SDKROOT)/usr/include/libxml2\""
         LIBRARY_SEARCH_PATHS: "$(inherited) \"$(DERIVED_FILE_DIR)/TifloPDF/lib\" \"$(DERIVED_FILE_DIR)/TifloChromaprint/lib\""
-        OTHER_LDFLAGS: "$(inherited) -lbz2 -lqpdf -ljpeg -lz -lc++ -lchromaprint -framework Accelerate"
+        OTHER_LDFLAGS: "$(inherited) -lbz2 -lqpdf -ljpeg -lz -lc++ -lchromaprint -lxml2 -framework Accelerate"
         GENERATE_INFOPLIST_FILE: NO
         INFOPLIST_FILE: Sources/Info.plist
         INFOPLIST_KEY_CFBundleDisplayName: "TifloAcosta"

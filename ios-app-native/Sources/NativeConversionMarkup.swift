@@ -1,5 +1,8 @@
 import Foundation
 import ZIPFoundation
+#if canImport(TifloPDFPostprocess)
+import TifloPDFPostprocess
+#endif
 
 /// Reuses the saved original when it offers verifiable XHTML structure.
 enum NativeConversionMarkup {
@@ -45,9 +48,22 @@ enum NativeConversionMarkup {
         if ["html", "htm", "xhtml"].contains(input.format) {
             guard let size = try? source.resourceValues(forKeys: [.fileSizeKey]).fileSize,
                   size <= maximumTextBytes,
-                  let data = try? Data(contentsOf: source, options: .mappedIfSafe) else { return nil }
-            return try parse([(path: "book.xhtml", data: data)], fallbackTitle: input.title,
-                             packageImages: [.epub, .odt, .rtf, .docx, .pdf].contains(format)) { _, _ in nil }
+                  let data = try? Data(contentsOf: source, options: .mappedIfSafe),
+                  let text = String(data: data, encoding: .utf8),
+                  !text.localizedCaseInsensitiveContains("<!ENTITY") else { return nil }
+            let packageImages = [.epub, .odt, .rtf, .docx, .pdf].contains(format)
+            // Prefer the existing strict path for well-formed XHTML.
+            if let strict = try parse([(path: "book.xhtml", data: data)], fallbackTitle: input.title,
+                                      packageImages: packageImages, image: { _, _ in nil }) {
+                return strict
+            }
+            try Task.checkCancellation()
+            guard let normalized = normalizeHTML(data) else { return nil }
+            try Task.checkCancellation()
+            // The very same allowlist filters scripts, unsafe links, attributes
+            // and images; no remote or local external resources are fetched.
+            return try parse([(path: "book.xhtml", data: normalized)], fallbackTitle: input.title,
+                             packageImages: packageImages, image: { _, _ in nil })
         }
         guard ["epub", "odt", "docx"].contains(input.format),
               let archive = Archive(url: source, accessMode: .read) else { return nil }
@@ -127,6 +143,17 @@ enum NativeConversionMarkup {
             else { return nil }
             return (type, data)
         }
+    }
+
+    private static func normalizeHTML(_ data: Data) -> Data? {
+        var output: UnsafeMutablePointer<UInt8>?
+        var count = 0
+        let status = data.withUnsafeBytes { bytes in
+            tiflo_html_normalize(bytes.bindMemory(to: UInt8.self).baseAddress, bytes.count, &output, &count)
+        }
+        guard status == 0, let output, count > 0 else { return nil }
+        defer { tiflo_html_normalize_free(output) }
+        return Data(bytes: output, count: count)
     }
 
     private static func entryData(_ entry: Entry, in archive: Archive, limit: Int) throws -> Data? {

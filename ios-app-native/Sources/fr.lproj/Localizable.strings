@@ -2059,3 +2059,10 @@
 "Sin episodios nuevos desde la consulta anterior." = "Aucun nouvel épisode depuis la dernière consultation.";
 "Episodios nuevos desde la consulta anterior: %d." = "Nouveaux épisodes depuis la dernière consultation : %d.";
 "No se pudieron consultar los episodios de este canal." = "Impossible de consulter les épisodes de cette chaîne.";
+
+"Esta sección permite descargar archivos mediante enlaces directos de Internet o de servicios en la nube, como Google Drive, siempre que permitan su descarga." = "Cette section permet de télécharger des fichiers à partir de liens directs sur Internet ou de services cloud, comme Google Drive, lorsque le téléchargement est autorisé.";
+"Copia el enlace, pulsa «Pegar enlace», después «Analizar enlace» y, si está disponible, «Descargar en TifloAcosta»." = "Copiez le lien, touchez « Coller le lien », puis « Analyser le lien » et, si l’option est disponible, « Télécharger dans TifloAcosta ».";
+"En «Mis descargas» podrás importar los archivos en TifloLector, compartirlos o eliminarlos." = "Dans « Mes téléchargements », vous pouvez importer les fichiers dans TifloLector, les partager ou les supprimer.";
+"El límite es de 100 MB por archivo. No admite carpetas completas ni vídeos de YouTube." = "La limite est de 100 Mo par fichier. Les dossiers entiers et les vidéos YouTube ne sont pas pris en charge.";
+"Descargar en TifloAcosta" = "Télécharger dans TifloAcosta";
+"Descargando en TifloAcosta" = "Téléchargement dans TifloAcosta";

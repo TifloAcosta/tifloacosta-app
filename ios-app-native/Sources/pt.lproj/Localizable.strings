@@ -2059,3 +2059,10 @@
 "Sin episodios nuevos desde la consulta anterior." = "Sem episódios novos desde a última consulta.";
 "Episodios nuevos desde la consulta anterior: %d." = "Episódios novos desde a última consulta: %d.";
 "No se pudieron consultar los episodios de este canal." = "Não foi possível consultar os episódios deste canal.";
+
+"Esta sección permite descargar archivos mediante enlaces directos de Internet o de servicios en la nube, como Google Drive, siempre que permitan su descarga." = "Esta secção permite transferir ficheiros através de ligações diretas da Internet ou de serviços na nuvem, como o Google Drive, desde que a transferência seja permitida.";
+"Copia el enlace, pulsa «Pegar enlace», después «Analizar enlace» y, si está disponible, «Descargar en TifloAcosta»." = "Copia a ligação, toca em «Colar ligação», depois em «Analisar ligação» e, se disponível, em «Transferir no TifloAcosta».";
+"En «Mis descargas» podrás importar los archivos en TifloLector, compartirlos o eliminarlos." = "Em «As minhas transferências», podes importar os ficheiros para o TifloLector, partilhá-los ou eliminá-los.";
+"El límite es de 100 MB por archivo. No admite carpetas completas ni vídeos de YouTube." = "O limite é de 100 MB por ficheiro. Não são suportadas pastas completas nem vídeos do YouTube.";
+"Descargar en TifloAcosta" = "Transferir no TifloAcosta";
+"Descargando en TifloAcosta" = "A transferir no TifloAcosta";

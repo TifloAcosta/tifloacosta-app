@@ -173,6 +173,18 @@ struct NativeDownloadsScreen: View {
     var body: some View {
         List {
             Section("Descargar desde un enlace") {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Esta sección permite descargar archivos mediante enlaces directos de Internet o de servicios en la nube, como Google Drive, siempre que permitan su descarga.")
+                    Text("Copia el enlace, pulsa «Pegar enlace», después «Analizar enlace» y, si está disponible, «Descargar en TifloAcosta».")
+                    Text("En «Mis descargas» podrás importar los archivos en TifloLector, compartirlos o eliminarlos.")
+                    Text("El límite es de 100 MB por archivo. No admite carpetas completas ni vídeos de YouTube.")
+                }
+                .font(.subheadline)
+                .foregroundStyle(TifloVisual.primaryText)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityElement(children: .combine)
+                .accessibilityIdentifier("tiflo.download.instructions")
+
                 TextField("Enlace HTTPS", text: $address)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()

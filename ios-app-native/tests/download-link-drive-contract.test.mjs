@@ -52,3 +52,16 @@ test('Descargas gestiona la confirmación de Drive y no guarda una página HTML'
   assert.match(transfer, /components\.scheme == "https"/);
   assert.match(transfer, /query\.first\(where: \{ \$0\.name == "id" \}\)\?\.value == expectedID/);
 });
+
+
+test('download instructions precede the address and are localized with matching action names', () => {
+  const screen = readFileSync(new URL('../Sources/NativeDownloads.swift', import.meta.url), 'utf8');
+  const keys = ["Esta sección permite descargar archivos mediante enlaces directos de Internet o de servicios en la nube, como Google Drive, siempre que permitan su descarga.","Copia el enlace, pulsa «Pegar enlace», después «Analizar enlace» y, si está disponible, «Descargar en TifloAcosta».","En «Mis descargas» podrás importar los archivos en TifloLector, compartirlos o eliminarlos.","El límite es de 100 MB por archivo. No admite carpetas completas ni vídeos de YouTube.","Descargar en TifloAcosta","Descargando en TifloAcosta"];
+  const intro = screen.slice(screen.indexOf('Section("Descargar desde un enlace")'), screen.indexOf('TextField("Enlace HTTPS"'));
+  for (const key of keys.slice(0, 4)) assert.ok(intro.includes(JSON.stringify(key)), key);
+  assert.ok(intro.includes('.accessibilityElement(children: .combine)'));
+  for (const lang of ['en', 'fr', 'de', 'it', 'pt']) {
+    const catalog = readFileSync(new URL('../Sources/' + lang + '.lproj/Localizable.strings', import.meta.url), 'utf8');
+    for (const key of keys) assert.ok(catalog.includes(JSON.stringify(key) + ' = '), lang + ': ' + key);
+  }
+});

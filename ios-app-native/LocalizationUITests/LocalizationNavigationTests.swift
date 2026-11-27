@@ -229,7 +229,7 @@ final class LocalizationNavigationTests: XCTestCase {
             "Mis suscripciones de YouTube": "Mes abonnements YouTube",
             "Canales seguidos sin cuenta Google": "Chaînes suivies sans compte Google",
             "Novedades de mis canales": "Nouveautés de mes chaînes",
-            "Continuar viendo": "Reprendre la lecture",
+            "Continuar viendo": "Continuer à regarder",
             "Ver después": "Regarder plus tard",
             "Buscar en todo YouTube": "Rechercher sur tout YouTube",
             "Tipo de resultados": "Type de résultats",

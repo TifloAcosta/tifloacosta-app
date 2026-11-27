@@ -275,7 +275,7 @@
 "Medio" = "Média";
 "Mi libro" = "Mon livre";
 "No hay recursos nuevos." = "Aucune nouvelle ressource.";
-"Noticias" = "Actualités";
+"Noticias" = "Articles d’actualité";
 "Opciones" = "Options";
 "Oscuro" = "Sombre";
 "Podcast" = "Podcast";
@@ -331,7 +331,7 @@
 "Noticia" = "Actualité";
 "Pegar enlace" = "Coller le lien";
 "Productos disponibles" = "Produits disponibles";
-"Programas accesibles" = "Émissions accessibles";
+"Programas accesibles" = "Logiciels accessibles";
 "Proyectos y prototipos" = "Projets et prototypes";
 "Reintentar lectura" = "Réessayer la lecture";
 "Reproducción" = "Lecture";
@@ -528,7 +528,7 @@
 "Canales seguidos sin cuenta Google" = "Chaînes suivies sans compte Google";
 "Novedades de mis canales" = "Nouveautés de mes chaînes";
 "Mi actividad" = "Mon activité";
-"Continuar viendo" = "Reprendre la lecture";
+"Continuar viendo" = "Continuer à regarder";
 "Ver después" = "Regarder plus tard";
 "YouTube accesible" = "YouTube accessible";
 "Resultados de YouTube" = "Résultats YouTube";
@@ -587,7 +587,7 @@
 "Doble toque para leer. Acción: Quitar de favoritos." = "Touchez deux fois pour lire. Action : Retirer des favoris.";
 "Doble toque para reproducir en TifloAcosta. Acciones: Abrir en YouTube y Quitar de favoritos." = "Touchez deux fois pour lire dans TifloAcosta. Actions : Ouvrir sur YouTube et Retirer des favoris.";
 "Explica qué sucede y qué debería ocurrir." = "Décris ce qui se passe et ce qui devrait se produire.";
-"Se incluirán versión de la app y de iOS, tipo genérico de dispositivo, estado de VoiceOver, ajustes de movimiento y texto en negrita y resumen del catálogo. Todo permanece en el dispositivo hasta que decidas compartirlo." = "Le rapport peut inclure les versions de l’app et d’iOS, le type d’appareil, VoiceOver, les réglages visuels et un résumé du catalogue. Il reste sur l’appareil jusqu’au partage.";
+"Se incluirán versión de la app y de iOS, tipo genérico de dispositivo, estado de VoiceOver, ajustes de movimiento y texto en negrita y resumen del catálogo. Todo permanece en el dispositivo hasta que decidas compartirlo." = "Le rapport inclura les versions de l’app et d’iOS, le type générique d’appareil, l’état de VoiceOver, les réglages de réduction des animations et de texte en gras, ainsi qu’un résumé du catalogue. Tout reste sur l’appareil jusqu’à ce que vous décidiez de le partager.";
 "No se adjuntan documentos, historiales, contraseñas, claves de API ni datos de cuentas. Revisa tu texto antes de compartirlo." = "Aucun document, historique, mot de passe, clé API ni donnée de compte n’est joint. Relis ton texte avant le partage.";
 "El informe solo se comparte cuando eliges una aplicación y confirmas el envío. No se envía automáticamente." = "Le rapport n’est partagé que lorsque tu choisis une application et confirmes l’envoi. Aucun envoi automatique.";
 "Todavía no hay contenidos guardados para leer después." = "Aucun contenu enregistré pour plus tard.";
@@ -770,8 +770,8 @@
 "Conversión completada. Archivo guardado en la biblioteca" = "Conversion terminée. Fichier enregistré dans la bibliothèque";
 "El archivo MP3 o DAISY permanece en la biblioteca. Puedes compartirlo también más adelante." = "Le fichier MP3 ou DAISY reste dans la bibliothèque. Vous pourrez aussi le partager plus tard.";
 "Reproducción automática al abrir" = "Lecture automatique à l’ouverture";
-"Foco inicial en Reproducir" = "Focus initial sur Lecture";
-"Activado: al abrir el documento, el foco se sitúa en Reproducir. Desactivado: el foco se sitúa en el texto. La voz solo comienza cuando pulsas Reproducir." = "Activé : le focus se place sur Lecture à l’ouverture. Désactivé : il se place sur le texte. La voix démarre uniquement lorsque vous appuyez sur Lecture.";
+"Foco inicial en Reproducir" = "Focus initial sur « Lire »";
+"Activado: al abrir el documento, el foco se sitúa en Reproducir. Desactivado: el foco se sitúa en el texto. La voz solo comienza cuando pulsas Reproducir." = "Activé : à l’ouverture du document, le focus se place sur « Lire ». Désactivé : il se place sur le texte. La voix démarre uniquement lorsque vous touchez « Lire ».";
 "No se pudo compartir: %@" = "Impossible de partager : %@";
 "No hay un archivo disponible para compartir." = "Aucun fichier disponible à partager.";
 // Mi Música: etiquetas de la sección y accesibilidad.
@@ -989,9 +989,9 @@
 "Eliminado de Favoritos: %@" = "Retiré des favoris : %@";
 "Todavía no hay un libro abierto anteriormente para continuar." = "Aucun livre ouvert précédemment à reprendre.";
 "Continuando %@ desde la posición guardada." = "Reprise de %@ à la position enregistrée.";
-"Configura la clave Gemini en Motores externos." = "Configurez la clé Gemini dans Voix externes.";
+"Configura la clave Gemini en Motores externos." = "Configurez la clé Gemini dans Moteurs externes.";
 "Generando el primer fragmento con Gemini. La reproducción comenzará cuando Google devuelva el audio." = "Génération du premier segment avec Gemini. La lecture commencera lorsque Google renverra l’audio.";
-"Instala el motor y modelo Phonon en Motores externos." = "Installez le moteur et le modèle Phonon dans Voix externes.";
+"Instala el motor y modelo Phonon en Motores externos." = "Installez le moteur et le modèle Phonon dans Moteurs externes.";
 "Faltan archivos de audio de esta obra." = "Des fichiers audio de cette œuvre sont manquants.";
 "No se pudo reproducir: %@" = "Lecture impossible : %@";
 "La pista indicada no está disponible." = "La piste sélectionnée est indisponible.";
@@ -1484,7 +1484,7 @@
 "Los servicios externos se consultan en su plataforma original. La búsqueda de Google Drive es limitada y puede no abarcar todas las carpetas." = "Les services externes sont consultés sur leur plateforme d’origine. La recherche Google Drive peut ne pas couvrir tous les dossiers.";
 "Catálogo público de Google Drive." = "Catalogue public Google Drive.";
 
-"Continuar viendo o escuchando" = "Reprendre la lecture";
+"Continuar viendo o escuchando" = "Continuer à regarder ou écouter";
 "Historial de Multicines" = "Historique du cinéma";
 "Eliminar del historial" = "Retirer de l’historique";
 "Borrar historial" = "Effacer l’historique";
@@ -1528,12 +1528,12 @@
 "Buscando en YouTube." = "Recherche sur YouTube.";
 "No se encontraron resultados." = "Aucun résultat trouvé.";
 "%d resultados encontrados hasta el momento." = "%d résultats trouvés jusqu’à présent.";
-"Quitar de Ver después" = "Retirer de À regarder plus tard";
-"Guardar para ver después" = "Enregistrer dans À regarder plus tard";
+"Quitar de Ver después" = "Retirer de Regarder plus tard";
+"Guardar para ver después" = "Enregistrer dans Regarder plus tard";
 "Conectando con Google" = "Connexion à Google";
 "La actualización está en curso." = "La mise à jour est en cours.";
 "Recurso guardado para leer después." = "Ressource enregistrée pour plus tard.";
-"Recurso retirado de Leer después." = "Ressource retirée de la liste de lecture ultérieure.";
+"Recurso retirado de Leer después." = "Ressource retirée de Lire plus tard.";
 "Actualizando recursos" = "Mise à jour des ressources";
 "Vídeos cortos, menos de cuatro minutos" = "Vidéos courtes, moins de quatre minutes";
 "En directo" = "En direct";
@@ -1563,7 +1563,7 @@
 "Filtrar documentos" = "Filtrer les documents";
 "El nombre de la carpeta está vacío, repetido o es demasiado largo." = "Le nom du dossier est vide, déjà utilisé ou trop long.";
 "No hay documentos seleccionados para mover." = "Aucun document sélectionné à déplacer.";
-"No se pudo crear la carpeta. Comprueba que el nombre no esté vacío, repetido o sea demasiado largo." = "Impossible de créer le dossier. Vérifiez que son nom n’est pas vide, déjà utilisé ou trop long.";
+"No se pudo crear la carpeta. Comprueba que el nombre no esté vacío, repetido o sea demasiado largo." = "Impossible de créer le dossier. Vérifiez que son nom est renseigné, unique et suffisamment court.";
 "Vídeo no disponible." = "Vidéo indisponible.";
 "No se pudo reproducir el vídeo con el reproductor de Apple." = "Impossible de lire la vidéo avec le lecteur Apple.";
 "No disponible" = "Indisponible";
@@ -1686,7 +1686,7 @@
 "Latinoamérica" = "Amérique latine";
 "Información y agradecimientos" = "Informations et remerciements";
 "Entrar en Audiocinemateca" = "Accéder à Audiocinemateca";
-"Agradecemos a %@ su predisposición y colaboración con Multicines Accesibles." = "Merci à %@ pour sa disponibilité et sa collaboration avec Multicines Accesibles.";
+"Agradecemos a %@ su predisposición y colaboración con Multicines Accesibles." = "Merci à %@ pour sa disponibilité et sa collaboration avec Cinémas accessibles.";
 "Universo Audesc" = "Universo Audesc";
 
 // Project Gutenberg connection status
@@ -1731,7 +1731,7 @@
 "una canción" = "un titre";
 
 // Release 1.7: shortcuts, provider and download errors
-"Abre la sección Actualidad de TifloAcosta." = "Ouvre la rubrique Actualité de TifloAcosta.";
+"Abre la sección Actualidad de TifloAcosta." = "Ouvre la rubrique Actualités de TifloAcosta.";
 "Abre la biblioteca de TifloLector en TifloAcosta." = "Ouvre la bibliothèque TifloLector dans TifloAcosta.";
 "Reanuda el último libro abierto, desde la posición guardada." = "Reprend le dernier livre ouvert à la position enregistrée.";
 "Abre los vídeos accesibles de TifloAcosta." = "Ouvre les vidéos accessibles de TifloAcosta.";

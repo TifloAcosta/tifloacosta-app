@@ -1,0 +1,78 @@
+name: Diagnóstico de permisos del perfil iCloud - solo lectura
+on:
+  push:
+    branches:
+      - development/next-public-1.6-500200-20261121
+    paths:
+      - '.github/workflows/ios-profile-entitlement-diagnostic-20261127.yml'
+permissions:
+  contents: read
+jobs:
+  inspect-profile:
+    if: ${{ github.repository == 'TifloAcosta/tifloacosta-app' && github.event.before == 'c98971c5faebe2ada0baca9a4ad8aa7a59fee497' && github.run_attempt == 1 }}
+    runs-on: macos-15
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Confirmar alcance de solo lectura
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = 'refs/heads/development/next-public-1.6-500200-20261121'
+          test "$(git rev-parse HEAD^)" = 'c98971c5faebe2ada0baca9a4ad8aa7a59fee497'
+          test "$(git diff --name-only HEAD^ HEAD)" = '.github/workflows/ios-profile-entitlement-diagnostic-20261127.yml'
+      - name: Inspeccionar permisos sin revelar credenciales o perfil
+        env:
+          API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+          API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+          P12_PASSWORD: ${{ secrets.IOS_SIGNING_KEY_PASSPHRASE }}
+        run: |
+          set -euo pipefail
+          node ios-app-native/scripts/prepare-apple-key.mjs
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          import path from 'node:path';
+          import {execFileSync} from 'node:child_process';
+          const keyFile=path.join(process.env.HOME,'.appstoreconnect/private_keys','AuthKey_'+process.env.API_ID+'.p8');
+          const encode=x=>Buffer.from(JSON.stringify(x)).toString('base64url');
+          const now=Math.floor(Date.now()/1000);
+          const input=encode({alg:'ES256',kid:process.env.API_ID,typ:'JWT'})+'.'+encode({iss:process.env.API_ISSUER,iat:now,exp:now+600,aud:'appstoreconnect-v1'});
+          const token=input+'.'+crypto.sign('sha256',Buffer.from(input),{key:fs.readFileSync(keyFile),dsaEncoding:'ieee-p1363'}).toString('base64url');
+          async function get(endpoint){
+            const r=await fetch('https://api.appstoreconnect.apple.com/v1/'+endpoint,{method:'GET',headers:{Authorization:'Bearer '+token}});
+            if(!r.ok)throw Error('GET Apple HTTP '+r.status);
+            return r.json();
+          }
+          try {
+            const name='TifloAcosta-App-TestFlight-46032271719';
+            const list=await get('profiles?filter%5Bname%5D='+encodeURIComponent(name));
+            const match=list.data.find(x=>x.attributes?.name===name);
+            if(!match)throw Error('No se encontró el perfil exacto creado en el diagnóstico anterior.');
+            const profile=await get('profiles/'+match.id);
+            const bytes=profile.data.attributes.profileContent;
+            if(!bytes)throw Error('Apple no devolvió el perfil solicitado.');
+            const file=path.join(process.env.RUNNER_TEMP,'inspect-icloud.mobileprovision');
+            try {
+              fs.writeFileSync(file,Buffer.from(bytes,'base64'),{mode:0o600});
+              const decoded=execFileSync('security',['cms','-D','-i',file]);
+              const report=JSON.parse(execFileSync('python3',['-c',
+                'import plistlib,json,sys; p=plistlib.loads(sys.stdin.buffer.read()); e=p.get("Entitlements",{}); svc=e.get("com.apple.developer.icloud-services"); known={"CloudDocuments","CloudKit","CloudKit-Anonymous","*"}; print(json.dumps({"service_present":svc is not None,"service_type":type(svc).__name__,"known_services":[x for x in svc if isinstance(x,str) and x in known] if isinstance(svc,list) else ([svc] if isinstance(svc,str) and svc in known else []),"unknown_services":sum(1 for x in svc if not isinstance(x,str) or x not in known) if isinstance(svc,list) else None,"container_exact":"iCloud.com.tifloacosta.app" in e.get("com.apple.developer.icloud-container-identifiers",[]),"ubiquity_exact":"iCloud.com.tifloacosta.app" in e.get("com.apple.developer.ubiquity-container-identifiers",[]),"app_group_exact":"group.com.tifloacosta.app" in e.get("com.apple.security.application-groups",[])}))'
+              ],{input:decoded,encoding:'utf8'}));
+              console.log('PROFILE_DIAG',JSON.stringify(report),'state',profile.data.attributes.profileState);
+            } finally { fs.rmSync(file,{force:true}); }
+            const bundles=await get('bundleIds?filter%5Bidentifier%5D=com.tifloacosta.app');
+            const b=bundles.data.find(x=>x.attributes.identifier==='com.tifloacosta.app');
+            if(!b)throw Error('No se encontró el identificador de app.');
+            const caps=await get('bundleIds/'+b.id+'/bundleIdCapabilities');
+            const ic=caps.data.find(x=>x.attributes.capabilityType==='ICLOUD');
+            console.log('ICLOUD_CAPABILITY',JSON.stringify({present:!!ic,settings:(ic?.attributes?.settings??[]).map(s=>({key:s.key,options:(s.options??[]).map(o=>({key:o.key,enabled:o.enabled}))}))}));
+          } finally {fs.rmSync(keyFile,{force:true});}
+          JS
+      - name: Limpiar clave temporal incluso si falla el diagnóstico
+        if: always()
+        run: |
+          if [ -n "${ASC_KEY_PATH:-}" ]; then rm -f "$ASC_KEY_PATH"; fi

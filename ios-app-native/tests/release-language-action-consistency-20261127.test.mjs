@@ -28,3 +28,32 @@ test('instructions refer to the actual localized control labels', () => {
     assert.ok((help?.get('guide.8.paragraph.3')??guide).includes(app.get('Detalles del vídeo')),lang+' video details');
   }
 });
+
+test('reading-mode descriptions name the actual localized modes and play control', () => {
+  const key='Voz: el foco puede comenzar en Reproducir. Visual: lectura manual del texto. Braille: lectura manual del mismo texto con la línea braille conectada a VoiceOver. Los tres modos conservan posición y marcas.';
+  for (const lang of languages) {
+    const app=new Map(entries(read(lang+'.lproj/Localizable.strings')));
+    for (const label of ['Voz','Visual','Braille','Reproducir']) {
+      assert.ok(app.get(key)?.includes(app.get(label)),lang+': '+label);
+    }
+  }
+});
+test('all guide paragraphs and titles exist in the six languages', () => {
+  const guide=read('NativeUsageGuide.swift');
+  const sections=[...guide.matchAll(/id: "(\d+)",\s*spanishTitle: "([^"]+)",\s*englishTitle: "([^"]+)",\s*spanishParagraphs: \[([\s\S]*?)\],\s*englishParagraphs: \[([\s\S]*?)\]/g)];
+  assert.equal(sections.length,14);
+  const expected=[];
+  for(const [,id,,,es,en] of sections){
+    const count=s=>s.split('\n').filter(l=>l.trim().startsWith('"')).length;
+    assert.equal(count(es),count(en),id);
+    expected.push('guide.'+id+'.title');
+    for(let i=1;i<=count(es);i++)expected.push('guide.'+id+'.paragraph.'+i);
+  }
+  for(const lang of languages.filter(l=>l!=='en')){
+    const rows=entries(read(lang+'.lproj/Guide.strings'));
+    const help=new Map(rows);
+    assert.equal(rows.length,help.size,lang+' duplicate keys');
+    assert.equal(help.size,expected.length,lang+' guide size');
+    for(const key of expected)assert.ok(help.get(key)?.trim(),lang+': '+key);
+  }
+});

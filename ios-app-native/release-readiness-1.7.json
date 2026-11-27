@@ -598,9 +598,11 @@
         "https://github.com/TifloAcosta/tifloacosta-app/issues/358#issuecomment-7194075331",
         "https://github.com/TifloAcosta/tifloacosta-app/issues/358#issuecomment-7194546804",
         "https://github.com/TifloAcosta/tifloacosta-app/issues/352#issuecomment-7224390975",
-        "https://github.com/TifloAcosta/tifloacosta-app/issues/352#issuecomment-7224779781"
+        "https://github.com/TifloAcosta/tifloacosta-app/issues/352#issuecomment-7224779781",
+        "https://github.com/TifloAcosta/tifloacosta-app/issues/352#issuecomment-7227213997",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/3f1a5b68005e3557c7c057bedfb6deef6c14dad6"
       ],
-      "note": "27-11-2026: 770/770 contratos, 7/7 pruebas de navegación/restauración, seis idiomas, dos compilaciones y auditoría de 117+2 fuentes; revisión de 42 candidatos dinámicos, cuatro interpolaciones de metadatos y equivalencia de 1965 claves por catálogo y 53 por catálogo de Compartir. Cotejos léxicos y de traducciones recientes realizados. Resultados técnicos SUCCESS en f4cac31e7189a0cef8efde25057faaf62a0e3b7d. Se preserva estado pending porque no se ha acreditado revisión semántica exhaustiva de todas las traducciones ni de todos los flujos condicionales exigidos. No activar envío hasta concluir y registrar esa revisión."
+      "note": "27-11-2026: 770/770 contratos, 7/7 pruebas de navegación/restauración, seis idiomas, dos compilaciones y auditoría de 117+2 fuentes; revisión de 42 candidatos dinámicos, cuatro interpolaciones de metadatos y equivalencia de 1965 claves por catálogo y 53 por catálogo de Compartir. Cotejos léxicos y de traducciones recientes realizados. Resultados técnicos SUCCESS en f4cac31e7189a0cef8efde25057faaf62a0e3b7d. Se preserva estado pending porque no se ha acreditado revisión semántica exhaustiva de todas las traducciones ni de todos los flujos condicionales exigidos. No activar envío hasta concluir y registrar esa revisión. 27-11-2026: concluido el cotejo semántico estático consecutivo de 2016 claves (10080 traducciones) y 53 claves de Compartir (265 traducciones); 55 correcciones finales, conservación de claves, cifras e interpolaciones comprobada. Pendiente SUCCESS de integración y navegación del commit de fuentes/prueba 3f1a5b68005e3557c7c057bedfb6deef6c14dad6 y evidencia de los flujos condicionales restantes. No repetir revisión estática salvo cambios o hallazgos de pruebas. No desbloquear hasta verificar."
     },
     "deferred": [
       {

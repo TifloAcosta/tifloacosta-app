@@ -62,8 +62,18 @@ enum NativeDocumentConversion {
         var text: String { runs.map(\.text).joined() }
     }
 
+    struct Result: Sendable {
+        let url: URL
+        let structureFallback: Bool
+    }
+
     static func convert(_ input: NativeConversionSource, to format: NativeDocumentFormat,
                         in destination: URL, onProgress: (Double) -> Void = { _ in }) throws -> URL {
+        try convertWithReport(input, to: format, in: destination, onProgress: onProgress).url
+    }
+
+    static func convertWithReport(_ input: NativeConversionSource, to format: NativeDocumentFormat,
+                                  in destination: URL, onProgress: (Double) -> Void = { _ in }) throws -> Result {
         guard input.canConvert else { throw Failure.empty }
         try Task.checkCancellation()
         let filename = URL(fileURLWithPath: input.filename).lastPathComponent
@@ -77,6 +87,7 @@ enum NativeDocumentConversion {
         defer { try? files.removeItem(at: staging) }
         let output = staging.appendingPathComponent(finalURL.lastPathComponent)
 
+        var structureFallback = false
         if format == .txt || (format == .md && ["md", "markdown"].contains(input.format)) {
             try Data(input.text.utf8).write(to: output, options: .atomic)
         } else {
@@ -96,6 +107,7 @@ enum NativeDocumentConversion {
                       let structured = try sourceParagraphs(markup, includeImages: format == .pdf) {
                 paragraphs = structured
             } else {
+                structureFallback = ["rtf", "html", "htm", "xhtml", "epub", "odt", "docx"].contains(input.format)
                 paragraphs = try parse(input) { onProgress($0 * 0.6) }
             }
             onProgress(0.6)
@@ -129,7 +141,7 @@ enum NativeDocumentConversion {
         }
         try files.moveItem(at: output, to: finalURL)
         onProgress(1)
-        return finalURL
+        return Result(url: finalURL, structureFallback: structureFallback)
     }
 
     private static func sourceParagraphs(_ markup: NativeConversionMarkup.Document?, includeImages: Bool) throws -> [Paragraph]? {

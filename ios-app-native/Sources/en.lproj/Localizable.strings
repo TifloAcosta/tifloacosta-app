@@ -2033,3 +2033,5 @@
 "Hay otra operación de copia en curso. Inténtalo cuando termine." = "Another backup operation is running. Try again when it finishes.";
 "No se puede confirmar aún si hay copias en iCloud." = "It is not yet possible to confirm whether iCloud has backups.";
 "La consulta del historial no se ha completado." = "The backup history check did not finish.";
+"«%@»: se ha convertido el texto, pero no se pudo recuperar la estructura original." = "«%@»: the text was converted, but the original structure could not be recovered.";
+"Documentos cuya estructura original no se pudo recuperar: %d." = "Documents whose original structure could not be recovered: %d.";

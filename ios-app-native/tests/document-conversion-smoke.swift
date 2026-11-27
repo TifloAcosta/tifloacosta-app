@@ -32,14 +32,26 @@ struct DocumentConversionSmoke {
         try Data(ordinary.utf8).write(to: ordinaryHTML)
         let ordinarySource = NativeConversionSource(filename: "ordinary.html", title: "Ejemplo",
             format: "html", text: "Capítulo 1 Texto é Volver Guía Foto externa Uno Dos No ejecutar", links: [], original: ordinaryHTML)
-        let ordinaryResult = try NativeDocumentConversion.convert(ordinarySource, to: .html,
+        let ordinaryResult = try NativeDocumentConversion.convertWithReport(ordinarySource, to: .html,
             in: root.appendingPathComponent("ordinary-html"))
-        let ordinaryOutput = try String(contentsOf: ordinaryResult, encoding: .utf8)
+        let ordinaryOutput = try String(contentsOf: ordinaryResult.url, encoding: .utf8)
+        precondition(!ordinaryResult.structureFallback)
         precondition(ordinaryOutput.contains("<h2 id=\"c0-cap\">") && ordinaryOutput.contains("Texto é") &&
             ordinaryOutput.contains("href=\"#c0-cap\"") && ordinaryOutput.contains("href=\"https://example.org/guia\"") &&
             ordinaryOutput.contains("<li>Uno</li>") && ordinaryOutput.contains("<li>Dos</li>") &&
             ordinaryOutput.contains("Foto externa") && !ordinaryOutput.contains("<script") &&
             !ordinaryOutput.contains("javascript:") && !ordinaryOutput.contains("remote.png"))
+
+        var missingSource = ordinarySource
+        missingSource.original = nil
+        let ordinaryFallback = try NativeDocumentConversion.convertWithReport(missingSource, to: .html,
+            in: root.appendingPathComponent("structure-fallback"))
+        precondition(ordinaryFallback.structureFallback)
+        let ordinaryFallbackText = try String(contentsOf: ordinaryFallback.url, encoding: .utf8)
+        precondition(ordinaryFallbackText.contains("Foto externa"))
+        let intentionallyPlain = try NativeDocumentConversion.convertWithReport(ordinarySource, to: .txt,
+            in: root.appendingPathComponent("intentionally-plain"))
+        precondition(!intentionallyPlain.structureFallback)
 
         var results: [NativeDocumentFormat: URL] = [:]
         for format in NativeDocumentFormat.allCases {

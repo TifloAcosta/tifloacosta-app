@@ -51,3 +51,21 @@ test('conversion retains completed results and asks before discarding unsaved fi
     for (const key of ["¿Descartar los archivos convertidos que no has guardado en la biblioteca?","Descartar e iniciar conversión","Descartar y cerrar","Resultados: %@","Guardando «%@».","Guardado en la biblioteca"]) assert.ok(catalog.includes('"' + key + '" = '), lang + ': ' + key);
   }
 });
+
+test('conversion retains text output and explicitly announces structural fallback', () => {
+    const engine = read('Sources/NativeDocumentConversion.swift');
+    const markup = read('Sources/NativeConversionMarkup.swift');
+    assert.match(engine, /struct Result: Sendable/);
+    assert.match(engine, /structureFallback = \["rtf", "html", "htm", "xhtml", "epub", "odt", "docx"\]/);
+    assert.match(screen, /outputs\.append\(result\.url\)/);
+    assert.match(screen, /if result\.structureFallback/);
+    assert.match(screen, /status \+= " " \+ MusicLocalized\.format/);
+    assert.match(markup, /guard let normalized = normalizeHTML\(data\)/);
+    const normalizer = read('PDFEngine/TifloHTMLNormalization.c');
+    assert.match(normalizer, /HTML_PARSE_NONET/);
+    assert.doesNotMatch(normalizer, /HTML_PARSE_HUGE|XML_PARSE_NOENT|XML_PARSE_DTDLOAD/);
+    for (const lang of ['en','pt','fr','it','de']) {
+        const catalog = read('Sources/' + lang + '.lproj/Localizable.strings');
+        for (const key of ["«%@»: se ha convertido el texto, pero no se pudo recuperar la estructura original.","Documentos cuya estructura original no se pudo recuperar: %d."]) assert.ok(catalog.includes('"' + key + '" = '), lang + ': ' + key);
+    }
+});

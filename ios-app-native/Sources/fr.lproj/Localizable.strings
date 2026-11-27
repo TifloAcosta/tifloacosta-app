@@ -2031,3 +2031,5 @@
 "Hay otra operación de copia en curso. Inténtalo cuando termine." = "Une autre opération de sauvegarde est en cours. Réessaie lorsqu’elle sera terminée.";
 "No se puede confirmar aún si hay copias en iCloud." = "Il n’est pas encore possible de confirmer la présence de sauvegardes dans iCloud.";
 "La consulta del historial no se ha completado." = "La consultation de l’historique des sauvegardes n’est pas terminée.";
+"«%@»: se ha convertido el texto, pero no se pudo recuperar la estructura original." = "«%@» : le texte a été converti, mais la structure originale n’a pas pu être récupérée.";
+"Documentos cuya estructura original no se pudo recuperar: %d." = "Documents dont la structure originale n’a pas pu être récupérée : %d.";

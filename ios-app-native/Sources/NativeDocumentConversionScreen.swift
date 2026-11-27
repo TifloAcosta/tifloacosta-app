@@ -36,6 +36,7 @@ struct NativeDocumentConversionScreen: View {
     @State private var outputs: [URL] = []
     @State private var saved: Set<URL> = []
     @State private var failures: [String] = []
+    @State private var structureWarnings: [String] = []
     @State private var status = ""
     @State private var job: Task<Void, Never>?
     @State private var saving = false
@@ -84,6 +85,9 @@ struct NativeDocumentConversionScreen: View {
                 if !status.isEmpty { Text(status).accessibilityAddTraits(.updatesFrequently) }
                 ForEach(Array(failures.enumerated()), id: \.offset) { _, failure in
                     Text(failure)
+                }
+                ForEach(Array(structureWarnings.enumerated()), id: \.offset) { _, warning in
+                    Text(warning)
                 }
                 if !outputs.isEmpty {
                     Section {
@@ -136,6 +140,7 @@ struct NativeDocumentConversionScreen: View {
         resultFormat = selected
         status = ""
         failures = []
+        structureWarnings = []
         outputs = []
         saved = []
         position = 1
@@ -155,15 +160,18 @@ struct NativeDocumentConversionScreen: View {
                 let target = nextWorkspace.directory.appendingPathComponent(String(index), isDirectory: true)
                 let worker = Task.detached(priority: .userInitiated) {
                     defer { events.continuation.finish() }
-                    return try NativeDocumentConversion.convert(source, to: selected, in: target) {
+                    return try NativeDocumentConversion.convertWithReport(source, to: selected, in: target) {
                         events.continuation.yield($0)
                     }
                 }
                 do {
-                    let output = try await withTaskCancellationHandler {
+                    let result = try await withTaskCancellationHandler {
                         try await worker.value
                     } onCancel: { worker.cancel() }
-                    outputs.append(output)
+                    outputs.append(result.url)
+                    if result.structureFallback {
+                        structureWarnings.append(MusicLocalized.format("«%@»: se ha convertido el texto, pero no se pudo recuperar la estructura original.", source.title))
+                    }
                 } catch is CancellationError {
                     cancelled = true
                 } catch {
@@ -176,6 +184,9 @@ struct NativeDocumentConversionScreen: View {
             let summary = MusicLocalized.format("Documentos convertidos: %d. Fallidos: %d.", outputs.count, failures.count)
             status = cancelled || Task.isCancelled
                 ? MusicLocalized.message("Conversión cancelada.") + " " + summary : summary
+            if !structureWarnings.isEmpty {
+                status += " " + MusicLocalized.format("Documentos cuya estructura original no se pudo recuperar: %d.", structureWarnings.count)
+            }
             UIAccessibility.post(notification: .announcement, argument: status)
         }
     }

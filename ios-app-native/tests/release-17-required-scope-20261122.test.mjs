@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 
 const manifest = JSON.parse(readFileSync(new URL('../release-readiness-1.7.json', import.meta.url), 'utf8'));
 const workflow = readFileSync(new URL('../../.github/workflows/ios-native-testflight-upload.yml', import.meta.url), 'utf8');
-const guardScript = readFileSync(new URL('../scripts/check-release-readiness.mjs', import.meta.url), 'utf8');
+import { evaluateReadiness } from '../scripts/check-release-readiness.mjs';
 
 test('the approved update preserves earlier requirements and adds the TTS lock-screen regression', () => {
   const ids = manifest.requirements.map(x => x.id);
@@ -33,13 +33,42 @@ test('the approved update preserves earlier requirements and adds the TTS lock-s
   assert.ok(manifest.requirements.some(x => /RTF/.test(x.title)));
 });
 
-test('internal beta cannot build before all requirements have code', () => {
+test('internal upload explicitly invokes the internal gate before Xcode, with evidence check', () => {
   const checkout = workflow.indexOf('- uses: actions/checkout@v4');
-  const gate = workflow.indexOf('node ios-app-native/scripts/check-release-readiness.mjs');
+  const gate = workflow.indexOf('node ios-app-native/scripts/check-release-readiness.mjs --internal-beta');
+  const evidence = workflow.indexOf('Verificar evidencias de auditoría de idiomas');
   const xcode = workflow.indexOf('Seleccionar Xcode 26');
-  assert.ok(checkout >= 0 && gate > checkout && xcode > gate);
-  assert.match(guardScript, /item.status !== 'implemented'/);
-  assert.match(guardScript, /throw Error\('Beta 1\.7 bloqueada/);
+  assert.ok(checkout >= 0 && gate > checkout && evidence > gate && xcode > evidence);
+  assert.match(workflow, /fetch-depth: 0/);
+});
+test('pending language audit blocks beta and public release', () => {
+  const m = structuredClone(manifest); m.internalBeta.linguisticAudit.status = 'pending';
+  assert.ok(evaluateReadiness(m, 'internal-beta').blockers.some(x => x.startsWith('11:')));
+  assert.ok(evaluateReadiness(manifest, 'public').blockers.length > 0);
+});
+test('only documented physical and external limitations may remain open in internal beta', () => {
+  const m = structuredClone(manifest);
+  m.requirements.find(x => x.id === 11).status = 'implemented';
+  m.internalBeta.linguisticAudit = {status:'validated',validatedCommit:'a'.repeat(40),integrationRun:1,navigationRun:2,reviewEvidence:['test fixture only']};
+  const verified = () => true;
+  const beta = evaluateReadiness(m,'internal-beta',verified);
+  assert.deepEqual(beta.blockers,[]);
+  assert.equal(beta.deferred.length,m.requirements.filter(x=>x.status==='partial').length);
+  assert.ok(evaluateReadiness(m,'public',verified).blockers.length>0);
+  assert.ok(evaluateReadiness(m,'internal-beta',()=>false).blockers.length>0);
+  m.requirements.find(x=>x.id===4).status='partial';
+  assert.ok(evaluateReadiness(m,'internal-beta',verified).blockers.some(x=>x.startsWith('4:')));
+  m.internalBeta.deferred.push({id:4,kind:'device-validation',evidence:['invalid fixture'],reason:'invalid'});
+  assert.throws(()=>evaluateReadiness(m,'internal-beta',verified));
+});
+test('public gate cannot be passed by marking code implemented alone', () => {
+  const m=structuredClone(manifest);
+  for (const x of m.requirements) x.status='implemented';
+  m.internalBeta.linguisticAudit={status:'validated',validatedCommit:'a'.repeat(40),integrationRun:1,navigationRun:2,reviewEvidence:['fixture']};
+  assert.ok(evaluateReadiness(m,'public',()=>true).blockers.some(x=>x.includes('Pruebas físicas')));
+  m.publicRelease={status:'validated',deviceReviewEvidence:['fixture']};
+  assert.deepEqual(evaluateReadiness(m,'public',()=>true).blockers,[]);
+  assert.throws(()=>evaluateReadiness(m,'unknown',()=>true));
 });
 
 test('the implementation status inventory is not falsely marked complete', () => {

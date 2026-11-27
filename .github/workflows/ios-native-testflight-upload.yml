@@ -48,9 +48,25 @@ jobs:
             exit 1
           fi
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Impedir beta incompleta según registro de actualización
         if: ${{ inputs.mode == 'upload' }}
-        run: node ios-app-native/scripts/check-release-readiness.mjs
+        run: node ios-app-native/scripts/check-release-readiness.mjs --internal-beta
+      - name: Verificar evidencias de auditoría de idiomas
+        if: ${{ inputs.mode == 'upload' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          AUDIT=ios-app-native/release-readiness-1.7.json
+          SHA="$(jq -er '.internalBeta.linguisticAudit.validatedCommit' "$AUDIT")"
+          for entry in "integrationRun:ios-next-beta-validation.yml" "navigationRun:ios-localization-ui-audit.yml"; do
+            KEY="${entry%%:*}"
+            FILE="${entry#*:}"
+            ID="$(jq -er --arg key "$KEY" '.internalBeta.linguisticAudit[$key]' "$AUDIT")"
+            gh api "repos/$GITHUB_REPOSITORY/actions/runs/$ID" | jq -e --arg sha "$SHA" --arg path ".github/workflows/$FILE" --arg branch "$GITHUB_REF_NAME" '.conclusion == "success" and .status == "completed" and .head_sha == $sha and .path == $path and .head_branch == $branch' >/dev/null
+          done
       - name: Identificar diagnóstico de firma sin distribución
         if: ${{ inputs.mode == 'sign-only' }}
         run: |

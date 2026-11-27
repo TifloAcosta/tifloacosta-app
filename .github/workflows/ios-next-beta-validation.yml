@@ -21,7 +21,8 @@ jobs:
         run: node --test ios-app-native/tests/*.test.mjs
       - name: Comprobar estado del inventario, sin bloquear la compilación de diagnóstico
         run: |
-          node ios-app-native/scripts/check-release-readiness.mjs ||             echo "Integración aún incompleta: no activar TestFlight hasta superar el control obligatorio."
+          node ios-app-native/scripts/check-release-readiness.mjs --internal-beta || echo "Control de beta interna pendiente."
+          node ios-app-native/scripts/check-release-readiness.mjs --public || echo "Control de publicación definitiva pendiente."
   build-without-distribution:
     needs: contracts
     runs-on: macos-15

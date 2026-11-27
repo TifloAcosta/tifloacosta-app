@@ -2,7 +2,7 @@
   "version": "1.7",
   "branch": "development/next-public-1.6-500200-20261121",
   "source": "Correo TifloAcosta - Próxima actualización - Registro acumulado de cambios, edición 10 (22-11-2026) y decisión posterior de incluir Multicines Accesibles",
-  "policy": "No se puede construir para beta interna hasta que cada funcionalidad obligatoria esté implementada en código. Las pruebas en dispositivo siguen siendo una fase separada.",
+  "policy": "Dos controles independientes. TestFlight interno: implementación y validación técnica previas, auditoría lingüística obligatoria y pendientes explícitos de ensayos físicos o limitaciones de alcance; no supone conformidad pública. Publicación definitiva: todos los requisitos obligatorios implementados y aceptación documentada de pruebas físicas y limitaciones, más autorización expresa independiente.",
   "requirements": [
     {
       "id": 1,
@@ -577,5 +577,104 @@
       "title": "Flujo TestFlight 1.7 limitado a la rama única",
       "status": "implemented"
     }
-  ]
+  ],
+  "internalBeta": {
+    "approvedPolicy": "27-11-2026: el titular autoriza separar TestFlight interno de publicación definitiva; auditoría integral de idiomas es condición previa obligatoria.",
+    "scope": "Probadores TifloAcosta; no revisión ni publicación pública.",
+    "linguisticAudit": {
+      "status": "pending",
+      "validatedCommit": null,
+      "integrationRun": null,
+      "navigationRun": null,
+      "reviewEvidence": [],
+      "note": "Pendiente cierre efectivo de auditoría de textos estáticos y dinámicos, anuncios VoiceOver, menús, errores, extensión Compartir, calidad ortográfica/terminológica y navegación en seis idiomas. No confundir cobertura de claves con revisión lingüística."
+    },
+    "deferred": [
+      {
+        "id": 12,
+        "kind": "platform-limitation",
+        "evidence": [
+          "ios-app-native/Sources/NativeReaderSettings.swift"
+        ],
+        "reason": "Ayuda accesible con ruta oficial; no API pública para abrir el panel Braille directamente. Validar la alternativa en iPhone; no afirmar acceso directo."
+      },
+      {
+        "id": 14,
+        "kind": "device-validation",
+        "evidence": [
+          "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/46033031560",
+          "ios-app-native/tests/unified-media-playback-coordination-20261122.test.mjs"
+        ],
+        "reason": "Coordinación de reproductores implementada; probar transiciones, audio y límites de plataformas en el dispositivo."
+      },
+      {
+        "id": 15,
+        "kind": "device-validation",
+        "evidence": [
+          "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/46033031560",
+          "ios-app-native/tests/reader-voice-dream-mp3-zip-20261123.test.mjs"
+        ],
+        "reason": "DAISY y ZIP de MP3 generados y verificados; importar en Voice Dream y comprobar la reproducción real."
+      },
+      {
+        "id": 19,
+        "kind": "device-validation",
+        "evidence": [
+          "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/46033031560",
+          "ios-app-native/tests/reader-exact-resume-magic-tap-20261123.test.mjs"
+        ],
+        "reason": "Probar pausa/reanudación, rotor y toque mágico. Límite de palabra o segmento según motor; no afirmar precisión fonética universal."
+      },
+      {
+        "id": 22,
+        "kind": "device-validation",
+        "evidence": [
+          "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/46033031560",
+          "ios-app-native/Sources/NativeAccessibleCinema.swift"
+        ],
+        "reason": "27 entradas incorporadas; comprobar catálogo, acceso territorial, autorizaciones y reproducción real según proveedor. No certificar disponibilidad universal."
+      },
+      {
+        "id": 23,
+        "kind": "device-validation",
+        "evidence": [
+          "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45999055646",
+          "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/46033031560"
+        ],
+        "reason": "Servicio y recuperación verificados; reproducir búsqueda, listas y error original en iPhone."
+      },
+      {
+        "id": 25,
+        "kind": "device-validation",
+        "evidence": [
+          "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/46033031560",
+          "ios-app-native/Sources/NativeTifloLector.swift"
+        ],
+        "reason": "Cola anticipada y continuidad implementadas; probar sesiones prolongadas bloqueadas y motores externos."
+      },
+      {
+        "id": 33,
+        "kind": "device-validation",
+        "evidence": [
+          "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/46041724701",
+          "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/46033031744"
+        ],
+        "reason": "Pruebas locales, transporte simulado, restauración y firma superados. Probar transferencia real iCloud, cuenta, conflictos y restauración en dispositivo. Copias de generaciones, no sincronización destructiva de datos vivos."
+      },
+      {
+        "id": 34,
+        "kind": "external-publication",
+        "evidence": [
+          "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/46033031560",
+          "ios-app-native/resource-audit-pills-reconciled-20261127.json"
+        ],
+        "reason": "Catálogo y navegación desarrollados en rama; sitio publicado aún no contiene los 460 accesos. Beta puede probar navegación y catálogo disponible, sin afirmar disponibilidad de todos los documentos. Publicación editorial independiente pendiente; no modificar main."
+      }
+    ]
+  },
+  "publicRelease": {
+    "status": "pending",
+    "deviceReviewEvidence": [],
+    "note": "Exige cierre de los 33 requisitos, pruebas físicas documentadas y autorización independiente. No habilita publicación automática."
+  }
 }

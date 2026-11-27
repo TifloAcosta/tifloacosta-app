@@ -1974,7 +1974,7 @@ struct NativeReaderLibraryScreen: View {
                 }
             }
         }
-        .navigationTitle(folder ?? "Sin carpeta")
+        .navigationTitle(folder ?? MusicLocalized.message("Sin carpeta"))
         .tifloScreenSurface()
     }
 
@@ -2149,7 +2149,7 @@ struct NativeReaderLibraryScreen: View {
                     .accessibilityAction(named: Text("Mover a carpeta")) {
                         folderForDocument = document
                     }
-                    .accessibilityAction(named: Text(document.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                    .accessibilityAction(named: Text(MusicLocalized.message(document.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos"))) {
                         do { try library.toggleFavorite(document) }
                         catch { importError = error.localizedDescription }
                     }
@@ -2873,7 +2873,7 @@ struct NativeReaderVideoScreen: View {
                     .frame(minHeight: 240)
                     .accessibilityLabel(document.title)
                 HStack {
-                    Button(isPlaying ? "Pausar" : "Reproducir") { togglePlayback() }
+                    Button(MusicLocalized.message(isPlaying ? "Pausar" : "Reproducir")) { togglePlayback() }
                     Button("Retroceder diez segundos") { skip(seconds: -10) }
                     Button("Avanzar diez segundos") { skip(seconds: 10) }
                 }
@@ -4147,7 +4147,7 @@ struct NativeReadingScreen: View {
                 Section("Estado") {
                     Text(audioExportProgress.isEmpty ? MusicLocalized.message("Selecciona el formato y el motor.") : audioExportProgress)
                         .accessibilityAddTraits(.updatesFrequently)
-                    Button(audioExportBusy ? "Generando…" : "Convertir y guardar") {
+                    Button(MusicLocalized.message(audioExportBusy ? "Generando…" : "Convertir y guardar")) {
                         exportGeneratedAudio()
                     }
                     .disabled(audioExportBusy)
@@ -4264,7 +4264,7 @@ struct NativeReadingScreen: View {
                 ? AnyLayout(VStackLayout(alignment: .leading, spacing: 6))
                 : AnyLayout(HStackLayout(spacing: 8))
         ) {
-            Button(speech.isPlaying ? "Pausar" : "Reproducir") {
+            Button(MusicLocalized.message(speech.isPlaying ? "Pausar" : "Reproducir")) {
                 activatePlaybackButton()
             }
             // Announce the reached unit, not the unrelated reading percentage.
@@ -4589,7 +4589,7 @@ struct NativeReadingScreen: View {
         if !latest.body.isEmpty || !(latest.daisyNavigation ?? []).isEmpty {
             Button("Índice y navegación estructurada") { showStructure = true }
         }
-        Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
+        Button(MusicLocalized.message(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos")) {
             do { try library.toggleFavorite(document) }
             catch {
                 actionMessage = error.localizedDescription

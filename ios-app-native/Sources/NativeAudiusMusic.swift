@@ -218,7 +218,7 @@ struct NativeAudiusScreen: View {
         List {
             Section("Reproductor Audius") {
                 Text(player.title.isEmpty ? MusicLocalized.message("Ninguna canción en reproducción") : player.title)
-                Button(player.isPlaying ? "Pausar" : "Reanudar") { player.toggle() }
+                Button(MusicLocalized.message(player.isPlaying ? "Pausar" : "Reanudar")) { player.toggle() }
                     .disabled(player.title.isEmpty)
                 Button("Detener") { player.stop() }
                     .disabled(player.title.isEmpty)

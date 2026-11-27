@@ -334,7 +334,7 @@ struct NativeJamendoScreen: View {
             Section("Reproductor Jamendo") {
                 Text(player.title.isEmpty ? MusicLocalized.message("Ninguna canción en reproducción") : player.title)
                     .accessibilityAddTraits(.isHeader)
-                Button(player.isPlaying ? "Pausar Jamendo" : "Reanudar Jamendo") { player.toggle() }
+                Button(MusicLocalized.message(player.isPlaying ? "Pausar Jamendo" : "Reanudar Jamendo")) { player.toggle() }
                     .disabled(player.title.isEmpty)
                 Button("Detener Jamendo") { player.stop() }
                     .disabled(player.title.isEmpty)

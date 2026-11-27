@@ -186,14 +186,14 @@ struct NativeAppleMusicScreen: View {
     var body: some View {
         List {
             Section("Conexión") {
-                Button(music.authorized ? "Comprobar acceso a Apple Music" : "Autorizar Apple Music") {
+                Button(MusicLocalized.message(music.authorized ? "Comprobar acceso a Apple Music" : "Autorizar Apple Music")) {
                     Task { await music.connect() }
                 }
             }
             if music.authorized {
                 Section("Reproductor") {
                     Text(music.currentTitle.isEmpty ? MusicLocalized.message("Ninguna canción en reproducción") : music.currentTitle)
-                    Button(music.isPlaying ? "Pausar" : "Reanudar") {
+                    Button(MusicLocalized.message(music.isPlaying ? "Pausar" : "Reanudar")) {
                         Task { await music.toggle() }
                     }
                     .disabled(music.currentTitle.isEmpty)

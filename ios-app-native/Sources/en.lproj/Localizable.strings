@@ -2071,3 +2071,12 @@
 "Países" = "Countries";
 "Idiomas" = "Languages";
 "Estilos" = "Genres";
+"Ninguna emisora" = "No station";
+"Pausar radio" = "Pause radio";
+"Reanudar radio" = "Resume radio";
+"Comprobar acceso a Apple Music" = "Check Apple Music access";
+"Autorizar Apple Music" = "Authorize Apple Music";
+"Reanudar" = "Resume";
+"Pausar Jamendo" = "Pause Jamendo";
+"Reanudar Jamendo" = "Resume Jamendo";
+"Generando…" = "Generating…";

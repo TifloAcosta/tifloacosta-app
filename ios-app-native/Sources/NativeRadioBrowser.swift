@@ -456,8 +456,8 @@ private struct NativeRadioScreen: View {
     var body: some View {
         List {
             Section("Emisora actual") {
-                Text(radio.stationName.isEmpty ? "Ninguna emisora" : radio.stationName)
-                Button(radio.isPlaying ? "Pausar radio" : "Reanudar radio") { radio.toggle() }
+                Text(radio.stationName.isEmpty ? MusicLocalized.message("Ninguna emisora") : radio.stationName)
+                Button(MusicLocalized.message(radio.isPlaying ? "Pausar radio" : "Reanudar radio")) { radio.toggle() }
                     .disabled(radio.stationName.isEmpty)
                 Button("Detener radio") { radio.stop() }
                     .disabled(radio.stationName.isEmpty)

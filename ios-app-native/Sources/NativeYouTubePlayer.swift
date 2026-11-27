@@ -606,6 +606,7 @@ struct NativeYouTubePlayerScreen: View {
     @StateObject private var engine = NativeYouTubePlayerEngine()
     @ObservedObject private var personalLibrary = NativeYouTubePersonalLibrary.shared
     @State private var resumeApplied = false
+    @State private var detailsVideo: NativeYouTubeVideo?
 
     init(video: NativeYouTubeVideo, playlist: [NativeYouTubeVideo] = [],
          playlistStartIndex: Int? = nil) {
@@ -659,7 +660,7 @@ struct NativeYouTubePlayerScreen: View {
                         let seconds = personalLibrary.resumeSeconds(currentVideo.id)
                         if seconds >= 5 {
                             engine.seek(toSeconds: seconds)
-                            speak("Continuar viendo desde el segundo \(Int(seconds)).")
+                            speak(MusicLocalized.format("Continuar viendo desde %@.", NativeYouTubeTime.spoken(seconds)))
                         }
                     }
                     .onChange(of: engine.completedSequence) { _, _ in
@@ -725,9 +726,11 @@ struct NativeYouTubePlayerScreen: View {
                     }
 
                 if engine.duration > 0 {
-                    Text(MusicLocalized.format("Tiempo: %d de %d segundos", Int(engine.currentTime), Int(engine.duration)))
-                        .foregroundStyle(TifloVisual.secondaryText)
+                    NativeYouTubeTimeProgress(elapsed: engine.currentTime, duration: engine.duration)
                 }
+
+                Button("Detalles del vídeo") { detailsVideo = currentVideo }
+                    .buttonStyle(TifloSecondaryActionStyle())
 
                 Button(personalLibrary.isWatchLater(currentVideo.id)
                     ? MusicLocalized.message("Quitar de Ver después") : MusicLocalized.message("Guardar para ver después")) {
@@ -743,22 +746,6 @@ struct NativeYouTubePlayerScreen: View {
                     .buttonStyle(TifloSecondaryActionStyle())
                 }
 
-                if !currentVideo.channelTitle.isEmpty {
-                    Text(MusicLocalized.format("Canal: %@", currentVideo.channelTitle))
-                        .foregroundStyle(TifloVisual.secondaryText)
-                }
-                if let date = NativeNewsMetadata.publication(currentVideo.publishedAt) {
-                    Text(MusicLocalized.format("Publicado: %@", date)).foregroundStyle(TifloVisual.secondaryText)
-                }
-                if currentVideo.durationSeconds > 0 {
-                    Text(MusicLocalized.format("Duración: %d segundos", currentVideo.durationSeconds))
-                        .foregroundStyle(TifloVisual.secondaryText)
-                }
-                if !currentVideo.description.isEmpty {
-                    Text(currentVideo.description)
-                        .textSelection(.enabled)
-                        .foregroundStyle(TifloVisual.primaryText)
-                }
                 Divider()
                 Text("Interacción con YouTube")
                     .font(.headline)
@@ -847,6 +834,9 @@ struct NativeYouTubePlayerScreen: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Cerrar") { engine.stop(); dismiss() }
             }
+        }
+        .sheet(item: $detailsVideo) { video in
+            NavigationStack { NativeYouTubeVideoDetailsScreen(video: video) }
         }
         .task(id: currentVideo.id) {
             await account.verifySession()

@@ -24,7 +24,7 @@ test('MusicKit authorization uses a conditional block whose execution can contin
 test('Jamendo catch updates the player error property, not the caught error', () => {
   const file = source('NativeJamendoMusic.swift');
   assert.doesNotMatch(file, /catch\s*\{\s*error\s*=/);
-  assert.match(file, /catch\s*\{\s*self\.error = MusicLocalized\.format\("No se pudo recuperar la canción guardada de Jamendo\."\)/);
+  assert.match(file, /catch\s*\{\s*guard !Task\.isCancelled, NativeMixedMusicQueue\.shared\.isCurrentPlaybackRequest\(playbackRequest\) else \{ return false \}\s*self\.error = MusicLocalized\.format\("No se pudo recuperar la canción guardada de Jamendo\."\)/);
 });
 
 test('equalizer backup general gains have an explicit Float array type for Swift compiler', () => {

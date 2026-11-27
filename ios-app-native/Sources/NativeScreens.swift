@@ -1184,7 +1184,7 @@ private struct NativeYouTubePersonalVideosScreen: View {
                             video: video, onPlay: { selectedVideo = $0 },
                             onComment: { commentingOnVideo = $0 }
                         )
-                        .accessibilityHint(MusicLocalized.format("Retoma el vídeo desde el segundo %d.", Int(saved.resumeSeconds)))
+                        .accessibilityHint(MusicLocalized.format("Retoma el vídeo desde %@.", NativeYouTubeTime.spoken(saved.resumeSeconds)))
                     }
                 }
             }
@@ -1437,6 +1437,7 @@ private struct NativeYouTubeThumbnail: View {
 
 struct NativeYouTubeVideoRow: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @State private var showingDetails = false
     let video: NativeYouTubeVideo
     let onPlay: (NativeYouTubeVideo) -> Void
     let onComment: (NativeYouTubeVideo) -> Void
@@ -1488,7 +1489,14 @@ struct NativeYouTubeVideoRow: View {
         .modifier(NativeYouTubeTitleActions(
             video: video, onPlay: onPlay, onComment: onComment
         ))
+        .accessibilityAction(named: Text("Detalles del vídeo")) { showingDetails = true }
         .accessibilityAction(.default) { onPlay(video) }
+        .contextMenu {
+            Button("Detalles del vídeo") { showingDetails = true }
+        }
+        .sheet(isPresented: $showingDetails) {
+            NavigationStack { NativeYouTubeVideoDetailsScreen(video: video) }
+        }
     }
 }
 

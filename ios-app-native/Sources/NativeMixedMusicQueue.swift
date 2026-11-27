@@ -43,6 +43,10 @@ final class NativeMixedMusicQueue: ObservableObject {
 
     func stop() {
         stopPlaying()
+        resetQueue()
+    }
+
+    private func resetQueue() {
         entries = []
         localURLs = [:]
         albumKeysByURL = [:]
@@ -50,7 +54,26 @@ final class NativeMixedMusicQueue: ObservableObject {
         currentIndex = -1
     }
 
-    private func stopPlaying() {
+    // Independent playback must not inherit callbacks from an abandoned list.
+    func preparePlaybackRequest(_ existing: Int?) -> Int? {
+        if let existing { return isCurrentPlaybackRequest(existing) ? existing : nil }
+        invalidatePlaybackRequest()
+        resetQueue()
+        error = nil
+        return playbackGeneration
+    }
+
+    func isCurrentPlaybackRequest(_ request: Int) -> Bool {
+        request == playbackGeneration
+    }
+
+    func cancelPendingForIndependentMedia() {
+        guard pendingRemoteTask != nil else { return }
+        invalidatePlaybackRequest()
+        resetQueue()
+    }
+
+    private func invalidatePlaybackRequest() {
         playbackGeneration += 1
         pendingRemoteTask?.cancel()
         pendingRemoteTask = nil
@@ -58,6 +81,10 @@ final class NativeMixedMusicQueue: ObservableObject {
         NativeAppleMusicPlayer.shared.onPlaybackFinished = nil
         NativeAudiusPlayer.shared.onPlaybackFinished = nil
         NativeJamendoPlayer.shared.onPlaybackFinished = nil
+    }
+
+    private func stopPlaying() {
+        invalidatePlaybackRequest()
         NativeMusicPlayer.shared.stop()
         NativeAppleMusicPlayer.shared.stop()
         NativeAudiusPlayer.shared.stop()
@@ -87,7 +114,7 @@ final class NativeMixedMusicQueue: ObservableObject {
                 NativeMusicPlayer.shared.onPlaybackFinished = finished
                 NativeMusicPlayer.shared.play(name: entry.title, url: url,
                     queue: [(name: entry.title, url: url)], playlistID: playlistID,
-                    albumKeysByURL: albumKeysByURL)
+                    albumKeysByURL: albumKeysByURL, queueRequest: generation)
                 guard NativeMusicPlayer.shared.isPlaying else {
                     error = MusicLocalized.message("Esta canción no se pudo reproducir. Se conserva en tu lista.")
                     currentIndex += 1
@@ -101,7 +128,8 @@ final class NativeMixedMusicQueue: ObservableObject {
                 NativeAppleMusicPlayer.shared.onPlaybackFinished = finished
                 pendingRemoteTask = Task { @MainActor in
                     guard generation == playbackGeneration else { return }
-                    let played = await NativeAppleMusicPlayer.shared.playSaved(id: remoteID, title: entry.title)
+                    defer { if generation == playbackGeneration { pendingRemoteTask = nil } }
+                    let played = await NativeAppleMusicPlayer.shared.playSaved(id: remoteID, title: entry.title, queueRequest: generation)
                     if !played && generation == playbackGeneration {
                         error = MusicLocalized.format("Esta canción no se pudo reproducir. Se conserva en tu lista.")
                         next()
@@ -113,7 +141,7 @@ final class NativeMixedMusicQueue: ObservableObject {
                     continue
                 }
                 NativeAudiusPlayer.shared.onPlaybackFinished = finished
-                let played = NativeAudiusPlayer.shared.play(id: remoteID, title: entry.title)
+                let played = NativeAudiusPlayer.shared.play(id: remoteID, title: entry.title, queueRequest: generation)
                 if !played {
                     error = MusicLocalized.format("Esta canción no se pudo reproducir. Se conserva en tu lista.")
                     currentIndex += 1
@@ -127,7 +155,8 @@ final class NativeMixedMusicQueue: ObservableObject {
                 NativeJamendoPlayer.shared.onPlaybackFinished = finished
                 pendingRemoteTask = Task { @MainActor in
                     guard generation == playbackGeneration else { return }
-                    let played = await NativeJamendoPlayer.shared.playSaved(id: remoteID)
+                    defer { if generation == playbackGeneration { pendingRemoteTask = nil } }
+                    let played = await NativeJamendoPlayer.shared.playSaved(id: remoteID, queueRequest: generation)
                     if !played && generation == playbackGeneration {
                         error = MusicLocalized.format("Esta canción no se pudo reproducir. Se conserva en tu lista.")
                         next()

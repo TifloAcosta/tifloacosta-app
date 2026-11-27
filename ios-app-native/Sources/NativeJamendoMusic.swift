@@ -95,11 +95,13 @@ final class NativeJamendoPlayer: ObservableObject {
     private var remoteTokens: [Any] = []
 
     @discardableResult
-    func playSaved(id: String) async -> Bool {
+    func playSaved(id: String, queueRequest: Int? = nil) async -> Bool {
         guard id.range(of: #"^[0-9]+$"#, options: .regularExpression) != nil else {
             error = MusicLocalized.format("El identificador guardado de Jamendo no es válido.")
             return false
         }
+        guard !Task.isCancelled,
+              let playbackRequest = NativeMixedMusicQueue.shared.preparePlaybackRequest(queueRequest) else { return false }
         do {
             var url = URLComponents(string: "https://api.jamendo.com/v3.0/tracks/")!
             url.queryItems = [
@@ -110,25 +112,27 @@ final class NativeJamendoPlayer: ObservableObject {
             let (data, response) = try await URLSession.shared.data(from: url.url!)
             guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw URLError(.badServerResponse) }
             let result = try JSONDecoder().decode(NativeJamendoSearchResult.self, from: data)
+            guard !Task.isCancelled, NativeMixedMusicQueue.shared.isCurrentPlaybackRequest(playbackRequest) else { return false }
             guard result.headers.status == "success", let track = result.results.first,
                   let streamURL = track.streamURL else {
                 error = MusicLocalized.format("Esta canción ya no está disponible en Jamendo. Se conserva en tu lista.")
                 return false
             }
-            guard !Task.isCancelled else { return false }
-            play(name: track.name, artist: track.artistName, url: streamURL)
+            play(name: track.name, artist: track.artistName, url: streamURL, queueRequest: playbackRequest)
             return isPlaying
         } catch {
+            guard !Task.isCancelled, NativeMixedMusicQueue.shared.isCurrentPlaybackRequest(playbackRequest) else { return false }
             self.error = MusicLocalized.format("No se pudo recuperar la canción guardada de Jamendo.")
             return false
         }
     }
 
-    func play(name: String, artist: String, url: URL) {
+    func play(name: String, artist: String, url: URL, queueRequest: Int? = nil) {
         guard url.scheme == "https", url.host != nil else {
             error = MusicLocalized.format("La dirección de reproducción de Jamendo no es válida.")
             return
         }
+        guard NativeMixedMusicQueue.shared.preparePlaybackRequest(queueRequest) != nil else { return }
         NativeAudiusPlayer.shared.pauseForOtherAudio()
         NativeAppleMusicPlayer.shared.pauseForOtherAudio()
         NativeRadioPlayer.shared.pauseForOtherAudio()

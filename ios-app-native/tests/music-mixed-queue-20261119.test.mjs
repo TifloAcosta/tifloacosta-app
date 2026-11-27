@@ -17,9 +17,9 @@ test('mixed queue keeps ordered entries and routes each saved provider ID', () =
   assert.match(queue, /case \.appleMusic:/);
   assert.match(queue, /case \.audius:/);
   assert.match(queue, /case \.jamendo:/);
-  assert.match(queue, /playSaved\(id: remoteID, title: entry\.title\)/);
-  assert.match(queue, /play\(id: remoteID, title: entry\.title\)/);
-  assert.match(queue, /playSaved\(id: remoteID\)/);
+  assert.match(queue, /playSaved\(id: remoteID, title: entry\.title, queueRequest: generation\)/);
+  assert.match(queue, /play\(id: remoteID, title: entry\.title, queueRequest: generation\)/);
+  assert.match(queue, /playSaved\(id: remoteID, queueRequest: generation\)/);
 });
 
 test('natural playback completion advances a mixed queue without relying on local-only next', () => {
@@ -49,11 +49,11 @@ test('a saved unavailable remote track returns a failure so the mixed queue can 
   const queue = source('NativeMixedMusicQueue.swift');
   const apple = source('NativeAppleMusic.swift');
   const jamendo = source('NativeJamendoMusic.swift');
-  assert.match(apple, /func playSaved\(id: String, title: String\) async -> Bool/);
-  assert.match(jamendo, /func playSaved\(id: String\) async -> Bool/);
+  assert.match(apple, /func playSaved\(id: String, title: String, queueRequest: Int\? = nil\) async -> Bool/);
+  assert.match(jamendo, /func playSaved\(id: String, queueRequest: Int\? = nil\) async -> Bool/);
   assert.match(queue, /if !played && generation == playbackGeneration/);
   const audius = source('NativeAudiusMusic.swift');
-  assert.match(audius, /func play\(id: String, title: String\) -> Bool/);
+  assert.match(audius, /func play\(id: String, title: String, queueRequest: Int\? = nil\) -> Bool/);
 });
 
 test('a pending remote lookup is cancelled when the playlist is skipped or stopped', () => {
@@ -113,4 +113,19 @@ test('editorial media accessibility label uses translated source and publication
   assert.match(media, /let source = MusicLocalized\.format\("%@\. Fuente: %@", format, item\.sourceName\)/);
   assert.match(media, /parts\.append\(MusicLocalized\.format\("Publicado: %@", date\)\)/);
   assert.match(media, /\.accessibilityLabel\(Text\(mediaAccessibilityLabel\(item\)\)\)/);
+});
+
+test('independent songs invalidate mixed-list callbacks and late lookups cannot reclaim the queue', () => {
+  const queue = source('NativeMixedMusicQueue.swift');
+  assert.match(queue, /func preparePlaybackRequest\(_ existing: Int\?\) -> Int\? \{[\s\S]*?invalidatePlaybackRequest\(\)\s+resetQueue\(\)/);
+  assert.match(queue, /private func invalidatePlaybackRequest\(\) \{\s+playbackGeneration \+= 1\s+pendingRemoteTask\?\.cancel\(\)/);
+  for (const file of ['NativeMusicPlayer.swift','NativeAppleMusic.swift','NativeJamendoMusic.swift','NativeAudiusMusic.swift']) {
+    assert.match(source(file), /preparePlaybackRequest\(queueRequest\)/);
+  }
+  for (const file of ['NativeAppleMusic.swift','NativeJamendoMusic.swift']) {
+    assert.match(source(file), /isCurrentPlaybackRequest\(playbackRequest\)/);
+  }
+  assert.match(source('NativeAppleMusic.swift'), /try await player.play\(\)\s+guard !Task.isCancelled, NativeMixedMusicQueue.shared.isCurrentPlaybackRequest\(request\)/);
+  assert.match(source('NativeMusicPlayer.swift'), /case \.reader, \.radio, \.podcast, \.cinema, \.youtube:\s+NativeMixedMusicQueue.shared.cancelPendingForIndependentMedia\(\)/);
+  assert.equal((queue.match(/defer \{ if generation == playbackGeneration \{ pendingRemoteTask = nil \} \}/g) || []).length, 2);
 });

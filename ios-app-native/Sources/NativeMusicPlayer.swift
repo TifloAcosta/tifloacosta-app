@@ -19,6 +19,12 @@ enum NativeRemotePlaybackOwner {
     }
 
     static func claim(_ destination: Destination) {
+        switch destination {
+        case .reader, .radio, .podcast, .cinema, .youtube:
+            NativeMixedMusicQueue.shared.cancelPendingForIndependentMedia()
+        case .music, .audius, .appleMusic, .jamendo:
+            break
+        }
         if let previous = current, previous != destination {
             switch previous {
             case .reader: NativeReaderPlaybackBridge.pauseActiveReader?()
@@ -417,7 +423,8 @@ final class NativeMusicPlayer: ObservableObject {
     }
 
     func play(name: String, url: URL, queue: [(name: String, url: URL)], playlistID: UUID? = nil,
-              albumKeysByURL: [URL: String] = [:]) {
+              albumKeysByURL: [URL: String] = [:], queueRequest: Int? = nil) {
+        guard NativeMixedMusicQueue.shared.preparePlaybackRequest(queueRequest) != nil else { return }
         currentPlaylistID = playlistID
         self.albumKeysByURL = albumKeysByURL
         originalQueue = queue

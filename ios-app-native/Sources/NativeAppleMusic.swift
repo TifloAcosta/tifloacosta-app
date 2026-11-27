@@ -78,8 +78,9 @@ final class NativeAppleMusicPlayer: ObservableObject {
         }
     }
 
-    func play(_ song: Song) async {
-        guard authorized, canPlayCatalog else { return }
+    func play(_ song: Song, queueRequest: Int? = nil) async {
+        guard authorized, canPlayCatalog, !Task.isCancelled,
+              let request = NativeMixedMusicQueue.shared.preparePlaybackRequest(queueRequest) else { return }
         NativeJamendoPlayer.shared.pauseForOtherAudio()
         NativeMusicPlayer.shared.pauseForReader()
         NativeRadioPlayer.shared.pauseForOtherAudio()
@@ -89,39 +90,51 @@ final class NativeAppleMusicPlayer: ObservableObject {
             player.queue = [song]
             NativeRemotePlaybackOwner.claim(.appleMusic)
             try await player.play()
+            guard !Task.isCancelled, NativeMixedMusicQueue.shared.isCurrentPlaybackRequest(request),
+                  NativeRemotePlaybackOwner.current == .appleMusic else {
+                if NativeRemotePlaybackOwner.current != .appleMusic { player.pause() }
+                return
+            }
             currentTitle = song.title
             isPlaying = true
             watchNaturalCompletion()
             error = nil
         } catch {
+            guard NativeMixedMusicQueue.shared.isCurrentPlaybackRequest(request),
+                  NativeRemotePlaybackOwner.current == .appleMusic else { return }
             isPlaying = false
+            NativeRemotePlaybackOwner.release(.appleMusic)
             self.error = "No se pudo reproducir esta canción con Apple Music."
         }
     }
 
     @discardableResult
-    func playSaved(id: String, title: String) async -> Bool {
+    func playSaved(id: String, title: String, queueRequest: Int? = nil) async -> Bool {
         guard !id.isEmpty else {
             error = MusicLocalized.format("La referencia guardada de Apple Music no es válida.")
             return false
         }
+        guard !Task.isCancelled,
+              let playbackRequest = NativeMixedMusicQueue.shared.preparePlaybackRequest(queueRequest) else { return false }
         if !authorized || !canPlayCatalog {
             await connect()
             guard authorized, canPlayCatalog else { return false }
         }
-        guard !Task.isCancelled else { return false }
+        guard !Task.isCancelled, NativeMixedMusicQueue.shared.isCurrentPlaybackRequest(playbackRequest) else { return false }
         do {
             var request = MusicCatalogSearchRequest(term: title, types: [Song.self])
             request.limit = 25
             let result = try await request.response()
+            guard !Task.isCancelled, NativeMixedMusicQueue.shared.isCurrentPlaybackRequest(playbackRequest) else { return false }
             guard let song = result.songs.first(where: { $0.id.rawValue == id }) else {
                 error = MusicLocalized.format("Esta canción ya no está disponible en Apple Music. Se conserva en tu lista.")
                 return false
             }
-            guard !Task.isCancelled else { return false }
-            await play(song)
-            return isPlaying
+            await play(song, queueRequest: playbackRequest)
+            return !Task.isCancelled && NativeMixedMusicQueue.shared.isCurrentPlaybackRequest(playbackRequest) &&
+                NativeRemotePlaybackOwner.current == .appleMusic && isPlaying
         } catch {
+            guard !Task.isCancelled, NativeMixedMusicQueue.shared.isCurrentPlaybackRequest(playbackRequest) else { return false }
             self.error = MusicLocalized.format("No se pudo recuperar la canción guardada de Apple Music.")
             return false
         }
@@ -147,7 +160,7 @@ final class NativeAppleMusicPlayer: ObservableObject {
     }
 
     func pauseForOtherAudio() {
-        guard isPlaying else { return }
+        guard isPlaying || NativeRemotePlaybackOwner.current == .appleMusic else { return }
         completionTimer?.invalidate()
         completionTimer = nil
         player.pause()

@@ -65,7 +65,7 @@ final class NativeAudiusPlayer: ObservableObject {
     private var remoteTokens: [Any] = []
 
     @discardableResult
-    func play(id: String, title: String) -> Bool {
+    func play(id: String, title: String, queueRequest: Int? = nil) -> Bool {
         guard id.range(of: #"^[A-Za-z0-9_-]+$"#, options: .regularExpression) != nil else {
             error = "Esta pista no tiene un identificador compatible."
             return false
@@ -75,7 +75,8 @@ final class NativeAudiusPlayer: ObservableObject {
         url.host = "api.audius.co"
         url.path = "/v1/tracks/\(id)/stream"
         url.queryItems = [URLQueryItem(name: "app_name", value: "TifloAcosta")]
-        guard let target = url.url else { return false }
+        guard let target = url.url,
+              NativeMixedMusicQueue.shared.preparePlaybackRequest(queueRequest) != nil else { return false }
         NativeJamendoPlayer.shared.pauseForOtherAudio()
         NativeAppleMusicPlayer.shared.pauseForOtherAudio()
         NativeRadioPlayer.shared.pauseForOtherAudio()

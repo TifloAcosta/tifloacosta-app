@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   authorized-video-details:
-    if: github.event_name == 'push' && github.event.before == '6ba2764a2845d4639ab00f93dc1d5fc88b692b1d' && github.run_attempt == 1 && github.ref == 'refs/heads/development/next-public-1.6-500200-20261121'
+    if: github.event_name == 'push' && github.event.before == '66df60658f1c2e5c12496c1609400bb679a9a862' && github.run_attempt == 1 && github.ref == 'refs/heads/development/next-public-1.6-500200-20261121'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -41,7 +41,7 @@ jobs:
           npx --no-install wrangler secret list > "$RUNNER_TEMP/youtube-worker-secrets.json"
           jq -e 'map(.name) | contains(["GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "YOUTUBE_SESSION_SECRET", "YOUTUBE_API_KEY"])' "$RUNNER_TEMP/youtube-worker-secrets.json"
 
-      - name: Promote previously verified candidate with propagation check and rollback
+      - name: Promote verified candidate and confirm stable public metadata with rollback
         working-directory: youtube-worker
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -88,15 +88,28 @@ jobs:
               compatibilityFlags: resources.script_runtime.compatibility_flags ?? []
             };
           }
+          let propagationDeadline = 0;
           async function request(base, path, query = {}, expected = 200, from = origin) {
-            const url = new URL(path, base);
-            url.search = new URLSearchParams(query);
-            const response = await fetch(url, {
-              headers: {Origin: from}, signal: AbortSignal.timeout(20000)
-            });
-            assert.equal(response.status, expected, path + ' ' + JSON.stringify(query));
-            assert.equal(response.headers.get('access-control-allow-origin'), from === origin ? origin : null);
-            return response.json();
+            for (;;) {
+              const url = new URL(path, base);
+              url.search = new URLSearchParams(query);
+              if (path === '/video-details') url.searchParams.set('_probe', crypto.randomUUID());
+              const response = await fetch(url, {
+                headers: {Origin: from, 'Cache-Control': 'no-cache'}, signal: AbortSignal.timeout(20000)
+              });
+              const result = await response.json();
+              if (base === production && path === '/video-details' &&
+                  response.status === 404 && result.error === 'NOT_FOUND' &&
+                  Date.now() < propagationDeadline) {
+                assert.equal(await active(), 'ae938c3d-1152-47da-b159-16e1230e4b13');
+                console.log('Old route response during propagation; retrying', response.headers.get('cf-ray') || '');
+                await new Promise(resolve => setTimeout(resolve, 5000));
+                continue;
+              }
+              assert.equal(response.status, expected, path + ' ' + JSON.stringify(query) + ' error=' + (result.error || '') + ' ray=' + (response.headers.get('cf-ray') || ''));
+              assert.equal(response.headers.get('access-control-allow-origin'), from === origin ? origin : null);
+              return result;
+            }
           }
           async function smoke(base) {
             assert.equal((await request(base, '/health')).service, 'youtube-actions');
@@ -156,39 +169,28 @@ jobs:
           const knownID = 'NWlpMREl2CE';
           const knownDetails = await request(preview, '/video-details', {videoId: knownID});
           assert.equal(knownDetails.id, knownID);
-          // The deployment API can report the new version before the custom
-          // domain serves it. Only retry the old route's explicit NOT_FOUND.
-          async function awaitPropagation() {
-            for (let attempt = 0; attempt < 18; attempt++) {
-              assert.equal(await active(), candidate, 'Production changed during propagation');
-              const url = new URL('/video-details', production);
-              url.searchParams.set('videoId', '!');
-              const response = await fetch(url, {
-                headers: {Origin: origin, 'Cache-Control': 'no-cache'},
-                signal: AbortSignal.timeout(10000)
-              });
-              const result = await response.json();
-              if (response.status === 400 && result.error === 'INVALID_VIDEO') {
-                assert.equal(response.headers.get('access-control-allow-origin'), origin);
-                console.log('Production route propagated; attempt', attempt + 1);
-                return;
-              }
-              assert.equal(response.status, 404, 'Unexpected readiness response');
-              assert.equal(result.error, 'NOT_FOUND', 'Not the old route response');
-              await new Promise(resolve => setTimeout(resolve, 5000));
-            }
-            throw new Error('Production route did not propagate within bounded window');
-          }
           assert.equal(await active(), previous, 'Production changed during preparation');
           const switchTo = version_id => api('/deployments', {strategy: 'percentage', versions: [{version_id, percentage: 100}]});
           try {
             await switchTo(candidate);
             assert.equal(await active(), candidate);
-            await awaitPropagation();
-            const published = await request(production, '/video-details', {videoId: knownID});
-            assert.equal(published.id, knownID);
-            assert.equal(published.description, knownDetails.description);
+            propagationDeadline = Date.now() + 120000;
+            // Accept only the explicit old-route response during a bounded
+            // propagation window. Require repeated real metadata success.
+            for (let i = 0; i < 3; i++) {
+              const published = await request(production, '/video-details', {videoId: knownID});
+              assert.equal(published.id, knownID);
+              assert.equal(published.description, knownDetails.description);
+              assert.equal((await request(production, '/video-details', {videoId: '!'}, 400)).error, 'INVALID_VIDEO');
+              console.log('Stable metadata probe', i + 1);
+              if (i < 2) await new Promise(resolve => setTimeout(resolve, 10000));
+            }
             await smoke(production);
+            propagationDeadline = 0;
+            // Final checks are strict; no retry or propagation exception.
+            const final = await request(production, '/video-details', {videoId: knownID});
+            assert.equal(final.description, knownDetails.description);
+            assert.equal(await active(), candidate);
             console.log('Production smoke tests passed for', candidate);
           } catch (error) {
             const current = await active();

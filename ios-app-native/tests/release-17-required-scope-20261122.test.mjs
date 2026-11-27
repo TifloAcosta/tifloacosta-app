@@ -46,7 +46,10 @@ test('the implementation status inventory is not falsely marked complete', () =>
   const volume = manifest.requirements.find(x => x.id === 4);
   assert.equal(volume.status, 'implemented');
   assert.ok(volume.evidence.some(path => path.endsWith('NativeReaderGeneratedVoiceVolume.swift')));
-  assert.equal(manifest.requirements.find(x => x.id === 20).status, 'partial');
+  const brailleCursor = manifest.requirements.find(x => x.id === 20);
+  assert.equal(brailleCursor.status, 'implemented');
+  assert.ok(brailleCursor.evidence.some(path => path.endsWith('reader-rtf-braille-cursor-stability-20261122.test.mjs')));
+  assert.match(brailleCursor.validation, /línea braille/);
   assert.ok(manifest.requirements.some(x => x.status !== 'implemented'));
   assert.equal(manifest.requirements.find(x => x.id === 22).status, 'partial');
   assert.equal(manifest.requirements.find(x => x.id === 23).status, 'partial');

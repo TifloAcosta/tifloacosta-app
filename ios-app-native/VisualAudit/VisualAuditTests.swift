@@ -28,6 +28,9 @@ final class VisualAuditTests: XCTestCase {
     }
 
     private func capture(_ app: XCUIApplication, _ label: String) {
+        // XCTest's idle detection can finish before SwiftUI's navigation
+        // transition has visually settled. Capture the steady state instead.
+        Thread.sleep(forTimeInterval: 1.2)
         let attachment = XCTAttachment(screenshot: app.screenshot())
         attachment.name = label
         attachment.lifetime = .keepAlways
@@ -64,6 +67,23 @@ final class VisualAuditTests: XCTestCase {
             openRoot(app, section.0)
             capture(app, String(format: "%02d-%@", index + 1, section.1))
         }
+
+        launch(app, textSize: textSize)
+        openRoot(app, "Descargar desde un enlace")
+        let instructions = app.descendants(matching: .any).matching(identifier: "tiflo.download.instructions").firstMatch
+        XCTAssertTrue(instructions.waitForExistence(timeout: 20))
+        capture(app, "15-download-instructions")
+        let address = app.textFields.firstMatch
+        XCTAssertTrue(reveal(app, address))
+        capture(app, "16-download-controls")
+
+        launch(app, textSize: textSize)
+        openRoot(app, "Vídeos")
+        openLabel(app, "Buscar en YouTube")
+        let search = app.textFields.matching(identifier: "tiflo.youtube.search.field").firstMatch
+        XCTAssertTrue(search.waitForExistence(timeout: 20))
+        XCTAssertTrue(reveal(app, search))
+        capture(app, "17-youtube-search")
 
         for (provider, name) in [("Google Drive", "google-drive"), ("Dropbox", "dropbox")] {
             launch(app, textSize: textSize)

@@ -974,7 +974,6 @@ private struct NativeYouTubeSearchScreen: View {
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                     .submitLabel(.search)
-                    .accessibilityLabel("Buscar en todo YouTube")
                     .accessibilityIdentifier("tiflo.youtube.search.field")
                     .onSubmit { search() }
                 NativeAdjustableChoice(

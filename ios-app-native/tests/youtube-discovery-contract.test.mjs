@@ -11,6 +11,7 @@ test('A single native YouTube search announces the field only once', () => {
   const screen = screens.split('struct NativeVideosScreen: View {')[1].split('// Una sola definición de gestos')[0];
   assert.match(screen, /TextField\("Buscar en todo YouTube"/);
   assert.doesNotMatch(screen, /\.accessibilityLabel\("Buscar en todo YouTube"\)/);
+  assert.match(screen, /\.accessibilityIdentifier\("tiflo\.youtube\.search\.field"\)/);
   assert.match(screen, /NativeAdjustableChoice\(\s*title: "Tipo de resultados"/);
   assert.match(screen, /"Todos", "Vídeos", "Canales"/);
   assert.match(screen, /"En directo", "Con subtítulos"/);

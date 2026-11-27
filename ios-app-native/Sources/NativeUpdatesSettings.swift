@@ -375,6 +375,7 @@ struct NativeSettingsScreen: View {
         .navigationTitle("Configuración")
         .fullScreenCover(isPresented: $showBackups, onDismiss: { backups.endManagement() }) {
             NativeBackupManagementScreen()
+                .tifloVisualPreferences()
         }
         .alert("Copias de seguridad", isPresented: $backupUnavailable) {
             Button("Aceptar", role: .cancel) {}

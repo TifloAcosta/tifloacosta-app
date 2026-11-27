@@ -516,6 +516,15 @@ final class LocalizationNavigationTests: XCTestCase {
         }
 
         launch(app, index: index)
+        openRoot(app, key: "Descargar desde un enlace", language: language)
+        let instructions = app.descendants(matching: .any).matching(identifier: "tiflo.download.instructions").firstMatch
+        XCTAssertTrue(instructions.waitForExistence(timeout: 20), "Missing download instructions")
+        XCTAssertFalse(instructions.label.isEmpty)
+        let address = app.textFields.firstMatch
+        XCTAssertTrue(reveal(app, address), "Download address not reachable")
+        // Do not paste, analyze or download anything.
+
+        launch(app, index: index)
         openRoot(app, key: "Multicines Accesibles", language: language)
         for key in ["Buscar obras", "Mi colección personal", "Dónde ver una película"] {
             find(app, key: key, language: language)
@@ -542,7 +551,12 @@ final class LocalizationNavigationTests: XCTestCase {
         let searchField = app.textFields.matching(identifier: "tiflo.youtube.search.field").firstMatch
         XCTAssertTrue(searchField.waitForExistence(timeout: 20), app.debugDescription)
         XCTAssertTrue(reveal(app, searchField), "Search field not reachable")
-        XCTAssertEqual(searchField.label, expected("Buscar en todo YouTube", language))
+        // SwiftUI exposes the empty field prompt as placeholderValue on some
+        // iOS releases, and as label on others. Do not duplicate its spoken name.
+        let prompt = expected("Buscar en todo YouTube", language)
+        XCTAssertTrue(searchField.label == prompt || searchField.placeholderValue == prompt,
+                      "Unexpected search field: label=\(searchField.label), placeholder=\(searchField.placeholderValue ?? "nil")")
+        XCTAssertEqual(app.textFields.matching(identifier: "tiflo.youtube.search.field").count, 1)
         find(app, key: "Tipo de resultados", language: language)
         // Do not submit a search or sign into a third-party account.
 

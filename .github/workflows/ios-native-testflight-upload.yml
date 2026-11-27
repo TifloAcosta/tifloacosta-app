@@ -4,6 +4,15 @@ name: TifloAcosta iOS nativa - enviar a TestFlight
 on:
   workflow_dispatch:
     inputs:
+      mode:
+        description: "Operación expresa: diagnóstico de firma sin subida o envío autorizado"
+        type: choice
+        required: true
+        default: none
+        options:
+          - none
+          - sign-only
+          - upload
       verify_build:
         description: "Compilación ya subida que se quiere verificar en TestFlight"
         type: string
@@ -16,7 +25,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build-upload:
-    if: ${{ inputs.verify_build == '' }}
+    if: ${{ inputs.verify_build == '' && (inputs.mode == 'sign-only' || inputs.mode == 'upload') }}
     runs-on: macos-15
     timeout-minutes: 80
     env:
@@ -28,6 +37,7 @@ jobs:
       GITHUB_TOKEN: ${{ github.token }}
       GITHUB_RUN_NUMBER: ${{ github.run_number }}
       TIFLO_IOS_MARKETING_VERSION: "1.7"
+      TIFLO_SIGNING_PREFLIGHT: ${{ inputs.mode == 'sign-only' && '1' || '0' }}
       TIFLO_ACOUSTID_CLIENT: ${{ vars.TIFLO_ACOUSTID_CLIENT }}
     steps:
       - name: Confirmar rama única de la beta interna
@@ -39,7 +49,13 @@ jobs:
           fi
       - uses: actions/checkout@v4
       - name: Impedir beta incompleta según registro de actualización
+        if: ${{ inputs.mode == 'upload' }}
         run: node ios-app-native/scripts/check-release-readiness.mjs
+      - name: Identificar diagnóstico de firma sin distribución
+        if: ${{ inputs.mode == 'sign-only' }}
+        run: |
+          echo 'Diagnóstico de firma: no es una beta aprobada, no sube a Apple ni modifica el inventario.'
+          echo 'Se requiere certificado existente; solo se crearán perfiles para los dos IDs ya configurados.'
       - name: Validar Actualidad, Recursos y diseño sin HTML
         run: |
           set -euo pipefail
@@ -71,7 +87,7 @@ jobs:
       - name: Recuperar certificado Apple Distribution existente
         run: node ios-app-native/scripts/ensure-signing.mjs
       - name: Conservar P12 protegido si se generó un certificado
-        if: env.NEW_P12 == 'true'
+        if: ${{ inputs.mode == 'upload' && env.NEW_P12 == 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: TifloAcosta-P12-protegido
@@ -92,15 +108,16 @@ jobs:
       - name: Archivar app SwiftUI firmada para distribución Apple
         run: |
           set -euo pipefail
+          PROVISION_ARGS=()
+          if [ "$TIFLO_SIGNING_PREFLIGHT" != "1" ]; then
+            PROVISION_ARGS=(-allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER")
+          fi
           xcodebuild -project ios-app-native/TifloAcostaNative.xcodeproj \
             -scheme TifloAcostaNative \
             -configuration Release \
             -destination 'generic/platform=iOS' \
             -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" \
-            -allowProvisioningUpdates \
-            -authenticationKeyPath "$ASC_KEY_PATH" \
-            -authenticationKeyID "$API_ID" \
-            -authenticationKeyIssuerID "$API_ISSUER" \
+            ${PROVISION_ARGS[@]+"${PROVISION_ARGS[@]}"} \
             TIFLO_ACOUSTID_CLIENT="$TIFLO_ACOUSTID_CLIENT" \
             MARKETING_VERSION="$TIFLO_IOS_MARKETING_VERSION" CURRENT_PROJECT_VERSION="$IOS_BUILD_VERSION" archive
       - name: Configurar exportación con los dos perfiles de firma
@@ -119,17 +136,27 @@ jobs:
       - name: Exportar IPA para App Store Connect
         run: |
           set -euo pipefail
+          PROVISION_ARGS=()
+          if [ "$TIFLO_SIGNING_PREFLIGHT" != "1" ]; then
+            PROVISION_ARGS=(-allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER")
+          fi
           xcodebuild -exportArchive \
             -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" \
             -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" \
             -exportPath "$RUNNER_TEMP/native-export" \
-            -allowProvisioningUpdates \
-            -authenticationKeyPath "$ASC_KEY_PATH" \
-            -authenticationKeyID "$API_ID" \
-            -authenticationKeyIssuerID "$API_ISSUER"
+            ${PROVISION_ARGS[@]+"${PROVISION_ARGS[@]}"}
       - name: Validar IPA y extensión antes de enviar
         run: python3 ios-app-native/scripts/verify-testflight-ipa.py
+      - name: Confirmar diagnóstico local sin conservar el binario
+        if: ${{ inputs.mode == 'sign-only' }}
+        run: |
+          set -euo pipefail
+          IPA="$(find "$RUNNER_TEMP/native-export" -maxdepth 1 -name '*.ipa' -print -quit)"
+          test -f "$IPA"
+          shasum -a 256 "$IPA"
+          echo 'IPA diagnóstica verificada; no se ha enviado ni se publicará como artefacto.'
       - name: Subir compilación nativa a Apple TestFlight
+        if: ${{ inputs.mode == 'upload' }}
         run: |
           set -euo pipefail
           IPA="$(find "$RUNNER_TEMP/native-export" -maxdepth 1 -name '*.ipa' -print -quit)"
@@ -151,6 +178,7 @@ jobs:
           fi
           echo "Apple ha aceptado la subida; se comprobará el estado de TestFlight."
       - name: Confirmar beta disponible para probadores internos con Apple
+        if: ${{ inputs.mode == 'upload' }}
         timeout-minutes: 18
         env:
           TARGET_BUILD: ${{ env.IOS_BUILD_VERSION }}
@@ -160,8 +188,11 @@ jobs:
         run: |
           if [ -n "$ASC_KEY_PATH" ]; then rm -f "$ASC_KEY_PATH"; fi
           if [ -n "$IOS_TEMP_KEYCHAIN" ]; then security delete-keychain "$IOS_TEMP_KEYCHAIN" || true; fi
+          if [ "$TIFLO_SIGNING_PREFLIGHT" = "1" ]; then
+            rm -rf "$RUNNER_TEMP/native-export" "$RUNNER_TEMP/TifloAcosta.xcarchive" "$RUNNER_TEMP/ios-signing"
+          fi
   verify-uploaded-build:
-    if: ${{ inputs.verify_build != '' }}
+    if: ${{ inputs.mode == 'none' && inputs.verify_build != '' && github.ref == 'refs/heads/development/next-public-1.6-500200-20261121' }}
     runs-on: ubuntu-latest
     timeout-minutes: 18
     env:

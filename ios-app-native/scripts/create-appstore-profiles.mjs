@@ -58,6 +58,9 @@ for (const [identifier,envName,slug] of bundles) {
     x => x.attributes?.capabilityType === 'APP_GROUPS'
   );
   if (!hasAppGroups) {
+    if (process.env.TIFLO_SIGNING_PREFLIGHT === '1') {
+      throw Error('Diagnóstico sin cambios de capacidades: falta APP_GROUPS en '+identifier);
+    }
     await api('bundleIdCapabilities', {method:'POST',body:JSON.stringify({
       data:{type:'bundleIdCapabilities',attributes:{capabilityType:'APP_GROUPS'},
         relationships:{bundleId:{data:{type:'bundleIds',id:bundle.id}}}}

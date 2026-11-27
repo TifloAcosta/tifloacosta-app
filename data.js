@@ -3281,5 +3281,281 @@ window.TIFLO_RESOURCES = [
     "url": "https://tifloacosta.com/docs/es/reader-1lapO2tXq2mgUxhLGA4zFW4yHj8N-ANM8.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1lapO2tXq2mgUxhLGA4zFW4yHj8N-ANM8.html",
     "searchText": "Dónde comprar productos especializados para personas ciegas en Venezuela Proyecto Miren Sociedad Amigos de los Ciegos Clinisac importación"
+  },
+  {
+    "id": "es-10TKIY5ZkO75bFVRgrqpv77UeeaZm04iG",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "RSS: la forma más tranquila de enterarte de todo",
+    "url": "https://tifloacosta.com/docs/es/reader-10TKIY5ZkO75bFVRgrqpv77UeeaZm04iG.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-10TKIY5ZkO75bFVRgrqpv77UeeaZm04iG.html",
+    "searchText": "RSS: la forma más tranquila de enterarte de todo lector feeds accesibilidad OPML SonarPad iPhone iPad Mac Windows Android"
+  },
+  {
+    "id": "es-14XdQvI1K2vSVg5dlokfr-NyiN2gdOwq1",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS recomendadas para Perú",
+    "url": "https://tifloacosta.com/docs/es/reader-14XdQvI1K2vSVg5dlokfr-NyiN2gdOwq1.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-14XdQvI1K2vSVg5dlokfr-NyiN2gdOwq1.html",
+    "searchText": "Fuentes RSS recomendadas para Perú El Comercio Gestión Banco Central El Búho Caretas Diario UNO economía"
+  },
+  {
+    "id": "es-1shAfKN8xnFASB_cWKN1Uz5qipDaq7Umd",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS recomendadas para Guatemala",
+    "url": "https://tifloacosta.com/docs/es/reader-1shAfKN8xnFASB_cWKN1Uz5qipDaq7Umd.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1shAfKN8xnFASB_cWKN1Uz5qipDaq7Umd.html",
+    "searchText": "Fuentes RSS recomendadas para Guatemala Prensa Libre La Hora Emisoras Unidas Diario de Centro América Plaza Pública República Banco de Guatemala"
+  },
+  {
+    "id": "es-1BKeMGcbFNwcEo1vCn2a3RHChEZ-E6DUp",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS recomendadas para Argentina",
+    "url": "https://tifloacosta.com/docs/es/reader-1BKeMGcbFNwcEo1vCn2a3RHChEZ-E6DUp.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1BKeMGcbFNwcEo1vCn2a3RHChEZ-E6DUp.html",
+    "searchText": "Fuentes RSS recomendadas para Argentina Clarín La Nación Infobae Página/12 Ámbito El Cronista Olé La Voz del Interior"
+  },
+  {
+    "id": "es-1Dqgjgjx33j5KkLAlmp4_pNvxB4XbgwWV",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS para Venezuela",
+    "url": "https://tifloacosta.com/docs/es/reader-1Dqgjgjx33j5KkLAlmp4_pNvxB4XbgwWV.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1Dqgjgjx33j5KkLAlmp4_pNvxB4XbgwWV.html",
+    "searchText": "Fuentes RSS para Venezuela El Pitazo Efecto Cocuyo Runrun TalCual El Nacional La Patilla Crónica Uno Prodavinci"
+  },
+  {
+    "id": "es-16j8ap-YOHo9SZwbEO9eEtQQHQ1vZh0JM",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS de Cuba",
+    "url": "https://tifloacosta.com/docs/es/reader-16j8ap-YOHo9SZwbEO9eEtQQHQ1vZh0JM.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-16j8ap-YOHo9SZwbEO9eEtQQHQ1vZh0JM.html",
+    "searchText": "Fuentes RSS de Cuba medios oficiales institucionales independientes diáspora regionales"
+  },
+  {
+    "id": "es-1xVb-ANKjekZBG28m612b8Z8oesjeu1Oc",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS recomendadas para Colombia",
+    "url": "https://tifloacosta.com/docs/es/reader-1xVb-ANKjekZBG28m612b8Z8oesjeu1Oc.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1xVb-ANKjekZBG28m612b8Z8oesjeu1Oc.html",
+    "searchText": "Fuentes RSS recomendadas para Colombia El Tiempo La Silla Vacía Portafolio ColombiaCheck Impacto TIC Futbolred RTVC"
+  },
+  {
+    "id": "es-1Xpljcl9XLUFE9cLo595D13LbED5ZK249",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS para Uruguay",
+    "url": "https://tifloacosta.com/docs/es/reader-1Xpljcl9XLUFE9cLo595D13LbED5ZK249.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1Xpljcl9XLUFE9cLo595D13LbED5ZK249.html",
+    "searchText": "Fuentes RSS para Uruguay la diaria El Observador Subrayado Montevideo Portal Búsqueda Brecha economía"
+  },
+  {
+    "id": "es-1v6caQ9oXiFLFPtW7de6e57Q4Vg9PgFbt",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS de República Dominicana",
+    "url": "https://tifloacosta.com/docs/es/reader-1v6caQ9oXiFLFPtW7de6e57Q4Vg9PgFbt.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1v6caQ9oXiFLFPtW7de6e57Q4Vg9PgFbt.html",
+    "searchText": "Fuentes RSS de República Dominicana actualidad general noticias populares fuentes inglés"
+  },
+  {
+    "id": "es-1wy_FCdXDPB1S-5A4ckJ3IcLm9EBPETWL",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS para Paraguay",
+    "url": "https://tifloacosta.com/docs/es/reader-1wy_FCdXDPB1S-5A4ckJ3IcLm9EBPETWL.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1wy_FCdXDPB1S-5A4ckJ3IcLm9EBPETWL.html",
+    "searchText": "Fuentes RSS para Paraguay ABC Color Agencia IP La Nación HOY Diario Popular 5Días MarketData SILpy"
+  },
+  {
+    "id": "es-1AIcUU1XfmNljqJgpiSdg8rDk5d52y1hg",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS de Panamá",
+    "url": "https://tifloacosta.com/docs/es/reader-1AIcUU1XfmNljqJgpiSdg8rDk5d52y1hg.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1AIcUU1XfmNljqJgpiSdg8rDk5d52y1hg.html",
+    "searchText": "Fuentes RSS de Panamá actualidad economía negocios sucesos noticias populares institucional"
+  },
+  {
+    "id": "es-1cKP2rOJzgQwbxsYr3Vmb_b41DfjiBKEq",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS recomendadas para Nicaragua",
+    "url": "https://tifloacosta.com/docs/es/reader-1cKP2rOJzgQwbxsYr3Vmb_b41DfjiBKEq.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1cKP2rOJzgQwbxsYr3Vmb_b41DfjiBKEq.html",
+    "searchText": "Fuentes RSS recomendadas para Nicaragua La Prensa Confidencial Nicaragua Investiga 100% Noticias Artículo 66 Despacho 505 Divergentes"
+  },
+  {
+    "id": "es-1Gn4fEdAQe03tU-8f8kXmGjy6KRYNslDS",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS para México",
+    "url": "https://tifloacosta.com/docs/es/reader-1Gn4fEdAQe03tU-8f8kXmGjy6KRYNslDS.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1Gn4fEdAQe03tU-8f8kXmGjy6KRYNslDS.html",
+    "searchText": "Fuentes RSS para México Aristegui La Jornada El Universal El Economista Diario Oficial INEGI Xataka México Yo También"
+  },
+  {
+    "id": "es-157YiErU2qiThVfCIsUoNKNaiDwD6Eogm",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS recomendadas para Honduras",
+    "url": "https://tifloacosta.com/docs/es/reader-157YiErU2qiThVfCIsUoNKNaiDwD6Eogm.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-157YiErU2qiThVfCIsUoNKNaiDwD6Eogm.html",
+    "searchText": "Fuentes RSS recomendadas para Honduras Proceso Digital Criterio Contracorriente Radio HRN Tu Nota Dinero HN Honduras Verifica Deportes TVC"
+  },
+  {
+    "id": "es-1VgndGHz1ky0krT9zj-wGoXEHSXrf_t2f",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS de Estados Unidos en español",
+    "url": "https://tifloacosta.com/docs/es/reader-1VgndGHz1ky0krT9zj-wGoXEHSXrf_t2f.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1VgndGHz1ky0krT9zj-wGoXEHSXrf_t2f.html",
+    "searchText": "Fuentes RSS de Estados Unidos en español inmigración comunidad hispana salud servicios verificación desinformación medios locales"
+  },
+  {
+    "id": "es-1-0-rT0Kfkqpbv06gMeXL0Y1PzsEWdIEY",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS recomendadas para España",
+    "url": "https://tifloacosta.com/docs/es/reader-1-0-rT0Kfkqpbv06gMeXL0Y1PzsEWdIEY.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1-0-rT0Kfkqpbv06gMeXL0Y1PzsEWdIEY.html",
+    "searchText": "Fuentes RSS recomendadas para España RTVE La Moncloa La Vanguardia BOE Agencia Tributaria Derechos Sociales DGT INCIBE"
+  },
+  {
+    "id": "es-1ZUVV7HeLvrRXtLgr4neU4uLtKyimqkM-",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS de El Salvador",
+    "url": "https://tifloacosta.com/docs/es/reader-1ZUVV7HeLvrRXtLgr4neU4uLtKyimqkM-.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1ZUVV7HeLvrRXtLgr4neU4uLtKyimqkM-.html",
+    "searchText": "Fuentes RSS de El Salvador actualidad general información alternativa análisis"
+  },
+  {
+    "id": "es-18Qs2VycdAwhZ1EACzOGvTnFTn_N0U_2L",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS recomendadas para Ecuador",
+    "url": "https://tifloacosta.com/docs/es/reader-18Qs2VycdAwhZ1EACzOGvTnFTn_N0U_2L.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-18Qs2VycdAwhZ1EACzOGvTnFTn_N0U_2L.html",
+    "searchText": "Fuentes RSS recomendadas para Ecuador El Universo El Comercio Primicias La Hora GK Plan V Ecuador Chequea Fundamedios INEC"
+  },
+  {
+    "id": "es-1hWndtfF0y7Q2lEkM5MHlePY3IUVt4nVR",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS de Costa Rica",
+    "url": "https://tifloacosta.com/docs/es/reader-1hWndtfF0y7Q2lEkM5MHlePY3IUVt4nVR.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1hWndtfF0y7Q2lEkM5MHlePY3IUVt4nVR.html",
+    "searchText": "Fuentes RSS de Costa Rica actualidad economía negocios información local regional inglés institucional"
+  },
+  {
+    "id": "es-1CobDrAd5F8o1i9g_KFrQhSOTTp_tvxyP",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS recomendadas para Chile",
+    "url": "https://tifloacosta.com/docs/es/reader-1CobDrAd5F8o1i9g_KFrQhSOTTp_tvxyP.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1CobDrAd5F8o1i9g_KFrQhSOTTp_tvxyP.html",
+    "searchText": "Fuentes RSS recomendadas para Chile Cooperativa La Tercera BioBioChile CNN Chile La Nación CIPER El Mostrador The Clinic Diario Financiero"
+  },
+  {
+    "id": "es-1iedADwzeg4b-HR5eETdj3xgPYVcZJFJo",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS de Brasil",
+    "url": "https://tifloacosta.com/docs/es/reader-1iedADwzeg4b-HR5eETdj3xgPYVcZJFJo.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1iedADwzeg4b-HR5eETdj3xgPYVcZJFJo.html",
+    "searchText": "Fuentes RSS de Brasil actualidad política economía derechos humanos sociedad tecnología portugués"
+  },
+  {
+    "id": "es-1jZ9gxtlHFlDtXNAio4q0b08RSounaR2i",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "Fuentes RSS recomendadas para Bolivia",
+    "url": "https://tifloacosta.com/docs/es/reader-1jZ9gxtlHFlDtXNAio4q0b08RSounaR2i.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1jZ9gxtlHFlDtXNAio4q0b08RSounaR2i.html",
+    "searchText": "Fuentes RSS recomendadas para Bolivia Los Tiempos Visión 360 Opinión Bolivia actualidad política sociedad seguridad"
+  },
+  {
+    "id": "es-1lNvxuYJe5jlARv6Bv9JRf2eQZLJw1oOb",
+    "lang": "es",
+    "category": "Noticias",
+    "folderPath": [
+      "Fuentes RSS por países"
+    ],
+    "title": "RSS en español para quienes viven en cualquier parte del mundo",
+    "url": "https://tifloacosta.com/docs/es/reader-1lNvxuYJe5jlARv6Bv9JRf2eQZLJw1oOb.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1lNvxuYJe5jlARv6Bv9JRf2eQZLJw1oOb.html",
+    "searchText": "RSS en español para quienes viven en cualquier parte del mundo BBC Mundo DW Español France 24 Euronews Naciones Unidas Global Voices Agencia SINC WIRED Xataka Applesfera"
   }
 ];

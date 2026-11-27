@@ -1,0 +1,186 @@
+{
+  "date": "2026-11-27",
+  "sourceInventory": "ios-app-native/resource-audit-recursive-20261126.json",
+  "collection": [
+    "Noticias",
+    "Fuentes RSS por países"
+  ],
+  "sources": 24,
+  "uniqueDocuments": 23,
+  "duplicateSources": [
+    {
+      "sourceId": "18kU95UWNEgoN8yTVtHxI9woxZEpqunz0",
+      "sourcePath": [
+        "Noticias",
+        "RSS, la forma más tranquila de enterarte de todo (Tifloacosta).html"
+      ],
+      "canonicalSourceId": "10TKIY5ZkO75bFVRgrqpv77UeeaZm04iG",
+      "canonicalResourceId": "es-10TKIY5ZkO75bFVRgrqpv77UeeaZm04iG",
+      "gitBlob": "93f3bd88c8c8f7f5550ea09295c0764c46a94d15",
+      "reason": "Identical original HTML bytes, same Git blob; canonical nested source retained to preserve collection."
+    }
+  ],
+  "documents": [
+    {
+      "sourceId": "10TKIY5ZkO75bFVRgrqpv77UeeaZm04iG",
+      "gitBlob": "93f3bd88c8c8f7f5550ea09295c0764c46a94d15",
+      "title": "RSS: la forma más tranquila de enterarte de todo",
+      "resourceId": "es-10TKIY5ZkO75bFVRgrqpv77UeeaZm04iG",
+      "path": "docs/es/reader-10TKIY5ZkO75bFVRgrqpv77UeeaZm04iG.html"
+    },
+    {
+      "sourceId": "14XdQvI1K2vSVg5dlokfr-NyiN2gdOwq1",
+      "gitBlob": "1b5ece2df507c8153cf8cc01c42b8341ec7792a2",
+      "title": "Fuentes RSS recomendadas para Perú",
+      "resourceId": "es-14XdQvI1K2vSVg5dlokfr-NyiN2gdOwq1",
+      "path": "docs/es/reader-14XdQvI1K2vSVg5dlokfr-NyiN2gdOwq1.html"
+    },
+    {
+      "sourceId": "1shAfKN8xnFASB_cWKN1Uz5qipDaq7Umd",
+      "gitBlob": "b2428872357931a34a9e0c39f836669cf2af7336",
+      "title": "Fuentes RSS recomendadas para Guatemala",
+      "resourceId": "es-1shAfKN8xnFASB_cWKN1Uz5qipDaq7Umd",
+      "path": "docs/es/reader-1shAfKN8xnFASB_cWKN1Uz5qipDaq7Umd.html"
+    },
+    {
+      "sourceId": "1BKeMGcbFNwcEo1vCn2a3RHChEZ-E6DUp",
+      "gitBlob": "6700e99ed56a43fdccc4f370a33bb3f0a1676e9a",
+      "title": "Fuentes RSS recomendadas para Argentina",
+      "resourceId": "es-1BKeMGcbFNwcEo1vCn2a3RHChEZ-E6DUp",
+      "path": "docs/es/reader-1BKeMGcbFNwcEo1vCn2a3RHChEZ-E6DUp.html"
+    },
+    {
+      "sourceId": "1Dqgjgjx33j5KkLAlmp4_pNvxB4XbgwWV",
+      "gitBlob": "c543609fa5ae01ce5bf2a15aee2cdb96e147e4b2",
+      "title": "Fuentes RSS para Venezuela",
+      "resourceId": "es-1Dqgjgjx33j5KkLAlmp4_pNvxB4XbgwWV",
+      "path": "docs/es/reader-1Dqgjgjx33j5KkLAlmp4_pNvxB4XbgwWV.html"
+    },
+    {
+      "sourceId": "16j8ap-YOHo9SZwbEO9eEtQQHQ1vZh0JM",
+      "gitBlob": "d2cc13974afcf1712a9024a1d456b7986d62c088",
+      "title": "Fuentes RSS de Cuba",
+      "resourceId": "es-16j8ap-YOHo9SZwbEO9eEtQQHQ1vZh0JM",
+      "path": "docs/es/reader-16j8ap-YOHo9SZwbEO9eEtQQHQ1vZh0JM.html"
+    },
+    {
+      "sourceId": "1xVb-ANKjekZBG28m612b8Z8oesjeu1Oc",
+      "gitBlob": "cddd8a6bc3d427b27d3b6accf227b2d383771484",
+      "title": "Fuentes RSS recomendadas para Colombia",
+      "resourceId": "es-1xVb-ANKjekZBG28m612b8Z8oesjeu1Oc",
+      "path": "docs/es/reader-1xVb-ANKjekZBG28m612b8Z8oesjeu1Oc.html"
+    },
+    {
+      "sourceId": "1Xpljcl9XLUFE9cLo595D13LbED5ZK249",
+      "gitBlob": "90d42aa89cc841c9b4df35289bfff720a2dffabd",
+      "title": "Fuentes RSS para Uruguay",
+      "resourceId": "es-1Xpljcl9XLUFE9cLo595D13LbED5ZK249",
+      "path": "docs/es/reader-1Xpljcl9XLUFE9cLo595D13LbED5ZK249.html"
+    },
+    {
+      "sourceId": "1v6caQ9oXiFLFPtW7de6e57Q4Vg9PgFbt",
+      "gitBlob": "406c818f557d2c283e77a8ffa57c519887ffb606",
+      "title": "Fuentes RSS de República Dominicana",
+      "resourceId": "es-1v6caQ9oXiFLFPtW7de6e57Q4Vg9PgFbt",
+      "path": "docs/es/reader-1v6caQ9oXiFLFPtW7de6e57Q4Vg9PgFbt.html"
+    },
+    {
+      "sourceId": "1wy_FCdXDPB1S-5A4ckJ3IcLm9EBPETWL",
+      "gitBlob": "473f08c7d6f596135f5040892023d54f622d2415",
+      "title": "Fuentes RSS para Paraguay",
+      "resourceId": "es-1wy_FCdXDPB1S-5A4ckJ3IcLm9EBPETWL",
+      "path": "docs/es/reader-1wy_FCdXDPB1S-5A4ckJ3IcLm9EBPETWL.html"
+    },
+    {
+      "sourceId": "1AIcUU1XfmNljqJgpiSdg8rDk5d52y1hg",
+      "gitBlob": "dff90dcae8044851d24ebd4b66ab9d0d8aef52bb",
+      "title": "Fuentes RSS de Panamá",
+      "resourceId": "es-1AIcUU1XfmNljqJgpiSdg8rDk5d52y1hg",
+      "path": "docs/es/reader-1AIcUU1XfmNljqJgpiSdg8rDk5d52y1hg.html"
+    },
+    {
+      "sourceId": "1cKP2rOJzgQwbxsYr3Vmb_b41DfjiBKEq",
+      "gitBlob": "e5e9dc73fed904dd91b00722b9194c1f284c29bf",
+      "title": "Fuentes RSS recomendadas para Nicaragua",
+      "resourceId": "es-1cKP2rOJzgQwbxsYr3Vmb_b41DfjiBKEq",
+      "path": "docs/es/reader-1cKP2rOJzgQwbxsYr3Vmb_b41DfjiBKEq.html"
+    },
+    {
+      "sourceId": "1Gn4fEdAQe03tU-8f8kXmGjy6KRYNslDS",
+      "gitBlob": "51d0b808f1a0be1401251c01095876486a117738",
+      "title": "Fuentes RSS para México",
+      "resourceId": "es-1Gn4fEdAQe03tU-8f8kXmGjy6KRYNslDS",
+      "path": "docs/es/reader-1Gn4fEdAQe03tU-8f8kXmGjy6KRYNslDS.html"
+    },
+    {
+      "sourceId": "157YiErU2qiThVfCIsUoNKNaiDwD6Eogm",
+      "gitBlob": "c88a2e162a8e6c2b9543b60edfc3be339ba9a922",
+      "title": "Fuentes RSS recomendadas para Honduras",
+      "resourceId": "es-157YiErU2qiThVfCIsUoNKNaiDwD6Eogm",
+      "path": "docs/es/reader-157YiErU2qiThVfCIsUoNKNaiDwD6Eogm.html"
+    },
+    {
+      "sourceId": "1VgndGHz1ky0krT9zj-wGoXEHSXrf_t2f",
+      "gitBlob": "164f1c991432fcd48d8ed70e1e42b416ecf58ccd",
+      "title": "Fuentes RSS de Estados Unidos en español",
+      "resourceId": "es-1VgndGHz1ky0krT9zj-wGoXEHSXrf_t2f",
+      "path": "docs/es/reader-1VgndGHz1ky0krT9zj-wGoXEHSXrf_t2f.html"
+    },
+    {
+      "sourceId": "1-0-rT0Kfkqpbv06gMeXL0Y1PzsEWdIEY",
+      "gitBlob": "1d16a4aec8a40e0a9dafe52257b30fc28356efde",
+      "title": "Fuentes RSS recomendadas para España",
+      "resourceId": "es-1-0-rT0Kfkqpbv06gMeXL0Y1PzsEWdIEY",
+      "path": "docs/es/reader-1-0-rT0Kfkqpbv06gMeXL0Y1PzsEWdIEY.html"
+    },
+    {
+      "sourceId": "1ZUVV7HeLvrRXtLgr4neU4uLtKyimqkM-",
+      "gitBlob": "f3b7082162ad85e0cb74e4f2344507ed26f4ac26",
+      "title": "Fuentes RSS de El Salvador",
+      "resourceId": "es-1ZUVV7HeLvrRXtLgr4neU4uLtKyimqkM-",
+      "path": "docs/es/reader-1ZUVV7HeLvrRXtLgr4neU4uLtKyimqkM-.html"
+    },
+    {
+      "sourceId": "18Qs2VycdAwhZ1EACzOGvTnFTn_N0U_2L",
+      "gitBlob": "87a9ba8d07cb8040a8be4cbbf2de856e116d7b45",
+      "title": "Fuentes RSS recomendadas para Ecuador",
+      "resourceId": "es-18Qs2VycdAwhZ1EACzOGvTnFTn_N0U_2L",
+      "path": "docs/es/reader-18Qs2VycdAwhZ1EACzOGvTnFTn_N0U_2L.html"
+    },
+    {
+      "sourceId": "1hWndtfF0y7Q2lEkM5MHlePY3IUVt4nVR",
+      "gitBlob": "5f3250b805324e1c3d64136859cafb19ba727064",
+      "title": "Fuentes RSS de Costa Rica",
+      "resourceId": "es-1hWndtfF0y7Q2lEkM5MHlePY3IUVt4nVR",
+      "path": "docs/es/reader-1hWndtfF0y7Q2lEkM5MHlePY3IUVt4nVR.html"
+    },
+    {
+      "sourceId": "1CobDrAd5F8o1i9g_KFrQhSOTTp_tvxyP",
+      "gitBlob": "9889eef3740ea1c664ac702f0452ef5090747660",
+      "title": "Fuentes RSS recomendadas para Chile",
+      "resourceId": "es-1CobDrAd5F8o1i9g_KFrQhSOTTp_tvxyP",
+      "path": "docs/es/reader-1CobDrAd5F8o1i9g_KFrQhSOTTp_tvxyP.html"
+    },
+    {
+      "sourceId": "1iedADwzeg4b-HR5eETdj3xgPYVcZJFJo",
+      "gitBlob": "70bc5efb8784b16ee0eb29b0622c76653bcef294",
+      "title": "Fuentes RSS de Brasil",
+      "resourceId": "es-1iedADwzeg4b-HR5eETdj3xgPYVcZJFJo",
+      "path": "docs/es/reader-1iedADwzeg4b-HR5eETdj3xgPYVcZJFJo.html"
+    },
+    {
+      "sourceId": "1jZ9gxtlHFlDtXNAio4q0b08RSounaR2i",
+      "gitBlob": "509cada63096b087af128bc1a513bd79cce6bb83",
+      "title": "Fuentes RSS recomendadas para Bolivia",
+      "resourceId": "es-1jZ9gxtlHFlDtXNAio4q0b08RSounaR2i",
+      "path": "docs/es/reader-1jZ9gxtlHFlDtXNAio4q0b08RSounaR2i.html"
+    },
+    {
+      "sourceId": "1lNvxuYJe5jlARv6Bv9JRf2eQZLJw1oOb",
+      "gitBlob": "b802b0387cefea098e82c3bba0ecc07f547f2b72",
+      "title": "RSS en español para quienes viven en cualquier parte del mundo",
+      "resourceId": "es-1lNvxuYJe5jlARv6Bv9JRf2eQZLJw1oOb",
+      "path": "docs/es/reader-1lNvxuYJe5jlARv6Bv9JRf2eQZLJw1oOb.html"
+    }
+  ]
+}

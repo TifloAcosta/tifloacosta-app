@@ -587,7 +587,7 @@
 "Doble toque para leer. Acción: Quitar de favoritos." = "Tocca due volte per leggere. Azione: Rimuovi dai preferiti.";
 "Doble toque para reproducir en TifloAcosta. Acciones: Abrir en YouTube y Quitar de favoritos." = "Tocca due volte per riprodurre in TifloAcosta. Azioni: Apri su YouTube e Rimuovi dai preferiti.";
 "Explica qué sucede y qué debería ocurrir." = "Descrivi cosa succede e cosa dovrebbe accadere.";
-"Se incluirán versión de la app y de iOS, tipo genérico de dispositivo, estado de VoiceOver, ajustes de movimiento y texto en negrita y resumen del catálogo. Todo permanece en el dispositivo hasta que decidas compartirlo." = "Il rapporto può includere versioni di app e iOS, tipo di dispositivo, stato VoiceOver, impostazioni visive e riepilogo del catalogo. Resta sul dispositivo finché non lo condividi.";
+"Se incluirán versión de la app y de iOS, tipo genérico de dispositivo, estado de VoiceOver, ajustes de movimiento y texto en negrita y resumen del catálogo. Todo permanece en el dispositivo hasta que decidas compartirlo." = "Il rapporto includerà le versioni dell’app e di iOS, il tipo generico di dispositivo, lo stato di VoiceOver, le impostazioni di riduzione del movimento e del testo in grassetto e un riepilogo del catalogo. Tutto rimane sul dispositivo finché non decidi di condividerlo.";
 "No se adjuntan documentos, historiales, contraseñas, claves de API ni datos de cuentas. Revisa tu texto antes de compartirlo." = "Non vengono allegati documenti, cronologie, password, chiavi API o dati dell’account. Controlla il testo prima di condividerlo.";
 "El informe solo se comparte cuando eliges una aplicación y confirmas el envío. No se envía automáticamente." = "Il rapporto viene condiviso solo quando scegli un’app e confermi. Non viene mai inviato automaticamente.";
 "Todavía no hay contenidos guardados para leer después." = "Nessun contenuto salvato per dopo.";
@@ -981,16 +981,16 @@
 "Esta noticia no tiene un enlace original para compartir." = "Questa notizia non ha un link originale da condividere.";
 "La fuente original no está disponible." = "La fonte originale non è disponibile.";
 "Noticia guardada para leer después." = "Notizia salvata per dopo.";
-"Noticia retirada de Leer después." = "Notizia rimossa da Leggi dopo.";
+"Noticia retirada de Leer después." = "Notizia rimossa da Leggi più tardi.";
 "Añadido a Favoritos" = "Aggiunto ai preferiti";
 "Eliminado de Favoritos" = "Rimosso dai preferiti";
 "No hay enlace original para compartir." = "Nessun link originale da condividere.";
 "Eliminado de Favoritos: %@" = "Rimosso dai preferiti: %@";
 "Todavía no hay un libro abierto anteriormente para continuar." = "Nessun libro aperto in precedenza da riprendere.";
 "Continuando %@ desde la posición guardada." = "Ripresa di %@ dalla posizione salvata.";
-"Configura la clave Gemini en Motores externos." = "Configura la chiave Gemini in Voci esterne.";
+"Configura la clave Gemini en Motores externos." = "Configura la chiave Gemini in Motori esterni.";
 "Generando el primer fragmento con Gemini. La reproducción comenzará cuando Google devuelva el audio." = "Generazione del primo segmento con Gemini. La riproduzione inizierà quando Google restituirà l’audio.";
-"Instala el motor y modelo Phonon en Motores externos." = "Installa il motore e il modello Phonon in Voci esterne.";
+"Instala el motor y modelo Phonon en Motores externos." = "Installa il motore e il modello Phonon in Motori esterni.";
 "Faltan archivos de audio de esta obra." = "Mancano file audio di quest’opera.";
 "No se pudo reproducir: %@" = "Riproduzione non riuscita: %@";
 "La pista indicada no está disponible." = "La traccia selezionata non è disponibile.";
@@ -1323,7 +1323,7 @@
 "Cargar más archivos de esta carpeta" = "Carica altri file da questa cartella";
 "Reproducción desde Google Drive" = "Riproduzione da Google Drive";
 "El archivo se ha descargado temporalmente para reproducirse. No se ha importado a tu colección personal." = "Il file è stato scaricato temporaneamente per la riproduzione. Non è stato aggiunto alla tua raccolta personale.";
-"Descargando: " = "Download: ";
+"Descargando: " = "Download in corso: ";
 "Descargar temporalmente y reproducir: " = "Scarica temporaneamente e riproduci: ";
 "Vuelve a elegir la carpeta para autorizar el acceso con Google Drive." = "Seleziona di nuovo la cartella per autorizzare l'accesso tramite Google Drive.";
 "Selecciona una carpeta en Google Drive, no un archivo." = "Seleziona una cartella in Google Drive, non un file.";
@@ -1533,7 +1533,7 @@
 "Conectando con Google" = "Connessione a Google";
 "La actualización está en curso." = "Aggiornamento in corso.";
 "Recurso guardado para leer después." = "Risorsa salvata per la lettura successiva.";
-"Recurso retirado de Leer después." = "Risorsa rimossa dalla lettura successiva.";
+"Recurso retirado de Leer después." = "Risorsa rimossa da Leggi più tardi.";
 "Actualizando recursos" = "Aggiornamento delle risorse";
 "Vídeos cortos, menos de cuatro minutos" = "Video brevi, meno di quattro minuti";
 "En directo" = "In diretta";
@@ -1563,7 +1563,7 @@
 "Filtrar documentos" = "Filtra documenti";
 "El nombre de la carpeta está vacío, repetido o es demasiado largo." = "Il nome della cartella è vuoto, già in uso o troppo lungo.";
 "No hay documentos seleccionados para mover." = "Nessun documento selezionato da spostare.";
-"No se pudo crear la carpeta. Comprueba que el nombre no esté vacío, repetido o sea demasiado largo." = "Impossibile creare la cartella. Verifica che il nome non sia vuoto, già in uso o troppo lungo.";
+"No se pudo crear la carpeta. Comprueba que el nombre no esté vacío, repetido o sea demasiado largo." = "Impossibile creare la cartella. Verifica che il nome sia presente, univoco e non troppo lungo.";
 "Vídeo no disponible." = "Video non disponibile.";
 "No se pudo reproducir el vídeo con el reproductor de Apple." = "Impossibile riprodurre il video con il lettore Apple.";
 "No disponible" = "Non disponibile";
@@ -1610,8 +1610,8 @@
 "No se pudo guardar «%@»: %@" = "Impossibile salvare «%@»: %@";
 "Selecciona una carpeta en Archivos para descargar «%@»." = "Scegli una cartella in File per scaricare «%@».";
 "No se pudo descargar «%@»: %@" = "Impossibile scaricare «%@»: %@";
-"¿Borrar el historial de consulta de Actualidad y Recursos?" = "Cancellare la cronologia di consultazione di Notizie e Risorse?";
-"Lecturas de Actualidad" = "Letture delle Notizie";
+"¿Borrar el historial de consulta de Actualidad y Recursos?" = "Cancellare la cronologia di consultazione di Attualità e Risorse?";
+"Lecturas de Actualidad" = "Letture di Attualità";
 "Lecturas de Recursos" = "Letture delle Risorse";
 
 /* Final beta: source filters, OCR and supported formats */
@@ -1686,7 +1686,7 @@
 "Latinoamérica" = "America Latina";
 "Información y agradecimientos" = "Informazioni e ringraziamenti";
 "Entrar en Audiocinemateca" = "Accedi ad Audiocinemateca";
-"Agradecemos a %@ su predisposición y colaboración con Multicines Accesibles." = "Ringraziamo %@ per la disponibilità e la collaborazione con Multicines Accesibles.";
+"Agradecemos a %@ su predisposición y colaboración con Multicines Accesibles." = "Ringraziamo %@ per la disponibilità e la collaborazione con Cinema accessibili.";
 "Universo Audesc" = "Universo Audesc";
 
 // Project Gutenberg connection status
@@ -1919,7 +1919,7 @@
 "%d resultados" = "%d risultati";
 "%d de %d fragmentos" = "%d di %d frammenti";
 "Fragmentos traducidos: %d de %d" = "Frammenti tradotti: %d di %d";
-"Quitar de Leer después: %@" = "Rimuovi da Leggi dopo: %@";
+"Quitar de Leer después: %@" = "Rimuovi da Leggi più tardi: %@";
 
 // Release 1.7: remaining dynamic provider and cloud controls
 "Abrir carpeta: %@" = "Apri cartella: %@";

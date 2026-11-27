@@ -103,6 +103,19 @@ final class VisualAuditTests: XCTestCase {
         XCTAssertTrue(close.waitForExistence(timeout: 30))
         capture(app, "14-backups")
         // No changes to backup configuration, no uploads or restoration.
+
+        launch(app, textSize: textSize)
+        openRoot(app, "Configuración")
+        openLabel(app, "Comunicar incidencia de accesibilidad")
+        let diagnostics = app.switches["Incluir diagnóstico básico"].firstMatch
+        XCTAssertTrue(reveal(app, diagnostics))
+        XCTAssertEqual(diagnostics.value as? String, "0")
+        capture(app, "18-report-diagnostics-off")
+        diagnostics.tap()
+        XCTAssertEqual(diagnostics.value as? String, "1")
+        let summary = app.staticTexts.containing(NSPredicate(format: "label CONTAINS %@", "Catálogo. Recursos:")).firstMatch
+        XCTAssertTrue(reveal(app, summary), "The optional catalog summary must appear after enabling diagnostics")
+        capture(app, "19-report-diagnostics-on")
     }
 
     func testStandard() { audit(0) }

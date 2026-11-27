@@ -629,7 +629,7 @@ struct NativeYouTubePlayerScreen: View {
         currentVideo = playlist[next]
         resumeApplied = true // A playlist always starts the next video at its beginning.
         engine.loadVideo(id: currentVideo.id)
-        speak("Siguiente vídeo de la lista: \(currentVideo.title).")
+        speak(MusicLocalized.format("Siguiente vídeo de la lista: %@.", currentVideo.title))
     }
 
     private func speak(_ text: String) {
@@ -639,7 +639,7 @@ struct NativeYouTubePlayerScreen: View {
     private func changePosition(_ delta: Int) {
         let next = min(100, max(0, engine.percent + delta))
         engine.seek(percent: next)
-        speak("Posición \(next) por ciento.")
+        speak(MusicLocalized.format("Posición: %d por ciento.", next))
     }
 
     var body: some View {

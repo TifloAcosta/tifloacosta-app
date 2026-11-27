@@ -45,10 +45,10 @@ function collect(files,patterns){
 }
 const literal=/\b(?:MusicLocalized\.(?:message|format)|NativeAppLanguage\.message)\s*\(\s*"((?:\\.|[^"\\])*)"/g;
 const sharedLiteral=/\bShareLocale\.(?:message|format)\s*\(\s*"((?:\\.|[^"\\])*)"/g;
-const ui=/\b(?:Menu|ProgressView|ContentUnavailableView|ShareLink|GroupBox|ControlGroup|Slider|Stepper|DatePicker|accessibilityValue|accessibilityRotor|accessibilityCustomContent|accessibilityAction\(\s*named:\s*Text|accessibilityLabel|accessibilityHint|Label|Text|Button|Section|Toggle|Picker|NavigationLink|DisclosureGroup|LabeledContent|TextField|SecureField|navigationTitle|alert|confirmationDialog|IntentDescription)\s*\(\s*"((?:\\.|[^"\\])*)"/g;
+const ui=/\b(?:Link|Menu|ProgressView|ContentUnavailableView|ShareLink|GroupBox|ControlGroup|Slider|Stepper|DatePicker|accessibilityValue|accessibilityRotor|accessibilityCustomContent|accessibilityAction\(\s*named:\s*Text|accessibilityLabel|accessibilityHint|Label|Text|Button|Section|Toggle|Picker|NavigationLink|DisclosureGroup|LabeledContent|TextField|SecureField|navigationTitle|alert|confirmationDialog|IntentDescription)\s*\(\s*"((?:\\.|[^"\\])*)"/g;
 const intent=/\bLocalizedStringResource\s*=\s*"((?:\\.|[^"\\])*)"/g;
 const shortTitle=/\bshortTitle:\s*"((?:\\.|[^"\\])*)"/g;
-const properNames=new Set(['ISBN','iOS','TifloAcosta','Google','YouTube']);
+const properNames=new Set(['ISBN','iOS','TifloAcosta','Google','YouTube','Audio Description Project','Portail de l’audiodescription','hörfilm.info','CiecandoScherzando','RTP Play']);
 function missing(found,dicts,exceptions=new Set()){
   const result=[];
   for(const [key,where] of found){
@@ -131,4 +131,19 @@ test('localization simulator project supplies bundle versions for both applicati
     assert.match(plist,/<key>CFBundleVersion<\/key><string>\$\(CURRENT_PROJECT_VERSION\)<\/string>/);
     assert.match(plist,/<key>CFBundleShortVersionString<\/key><string>\$\(MARKETING_VERSION\)<\/string>/);
   }
+});
+
+test('release localization: cinema directory fields and dynamic YouTube announcements are localized',()=>{
+  const cinema=fs.readFileSync(path.join(source,'NativeAccessibleCinema.swift'),'utf8');
+  const player=fs.readFileSync(path.join(source,'NativeYouTubePlayer.swift'),'utf8');
+  const directory=cinema.split('static let sources: [AccessibleCinemaSource] = [')[1].split('\n    ]')[0];
+  const fields=[...directory.matchAll(/\b(?:access|description|geographicNotice): "((?:\\.|[^"\\])*)"/g)]
+    .map(m=>m[1]).filter(Boolean);
+  assert.ok(fields.length>=54);
+  for(const [lang,catalog] of main)for(const key of fields)assert.ok(catalog.has(key),lang+': '+key);
+  assert.match(cinema, /\[MusicLocalized\.message\(source\.name\), MusicLocalized\.message\(source\.description\), source\.detail\]/);
+  assert.equal((cinema.match(/Link\(MusicLocalized\.format\("Abrir plataforma original: %@", MusicLocalized\.message\(source\.name\)\)/g)||[]).length,2);
+  assert.match(player, /speak\(MusicLocalized\.format\("Siguiente vídeo de la lista: %@\.", currentVideo\.title\)\)/);
+  assert.match(player, /speak\(MusicLocalized\.format\("Posición: %d por ciento\.", next\)\)/);
+  assert.doesNotMatch(player, /\bspeak\("/);
 });

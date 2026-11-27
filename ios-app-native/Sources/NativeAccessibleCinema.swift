@@ -345,7 +345,7 @@ private struct NativeCinemaContentScreen: View {
         return AccessibleCinemaDirectory.sources.filter { source in
             let languageMatches = selectedLanguage == .all || source.languages.contains(selectedLanguage)
             let typeMatches = selectedKind == .all || source.kinds.contains(selectedKind)
-            let queryMatches = query.isEmpty || [MusicLocalized.message(source.name), source.description, source.detail]
+            let queryMatches = query.isEmpty || [MusicLocalized.message(source.name), MusicLocalized.message(source.description), source.detail]
                 .contains(where: { $0.localizedStandardContains(query) })
             return languageMatches && typeMatches && queryMatches
         }
@@ -988,7 +988,7 @@ private struct NativeCinemaProviderScreen: View {
                             .frame(minHeight: 44, alignment: .leading)
                         }
                         if let address = source.address, source.id != "audiocinemateca" {
-                            Link("Abrir plataforma original: \(MusicLocalized.message(source.name))", destination: address)
+                            Link(MusicLocalized.format("Abrir plataforma original: %@", MusicLocalized.message(source.name)), destination: address)
                                 .font(.body.weight(.semibold))
                                 .frame(minHeight: 44, alignment: .leading)
                         } else if source.address == nil && !["audesc-es", "audesc-latino"].contains(source.id) {
@@ -1003,7 +1003,7 @@ private struct NativeCinemaProviderScreen: View {
                         Text(source.detail)
                         Text("Las plataformas muestran obras audiodescritas según su catálogo, país y permisos. Abrir la web oficial no significa que todas sus películas tengan audiodescripción.")
                         if source.id == "audiocinemateca", let address = source.address {
-                            Link("Abrir plataforma original: \(MusicLocalized.message(source.name))", destination: address)
+                            Link(MusicLocalized.format("Abrir plataforma original: %@", MusicLocalized.message(source.name)), destination: address)
                         }
                         if let collaborator {
                             Text(MusicLocalized.format("Agradecemos a %@ su predisposición y colaboración con Multicines Accesibles.", collaborator))

@@ -54,7 +54,7 @@ test('Actualidad muestra selector de formatos multimedia antes de los resultados
   for (const choice of ['Selecciona un formato','Podcasts','Canales de YouTube','Todos los formatos']) {
     assert.ok(news.includes('"' + choice + '"'));
   }
-  assert.match(news, /NativeMediaInlineContent\(formatIndex: mediaKindIndex\)/);
+  assert.match(news, /NativeMediaInlineContent\(selectedVideo: \$selectedMediaVideo, formatIndex: mediaKindIndex\)/);
   assert.match(media, /_formatIndex = State\(initialValue:/);
   assert.match(inline, /title: "Fuente o canal"/);
   assert.match(inline, /title: "Idioma"/);

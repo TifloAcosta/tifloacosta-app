@@ -1242,16 +1242,24 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
     @State private var visibleCount = 10
     @State private var loading = false
     @State private var message: String?
+    @State private var channelProgress = ""
+    @State private var loadGeneration = 0
     @State private var selectedVideo: NativeYouTubeVideo?
     @State private var commentingOnVideo: NativeYouTubeVideo?
 
     private var channels: [NativeYouTubeChannel] {
-        if useYouTubeSubscriptions { return account.subscriptions }
-        return personalVideos.followedChannels.compactMap(NativeYouTubeChannel.init(saved:))
+        let local = personalVideos.followedChannels.compactMap(NativeYouTubeChannel.init(saved:))
+        let subscriptions = account.authenticated ? account.subscriptions : []
+        var seen = Set<String>()
+        return (useYouTubeSubscriptions ? subscriptions : subscriptions + local)
+            .filter { seen.insert($0.id).inserted }
     }
 
     private var channelSignature: String {
-        channels.map(\.id).joined(separator: ",")
+        // Subscription pagination changes the list during loading; it must
+        // not cancel the very task that requested those pages.
+        let local = useYouTubeSubscriptions ? [] : personalVideos.followedChannels.compactMap(NativeYouTubeChannel.init(saved:)).map(\.id)
+        return "\(account.authenticated):" + local.sorted().joined(separator: ",")
     }
 
     private var hasMore: Bool {
@@ -1281,16 +1289,44 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
     }
 
     private func load(loadMore: Bool = false) async {
-        guard !loading else { return }
+        // A newly entered screen or changed session may supersede a cancelled
+        // task. Generation checks prevent its late results from replacing ours.
+        if loadMore && loading { return }
+        loadGeneration += 1
+        let generation = loadGeneration
         loading = true
-        defer { loading = false }
+        defer {
+            if generation == loadGeneration {
+                loading = false
+                channelProgress = ""
+            }
+        }
         if !loadMore {
             searches.removeAll()
             collected.removeAll()
             visibleCount = 10
+            message = nil
+            if account.authenticated {
+                if account.subscriptions.isEmpty { await account.loadSubscriptions() }
+                var tokens = Set<String>()
+                while generation == loadGeneration && !Task.isCancelled,
+                      !account.subscriptionsNextPageToken.isEmpty,
+                      tokens.count < 50,
+                      tokens.insert(account.subscriptionsNextPageToken).inserted {
+                    await account.loadSubscriptions(loadMore: true)
+                    if account.subscriptionsMessage != nil { break }
+                }
+            }
         }
+        guard generation == loadGeneration, !Task.isCancelled else { return }
+        let targets = channels
         var failures: [String] = []
-        for channel in channels {
+        if account.authenticated, let subscriptionError = account.subscriptionsMessage {
+            failures.append(subscriptionError)
+        }
+        for (index, channel) in targets.enumerated() {
+            guard generation == loadGeneration, !Task.isCancelled else { return }
+            channelProgress = "\(index + 1)/\(targets.count)"
             let store = searches[channel.id] ?? NativeYouTubeSearchStore()
             if loadMore {
                 if !store.nextPageToken.isEmpty {
@@ -1299,10 +1335,13 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
             } else {
                 await store.search("", channelID: channel.id)
             }
+            guard generation == loadGeneration, !Task.isCancelled else { return }
             searches[channel.id] = store
             if store.searchFailed {
-                failures.append(channel.title)
+                failures.append(channel.title + (store.message.map { ": " + $0 } ?? ""))
             }
+            // Show useful results immediately instead of waiting for every channel.
+            gather()
         }
         gather()
         if loadMore { visibleCount += 10 }
@@ -1315,7 +1354,10 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
             Section(useYouTubeSubscriptions ? "Novedades de mis suscripciones" : "Novedades de mis canales") {
                 Button("Actualizar novedades") { Task { await load() } }
                     .disabled(loading)
-                if loading { ProgressView("Consultando canales seguidos") }
+                if loading {
+                    ProgressView("Consultando canales seguidos")
+                    if !channelProgress.isEmpty { Text(channelProgress).accessibilityAddTraits(.updatesFrequently) }
+                }
                 if let message { Text(message).accessibilityAddTraits(.updatesFrequently) }
                 if channels.isEmpty {
                     Text(MusicLocalized.message(useYouTubeSubscriptions
@@ -1347,11 +1389,10 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
         .sheet(item: $commentingOnVideo) { video in
             NavigationStack { NativeYouTubeCommentScreen(video: video) }
         }
-        .task(id: channelSignature) {
-            if useYouTubeSubscriptions, account.authenticated, account.subscriptions.isEmpty {
-                await account.loadSubscriptions()
-            }
-            await load()
+        .task(id: channelSignature) { await load() }
+        .onDisappear {
+            loadGeneration += 1
+            loading = false
         }
     }
 }

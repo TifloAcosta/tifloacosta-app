@@ -41,6 +41,8 @@ struct NativeCinemaRecent: Codable, Identifiable {
 final class NativeCinemaRecentStore: ObservableObject {
     static let shared = NativeCinemaRecentStore()
     @Published private(set) var entries: [NativeCinemaRecent] = []
+    @Published private(set) var favorites: [NativeCinemaRecent] = []
+    private var favoritesURL: URL { url.deletingLastPathComponent().appendingPathComponent("cinema-favorites-v1.json") }
     private var suppressedKeys = Set<String>()
     private let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         .appendingPathComponent("cinema-recent-v1.json")
@@ -49,6 +51,38 @@ final class NativeCinemaRecentStore: ObservableObject {
            let saved = try? JSONDecoder().decode([NativeCinemaRecent].self, from: data) {
             entries = Self.retained(saved)
         }
+        if let data = try? Data(contentsOf: favoritesURL),
+           let saved = try? JSONDecoder().decode([NativeCinemaRecent].self, from: data) {
+            favorites = saved
+        }
+    }
+
+    private func persistFavorites() {
+        try? FileManager.default.createDirectory(at: favoritesURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+        if let data = try? JSONEncoder().encode(favorites) {
+            try? data.write(to: favoritesURL, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+        }
+    }
+
+    func isFavorite(_ selection: NativeCinemaPlaybackSelection) -> Bool {
+        guard let id = selection.keys.first else { return false }
+        return favorites.contains { $0.id == id }
+    }
+
+    func toggleFavorite(_ selection: NativeCinemaPlaybackSelection) {
+        guard let id = selection.keys.first else { return }
+        if favorites.contains(where: { $0.id == id }) {
+            favorites.removeAll { $0.id == id }
+        } else {
+            favorites.insert(NativeCinemaRecent(id: id, source: selection.historySource, title: selection.title,
+                seconds: 0, duration: 0, finished: false), at: 0)
+        }
+        persistFavorites()
+    }
+
+    func removeFavorite(_ id: String) {
+        favorites.removeAll { $0.id == id }
+        persistFavorites()
     }
     private func persist() {
         try? FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
@@ -107,7 +141,9 @@ final class NativeCinemaRecentStore: ObservableObject {
     func removeSource(_ source: String) {
         suppressedKeys.formUnion(entries.filter { $0.source == source }.map(\.id))
         entries.removeAll { $0.source == source }
+        favorites.removeAll { $0.source == source }
         persist()
+        persistFavorites()
     }
 }
 
@@ -181,6 +217,7 @@ enum NativeCinemaPlaybackSelection {
     case movie(NativeMoviesForTheBlindWork)
     case audio(NativeAudiocinematecaCatalogueIndex.Entry)
     case drive(NativeCinemaDriveSearchHit)
+    case privateDrive(sourceID: String, item: NativeCloudItem)
 
     var title: String {
         switch self {
@@ -189,6 +226,7 @@ enum NativeCinemaPlaybackSelection {
         case .movie(let work): return work.title
         case .audio(let entry): return entry.title
         case .drive(let hit): return hit.entry.name
+        case .privateDrive(_, let item): return item.name
         }
     }
     var provider: String {
@@ -197,7 +235,7 @@ enum NativeCinemaPlaybackSelection {
         case .tape: return "Tape Territory"
         case .movie: return "Movies for the Blind"
         case .audio: return "Audiocinemateca"
-        case .drive: return "Universo Audesc"
+        case .drive, .privateDrive: return "Universo Audesc"
         }
     }
     var language: String {
@@ -208,6 +246,7 @@ enum NativeCinemaPlaybackSelection {
             return entry.languageCode == "1" ? "Español de España" :
                 entry.languageCode == "2" ? "Español de Latinoamérica" : "No indicado"
         case .drive(let hit): return hit.sourceID == "audesc-es" ? "Español de España" : "Español latino"
+        case .privateDrive(let sourceID, _): return sourceID == "audesc-es" ? "Español de España" : "Español latino"
         }
     }
     var year: String {
@@ -236,6 +275,17 @@ enum NativeCinemaPlaybackSelection {
         case .audio(let entry):
             return entry.parts.map { NativeCinemaRecent.digest(NativeAudiocinematecaPlaybackRow.reference(entry: entry, part: $0)) }
         case .drive(let hit): return [NativeCinemaRecent.digest("gdrive-public:" + hit.sourceID + "::" + hit.entry.id)]
+        case .privateDrive(let sourceID, let item): return [NativeCinemaRecent.digest("gdrive:" + sourceID + ":" + item.id)]
+        }
+    }
+    var historySource: String {
+        switch self {
+        case .personal: return "personal"
+        case .tape: return "tape-territory"
+        case .movie: return "movies-for-the-blind"
+        case .audio: return "audiocinemateca"
+        case .drive(let hit): return hit.sourceID == "audesc-es" ? "public-es" : "public-latino"
+        case .privateDrive(let sourceID, _): return sourceID == "audesc-es" ? "drive-es" : "drive-latino"
         }
     }
     var hasSavedPosition: Bool {
@@ -299,7 +349,56 @@ enum NativeCinemaPlaybackSelection {
                 loader.cancel()
                 throw error
             }
+        case .privateDrive(let sourceID, let item):
+            let allowCellular = UserDefaults.standard.bool(forKey: "cinema.cellularDownloads")
+            guard NativeMusicConnectionPolicy.shared.canDownload(allowCellular: allowCellular) else {
+                throw NativeCinemaDirectError.wifiRequired
+            }
+            let token = try await NativeCloudAccountStore.shared.validAccessToken(for: .googleDrive)
+            let storage = try NativeCloudStorage(provider: .googleDrive, accessToken: token)
+            let file = try await storage.downloadCinema(item, allowsCellular: allowCellular)
+            do {
+                try Task.checkCancellation()
+                try player.openTemporaryFile(file, title: item.name, reference: "gdrive:" + sourceID + ":" + item.id,
+                    library: library, fromBeginning: fromBeginning)
+            } catch {
+                try? FileManager.default.removeItem(at: file)
+                throw error
+            }
         }
+    }
+
+    /// Recover only from the user's previously selected authorized folder.
+    /// No OAuth expansion, raw references or credentials are persisted.
+    static func resolvePrivateDrive(sourceID: String, key: String) async throws -> Self? {
+        guard ["audesc-es", "audesc-latino"].contains(sourceID),
+              let root = UserDefaults.standard.string(forKey: "cinema.drive.root." + sourceID), !root.isEmpty else { return nil }
+        let token = try await NativeCloudAccountStore.shared.validAccessToken(for: .googleDrive)
+        let storage = try NativeCloudStorage(provider: .googleDrive, accessToken: token)
+        var pending: [String] = [root]
+        var offset = 0
+        var visited = Set<String>()
+        while offset < pending.count {
+            try Task.checkCancellation()
+            let folder = pending[offset]
+            offset += 1
+            guard visited.insert(folder).inserted else { continue }
+            var cursor: String?
+            var cursors = Set<String>()
+            repeat {
+                try Task.checkCancellation()
+                let page = try await storage.listFolder(id: folder, cursor: cursor)
+                for item in page.items {
+                    if item.isFolder { pending.append(item.id) }
+                    else if NativeCinemaRecent.digest("gdrive:" + sourceID + ":" + item.id) == key {
+                        return .privateDrive(sourceID: sourceID, item: item)
+                    }
+                }
+                cursor = page.nextCursor
+                if let cursor, !cursors.insert(cursor).inserted { throw NativeCinemaPublicDriveError.badResponse }
+            } while cursor != nil
+        }
+        return nil
     }
 }
 
@@ -324,6 +423,7 @@ struct NativeCinemaDirectPlaybackScreen: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var player = NativeCinemaAudioPlayer.shared
     @ObservedObject private var library = NativeCinemaLocalLibrary.shared
+    @ObservedObject private var recents = NativeCinemaRecentStore.shared
     @State private var started = false
     @State private var loading = false
     @State private var failure: String?
@@ -341,6 +441,9 @@ struct NativeCinemaDirectPlaybackScreen: View {
                     Text(MusicLocalized.message(item.kind.rawValue))
                 default: EmptyView()
                 }
+            }
+            Button(recents.isFavorite(request.selection) ? "Quitar de favoritos" : "Añadir a favoritos") {
+                recents.toggleFavorite(request.selection)
             }
             if loading { ProgressView("Cargando reproducción") }
             if let failure {
@@ -472,9 +575,8 @@ struct NativeCinemaResumeScreen: View {
                     selection = .drive(hit)
                 }
             case "drive-es", "drive-latino":
-                // Old personal OAuth records contain a digest, not a file locator.
-                // Keep the authorized browser fallback rather than expand OAuth scopes.
-                return
+                selection = try await NativeCinemaPlaybackSelection.resolvePrivateDrive(
+                    sourceID: recent.source == "drive-es" ? "audesc-es" : "audesc-latino", key: recent.id)
             default: break
             }
             try Task.checkCancellation()

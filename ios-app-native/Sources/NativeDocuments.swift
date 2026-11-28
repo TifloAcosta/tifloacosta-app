@@ -73,7 +73,7 @@ enum NativeDocumentText {
         return paragraphs.joined(separator: "\n\n")
     }
 
-    private static func decodeEntities(_ text: String) -> String {
+    static func decodeEntities(_ text: String) -> String {
         let named = [
             "amp": "&", "lt": "<", "gt": ">", "quot": "\"",
             "apos": "'", "nbsp": " ", "ndash": "–", "mdash": "—",
@@ -118,6 +118,64 @@ enum NativeDocumentText {
     }
 }
 
+/// A native reading stop, either text or a real link. Never run document HTML.
+struct NativeResourceReadingBlock: Sendable {
+    let text: String
+    let url: URL?
+
+    static func make(data: Data, source: URL, fallback: String) -> [Self] {
+        let plain = fallback.components(separatedBy: "\n\n")
+            .filter { !$0.isEmpty }.map { Self(text: $0, url: nil) }
+        guard !["pdf", "txt", "rtf"].contains(source.pathExtension.lowercased()) else { return plain }
+        var html = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
+        // Remove non-reading markup before inspecting anchors; nothing is executed.
+        for pattern in [
+            #"(?is)<!--.*?-->"#,
+            #"(?is)<head\b[^>]*>.*?</head\s*>"#,
+            #"(?is)<(script|style|template|svg|noscript)\b[^>]*>.*?</\1\s*>"#
+        ] {
+            html = html.replacingOccurrences(of: pattern, with: " ", options: .regularExpression)
+        }
+        // Only recognize explicit anchors, not arbitrary strings that resemble URLs.
+        guard let anchors = try? NSRegularExpression(
+            pattern: #"(?is)<a\b((?:[^>"']|"[^"]*"|'[^']*')*)>(.*?)</a\s*>"#),
+              let href = try? NSRegularExpression(
+                pattern: #"(?is)(?:^|\s)href\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>]+))"#)
+        else { return plain }
+        let matches = anchors.matches(in: html, range: NSRange(html.startIndex..., in: html))
+        guard !matches.isEmpty else { return plain }
+        let marker = "TIFLOLINK" + UUID().uuidString.replacingOccurrences(of: "-", with: "") + "X"
+        var links: [String: Self] = [:]
+        var tagged = html
+        let htmlSource = URL(fileURLWithPath: "/resource.html")
+        for (index, match) in matches.enumerated().reversed() {
+            guard let attrsRange = Range(match.range(at: 1), in: html),
+                  let labelRange = Range(match.range(at: 2), in: html),
+                  let full = Range(match.range, in: tagged) else { continue }
+            let attrs = String(html[attrsRange])
+            guard let found = href.firstMatch(in: attrs, range: NSRange(attrs.startIndex..., in: attrs)),
+                  let valueRange = (1...3).compactMap({ Range(found.range(at: $0), in: attrs) }).first
+            else { continue }
+            let raw = NativeDocumentText.decodeEntities(String(attrs[valueRange]))
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !raw.isEmpty,
+                  let url = URL(string: raw, relativeTo: source)?.absoluteURL,
+                  ["https", "http"].contains(url.scheme?.lowercased() ?? ""),
+                  url.host != nil, url.user == nil, url.password == nil else { continue }
+            let label = NativeDocumentText.extract(Data(html[labelRange].utf8), from: htmlSource)
+                .replacingOccurrences(of: "\n\n", with: " ")
+            let token = marker + String(index) + "END"
+            links[token] = Self(text: label.isEmpty ? url.absoluteString : label, url: url)
+            tagged.replaceSubrange(full, with: "\n\n" + token + "\n\n")
+        }
+        guard !links.isEmpty else { return plain }
+        let text = NativeDocumentText.extract(Data(tagged.utf8), from: htmlSource)
+        return text.components(separatedBy: "\n\n").filter { !$0.isEmpty }.map {
+            links[$0] ?? Self(text: $0, url: nil)
+        }
+    }
+}
+
 struct NativeRemoteResourceScreen: View {
     let item: NativeCatalogItem
     @EnvironmentObject private var library: NativeReaderLibrary
@@ -126,7 +184,8 @@ struct NativeRemoteResourceScreen: View {
     @AppStorage("native-ios-language") private var languageIndex = 0
     @StateObject private var speech = NativeReadingSpeech()
     @State private var documentText = ""
-    @State private var paragraphs: [String] = []
+    @State private var paragraphs: [NativeResourceReadingBlock] = []
+    @State private var offlineSaved = false
     @State private var loading = true
     @State private var error: String?
     @State private var status: String?
@@ -143,9 +202,10 @@ struct NativeRemoteResourceScreen: View {
         error = nil
         defer { loading = false }
         do {
-            let text = try await resourceService.text(for: item)
+            let (text, blocks) = try await resourceService.readingContent(for: item)
             documentText = text
-            paragraphs = text.components(separatedBy: "\n\n").filter { !$0.isEmpty }
+            paragraphs = blocks
+            offlineSaved = resourceService.isAvailableOffline(item)
             if paragraphs.isEmpty { throw NativeResourceError.emptyDocument }
         } catch {
             self.error = MusicLocalized.format("No se pudo leer este documento: %@", error.localizedDescription)
@@ -174,6 +234,31 @@ struct NativeRemoteResourceScreen: View {
                 announce(MusicLocalized.format("No se pudo guardar: %@", error.localizedDescription))
             }
         }
+    }
+
+    private func saveOffline(refresh: Bool = false) {
+        guard !busy else { return }
+        busy = true
+        Task {
+            defer { busy = false }
+            do {
+                try await resourceService.saveOffline(item, refresh: refresh)
+                offlineSaved = true
+                if refresh { await load() }
+                announce(MusicLocalized.message("Disponible sin conexión"))
+            } catch {
+                announce(MusicLocalized.format("No se pudo guardar: %@", error.localizedDescription))
+            }
+        }
+    }
+
+    private func removeOffline() {
+        guard !busy else { return }
+        do {
+            try resourceService.removeOffline(item)
+            offlineSaved = false
+            announce(MusicLocalized.message("Copia sin conexión eliminada"))
+        } catch { announce(error.localizedDescription) }
     }
 
     private func download() {
@@ -241,16 +326,32 @@ struct NativeRemoteResourceScreen: View {
                         .disabled(imported || busy)
                         Button("Descargar en Archivos") { download() }
                             .disabled(busy)
+                        if offlineSaved {
+                            Text("Disponible sin conexión")
+                            Button("Actualizar copia sin conexión") { saveOffline(refresh: true) }
+                                .disabled(busy)
+                            Button("Eliminar copia sin conexión") { removeOffline() }
+                                .disabled(busy)
+                        } else {
+                            Button("Guardar sin conexión") { saveOffline() }
+                                .disabled(busy)
+                        }
                     }
                     .buttonStyle(TifloSecondaryActionStyle())
 
                     // Thousands of paragraphs must not become one oversized Text view.
                     LazyVStack(alignment: .leading, spacing: 12) {
                         ForEach(paragraphs.indices, id: \.self) { index in
-                            Text(paragraphs[index])
-                                .font(.body)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .textSelection(.enabled)
+                            if let url = paragraphs[index].url {
+                                Link(paragraphs[index].text, destination: url)
+                                    .accessibilityAddTraits(.isLink)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            } else {
+                                Text(paragraphs[index].text)
+                                    .font(.body)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .textSelection(.enabled)
+                            }
                         }
                     }
                 }

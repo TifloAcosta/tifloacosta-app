@@ -1,6 +1,8 @@
 import SwiftUI
 import Foundation
 import CryptoKit
+import AVFoundation
+import UIKit
 
 struct NativeCinemaRecent: Codable, Identifiable {
     let id: String
@@ -29,7 +31,7 @@ struct NativeCinemaRecent: Codable, Identifiable {
         case "tape-territory": return "Tape Territory"
         case "movies-for-the-blind": return "Movies for the Blind"
         case "public-es", "drive-es": return "Universo Audesc España"
-        case "public-latino", "drive-latino": return "Universo Audesc Latina"
+        case "public-latino", "drive-latino": return "Universo Audesc Latino"
         default: return ""
         }
     }
@@ -45,7 +47,7 @@ final class NativeCinemaRecentStore: ObservableObject {
     init() {
         if let data = try? Data(contentsOf: url),
            let saved = try? JSONDecoder().decode([NativeCinemaRecent].self, from: data) {
-            entries = Array(saved.prefix(100))
+            entries = Self.retained(saved)
         }
     }
     private func persist() {
@@ -62,8 +64,8 @@ final class NativeCinemaRecentStore: ObservableObject {
         recovery?.recordPreserved(section: "cinema", kind: "history",
             identifiers: incoming.filter { ids.contains($0.id) }.map(\.id))
         let missing = incoming.filter { !suppressedKeys.contains($0.id) && ids.insert($0.id).inserted }
-        let accepted = Array(missing.prefix(max(0, 100 - entries.count)))
-        let combined = entries + accepted
+        let combined = Self.retained(entries + missing)
+        let accepted = missing.filter { candidate in combined.contains { $0.id == candidate.id } }
         let disk = try NativeBackupFileRestore(moves: [], indexes: [(url, try JSONEncoder().encode(combined))], recovery: recovery)
         return ({
             try disk.apply()
@@ -74,17 +76,29 @@ final class NativeCinemaRecentStore: ObservableObject {
         }, incoming.filter { candidate in !old.contains(where: { $0.id == candidate.id }) }.count - accepted.count)
     }
 
+    // Never evict an unfinished work because another one was played.
+    private static func retained(_ values: [NativeCinemaRecent]) -> [NativeCinemaRecent] {
+        var completed = 0
+        return values.filter {
+            if !$0.finished { return true }
+            completed += 1
+            return completed <= 100
+        }
+    }
+
     func remember(key: String, source: String, title: String, seconds: Double, duration: Double) {
         guard !key.isEmpty, !source.isEmpty, !suppressedKeys.contains(key),
               seconds.isFinite, duration.isFinite, seconds >= 0, duration >= 0 else { return }
-        entries = NativeCinemaRules.upsert(NativeCinemaRecent(id: key, source: source, title: title,
-            seconds: seconds, duration: duration, finished: false), in: entries)
+        let recent = NativeCinemaRecent(id: key, source: source, title: title,
+            seconds: seconds, duration: duration, finished: false)
+        entries = Self.retained([recent] + entries.filter { $0.id != key })
         persist()
     }
     func markFinished(key: String) {
         guard let index = entries.firstIndex(where: { $0.id == key }) else { return }
         entries[index].finished = true
         entries[index].seconds = 0
+        entries = Self.retained(entries)
         persist()
     }
     func allow(key: String) { suppressedKeys.remove(key) }
@@ -156,6 +170,216 @@ struct NativeCinemaHistoryScreen: View {
             }
             Button("Cancelar", role: .cancel) { pendingRemoval = nil }
         }
+    }
+}
+
+
+@MainActor
+enum NativeCinemaPlaybackSelection {
+    case personal(NativeCinemaLocalItem)
+    case tape(NativeTapeTerritoryCatalogue.Film)
+    case movie(NativeMoviesForTheBlindWork)
+    case audio(NativeAudiocinematecaCatalogueIndex.Entry)
+    case drive(NativeCinemaDriveSearchHit)
+
+    var title: String {
+        switch self {
+        case .personal(let item): return item.title
+        case .tape(let film): return film.title
+        case .movie(let work): return work.title
+        case .audio(let entry): return entry.title
+        case .drive(let hit): return hit.entry.name
+        }
+    }
+    var provider: String {
+        switch self {
+        case .personal: return "Mi colección personal"
+        case .tape: return "Tape Territory"
+        case .movie: return "Movies for the Blind"
+        case .audio: return "Audiocinemateca"
+        case .drive: return "Universo Audesc"
+        }
+    }
+    var language: String {
+        switch self {
+        case .personal(let item): return item.language.rawValue
+        case .tape, .movie: return "Inglés"
+        case .audio(let entry):
+            return entry.languageCode == "1" ? "Español de España" :
+                entry.languageCode == "2" ? "Español de Latinoamérica" : "No indicado"
+        case .drive(let hit): return hit.sourceID == "audesc-es" ? "Español de España" : "Español latino"
+        }
+    }
+    var year: String {
+        switch self {
+        case .tape(let film): return String(film.year)
+        case .audio(let entry): return entry.year
+        default: return ""
+        }
+    }
+    var details: String? {
+        switch self {
+        case .tape(let film): return film.synopsis
+        case .audio(let entry): return entry.synopsis
+        default: return nil
+        }
+    }
+    var label: String {
+        [title, year, MusicLocalized.message(provider), MusicLocalized.message(language)].filter { !$0.isEmpty }.joined(separator: ", ")
+    }
+    var keys: [String] {
+        switch self {
+        case .personal(let item): return [item.id.uuidString]
+        case .tape(let film): return [NativeCinemaRecent.digest("tape-territory:" + film.slug)]
+        case .movie(let work):
+            return work.parts.map { NativeCinemaRecent.digest("movies-for-the-blind:" + NativeCinemaRecent.digest($0.id)) }
+        case .audio(let entry):
+            return entry.parts.map { NativeCinemaRecent.digest(NativeAudiocinematecaPlaybackRow.reference(entry: entry, part: $0)) }
+        case .drive(let hit): return [NativeCinemaRecent.digest("gdrive-public:" + hit.sourceID + "::" + hit.entry.id)]
+        }
+    }
+    var hasSavedPosition: Bool {
+        NativeCinemaRecentStore.shared.entries.contains { !$0.finished && keys.contains($0.id) && $0.seconds > 0 }
+    }
+    func containsCurrent(_ player: NativeCinemaAudioPlayer) -> Bool {
+        guard let id = player.currentID else { return false }
+        let key = player.currentCloudReference.map(NativeCinemaRecent.digest) ?? id.uuidString
+        return keys.contains(key)
+    }
+    private func startIndex(fromBeginning: Bool) -> Int {
+        guard !fromBeginning else { return 0 }
+        let recent = NativeCinemaRecentStore.shared.entries
+        if let latest = recent.first(where: { !$0.finished && keys.contains($0.id) }),
+           let index = keys.firstIndex(of: latest.id) { return index }
+        if keys.count > 1, let latest = recent.first(where: { $0.finished && keys.contains($0.id) }),
+           let index = keys.firstIndex(of: latest.id), index + 1 < keys.count { return index + 1 }
+        return 0
+    }
+
+    func start(fromBeginning: Bool, library: NativeCinemaLocalLibrary, player: NativeCinemaAudioPlayer) async throws {
+        if containsCurrent(player), !fromBeginning, player.playbackError == nil {
+            if !player.playing { player.toggle(library: library) }
+            return
+        }
+        try Task.checkCancellation()
+        switch self {
+        case .personal(let item):
+            try player.open(item, library: library, fromBeginning: fromBeginning)
+        case .tape(let film):
+            guard let url = film.describedStream else { throw NativeCinemaLocalError.unsupported }
+            try player.openTapeTerritory(url, title: film.title, slug: film.slug, library: library, fromBeginning: fromBeginning)
+        case .movie(let work):
+            let index = startIndex(fromBeginning: fromBeginning)
+            guard work.parts.indices.contains(index) else { throw NativeCinemaLocalError.missing }
+            try player.openMoviePart(work.parts[index], workTitle: work.title,
+                followedBy: Array(work.parts.dropFirst(index + 1)), library: library, fromBeginning: fromBeginning)
+        case .audio(let entry):
+            let index = startIndex(fromBeginning: fromBeginning)
+            guard entry.parts.indices.contains(index) else { throw NativeCinemaLocalError.missing }
+            // Films in several files continue automatically; series respect the selected episode.
+            let remaining = entry.category == "series" ? [] : Array(entry.parts.dropFirst(index + 1))
+            try player.openAudiocinematecaPart(entry: entry, part: entry.parts[index],
+                followedBy: remaining, library: library, fromBeginning: fromBeginning)
+        case .drive(let hit):
+            let allowCellular = UserDefaults.standard.bool(forKey: "cinema.cellularDownloads")
+            guard NativeMusicConnectionPolicy.shared.canDownload(allowCellular: allowCellular) else {
+                throw NativeCinemaDirectError.wifiRequired
+            }
+            let resolved = try await NativeCinemaPublicDrive().resolveSearchHit(hit)
+            try Task.checkCancellation()
+            guard let loader = NativeCinemaDriveResourceLoader(item: resolved.entry, ancestors: resolved.path,
+                                                                allowsCellular: allowCellular) else {
+                throw NativeCinemaPublicDriveError.unsupported
+            }
+            do {
+                try player.openPublicStream(asset: loader.makeAsset(), loader: loader, title: resolved.entry.name,
+                    reference: "gdrive-public:" + hit.sourceID + "::" + resolved.entry.id,
+                    isVideo: resolved.entry.isVideo, library: library, fromBeginning: fromBeginning)
+            } catch {
+                loader.cancel()
+                throw error
+            }
+        }
+    }
+}
+
+private enum NativeCinemaDirectError: LocalizedError {
+    case wifiRequired
+    var errorDescription: String? {
+        MusicLocalized.message("La descarga está limitada a Wi-Fi. Activa los datos móviles si quieres permitirla.")
+    }
+}
+
+@MainActor
+struct NativeCinemaPlaybackRequest: Identifiable {
+    let id = UUID()
+    let selection: NativeCinemaPlaybackSelection
+    var fromBeginning = false
+    var informationOnly = false
+}
+
+@MainActor
+struct NativeCinemaDirectPlaybackScreen: View {
+    let request: NativeCinemaPlaybackRequest
+    @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var player = NativeCinemaAudioPlayer.shared
+    @ObservedObject private var library = NativeCinemaLocalLibrary.shared
+    @State private var started = false
+    @State private var loading = false
+    @State private var failure: String?
+    var body: some View {
+        List {
+            Text(request.selection.label).accessibilityAddTraits(.isHeader)
+            if request.informationOnly {
+                if let details = request.selection.details, !details.isEmpty { Text(details) }
+                Button("Reproducir") { Task { await play(fromBeginning: false) } }
+                Button("Reproducir desde el principio") { Task { await play(fromBeginning: true) } }
+                switch request.selection {
+                case .audio(let entry):
+                    NavigationLink("Ficha de la obra") { NativeAudiocinematecaDetail(entry: entry) }
+                case .personal(let item):
+                    Text(MusicLocalized.message(item.kind.rawValue))
+                default: EmptyView()
+                }
+            }
+            if loading { ProgressView("Cargando reproducción") }
+            if let failure {
+                Text(failure).accessibilityAddTraits(.updatesFrequently)
+                Button("Reintentar") { Task { await play(fromBeginning: request.fromBeginning) } }
+            }
+            if request.selection.containsCurrent(player) {
+                if let error = player.playbackError {
+                    Text(error).accessibilityAddTraits(.updatesFrequently)
+                    Button("Volver a intentar") { Task { await play(fromBeginning: false) } }
+                    if case .drive(let hit) = request.selection {
+                        NavigationLink("Explorar catálogo audiodescrito") {
+                            NativeCinemaPublishedDriveBrowser(sourceID: hit.sourceID, sourceName: request.selection.provider, initialHit: hit)
+                        }
+                    }
+                }
+                if player.currentCloudIsVideo, let video = player.videoPlayer {
+                    NativeCinemaVideoSurface(player: video).frame(height: 210).accessibilityHidden(true)
+                }
+                NativeCinemaTransportControls(player: player, library: library)
+                Button("Reproducir desde el principio") { Task { await play(fromBeginning: true) } }
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle(request.selection.title)
+        .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Cerrar") { dismiss() } } }
+        .task {
+            guard !started, !request.informationOnly else { return }
+            started = true
+            await play(fromBeginning: request.fromBeginning)
+        }
+    }
+    private func play(fromBeginning: Bool) async {
+        guard !loading else { return }
+        loading = true
+        failure = nil
+        defer { loading = false }
+        do { try await request.selection.start(fromBeginning: fromBeginning, library: library, player: player) }
+        catch { if !Task.isCancelled { failure = error.localizedDescription } }
     }
 }
 

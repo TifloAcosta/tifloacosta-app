@@ -2731,13 +2731,13 @@ enum NativeReaderHeadingDisplay {
     }
 }
 
-fileprivate struct NativeReaderNavigationPoint: Identifiable, Sendable {
+struct NativeReaderNavigationPoint: Identifiable, Sendable {
     let offset: Int
     let title: String
     var id: Int { offset }
 }
 
-fileprivate struct NativeReaderTextLayout: Sendable {
+struct NativeReaderTextLayout: Sendable {
     private let fullText: String
     let fragments: [String]
     let fragmentStarts: [Int]
@@ -3120,7 +3120,7 @@ struct NativeReadingScreen: View {
     ]
      private let sleepMinutes: [Int] = [0, 5, 10, 15, 30, 45, 60]
 
-    fileprivate init(document: NativeReadingDocument, speech: NativeReadingSpeech,
+    init(document: NativeReadingDocument, speech: NativeReadingSpeech,
          startPercent: Int? = nil, startTrack: Int? = nil,
          startWithConversion: Bool = false,
          preparedLayout: NativeReaderTextLayout? = nil,

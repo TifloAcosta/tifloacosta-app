@@ -1,0 +1,53 @@
+name: Audesc central index probe (no publication)
+on:
+  push:
+    branches:
+      - development/next-public-1.6-500200-20261121
+    paths:
+      - .github/workflows/cinema-central-index-probe.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: cinema-central-index-probe
+  cancel-in-progress: false
+jobs:
+  probe:
+    if: github.ref == 'refs/heads/development/next-public-1.6-500200-20261121'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Synthetic fixtures
+        run: node --test test/cinema-central-index.test.mjs
+      - name: Read approved roots from existing iOS configuration
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, os, plistlib
+          with open('ios-app-native/Sources/Info.plist','rb') as f:
+              plist=plistlib.load(f)
+          config={}
+          for source, prefix in [('audesc-es','TifloCinemaAudescSpain'),('audesc-latino','TifloCinemaAudescLatino')]:
+              root={'id':plist[prefix+'FolderID'],'name':'Universo Audesc','mimeType':'application/vnd.google-apps.folder'}
+              if plist.get(prefix+'ResourceKey'):
+                  root['resourceKey']=plist[prefix+'ResourceKey']
+              config[source]=root
+          target=os.path.join(os.environ['RUNNER_TEMP'],'cinema-index-config.json')
+          fd=os.open(target,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
+          with os.fdopen(fd,'w') as f:
+              json.dump(config,f)
+          PY
+      - name: Probe both actual catalogues without publishing
+        env:
+          TIFLO_CINEMA_SERVER_DRIVE_KEY: ${{ secrets.TIFLO_CINEMA_SERVER_DRIVE_KEY }}
+          TIFLO_CINEMA_INDEX_CONFIG: ${{ runner.temp }}/cinema-index-config.json
+        run: node scripts/cinema-central-index-probe.mjs
+      - name: Remove temporary configuration
+        if: always()
+        run: rm -f "$RUNNER_TEMP/cinema-index-config.json"

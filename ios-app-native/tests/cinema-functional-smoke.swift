@@ -26,6 +26,12 @@ struct CinemaFunctionalSmoke {
         precondition(!NativeCinemaRules.canDeclareEmpty(completed: true, count: 0, unavailable: 1, partial: 0, attempted: 1))
         precondition(!NativeCinemaRules.canDeclareEmpty(completed: true, count: 0, unavailable: 0, partial: 1, attempted: 1))
         precondition(!NativeCinemaRules.canDeclareEmpty(completed: true, count: 0, unavailable: 0, partial: 0, attempted: 0))
-        print("Cinema: 19 functional checks passed")
+        let keys = ["first", "second", "third"]
+        precondition(NativeCinemaRules.preferredPartIndex(keys: keys, recent: [("second", false), ("first", true)], fromBeginning: false) == 1)
+        precondition(NativeCinemaRules.preferredPartIndex(keys: keys, recent: [("second", true)], fromBeginning: false) == 2)
+        precondition(NativeCinemaRules.preferredPartIndex(keys: keys, recent: [("third", true)], fromBeginning: false) == 0)
+        precondition(NativeCinemaRules.preferredPartIndex(keys: keys, recent: [("second", false)], fromBeginning: true) == 0)
+        precondition(NativeCinemaRules.preferredPartIndex(keys: keys, recent: [("unrelated", false)], fromBeginning: false) == 0)
+        print("Cinema: 24 functional checks passed")
     }
 }

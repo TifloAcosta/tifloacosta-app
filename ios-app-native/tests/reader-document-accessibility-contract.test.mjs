@@ -27,7 +27,7 @@ test('Sleep timer is first-level and scoped to the open document', () => {
 });
 
 test('Long text is lazily segmented and VoiceOver is not force-recentered', () => {
-  assert.match(reader, /private struct NativeReaderTextLayout/);
+  assert.match(reader, /struct NativeReaderTextLayout: Sendable/);
   assert.match(reader, /LazyVStack\(alignment: \.leading/);
   assert.match(reader, /ForEach\(textLayout\.fragments\.indices/);
   assert.match(reader, /programmaticFocusRequest/);

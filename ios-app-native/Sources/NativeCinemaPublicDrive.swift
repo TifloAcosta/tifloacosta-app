@@ -4,7 +4,7 @@ import Foundation
 /// Uses a separately restricted Google Drive API key. It never requests a
 /// user's Google account, uses another feature's OAuth token, or caches a
 /// publisher's expired title list.
-struct NativeCinemaPublicDriveEntry: Identifiable, Equatable {
+struct NativeCinemaPublicDriveEntry: Identifiable, Equatable, Sendable {
     let id: String
     let name: String
     let isFolder: Bool
@@ -22,7 +22,7 @@ struct NativeCinemaPublicDriveEntry: Identifiable, Equatable {
     }
 }
 
-struct NativeCinemaPublicDrivePage {
+struct NativeCinemaPublicDrivePage: Sendable {
     let entries: [NativeCinemaPublicDriveEntry]
     let nextCursor: String?
 }
@@ -269,61 +269,137 @@ final class NativeCinemaPublicDrive {
 }
 
 
-// Live, bounded traversal of the publisher's configured folder, never the
-// user's entire Drive. No title or resource key is persisted.
-struct NativeCinemaDriveSearchHit: Identifiable {
+// Search only within the configured publisher roots. Reusable metadata stays
+// in memory, never publishes resource keys or expired premieres to a server.
+struct NativeCinemaDriveSearchHit: Identifiable, Sendable {
     let sourceID: String
     let entry: NativeCinemaPublicDriveEntry
     let path: [NativeCinemaPublicDriveEntry]
     let pageCursor: String?
     var id: String { sourceID + ":" + entry.id }
 }
-struct NativeCinemaDriveSearchResult {
+struct NativeCinemaDriveSearchResult: Sendable {
     var hits: [NativeCinemaDriveSearchHit] = []
     var incomplete = false
 }
-extension NativeCinemaPublicDrive {
-    func searchPublished(sourceID: String, query: String, kind: AccessibleCinemaKind) async throws -> NativeCinemaDriveSearchResult {
-        guard let root = Self.publisherRoot(for: sourceID) else { throw NativeCinemaPublicDriveError.invalidFolder }
+
+actor NativeCinemaDriveIndex {
+    static let shared = NativeCinemaDriveIndex()
+    private struct Cursor: Hashable {
+        let folderID: String
+        let token: String?
+    }
+    private struct Pending {
+        let path: [NativeCinemaPublicDriveEntry]
+        let token: String?
+    }
+    private struct Snapshot {
+        let rootID: String
+        let started: Date
+        var completed: Date?
+        var queue: [Pending]
+        var offset = 0
+        var seenFolders: Set<String>
+        var pages = Set<Cursor>()
+        var hits: [String: NativeCinemaDriveSearchHit] = [:]
+        var failed = false
+    }
+    private var snapshots: [String: Snapshot] = [:]
+    private var active = Set<String>()
+
+    func search(sourceID: String, query: String, kind: AccessibleCinemaKind,
+                refresh: Bool = false,
+                progress: @MainActor @Sendable (NativeCinemaDriveSearchResult, Int) -> Void) async throws -> NativeCinemaDriveSearchResult {
+        guard let root = NativeCinemaPublicDrive.publisherRoot(for: sourceID) else {
+            throw NativeCinemaPublicDriveError.invalidFolder
+        }
         let term = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !term.isEmpty else { return NativeCinemaDriveSearchResult() }
-        var result = NativeCinemaDriveSearchResult()
-        var queue: [([NativeCinemaPublicDriveEntry], String?)] = [([root], nil)]
-        var seenFolders: Set<String> = [root.id]
-        var seenFiles = Set<String>()
-        let started = Date()
-        var pages = 0
-        while !queue.isEmpty && pages < 40 && Date().timeIntervalSince(started) < 20 && result.hits.count < 100 {
+        // Wait for a cancelled prior search to release this same root.
+        while active.contains(sourceID) {
+            try await Task.sleep(nanoseconds: 100_000_000)
+        }
+        try Task.checkCancellation()
+        active.insert(sourceID)
+        defer { active.remove(sourceID) }
+        let previous = snapshots[sourceID]
+        let fresh = previous?.completed.map { Date().timeIntervalSince($0) < 900 } ?? false
+        let usable = previous?.rootID == root.id &&
+            (fresh || (previous?.completed == nil && previous?.failed == false &&
+                Date().timeIntervalSince(previous?.started ?? .distantPast) < 900))
+        var state = (!refresh && usable ? previous : nil) ?? Snapshot(
+            rootID: root.id, started: Date(), queue: [Pending(path: [root], token: nil)],
+            seenFolders: [root.id])
+        func result(_ state: Snapshot, incomplete: Bool) -> NativeCinemaDriveSearchResult {
+            var uncertain = incomplete
+            let matches = state.hits.values.filter { hit in
+                guard NativeCinemaRules.matches(term, fields: [hit.entry.name]) else { return false }
+                let category = Self.searchCategory(path: hit.path)
+                if kind != .all && category == nil {
+                    // Unknown categories must not silently hide a matching title.
+                    uncertain = true
+                }
+                return kind == .all || category == nil || kind == category
+            }.sorted { $0.entry.name.localizedStandardCompare($1.entry.name) == .orderedAscending }
+            return NativeCinemaDriveSearchResult(hits: matches, incomplete: uncertain)
+        }
+        if state.completed != nil {
+            return result(state, incomplete: state.failed)
+        }
+        defer {
+            // Keep the checkpoint even on cancellation; resume on next query.
+            snapshots[sourceID] = state
+        }
+        let service = try NativeCinemaPublicDrive()
+        // No overall time, page or hit cutoff. Individual network requests
+        // retain their timeout; user cancellation and repeated cursors stop safely.
+        while state.offset < state.queue.count {
             try Task.checkCancellation()
-            let (path, cursor) = queue.removeFirst()
-            guard let folder = path.last else { continue }
-            pages += 1
-            let page: NativeCinemaPublicDrivePage
-            do {
-                page = try await listFolder(folder, ancestors: Array(path.dropLast()), cursor: cursor)
-            } catch is CancellationError { throw CancellationError() }
-            catch {
-                if pages == 1 { throw error }
-                result.incomplete = true
+            let pending = state.queue[state.offset]
+            guard let folder = pending.path.last else { state.offset += 1; continue }
+            let cursor = Cursor(folderID: folder.id, token: pending.token)
+            if state.pages.contains(cursor) {
+                state.failed = true
+                state.offset += 1
                 continue
             }
-            let category = Self.searchCategory(path: path)
+            let page: NativeCinemaPublicDrivePage
+            do {
+                page = try await service.listFolder(folder, ancestors: Array(pending.path.dropLast()), cursor: pending.token)
+            } catch {
+                if Task.isCancelled || (error as? URLError)?.code == .cancelled { throw CancellationError() }
+                if state.pages.isEmpty { throw error }
+                state.failed = true
+                state.offset += 1
+                continue
+            }
+            try Task.checkCancellation()
+            state.pages.insert(cursor)
+            state.offset += 1
             for entry in page.entries {
-                if result.hits.count >= 100 { result.incomplete = true; break }
                 if entry.isFolder {
-                    if seenFolders.insert(entry.id).inserted { queue.append((path + [entry], nil)) }
-                } else if entry.isSupportedMedia && kind != .all && category == nil {
-                    if NativeCinemaRules.matches(term, fields: [entry.name]) { result.incomplete = true }
-                } else if entry.isSupportedMedia && (kind == .all || kind == category)
-                    && NativeCinemaRules.matches(term, fields: [entry.name]) && seenFiles.insert(entry.id).inserted {
-                    result.hits.append(.init(sourceID: sourceID, entry: entry, path: path, pageCursor: cursor))
+                    if state.seenFolders.insert(entry.id).inserted {
+                        state.queue.append(Pending(path: pending.path + [entry], token: nil))
+                    }
+                } else if entry.isSupportedMedia {
+                    state.hits[entry.id] = NativeCinemaDriveSearchHit(sourceID: sourceID,
+                        entry: entry, path: pending.path, pageCursor: pending.token)
                 }
             }
-            if let next = page.nextCursor, next != cursor { queue.insert((path, next), at: 0) }
+            if let next = page.nextCursor, !next.isEmpty {
+                if state.pages.contains(Cursor(folderID: folder.id, token: next)) {
+                    state.failed = true
+                } else {
+                    state.queue.append(Pending(path: pending.path, token: next))
+                }
+            }
+            // Publish partial matches as the traversal progresses, not just at completion.
+            if state.pages.count == 1 || state.pages.count % 5 == 0 || state.offset == state.queue.count {
+                await progress(result(state, incomplete: true), state.pages.count)
+            }
         }
-        result.incomplete = result.incomplete || !queue.isEmpty
-        result.hits.sort { $0.entry.name.localizedStandardCompare($1.entry.name) == .orderedAscending }
-        return result
+        if !state.failed { state.completed = Date() }
+        return result(state, incomplete: state.failed)
     }
     private static func searchCategory(path: [NativeCinemaPublicDriveEntry]) -> AccessibleCinemaKind? {
         for folder in path.dropFirst().reversed() {
@@ -334,5 +410,14 @@ extension NativeCinemaPublicDrive {
             if name.contains("pelicula") || name.contains("cine por orden") { return .film }
         }
         return nil
+    }
+}
+
+extension NativeCinemaPublicDrive {
+    func searchPublished(sourceID: String, query: String, kind: AccessibleCinemaKind,
+                         refresh: Bool = false,
+                         progress: @MainActor @Sendable (NativeCinemaDriveSearchResult, Int) -> Void = { _, _ in }) async throws -> NativeCinemaDriveSearchResult {
+        try await NativeCinemaDriveIndex.shared.search(sourceID: sourceID, query: query, kind: kind,
+                                                       refresh: refresh, progress: progress)
     }
 }

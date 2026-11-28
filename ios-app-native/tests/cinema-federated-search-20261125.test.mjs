@@ -8,7 +8,7 @@ test('explicit cancellable federated search uses provider parsers and selected f
 });
 test('public Drive search stays within configured roots, paginates and reports partial coverage',()=>{
  const source=read('NativeCinemaPublicDrive.swift');
- for(const token of ['Self.publisherRoot(for: sourceID)','while state.offset < state.queue.count','try Task.checkCancellation()','ancestors: Array(pending.path.dropLast())','state.failed','storeComplete(state, sourceID: sourceID)']) assert.ok(source.includes(token),token);
+ for(const token of ['NativeCinemaPublicDrive.publisherRoot(for: sourceID)','while state.offset < state.queue.count','try Task.checkCancellation()','ancestors: Array(pending.path.dropLast())','state.failed','storeComplete(state, sourceID: sourceID)']) assert.ok(source.includes(token),token);
  assert.ok(read('NativeCinemaPublishedDriveBrowser.swift').includes('resolveSearchHit(hit)'));
 });
 test('genre uses provider metadata and catalogue receives filters',()=>{

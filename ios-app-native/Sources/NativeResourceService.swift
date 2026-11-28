@@ -50,8 +50,8 @@ final class NativeResourceService: ObservableObject {
     }
 
     func saveOffline(_ item: NativeCatalogItem, refresh: Bool = false) async throws {
-        if !refresh && isAvailableOffline(item) { return }
         let content = try await payload(for: item, refresh: refresh)
+        try Task.checkCancellation()
         let destination = offlineURL(for: item)
         try await Task.detached(priority: .utility) {
             var directory = destination.deletingLastPathComponent()
@@ -59,6 +59,7 @@ final class NativeResourceService: ObservableObject {
             var values = URLResourceValues()
             values.isExcludedFromBackup = true // Public editorial copies, not user documents.
             try? directory.setResourceValues(values)
+            try Task.checkCancellation()
             try JSONEncoder().encode(content).write(to: destination, options: .atomic)
         }.value
     }
@@ -66,6 +67,9 @@ final class NativeResourceService: ObservableObject {
     func removeOffline(_ item: NativeCatalogItem) throws {
         let url = offlineURL(for: item)
         if FileManager.default.fileExists(atPath: url.path) { try FileManager.default.removeItem(at: url) }
+        let id = key(for: item)
+        cache.removeValue(forKey: id)
+        cacheOrder.removeAll { $0 == id }
     }
 
     private func remember(_ content: NativeResourcePayload, for item: NativeCatalogItem) {

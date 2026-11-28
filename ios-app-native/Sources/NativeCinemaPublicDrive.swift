@@ -2,8 +2,8 @@ import Foundation
 
 /// Read-only access to publisher-authorized public Google Drive catalogues.
 /// Uses a separately restricted Google Drive API key. It never requests a
-/// user's Google account, uses another feature's OAuth token, or caches a
-/// publisher's expired title list.
+/// user's Google account or another feature's OAuth token. Local metadata
+/// indexes are time-limited and every selected work is checked live.
 struct NativeCinemaPublicDriveEntry: Identifiable, Equatable, Codable, Sendable {
     let id: String
     let name: String
@@ -192,7 +192,7 @@ final class NativeCinemaPublicDrive {
         var query = [
             URLQueryItem(name: "q", value: "'\(folderName)' in parents and trashed = false"),
             URLQueryItem(name: "fields", value:
-                "nextPageToken,incompleteSearch,files(id,name,mimeType,size,resourceKey)"),
+                "nextPageToken,incompleteSearch,files(id,name,mimeType,size,resourceKey,shortcutDetails(targetId,targetMimeType))"),
             URLQueryItem(name: "pageSize", value: String(min(1000, max(1, pageSize)))),
             URLQueryItem(name: "supportsAllDrives", value: "true"),
             URLQueryItem(name: "includeItemsFromAllDrives", value: "true")
@@ -224,7 +224,11 @@ final class NativeCinemaPublicDrive {
         return NativeCinemaPublicDrivePage(
             entries: entries,
             nextCursor: root["nextPageToken"] as? String,
-            incomplete: root["incompleteSearch"] as? Bool ?? false
+            // A shortcut can lead outside the approved root. Do not silently
+            // claim complete coverage of a tree with unresolved shortcuts.
+            incomplete: (root["incompleteSearch"] as? Bool ?? false) ||
+                records.contains { ($0["mimeType"] as? String) == "application/vnd.google-apps.shortcut" } ||
+                entries.count != records.count
         )
     }
 
@@ -273,7 +277,7 @@ final class NativeCinemaPublicDrive {
 
 // Search only within the configured publisher roots. Completed metadata
 // snapshots stay on this device, without resource keys, cursors or media.
- // Every selected result must be resolved again through the live folder tree.
+// Every selected result must be resolved again through the live folder tree.
 struct NativeCinemaDriveSearchHit: Identifiable, Codable, Sendable {
     let sourceID: String
     let entry: NativeCinemaPublicDriveEntry
@@ -462,6 +466,11 @@ actor NativeCinemaDriveIndex {
                 } else {
                     state.queue.append(Pending(path: pending.path, token: next))
                 }
+            }
+            // Release processed path arrays as the queue grows.
+            if state.offset >= 256 {
+                state.queue.removeFirst(state.offset)
+                state.offset = 0
             }
             // Publish partial matches as the traversal progresses, not just at completion.
             if state.pages.count == 1 || state.pages.count % 5 == 0 || state.offset == state.queue.count {

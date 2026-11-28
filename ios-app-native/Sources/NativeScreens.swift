@@ -1325,7 +1325,7 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
             }
     }
 
-    private func load(loadMore: Bool = false) async {
+    private func load(loadMore: Bool = false, reloadSubscriptions: Bool = false) async {
         // A newly entered screen or changed session may supersede a cancelled
         // task. Generation checks prevent its late results from replacing ours.
         if loadMore && loading { return }
@@ -1344,7 +1344,9 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
             visibleCount = 10
             message = nil
             if account.authenticated {
-                if account.subscriptions.isEmpty { await account.loadSubscriptions() }
+                if reloadSubscriptions || account.subscriptions.isEmpty {
+                    await account.loadSubscriptions()
+                }
                 var tokens = Set<String>()
                 while generation == loadGeneration && !Task.isCancelled,
                       !account.subscriptionsNextPageToken.isEmpty,
@@ -1389,7 +1391,7 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
     var body: some View {
         List {
             Section(useYouTubeSubscriptions ? "Novedades de mis suscripciones" : "Novedades de mis canales") {
-                Button("Actualizar novedades") { Task { await load() } }
+                Button("Actualizar novedades") { Task { await load(reloadSubscriptions: true) } }
                     .disabled(loading)
                 if loading {
                     ProgressView("Consultando canales seguidos")

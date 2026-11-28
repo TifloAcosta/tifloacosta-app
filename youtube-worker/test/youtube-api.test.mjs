@@ -406,3 +406,41 @@ test('invalid playlists and missing credentials fail before any API call', async
     error => error?.code === 'SEARCH_UNAVAILABLE'
   );
 });
+
+
+test('subscription updates use official uploads playlist, not expensive search.list', async () => {
+  const channelId = 'UC' + 'x'.repeat(22);
+  const playlistId = 'UU' + 'x'.repeat(22);
+  const videoId = 'abcDEF123_-';
+  const calls = [];
+  const page = await searchVideos('key', '', 'NEXT', async raw => {
+    const url = new URL(raw);
+    calls.push(url.pathname);
+    if (url.pathname.endsWith('/channels')) {
+      assert.equal(url.searchParams.get('id'), channelId);
+      assert.equal(url.searchParams.get('part'), 'contentDetails');
+      return jsonResponse({ items: [{ contentDetails: { relatedPlaylists: { uploads: playlistId } } }] });
+    }
+    if (url.pathname.endsWith('/playlistItems')) {
+      assert.equal(url.searchParams.get('playlistId'), playlistId);
+      assert.equal(url.searchParams.get('pageToken'), 'NEXT');
+      return jsonResponse({ items: [
+        { contentDetails: { videoId, videoPublishedAt: '2026-11-27T12:00:00Z' },
+          snippet: { title: 'Recent video', channelTitle: 'Channel', publishedAt: '2026-11-28T12:00:00Z', position: 0 } },
+        { contentDetails: { videoId: 'private1234' }, snippet: { title: 'Private video', position: 1 } }
+      ], nextPageToken: 'AFTER' });
+    }
+    if (url.pathname.endsWith('/videos')) {
+      assert.equal(url.searchParams.get('id'), videoId);
+      return jsonResponse({ items: [{ id: videoId, contentDetails: { duration: 'PT2M' } }] });
+    }
+    throw new Error('Unexpected request: ' + url.pathname);
+  }, { channelId, recentUploads: true });
+  assert.equal(calls.length, 3);
+  assert.ok(calls.every(path => !path.endsWith('/search')));
+  assert.equal(page.items.length, 1);
+  assert.equal(page.items[0].id, videoId);
+  assert.equal(page.items[0].publishedAt, '2026-11-27T12:00:00Z');
+  assert.equal(page.items[0].durationSeconds, 120);
+  assert.equal(page.nextPageToken, 'AFTER');
+});

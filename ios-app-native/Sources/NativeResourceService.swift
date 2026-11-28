@@ -33,6 +33,7 @@ private struct NativeResourcePayload: Codable, Sendable {
 final class NativeResourceService: ObservableObject {
     private var cache: [String: NativeResourcePayload] = [:]
     private var cacheOrder: [String] = []
+    @Published private(set) var offlineRevision = 0
 
     private func key(for item: NativeCatalogItem) -> String {
         let identity = item.id + "\n" + (item.resourceURL?.absoluteString ?? "")
@@ -62,6 +63,7 @@ final class NativeResourceService: ObservableObject {
             try Task.checkCancellation()
             try JSONEncoder().encode(content).write(to: destination, options: .atomic)
         }.value
+        offlineRevision += 1
     }
 
     func removeOffline(_ item: NativeCatalogItem) throws {
@@ -70,6 +72,7 @@ final class NativeResourceService: ObservableObject {
         let id = key(for: item)
         cache.removeValue(forKey: id)
         cacheOrder.removeAll { $0 == id }
+        offlineRevision += 1
     }
 
     private func remember(_ content: NativeResourcePayload, for item: NativeCatalogItem) {

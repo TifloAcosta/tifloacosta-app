@@ -3,8 +3,8 @@ import AVFoundation
 import UIKit
 
 /// Catalogue driven by the publisher's current public Google Drive tree.
-/// No user Google account required; nothing is indexed or cached persistently.
-/// A title removed by the publisher disappears on the next refresh.
+/// No user Google account required. Search results are resolved against
+/// fresh provider listings before opening, regardless of cached metadata.
 @MainActor
 struct NativeCinemaPublishedDriveBrowser: View {
     let sourceID: String
@@ -183,10 +183,11 @@ struct NativeCinemaPublishedDriveBrowser: View {
                 throw NativeCinemaPublicDriveError.invalidFolder
             }
             if let hit = initialHit, hit.sourceID == sourceID, hit.path.first?.id == root.id {
-                path = hit.path
-                query = hit.entry.name
-                loading = false
-                await loadPage(reset: true, initialCursor: hit.pageCursor)
+                let resolved = try await NativeCinemaPublicDrive().resolveSearchHit(hit)
+                path = resolved.path
+                query = resolved.entry.name
+                entries = [resolved.entry]
+                cursor = nil
             } else {
                 path = [root]
                 loading = false

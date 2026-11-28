@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-28T03:55:41.491Z",
+  "generatedAt": "2026-11-28T10:30:19.869Z",
   "resources": [
     {
       "kind": "resource",
@@ -6262,23 +6262,6 @@
         "android",
         "apps-accesibles",
         "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "conticgo-67bd8d309c122f96:es",
-      "sourceId": "conticgo-67bd8d309c122f96",
-      "lang": "es",
-      "title": "Proyecto ABILITY: la IA que permite tocar gráficos y mapas",
-      "summary": "La Unión Europea impulsa una innovadora tecnología que combina pantallas táctiles bidimensionales e inteligencia artificial. Gracias a este avance, las personas ciegas podrán explorar esquemas, mapas y documentos digitales en tiempo real. ¿Qué es exactamente el proyecto ABILITY y por qué importa? El proyecto ABILITY (Accessible Digital Services for Blind and Partially Sighted People) es […] La entrada Proyecto ABILITY: la IA que permite tocar gráficos y mapas se publicó primero en Conticgo .",
-      "body": "La Unión Europea impulsa una innovadora tecnología que combina pantallas táctiles bidimensionales e inteligencia artificial. Gracias a este avance, las personas ciegas podrán explorar esquemas, mapas y documentos digitales en tiempo real.\n\nEl proyecto ABILITY ( Accessible Digital Services for Blind and Partially Sighted People ) es una investigación financiada por la Unión Europea dentro del programa Horizonte Europa. Su objetivo principal es eliminar la brecha visual en el entorno digital.\n\nHasta ahora, las líneas braille convencionales solo muestran una fila de caracteres a la vez. Si un estudiante abre un libro de biología o un informe económico, el software solo puede leer una breve descripción escrita por el autor. Cuando esa descripción no existe, la información se pierde por completo. ABILITY resuelve este obstáculo permitiendo que el usuario sienta la forma real del contenido directamente bajo sus dedos.\n\nPara lograr que una imagen compleja tenga sentido al tacto, no basta con levantar puntos al azar. Una fotografía o un gráfico saturado de líneas resultaría confuso para la yema de los dedos. Por ello, el sistema funciona en tres fases coordinadas:\n\nAnálisis mediante visión por computador: Primero, la inteligencia artificial escanea el archivo digital, web o presentación. El algoritmo identifica qué elementos son relevantes y elimina el ruido visual innecesario.\n\nTraducción a vectores táctiles: A continuación, el software simplifica la imagen y la envía a una tableta gráfica táctil de alta densidad. Esta superficie eleva pequeños pines físicos en tiempo real, dibujando el contorno del mapa o la curva del gráfico.\n\nInteracción multimodal con audio: Finalmente, el sistema combina el tacto con la voz. Cuando la persona desliza su dedo por un punto concreto de la pantalla, el dispositivo lee en voz alta el dato exacto o la etiqueta de esa zona.\n\nEl concepto de las pantallas táctiles gráficas no es nuevo en el sector. Dispositivos comerciales como Graphiti o Canute ya demostraron su utilidad hace años. No obstante, su precio —que oscila entre los 3.000 y los 15.000 euros— los convierte en herramientas inalcanzables para la mayoría de los hogares.\n\nUno de los pilares del proyecto ABILITY es precisamente la democratización económica. El consorcio europeo, en el que participan centros de referencia como la Universidad Johannes Kepler de Linz y empresas especializadas como Inventivio, trabaja con nuevos materiales y actuadores más económicos. De este modo, buscan que esta tecnología llegue tanto a colegios y universidades como a puestos de trabajo cotidianos.\n\nLa llegada de soluciones como ABILITY abre la puerta a una verdadera igualdad de oportunidades en ámbitos académicos y profesionales. Hasta hoy, cursar ingeniería, matemáticas, economía o arquitectura exigía depender de impresoras especiales de relieve (como los hornos Fuser) y esperar semanas para recibir el material adaptado.\n\nCon esta nueva generación de tabletas táctiles inteligentes, cualquier alumno ciego podrá descargar los apuntes en clase y explorar los mismos diagramas que sus compañeros al instante. La tiflotecnología da así un paso gigante hacia una accesibilidad universal real, autónoma y sin esperas.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: CORDIS EU Research Results – ABILITY Project , ABILITY Project Official Website , Instituto de Informática Integrada de la Universidad Johannes Kepler",
-      "sourceName": "Conticgo",
-      "originalUrl": "https://conticgo.net/proyecto-ability-la-ia-que-permite-tocar-graficos-y-mapas/",
-      "publishedAt": "2026-11-18T07:04:31.000Z",
-      "categories": [
-        "tecnologia-accesibilidad",
-        "proyectos-prototipos",
-        "ia-accesibilidad"
       ]
     }
   ]

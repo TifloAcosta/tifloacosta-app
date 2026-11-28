@@ -1034,7 +1034,19 @@ struct NativeMyMusicScreen: View {
     @State private var newSmartFolderName = ""
     @State private var newSmartFolderKeyword = ""
     @State private var selectedSmartRule = MusicSmartRuleKind.title
+    @Environment(\.accessibilityVoiceOverEnabled) private var voiceOverEnabled
     @State private var showRecognitionAccount = false
+    @State private var pendingRecognitionIDs: [UUID] = []
+    @State private var recognitionAuthorized = false
+    @State private var recognitionBaseCompleted = 0
+    @State private var recognitionBaseMatched = 0
+    @State private var recognitionBaseFailed = 0
+    @State private var showPlaybackOptions = false
+    private enum MusicPage: String {
+        case library = "Mi Música", organize = "Organizar mi música", albums = "Álbumes"
+        case folders = "Mis carpetas", playlists = "Listas de reproducción", smartFolders = "Carpetas inteligentes"
+    }
+    @State private var musicPage: MusicPage = .library
     @State private var recognitionSelection: [UUID]?
     @State private var recognitionTask: Task<Void, Never>?
     @State private var recognitionResult: String?
@@ -1045,39 +1057,42 @@ struct NativeMyMusicScreen: View {
 
     private func requestIdentification(_ ids: [UUID]) {
         guard !ids.isEmpty, recognitionTask == nil else { return }
-        if NativeMusicRecognition.hasActiveAccount {
-            recognitionSelection = ids
-        } else {
-            showRecognitionAccount = true
-        }
+        recognitionSelection = ids
     }
 
-    private func identify(_ ids: [UUID]) {
+    private func identify(_ ids: [UUID], resuming: Bool = false) {
         guard !ids.isEmpty, recognitionTask == nil else { return }
-        guard NativeMusicRecognition.hasActiveAccount else {
-            showRecognitionAccount = true
-            return
+        if !resuming {
+            recognitionBaseCompleted = 0
+            recognitionBaseMatched = 0
+            recognitionBaseFailed = 0
+            recognitionTotal = ids.count
         }
-        recognitionCompleted = 0
-        recognitionMatched = 0
-        recognitionFailed = 0
-        recognitionTotal = ids.count
+        recognitionCompleted = recognitionBaseCompleted
+        recognitionMatched = recognitionBaseMatched
+        recognitionFailed = recognitionBaseFailed
         recognitionResult = nil
         recognitionTask = Task {
             defer { recognitionTask = nil }
             var prefix = ""
             do {
                 _ = try await NativeAcoustIDLookup.identifyBatch(ids, onProgress: { completed, matched, failed in
-                    recognitionCompleted = completed
-                    recognitionMatched = matched
-                    recognitionFailed = failed
+                    recognitionCompleted = recognitionBaseCompleted + completed
+                    recognitionMatched = recognitionBaseMatched + matched
+                    recognitionFailed = recognitionBaseFailed + failed
                 }) {
                     try await library.recognizeTrack($0)
                 }
             } catch is CancellationError {
                 prefix = MusicLocalized.message("Identificación cancelada.") + " "
             } catch let error as URLError where error.code == .userAuthenticationRequired {
-                prefix = MusicLocalized.message("La cuenta de AcoustID debe volver a vincularse.") + " "
+                pendingRecognitionIDs = Array(ids.dropFirst(max(0, recognitionCompleted - recognitionBaseCompleted)))
+                recognitionBaseCompleted = recognitionCompleted
+                recognitionBaseMatched = recognitionMatched
+                recognitionBaseFailed = recognitionFailed
+                recognitionAuthorized = false
+                showRecognitionAccount = true
+                return
             } catch {
                 prefix = MusicLocalized.message("No se pudo completar la identificación.") + " "
             }
@@ -1293,10 +1308,15 @@ struct NativeMyMusicScreen: View {
         .navigationTitle("Ecualizador")
     }
 
-    private var musicPlayerSection: some View {
-        Section("Reproductor") {
-            musicTransportControls
-            musicPlaybackOptions
+    @ViewBuilder private var musicPlayerSection: some View {
+        if !player.currentName.isEmpty {
+            Section("Reproductor") {
+                musicTransportControls
+                DisclosureGroup("Opciones de reproducción", isExpanded: $showPlaybackOptions) {
+                    musicPlaybackOptions
+                    NavigationLink("Ecualizador") { musicEqualizerSettings }
+                }
+            }
         }
     }
 
@@ -1307,15 +1327,13 @@ struct NativeMyMusicScreen: View {
             .disabled(player.currentName.isEmpty)
         Button("Canción anterior") { player.previous() }
             .disabled(player.currentName.isEmpty)
-        Button("Retroceder 15 segundos") { player.skip(seconds: -15) }
-            .disabled(player.currentName.isEmpty)
-        Button("Avanzar 15 segundos") { player.skip(seconds: 15) }
-            .disabled(player.currentName.isEmpty)
         Button("Canción siguiente") { player.next() }
             .disabled(player.currentName.isEmpty)
     }
 
     @ViewBuilder private var musicPlaybackOptions: some View {
+        Button("Retroceder 15 segundos") { player.skip(seconds: -15) }
+        Button("Avanzar 15 segundos") { player.skip(seconds: 15) }
         Button(MusicLocalized.format("Reproducción aleatoria: %@", MusicLocalized.message(player.shuffleEnabled ? "Activado" : "Desactivado"))) { player.toggleShuffle() }
         Button(MusicLocalized.format("Repetición: %@", musicRepeatDescription)) { player.changeRepeat() }
         Button("Temporizador de 15 minutos") { player.setSleep(minutes: 15) }
@@ -1354,6 +1372,49 @@ struct NativeMyMusicScreen: View {
         return Set(groups.values.filter { $0.count > 1 }.flatMap { group in group.map { $0.id } })
     }
 
+    @ViewBuilder private func musicTrackActions(_ file: MusicLocalFile) -> some View {
+        if NativeMusicRecognition.clientKey != nil {
+            Button("Identificar canción") { requestIdentification([file.id]) }
+                .disabled(recognitionTask != nil)
+        }
+        Button("Editar información de la canción") { editTrackInformation(file) }
+        Button("Editar género") {
+            editingGenreFile = file
+            editingGenreValue = file.genre ?? ""
+        }
+        ForEach(library.folders) { folder in
+            Button(MusicLocalized.format("Añadir a %@", folder.name)) { library.assign(file.id, to: folder.id) }
+        }
+        ForEach(library.playlists) { playlist in
+            Button(MusicLocalized.format("Añadir a lista %@", playlist.name)) {
+                library.addToPlaylist(file.id, playlistId: playlist.id)
+            }
+        }
+        Button("Eliminar de la biblioteca", role: .destructive) { pendingRemoval = file }
+    }
+
+    private func musicTrackRow(_ file: MusicLocalFile, duplicates: Set<UUID>) -> some View {
+        HStack {
+            Button(MusicLocalized.format("Reproducir %@", file.name)) {
+                player.play(name: file.name, url: library.audioURL(for: file),
+                    queue: library.files.map { (name: $0.name, url: library.audioURL(for: $0)) },
+                    albumKeysByURL: albumKeysByURL)
+            }
+            .accessibilityLabel(detailedVoiceOver ?
+                MusicLocalized.format("%@, artista %@, álbum %@, disponible sin conexión", file.name, file.artist ?? MusicLocalized.format("No indicado"), file.album ?? MusicLocalized.format("No indicado")) :
+                file.name)
+            .accessibilityHint(duplicates.contains(file.id) ? MusicLocalized.message("Posible canción duplicada") : "")
+            .accessibilityActions { musicTrackActions(file) }
+            if duplicates.contains(file.id) {
+                Text("Posible canción duplicada").font(.caption).accessibilityHidden(true)
+            }
+            Spacer()
+            Menu(MusicLocalized.format("Acciones de %@", file.name)) { musicTrackActions(file) }
+                .accessibilityHidden(voiceOverEnabled)
+        }
+        .buttonStyle(.borderless)
+    }
+
     private var musicLibrarySection: some View {
         Section("Mi biblioteca") {
             let duplicates = possibleDuplicateSongs
@@ -1361,63 +1422,7 @@ struct NativeMyMusicScreen: View {
                 Text("Todavía no hay canciones. Usa Organizar mi música para importarlas.")
             } else {
                 ForEach(visibleFiles) { file in
-                    HStack {
-                        Button(MusicLocalized.format("Reproducir %@", file.name)) {
-                            player.play(
-                                name: file.name,
-                                url: library.audioURL(for: file),
-                                queue: library.files.map { (name: $0.name, url: library.audioURL(for: $0)) },
-                                albumKeysByURL: albumKeysByURL
-                            )
-                        }
-                        .accessibilityLabel(detailedVoiceOver ?
-                            MusicLocalized.format("%@, artista %@, álbum %@, disponible sin conexión", file.name, file.artist ?? MusicLocalized.format("No indicado"), file.album ?? MusicLocalized.format("No indicado")) :
-                            file.name)
-                        .accessibilityHint(duplicates.contains(file.id) ? MusicLocalized.message("Posible canción duplicada") : "")
-                        .accessibilityActions {
-                            Button("Reproducir") {
-                                player.play(name: file.name, url: library.audioURL(for: file),
-                                    queue: library.files.map { (name: $0.name, url: library.audioURL(for: $0)) },
-                                    albumKeysByURL: albumKeysByURL)
-                            }
-                            ForEach(library.playlists) { playlist in
-                                Button(MusicLocalized.format("Añadir a lista %@", playlist.name)) {
-                                    library.addToPlaylist(file.id, playlistId: playlist.id)
-                                }
-                            }
-                            ForEach(library.folders) { folder in
-                                Button(MusicLocalized.format("Añadir a %@", folder.name)) { library.assign(file.id, to: folder.id) }
-                            }
-                            if NativeMusicRecognition.clientKey != nil {
-                                Button("Identificar canción") { requestIdentification([file.id]) }
-                                    .disabled(recognitionTask != nil)
-                            }
-                            Button("Editar información de la canción") { editTrackInformation(file) }
-                            Button("Eliminar de la biblioteca") { pendingRemoval = file }
-                        }
-                        if duplicates.contains(file.id) {
-                            Text("Posible canción duplicada").font(.caption).accessibilityHidden(true)
-                        }
-                        Spacer()
-                        Menu(MusicLocalized.format("Acciones de %@", file.name)) {
-                            if NativeMusicRecognition.clientKey != nil {
-                                Button("Identificar canción") { requestIdentification([file.id]) }
-                                    .disabled(recognitionTask != nil)
-                            }
-                            Button("Editar información de la canción") { editTrackInformation(file) }
-                            Button("Editar género") {
-                                editingGenreFile = file
-                                editingGenreValue = file.genre ?? ""
-                            }
-                            ForEach(library.folders) { folder in
-                                Button(MusicLocalized.format("Añadir a %@", folder.name)) { library.assign(file.id, to: folder.id) }
-                            }
-                            ForEach(library.playlists) { playlist in
-                                Button(MusicLocalized.format("Añadir a lista %@", playlist.name)) { library.addToPlaylist(file.id, playlistId: playlist.id) }
-                            }
-                            Button("Eliminar de la biblioteca", role: .destructive) { pendingRemoval = file }
-                        }
-                    }
+                    musicTrackRow(file, duplicates: duplicates)
                 }
             }
         }
@@ -1479,7 +1484,7 @@ struct NativeMyMusicScreen: View {
     private var musicPlaylistsSection: some View {
         Section("Listas de reproducción") {
             ForEach(library.playlists) { playlist in
-                Text(MusicLocalized.format("%@, %d canciones", playlist.name, library.playlistEntries(playlist).count))
+                DisclosureGroup(MusicLocalized.format("%@, %d canciones", playlist.name, library.playlistEntries(playlist).count)) {
                 Button(MusicLocalized.format("Reproducir lista %@", playlist.name)) {
                     mixedQueue.play(entries: library.playlistEntries(playlist), playlistID: playlist.id, localURLs: Dictionary(
                         uniqueKeysWithValues: library.files.map { ($0.id, library.audioURL(for: $0)) }),
@@ -1534,6 +1539,7 @@ struct NativeMyMusicScreen: View {
                 }
                 Button(MusicLocalized.format("Eliminar lista %@", playlist.name)) {
                     pendingCollectionRemoval = (playlist.id, playlist.name, "playlist")
+                }
                 }
             }
         }
@@ -1601,33 +1607,50 @@ struct NativeMyMusicScreen: View {
                 Button("Crear lista de reproducción") { showingPlaylistEditor = true }
                 Button("Crear carpeta inteligente") { showingSmartFolderEditor = true }
             }
-            if recognitionTask != nil {
-                ProgressView(value: Double(recognitionCompleted), total: Double(max(1, recognitionTotal))) {
-                    Text(MusicLocalized.format("Procesadas: %d de %d.", recognitionCompleted, recognitionTotal))
-                }
-                Button("Cancelar identificación") { recognitionTask?.cancel() }
-            }
             NavigationLink("Nubes") { musicClouds }
+            Button("Álbumes") { musicPage = .albums }
+            Button("Mis carpetas") { musicPage = .folders }
+            Button("Listas de reproducción") { musicPage = .playlists }
+            Button("Carpetas inteligentes") { musicPage = .smartFolders }
             NavigationLink("Ajustes") { musicSettings }
         }
     }
 
     var body: some View {
         let list = List {
-            musicPlayerSection
-            musicPlatformsSection
-            musicLibrarySection
-            musicAlbumsSection
-            musicFoldersSection
-            musicQueueSection
-            musicPlaylistsSection
-            musicSmartFoldersSection
-            musicOrganizeSection
+            if recognitionTask != nil {
+                ProgressView(value: Double(recognitionCompleted), total: Double(max(1, recognitionTotal))) {
+                    Text(MusicLocalized.format("Procesadas: %d de %d.", recognitionCompleted, recognitionTotal))
+                }
+                Button("Cancelar identificación") { recognitionTask?.cancel() }
+            }
+            if musicPage == .library {
+                musicPlayerSection
+                musicQueueSection
+                musicPlatformsSection
+                Section {
+                    Button("Organizar mi música") { musicPage = .organize }
+                    NavigationLink("Ajustes") { musicSettings }
+                }
+                musicLibrarySection
+            } else {
+                Section {
+                    Button("Volver a Mi Música") { musicPage = .library }
+                }
+                switch musicPage {
+                case .library: EmptyView()
+                case .organize: musicOrganizeSection
+                case .albums: musicAlbumsSection
+                case .folders: musicFoldersSection
+                case .playlists: musicPlaylistsSection
+                case .smartFolders: musicSmartFoldersSection
+                }
+            }
         }
 
         let searchableList = list
             .tifloScreenSurface()
-            .navigationTitle("Mi Música")
+            .navigationTitle(LocalizedStringKey(musicPage.rawValue))
             .onReceive(network.$path) { _ in stopOnlineIfConnectionIsRestricted() }
             .onChange(of: allowCellularPlayback) { _, _ in stopOnlineIfConnectionIsRestricted() }
             .alert("Conexión", isPresented: Binding(
@@ -1685,9 +1708,23 @@ struct NativeMyMusicScreen: View {
             }
 
         let libraryActions = smartFolderSheet
-            .sheet(isPresented: $showRecognitionAccount) {
+            .sheet(isPresented: $showRecognitionAccount, onDismiss: {
+                let pending = pendingRecognitionIDs
+                let authorized = recognitionAuthorized
+                pendingRecognitionIDs = []
+                recognitionAuthorized = false
+                if authorized && !pending.isEmpty {
+                    identify(pending, resuming: true)
+                } else if !pending.isEmpty {
+                    recognitionResult = MusicLocalized.message("Identificación cancelada.") + " " +
+                        MusicLocalized.format("Procesadas: %d de %d.", recognitionCompleted, recognitionTotal)
+                }
+            }) {
                 NavigationStack {
-                    NativeAcoustIDAccount()
+                    NativeAcoustIDAccount(authorizationRequired: true, onAuthorized: {
+                        recognitionAuthorized = true
+                        showRecognitionAccount = false
+                    })
                         .toolbar { ToolbarItem(placement: .cancellationAction) {
                             Button("Cerrar") { showRecognitionAccount = false }
                         } }

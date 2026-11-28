@@ -386,97 +386,100 @@ struct NativeCinemaDirectPlaybackScreen: View {
 @MainActor
 struct NativeCinemaResumeScreen: View {
     let recent: NativeCinemaRecent
+    var autoResume = false
     @ObservedObject private var player = NativeCinemaAudioPlayer.shared
     @ObservedObject private var library = NativeCinemaLocalLibrary.shared
-    @State private var tapeFilm: NativeTapeTerritoryCatalogue.Film?
-    @State private var movieWork: NativeMoviesForTheBlindWork?
-    @State private var audioEntry: NativeAudiocinematecaCatalogueIndex.Entry?
-    @State private var audioPart: NativeAudiocinematecaCatalogueIndex.Part?
-    @State private var driveHit: NativeCinemaDriveSearchHit?
+    @State private var selection: NativeCinemaPlaybackSelection?
     @State private var loading = false
     @State private var failed = false
+    @State private var didResolve = false
+    @State private var errorText: String?
     var body: some View {
         List {
             Text(recent.title).accessibilityAddTraits(.isHeader)
-            if recent.source == "personal", let item = library.items.first(where: { $0.id.uuidString == recent.id }) {
-                Button("Reproducir") { do { try player.open(item, library: library) } catch { failed = true } }
-            } else if let tapeFilm {
-                Button("Reproducir") {
-                    guard let url = tapeFilm.describedStream else { return }
-                    do { try player.openTapeTerritory(url, title: tapeFilm.title, slug: tapeFilm.slug, library: library) }
-                    catch { failed = true }
-                }
-            } else if let movieWork, let part = movieWork.parts.first(where: {
-                NativeCinemaRecent.digest("movies-for-the-blind:" + NativeCinemaRecent.digest($0.id)) == recent.id
-            }) {
-                Button("Reproducir") {
-                    do {
-                        let remaining = movieWork.parts.drop(while: { $0.id != part.id }).dropFirst()
-                        try player.openMoviePart(part, workTitle: movieWork.title, followedBy: Array(remaining), library: library)
-                    } catch { failed = true }
-                }
-            } else if let audioEntry, let audioPart {
-                NativeAudiocinematecaPlaybackRow(entry: audioEntry, part: audioPart, label: MusicLocalized.message("Reproducir"))
-            } else if let driveHit {
-                NavigationLink("Explorar catálogo audiodescrito") {
-                    NativeCinemaPublishedDriveBrowser(sourceID: driveHit.sourceID, sourceName: recent.providerName, initialHit: driveHit)
+            if let selection {
+                Button("Reproducir") { Task { await play(selection, fromBeginning: false) } }
+                Button("Reproducir desde el principio") { Task { await play(selection, fromBeginning: true) } }
+                if selection.containsCurrent(player) {
+                    if let error = player.playbackError { Text(error) }
+                    if player.currentCloudIsVideo, let video = player.videoPlayer {
+                        NativeCinemaVideoSurface(player: video).frame(height: 210).accessibilityHidden(true)
+                    }
+                    NativeCinemaTransportControls(player: player, library: library)
                 }
             } else if ["drive-es", "drive-latino"].contains(recent.source) {
                 NavigationLink("Explorar carpeta de Google Drive") {
                     NativeCinemaDriveBrowser(sourceID: recent.source == "drive-es" ? "audesc-es" : "audesc-latino", sourceName: recent.providerName)
                 }
             }
-            if recent.source != "audiocinemateca" && player.currentID != nil &&
-                (player.currentCloudReference.map(NativeCinemaRecent.digest) == recent.id || player.currentID?.uuidString == recent.id) {
-                if let error = player.playbackError { Text(error) }
-                NativeCinemaTransportControls(player: player, library: library)
-            }
             if loading { ProgressView("Consultando catálogos…") }
             if failed {
-                Text("No se ha podido recuperar esta obra del catálogo actual.")
+                Text(errorText ?? MusicLocalized.message("No se ha podido recuperar esta obra del catálogo actual."))
                 Button("Reintentar") { Task { await resolve() } }
             }
         }
         .tifloScreenSurface()
         .navigationTitle(recent.title)
-        .task { await resolve() }
+        .task {
+            guard !didResolve else { return }
+            didResolve = true
+            await resolve()
+        }
     }
+
+    private func play(_ selection: NativeCinemaPlaybackSelection, fromBeginning: Bool) async {
+        do { try await selection.start(fromBeginning: fromBeginning, library: library, player: player) }
+        catch {
+            if !Task.isCancelled {
+                failed = true
+                errorText = error.localizedDescription
+            }
+        }
+    }
+
     private func resolve() async {
         guard !loading else { return }
-        loading = true; failed = false
+        loading = true; failed = false; errorText = nil
         defer { loading = false }
         do {
             switch recent.source {
-            case "personal": failed = !library.items.contains { $0.id.uuidString == recent.id }
+            case "personal":
+                if let item = library.items.first(where: { $0.id.uuidString == recent.id }) {
+                    selection = .personal(item)
+                }
             case "tape-territory":
-                tapeFilm = try await NativeTapeTerritoryCatalogue.fetchFilms().first {
+                if let film = try await NativeTapeTerritoryCatalogue.fetchFilms().first(where: {
                     NativeCinemaRecent.digest("tape-territory:" + $0.slug) == recent.id
-                }
-                failed = tapeFilm == nil
+                }) { selection = .tape(film) }
             case "movies-for-the-blind":
-                movieWork = try await NativeMoviesForTheBlindWork.fetchWorks().first { work in
+                if let work = try await NativeMoviesForTheBlindWork.fetchWorks().first(where: { work in
                     work.parts.contains { NativeCinemaRecent.digest("movies-for-the-blind:" + NativeCinemaRecent.digest($0.id)) == recent.id }
-                }
-                failed = movieWork == nil
+                }) { selection = .movie(work) }
             case "audiocinemateca":
                 guard let account = NativeAudiocinematecaCredentials.load() else { failed = true; return }
                 let entries = try await NativeAudiocinematecaCache.shared.refresh(account: account)
                 guard let current = NativeAudiocinematecaCredentials.load(), current.username == account.username,
                       current.password == account.password else { failed = true; return }
-                for entry in entries where entry.title == recent.title {
-                    if let part = entry.parts.first(where: {
+                if let entry = entries.first(where: { entry in
+                    entry.parts.contains {
                         NativeCinemaRecent.digest(NativeAudiocinematecaPlaybackRow.reference(entry: entry, part: $0)) == recent.id
-                    }) { audioEntry = entry; audioPart = part; break }
-                }
-                failed = audioEntry == nil
+                    }
+                }) { selection = .audio(entry) }
             case "public-es", "public-latino":
                 let sourceID = recent.source == "public-es" ? "audesc-es" : "audesc-latino"
                 let result = try await NativeCinemaPublicDrive().searchPublished(sourceID: sourceID, query: recent.title, kind: .all)
-                driveHit = result.hits.first { NativeCinemaRecent.digest("gdrive-public:" + sourceID + "::" + $0.entry.id) == recent.id }
-                failed = driveHit == nil
-            case "drive-es", "drive-latino": break
-            default: failed = true
+                if let hit = result.hits.first(where: { NativeCinemaRecent.digest("gdrive-public:" + sourceID + "::" + $0.entry.id) == recent.id }) {
+                    selection = .drive(hit)
+                }
+            case "drive-es", "drive-latino":
+                // Old personal OAuth records contain a digest, not a file locator.
+                // Keep the authorized browser fallback rather than expand OAuth scopes.
+                return
+            default: break
             }
-        } catch { if !Task.isCancelled { failed = true } }
+            try Task.checkCancellation()
+            guard let selection else { failed = true; return }
+            if autoResume { await play(selection, fromBeginning: false) }
+        } catch { if !Task.isCancelled { failed = true; errorText = error.localizedDescription } }
     }
 }

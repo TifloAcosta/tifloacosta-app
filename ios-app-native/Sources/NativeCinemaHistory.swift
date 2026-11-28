@@ -306,13 +306,9 @@ enum NativeCinemaPlaybackSelection {
         return keys.contains(key)
     }
     private func startIndex(fromBeginning: Bool) -> Int {
-        guard !fromBeginning else { return 0 }
-        let recent = NativeCinemaRecentStore.shared.entries
-        if let latest = recent.first(where: { !$0.finished && keys.contains($0.id) }),
-           let index = keys.firstIndex(of: latest.id) { return index }
-        if keys.count > 1, let latest = recent.first(where: { $0.finished && keys.contains($0.id) }),
-           let index = keys.firstIndex(of: latest.id), index + 1 < keys.count { return index + 1 }
-        return 0
+        NativeCinemaRules.preferredPartIndex(keys: keys,
+            recent: NativeCinemaRecentStore.shared.entries.map { ($0.id, $0.finished) },
+            fromBeginning: fromBeginning)
     }
 
     func start(fromBeginning: Bool, library: NativeCinemaLocalLibrary, player: NativeCinemaAudioPlayer) async throws {
@@ -451,7 +447,7 @@ struct NativeCinemaDirectPlaybackScreen: View {
                 default: EmptyView()
                 }
             }
-            Button(recents.isFavorite(request.selection) ? "Quitar de favoritos" : "Añadir a favoritos") {
+            Button(MusicLocalized.message(recents.isFavorite(request.selection) ? "Quitar de favoritos" : "Añadir a favoritos")) {
                 recents.toggleFavorite(request.selection)
             }
             if loading { ProgressView("Cargando reproducción") }

@@ -73,5 +73,6 @@ test('Mis suscripciones incluye sus novedades, sin mezclar seguimiento local y G
   assert.match(screens, /NavigationLink\("Ver novedades de mis suscripciones"\)/);
   assert.match(screens, /NativeYouTubeFollowedUpdatesScreen\(useYouTubeSubscriptions: true\)/);
   assert.match(screens, /NativeYouTubeFollowedUpdatesScreen\(useYouTubeSubscriptions: false\)/);
-  assert.match(screens, /if useYouTubeSubscriptions \{ return account\.subscriptions \}/);
+  assert.match(screens, /return \(useYouTubeSubscriptions \? subscriptions : subscriptions \+ local\)/);
+  assert.match(screens, /\.filter \{ seen.insert\(\$0.id\).inserted \}/);
 });

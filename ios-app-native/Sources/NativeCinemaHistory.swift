@@ -91,7 +91,8 @@ final class NativeCinemaRecentStore: ObservableObject {
         }
     }
 
-    func prepareBackupHistory(_ incoming: [NativeCinemaRecent], recovery: NativeBackupRecoveryBuilder? = nil) throws
+    func prepareBackupHistory(_ incoming: [NativeCinemaRecent], favorites incomingFavorites: [NativeCinemaRecent] = [],
+                              recovery: NativeBackupRecoveryBuilder? = nil) throws
         -> (apply: () throws -> Void, rollback: () throws -> Void, omitted: Int) {
         let old = entries
         var ids = Set(entries.map(\.id))
@@ -100,13 +101,21 @@ final class NativeCinemaRecentStore: ObservableObject {
         let missing = incoming.filter { !suppressedKeys.contains($0.id) && ids.insert($0.id).inserted }
         let combined = Self.retained(entries + missing)
         let accepted = missing.filter { candidate in combined.contains { $0.id == candidate.id } }
-        let disk = try NativeBackupFileRestore(moves: [], indexes: [(url, try JSONEncoder().encode(combined))], recovery: recovery)
+        let oldFavorites = favorites
+        var favoriteIDs = Set(favorites.map(\.id))
+        let combinedFavorites = favorites + incomingFavorites.filter { favoriteIDs.insert($0.id).inserted }
+        let disk = try NativeBackupFileRestore(moves: [], indexes: [
+            (url, try JSONEncoder().encode(combined)),
+            (favoritesURL, try JSONEncoder().encode(combinedFavorites))
+        ], recovery: recovery)
         return ({
             try disk.apply()
             self.entries = combined
+            self.favorites = combinedFavorites
         }, {
             try disk.rollback()
             self.entries = old
+            self.favorites = oldFavorites
         }, incoming.filter { candidate in !old.contains(where: { $0.id == candidate.id }) }.count - accepted.count)
     }
 

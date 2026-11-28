@@ -388,12 +388,15 @@ enum NativeBackupLibraryValidation {
         case .cinema:
             let items = try decoder.decode([NativeCinemaLocalItem].self, from: required("catalogo-personal.json"))
             let history = try decoder.decode([NativeCinemaRecent].self, from: required("historial.json"))
+            let favorites = try metadata["favoritos.json"].map { try decoder.decode([NativeCinemaRecent].self, from: $0) } ?? []
             let allowed = Set(["mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf", "flac", "mp4", "m4v", "mov"])
             let sources = Set(["personal", "public-es", "public-latino", "drive-es", "drive-latino",
                                "audiocinemateca", "tape-territory", "movies-for-the-blind"])
             guard Set(items.map(\.id)).count == items.count,
-                  Set(history.map(\.id)).count == history.count, history.count <= 100,
-                  history.allSatisfy({
+                  Set(history.map(\.id)).count == history.count,
+                  Set(favorites.map(\.id)).count == favorites.count,
+                  history.filter(\.finished).count <= 100,
+                  (history + favorites).allSatisfy({
                       sources.contains($0.source) && NativeBackupReferencePolicy.eligibleID($0.id) &&
                       $0.seconds.isFinite && $0.duration.isFinite && $0.seconds >= 0 && $0.duration >= 0 &&
                       ($0.source != "personal" || UUID(uuidString: $0.id) != nil)

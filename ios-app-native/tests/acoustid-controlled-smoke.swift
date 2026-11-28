@@ -12,6 +12,18 @@ struct AcoustIDControlledSmoke {
             fatalError("Expected authentication error")
         } catch let error as URLError { precondition(error.code == .userAuthenticationRequired) }
 
+        let required = Data(#"{"status":"error","error":{"code":21}}"#.utf8)
+        precondition(NativeAcoustIDLookup.requiresUserKey(in: required))
+        do {
+            _ = try NativeAcoustIDLookup.match(in: required)
+            fatalError("Expected required user key")
+        } catch let error as URLError { precondition(error.code == .userAuthenticationRequired) }
+        let appError = Data(#"{"status":"error","error":{"code":3}}"#.utf8)
+        precondition(!NativeAcoustIDLookup.requiresUserKey(in: appError))
+        let successful = Data(#"{"status":"ok","results":[{"score":0.99,"recordings":[{"title":"Title","artists":[{"name":"Artist"}]}]}]}"#.utf8)
+        let matched = try NativeAcoustIDLookup.match(in: successful)
+        precondition(matched?.title == "Title" && matched?.artist == "Artist")
+
         let ambiguous = Data(#"{"status":"ok","results":[{"score":0.99,"recordings":[{"title":"Title","artists":[{"name":"A"}]},{"title":"Title","artists":[{"name":"B"}]}]}]}"#.utf8)
         let ambiguousMatch = try NativeAcoustIDLookup.match(in: ambiguous)
         precondition(ambiguousMatch == nil)

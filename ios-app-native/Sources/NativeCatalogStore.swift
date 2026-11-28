@@ -90,15 +90,26 @@ final class NativeCatalogStore: ObservableObject {
     }
 
     private var cacheURL: URL {
+        FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("tifloacosta-native-catalog.json")
+    }
+
+    private var legacyCacheURL: URL {
         FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("tifloacosta-native-catalog.json")
     }
 
+    private func persistCatalog(_ data: Data) {
+        try? FileManager.default.createDirectory(at: cacheURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try? data.write(to: cacheURL, options: .atomic)
+    }
+
     init() {
-        if let data = try? Data(contentsOf: cacheURL),
+        if let data = (try? Data(contentsOf: cacheURL)) ?? (try? Data(contentsOf: legacyCacheURL)),
            let snapshot = try? JSONDecoder().decode(NativeCatalogSnapshot.self, from: data),
            snapshot.schemaVersion == 1 {
             apply(snapshot)
+            if !FileManager.default.fileExists(atPath: cacheURL.path) { persistCatalog(data) }
             catalogGeneratedAt = Self.parsePublicationDate(snapshot.generatedAt)
             if let text = try? String(contentsOf: updateDateURL, encoding: .utf8),
                let timestamp = TimeInterval(text) {
@@ -192,7 +203,7 @@ final class NativeCatalogStore: ObservableObject {
                 resources: candidate.snapshot.resources,
                 videos: candidate.snapshot.videos
             )
-            try? candidate.data.write(to: cacheURL, options: .atomic)
+            persistCatalog(candidate.data)
             let now = Date()
             lastUpdated = now
             lastSource = candidate.host

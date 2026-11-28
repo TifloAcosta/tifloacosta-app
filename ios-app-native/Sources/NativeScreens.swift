@@ -616,6 +616,8 @@ struct NativeResourcesScreen: View {
     @State private var resourceToOpen: NativeCatalogItem?
     @State private var presentingResource = false
     @State private var actionStatus: String?
+    @State private var offlineTask: Task<Void, Never>?
+    @State private var offlineProgress: String?
 
     private var spanishResources: [NativeCatalogItem] {
         catalog.resources.filter { item in
@@ -780,6 +782,28 @@ struct NativeResourcesScreen: View {
     }
 
 
+    private func saveOffline(_ items: [NativeCatalogItem]) {
+        guard offlineTask == nil, !items.isEmpty else { return }
+        let targets = items
+        offlineTask = Task { @MainActor in
+            defer { offlineTask = nil; offlineProgress = nil }
+            var completed = 0
+            var failed = 0
+            for (index, item) in targets.enumerated() {
+                if Task.isCancelled { break }
+                offlineProgress = "\(index + 1)/\(targets.count)"
+                do {
+                    try await resourceService.saveOffline(item)
+                    completed += 1
+                } catch {
+                    if Task.isCancelled { break }
+                    failed += 1
+                }
+            }
+            announce(MusicLocalized.format("Copias sin conexión: %d guardadas, %d fallidas.", completed, failed))
+        }
+    }
+
     @ViewBuilder
     private func resourceRow(_ item: NativeCatalogItem) -> some View {
         NavigationLink {
@@ -793,7 +817,9 @@ struct NativeResourcesScreen: View {
             }
         }
         .accessibilityLabel(item.title)
-        .accessibilityValue(Text(item.resourceLocation))
+        .accessibilityValue(Text(item.resourceLocation + (resourceService.isAvailableOffline(item)
+            ? ". " + MusicLocalized.message("Disponible sin conexión") : "")))
+        .accessibilityAction(named: Text("Guardar sin conexión")) { saveOffline([item]) }
         .accessibilityAction(named: Text("Leer")) { read(item) }
         .accessibilityAction(named: Text("Guardar")) { save(item) }
         .accessibilityAction(named: Text("Descargar")) { download(item) }
@@ -821,6 +847,11 @@ struct NativeResourcesScreen: View {
                 }
             }
             Section("Contenido de Recursos") {
+                if let offlineProgress {
+                    ProgressView("Guardar sin conexión")
+                    Text(offlineProgress).accessibilityAddTraits(.updatesFrequently)
+                    Button("Cancelar") { offlineTask?.cancel() }
+                }
                 Button("Actualizar recursos") { updateResources() }
                     .disabled(catalog.loading)
                 if catalog.loading {
@@ -863,6 +894,12 @@ struct NativeResourcesScreen: View {
                         Text(MusicLocalized.message(isSearchingResources ? "No hay resultados." : "No hay recursos en la categoría elegida."))
                     }
 
+                    if !isSearchingResources && chosenCategory != nil && !filtered.isEmpty {
+                        Button(MusicLocalized.format("Guardar %d recursos sin conexión", filtered.count)) {
+                            saveOffline(filtered)
+                        }
+                        .disabled(offlineTask != nil)
+                    }
                     if isPillsCategory && !isSearchingResources {
                         ForEach(pillsYears, id: \.self) { year in
                             NavigationLink(String(year)) {

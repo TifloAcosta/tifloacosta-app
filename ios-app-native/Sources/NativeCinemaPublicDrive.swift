@@ -28,7 +28,7 @@ struct NativeCinemaPublicDrivePage: Sendable {
     var incomplete = false
 }
 
-enum NativeCinemaPublicDriveError: LocalizedError {
+enum NativeCinemaPublicDriveError: LocalizedError, Equatable {
     case unconfigured, invalidFolder, badResponse, denied, noLongerAvailable,
          unavailable, oversized, unsupported
 
@@ -369,7 +369,7 @@ actor NativeCinemaDriveIndex {
         try Task.checkCancellation()
         active.insert(sourceID)
         defer { active.remove(sourceID) }
-        let stored = readComplete(sourceID, rootID: root.id)
+        let stored = snapshots[sourceID]?.completed != nil ? nil : readComplete(sourceID, rootID: root.id)
         let previous = snapshots[sourceID] ?? stored
         let lastComplete = previous?.completed != nil ? previous : stored
         let fresh = previous?.completed.map { Date().timeIntervalSince($0) < 900 } ?? false
@@ -420,12 +420,12 @@ actor NativeCinemaDriveIndex {
             }
             let page: NativeCinemaPublicDrivePage
             do {
-                page = try await service.listFolder(folder, ancestors: Array(pending.path.dropLast()),
-                                                    cursor: pending.token, pageSize: 500)
+                page = try await Self.listPage(service, pending: pending, folder: folder)
             } catch {
                 if Task.isCancelled || (error as? URLError)?.code == .cancelled { throw CancellationError() }
                 if state.pages.isEmpty {
-                    if let failure = error as? NativeCinemaPublicDriveError, case .denied = failure {
+                    if let failure = error as? NativeCinemaPublicDriveError,
+                       failure == .denied || failure == .noLongerAvailable {
                         if let url = try? Self.storageURL(sourceID) { try? FileManager.default.removeItem(at: url) }
                         snapshots.removeValue(forKey: sourceID)
                         state.failed = true
@@ -476,6 +476,24 @@ actor NativeCinemaDriveIndex {
         }
         return result(state, incomplete: state.failed)
     }
+    private static func listPage(_ service: NativeCinemaPublicDrive, pending: Pending,
+                                 folder: NativeCinemaPublicDriveEntry) async throws -> NativeCinemaPublicDrivePage {
+        for attempt in 0..<3 {
+            try Task.checkCancellation()
+            do {
+                return try await service.listFolder(folder, ancestors: Array(pending.path.dropLast()),
+                                                    cursor: pending.token, pageSize: 500)
+            } catch {
+                if Task.isCancelled || (error as? URLError)?.code == .cancelled { throw CancellationError() }
+                let temporary = (error as? NativeCinemaPublicDriveError) == .unavailable ||
+                    [.timedOut, .networkConnectionLost, .cannotConnectToHost].contains((error as? URLError)?.code ?? .unknown)
+                guard temporary, attempt < 2 else { throw error }
+                try await Task.sleep(nanoseconds: UInt64(attempt + 1) * 1_000_000_000)
+            }
+        }
+        throw NativeCinemaPublicDriveError.unavailable
+    }
+
     private static func searchCategory(path: [NativeCinemaPublicDriveEntry]) -> AccessibleCinemaKind? {
         for folder in path.dropFirst().reversed() {
             let name = folder.name.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "es"))

@@ -1393,11 +1393,11 @@ struct NativeMyMusicScreen: View {
         Button("Eliminar de la biblioteca", role: .destructive) { pendingRemoval = file }
     }
 
-    private func musicTrackRow(_ file: MusicLocalFile, duplicates: Set<UUID>) -> some View {
+    private func musicTrackRow(_ file: MusicLocalFile, duplicates: Set<UUID>, in collection: [MusicLocalFile]? = nil) -> some View {
         HStack {
             Button(MusicLocalized.format("Reproducir %@", file.name)) {
                 player.play(name: file.name, url: library.audioURL(for: file),
-                    queue: library.files.map { (name: $0.name, url: library.audioURL(for: $0)) },
+                    queue: (collection ?? library.files).map { (name: $0.name, url: library.audioURL(for: $0)) },
                     albumKeysByURL: albumKeysByURL)
             }
             .accessibilityLabel(detailedVoiceOver ?
@@ -1431,7 +1431,11 @@ struct NativeMyMusicScreen: View {
     private var musicAlbumsSection: some View {
         Section("Álbumes") {
             ForEach(musicAlbums) { album in
-                Text(album.name)
+                let songs = library.files.filter { $0.albumKey == album.id }
+                DisclosureGroup(album.name) {
+                ForEach(songs) { file in
+                    musicTrackRow(file, duplicates: possibleDuplicateSongs, in: songs)
+                }
                 Button(MusicLocalized.format("Guardar ecualización para álbum %@", album.name)) {
                     player.saveForAlbum(album.id)
                 }
@@ -1439,6 +1443,7 @@ struct NativeMyMusicScreen: View {
                     player.removeAlbumOverride(album.id)
                 }
                 .disabled(!player.hasAlbumOverride(album.id))
+                }
             }
         }
     }
@@ -1446,16 +1451,20 @@ struct NativeMyMusicScreen: View {
     private var musicFoldersSection: some View {
         Section("Mis carpetas") {
             ForEach(library.folders) { folder in
-                HStack {
-                    Text(MusicLocalized.format("%@, %d canciones", folder.name, folder.trackIds.count))
-                        .accessibilityLabel(detailedVoiceOver ?
-                            MusicLocalized.format("%@, carpeta, %d canciones, guardadas en el iPhone", folder.name, folder.trackIds.count) :
-                            MusicLocalized.format("%@, %d canciones", folder.name, folder.trackIds.count))
-                    Spacer()
+                let songs = library.files.filter { folder.trackIds.contains($0.id) }
+                DisclosureGroup {
+                    ForEach(songs) { file in
+                        musicTrackRow(file, duplicates: possibleDuplicateSongs, in: songs)
+                    }
                     Button(MusicLocalized.format("Eliminar carpeta %@", folder.name)) {
                         pendingCollectionRemoval = (folder.id, folder.name, "folder")
                     }
                         .accessibilityHint("Solo elimina esta carpeta virtual; las canciones se conservan.")
+                } label: {
+                    Text(MusicLocalized.format("%@, %d canciones", folder.name, songs.count))
+                        .accessibilityLabel(detailedVoiceOver ?
+                            MusicLocalized.format("%@, carpeta, %d canciones, guardadas en el iPhone", folder.name, songs.count) :
+                            MusicLocalized.format("%@, %d canciones", folder.name, songs.count))
                 }
             }
         }
@@ -1521,8 +1530,16 @@ struct NativeMyMusicScreen: View {
                         }
                         .accessibilityLabel(MusicLocalized.format("%@, %@, Jamendo", entry.title, entry.artist ?? ""))
                     case .local:
-                        if entry.localId != nil,
-                           !library.files.contains(where: { $0.id == entry.localId }) {
+                        if let file = library.files.first(where: { $0.id == entry.localId }) {
+                            Button(file.name) {
+                                let entries = library.playlistEntries(playlist)
+                                if let index = entries.firstIndex(where: { $0.id == entry.id }) {
+                                    mixedQueue.play(entries: Array(entries.dropFirst(index)), playlistID: playlist.id,
+                                        localURLs: Dictionary(uniqueKeysWithValues: library.files.map { ($0.id, library.audioURL(for: $0)) }),
+                                        albumKeysByURL: albumKeysByURL)
+                                }
+                            }
+                        } else {
                             Text(MusicLocalized.format("%@, archivo no disponible", entry.title))
                         }
                     }
@@ -1549,7 +1566,10 @@ struct NativeMyMusicScreen: View {
         Section("Carpetas inteligentes") {
             ForEach(library.smartFolders) { folder in
                 let matches = library.matchingTracks(for: folder)
-                Text(MusicLocalized.format("%@, criterio: %@ %@, %d canciones", folder.name, MusicLocalized.message(folder.ruleKind.label), folder.titleContains, matches.count))
+                DisclosureGroup(MusicLocalized.format("%@, criterio: %@ %@, %d canciones", folder.name, MusicLocalized.message(folder.ruleKind.label), folder.titleContains, matches.count)) {
+                ForEach(matches) { file in
+                    musicTrackRow(file, duplicates: possibleDuplicateSongs, in: matches)
+                }
                 Button(MusicLocalized.format("Reproducir carpeta inteligente %@", folder.name)) {
                     let items = matches.map { (name: $0.name, url: library.audioURL(for: $0)) }
                     if let first = items.first { player.play(name: first.name, url: first.url, queue: items,
@@ -1558,6 +1578,7 @@ struct NativeMyMusicScreen: View {
                 .disabled(matches.isEmpty)
                 Button(MusicLocalized.format("Eliminar carpeta inteligente %@", folder.name)) {
                     pendingCollectionRemoval = (folder.id, folder.name, "smartFolder")
+                }
                 }
             }
         }
@@ -1612,7 +1633,6 @@ struct NativeMyMusicScreen: View {
             Button("Mis carpetas") { musicPage = .folders }
             Button("Listas de reproducción") { musicPage = .playlists }
             Button("Carpetas inteligentes") { musicPage = .smartFolders }
-            NavigationLink("Ajustes") { musicSettings }
         }
     }
 
@@ -1635,7 +1655,11 @@ struct NativeMyMusicScreen: View {
                 musicLibrarySection
             } else {
                 Section {
-                    Button("Volver a Mi Música") { musicPage = .library }
+                    if musicPage == .organize {
+                        Button("Volver a Mi Música") { musicPage = .library }
+                    } else {
+                        Button("Organizar mi música") { musicPage = .organize }
+                    }
                 }
                 switch musicPage {
                 case .library: EmptyView()

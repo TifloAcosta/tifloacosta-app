@@ -17,7 +17,7 @@ enum NativeBackupSectionArchive {
     // Bounded JSON decoding; media is still streamed. Match creation and restore.
     private static let maximumLibraryMetadataBytes = 128 * 1024 * 1024
     private static let libraryMetadataNames: Set<String> = [
-        "documentos.json", "carpetas.json", "manifest.json", "catalogo-personal.json", "historial.json"
+        "documentos.json", "carpetas.json", "manifest.json", "catalogo-personal.json", "historial.json", "favoritos.json"
     ]
 
     static func validatePath(_ path: String) throws {
@@ -252,7 +252,7 @@ enum NativeBackupSectionArchive {
                 guard !normalizedPaths.contains(parent) else { throw Failure.duplicatePath }
                 parents.insert(parent)
             }
-            if !required.contains(path) {
+            if !required.contains(path) && !(section == .cinema && path == "favoritos.json") {
                 switch section {
                 case .reader:
                     guard parts.count >= 3, ["ReaderMedia", "ReaderOriginals"].contains(String(parts[0])),

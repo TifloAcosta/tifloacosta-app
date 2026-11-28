@@ -364,6 +364,17 @@ private struct NativeCinemaContentScreen: View {
         return components.url!
     }
 
+    private var combinedExternalSearchURL: URL? {
+        let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let hosts = Set(externalSearchSources.compactMap { $0.address?.host }).sorted()
+        guard !term.isEmpty, !hosts.isEmpty else { return nil }
+        let sites = hosts.map { "site:" + $0 }.joined(separator: " OR ")
+        let variants = "\"audio description\" OR audiodescripción OR audiodescription OR Audiodeskription OR audiodescrizione OR audiodescrição"
+        var components = URLComponents(string: "https://www.google.com/search")
+        components?.queryItems = [URLQueryItem(name: "q", value: term + " (" + sites + ") (" + variants + ")")]
+        return components?.url
+    }
+
     private func providerSearchURL(_ source: AccessibleCinemaSource) -> URL? {
         // This is explicitly an external web search, not an AD-confirmed result.
         guard let host = source.address?.host else { return nil }
@@ -491,8 +502,14 @@ private struct NativeCinemaContentScreen: View {
                         ? MusicLocalized.format("%@: índice anterior, pendiente de actualizar", name)
                         : MusicLocalized.format("%@: %d páginas consultadas", name, pages)
                     if partial.stale && !staleSources.contains(name) { staleSources.append(name) }
-                    if !partial.stale { staleSources.removeAll { $0 == name } }
-                    driveResults.removeAll { $0.sourceID == sourceID }
+                    if staleSources.contains(name), !partial.stale {
+                        // Keep the older hits visibly marked until the fresh
+                        // pass completes; a partial pass must not imply deletion.
+                        let newIDs = Set(partial.hits.map(\.id))
+                        driveResults.removeAll { $0.sourceID == sourceID && newIDs.contains($0.id) }
+                    } else {
+                        driveResults.removeAll { $0.sourceID == sourceID }
+                    }
                     driveResults.append(contentsOf: partial.hits)
                 }
                 guard !Task.isCancelled, submittedSearch == request else { return }
@@ -532,7 +549,11 @@ private struct NativeCinemaContentScreen: View {
                 NavigationLink {
                     NativeCinemaPublishedDriveBrowser(sourceID: hit.sourceID, sourceName: name, initialHit: hit)
                 } label: {
-                    Text(hit.entry.name + " — " + name)
+                    let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+                    let folderTitle = hit.path.dropFirst().reversed().first(where: { NativeCinemaRules.matches(term, fields: [$0.name]) })?.name
+                    let title = NativeCinemaRules.matches(term, fields: [hit.entry.name])
+                        ? hit.entry.name : [folderTitle, hit.entry.name].compactMap { $0 }.joined(separator: " — ")
+                    Text(title + " — " + name)
                 }
             }
             if ([tapeResults.count, movieResults.count, driveResults.count].max() ?? 0) > cinemaSearchLimit {
@@ -714,6 +735,9 @@ private struct NativeCinemaContentScreen: View {
                             List {
                             Text("Estos catálogos no se consultan automáticamente. Abre la plataforma o busca el título en su web. Comprueba que la obra tenga audiodescripción.")
                                 .font(.footnote)
+                            if let url = combinedExternalSearchURL {
+                                Link("Buscar en todas las webs de estas plataformas", destination: url)
+                            }
                             ForEach(externalSearchSources) { source in
                                 NavigationLink {
                                     List {

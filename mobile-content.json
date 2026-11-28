@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-28T02:00:29.563Z",
+  "generatedAt": "2026-11-28T03:55:41.491Z",
   "resources": [
     {
       "kind": "resource",
@@ -5646,6 +5646,23 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-f5851e2c6b87151c:en",
+      "sourceId": "9to5mac-f5851e2c6b87151c",
+      "lang": "en",
+      "title": "WhatsApp announces travel eSIMs, tests view-once texts and a cleaner interface",
+      "summary": "In addition to officially announcing support for in-app travel eSIM purchases, WhatsApp is now reportedly testing two new features on iOS. Here are the details. more…",
+      "body": "In addition to officially announcing support for in-app travel eSIM purchases, WhatsApp is now reportedly testing two new features on iOS. Here are the details.\n\nWhatsApp yesterday announced that iPhone and Android users will soon be able to purchase and install travel eSIMs directly from the app.\n\nAccording to the company, the feature will allow users to get a mobile data plan for international travel with just a few taps, without having to leave WhatsApp, while continuing to use the messaging service with their existing phone number.\n\nFrom the announcement:\n\nTo make this possible, we’re working with e-SIM providers and telco partners including Jio, Smart Axiata, Smart Communications, Verizon and others, and we’ll begin rolling this out in select countries soon. You’ll see it right in the app when it’s available for you.\n\nAdditionally, WABetaInfo reported this week that users running WhatsApp’s TestFlight beta are starting to see the option to send view-once text messages, extending a feature that is already available for photos, videos, and voice messages.\n\nWABetaInfo noted that after long-pressing the send button, users who have access to the new feature can select between scheduling the message and sending it as a view-once message.\n\nRecipients can then tap the message to read it in a separate interface, with WhatsApp blocking screenshots, screen recordings, copying, and forwarding. Once the recipient closes the message, neither party can access its contents again.\n\nIn another test rolling out to iPhone beta users, WhatsApp is making a slight change to the app’s tab bar, removing the text labels that appear below each icon while preserving its existing Liquid Glass design.\n\nFrom WABetaInfo ‘s report :\n\nWith the latest update, the text labels within the tab bar are no longer visible. The tab bar now shows icons for Updates, Calls, Contacts, Chats, and You without any labels. This makes the tab bar more compact since the app no longer needs to reserve more space for its labels. WhatsApp makes icons with the tab bar clear and recognizable, so users can still identify every tab immediately.\n\nAs is usually the case with WhatsApp beta features, there is no telling when (or if) these two changes will make their way to the public version of the app.\n\nTo learn more about WhatsApp’s upcoming travel eSIM feature, follow this link . For WABetaInfo ’s coverage of the two beta features, see here and here .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/27/whatsapp-announces-travel-esims-tests-view-once-texts-and-a-cleaner-interface/",
+      "publishedAt": "2026-11-27T22:30:06.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "9to5mac-2da1dc432bebb25f:en",
       "sourceId": "9to5mac-2da1dc432bebb25f",
       "lang": "en",
@@ -5659,21 +5676,6 @@
         "apple",
         "tecnologia-general",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-daf71508312a2a2d:en",
-      "sourceId": "the-verge-daf71508312a2a2d",
-      "lang": "en",
-      "title": "My favorite MPC beat maker is ready for your vibe-coded firmware and effects",
-      "summary": "Akai is continuing to open up its various music-making platforms with the MPC Sample 1.4 firmware. My favorite (and the most affordable) of the MPC samplers has become a popular home for vibe-coded custom firmwares and mods. The company has decided, rather than fight it, to embrace the modding community. The latest update adds several […]",
-      "body": "Akai is continuing to open up its various music-making platforms with the MPC Sample 1.4 firmware . My favorite (and the most affordable) of the MPC samplers has become a popular home for vibe-coded custom firmwares and mods. The company has decided, rather than fight it, to embrace the modding community. The latest update adds several new developer features, including support for the new SDK and custom Knob Effects plugins.\n\nPlugins added to the appropriate folder on your microSD card are now automatically recognized and will appear at the bottom of the list in the Knob Effects menu. There's also a Developer Mode, which lets you run scripts …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/gadgets/1044485/mpc-sample-firmware-sdk",
-      "publishedAt": "2026-11-27T20:48:04.000Z",
-      "categories": [
-        "tecnologia-general"
       ]
     },
     {
@@ -5733,22 +5735,6 @@
     },
     {
       "kind": "news",
-      "id": "the-verge-8726c4688badde12:en",
-      "sourceId": "the-verge-8726c4688badde12",
-      "lang": "en",
-      "title": "You might lose your Oura health data if you’re still using an old Android phone",
-      "summary": "Oura will be dropping support for Android 11 on December 8th, 2026, and users may not have access to all of their data if they don't upgrade to Android 12 or higher before the deadline. The support page now reads: Oura will drop support for Android 11 on December 8, 2026. If you are using […]",
-      "body": "Oura will be dropping support for Android 11 on December 8th, 2026, and users may not have access to all of their data if they don't upgrade to Android 12 or higher before the deadline. The support page now reads:\n\nOura will drop support for Android 11 on December 8, 2026. If you are using an Android device, be sure to update to Android 12 or higher to ensure no loss of data or features. If you decide not to upgrade, you may still be able to use some limited historical Oura App features. Please note that if you do upgrade your smartphone system later, your historical Oura data will not carry over.\n\nCompanies often end support for older OSe …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/gadgets/1044314/oura-ring-health-data-android-11",
-      "publishedAt": "2026-11-27T19:44:19.000Z",
-      "categories": [
-        "tecnologia-general",
-        "android"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "9to5mac-1eae8ca81c5e2144:en",
       "sourceId": "9to5mac-1eae8ca81c5e2144",
       "lang": "en",
@@ -5777,22 +5763,6 @@
       "categories": [
         "apple",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-c21b82fb18224fe7:en",
-      "sourceId": "9to5mac-c21b82fb18224fe7",
-      "lang": "en",
-      "title": "iPhone Duo Diary: Pros & cons in early real-life use",
-      "summary": "I said back at the launch that I was experiencing extreme levels of technolust for the iPhone Duo despite feeling that it wasn’t the best match for me. A hands-on session of around half an hour in an Apple Store didn’t change either impression. But there’s of course no substitute for real-life usage of a device to find out how accurate my initial impressions might be, so I’m currently using the Duo as my sole iPhone, leaving my iPhone 18 Pro in a drawer … more…",
-      "body": "I said back at the launch that I was experiencing extreme levels of technolust for the iPhone Duo despite feeling that it wasn’t the best match for me. A hands-on session of around half an hour in an Apple Store didn’t change either impression.\n\nBut there’s of course no substitute for real-life usage of a device to find out how accurate my initial impressions might be, so I’m currently using the Duo as my sole iPhone, leaving my iPhone 18 Pro in a drawer …\n\nThe launch video already had me wanting one , despite my view that it wasn’t really designed for me.\n\nThis device isn’t the best match for me. To me, an iPhone is about 50% ultra-slim camera, 49% pocket computer, and 1% phone. The iPhone 18 Pro Max is a better device for my needs. However, I was experiencing extreme levels of technolust for the iPhone Duo.\n\nUsing one in an Apple Store reinforced both sides of the equation for me.\n\nYes, it’s exceedingly expensive, and yes, having the priciest iPhone lack the best cameras would be a huge compromise for me. But while I still don’t think it would be the best iPhone for my needs, I do absolutely, undeniably want one.\n\nWhat I’m doing now is using the iPhone Duo as my primary phone to discover how those pros and cons balance out in the real world. This first piece is written after just a couple of days, so compromises the things that stand out to me in very early use.\n\nThe size of the inner display is, of course, the whole point of the device: you essentially get an iPad mini that slips into your pocket. As someone who will almost always take a larger display over a smaller one, I do really love this.\n\nWhen using a single app full screen on the display, it’s significantly more immersive than on other iPhones. For example, it’s normally extremely rare for me to ever watch video on an iPhone screen, but although I would still opt for a MacBook over the iPhone Duo, I have found myself watching more YouTube videos on the device. It does depend to an extent on the aspect ratio of the video, however, with letterboxing reducing the appeal.\n\nIt can be a much better way to casually share photos and iPhone videos with other people. I never feel that even a Pro Max screen does justice to most photos, but the iPhone Duo screen can be large enough to do so. This again, however, depends on the aspect ratio. For example, a photo in a 16:9 ratio or similar is actually smaller on this display than it is on a Pro Max.\n\nBut a photo with the same aspect ratio as the display, completely filling it, really does look great.\n\nMy preference for large screens extends to ebooks, so reading an ebook on an iPhone has always been an absolute last resort. However, while doing so on the Duo certainly wouldn’t be my first choice, it is a significantly better experience than a normal iPhone. I’m currently viewing it as part of my Kindle ecosystem: iPhone Duo, Kindle Paperwhite Signature Edition , Kindle Scribe .\n\nProvided an app has been optimized for the display, pretty much everything is just better on this size screen\n\nWhile the size may be the headline news, I have to say I’m also a huge fan of the anti-reflective coating. I said when I first tested it that I wished it had also been used on the outer display and was an option on other iPhones, and I’m absolutely still of this view.\n\nIt’s almost as if it turns it into a third display type, sitting somewhere between e-ink and conventional glossy screens. I know some find the colors too muted compared to a glossy display, but I don’t find this to be an issue at all. I very much prefer the more paper-like look.\n\nSplit-screen view, positioning one app on each side of the display, is another key feature. The display is too small for windowing, but the split-screen view is very usable for short tasks. It’s especially useful when using two apps simultaneously, such as embedding a photo into a message.\n\nAnother handy use is when you’re following instructions in one app to carry out in another – in this case Claude telling me how to transfer an e-SIM from my 18 Pro to the Duo (which it did better than Siri AI ).\n\nThe new gesture of sliding from the bottom of the screen to either the left or right side became instinctive almost immediately – it’s just so obvious. You can also quit either app while leaving the other in place.\n\nI had a FaceTime call last night where I was able to let my friend see both my face and what I was looking at. Admittedly, I was mostly using this feature to show off the iPhone Duo itself in a mirror, but I can definitely see situations in which this would be genuinely useful, ranging from tech support to sharing travel experiences.\n\nThe aspect ratio of the outer display definitely takes some getting used to, but you can display the same number of apps as on a standard iPhone. I also found that reachability in one-handed use was better with this than with the iPhone Pro Max, so I view this as a win for the device.\n\nFinally, of course, the other side of the USP of the Duo is the small folded size. The shape is extremely pocketable and fits jeans pockets more comfortably than even a standard iPhone Pro, let alone the Pro Max. At the same time, the increased width is still narrow enough to comfortably fit into a standard jacket/coat inside pocket.\n\nI’ve talked about this a lot already as the biggest disincentive for me to buy the Duo, so I’ll just briefly reiterate the key differences here. No telephoto lens*, none of the new Pro controls like variable aperture and shutter speed, no ProRAW photos, no ProRes RAW video.\n\n*This one isn’t huge for me as I mostly shoot in the 0.5 to 2x range, but there are definitely times when longer reach is useful.\n\nThe Duo is heavier than the iPhone 18 Pro Max, and I have to say that you do feel the weight in one-handed use. While you’re using the outer display, the trade-off is very poor: you’re getting a heavier device with a smaller screen.\n\nWhen using the inner display, it still feels heavy and isn’t comfortable to hold with one hand, in part due to the lever effect, so I generally hold it with both hands. That’s perfectly usable, with everything within reach of one thumb or the other, and of course the trade-off is very much more reasonable given the size of the display you’re now using.\n\nIn my own usage so far, I’ve opened up the phone for anything other than really quick things like checking an incoming message. But if you’re someone who would mostly use the outer screen, as was the case with my colleague Ryan , then I can see why the Duo simply wouldn’t make sense.\n\nClosely related to the weight when using the device in folded form, it feels rather bulky, especially with a case on it – and given the extremely high price of a replacement screen, you’d have to be very brave indeed to use it without one!\n\nPerhaps I’ll get used to it, but in the first few days the lack of Face ID has annoyed me Every Single Time I’ve had to unlock the phone or use biometric authentication within an app. Face ID is just so seamless, and Touch ID very much isn’t.\n\nThe issue is exacerbated by the fact that the button will be in a different place depending on which way you’re holding the phone, and using it in different orientations is very much more common with the Duo than with a conventional slab iPhone.\n\nThe rest-to-unlock setting helps a little, but not much. I’m running it on the developer beta, so I do have Face Unlock enabled, but while I think Apple’s compromises make sense , the practical impact is that it demands Touch ID most of the time.\n\nWhen I heard the level of complaints being made about the downgrade to Touch ID, I thought people were perhaps making too much fuss about the issue, but even three days in, I have to say I now get it completely.\n\nOne of the early adopter pains is unoptimized apps. A lot of them will get fixed quite quickly, I think, but there are always apps that never will – like banking apps. However, this is a smaller issue than I expected it to be.\n\nFor example, my development has a concierge app used for things like notifying me when packages have been delivered to the front desk instead of my apartment. With the iPhone Duo unfolded in landscape mode, this app initially opened as a tiny vertical window. However, as soon as I hit the on-screen buttons to flip and resize an unoptimized app, then it became perfectly usable – and it has remembered this setting ever since.\n\nThe final drawback, and a very substantial one, is of course the cost. Yes, it combines the benefits of an iPhone and an iPad mini in one device, but it literally costs the same as buying each of them. Just a few years ago, if you had talked about anyone spending $2,000 plus on a iPhone, it would have seemed absolutely insane. I’m honestly not sure it’s any less insane today.\n\nHowever, if you do want both devices and would otherwise have bought each of them, then there’s definitely a massive convenience factor in having it all in one pocketable package.\n\nI said in the intro that there was a definite head versus heart thing going on here. Given the importance of the camera functionality, my head is quite certain that the iPhone 18 Pro is the better device for me. My heart, however, is finding the Duo a dangerously compelling proposition in all other respects.\n\nMy head also wanted to cheat. It proposed that I should carry both devices, using the 18 Pro as a camera and the Duo for everything else. It has taken considerable willpower to reject this idea and leave the 18 Pro at home; that in itself tells its own story.\n\nEven in the first few days, some of the novelty factor has already worn off. For example, that clever blur animation as you unfold the phone is super-cute the first few times you see it, but now I no longer even notice it. The overall excitement of a brand new form factor will similarly wear off over time, though I’m not sure at what rate.\n\nIn previous head versus heart battles, I’ve certainly made mistakes in some areas of my life. In the tech sphere, however, my head usually wins out. Right now, then, I have two predictions. First, I’m not going to end up as an iPhone Duo owner. Second, I’m going to be exceedingly sad when I return it.\n\nPlace your bets …",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/27/iphone-duo-diary-pros-cons-in-early-real-life-use/",
-      "publishedAt": "2026-11-27T17:00:00.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
       ]
     },
     {

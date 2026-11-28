@@ -377,7 +377,8 @@ export async function handleRequest(request, env, deps = {}) {
         url.searchParams.get('pageToken') || '',
         fetchImpl,
         { filter: url.searchParams.get('filter') || 'video',
-          channelId: url.pathname === '/channel-videos' ? url.searchParams.get('channelId') || '' : '' }
+          channelId: url.pathname === '/channel-videos' ? url.searchParams.get('channelId') || '' : '',
+          recentUploads: url.pathname === '/channel-videos' && url.searchParams.get('uploads') === '1' }
       );
       return json(result, 200, cors);
     } catch (error) {

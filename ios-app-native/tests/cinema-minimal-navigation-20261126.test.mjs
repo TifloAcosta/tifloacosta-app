@@ -21,7 +21,7 @@ test('provider folders are grouped by six languages and Audesc has two separate 
   assert.ok(platforms.includes('NavigationLink("Universo Audesc")'));
   assert.ok(platforms.includes('source.languages.contains(.latino)'));
   assert.ok(platforms.includes('return matches && !["audesc-es", "audesc-latino"].contains(source.id)'));
-  assert.ok(platforms.includes('source.id == "audesc-es" ? "España" : "Latinoamérica"'));
+  assert.ok(platforms.includes('source.id == "audesc-es" ? "Español de España" : "Español latino"'));
   assert.ok(platforms.includes('NativeCinemaProviderScreen(source: source)'));
   assert.ok(!platforms.includes('Text(source.detail)'));
 });

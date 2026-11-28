@@ -80,7 +80,7 @@ test('Botón Reproducir usa el modo elegido para los gestos y mantiene doble toq
 test('Toque mágico solo controla la reproducción actual', () => {
   assert.match(reader, /\.accessibilityAction\(\.magicTap\)/);
   assert.match(reader, /if speech\.isPlaying\s*\{\s*pausePlayback\(\)/);
-  assert.match(reader, /if speech\.isPaused \{\s*speech\.resume\(\)/);
+  assert.match(reader, /if speech\.isPaused \{\s*if !tracks.isEmpty \{ speech\.updateLiveRecordedAudioSpeed\(speed\) \}\s*speech\.resume\(\)/);
   assert.match(reader, /\.accessibilityAction\(\.magicTap\) \{ toggleReaderPlayback\(\) \}/);
 });
 test('Marcas incluyen contexto y borrado anuncia el título exacto', () => {

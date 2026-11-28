@@ -71,7 +71,6 @@ actor NativeMusicRecognition {
 
     func identify(_ audioURL: URL, client: String) async throws -> Match? {
         let user = try NativeAcoustIDKeychain.read(.active)
-        guard let user else { throw URLError(.userAuthenticationRequired) }
         let sample = try Self.fingerprint(audioURL)
         let data = try await request("lookup", client: client, user: user, fields: [
             URLQueryItem(name: "duration", value: String(sample.duration)),
@@ -111,7 +110,13 @@ actor NativeMusicRecognition {
             let deadline = clock.now.advanced(by: .seconds(max(1, seconds)))
             blockedUntil = max(blockedUntil ?? deadline, deadline)
         }
-        if http.statusCode == 401 || http.statusCode == 403 { throw URLError(.userAuthenticationRequired) }
+        // The API may report authorization errors in either HTTP or JSON.
+        if path == "lookup", NativeAcoustIDLookup.requiresUserKey(in: data) {
+            throw URLError(.userAuthenticationRequired)
+        }
+        if (http.statusCode == 401 || http.statusCode == 403), user != nil {
+            throw URLError(.userAuthenticationRequired)
+        }
         guard http.statusCode == 200 else { throw URLError(.badServerResponse) }
         return data
     }

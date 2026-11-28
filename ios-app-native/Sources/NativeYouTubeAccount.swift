@@ -356,6 +356,7 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
         if loadMore && subscriptionsNextPageToken.isEmpty { return }
         subscriptionsBusy = true
         subscriptionsMessage = nil
+        let expectedCredential = credential
         defer { subscriptionsBusy = false }
         do {
             let page: NativeYouTubeSubscriptionPage = try await call(
@@ -363,14 +364,18 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
                 queryItems: loadMore
                     ? [URLQueryItem(name: "pageToken", value: subscriptionsNextPageToken)] : []
             )
+            try Task.checkCancellation()
+            guard authenticated, credential == expectedCredential else { return }
             if !loadMore { subscriptions = [] }
-            let previous = Set(subscriptions.map(\.id))
-            subscriptions += page.items.filter { !previous.contains($0.id) }
+            var previous = Set(subscriptions.map(\.id))
+            subscriptions += page.items.filter { previous.insert($0.id).inserted }
             subscriptionsNextPageToken = page.nextPageToken
             if subscriptions.isEmpty {
                 subscriptionsMessage = MusicLocalized.message("No hay canales suscritos en esta cuenta.")
             }
         } catch {
+            if Task.isCancelled || (error as? URLError)?.code == .cancelled { return }
+            guard credential == expectedCredential else { return }
             let code = (error as? YouTubeFailure)?.code ?? "NETWORK"
             if code == "SESSION_EXPIRED" { forget() }
             subscriptionsMessage = errorText(code)

@@ -21,6 +21,6 @@ test('Abrir carpeta no reescribe el filtro ni oculta libros ajenos', () => {
   assert.ok(start !== -1 && end > start);
   const view = reader.slice(start, end);
   assert.match(view, /NavigationLink/);
-  assert.match(view, /NativeReadingScreen\(document: doc, speech: speech\)/);
+  assert.match(view, /NativeReaderOpeningScreen\(document: doc, speech: speech\)/);
   assert.doesNotMatch(view, /selectedFolder\s*=/);
 });

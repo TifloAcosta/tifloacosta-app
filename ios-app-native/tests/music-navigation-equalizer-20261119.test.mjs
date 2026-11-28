@@ -4,18 +4,21 @@ import { readFileSync } from 'node:fs';
 
 const music = readFileSync(new URL('../Sources/NativeMyMusic.swift', import.meta.url), 'utf8');
 
-test('Mi Música shows playable content first, then organization and settings controls', () => {
-  const body = music.slice(music.indexOf('    var body: some View {', music.indexOf('struct NativeMyMusicScreen')), music.indexOf('.navigationTitle("Mi Música")'));
-  assert.match(body, /\bmusicPlayerSection\b[\s\S]*\bmusicPlatformsSection\b[\s\S]*\bmusicLibrarySection\b[\s\S]*\bmusicOrganizeSection\b/);
-  assert.match(music, /private var musicPlayerSection: some View \{\s*Section\("Reproductor"\)/);
+test('Mi Música prioritizes songs and separates management into explicit pages', () => {
+  const body = music.slice(music.indexOf('    var body: some View {', music.indexOf('struct NativeMyMusicScreen')), music.indexOf('.navigationTitle(LocalizedStringKey(musicPage.rawValue))'));
+  const main = body.split('if musicPage == .library {')[1].split('} else {')[0];
+  assert.match(main, /\bmusicPlayerSection\b[\s\S]*\bmusicPlatformsSection\b[\s\S]*Button\("Organizar mi música"\)[\s\S]*\bmusicLibrarySection\b/);
+  assert.doesNotMatch(main, /musicAlbumsSection|musicFoldersSection|musicPlaylistsSection|musicSmartFoldersSection/);
+  assert.match(music, /private var musicPlayerSection: some View \{\s*if !player.currentName.isEmpty \{\s*Section\("Reproductor"\)/);
+  assert.match(music, /DisclosureGroup\("Opciones de reproducción"/);
   assert.match(music, /private var musicLibrarySection: some View \{\s*Section\("Mi biblioteca"\)/);
-  const organize = music.slice(music.indexOf('    private var musicOrganizeSection:'), music.indexOf(body));
+  const organize = music.slice(music.indexOf('    private var musicOrganizeSection:'), music.indexOf('    var body: some View {', music.indexOf('    private var musicOrganizeSection:')));
   assert.match(organize, /Menu\("Organizar mi música"\)/);
-  assert.match(organize, /NavigationLink\("Ajustes"\)/);
+  assert.match(main, /NavigationLink\("Ajustes"\)/);
   assert.match(music, /private var musicPlatformsSection: some View \{[\s\S]*?NavigationLink\("Plataformas musicales"\)/);
   assert.doesNotMatch(organize, /NavigationLink\("Plataformas musicales"\)/);
-  assert.doesNotMatch(body, /Section\("Ecualizador"\)/);
-  assert.doesNotMatch(body, /Section\("Copias de seguridad"\)/);
+  assert.doesNotMatch(main, /Section\("Ecualizador"\)|Section\("Copias de seguridad"\)/);
+  for (const section of ['albums','folders','playlists','smartFolders']) assert.ok(body.includes('case .'+section+':'));
 });
 
 test('organize menu contains import and creation actions without duplicate top level controls', () => {

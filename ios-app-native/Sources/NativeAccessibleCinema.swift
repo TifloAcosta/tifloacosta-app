@@ -346,12 +346,22 @@ private struct NativeCinemaContentScreen: View {
     private var eligibleSources: [AccessibleCinemaSource] {
         AccessibleCinemaDirectory.sources.filter { source in
             (selectedLanguage == .all || source.languages.contains(selectedLanguage)) &&
-                (selectedKind == .all || source.kinds.contains(selectedKind))
+                (selectedKind == .all || source.kinds.contains(selectedKind) ||
+                    ["audesc-es", "audesc-latino"].contains(source.id))
         }
     }
 
     private var externalSearchSources: [AccessibleCinemaSource] {
         eligibleSources.filter { !["audesc-es", "audesc-latino", "audiocinemateca", "tape-territory", "movies-for-the-blind"].contains($0.id) }
+    }
+
+    private func adpSearchURL(provider: String? = nil) -> URL {
+        var components = URLComponents(string: "https://adp.acb.org/adp-search")!
+        components.queryItems = [URLQueryItem(name: "title", value: searchText)]
+        if let provider {
+            components.queryItems?.append(URLQueryItem(name: "provider_filter[" + provider + "]", value: provider))
+        }
+        return components.url!
     }
 
     private func providerSearchURL(_ source: AccessibleCinemaSource) -> URL? {
@@ -492,7 +502,16 @@ private struct NativeCinemaContentScreen: View {
                 if result.incomplete { partialSources.append(name) }
                 if result.stale && !staleSources.contains(name) { staleSources.append(name) }
                 if !result.stale { staleSources.removeAll { $0 == name } }
-            } catch { if !Task.isCancelled, submittedSearch == request { unavailableSources.append(name) } }
+            } catch {
+                if !Task.isCancelled, submittedSearch == request {
+                    unavailableSources.append(name)
+                    if let failure = error as? NativeCinemaPublicDriveError,
+                       failure == .denied || failure == .noLongerAvailable {
+                        driveResults.removeAll { $0.sourceID == sourceID }
+                        staleSources.removeAll { $0 == name }
+                    }
+                }
+            }
         }
     }
 
@@ -691,7 +710,8 @@ private struct NativeCinemaContentScreen: View {
                         }
                     }
                     if !externalSearchSources.isEmpty {
-                        Section("Buscar en plataformas externas") {
+                        NavigationLink("Buscar en plataformas externas") {
+                            List {
                             Text("Estos catálogos no se consultan automáticamente. Abre la plataforma o busca el título en su web. Comprueba que la obra tenga audiodescripción.")
                                 .font(.footnote)
                             ForEach(externalSearchSources) { source in
@@ -701,6 +721,9 @@ private struct NativeCinemaContentScreen: View {
                                             Link("Buscar en la plataforma original", destination: URL(string: "https://www.ardmediathek.de/suche")!)
                                         } else if source.id == "rtve-campeones" {
                                             Link("Buscar en la plataforma original", destination: URL(string: "https://www.rtve.es/play/buscador/")!)
+                                        }
+                                        if let provider = ["tubi": "Tubi", "pluto": "Pluto", "plex-ad": "Plex"][source.id] {
+                                            Link("Audio Description Project", destination: adpSearchURL(provider: provider))
                                         }
                                         if let url = providerSearchURL(source) {
                                             Link("Buscar título en la web", destination: url)
@@ -713,13 +736,16 @@ private struct NativeCinemaContentScreen: View {
                                     .navigationTitle(MusicLocalized.message(source.name))
                                 } label: { Text(MusicLocalized.message(source.name)) }
                             }
+                            }
+                            .tifloScreenSurface()
+                            .navigationTitle("Buscar en plataformas externas")
                         }
                     }
                     if selectedLanguage == .all || selectedLanguage == .english || selectedLanguage == .french ||
                         selectedLanguage == .german || selectedLanguage == .italian {
                         Section("Buscadores especializados") {
                             if selectedLanguage == .all || selectedLanguage == .english {
-                                Link("Audio Description Project", destination: URL(string: "https://adp.acb.org/adp-search")!)
+                                Link("Audio Description Project", destination: adpSearchURL())
                             }
                             if selectedLanguage == .all || selectedLanguage == .french {
                                 Link("Portail de l’audiodescription", destination: frenchDiscoveryURL(freeOnly: false))

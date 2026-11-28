@@ -19,7 +19,7 @@ test('resource browsing separates direct documents from children and permits nes
     assert.match(screens, /path: path \+ \[folder\]/);
     assert.match(screens, /descendants\.filter \{ \$0\.matchesResourceQuery\(query\) \}/);
     assert.match(screens, /if isSearchingResources \{[\s\S]*?return item\.matchesResourceQuery\(resourceQuery\)[\s\S]*?return item\.category == chosenCategory/);
-    assert.match(screens, /\.accessibilityValue\(Text\(item\.resourceLocation\)\)/);
+    assert.match(screens, /\.accessibilityValue\(Text\(item\.resourceLocation \+ \(resourceService\.isAvailableOffline\(item\)/);
     assert.match(screens, /if isPillsCategory && !isSearchingResources/);
 });
 

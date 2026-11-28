@@ -159,7 +159,10 @@ final class NativeCinemaLocalLibrary: ObservableObject {
             .init(source: staging.appendingPathComponent("media").appendingPathComponent($0.storedName),
                   target: Self.directory.appendingPathComponent($0.storedName))
         }
-        let historyPlan = try NativeCinemaRecentStore.shared.prepareBackupHistory(history, recovery: recovery)
+        let favoritesURL = staging.appendingPathComponent("favoritos.json")
+        let favorites = FileManager.default.fileExists(atPath: favoritesURL.path)
+            ? try decoder.decode([NativeCinemaRecent].self, from: Data(contentsOf: favoritesURL)) : []
+        let historyPlan = try NativeCinemaRecentStore.shared.prepareBackupHistory(history, favorites: favorites, recovery: recovery)
         let disk = try NativeBackupFileRestore(moves: moves, indexes: [
             (Self.indexURL, try JSONEncoder().encode(combined))
         ], recovery: recovery)
@@ -179,6 +182,7 @@ final class NativeCinemaLocalLibrary: ObservableObject {
     func createGlobalBackupArchive() async throws -> URL {
         let snapshot = items
         let recent = NativeCinemaRecentStore.shared.entries
+        let favorites = NativeCinemaRecentStore.shared.favorites
         let root = Self.directory
         let allowed = Self.allowedExtensions
         let maximumFileSize = Self.maximumFileSize
@@ -208,7 +212,8 @@ final class NativeCinemaLocalLibrary: ObservableObject {
             let encoder = JSONEncoder()
             return try NativeBackupSectionArchive.create(
                 metadata: ["catalogo-personal.json": encoder.encode(snapshot),
-                           "historial.json": encoder.encode(recent)],
+                           "historial.json": encoder.encode(recent),
+                           "favoritos.json": encoder.encode(favorites)],
                 files: files, maxBytes: 4_000_000_000, maxEntries: 10_000)
         }
         let archive = try await withTaskCancellationHandler {

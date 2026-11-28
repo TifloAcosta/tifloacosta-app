@@ -317,8 +317,64 @@ actor NativeCinemaDriveIndex {
         let date: Date
         let hits: [NativeCinemaDriveSearchHit]
     }
+    private struct CentralIndex: Decodable {
+        let schema: Int
+        let sourceID: String
+        let rootID: String
+        let generatedAt: String
+        let complete: Bool
+        let hits: [NativeCinemaDriveSearchHit]
+    }
     private var snapshots: [String: Snapshot] = [:]
     private var active = Set<String>()
+    private var centralChecked: [String: Date] = [:]
+    private var centralLoaded = Set<String>()
+
+    /// Opt-in only. No central endpoint is configured until the owner authorizes
+    /// publishing the metadata. The on-device index works independently.
+    private func fetchCentral(_ sourceID: String, rootID: String) async throws -> Snapshot? {
+        guard let raw = Bundle.main.object(forInfoDictionaryKey: "TifloCinemaCentralIndexBaseURL") as? String,
+              !raw.isEmpty,
+              let base = URL(string: raw), base.scheme == "https",
+              ["tifloacosta.com", "www.tifloacosta.com"].contains(base.host ?? ""),
+              base.user == nil, base.password == nil, base.query == nil, base.fragment == nil,
+              ["audesc-es", "audesc-latino"].contains(sourceID) else { return nil }
+        let url = base.appendingPathComponent(sourceID + ".json")
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 15
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let http = response as? HTTPURLResponse, http.statusCode == 200,
+              http.url == url, data.count <= 64 * 1024 * 1024 else {
+            throw NativeCinemaPublicDriveError.badResponse
+        }
+        let value = try JSONDecoder().decode(CentralIndex.self, from: data)
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        guard value.schema == 1, value.complete, value.sourceID == sourceID,
+              value.rootID == rootID,
+              let date = formatter.date(from: value.generatedAt) ?? ISO8601DateFormatter().date(from: value.generatedAt),
+              date <= Date(), Date().timeIntervalSince(date) < 6 * 3600 else {
+            throw NativeCinemaPublicDriveError.badResponse
+        }
+        func valid(_ item: NativeCinemaPublicDriveEntry) -> Bool {
+            !item.name.isEmpty && item.name.count < 500 && item.resourceKey == nil &&
+            (10...200).contains(item.id.count) &&
+            item.id.range(of: "^[A-Za-z0-9_-]+$", options: .regularExpression) != nil
+        }
+        var hits: [String: NativeCinemaDriveSearchHit] = [:]
+        for hit in value.hits {
+            guard hit.sourceID == sourceID, hit.pageCursor == nil, valid(hit.entry),
+                  !hit.entry.isFolder, hit.entry.isSupportedMedia,
+                  hit.path.first?.id == rootID, !hit.path.isEmpty,
+                  hit.path.allSatisfy({ $0.isFolder && valid($0) }),
+                  Set(hit.path.map(\.id)).count == hit.path.count,
+                  hits[hit.entry.id] == nil else { throw NativeCinemaPublicDriveError.badResponse }
+            hits[hit.entry.id] = hit
+        }
+        return Snapshot(rootID: rootID, started: date, completed: date,
+                        queue: [], seenFolders: [], hits: hits)
+    }
 
     private static func storageURL(_ sourceID: String) throws -> URL {
         guard ["audesc-es", "audesc-latino"].contains(sourceID) else {
@@ -373,14 +429,35 @@ actor NativeCinemaDriveIndex {
         try Task.checkCancellation()
         active.insert(sourceID)
         defer { active.remove(sourceID) }
+        if refresh || Date().timeIntervalSince(centralChecked[sourceID] ?? .distantPast) >= 900 {
+            centralChecked[sourceID] = Date()
+            centralLoaded.remove(sourceID)
+            do {
+                if let central = try await fetchCentral(sourceID, rootID: root.id) {
+                    try Task.checkCancellation()
+                    // Prefer a complete newer snapshot; keep local fallback if the service fails.
+                    if (snapshots[sourceID]?.completed ?? .distantPast) <= (central.completed ?? .distantPast) {
+                        snapshots[sourceID] = central
+                        centralLoaded.insert(sourceID)
+                        storeComplete(central, sourceID: sourceID)
+                    }
+                }
+            } catch {
+                if Task.isCancelled { throw CancellationError() }
+                // A failed central endpoint is never interpreted as an empty catalogue.
+            }
+        }
         let stored = snapshots[sourceID]?.completed != nil ? nil : readComplete(sourceID, rootID: root.id)
         let previous = snapshots[sourceID] ?? stored
         let lastComplete = previous?.completed != nil ? previous : stored
         let fresh = previous?.completed.map { Date().timeIntervalSince($0) < 900 } ?? false
+        let centralFresh = centralChecked[sourceID].map { Date().timeIntervalSince($0) < 900 } == true &&
+            centralLoaded.contains(sourceID) &&
+            (previous?.completed.map { Date().timeIntervalSince($0) < 6 * 3600 } ?? false)
         let usable = previous?.rootID == root.id &&
-            (fresh || (previous?.completed == nil && previous?.failed == false &&
+            (fresh || centralFresh || (previous?.completed == nil && previous?.failed == false &&
                 Date().timeIntervalSince(previous?.started ?? .distantPast) < 900))
-        var state = (!refresh && usable ? previous : nil) ?? Snapshot(
+        var state = ((!refresh || centralFresh) && usable ? previous : nil) ?? Snapshot(
             rootID: root.id, started: Date(), queue: [Pending(path: [root], token: nil)],
             seenFolders: [root.id])
         func result(_ state: Snapshot, incomplete: Bool) -> NativeCinemaDriveSearchResult {

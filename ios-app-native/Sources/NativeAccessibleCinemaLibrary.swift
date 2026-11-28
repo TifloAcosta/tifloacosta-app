@@ -259,10 +259,13 @@ final class NativeCinemaAudioPlayer: ObservableObject {
     private var completed = false
     private var movieQueue: [NativePodcastEpisode] = []
     private var movieWorkTitle = ""
+    private var audioQueue: [NativeAudiocinematecaCatalogueIndex.Part] = []
+    private var audioWork: NativeAudiocinematecaCatalogueIndex.Entry?
+    private var audioAccountStamp: String?
     private var remoteCommandTokens: [Any] = []
     private var progressTimer: Timer?
 
-    func open(_ item: NativeCinemaLocalItem, library: NativeCinemaLocalLibrary) throws {
+    func open(_ item: NativeCinemaLocalItem, library: NativeCinemaLocalLibrary, fromBeginning: Bool = false) throws {
         guard let url = library.fileURL(for: item) else {
             throw NativeCinemaLocalError.missing
         }
@@ -280,7 +283,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         currentID = item.id
         currentCloudIsVideo = item.isVideoFile
         historyTitle = item.title
-        let restored = max(0, item.lastSeconds)
+        let restored = fromBeginning ? 0 : max(0, library.items.first(where: { $0.id == item.id })?.lastSeconds ?? item.lastSeconds)
         seconds = restored
         duration = 0
         lastSavedSecond = restored
@@ -307,7 +310,8 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         _ file: URL,
         title: String,
         reference: String,
-        library: NativeCinemaLocalLibrary
+        library: NativeCinemaLocalLibrary,
+        fromBeginning: Bool = false
     ) throws {
         let temporaryRoot = FileManager.default.temporaryDirectory.standardizedFileURL
         let parent = file.standardizedFileURL.deletingLastPathComponent()
@@ -328,7 +332,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         currentCloudReference = reference
         historyTitle = title
         currentCloudIsVideo = ["mp4", "m4v", "mov"].contains(file.pathExtension.lowercased())
-        let restored = max(0, UserDefaults.standard.double(forKey: "cinema.cloud.position." + reference))
+        let restored = fromBeginning ? 0 : savedCloudPosition(reference)
         seconds = restored
         duration = 0
         lastSavedSecond = restored
@@ -356,7 +360,8 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         title: String,
         reference: String,
         isVideo: Bool,
-        library: NativeCinemaLocalLibrary
+        library: NativeCinemaLocalLibrary,
+        fromBeginning: Bool = false
     ) throws {
         guard !reference.isEmpty, NativeCinemaPublicDrive.configuredKey != nil else {
             throw NativeCinemaPublicDriveError.denied
@@ -373,8 +378,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         currentCloudReference = reference
         historyTitle = title
         currentCloudIsVideo = isVideo
-        let restored = max(0, UserDefaults.standard.double(
-            forKey: "cinema.cloud.position." + reference))
+        let restored = fromBeginning ? 0 : savedCloudPosition(reference)
         seconds = restored
         duration = 0
         lastSavedSecond = restored
@@ -399,23 +403,24 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         title: String,
         reference: String,
         isVideo: Bool,
-        library: NativeCinemaLocalLibrary
+        library: NativeCinemaLocalLibrary,
+        fromBeginning: Bool = false
     ) throws {
         guard reference.hasPrefix("audiocinemateca:") else {
             throw NativeAudiocinematecaCatalogueError.denied
         }
         try openAuthorizedCinemaStream(asset: asset, loader: loader, title: title, reference: reference,
-                                       isVideo: isVideo, library: library)
+                                       isVideo: isVideo, library: library, fromBeginning: fromBeginning)
     }
 
-    func openTapeTerritory(_ url: URL, title: String, slug: String, library: NativeCinemaLocalLibrary) throws {
+    func openTapeTerritory(_ url: URL, title: String, slug: String, library: NativeCinemaLocalLibrary, fromBeginning: Bool = false) throws {
         try openAuthorizedCinemaStream(asset: AVURLAsset(url: url), loader: nil, title: title,
-                                       reference: "tape-territory:" + slug, isVideo: true, library: library)
+                                       reference: "tape-territory:" + slug, isVideo: true, library: library, fromBeginning: fromBeginning)
     }
 
     private func openAuthorizedCinemaStream(asset: AVURLAsset, loader: NativeAudiocinematecaResourceLoader?,
                                             title: String, reference: String, isVideo: Bool,
-                                            library: NativeCinemaLocalLibrary) throws {
+                                            library: NativeCinemaLocalLibrary, fromBeginning: Bool = false) throws {
         pauseAndSave(library: library)
         try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
         try AVAudioSession.sharedInstance().setActive(true)
@@ -428,8 +433,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         currentCloudReference = reference
         historyTitle = title
         currentCloudIsVideo = isVideo
-        let restored = max(0, UserDefaults.standard.double(
-            forKey: "cinema.cloud.position." + reference))
+        let restored = fromBeginning ? 0 : savedCloudPosition(reference)
         seconds = restored
         duration = 0
         lastSavedSecond = restored
@@ -455,7 +459,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
 
     func openMoviePart(_ part: NativePodcastEpisode, workTitle: String,
                        followedBy remaining: [NativePodcastEpisode], library: NativeCinemaLocalLibrary,
-                       previousPosition: Double = 0) throws {
+                       previousPosition: Double = 0, fromBeginning: Bool = false) throws {
         guard part.audioURL.scheme == "https", part.audioURL.host != nil,
               part.audioURL.user == nil, part.audioURL.password == nil else { throw NativeCinemaLocalError.invalidFile }
         let reference = "movies-for-the-blind:" + NativeCinemaRecent.digest(part.id)
@@ -464,10 +468,44 @@ final class NativeCinemaAudioPlayer: ObservableObject {
             UserDefaults.standard.set(previousPosition, forKey: "cinema.cloud.position." + reference)
         }
         try openAuthorizedCinemaStream(asset: AVURLAsset(url: part.audioURL), loader: nil,
-            title: part.title, reference: reference, isVideo: false, library: library)
+            title: part.title, reference: reference, isVideo: false, library: library, fromBeginning: fromBeginning)
         movieQueue = remaining
         movieWorkTitle = workTitle
         setRecoveryTitle(workTitle, library: library)
+    }
+
+    /// Restore progress from the shared history as well as local preferences (including restored backups).
+    private func savedCloudPosition(_ reference: String) -> Double {
+        let key = "cinema.cloud.position." + reference
+        if let value = UserDefaults.standard.object(forKey: key) as? Double, value.isFinite {
+            return max(0, value)
+        }
+        let recent = NativeCinemaRecentStore.shared.entries.first { $0.id == NativeCinemaRecent.digest(reference) }
+        return max(0, recent?.seconds ?? 0)
+    }
+
+    func openAudiocinematecaPart(entry: NativeAudiocinematecaCatalogueIndex.Entry,
+                                part: NativeAudiocinematecaCatalogueIndex.Part,
+                                followedBy remaining: [NativeAudiocinematecaCatalogueIndex.Part] = [],
+                                library: NativeCinemaLocalLibrary,
+                                fromBeginning: Bool = false) throws {
+        guard let account = NativeAudiocinematecaCredentials.load(),
+              let loader = NativeAudiocinematecaResourceLoader(url: part.url, account: account, allowsCellular: true) else {
+            throw NativeAudiocinematecaCatalogueError.denied
+        }
+        do {
+            try openAudiocinematecaStream(asset: loader.makeAsset(), loader: loader,
+                title: entry.title + (part.title.isEmpty ? "" : " — " + part.title),
+                reference: NativeAudiocinematecaPlaybackRow.reference(entry: entry, part: part),
+                isVideo: false, library: library, fromBeginning: fromBeginning)
+            audioQueue = remaining
+            audioWork = entry
+            audioAccountStamp = NativeCinemaRecent.digest(account.username + "\u{0}" + account.password)
+            setRecoveryTitle(entry.title, library: library)
+        } catch {
+            loader.cancel()
+            throw error
+        }
     }
 
     private func cleanUpTemporaryPlayback() {
@@ -593,6 +631,9 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         guard let player else { return }
         let remaining = movieQueue
         let work = movieWorkTitle
+        let remainingAudio = audioQueue
+        let entry = audioWork
+        let stamp = audioAccountStamp
         player.pause()
         playing = false
         buffering = false
@@ -605,6 +646,15 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         if let next = remaining.first {
             do {
                 try openMoviePart(next, workTitle: work, followedBy: Array(remaining.dropFirst()), library: library)
+            } catch { playbackError = error.localizedDescription }
+        } else if let next = remainingAudio.first, let entry {
+            do {
+                guard let account = NativeAudiocinematecaCredentials.load(),
+                      NativeCinemaRecent.digest(account.username + "\u{0}" + account.password) == stamp else {
+                    throw NativeAudiocinematecaCatalogueError.denied
+                }
+                try openAudiocinematecaPart(entry: entry, part: next, followedBy: Array(remainingAudio.dropFirst()),
+                    library: library, fromBeginning: true)
             } catch { playbackError = error.localizedDescription }
         } else {
             performSeek(0, library: library)
@@ -685,6 +735,9 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         completed = false
         movieQueue = []
         movieWorkTitle = ""
+        audioQueue = []
+        audioWork = nil
+        audioAccountStamp = nil
         player = nil
         publicDriveLoader?.cancel()
         publicDriveLoader = nil

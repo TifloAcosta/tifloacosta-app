@@ -32,7 +32,7 @@ test('options exclude absent chapters, headings and fake virtual pages', () => {
 });
 
 test('Markdown hash prefixes are never read in headings, selectable text, or braille', () => {
-  const helper = part('enum NativeReaderHeadingDisplay {', 'private struct NativeReaderNavigationPoint:');
+  const helper = part('enum NativeReaderHeadingDisplay {', 'struct NativeReaderNavigationPoint:');
   assert.match(helper, /String\(repeating: " ", count: match\.range\.length\)/);
   assert.match(helper, /#\{1,6\}/);
   assert.match(source, /var result = NativeReaderHeadingDisplay\.mask\(in: source\)/);
@@ -41,7 +41,7 @@ test('Markdown hash prefixes are never read in headings, selectable text, or bra
   assert.match(source, /NativeReaderHeadingDisplay\.title\(point\.title/);
   assert.match(selectable, /NativeReaderHeadingDisplay\.mask\(in: text\)/);
   assert.match(braille, /NativeReaderHeadingDisplay\.mask\(in: text\)/);
-  const textLayout = part('private struct NativeReaderTextLayout {', '// Reproductor local de vídeo');
+  const textLayout = part('struct NativeReaderTextLayout: Sendable {', '// Reproductor local de vídeo');
   assert.match(textLayout, /var headings: \[Int\] = \[\]/);
   assert.doesNotMatch(textLayout, /var headings: \[Int\] = \[0\]/);
 });

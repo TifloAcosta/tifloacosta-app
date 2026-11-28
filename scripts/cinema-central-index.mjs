@@ -50,7 +50,7 @@ export async function buildIndex({sourceID, root, listPage, now = () => new Date
   return {schema:1,sourceID,rootID:root.id,generatedAt:now().toISOString(),complete:true,hits:[...hits.values()]};
 }
 
-async function makeListPage(key) {
+export async function makeListPage(key, { onRequest = () => {} } = {}) {
   return async (folder,path,token) => {
     const url = new URL('https://www.googleapis.com/drive/v3/files');
     url.searchParams.set('q', "'"+folder.id+"' in parents and trashed = false");
@@ -64,6 +64,7 @@ async function makeListPage(key) {
     for (let attempt=0;attempt<3;attempt++) {
       let response;
       try {
+        onRequest();
         response = await fetch(url,{headers,redirect:'error',signal:AbortSignal.timeout(45000)});
       } catch {
         if(attempt===2) throw Error('Catalogue connection failed');

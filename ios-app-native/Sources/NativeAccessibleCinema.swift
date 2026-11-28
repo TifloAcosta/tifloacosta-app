@@ -260,9 +260,9 @@ struct NativeAccessibleCinemaScreen: View {
             if cinemaRecents.entries.contains(where: { !$0.finished }) {
                 NavigationLink("Continuar viendo o escuchando") {
                     List {
-                        ForEach(cinemaRecents.entries.filter { !$0.finished }.prefix(12)) { recent in
+                        ForEach(cinemaRecents.entries.filter { !$0.finished }) { recent in
                             NavigationLink {
-                                NativeCinemaResumeScreen(recent: recent)
+                                NativeCinemaResumeScreen(recent: recent, autoResume: true)
                             } label: {
                                 VStack(alignment: .leading) {
                                     Text(recent.title)
@@ -395,6 +395,7 @@ private struct NativeCinemaContentScreen: View {
     @State private var submittedSearch: UUID?
     @State private var remoteSearching = false
     @State private var remoteSearched = false
+    @State private var selectedPlayback: NativeCinemaPlaybackRequest?
     @State private var refreshDriveIndex = false
     @State private var driveSearchProgress: String?
     @State private var tapeResults: [NativeTapeTerritoryCatalogue.Film] = []
@@ -634,35 +635,49 @@ private struct NativeCinemaContentScreen: View {
         }
     }
 
+    @MainActor private func playbackRow(_ selection: NativeCinemaPlaybackSelection, title: String? = nil) -> some View {
+        Button {
+            selectedPlayback = NativeCinemaPlaybackRequest(selection: selection)
+        } label: {
+            Text(title ?? selection.label)
+        }
+        .accessibilityHint(selection.hasSavedPosition ? MusicLocalized.message("Reanudar reproducción") : MusicLocalized.message("Reproducir"))
+        .accessibilityAction(named: Text("Reproducir desde el principio")) {
+            selectedPlayback = NativeCinemaPlaybackRequest(selection: selection, fromBeginning: true)
+        }
+        .accessibilityAction(named: Text("Información de la obra")) {
+            selectedPlayback = NativeCinemaPlaybackRequest(selection: selection, informationOnly: true)
+        }
+    }
+
     @ViewBuilder private var remoteResults: some View {
         Section("Resultados de catálogos") {
             ForEach(tapeResults.prefix(cinemaSearchLimit)) { film in
-                NavigationLink {
-                    NativeTapeTerritoryScreen(query: film.title, initialFilms: [film])
-                } label: { Text(film.title + " — Tape Territory (" + String(film.year) + ")") }
+                playbackRow(.tape(film))
             }
             ForEach(movieResults.prefix(cinemaSearchLimit)) { work in
-                NavigationLink {
-                    NativeMoviesForTheBlindScreen(query: work.title, initialWorks: [work])
-                } label: { Text(work.title + " — Movies for the Blind") }
+                playbackRow(.movie(work))
             }
             ForEach(arteResults.prefix(cinemaSearchLimit)) { work in
                 Link([work.title, work.year, "ARTE (francés)"].filter { !$0.isEmpty }.joined(separator: " — "), destination: work.address)
                     .accessibilityHint(MusicLocalized.format("Abrir plataforma original: %@", "ARTE"))
+                    .accessibilityValue(Text("Reproductor externo"))
             }
             ForEach(driveResults.prefix(cinemaSearchLimit)) { hit in
-                let name = hit.sourceID == "audesc-es" ? "Universo Audesc España" : "Universo Audesc Latino"
-                NavigationLink {
-                    NativeCinemaPublishedDriveBrowser(sourceID: hit.sourceID, sourceName: name, initialHit: hit)
-                } label: {
-                    let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-                    let folderTitle = hit.path.dropFirst().reversed().first(where: { NativeCinemaRules.matches(term, fields: [$0.name]) })?.name
-                    let title = NativeCinemaRules.matches(term, fields: [hit.entry.name])
-                        ? hit.entry.name : [folderTitle, hit.entry.name].compactMap { $0 }.joined(separator: " — ")
-                    Text(title + " — " + name)
-                }
+                let selection = NativeCinemaPlaybackSelection.drive(hit)
+                let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+                let folderTitle = hit.path.dropFirst().reversed().first(where: { NativeCinemaRules.matches(term, fields: [$0.name]) })?.name
+                let title = NativeCinemaRules.matches(term, fields: [hit.entry.name])
+                    ? selection.label : [folderTitle, selection.label].compactMap { $0 }.joined(separator: " — ")
+                playbackRow(selection, title: title)
             }
-            if ([tapeResults.count, movieResults.count, arteResults.count, driveResults.count].max() ?? 0) > cinemaSearchLimit {
+            ForEach(matchingAudiocinemateca.prefix(cinemaSearchLimit)) { item in
+                playbackRow(.audio(item))
+            }
+            ForEach(personalItems.prefix(cinemaSearchLimit)) { item in
+                playbackRow(.personal(item))
+            }
+            if ([tapeResults.count, movieResults.count, arteResults.count, driveResults.count, matchingAudiocinemateca.count, personalItems.count].max() ?? 0) > cinemaSearchLimit {
                 Button("Cargar más resultados") { cinemaSearchLimit += 50 }
             }
             if !unavailableSources.isEmpty {
@@ -674,7 +689,7 @@ private struct NativeCinemaContentScreen: View {
             if !staleSources.isEmpty {
                 Text(MusicLocalized.message("Índice anterior, pendiente de actualizar: ") + staleSources.joined(separator: ", "))
             }
-            let resultCount = tapeResults.count + movieResults.count + arteResults.count + driveResults.count + matchingAudiocinemateca.count
+            let resultCount = tapeResults.count + movieResults.count + arteResults.count + driveResults.count + matchingAudiocinemateca.count + personalItems.count
             if remoteSearched {
                 Text(MusicLocalized.format("Resultados: %d", resultCount)).accessibilityAddTraits(.updatesFrequently)
                 if NativeCinemaRules.canDeclareEmpty(completed: remoteSearched, count: resultCount,
@@ -805,22 +820,11 @@ private struct NativeCinemaContentScreen: View {
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
-            if remoteSearched || remoteSearching || !driveResults.isEmpty || !tapeResults.isEmpty || !movieResults.isEmpty || !arteResults.isEmpty { remoteResults }
+            if remoteSearched || remoteSearching || !driveResults.isEmpty || !tapeResults.isEmpty || !movieResults.isEmpty || !arteResults.isEmpty ||
+                (!searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && (!personalItems.isEmpty || !matchingAudiocinemateca.isEmpty)) { remoteResults }
 
             if spanishFilter && !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 Section("Audiocinemateca") {
-                    if NativeAudiocinematecaCredentials.load() != nil {
-                        ForEach(matchingAudiocinemateca.prefix(cinemaSearchLimit)) { item in
-                            NavigationLink {
-                                NativeAudiocinematecaDetail(entry: item)
-                            } label: {
-                                Text(item.title)
-                            }
-                        }
-                        if matchingAudiocinemateca.count > cinemaSearchLimit {
-                            Button("Cargar más resultados") { cinemaSearchLimit += 50 }
-                        }
-                    }
                     NavigationLink("Explorar catálogo audiodescrito") {
                         NativeAudiocinematecaBrowser(query: searchText, kind: selectedKind, language: selectedLanguage)
                     }
@@ -888,11 +892,6 @@ private struct NativeCinemaContentScreen: View {
                                 Link("CiecandoScherzando", destination: URL(string: "https://ciecandoscherzando.it/audiodescrizioni/")!)
                             }
                         }
-                    }
-                    if !personalItems.isEmpty {
-                        Section {
-                            personalRows
-                        } header: { Text("Mi colección personal") }
                     }
                     if !filtered.isEmpty {
                         Section("Plataformas") {
@@ -1019,6 +1018,9 @@ private struct NativeCinemaContentScreen: View {
         .onChange(of: searchText) { _, _ in resetRemoteSearch() }
         .onChange(of: languageIndex) { _, _ in resetRemoteSearch() }
         .onChange(of: contentIndex) { _, _ in resetRemoteSearch() }
+        .sheet(item: $selectedPlayback) { request in
+            NavigationStack { NativeCinemaDirectPlaybackScreen(request: request) }
+        }
         .task(id: submittedSearch) {
             if let request = submittedSearch { await performRemoteSearch(request) }
         }

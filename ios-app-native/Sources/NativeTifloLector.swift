@@ -1981,7 +1981,7 @@ struct NativeReaderLibraryScreen: View {
                         NativeReaderVideoScreen(document: doc)
                             .onAppear { library.markOpened(doc) }
                     } else {
-                        NativeReadingScreen(document: doc, speech: speech)
+                        NativeReaderOpeningScreen(document: doc, speech: speech)
                             .onAppear { library.markOpened(doc) }
                     }
                 } label: {
@@ -2139,7 +2139,7 @@ struct NativeReaderLibraryScreen: View {
                             NativeReaderVideoScreen(document: document)
                                 .onAppear { library.markOpened(document) }
                         } else {
-                            NativeReadingScreen(document: document, speech: speech)
+                            NativeReaderOpeningScreen(document: document, speech: speech)
                                 .onAppear { library.markOpened(document) }
                         }
                     } label: { Text(documentRowLabel(document)) }
@@ -2351,7 +2351,7 @@ struct NativeReaderLibraryScreen: View {
         }
         .sheet(item: $documentToConvert) { doc in
             NavigationStack {
-                NativeReadingScreen(document: doc, speech: speech, startWithConversion: true)
+                NativeReaderOpeningScreen(document: doc, speech: speech, startWithConversion: true)
                     .environmentObject(library)
             }
         }
@@ -2731,13 +2731,13 @@ enum NativeReaderHeadingDisplay {
     }
 }
 
-private struct NativeReaderNavigationPoint: Identifiable {
+fileprivate struct NativeReaderNavigationPoint: Identifiable, Sendable {
     let offset: Int
     let title: String
     var id: Int { offset }
 }
 
-private struct NativeReaderTextLayout {
+fileprivate struct NativeReaderTextLayout: Sendable {
     private let fullText: String
     let fragments: [String]
     let fragmentStarts: [Int]
@@ -2974,6 +2974,50 @@ struct NativeReaderVideoScreen: View {
     }
 }
 
+/// Prepare the navigation index once, away from the interface actor.
+private struct NativeReaderOpeningScreen: View {
+    let document: NativeReadingDocument
+    let speech: NativeReadingSpeech
+    var startPercent: Int? = nil
+    var startTrack: Int? = nil
+    var startWithConversion = false
+
+    private struct Prepared: Sendable {
+        let layout: NativeReaderTextLayout
+        let wordCount: Int
+    }
+    @State private var prepared: Prepared?
+
+    var body: some View {
+        Group {
+            if let prepared {
+                NativeReadingScreen(document: document, speech: speech,
+                    startPercent: startPercent, startTrack: startTrack,
+                    startWithConversion: startWithConversion,
+                    preparedLayout: prepared.layout, preparedWordCount: prepared.wordCount)
+            } else {
+                ProgressView("Abriendo documento")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .tifloScreenSurface()
+                    .navigationTitle(document.title)
+            }
+        }
+        .task(id: document.id) {
+            guard prepared == nil else { return }
+            let body = document.body
+            let worker = Task.detached(priority: .userInitiated) {
+                Prepared(layout: NativeReaderTextLayout(body),
+                    wordCount: body.split(whereSeparator: \.isWhitespace).count)
+            }
+            let result = await withTaskCancellationHandler {
+                await worker.value
+            } onCancel: { worker.cancel() }
+            guard !Task.isCancelled else { return }
+            prepared = result
+        }
+    }
+}
+
 struct NativeReadingScreen: View {
     let document: NativeReadingDocument
     @ObservedObject var speech: NativeReadingSpeech
@@ -3076,16 +3120,18 @@ struct NativeReadingScreen: View {
     ]
      private let sleepMinutes: [Int] = [0, 5, 10, 15, 30, 45, 60]
 
-    init(document: NativeReadingDocument, speech: NativeReadingSpeech,
+    fileprivate init(document: NativeReadingDocument, speech: NativeReadingSpeech,
          startPercent: Int? = nil, startTrack: Int? = nil,
-         startWithConversion: Bool = false) {
+         startWithConversion: Bool = false,
+         preparedLayout: NativeReaderTextLayout? = nil,
+         preparedWordCount: Int? = nil) {
         self.document = document
         self.speech = speech
         self.startPercent = startPercent
         self.startTrack = startTrack
         self.startWithConversion = startWithConversion
-        self.textLayout = NativeReaderTextLayout(document.body)
-        self.wordCount = document.body.split(whereSeparator: \.isWhitespace).count
+        self.textLayout = preparedLayout ?? NativeReaderTextLayout(document.body)
+        self.wordCount = preparedWordCount ?? document.body.split(whereSeparator: \.isWhitespace).count
     }
 
     private var latest: NativeReadingDocument { library.latest(document) }

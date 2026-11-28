@@ -1,0 +1,41 @@
+name: Cinema metadata checks (no distribution)
+on:
+  push:
+    branches:
+      - development/next-public-1.6-500200-20261121
+    paths:
+      - scripts/cinema-central-index.mjs
+      - test/cinema-central-index.test.mjs
+      - .github/workflows/cinema-index-provider-checks.yml
+      - ios-app-native/Sources/NativeAccessibleCinema.swift
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  checks:
+    if: github.ref == 'refs/heads/development/next-public-1.6-500200-20261121'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test test/cinema-central-index.test.mjs
+      - name: Check public ARTE metadata only
+        run: |
+          node --input-type=module <<'JS'
+          const url = 'https://www.arte.tv/static/opa_static/audiodescription/fr.json';
+          const response = await fetch(url,{headers:{Accept:'application/json'},redirect:'error',signal:AbortSignal.timeout(20000)});
+          if (!response.ok) throw Error('ARTE HTTP '+response.status);
+          const data = await response.json();
+          if (!Array.isArray(data.programs)) throw Error('ARTE schema changed');
+          const now=Date.now();
+          const usable=data.programs.filter(p=>{
+            let u;
+            try{u=new URL(p.url)}catch{return false}
+            return typeof p.title==='string' && typeof p.programId==='string' && u.protocol==='https:' && u.hostname==='www.arte.tv' && u.pathname.startsWith('/fr/videos/') && typeof p.videoRightsBegin==='string' && typeof p.videoRightsEnd==='string' && Date.parse(p.videoRightsBegin)<=now && now<Date.parse(p.videoRightsEnd);
+          });
+          console.log(JSON.stringify({total:data.programs.length, currentlyUsable:usable.length}));
+          if(data.programs.length && !usable.length) throw Error('No current records compatible with native parser; review before claiming availability');
+          JS

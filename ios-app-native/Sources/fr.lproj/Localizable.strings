@@ -2130,3 +2130,8 @@
 "Copias sin conexión: %d guardadas, %d fallidas." = "Copies hors connexion : %d enregistrées, %d en échec.";
 "Guardar %d recursos sin conexión" = "Enregistrer %d ressources hors connexion";
 "Abriendo documento" = "Ouverture du document";
+
+"Autorizar cuenta en AcoustID" = "Autoriser le compte dans AcoustID";
+"AcoustID requiere que autorices tu cuenta para identificar canciones. Solo tienes que hacerlo una vez, salvo que la autorización caduque o se revoque." = "AcoustID exige que vous autorisiez votre compte pour identifier les chansons. Vous ne devez le faire qu’une fois, sauf si l’autorisation expire ou est révoquée.";
+"Opciones de reproducción" = "Options de lecture";
+"Volver a Mi Música" = "Retour à Ma musique";

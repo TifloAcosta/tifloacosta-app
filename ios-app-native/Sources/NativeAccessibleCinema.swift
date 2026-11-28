@@ -290,6 +290,87 @@ struct NativeAccessibleCinemaScreen: View {
     }
 }
 
+/// The French public-service portal documents this official ARTE AD feed.
+/// Only title-level links to the original provider are exposed; no streams.
+private struct NativeArteCatalogue {
+    struct Work: Identifiable {
+        let id: String
+        let title: String
+        let year: String
+        let address: URL
+        let kind: AccessibleCinemaKind?
+    }
+    struct Result {
+        let works: [Work]
+        let incomplete: Bool
+    }
+    private static let endpoint = URL(string: "https://www.arte.tv/static/opa_static/audiodescription/fr.json")!
+
+    static func parse(_ data: Data, query: String, kind: AccessibleCinemaKind, now: Date = Date()) throws -> Result {
+        guard data.count <= 12_000_000,
+              let root = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let programs = root["programs"] as? [[String: Any]] else {
+            throw URLError(.cannotParseResponse)
+        }
+        let iso = ISO8601DateFormatter()
+        let fractional = ISO8601DateFormatter()
+        fractional.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        func date(_ value: Any?) -> Date? {
+            guard let text = value as? String else { return nil }
+            return iso.date(from: text) ?? fractional.date(from: text)
+        }
+        var works: [Work] = []
+        var ids = Set<String>()
+        var incomplete = false
+        for program in programs {
+            guard let title = program["title"] as? String, !title.isEmpty,
+                  let id = program["programId"] as? String, !id.isEmpty,
+                  let raw = program["url"] as? String, let url = URL(string: raw),
+                  url.scheme == "https", url.host == "www.arte.tv",
+                  url.path.hasPrefix("/fr/videos/"), url.user == nil, url.password == nil else {
+                incomplete = true
+                continue
+            }
+            let year = (program["productionYear"] as? String) ?? (program["productionYear"] as? Int).map(String.init) ?? ""
+            guard NativeCinemaRules.matches(query, fields: [title, year]) else { continue }
+            // Rights dates must be explicit, valid and current.
+            guard let begins = date(program["videoRightsBegin"]),
+                  let ends = date(program["videoRightsEnd"]), ends >= begins else {
+                incomplete = true
+                continue
+            }
+            guard begins <= now, now < ends else { continue }
+            let genre = (program["genrePresse"] as? String ?? "").folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "fr"))
+            let actual: AccessibleCinemaKind?
+            switch genre {
+            case "film", "long metrage", "telefilm": actual = .film
+            case "serie": actual = .series
+            case "documentaire": actual = .documentary
+            case "court metrage": actual = .short
+            default: actual = nil
+            }
+            if kind != .all && actual == nil { incomplete = true }
+            guard kind == .all || actual == nil || actual == kind,
+                  ids.insert(id).inserted else { continue }
+            works.append(Work(id: id, title: title, year: year, address: url, kind: actual))
+        }
+        return Result(works: works.sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending },
+                      incomplete: incomplete)
+    }
+
+    static func search(query: String, kind: AccessibleCinemaKind) async throws -> Result {
+        var request = URLRequest(url: endpoint)
+        request.timeoutInterval = 20
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let http = response as? HTTPURLResponse, http.statusCode == 200,
+              http.url?.scheme == "https", http.url?.host == "www.arte.tv",
+              http.url?.path == endpoint.path else { throw URLError(.badServerResponse) }
+        try Task.checkCancellation()
+        return try await Task.detached(priority: .utility) { try parse(data, query: query, kind: kind) }.value
+    }
+}
+
 private enum NativeCinemaContentMode {
     case search, collection, discovery
     var title: String {
@@ -318,6 +399,8 @@ private struct NativeCinemaContentScreen: View {
     @State private var driveSearchProgress: String?
     @State private var tapeResults: [NativeTapeTerritoryCatalogue.Film] = []
     @State private var movieResults: [NativeMoviesForTheBlindWork] = []
+    @State private var arteResults: [NativeArteCatalogue.Work] = []
+    @State private var arteChecked = false
     @State private var driveResults: [NativeCinemaDriveSearchHit] = []
     @State private var unavailableSources: [String] = []
     @State private var partialSources: [String] = []
@@ -352,7 +435,10 @@ private struct NativeCinemaContentScreen: View {
     }
 
     private var externalSearchSources: [AccessibleCinemaSource] {
-        eligibleSources.filter { !["audesc-es", "audesc-latino", "audiocinemateca", "tape-territory", "movies-for-the-blind"].contains($0.id) }
+        eligibleSources.filter {
+            !["audesc-es", "audesc-latino", "audiocinemateca", "tape-territory", "movies-for-the-blind"].contains($0.id) &&
+                !($0.id == "arte" && arteChecked)
+        }
     }
 
     private func adpSearchURL(provider: String? = nil) -> URL {
@@ -432,6 +518,8 @@ private struct NativeCinemaContentScreen: View {
         consultedCatalogues = 0
         tapeResults = []
         movieResults = []
+        arteResults = []
+        arteChecked = false
         driveResults = []
         unavailableSources = []
         partialSources = []
@@ -445,6 +533,8 @@ private struct NativeCinemaContentScreen: View {
         consultedCatalogues = 0
         tapeResults = []
         movieResults = []
+        arteResults = []
+        arteChecked = false
         driveResults = []
         unavailableSources = []
         partialSources = []
@@ -486,6 +576,18 @@ private struct NativeCinemaContentScreen: View {
                 movieResults = works.filter { NativeCinemaRules.matches(term, fields: [$0.title]) }
                 consultedCatalogues += 1
             } catch { if !Task.isCancelled, submittedSearch == request { unavailableSources.append("Movies for the Blind") } }
+        }
+        if eligibleSources.contains(where: { $0.id == "arte" }) {
+            do {
+                let catalogue = try await NativeArteCatalogue.search(query: term, kind: selectedKind)
+                guard !Task.isCancelled, submittedSearch == request else { return }
+                arteResults = catalogue.works
+                arteChecked = !catalogue.incomplete
+                consultedCatalogues += 1
+                if catalogue.incomplete { partialSources.append("ARTE (francés)") }
+            } catch {
+                if !Task.isCancelled, submittedSearch == request { unavailableSources.append("ARTE (francés)") }
+            }
         }
         for (sourceID, language, name) in [
             ("audesc-es", AccessibleCinemaLanguage.spain, "Universo Audesc España"),
@@ -544,6 +646,10 @@ private struct NativeCinemaContentScreen: View {
                     NativeMoviesForTheBlindScreen(query: work.title, initialWorks: [work])
                 } label: { Text(work.title + " — Movies for the Blind") }
             }
+            ForEach(arteResults.prefix(cinemaSearchLimit)) { work in
+                Link([work.title, work.year, "ARTE (francés)"].filter { !$0.isEmpty }.joined(separator: " — "), destination: work.address)
+                    .accessibilityHint("Abrir plataforma original")
+            }
             ForEach(driveResults.prefix(cinemaSearchLimit)) { hit in
                 let name = hit.sourceID == "audesc-es" ? "Universo Audesc España" : "Universo Audesc Latino"
                 NavigationLink {
@@ -556,7 +662,7 @@ private struct NativeCinemaContentScreen: View {
                     Text(title + " — " + name)
                 }
             }
-            if ([tapeResults.count, movieResults.count, driveResults.count].max() ?? 0) > cinemaSearchLimit {
+            if ([tapeResults.count, movieResults.count, arteResults.count, driveResults.count].max() ?? 0) > cinemaSearchLimit {
                 Button("Cargar más resultados") { cinemaSearchLimit += 50 }
             }
             if !unavailableSources.isEmpty {
@@ -568,7 +674,7 @@ private struct NativeCinemaContentScreen: View {
             if !staleSources.isEmpty {
                 Text(MusicLocalized.message("Índice anterior, pendiente de actualizar: ") + staleSources.joined(separator: ", "))
             }
-            let resultCount = tapeResults.count + movieResults.count + driveResults.count + matchingAudiocinemateca.count
+            let resultCount = tapeResults.count + movieResults.count + arteResults.count + driveResults.count + matchingAudiocinemateca.count
             if remoteSearched {
                 Text(MusicLocalized.format("Resultados: %d", resultCount)).accessibilityAddTraits(.updatesFrequently)
                 if NativeCinemaRules.canDeclareEmpty(completed: remoteSearched, count: resultCount,
@@ -699,7 +805,7 @@ private struct NativeCinemaContentScreen: View {
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
-            if remoteSearched || remoteSearching || !driveResults.isEmpty || !tapeResults.isEmpty || !movieResults.isEmpty { remoteResults }
+            if remoteSearched || remoteSearching || !driveResults.isEmpty || !tapeResults.isEmpty || !movieResults.isEmpty || !arteResults.isEmpty { remoteResults }
 
             if spanishFilter && !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 Section("Audiocinemateca") {

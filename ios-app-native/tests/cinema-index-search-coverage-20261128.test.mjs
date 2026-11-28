@@ -51,7 +51,7 @@ test('each of 27 directory entries has either a direct catalogue route or an exp
     for (const id of direct) assert.ok(main.includes('"'+id+'"'));
     const external = ids.filter(x => !direct.includes(x));
     assert.equal(external.length, 22);
-    assert.match(main, /eligibleSources.filter \{ !\["audesc-es", "audesc-latino", "audiocinemateca", "tape-territory", "movies-for-the-blind"\].contains\(\$0.id\)/);
+    assert.match(main, /eligibleSources.filter \{\s*!\["audesc-es", "audesc-latino", "audiocinemateca", "tape-territory", "movies-for-the-blind"\].contains\(\$0.id\)/);
     assert.match(main, /ForEach\(externalSearchSources\)/);
     assert.match(main, /combinedExternalSearchURL/);
     assert.match(main, /providerSearchURL\(source\)/);
@@ -71,4 +71,21 @@ test('all new search labels translated, progressive results and explicit stale s
     assert.match(main, /staleSources/);
     assert.match(main, /submittedSearch = nil/);
     assert.match(main, /Text\(driveSearchProgress\).accessibilityAddTraits\(\.updatesFrequently\)/);
+});
+
+test('optional central index is validated and disabled by default; ARTE uses documented French AD feed',()=>{
+    const plist=read('Info.plist');
+    assert.match(plist, /<key>TifloCinemaCentralIndexBaseURL<\/key><string><\/string>/);
+    assert.match(drive, /value.schema == 1, value.complete, value.sourceID == sourceID/);
+    assert.match(drive, /value.rootID == rootID/);
+    assert.match(drive, /item.resourceKey == nil/);
+    assert.match(drive, /hit.pageCursor == nil/);
+    assert.match(drive, /fetchCentral\(sourceID, rootID: root.id\)/);
+    assert.match(main, /https:\/\/www.arte.tv\/static\/opa_static\/audiodescription\/fr.json/);
+    assert.match(main, /program\["videoRightsBegin"\]/);
+    assert.match(main, /program\["videoRightsEnd"\]/);
+    assert.match(main, /guard begins <= now, now < ends/);
+    assert.match(main, /url.path.hasPrefix\("\/fr\/videos\/"\)/);
+    assert.match(main, /arteChecked = !catalogue.incomplete/);
+    assert.match(main, /!\(\$0.id == "arte" && arteChecked\)/);
 });

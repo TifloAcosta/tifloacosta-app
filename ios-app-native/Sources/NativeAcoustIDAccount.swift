@@ -1,6 +1,11 @@
 import SwiftUI
+import UIKit
 
 struct NativeAcoustIDAccount: View {
+    var authorizationRequired = false
+    var onAuthorized: (() -> Void)? = nil
+    @Environment(\.openURL) private var openURL
+    @State private var showManualKey = false
     @AppStorage("mi-musica-acoustid-auto") private var automatic = false
     @State private var key = ""
     @State private var linked = false
@@ -13,7 +18,10 @@ struct NativeAcoustIDAccount: View {
             if let client = NativeMusicRecognition.clientKey {
                 Section("Cuenta AcoustID") {
                     Text(linked ? "Cuenta vinculada" : "Cuenta sin vincular")
-                    Button("Solicitar código de vinculación") { beginLink(client) }
+                    if authorizationRequired {
+                        Text("AcoustID requiere que autorices tu cuenta para identificar canciones. Solo tienes que hacerlo una vez, salvo que la autorización caduque o se revoque.")
+                    }
+                    Button("Autorizar cuenta en AcoustID") { beginLink(client) }
                         .disabled(operation != nil)
                     if let approval {
                         Text(MusicLocalized.format("Código: %@", approval.code))
@@ -26,11 +34,12 @@ struct NativeAcoustIDAccount: View {
                     if linked {
                         Button("Desvincular de este iPhone", role: .destructive) { unlink() }
                             .disabled(operation != nil)
-                        Toggle("Identificar al importar con AcoustID", isOn: $automatic)
                     }
+                    Toggle("Identificar al importar con AcoustID", isOn: $automatic)
                     if let message { Text(message).accessibilityAddTraits(.updatesFrequently) }
                 }
-                Section("Clave personal de AcoustID") {
+                Section {
+                    DisclosureGroup("Clave personal de AcoustID", isExpanded: $showManualKey) {
                     SecureField("Clave personal de AcoustID", text: $key)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
@@ -38,6 +47,7 @@ struct NativeAcoustIDAccount: View {
                     Button("Validar y guardar clave") { saveManual(client) }
                         .disabled(operation != nil || key.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                     Link("Abrir la página de mi clave", destination: URL(string: "https://acoustid.org/api-key")!)
+                    }
                 }
                 Text("AcoustID recibe la huella acústica y la duración. El audio se queda en el dispositivo.")
             } else {
@@ -57,12 +67,16 @@ struct NativeAcoustIDAccount: View {
             do {
                 let payload = try await NativeMusicRecognition.shared.requestLink(client: client)
                 try Task.checkCancellation()
+                let fractional = ISO8601DateFormatter()
+                fractional.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
                 let expires = ISO8601DateFormatter().date(from: payload.link.expires)
+                    ?? fractional.date(from: payload.link.expires)
                 guard let expires, expires > Date() else { throw URLError(.badServerResponse) }
                 try NativeAcoustIDKeychain.save(payload.apikey, in: .pending)
                 defer { try? NativeAcoustIDKeychain.remove(.pending) }
                 approval = payload.link
                 message = "Esperando autorización en AcoustID."
+                openURL(payload.link.url)
                 while Date() < expires {
                     try await Task.sleep(for: .seconds(4))
                     guard Date() < expires else { break }
@@ -74,6 +88,7 @@ struct NativeAcoustIDAccount: View {
                         try NativeAcoustIDKeychain.save(payload.apikey, in: .active)
                         linked = true
                         message = "Cuenta vinculada"
+                        onAuthorized?()
                         return
                     case .declined, .expired, .revoked, .unknown:
                         message = "El código ya no permite vincular la cuenta."
@@ -108,6 +123,7 @@ struct NativeAcoustIDAccount: View {
                 linked = true
                 key = ""
                 message = "Cuenta vinculada"
+                onAuthorized?()
             } catch is CancellationError {
                 return
             } catch {

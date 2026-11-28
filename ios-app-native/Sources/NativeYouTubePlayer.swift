@@ -187,6 +187,7 @@ final class NativeYouTubeSearchStore: ObservableObject {
     private var currentQuery = ""
     private var currentFilter = "video"
     private var currentChannelID: String?
+    private var currentRecentUploads = false
     private var consumedPageTokens: Set<String> = []
     private let endpoint = URL(string: "https://youtube-auth.tifloacosta.com/search")!
 
@@ -214,7 +215,7 @@ final class NativeYouTubeSearchStore: ObservableObject {
     }
 
     func search(_ text: String, filter: String = "video", channelID: String? = nil,
-                loadMore: Bool = false) async {
+                loadMore: Bool = false, recentUploads: Bool = false) async {
         guard !isLoading else { return }
         let cleanQuery = text.trimmingCharacters(in: .whitespacesAndNewlines)
         if !loadMore && channelID == nil && cleanQuery.count < 2 {
@@ -237,6 +238,7 @@ final class NativeYouTubeSearchStore: ObservableObject {
             currentQuery = cleanQuery
             currentFilter = filter
             currentChannelID = channelID
+            currentRecentUploads = recentUploads
             nextPageToken = ""
             videos = []
             channels = []
@@ -253,6 +255,9 @@ final class NativeYouTubeSearchStore: ObservableObject {
             components.queryItems = [URLQueryItem(name: "q", value: currentQuery)]
             if let channelID = currentChannelID {
                 components.queryItems?.append(URLQueryItem(name: "channelId", value: channelID))
+                if currentRecentUploads {
+                    components.queryItems?.append(URLQueryItem(name: "uploads", value: "1"))
+                }
             } else {
                 components.queryItems?.append(URLQueryItem(name: "filter", value: currentFilter))
             }

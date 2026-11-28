@@ -23,6 +23,15 @@ enum NativeCinemaRules {
     static func upsert<T: Identifiable>(_ value: T, in entries: [T], limit: Int = 100) -> [T] {
         Array(([value] + entries.filter { $0.id != value.id }).prefix(max(0, limit)))
     }
+    static func preferredPartIndex(keys: [String], recent: [(String, Bool)], fromBeginning: Bool) -> Int {
+        guard !fromBeginning else { return 0 }
+        if let latest = recent.first(where: { !$0.1 && keys.contains($0.0) }),
+           let index = keys.firstIndex(of: latest.0) { return index }
+        if keys.count > 1, let latest = recent.first(where: { $0.1 && keys.contains($0.0) }),
+           let index = keys.firstIndex(of: latest.0), index + 1 < keys.count { return index + 1 }
+        return 0
+    }
+
     static func canDeclareEmpty(completed: Bool, count: Int, unavailable: Int, partial: Int, attempted: Int) -> Bool {
         completed && count == 0 && unavailable == 0 && partial == 0 && attempted > 0
     }

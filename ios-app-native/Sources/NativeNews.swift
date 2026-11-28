@@ -482,13 +482,13 @@ struct NativeNewsArticleScreen: View {
                         }
                     }
                 }
-                ForEach(Array(linkedVideos.enumerated()), id: \.element.id) { index, video in
+                ForEach(linkedVideos) { video in
                     Button {
                         selectedVideo = video
                     } label: {
                         Text(linkedVideos.count == 1
                             ? MusicLocalized.message("Reproducir vídeo en TifloAcosta")
-                            : MusicLocalized.message("Reproducir vídeo en TifloAcosta") + " \(index + 1)")
+                            : MusicLocalized.message("Reproducir vídeo en TifloAcosta") + " " + video.url.absoluteString)
                     }
                 }
                 Button("Guardar en TifloLector") { save() }

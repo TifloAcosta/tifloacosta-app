@@ -54,6 +54,23 @@ enum NativeNewsMetadata {
         return url
     }
 
+    /// Only official, explicitly present video URLs qualify for playback.
+    static func linkedVideos(_ item: NativeCatalogItem) -> [NativeYouTubeVideo] {
+        let text = item.body ?? item.summary ?? ""
+        let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+        let matches = detector?.matches(in: text, range: NSRange(text.startIndex..., in: text)) ?? []
+        let urls = [originalURL(item)].compactMap { $0 } + matches.compactMap(\.url)
+        var seen = Set<String>()
+        return urls.compactMap { url in
+            let media = NativeMediaItem(id: item.id, type: "video", sourceName: source(item),
+                sourceUrl: nil, originalUrl: url.absoluteString, originalLanguage: item.lang,
+                publishedAt: item.publishedAt, title: item.title, summary: item.summary, mediaUrl: nil)
+            guard let video = NativeYouTubeVideo(media: media),
+                  seen.insert(video.id).inserted else { return nil }
+            return video
+        }
+    }
+
     static func articleText(_ item: NativeCatalogItem) -> String {
         let text = item.body?.trimmingCharacters(in: .whitespacesAndNewlines)
             ?? item.summary?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -90,6 +107,7 @@ struct NativeNewsScreen: View {
     @State private var selectedArticle: NativeCatalogItem?
     @State private var showingArticle = false
     @State private var articleToTranslate: NativeCatalogItem?
+    @State private var selectedMediaVideo: NativeYouTubeVideo?
     @State private var status: String?
 
     private var spanishNews: [NativeCatalogItem] {
@@ -224,7 +242,7 @@ struct NativeNewsScreen: View {
             .listRowBackground(TifloVisual.surfaceRaised)
 
             if mediaKindIndex > 0 {
-                NativeMediaInlineContent(formatIndex: mediaKindIndex)
+                NativeMediaInlineContent(selectedVideo: $selectedMediaVideo, formatIndex: mediaKindIndex)
             } else {
                 Section {
                     NativeAdjustableChoice(
@@ -324,6 +342,9 @@ struct NativeNewsScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("Actualidad")
+        .sheet(item: $selectedMediaVideo) { video in
+            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+        }
         .sheet(item: $articleToTranslate) { item in
             NavigationStack {
                 if #available(iOS 18.0, *) {
@@ -363,6 +384,8 @@ struct NativeNewsArticleScreen: View {
     @AppStorage("native-ios-language") private var languageIndex = 0
     @Environment(\.openURL) private var openURL
     @State private var status: String?
+    @State private var selectedVideo: NativeYouTubeVideo?
+    @State private var linkedVideos: [NativeYouTubeVideo] = []
 
     private var paragraphs: [String] {
         let text = item.body ?? item.summary ?? ""
@@ -459,6 +482,15 @@ struct NativeNewsArticleScreen: View {
                         }
                     }
                 }
+                ForEach(Array(linkedVideos.enumerated()), id: \.element.id) { index, video in
+                    Button {
+                        selectedVideo = video
+                    } label: {
+                        Text(linkedVideos.count == 1
+                            ? MusicLocalized.message("Reproducir vídeo en TifloAcosta")
+                            : MusicLocalized.message("Reproducir vídeo en TifloAcosta") + " \(index + 1)")
+                    }
+                }
                 Button("Guardar en TifloLector") { save() }
                 Button("Compartir") { share() }
                 if let url = NativeNewsMetadata.originalURL(item) {
@@ -474,6 +506,12 @@ struct NativeNewsArticleScreen: View {
         .tifloScreenSurface()
         .navigationTitle("Noticia")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear { readingActivity.markOpened(.news, item: item) }
+        .sheet(item: $selectedVideo) { video in
+            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+        }
+        .task(id: item.id) {
+            readingActivity.markOpened(.news, item: item)
+            linkedVideos = NativeNewsMetadata.linkedVideos(item)
+        }
     }
 }

@@ -223,18 +223,11 @@ struct NativeAudiocinematecaPlaybackRow: View {
 
     @MainActor private func startPlayback() {
         failed = false
-        guard let account = NativeAudiocinematecaCredentials.load(),
-              let loader = NativeAudiocinematecaResourceLoader(url: part.url, account: account, allowsCellular: true) else {
-            failed = true
-            return
-        }
         do {
-            try player.openAudiocinematecaStream(asset: loader.makeAsset(), loader: loader,
-                title: entry.title + (part.title.isEmpty ? "" : " — " + part.title),
-                reference: reference, isVideo: false, library: library)
-            player.setRecoveryTitle(entry.title, library: library)
+            let remaining = entry.category == "series" ? [] :
+                Array(entry.parts.drop(while: { $0.id != part.id }).dropFirst())
+            try player.openAudiocinematecaPart(entry: entry, part: part, followedBy: remaining, library: library)
         } catch {
-            loader.cancel()
             failed = true
         }
     }

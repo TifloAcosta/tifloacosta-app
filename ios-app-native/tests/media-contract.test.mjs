@@ -12,7 +12,7 @@ const home = source('NativeScreens.swift');
 test('Actualidad enlaza Escuchar y ver sin reemplazar el selector de noticias', () => {
   assert.match(news, /NativeAdjustableChoice\(\s*title: "Seleccionar contenidos multimedia"/);
   assert.match(news, /selectedIndex: \$mediaKindIndex/);
-  assert.match(news, /NativeMediaInlineContent\(formatIndex: mediaKindIndex\)/);
+  assert.match(news, /NativeMediaInlineContent\(selectedVideo: \$selectedMediaVideo, formatIndex: mediaKindIndex\)/);
   assert.doesNotMatch(news, /NativeMediaScreen\(\s*initialFormatIndex:/);
   assert.match(inline, /\.task \{ await store\.refresh\(\) \}/);
   assert.match(inline, /TextField\("Buscar podcasts y vídeos"/);
@@ -40,7 +40,9 @@ test('Media usa el catálogo editorial real, sin mezclar HTML con SwiftUI', () =
   assert.match(media, /NativeYouTubeVideo\(media: item\)/);
   assert.match(media, /\.sheet\(item: \$selectedVideo\)/);
   assert.match(inline, /NativeMediaPlayback\.open\(item, player: player, library: podcastLibrary/);
-  assert.match(inline, /\.sheet\(item: \$selectedVideo\)/);
+  assert.match(inline, /@Binding var selectedVideo: NativeYouTubeVideo\?/);
+  assert.match(news, /\.sheet\(item: \$selectedMediaVideo\)/);
+  assert.match(news, /NativeYouTubePlayerScreen\(video: video\)/);
   assert.doesNotMatch(media + inline, /openURL\(item\.directAudioURL\)/);
   assert.doesNotMatch(media + news, /WKWebView|UIWebView|import Capacitor/);
 });

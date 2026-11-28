@@ -264,6 +264,21 @@ final class NativeCinemaAudioPlayer: ObservableObject {
     private var audioAccountStamp: String?
     private var remoteCommandTokens: [Any] = []
     private var progressTimer: Timer?
+    private var lifecycleObservers: [NSObjectProtocol] = []
+
+    private init() {
+        for name in [UIApplication.willResignActiveNotification, UIApplication.didEnterBackgroundNotification,
+                     UIApplication.willTerminateNotification] {
+            lifecycleObservers.append(NotificationCenter.default.addObserver(forName: name, object: nil, queue: .main) {
+                [weak self] _ in
+                MainActor.assumeIsolated {
+                    guard let self, let library = self.activeLibrary else { return }
+                    self.refresh(library: library)
+                    self.save(library: library, force: true)
+                }
+            })
+        }
+    }
 
     func open(_ item: NativeCinemaLocalItem, library: NativeCinemaLocalLibrary, fromBeginning: Bool = false) throws {
         guard let url = library.fileURL(for: item) else {
@@ -463,7 +478,8 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         guard part.audioURL.scheme == "https", part.audioURL.host != nil,
               part.audioURL.user == nil, part.audioURL.password == nil else { throw NativeCinemaLocalError.invalidFile }
         let reference = "movies-for-the-blind:" + NativeCinemaRecent.digest(part.id)
-        if UserDefaults.standard.object(forKey: "cinema.cloud.position." + reference) == nil,
+        if !fromBeginning, UserDefaults.standard.object(forKey: "cinema.cloud.position." + reference) == nil,
+           !NativeCinemaRecentStore.shared.entries.contains(where: { $0.id == NativeCinemaRecent.digest(reference) }),
            previousPosition.isFinite && previousPosition > 0 {
             UserDefaults.standard.set(previousPosition, forKey: "cinema.cloud.position." + reference)
         }
@@ -645,7 +661,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         NativeCinemaRecentStore.shared.markFinished(key: historyKey)
         if let next = remaining.first {
             do {
-                try openMoviePart(next, workTitle: work, followedBy: Array(remaining.dropFirst()), library: library)
+                try openMoviePart(next, workTitle: work, followedBy: Array(remaining.dropFirst()), library: library, fromBeginning: true)
             } catch { playbackError = error.localizedDescription }
         } else if let next = remainingAudio.first, let entry {
             do {

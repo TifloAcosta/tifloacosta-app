@@ -321,6 +321,7 @@ private struct NativeCinemaContentScreen: View {
     @State private var driveResults: [NativeCinemaDriveSearchHit] = []
     @State private var unavailableSources: [String] = []
     @State private var partialSources: [String] = []
+    @State private var staleSources: [String] = []
     @AppStorage("native-cinema-language-index-v1") private var languageIndex = 0
     @AppStorage("native-cinema-content-index-v1") private var contentIndex = 0
     @AppStorage("native-cinema-import-language-index-v1") private var importLanguageIndex = 1
@@ -373,6 +374,13 @@ private struct NativeCinemaContentScreen: View {
         return components?.url
     }
 
+    private func frenchDiscoveryURL(freeOnly: Bool) -> URL {
+        var components = URLComponents(string: "https://audiodescription.beta.gouv.fr/recherche")!
+        components.queryItems = [URLQueryItem(name: "search", value: searchText)]
+        if freeOnly { components.queryItems?.append(URLQueryItem(name: "is_free", value: "1")) }
+        return components.url!
+    }
+
     private var filtered: [AccessibleCinemaSource] {
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         return AccessibleCinemaDirectory.sources.filter { source in
@@ -406,6 +414,7 @@ private struct NativeCinemaContentScreen: View {
         driveResults = []
         unavailableSources = []
         partialSources = []
+        staleSources = []
         cinemaSearchLimit = 50
     }
     @MainActor private func performRemoteSearch(_ request: UUID) async {
@@ -418,6 +427,7 @@ private struct NativeCinemaContentScreen: View {
         driveResults = []
         unavailableSources = []
         partialSources = []
+        staleSources = []
         remoteSearching = true
         let refresh = refreshDriveIndex
         defer { if submittedSearch == request {
@@ -467,7 +477,11 @@ private struct NativeCinemaContentScreen: View {
                     sourceID: sourceID, query: term, kind: selectedKind, refresh: refresh
                 ) { partial, pages in
                     guard submittedSearch == request else { return }
-                    driveSearchProgress = MusicLocalized.format("%@: %d páginas consultadas", name, pages)
+                    driveSearchProgress = partial.stale
+                        ? MusicLocalized.format("%@: índice anterior, pendiente de actualizar", name)
+                        : MusicLocalized.format("%@: %d páginas consultadas", name, pages)
+                    if partial.stale && !staleSources.contains(name) { staleSources.append(name) }
+                    if !partial.stale { staleSources.removeAll { $0 == name } }
                     driveResults.removeAll { $0.sourceID == sourceID }
                     driveResults.append(contentsOf: partial.hits)
                 }
@@ -476,6 +490,8 @@ private struct NativeCinemaContentScreen: View {
                 driveResults.append(contentsOf: result.hits)
                 consultedCatalogues += 1
                 if result.incomplete { partialSources.append(name) }
+                if result.stale && !staleSources.contains(name) { staleSources.append(name) }
+                if !result.stale { staleSources.removeAll { $0 == name } }
             } catch { if !Task.isCancelled, submittedSearch == request { unavailableSources.append(name) } }
         }
     }
@@ -508,6 +524,9 @@ private struct NativeCinemaContentScreen: View {
             }
             if !partialSources.isEmpty {
                 Text(MusicLocalized.message("Búsqueda parcial: ") + partialSources.joined(separator: ", "))
+            }
+            if !staleSources.isEmpty {
+                Text(MusicLocalized.message("Índice anterior, pendiente de actualizar: ") + staleSources.joined(separator: ", "))
             }
             let resultCount = tapeResults.count + movieResults.count + driveResults.count + matchingAudiocinemateca.count
             if remoteSearched {
@@ -640,7 +659,7 @@ private struct NativeCinemaContentScreen: View {
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
-            if remoteSearched || remoteSearching { remoteResults }
+            if remoteSearched || remoteSearching || !driveResults.isEmpty || !tapeResults.isEmpty || !movieResults.isEmpty { remoteResults }
 
             if spanishFilter && !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 Section("Audiocinemateca") {
@@ -693,6 +712,24 @@ private struct NativeCinemaContentScreen: View {
                                     .tifloScreenSurface()
                                     .navigationTitle(MusicLocalized.message(source.name))
                                 } label: { Text(MusicLocalized.message(source.name)) }
+                            }
+                        }
+                    }
+                    if selectedLanguage == .all || selectedLanguage == .english || selectedLanguage == .french ||
+                        selectedLanguage == .german || selectedLanguage == .italian {
+                        Section("Buscadores especializados") {
+                            if selectedLanguage == .all || selectedLanguage == .english {
+                                Link("Audio Description Project", destination: URL(string: "https://adp.acb.org/adp-search")!)
+                            }
+                            if selectedLanguage == .all || selectedLanguage == .french {
+                                Link("Portail de l’audiodescription", destination: frenchDiscoveryURL(freeOnly: false))
+                                Link("Películas gratuitas", destination: frenchDiscoveryURL(freeOnly: true))
+                            }
+                            if selectedLanguage == .all || selectedLanguage == .german {
+                                Link("hörfilm.info", destination: URL(string: "https://hoerfilm.info/mediatheken.html")!)
+                            }
+                            if selectedLanguage == .all || selectedLanguage == .italian {
+                                Link("CiecandoScherzando", destination: URL(string: "https://ciecandoscherzando.it/audiodescrizioni/")!)
                             }
                         }
                     }

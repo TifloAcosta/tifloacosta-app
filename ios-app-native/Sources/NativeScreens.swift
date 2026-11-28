@@ -1330,10 +1330,10 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
             let store = searches[channel.id] ?? NativeYouTubeSearchStore()
             if loadMore {
                 if !store.nextPageToken.isEmpty {
-                    await store.search("", channelID: channel.id, loadMore: true)
+                    await store.search("", channelID: channel.id, loadMore: true, recentUploads: true)
                 }
             } else {
-                await store.search("", channelID: channel.id)
+                await store.search("", channelID: channel.id, recentUploads: true)
             }
             guard generation == loadGeneration, !Task.isCancelled else { return }
             searches[channel.id] = store
@@ -1374,8 +1374,8 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
                 }
                 if !loading && (collected.count > visibleCount || hasMore) {
                     Button("Cargar 10 más") {
-                        if hasMore { Task { await load(loadMore: true) } }
-                        else { visibleCount += 10 }
+                        if collected.count > visibleCount { visibleCount += 10 }
+                        else if hasMore { Task { await load(loadMore: true) } }
                     }
                 }
             }

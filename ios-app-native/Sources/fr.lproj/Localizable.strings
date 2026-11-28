@@ -2135,3 +2135,16 @@
 "AcoustID requiere que autorices tu cuenta para identificar canciones. Solo tienes que hacerlo una vez, salvo que la autorización caduque o se revoque." = "AcoustID exige que vous autorisiez votre compte pour identifier les chansons. Vous ne devez le faire qu’une fois, sauf si l’autorisation expire ou est révoquée.";
 "Opciones de reproducción" = "Options de lecture";
 "Volver a Mi Música" = "Retour à Ma musique";
+
+"Universo Audesc Latino" = "Universo Audesc Latino";
+"Español latino" = "Espagnol latino-américain";
+"%@: %d páginas consultadas" = "%@ : %d pages consultées";
+"%@: índice anterior, pendiente de actualizar" = "%@ : index précédent, mise à jour en attente";
+"Índice anterior, pendiente de actualizar: " = "Index précédent, mise à jour en attente : ";
+"Los resultados corresponden únicamente a los catálogos consultados. Las demás plataformas requieren una búsqueda externa." = "Les résultats concernent uniquement les catalogues consultés. Les autres plateformes nécessitent une recherche externe.";
+"Actualizar índice de Universo Audesc" = "Mettre à jour l’index Universo Audesc";
+"Buscar en plataformas externas" = "Rechercher sur les plateformes externes";
+"Estos catálogos no se consultan automáticamente. Abre la plataforma o busca el título en su web. Comprueba que la obra tenga audiodescripción." = "Ces catalogues ne sont pas consultés automatiquement. Ouvrez la plateforme ou recherchez le titre sur son site. Vérifiez que l’œuvre dispose d’une audiodescription.";
+"Buscar en la plataforma original" = "Rechercher sur la plateforme d’origine";
+"Buscar título en la web" = "Rechercher le titre sur le web";
+"Buscadores especializados" = "Moteurs de recherche spécialisés";

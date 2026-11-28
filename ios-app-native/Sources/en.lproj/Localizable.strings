@@ -2122,3 +2122,12 @@
 "Clave guardada" = "Key saved";
 "Sin clave" = "No key";
 "Guardar favorita" = "Save as favorite";
+
+"Disponible sin conexión" = "Available offline";
+"Copia sin conexión eliminada" = "Offline copy removed";
+"Actualizar copia sin conexión" = "Update offline copy";
+"Eliminar copia sin conexión" = "Remove offline copy";
+"Guardar sin conexión" = "Save offline";
+"Copias sin conexión: %d guardadas, %d fallidas." = "Offline copies: %d saved, %d failed.";
+"Guardar %d recursos sin conexión" = "Save %d resources offline";
+"Abriendo documento" = "Opening document";

@@ -1495,6 +1495,26 @@ final class NativeReadingSpeech: ObservableObject {
             engine: isPhonon ? 2 : 1, voice: geminiVoice)
     }
 
+    /// Change the rate of recorded audio without restarting or seeking.
+    /// Generated speech uses independent settings and is deliberately excluded.
+    func updateLiveRecordedAudioSpeed(_ speed: Double) {
+        guard !isGeneratedSpeech, let player, speed.isFinite else { return }
+        let rate = Float(max(0.5, min(2.0, speed)))
+        // Future playlist tracks and DAISY clips inherit the same rate.
+        playlistSpeed = Double(rate)
+        guard player.rate != rate else { return }
+        player.enableRate = true
+        player.rate = rate
+        // Recalculate the existing SMIL boundary from the current media time.
+        // When paused, this cancels any old alarm without starting playback.
+        scheduleDaisyBoundary()
+    }
+
+    var recordedAudioPlaybackRate: Double? {
+        guard !isGeneratedSpeech, let player else { return nil }
+        return Double(player.rate)
+    }
+
     private func startAudio(_ url: URL, speed: Double, at percent: Int,
                             atSeconds seconds: TimeInterval? = nil) throws {
         player?.stop()
@@ -3329,6 +3349,7 @@ struct NativeReadingScreen: View {
         NativeMusicPlayer.shared.pauseForReader()
         NativeRemotePlaybackOwner.claim(.reader)
         if speech.isPaused {
+            if !tracks.isEmpty { speech.updateLiveRecordedAudioSpeed(speed) }
             speech.resume()
         } else if !tracks.isEmpty {
             playTrack()
@@ -3348,12 +3369,21 @@ struct NativeReadingScreen: View {
         }
         MPNowPlayingInfoCenter.default().nowPlayingInfo = [
             MPMediaItemPropertyTitle: latest.title,
-            MPNowPlayingInfoPropertyPlaybackRate: speech.isPlaying ? 1.0 : 0.0
+            MPNowPlayingInfoPropertyPlaybackRate: speech.isPlaying ? (speech.recordedAudioPlaybackRate ?? 1.0) : 0.0
         ]
         applySleepTimer()
     }
 
     private func refreshLiveReadingSettings() {
+        if !tracks.isEmpty {
+            speech.updateLiveRecordedAudioSpeed(speed)
+            if let rate = speech.recordedAudioPlaybackRate,
+               NativeRemotePlaybackOwner.current == .reader {
+                var info = MPNowPlayingInfoCenter.default().nowPlayingInfo ?? [:]
+                info[MPNowPlayingInfoPropertyPlaybackRate] = speech.isPlaying ? rate : 0.0
+                MPNowPlayingInfoCenter.default().nowPlayingInfo = info
+            }
+        }
         speech.updateLiveSystemSettings(
             speed: speed, pitch: pitch, voiceIdentifier: effectiveVoiceID,
             language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES")
@@ -4928,6 +4958,9 @@ struct NativeReadingScreen: View {
         }
         .onChange(of: sleepIndex) { _, _ in
             applySleepTimer(reset: true)
+        }
+        .onChange(of: effectiveSpeedIndex) { _, _ in
+            refreshLiveReadingSettings()
         }
         .onReceive(library.$documents) { _ in
             // @Published emits before the stored document is replaced.

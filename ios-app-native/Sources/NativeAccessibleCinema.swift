@@ -648,7 +648,7 @@ private struct NativeCinemaContentScreen: View {
             }
             ForEach(arteResults.prefix(cinemaSearchLimit)) { work in
                 Link([work.title, work.year, "ARTE (francés)"].filter { !$0.isEmpty }.joined(separator: " — "), destination: work.address)
-                    .accessibilityHint("Abrir plataforma original")
+                    .accessibilityHint(MusicLocalized.format("Abrir plataforma original: %@", "ARTE"))
             }
             ForEach(driveResults.prefix(cinemaSearchLimit)) { hit in
                 let name = hit.sourceID == "audesc-es" ? "Universo Audesc España" : "Universo Audesc Latino"

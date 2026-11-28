@@ -27,7 +27,7 @@ test('only the two Audesc public catalogues remain in the directory', () => {
 
 test('public directory is read-only, does not mix OAuth, and supports pagination and resource keys', () => {
   assert.match(publicDrive, /func listFolder\(/);
-  assert.match(publicDrive, /nextPageToken,incompleteSearch,files\(id,name,mimeType,size,resourceKey\)/);
+  assert.match(publicDrive, /nextPageToken,incompleteSearch,files\(id,name,mimeType,size,resourceKey,shortcutDetails\(targetId,targetMimeType\)\)/);
   assert.match(publicDrive, /pageSize: Int = 100/);
   assert.match(publicDrive, /"includeItemsFromAllDrives", value: "true"/);
   assert.match(publicDrive, /"X-Goog-Drive-Resource-Keys"/);

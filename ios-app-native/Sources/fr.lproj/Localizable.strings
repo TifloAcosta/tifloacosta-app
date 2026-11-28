@@ -2121,3 +2121,12 @@
 "Clave guardada" = "Clé enregistrée";
 "Sin clave" = "Aucune clé";
 "Guardar favorita" = "Ajouter aux favoris";
+
+"Disponible sin conexión" = "Disponible hors connexion";
+"Copia sin conexión eliminada" = "Copie hors connexion supprimée";
+"Actualizar copia sin conexión" = "Mettre à jour la copie hors connexion";
+"Eliminar copia sin conexión" = "Supprimer la copie hors connexion";
+"Guardar sin conexión" = "Enregistrer hors connexion";
+"Copias sin conexión: %d guardadas, %d fallidas." = "Copies hors connexion : %d enregistrées, %d en échec.";
+"Guardar %d recursos sin conexión" = "Enregistrer %d ressources hors connexion";
+"Abriendo documento" = "Ouverture du document";

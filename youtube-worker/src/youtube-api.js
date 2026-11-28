@@ -255,6 +255,16 @@ export async function searchVideos(apiKey, searchTerm, pageToken = '', fetchImpl
   const normalizedTerm = String(searchTerm || '').trim();
   const q = channelId && !normalizedTerm ? '' : validSearchTerm(searchTerm);
   const token = validPageToken(pageToken);
+  // A channel's official uploads playlist costs far less quota than search.list.
+  // Keep normal channel browsing and query/filter semantics unchanged.
+  if (options.recentUploads && channelId && !q && filter === 'video') {
+    const data = await youtubeKeyFetch(query('channels', [
+      ['part', 'contentDetails'], ['id', channelId]
+    ]), apiKey, fetchImpl);
+    const uploads = String(data?.items?.[0]?.contentDetails?.relatedPlaylists?.uploads || '');
+    if (!PLAYLIST_ID_RE.test(uploads)) throw typedError('CHANNEL_NOT_FOUND', 404);
+    return listPlaylistVideos(apiKey, uploads, token, fetchImpl);
+  }
   const entries = [
     ['part', 'snippet'],
     ['type', channelId ? 'video' : filter === 'all' ? 'video,channel,playlist' : filter === 'channel' ? 'channel' : filter === 'playlist' ? 'playlist' : 'video'],
@@ -345,7 +355,7 @@ export async function listPlaylistVideos(apiKey, playlistId, pageToken = '', fet
       title: String(snippet.title || ''),
       channelTitle: String(snippet.videoOwnerChannelTitle || snippet.channelTitle || ''),
       description: String(snippet.description || ''),
-      publishedAt: String(snippet.publishedAt || ''),
+      publishedAt: String(item?.contentDetails?.videoPublishedAt || snippet.publishedAt || ''),
       position: Number.isInteger(snippet.position) && snippet.position >= 0
         ? snippet.position : null,
       durationSeconds: 0

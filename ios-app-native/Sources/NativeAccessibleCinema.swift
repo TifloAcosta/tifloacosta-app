@@ -38,7 +38,7 @@ struct NativeCinemaVideoSurface: UIViewRepresentable {
 /// Multicines Accesibles: native entry point and verified-source directory.
 /// Only the original provider can deliver third-party works unless distribution
 /// and streaming permissions have been explicitly documented.
-enum AccessibleCinemaLanguage: String, CaseIterable, Codable {
+enum AccessibleCinemaLanguage: String, CaseIterable, Codable, Sendable {
     case all = "Todos los idiomas"
     case spain = "Español de España"
     case latino = "Español de Latinoamérica"
@@ -49,7 +49,7 @@ enum AccessibleCinemaLanguage: String, CaseIterable, Codable {
     case german = "Alemán"
 }
 
-enum AccessibleCinemaKind: String, CaseIterable, Codable {
+enum AccessibleCinemaKind: String, CaseIterable, Codable, Sendable {
     case all = "Todos los contenidos"
     case film = "Películas"
     case series = "Series"
@@ -91,7 +91,7 @@ private enum AccessibleCinemaDirectory {
               address: nil, access: "Enlace oficial pendiente de incorporación segura.",
               description: "Biblioteca de películas, series, documentales y cortometrajes audiodescritos.",
               geographicNotice: "", isAudioOnly: true),
-        .init(id: "audesc-latino", name: "Universo Audesc Latina",
+        .init(id: "audesc-latino", name: "Universo Audesc Latino",
               languages: [.latino], kinds: [.film, .series, .documentary],
               address: nil, access: "Enlace oficial pendiente de incorporación segura.",
               description: "Biblioteca con audiodescripción y voces del ámbito latinoamericano.",
@@ -314,6 +314,8 @@ private struct NativeCinemaContentScreen: View {
     @State private var submittedSearch: UUID?
     @State private var remoteSearching = false
     @State private var remoteSearched = false
+    @State private var refreshDriveIndex = false
+    @State private var driveSearchProgress: String?
     @State private var tapeResults: [NativeTapeTerritoryCatalogue.Film] = []
     @State private var movieResults: [NativeMoviesForTheBlindWork] = []
     @State private var driveResults: [NativeCinemaDriveSearchHit] = []
@@ -340,6 +342,37 @@ private struct NativeCinemaContentScreen: View {
         return AccessibleCinemaKind.allCases[min(max(0, index), AccessibleCinemaKind.allCases.count - 1)]
     }
 
+    private var eligibleSources: [AccessibleCinemaSource] {
+        AccessibleCinemaDirectory.sources.filter { source in
+            (selectedLanguage == .all || source.languages.contains(selectedLanguage)) &&
+                (selectedKind == .all || source.kinds.contains(selectedKind))
+        }
+    }
+
+    private var externalSearchSources: [AccessibleCinemaSource] {
+        eligibleSources.filter { !["audesc-es", "audesc-latino", "audiocinemateca", "tape-territory", "movies-for-the-blind"].contains($0.id) }
+    }
+
+    private func providerSearchURL(_ source: AccessibleCinemaSource) -> URL? {
+        // This is explicitly an external web search, not an AD-confirmed result.
+        guard let host = source.address?.host else { return nil }
+        let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !term.isEmpty else { return nil }
+        let language = source.languages.first ?? .all
+        let qualifier: String
+        switch language {
+        case .spain, .latino: qualifier = "audiodescripción"
+        case .french: qualifier = "audiodescription"
+        case .german: qualifier = "Audiodeskription"
+        case .italian: qualifier = "audiodescrizione"
+        case .portuguese: qualifier = "audiodescrição"
+        default: qualifier = "audio description"
+        }
+        var components = URLComponents(string: "https://www.google.com/search")
+        components?.queryItems = [URLQueryItem(name: "q", value: "site:" + host + " " + term + " " + qualifier)]
+        return components?.url
+    }
+
     private var filtered: [AccessibleCinemaSource] {
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         return AccessibleCinemaDirectory.sources.filter { source in
@@ -363,6 +396,8 @@ private struct NativeCinemaContentScreen: View {
     }
     private func resetRemoteSearch() {
         submittedSearch = nil
+        refreshDriveIndex = false
+        driveSearchProgress = nil
         remoteSearching = false
         remoteSearched = false
         consultedCatalogues = 0
@@ -384,9 +419,14 @@ private struct NativeCinemaContentScreen: View {
         unavailableSources = []
         partialSources = []
         remoteSearching = true
-        defer { if submittedSearch == request { remoteSearching = false; remoteSearched = !Task.isCancelled } }
+        let refresh = refreshDriveIndex
+        defer { if submittedSearch == request {
+            remoteSearching = false
+            remoteSearched = !Task.isCancelled
+            driveSearchProgress = nil
+            refreshDriveIndex = false
+        } }
         if spanishFilter, let account = NativeAudiocinematecaCredentials.load() {
-            audiocinematecaResults = []
             do {
                 let entries = try await NativeAudiocinematecaCache.shared.refresh(account: account)
                 guard !Task.isCancelled, submittedSearch == request else { return }
@@ -397,6 +437,8 @@ private struct NativeCinemaContentScreen: View {
                     consultedCatalogues += 1
                 }
             } catch { if !Task.isCancelled, submittedSearch == request { unavailableSources.append("Audiocinemateca") } }
+        } else if spanishFilter {
+            unavailableSources.append("Audiocinemateca")
         }
         guard !Task.isCancelled, submittedSearch == request else { return }
         if englishFilmsFilter {
@@ -416,12 +458,21 @@ private struct NativeCinemaContentScreen: View {
         }
         for (sourceID, language, name) in [
             ("audesc-es", AccessibleCinemaLanguage.spain, "Universo Audesc España"),
-            ("audesc-latino", AccessibleCinemaLanguage.latino, "Universo Audesc Latina")
-        ] where selectedLanguage == .all || selectedLanguage == language {
+            ("audesc-latino", AccessibleCinemaLanguage.latino, "Universo Audesc Latino")
+        ] where (selectedLanguage == .all || selectedLanguage == language) &&
+            eligibleSources.contains(where: { $0.id == sourceID }) {
             guard !Task.isCancelled, submittedSearch == request else { return }
             do {
-                let result = try await NativeCinemaPublicDrive().searchPublished(sourceID: sourceID, query: term, kind: selectedKind)
+                let result = try await NativeCinemaPublicDrive().searchPublished(
+                    sourceID: sourceID, query: term, kind: selectedKind, refresh: refresh
+                ) { partial, pages in
+                    guard submittedSearch == request else { return }
+                    driveSearchProgress = MusicLocalized.format("%@: %d páginas consultadas", name, pages)
+                    driveResults.removeAll { $0.sourceID == sourceID }
+                    driveResults.append(contentsOf: partial.hits)
+                }
                 guard !Task.isCancelled, submittedSearch == request else { return }
+                driveResults.removeAll { $0.sourceID == sourceID }
                 driveResults.append(contentsOf: result.hits)
                 consultedCatalogues += 1
                 if result.incomplete { partialSources.append(name) }
@@ -442,10 +493,12 @@ private struct NativeCinemaContentScreen: View {
                 } label: { Text(work.title + " — Movies for the Blind") }
             }
             ForEach(driveResults.prefix(cinemaSearchLimit)) { hit in
-                let name = hit.sourceID == "audesc-es" ? "Universo Audesc España" : "Universo Audesc Latina"
+                let name = hit.sourceID == "audesc-es" ? "Universo Audesc España" : "Universo Audesc Latino"
                 NavigationLink {
                     NativeCinemaPublishedDriveBrowser(sourceID: hit.sourceID, sourceName: name, initialHit: hit)
-                } label: { Text(hit.entry.name + " — " + name) }
+                } label: {
+                    Text(hit.entry.name + " — " + name)
+                }
             }
             if ([tapeResults.count, movieResults.count, driveResults.count].max() ?? 0) > cinemaSearchLimit {
                 Button("Cargar más resultados") { cinemaSearchLimit += 50 }
@@ -466,7 +519,7 @@ private struct NativeCinemaContentScreen: View {
                     Text("No hay resultados confirmados. Consulta también las plataformas originales.")
                 }
             }
-            Text("Los servicios externos se consultan en su plataforma original. La búsqueda de Google Drive es limitada y puede no abarcar todas las carpetas.")
+            Text("Los resultados corresponden únicamente a los catálogos consultados. Las demás plataformas requieren una búsqueda externa.")
                 .font(.footnote)
         }
     }
@@ -573,7 +626,15 @@ private struct NativeCinemaContentScreen: View {
                     Button("Buscar obras") { resetRemoteSearch(); submittedSearch = UUID() }
                     if remoteSearching {
                         ProgressView("Consultando catálogos…")
-                        Button("Cancelar") { resetRemoteSearch() }
+                        if let driveSearchProgress {
+                            Text(driveSearchProgress).accessibilityAddTraits(.updatesFrequently)
+                        }
+                        Button("Cancelar") {
+                            submittedSearch = nil
+                            remoteSearching = false
+                            remoteSearched = false
+                            driveSearchProgress = nil
+                        }
                     }
                 }
             }
@@ -603,6 +664,38 @@ private struct NativeCinemaContentScreen: View {
 
 
                 if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    if !remoteSearching && spanishFilter {
+                        Button("Actualizar índice de Universo Audesc") {
+                            resetRemoteSearch()
+                            refreshDriveIndex = true
+                            submittedSearch = UUID()
+                        }
+                    }
+                    if !externalSearchSources.isEmpty {
+                        Section("Buscar en plataformas externas") {
+                            Text("Estos catálogos no se consultan automáticamente. Abre la plataforma o busca el título en su web. Comprueba que la obra tenga audiodescripción.")
+                                .font(.footnote)
+                            ForEach(externalSearchSources) { source in
+                                NavigationLink {
+                                    List {
+                                        if source.id == "ard" {
+                                            Link("Buscar en la plataforma original", destination: URL(string: "https://www.ardmediathek.de/suche")!)
+                                        } else if source.id == "rtve-campeones" {
+                                            Link("Buscar en la plataforma original", destination: URL(string: "https://www.rtve.es/play/buscador/")!)
+                                        }
+                                        if let url = providerSearchURL(source) {
+                                            Link("Buscar título en la web", destination: url)
+                                        }
+                                        NavigationLink("Explorar catálogo audiodescrito") {
+                                            NativeCinemaProviderScreen(source: source, selectedKind: selectedKind, selectedLanguage: selectedLanguage, query: searchText)
+                                        }
+                                    }
+                                    .tifloScreenSurface()
+                                    .navigationTitle(MusicLocalized.message(source.name))
+                                } label: { Text(MusicLocalized.message(source.name)) }
+                            }
+                        }
+                    }
                     if !personalItems.isEmpty {
                         Section {
                             personalRows
@@ -898,7 +991,7 @@ private struct NativeCinemaAudescScreen: View {
                 NavigationLink {
                     NativeCinemaProviderScreen(source: source)
                 } label: {
-                    Text(MusicLocalized.message(source.id == "audesc-es" ? "España" : "Latinoamérica"))
+                    Text(MusicLocalized.message(source.id == "audesc-es" ? "Español de España" : "Español latino"))
                 }
             }
             NavigationLink("Información y agradecimientos") {

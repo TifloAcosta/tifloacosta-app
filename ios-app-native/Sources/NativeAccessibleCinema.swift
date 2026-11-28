@@ -277,6 +277,27 @@ struct NativeAccessibleCinemaScreen: View {
                 }
             }
             NavigationLink("Buscar obras") { NativeCinemaContentScreen(mode: .search) }
+            if !cinemaRecents.favorites.isEmpty {
+                NavigationLink("Favoritos") {
+                    List {
+                        ForEach(cinemaRecents.favorites) { favorite in
+                            NavigationLink {
+                                NativeCinemaResumeScreen(recent: favorite, autoResume: true)
+                            } label: {
+                                Text(favorite.title + ", " + MusicLocalized.message(favorite.providerName))
+                            }
+                            .accessibilityAction(named: Text("Quitar de favoritos")) {
+                                cinemaRecents.removeFavorite(favorite.id)
+                            }
+                            .swipeActions { Button("Quitar de favoritos", role: .destructive) {
+                                cinemaRecents.removeFavorite(favorite.id)
+                            } }
+                        }
+                    }
+                    .tifloScreenSurface()
+                    .navigationTitle("Favoritos")
+                }
+            }
             NavigationLink("Plataformas") { NativeCinemaPlatformsScreen() }
             NavigationLink("Mi colección personal") { NativeCinemaContentScreen(mode: .collection) }
             if !cinemaRecents.entries.isEmpty {
@@ -382,6 +403,7 @@ private enum NativeCinemaContentMode {
     }
 }
 
+@MainActor
 private struct NativeCinemaContentScreen: View {
     let mode: NativeCinemaContentMode
     @State private var searchText = ""
@@ -396,6 +418,7 @@ private struct NativeCinemaContentScreen: View {
     @State private var remoteSearching = false
     @State private var remoteSearched = false
     @State private var selectedPlayback: NativeCinemaPlaybackRequest?
+    @ObservedObject private var cinemaRecents = NativeCinemaRecentStore.shared
     @State private var refreshDriveIndex = false
     @State private var driveSearchProgress: String?
     @State private var tapeResults: [NativeTapeTerritoryCatalogue.Film] = []
@@ -647,6 +670,9 @@ private struct NativeCinemaContentScreen: View {
         }
         .accessibilityAction(named: Text("Información de la obra")) {
             selectedPlayback = NativeCinemaPlaybackRequest(selection: selection, informationOnly: true)
+        }
+        .accessibilityAction(named: Text(cinemaRecents.isFavorite(selection) ? "Quitar de favoritos" : "Añadir a favoritos")) {
+            cinemaRecents.toggleFavorite(selection)
         }
     }
 

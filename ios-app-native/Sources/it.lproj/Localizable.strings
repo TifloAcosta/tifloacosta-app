@@ -2130,3 +2130,8 @@
 "Copias sin conexión: %d guardadas, %d fallidas." = "Copie offline: %d salvate, %d non riuscite.";
 "Guardar %d recursos sin conexión" = "Salva %d risorse offline";
 "Abriendo documento" = "Apertura del documento";
+
+"Autorizar cuenta en AcoustID" = "Autorizza account in AcoustID";
+"AcoustID requiere que autorices tu cuenta para identificar canciones. Solo tienes que hacerlo una vez, salvo que la autorización caduque o se revoque." = "AcoustID richiede di autorizzare il tuo account per identificare i brani. È necessario farlo una sola volta, a meno che l’autorizzazione scada o venga revocata.";
+"Opciones de reproducción" = "Opzioni di riproduzione";
+"Volver a Mi Música" = "Torna a La mia musica";

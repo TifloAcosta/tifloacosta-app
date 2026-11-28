@@ -2121,3 +2121,12 @@
 "Clave guardada" = "Schlüssel gespeichert";
 "Sin clave" = "Kein Schlüssel";
 "Guardar favorita" = "Zu Favoriten hinzufügen";
+
+"Disponible sin conexión" = "Offline verfügbar";
+"Copia sin conexión eliminada" = "Offline-Kopie entfernt";
+"Actualizar copia sin conexión" = "Offline-Kopie aktualisieren";
+"Eliminar copia sin conexión" = "Offline-Kopie entfernen";
+"Guardar sin conexión" = "Offline speichern";
+"Copias sin conexión: %d guardadas, %d fallidas." = "Offline-Kopien: %d gespeichert, %d fehlgeschlagen.";
+"Guardar %d recursos sin conexión" = "%d Ressourcen offline speichern";
+"Abriendo documento" = "Dokument wird geöffnet";

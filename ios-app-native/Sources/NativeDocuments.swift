@@ -123,9 +123,32 @@ struct NativeResourceReadingBlock: Sendable {
     let text: String
     let url: URL?
 
+    private static func safeURL(_ url: URL) -> Bool {
+        ["https", "http"].contains(url.scheme?.lowercased() ?? "") &&
+            url.host != nil && url.user == nil && url.password == nil
+    }
+
+    private static func plainBlocks(_ text: String) -> [Self] {
+        guard !text.isEmpty else { return [] }
+        guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+        else { return [Self(text: text, url: nil)] }
+        var result: [Self] = []
+        var cursor = text.startIndex
+        for match in detector.matches(in: text, range: NSRange(text.startIndex..., in: text)) {
+            guard let url = match.url, safeURL(url),
+                  let range = Range(match.range, in: text) else { continue }
+            let prefix = String(text[cursor..<range.lowerBound]).trimmingCharacters(in: .whitespacesAndNewlines)
+            if !prefix.isEmpty { result.append(Self(text: prefix, url: nil)) }
+            result.append(Self(text: String(text[range]), url: url))
+            cursor = range.upperBound
+        }
+        let suffix = String(text[cursor...]).trimmingCharacters(in: .whitespacesAndNewlines)
+        if !suffix.isEmpty { result.append(Self(text: suffix, url: nil)) }
+        return result
+    }
+
     static func make(data: Data, source: URL, fallback: String) -> [Self] {
-        let plain = fallback.components(separatedBy: "\n\n")
-            .filter { !$0.isEmpty }.map { Self(text: $0, url: nil) }
+        let plain = fallback.components(separatedBy: "\n\n").flatMap(plainBlocks)
         guard !["pdf", "txt", "rtf"].contains(source.pathExtension.lowercased()) else { return plain }
         var html = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
         // Remove non-reading markup before inspecting anchors; nothing is executed.
@@ -170,8 +193,9 @@ struct NativeResourceReadingBlock: Sendable {
         }
         guard !links.isEmpty else { return plain }
         let text = NativeDocumentText.extract(Data(tagged.utf8), from: htmlSource)
-        return text.components(separatedBy: "\n\n").filter { !$0.isEmpty }.map {
-            links[$0] ?? Self(text: $0, url: nil)
+        return text.components(separatedBy: "\n\n").flatMap { paragraph in
+            if let link = links[paragraph] { return [link] }
+            return plainBlocks(paragraph)
         }
     }
 }

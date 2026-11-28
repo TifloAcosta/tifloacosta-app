@@ -418,7 +418,6 @@ private struct NativeCinemaContentScreen: View {
     @State private var remoteSearching = false
     @State private var remoteSearched = false
     @State private var selectedPlayback: NativeCinemaPlaybackRequest?
-    @ObservedObject private var cinemaRecents = NativeCinemaRecentStore.shared
     @State private var refreshDriveIndex = false
     @State private var driveSearchProgress: String?
     @State private var tapeResults: [NativeTapeTerritoryCatalogue.Film] = []

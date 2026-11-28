@@ -2121,3 +2121,12 @@
 "Clave guardada" = "Chiave salvata";
 "Sin clave" = "Nessuna chiave";
 "Guardar favorita" = "Salva nei preferiti";
+
+"Disponible sin conexión" = "Disponibile offline";
+"Copia sin conexión eliminada" = "Copia offline rimossa";
+"Actualizar copia sin conexión" = "Aggiorna copia offline";
+"Eliminar copia sin conexión" = "Elimina copia offline";
+"Guardar sin conexión" = "Salva offline";
+"Copias sin conexión: %d guardadas, %d fallidas." = "Copie offline: %d salvate, %d non riuscite.";
+"Guardar %d recursos sin conexión" = "Salva %d risorse offline";
+"Abriendo documento" = "Apertura del documento";

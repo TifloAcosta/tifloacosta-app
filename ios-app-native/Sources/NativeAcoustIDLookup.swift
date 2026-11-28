@@ -22,10 +22,17 @@ enum NativeAcoustIDLookup {
         let error: APIError?
     }
 
+    static func requiresUserKey(in data: Data) -> Bool {
+        guard let payload = try? JSONDecoder().decode(Response.self, from: data),
+              payload.status != "ok", let code = payload.error?.code else { return false }
+        // 4: invalid user key; 21: personal key required from January 2027.
+        return code == 4 || code == 21
+    }
+
     static func match(in data: Data) throws -> Match? {
         let payload = try JSONDecoder().decode(Response.self, from: data)
         guard payload.status == "ok" else {
-            if payload.error?.code == 4 { throw URLError(.userAuthenticationRequired) }
+            if requiresUserKey(in: data) { throw URLError(.userAuthenticationRequired) }
             throw URLError(.badServerResponse)
         }
 

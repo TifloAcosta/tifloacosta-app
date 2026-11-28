@@ -20,7 +20,7 @@ test('authenticated streaming refuses redirects and checks bounded byte ranges',
   assert.match(loader,/NativeAudiocinematecaCredentials\.load\(\)/);
   assert.match(player,/audiocinematecaLoader\?\.cancel\(\)/);
   assert.match(player,/func openAudiocinematecaStream/);
-  assert.match(browser,/player\.openAudiocinematecaStream/);
+  assert.match(browser,/player\.openAudiocinematecaPart/);
 });
 test('versioned cache is private and removed on account logout',()=>{
   const cache=read('NativeAudiocinematecaCache.swift');
@@ -33,8 +33,10 @@ test('retry creates a fresh authenticated stream with the same position referenc
   assert.match(browser,/Button\("Volver a intentar"\)\s*\{\s*startPlayback\(\)/);
   assert.match(browser,/Button\(label\)\s*\{\s*startPlayback\(\)/);
   const action=browser.slice(browser.indexOf('private func startPlayback()'));
-  assert.match(action,/NativeAudiocinematecaResourceLoader\(url: part.url/);
-  assert.match(action,/player\.openAudiocinematecaStream/);
-  assert.match(action,/reference: reference/);
+  assert.match(action,/player\.openAudiocinematecaPart\(entry: entry, part: part, followedBy: remaining/);
+  const shared = player.slice(player.indexOf('func openAudiocinematecaPart'), player.indexOf('private func cleanUpTemporaryPlayback'));
+  assert.match(shared,/NativeAudiocinematecaResourceLoader\(url: part.url/);
+  assert.match(shared,/openAudiocinematecaStream/);
+  assert.match(shared,/reference: NativeAudiocinematecaPlaybackRow.reference\(entry: entry, part: part\)/);
   assert.doesNotMatch(read('NativeAudiocinematecaAccount.swift'),/Acceso al catálogo pendiente de validación/);
 });

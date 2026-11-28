@@ -671,7 +671,7 @@ private struct NativeCinemaContentScreen: View {
         .accessibilityAction(named: Text("Información de la obra")) {
             selectedPlayback = NativeCinemaPlaybackRequest(selection: selection, informationOnly: true)
         }
-        .accessibilityAction(named: Text(cinemaRecents.isFavorite(selection) ? "Quitar de favoritos" : "Añadir a favoritos")) {
+        .accessibilityAction(named: Text(MusicLocalized.message(cinemaRecents.isFavorite(selection) ? "Quitar de favoritos" : "Añadir a favoritos"))) {
             cinemaRecents.toggleFavorite(selection)
         }
     }
